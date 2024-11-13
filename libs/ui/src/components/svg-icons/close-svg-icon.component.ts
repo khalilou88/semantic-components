@@ -2,7 +2,7 @@ import { CommonModule, NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'sc-close-svg-icon',
+  selector: 'lib-close-svg-icon',
   standalone: true,
   imports: [CommonModule, NgClass],
   template: `

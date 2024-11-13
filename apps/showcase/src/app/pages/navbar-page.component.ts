@@ -9,7 +9,7 @@ import { NavbarComponent } from '@semantic-components/ui';
   template: `
     <p>navbar-page works!</p>
 
-    <sc-navbar />
+    <lib-navbar />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,

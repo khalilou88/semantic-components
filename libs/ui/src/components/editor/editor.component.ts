@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'sc-editor',
+  selector: 'lib-editor',
   standalone: true,
   imports: [CommonModule],
   template: `
