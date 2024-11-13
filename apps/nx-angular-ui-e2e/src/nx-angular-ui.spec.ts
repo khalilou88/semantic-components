@@ -57,7 +57,7 @@ function createTestProject() {
       cwd: dirname(projectDirectory),
       stdio: 'inherit',
       env: process.env,
-    }
+    },
   );
   console.log(`Created test project in "${projectDirectory}"`);
 

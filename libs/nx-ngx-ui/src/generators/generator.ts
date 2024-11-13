@@ -1,16 +1,8 @@
-import {
-  addProjectConfiguration,
-  formatFiles,
-  generateFiles,
-  Tree,
-} from '@nx/devkit';
+import { addProjectConfiguration, formatFiles, generateFiles, Tree } from '@nx/devkit';
 import * as path from 'path';
 import { UiLibraryGeneratorSchema } from './schema';
 
-export async function uiLibraryGenerator(
-  tree: Tree,
-  options: UiLibraryGeneratorSchema
-) {
+export async function uiLibraryGenerator(tree: Tree, options: UiLibraryGeneratorSchema) {
   const projectRoot = `libs/${options.name}`;
   addProjectConfiguration(tree, options.name, {
     root: projectRoot,

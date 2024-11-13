@@ -1,16 +1,8 @@
-import {
-  addProjectConfiguration,
-  formatFiles,
-  generateFiles,
-  Tree,
-} from '@nx/devkit';
+import { addProjectConfiguration, formatFiles, generateFiles, Tree } from '@nx/devkit';
 import * as path from 'path';
 import { ComponentsGeneratorSchema } from './schema';
 
-export async function componentsGenerator(
-  tree: Tree,
-  options: ComponentsGeneratorSchema
-) {
+export async function componentsGenerator(tree: Tree, options: ComponentsGeneratorSchema) {
   const projectRoot = `libs/${options.name}`;
   addProjectConfiguration(tree, options.name, {
     root: projectRoot,
