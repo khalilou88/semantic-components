@@ -17,7 +17,6 @@
     "paths": {
       "@semantic-components/ngx-ui": ["libs/ngx-ui/src/index.ts"],
       "@semantic-components/nx-angular-ui": ["libs/nx-angular-ui/src/index.ts"],
-      "@semantic-components/nx-ngx-ui": ["libs/nx-ngx-ui/src/index.ts"],
       "@semantic-components/ui": ["libs/ui/src/index.ts"],
       "@semantic-components/ui2": ["libs/ui2/src/index.ts"],
       "@semantic-components/ui3": ["libs/ui3/src/index.ts"],
