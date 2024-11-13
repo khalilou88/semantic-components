@@ -1,5 +1,5 @@
 {
-  "name": "@ngx-semantic-components/ui5",
+  "name": "@semantic-components/ui5",
   "version": "0.0.1",
   "dependencies": {
     "@nx/devkit": "20.1.0",
