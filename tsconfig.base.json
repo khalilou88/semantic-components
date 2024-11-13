@@ -15,7 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@ngx-semantic-components/ui": ["libs/ui/src/index.ts"]
+      "@ngx-semantic-components/ui": ["libs/ui/src/index.ts"],
+      "@ngx-semantic-components/ui2": ["libs/ui2/src/index.ts"],
+      "@ngx-semantic-components/ui3": ["libs/ui3/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
