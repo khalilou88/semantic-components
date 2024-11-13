@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@semantic-components/ngx-ui": ["libs/ngx-ui/src/index.ts"],
-      "@semantic-components/nx-angular-ui": ["libs/nx-angular-ui/src/index.ts"]
+      "@semantic-components/nx-angular-ui": ["libs/nx-angular-ui/src/index.ts"],
+      "@semantic-components/ui": ["libs/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
