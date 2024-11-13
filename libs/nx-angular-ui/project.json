@@ -43,6 +43,9 @@
       "options": {
         "jestConfig": "libs/nx-angular-ui/jest.config.ts"
       }
+    },
+    "nx-release-publish": {
+      "executor": "@nx/js:release-publish"
     }
   }
 }
