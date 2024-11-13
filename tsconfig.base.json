@@ -16,12 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@semantic-components/ngx-ui": ["libs/ngx-ui/src/index.ts"],
-      "@semantic-components/nx-angular-ui": ["libs/nx-angular-ui/src/index.ts"],
-      "@semantic-components/ui": ["libs/ui/src/index.ts"],
-      "@semantic-components/ui2": ["libs/ui2/src/index.ts"],
-      "@semantic-components/ui3": ["libs/ui3/src/index.ts"],
-      "@semantic-components/ui4": ["libs/ui4/src/index.ts"],
-      "@semantic-components/ui5": ["libs/ui5/src/index.ts"]
+      "@semantic-components/nx-angular-ui": ["libs/nx-angular-ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
