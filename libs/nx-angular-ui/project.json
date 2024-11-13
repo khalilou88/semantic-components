@@ -1,0 +1,48 @@
+{
+  "name": "nx-angular-ui",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/nx-angular-ui/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/nx-angular-ui",
+        "main": "libs/nx-angular-ui/src/index.ts",
+        "tsConfig": "libs/nx-angular-ui/tsconfig.lib.json",
+        "assets": [
+          "libs/nx-angular-ui/*.md",
+          {
+            "input": "./libs/nx-angular-ui/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./libs/nx-angular-ui/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./libs/nx-angular-ui",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./libs/nx-angular-ui",
+            "glob": "executors.json",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/nx-angular-ui/jest.config.ts"
+      }
+    }
+  }
+}
