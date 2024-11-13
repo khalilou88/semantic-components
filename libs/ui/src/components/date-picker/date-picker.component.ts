@@ -2,18 +2,14 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'lib-editor',
+  selector: 'sc-date-picker',
   standalone: true,
   imports: [CommonModule],
   template: `
-    <p>editor works!</p>
+    <p>date-picker works!</p>
   `,
-  styles: `
-    :host {
-      display: block;
-    }
-  `,
+  styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EditorComponent {}
+export class DatePickerComponent {}

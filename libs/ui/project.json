@@ -2,7 +2,7 @@
   "name": "ui",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/ui/src",
-  "prefix": "lib",
+  "prefix": "sc",
   "projectType": "library",
   "tags": [],
   "targets": {

@@ -105,13 +105,14 @@
       "unitTestRunner": "jest"
     },
     "@nx/angular:component": {
-      "prefix": "sc",
       "style": "css",
+      "prefix": "sc",
       "skipTests": true,
       "inlineStyle": true,
       "inlineTemplate": true,
       "viewEncapsulation": "None",
-      "changeDetection": "OnPush"
+      "changeDetection": "OnPush",
+      "path": "libs/ui/src/components"
     }
   }
 }
