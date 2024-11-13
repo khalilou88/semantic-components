@@ -1,0 +1,48 @@
+{
+  "name": "ui5",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/ui5/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/ui5",
+        "main": "libs/ui5/src/index.ts",
+        "tsConfig": "libs/ui5/tsconfig.lib.json",
+        "assets": [
+          "libs/ui5/*.md",
+          {
+            "input": "./libs/ui5/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./libs/ui5/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./libs/ui5",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./libs/ui5",
+            "glob": "executors.json",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/ui5/jest.config.ts"
+      }
+    }
+  }
+}

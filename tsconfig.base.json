@@ -18,7 +18,8 @@
       "@ngx-semantic-components/ui": ["libs/ui/src/index.ts"],
       "@ngx-semantic-components/ui2": ["libs/ui2/src/index.ts"],
       "@ngx-semantic-components/ui3": ["libs/ui3/src/index.ts"],
-      "@ngx-semantic-components/ui4": ["libs/ui4/src/index.ts"]
+      "@ngx-semantic-components/ui4": ["libs/ui4/src/index.ts"],
+      "@ngx-semantic-components/ui5": ["libs/ui5/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
