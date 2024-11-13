@@ -106,7 +106,6 @@
     },
     "@nx/angular:component": {
       "style": "css",
-      "prefix": "sc",
       "skipTests": true,
       "inlineStyle": true,
       "inlineTemplate": true,

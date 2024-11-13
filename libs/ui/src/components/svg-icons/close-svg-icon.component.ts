@@ -2,7 +2,7 @@ import { CommonModule, NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'sc-close-svg',
+  selector: 'sc-close-svg-icon',
   standalone: true,
   imports: [CommonModule, NgClass],
   template: `
@@ -24,7 +24,7 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CloseSvgComponent {
+export class CloseSvgIconComponent {
   @Input()
   class = '';
 }
