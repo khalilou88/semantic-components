@@ -1,0 +1,48 @@
+{
+  "name": "nx-generators",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/nx-generators/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/nx-generators",
+        "main": "libs/nx-generators/src/index.ts",
+        "tsConfig": "libs/nx-generators/tsconfig.lib.json",
+        "assets": [
+          "libs/nx-generators/*.md",
+          {
+            "input": "./libs/nx-generators/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./libs/nx-generators/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./libs/nx-generators",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./libs/nx-generators",
+            "glob": "executors.json",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/nx-generators/jest.config.ts"
+      }
+    }
+  }
+}

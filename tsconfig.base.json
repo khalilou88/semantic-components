@@ -18,6 +18,7 @@
       "@semantic-components/ngx-schematics": ["libs/ngx-schematics/src/index.ts"],
       "@semantic-components/ngx-ui": ["libs/ngx-ui/src/index.ts"],
       "@semantic-components/nx-angular-ui": ["libs/nx-angular-ui/src/index.ts"],
+      "@semantic-components/nx-generators": ["libs/nx-generators/src/index.ts"],
       "@semantic-components/ui": ["libs/ui/src/index.ts"]
     }
   },
