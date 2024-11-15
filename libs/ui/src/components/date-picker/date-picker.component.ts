@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'lib-date-picker',
+  selector: 'sc-date-picker',
   standalone: true,
   imports: [CommonModule],
   template: `

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'lib-navbar',
+  selector: 'sc-navbar',
   standalone: true,
   imports: [CommonModule],
   template: `

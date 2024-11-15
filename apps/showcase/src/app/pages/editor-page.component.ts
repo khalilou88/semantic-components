@@ -9,7 +9,7 @@ import { EditorComponent } from '@semantic-components/ui';
   template: `
     <p>editor-page works!</p>
 
-    <lib-editor />
+    <sc-editor />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,

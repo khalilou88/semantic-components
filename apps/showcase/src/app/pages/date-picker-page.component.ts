@@ -9,7 +9,7 @@ import { DatePickerComponent } from '@semantic-components/ui';
   template: `
     <p>date-picker works!</p>
 
-    <lib-date-picker />
+    <sc-date-picker />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
