@@ -4,7 +4,7 @@
   "peerDependencies": {
     "@angular/common": "^18.2.0",
     "@angular/core": "^18.2.0",
-    "@nx/angular": "20.1.0"
+    "@nx/angular": "^20.1.0"
   },
   "sideEffects": false
 }
