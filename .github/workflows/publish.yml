@@ -34,12 +34,8 @@ jobs:
         run: npx nx report
         shell: bash
 
-      # - name: Version
-      #   run: npx nx release version patch
-      #   shell: bash
-
-      - name: Build projects
-        run: npx nx run-many -t build
+      - name: Version
+        run: npx nx release version patch
         shell: bash
 
       - name: Publish packages
