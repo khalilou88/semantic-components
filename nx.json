@@ -16,7 +16,7 @@
     "sharedGlobals": ["{workspaceRoot}/.github/workflows/ci.yml"]
   },
   "release": {
-    "projects": ["libs/**"],
+    "projects": ["libs/*"],
     "version": {
       "preVersionCommand": "npx nx run-many -t build"
     }
