@@ -16,7 +16,7 @@
     "sharedGlobals": ["{workspaceRoot}/.github/workflows/ci.yml"]
   },
   "release": {
-    "projects": ["nx-angular-ui"],
+    "projects": ["libs/**"],
     "version": {
       "preVersionCommand": "npx nx run-many -t build"
     }
@@ -24,7 +24,7 @@
   "targetDefaults": {
     "nx-release-publish": {
       "options": {
-        "packageRoot": "dist/libs/{projectName}"
+        "packageRoot": "dist/{projectRoot}"
       }
     },
     "@angular-devkit/build-angular:application": {
