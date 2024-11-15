@@ -18,7 +18,10 @@
   "release": {
     "projects": ["libs/*"],
     "version": {
-      "preVersionCommand": "npx nx run-many -t build"
+      "preVersionCommand": "npx nx run-many -t build",
+      "generatorOptions": {
+        "packageRoot": "dist/{projectRoot}"
+      }
     }
   },
   "targetDefaults": {
