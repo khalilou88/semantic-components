@@ -2,7 +2,7 @@
   "name": "@semantic-components/nx-generators",
   "version": "0.0.1",
   "dependencies": {
-    "@nx/devkit": "20.1.1",
+    "@nx/devkit": "^20.1.2",
     "tslib": "^2.3.0"
   },
   "type": "commonjs",
