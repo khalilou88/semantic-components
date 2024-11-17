@@ -4,6 +4,7 @@ import { TooltipPageComponent } from './pages/tooltip-page.component';
 import { EditorPageComponent } from './pages/editor-page.component';
 import { DatePickerPageComponent } from './pages/date-picker-page.component';
 import { NavPageComponent } from './pages/nav-page.component';
+import { DropdownPageComponent } from './pages/dropdown-page.component';
 
 export const appRoutes: Route[] = [
   { path: 'home', component: HomePageComponent },
@@ -12,4 +13,5 @@ export const appRoutes: Route[] = [
   { path: 'editor', component: EditorPageComponent },
   { path: 'nav', component: NavPageComponent },
   { path: 'date-picker', component: DatePickerPageComponent },
+  { path: 'dropdown', component: DropdownPageComponent },
 ];
