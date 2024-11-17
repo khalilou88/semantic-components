@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { CdkMenu, CdkMenuTrigger } from '@angular/cdk/menu';
 import { CommonModule } from '@angular/common';
-import { CdkMenu, CdkMenuItem, CdkMenuTrigger } from '@angular/cdk/menu';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'sc-dropdown',
   standalone: true,
-  imports: [CommonModule, CdkMenuTrigger, CdkMenu, CdkMenuItem],
+  imports: [CommonModule, CdkMenuTrigger, CdkMenu],
   template: `
     <!--ng-content select="dropdown-toggle" /-->
 
