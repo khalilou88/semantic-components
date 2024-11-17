@@ -8,7 +8,7 @@ import { RouterModule } from '@angular/router';
   template: `
     <h1>Welcome to showcase 👋</h1>
 
-    <a routerLink="/navbar">navbar</a>
+    <a routerLink="/nav">nav</a>
 
     <router-outlet></router-outlet>
   `,

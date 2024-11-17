@@ -1,18 +1,15 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavbarComponent } from '@semantic-components/ui';
 
 @Component({
-  selector: 'app-navbar-page',
+  selector: 'sc-time-picker',
   standalone: true,
-  imports: [CommonModule, NavbarComponent],
+  imports: [CommonModule],
   template: `
-    <p>navbar-page works!</p>
-
-    <sc-navbar />
+    <p>time-picker works!</p>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavbarPageComponent {}
+export class TimePickerComponent {}
