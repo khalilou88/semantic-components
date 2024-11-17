@@ -7,8 +7,6 @@ import { NavComponent } from '@semantic-components/ui';
   standalone: true,
   imports: [CommonModule, NavComponent],
   template: `
-    <p>nav-page works!</p>
-
     <sc-nav />
   `,
   styles: ``,

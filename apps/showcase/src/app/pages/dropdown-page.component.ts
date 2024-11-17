@@ -11,8 +11,6 @@ import {
   standalone: true,
   imports: [CommonModule, DropdownComponent, DropdownItemComponent, DropdownDividerComponent],
   template: `
-    <p>nav-page works!</p>
-
     <sc-dropdown>
       <ng-container ngProjectAs="dropdown-items">
         <sc-dropdown-item text="Dashboard" />
