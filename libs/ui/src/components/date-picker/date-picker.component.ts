@@ -59,7 +59,7 @@ import { CustomControl } from './custom-control';
             <div class="p-1">
               <div class="flex">
                 <div class="">
-                  <sc-days-of-week [locale]="locale" />
+                  <sc-days-of-week />
 
                   @for (month of months; track $index) {
                     <sc-month
