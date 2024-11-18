@@ -51,7 +51,6 @@ import { MonthDaysComponent } from './month-days.component';
                   [activeMonth]="activeMonth"
                   [monthAndYearFormat]="monthAndYearFormat"
                   [showMonthStepper]="showMonthStepper"
-                  [locale]="locale"
                   (activeMonthChange)="onActiveMonthChange($event)"
                 />
               }
@@ -67,7 +66,6 @@ import { MonthDaysComponent } from './month-days.component';
                       [selectedDate]="value"
                       [min]="min"
                       [activeDate]="activeDate"
-                      [locale]="locale"
                       (selectedDateChange)="onSelect($event)"
                       (activeDateChange)="onActiveDateChange($event)"
                     />
@@ -129,23 +127,11 @@ export class DatePickerComponent
   @Input() min?: Date | null;
   @Input() monthAndYearFormat?: string;
 
-  // locale input is for demo purposes only - until there is an API for switching the locale at runtime
-  private _locale?: string;
-
-  @Input()
-  get locale() {
-    return this._locale;
-  }
-
-  set locale(locale: string | undefined) {
-    this._locale = locale || this.localeId;
-  }
-
   private _firstDayOfWeek?: keyof typeof WeekDay;
 
   @Input()
   get firstDayOfWeek() {
-    return this._firstDayOfWeek || this.getDefaultFirstDayOfWeek();
+    return this._firstDayOfWeek || 'Sunday';
   }
 
   set firstDayOfWeek(firstDayOfWeek: keyof typeof WeekDay) {
@@ -194,9 +180,7 @@ export class DatePickerComponent
   }
 
   ngOnInit() {
-    if (!this.locale) {
-      this.locale = this.localeId;
-    }
+    console.log('');
   }
 
   ngAfterContentInit() {
@@ -282,9 +266,5 @@ export class DatePickerComponent
     return Array.from({ length: this.numberOfMonths }, (_, index) =>
       addMonths(startOfFirstMonth, index),
     );
-  }
-
-  private getDefaultFirstDayOfWeek() {
-    return WeekDay[getLocaleFirstDayOfWeek(this.locale!)] as keyof typeof WeekDay;
   }
 }
