@@ -1,9 +1,11 @@
 const nx = require('@nx/eslint-plugin');
+const tailwind = require('eslint-plugin-tailwindcss');
 
 module.exports = [
   ...nx.configs['flat/base'],
   ...nx.configs['flat/typescript'],
   ...nx.configs['flat/javascript'],
+  ...tailwind.configs['flat/recommended'],
   {
     ignores: ['**/dist'],
   },

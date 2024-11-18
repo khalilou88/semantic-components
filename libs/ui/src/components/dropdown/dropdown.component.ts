@@ -16,7 +16,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     >
       Dropdown button
       <svg
-        class="ms-3 h-2.5 w-2.5"
+        class="ms-3 size-2.5"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
