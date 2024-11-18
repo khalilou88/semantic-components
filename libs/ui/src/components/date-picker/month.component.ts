@@ -39,8 +39,7 @@ export const keyCodesToDaySteps = new Map<number, DayStepDelta>([
       @for (dayOfMonth of daysOfMonth; track $index; let index = $index) {
         <button
           class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-          [ngClass]="cssClass(index)"
-          [ngClass]="isSelected(dayOfMonth) ? '!bg-primary-700 dark:!bg-primary-600' : ''"
+          [ngClass]="cssClass(index, dayOfMonth)"
           [attr.data-sc-date]="dayOfMonth | date: 'yyyy-MM-dd'"
           (click)="onDateClick2($event)"
         >
@@ -54,41 +53,50 @@ export const keyCodesToDaySteps = new Map<number, DayStepDelta>([
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MonthComponent implements AfterViewInit, OnChanges {
-  cssClass(index: number) {
-    if (index !== 0) {
-      return '';
-    }
-    let n = 0;
+  cssClass(index: number, dayOfMonth: Date) {
+    const classes = [];
 
-    if (this.firstDayOfMonth === 'sunday') {
-      n = 1;
+    if (index === 0) {
+      let n = 0;
+
+      if (this.firstDayOfMonth === 'sunday') {
+        n = 1;
+      }
+
+      if (this.firstDayOfMonth === 'monday') {
+        n = 2;
+      }
+
+      if (this.firstDayOfMonth === 'tuesday') {
+        n = 3;
+      }
+
+      if (this.firstDayOfMonth === 'wednesday') {
+        n = 4;
+      }
+
+      if (this.firstDayOfMonth === 'thursday') {
+        n = 5;
+      }
+
+      if (this.firstDayOfMonth === 'friday') {
+        n = 6;
+      }
+
+      if (this.firstDayOfMonth === 'saturday') {
+        n = 7;
+      }
+
+      classes.push(`col-start-${n}`);
     }
 
-    if (this.firstDayOfMonth === 'monday') {
-      n = 2;
+    if (this.isSelected(dayOfMonth)) {
+      classes.push('!text-white');
+      classes.push('!bg-primary-700');
+      classes.push('dark:!bg-primary-600');
     }
 
-    if (this.firstDayOfMonth === 'tuesday') {
-      n = 3;
-    }
-
-    if (this.firstDayOfMonth === 'wednesday') {
-      n = 4;
-    }
-
-    if (this.firstDayOfMonth === 'thursday') {
-      n = 5;
-    }
-
-    if (this.firstDayOfMonth === 'friday') {
-      n = 6;
-    }
-
-    if (this.firstDayOfMonth === 'saturday') {
-      n = 7;
-    }
-
-    return `col-start-${n}`;
+    return classes.join(' ');
   }
 
   daysOfMonth!: readonly Date[];
