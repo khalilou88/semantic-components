@@ -49,13 +49,31 @@ export class WeekDaysNamesComponent implements OnInit {
     const intlNarrowFormatter = new Intl.DateTimeFormat(this.localeId, { weekday: 'narrow' });
     const intlShortFormatter = new Intl.DateTimeFormat(this.localeId, { weekday: 'short' });
     const intlLongFormatter = new Intl.DateTimeFormat(this.localeId, { weekday: 'long' });
+
+    let k = 0;
+    const firstDayOfWeek = this.getFirstDayOfWeek();
+    if (firstDayOfWeek === 7) {
+      // First day of the week is Sunday
+      k = 3; // 3th January 2021 is a Sunday
+    }
+    if (firstDayOfWeek === 1) {
+      // First day of the week is Monday
+      k = 4; // 4th January 2021 is a Monday
+    }
+
     for (let i = 0; i < 7; i += 1) {
-      const date = new Date(Date.UTC(2021, 0, i + 3)); // 3th January 2021 is a Sunday
+      const date = new Date(Date.UTC(2021, 0, i + k));
       this.weekDaysNames.push({
         narrow: intlNarrowFormatter.format(date),
         short: intlShortFormatter.format(date),
         long: intlLongFormatter.format(date),
       });
     }
+  }
+
+  private getFirstDayOfWeek(): number {
+    const locale = new Intl.Locale(this.localeId);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return (locale as any).getWeekInfo().firstDay;
   }
 }
