@@ -15,7 +15,7 @@ interface WeekDayName {
 }
 
 @Component({
-  selector: 'sc-days-of-week',
+  selector: 'sc-week-days-names',
   standalone: true,
   imports: [CommonModule],
   template: `
@@ -26,7 +26,7 @@ interface WeekDayName {
           [title]="weekDayName.long"
           [attr.aria-label]="weekDayName.long"
         >
-          {{ weekDayName.narrow }}
+          {{ weekDayName.short }}
         </abbr>
       }
     </div>
@@ -35,7 +35,7 @@ interface WeekDayName {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DaysOfWeekComponent implements OnInit {
+export class WeekDaysNamesComponent implements OnInit {
   weekDaysNames: WeekDayName[] = [];
 
   constructor(@Inject(LOCALE_ID) private readonly localeId: string) {}
