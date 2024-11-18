@@ -14,11 +14,13 @@ import { CommonModule, FormStyle, getLocaleDayNames, TranslationWidth } from '@a
   imports: [CommonModule],
   template: `
     <div class="mb-1 grid grid-cols-7">
-      @for (narrowDayOfWeek of narrowDaysOfWeek; track $index) {
+      @for (dayOfWeek of daysOfWeek; track $index; let index = $index) {
         <abbr
           class="h-6 text-center text-sm font-medium leading-6 text-gray-500 dark:text-gray-400"
+          [title]="dayOfWeek"
+          [attr.aria-label]="dayOfWeek"
         >
-          {{ narrowDayOfWeek }}
+          {{ narrowDaysOfWeek[index] }}
         </abbr>
       }
     </div>
@@ -29,6 +31,7 @@ import { CommonModule, FormStyle, getLocaleDayNames, TranslationWidth } from '@a
 })
 export class DaysOfWeekComponent implements OnInit {
   narrowDaysOfWeek!: readonly string[];
+  daysOfWeek!: readonly string[];
 
   constructor(@Inject(LOCALE_ID) private readonly localeId: string) {}
 
@@ -38,5 +41,7 @@ export class DaysOfWeekComponent implements OnInit {
       FormStyle.Format,
       TranslationWidth.Narrow,
     );
+
+    this.daysOfWeek = getLocaleDayNames(this.localeId, FormStyle.Format, TranslationWidth.Wide);
   }
 }
