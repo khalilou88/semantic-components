@@ -7,8 +7,6 @@ import { DatePickerComponent } from '@semantic-components/ui';
   standalone: true,
   imports: [CommonModule, DatePickerComponent],
   template: `
-    <p>date-picker works!</p>
-
     <sc-date-picker />
   `,
   styles: ``,
