@@ -35,13 +35,20 @@ export const keyCodesToDaySteps = new Map<number, DayStepDelta>([
   standalone: true,
   imports: [CommonModule, NgClass],
   template: `
-    <!-- TODO -->
-    <div class="col-start-6"></div>
     <div class="grid w-64 grid-cols-7">
       @for (dayOfMonth of daysOfMonth; track $index; let index = $index) {
         <button
           class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-          [ngClass]="cssClass(index, dayOfMonth)"
+          [ngClass]="{
+            'col-start-1': index === 0 && firstDayOfMonthIndex === 0,
+            'col-start-2': index === 0 && firstDayOfMonthIndex === 1,
+            'col-start-3': index === 0 && firstDayOfMonthIndex === 2,
+            'col-start-4': index === 0 && firstDayOfMonthIndex === 3,
+            'col-start-5': index === 0 && firstDayOfMonthIndex === 4,
+            'col-start-6': index === 0 && firstDayOfMonthIndex === 5,
+            'col-start-7': index === 0 && firstDayOfMonthIndex === 6,
+            '!bg-primary-700 dark:!bg-primary-600 !text-white': isSelected(dayOfMonth),
+          }"
           [attr.data-sc-date]="dayOfMonth | date: 'yyyy-MM-dd'"
           (click)="onDateClick2($event)"
         >
@@ -55,51 +62,7 @@ export const keyCodesToDaySteps = new Map<number, DayStepDelta>([
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MonthComponent implements AfterViewInit, OnChanges {
-  cssClass(index: number, dayOfMonth: Date) {
-    const classes = [];
-
-    if (index === 0) {
-      let n = 0;
-
-      if (this.firstDayOfMonth === 'sunday') {
-        n = 1;
-      }
-
-      if (this.firstDayOfMonth === 'monday') {
-        n = 2;
-      }
-
-      if (this.firstDayOfMonth === 'tuesday') {
-        n = 3;
-      }
-
-      if (this.firstDayOfMonth === 'wednesday') {
-        n = 4;
-      }
-
-      if (this.firstDayOfMonth === 'thursday') {
-        n = 5;
-      }
-
-      if (this.firstDayOfMonth === 'friday') {
-        n = 6;
-      }
-
-      if (this.firstDayOfMonth === 'saturday') {
-        n = 7;
-      }
-
-      classes.push(`col-start-${n}`);
-    }
-
-    if (this.isSelected(dayOfMonth)) {
-      classes.push('!text-white');
-      classes.push('!bg-primary-700');
-      classes.push('dark:!bg-primary-600');
-    }
-
-    return classes.join(' ');
-  }
+  firstDayOfMonthIndex!: number;
 
   daysOfMonth!: readonly Date[];
   firstDayOfMonth!: string;
@@ -122,6 +85,9 @@ export class MonthComponent implements AfterViewInit, OnChanges {
     if (!this._month || !areDatesInSameMonth(this._month, month)) {
       this._month = month;
       this.daysOfMonth = getDaysOfMonth(this._month);
+      console.log('this.daysOfMonth[0].getDay()');
+      console.log(this.daysOfMonth[0].getDay());
+      this.firstDayOfMonthIndex = this.daysOfMonth[0].getDay();
       this.firstDayOfMonth = WeekDay[this.daysOfMonth[0].getDay()].toLowerCase();
     }
   }
