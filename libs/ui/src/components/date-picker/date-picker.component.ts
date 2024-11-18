@@ -1,11 +1,40 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { coerceNumberProperty } from '@angular/cdk/coercion';
+import { CommonModule, getLocaleFirstDayOfWeek, WeekDay } from '@angular/common';
+import {
+  AfterContentInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  Inject,
+  Input,
+  LOCALE_ID,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewEncapsulation,
+} from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DaysOfWeekComponent } from './days-of-week.component';
+import { MonthHeaderComponent } from './month-header.component';
+import { MonthComponent } from './month.component';
+import {
+  addMonths,
+  areDatesInSameMonth,
+  isValidDate,
+  setDate,
+  startOfDay,
+  startOfMonth,
+} from '../date-utils';
+import { CustomControl } from './custom-control';
 
 @Component({
   selector: 'sc-date-picker',
   standalone: true,
-  imports: [CommonModule, DaysOfWeekComponent],
+  imports: [CommonModule, DaysOfWeekComponent, MonthHeaderComponent, MonthComponent],
   template: `
     <div class="flex justify-center dark:bg-gray-900" id="exampleWrapper">
       <div id="datepicker-inline" inline-datepicker="">
@@ -36,12 +65,9 @@ import { DaysOfWeekComponent } from './days-of-week.component';
                     ></path>
                   </svg>
                 </button>
-                <button
-                  class="rounded-lg bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
-                  type="button"
-                >
-                  February 2024
-                </button>
+
+                <sc-month-header />
+
                 <button
                   class="rounded-lg bg-white p-2.5 text-lg text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600 dark:hover:text-white"
                   type="button"
@@ -67,275 +93,23 @@ import { DaysOfWeekComponent } from './days-of-week.component';
             <div class="p-1">
               <div class="flex">
                 <div class="">
-                  <sc-days-of-week />
-
-                  <div class="grid w-64 grid-cols-7">
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1706396400000"
-                    >
-                      28
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1706482800000"
-                    >
-                      29
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1706569200000"
-                    >
-                      30
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1706655600000"
-                    >
-                      31
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1706742000000"
-                    >
-                      1
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1706828400000"
-                    >
-                      2
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1706914800000"
-                    >
-                      3
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1707001200000"
-                    >
-                      4
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1707087600000"
-                    >
-                      5
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1707174000000"
-                    >
-                      6
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1707260400000"
-                    >
-                      7
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1707346800000"
-                    >
-                      8
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1707433200000"
-                    >
-                      9
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1707519600000"
-                    >
-                      10
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1707606000000"
-                    >
-                      11
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1707692400000"
-                    >
-                      12
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1707778800000"
-                    >
-                      13
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1707865200000"
-                    >
-                      14
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1707951600000"
-                    >
-                      15
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1708038000000"
-                    >
-                      16
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1708124400000"
-                    >
-                      17
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1708210800000"
-                    >
-                      18
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1708297200000"
-                    >
-                      19
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1708383600000"
-                    >
-                      20
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1708470000000"
-                    >
-                      21
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1708556400000"
-                    >
-                      22
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1708642800000"
-                    >
-                      23
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1708729200000"
-                    >
-                      24
-                    </span>
-                    <span
-                      class="!bg-primary-700 dark:!bg-primary-600 focused block flex-1 cursor-pointer rounded-lg border-0 bg-blue-700 text-center text-sm font-semibold leading-9 text-white dark:bg-blue-600"
-                      data-date="1708815600000"
-                    >
-                      25
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1708902000000"
-                    >
-                      26
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1708988400000"
-                    >
-                      27
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1709074800000"
-                    >
-                      28
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1709161200000"
-                    >
-                      29
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1709247600000"
-                    >
-                      1
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1709334000000"
-                    >
-                      2
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1709420400000"
-                    >
-                      3
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1709506800000"
-                    >
-                      4
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1709593200000"
-                    >
-                      5
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1709679600000"
-                    >
-                      6
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1709766000000"
-                    >
-                      7
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1709852400000"
-                    >
-                      8
-                    </span>
-                    <span
-                      class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-                      data-date="1709938800000"
-                    >
-                      9
-                    </span>
-                  </div>
+                  @for (month of months; track $index) {
+                    <sc-days-of-week />
+                    <sc-month [month]="month" />
+                  }
                 </div>
               </div>
             </div>
             <div class="">
               <div class="mt-2 flex space-x-2 rtl:space-x-reverse">
                 <button
-                  class="!bg-primary-700 dark:!bg-primary-600 hover:!bg-primary-800 dark:hover:!bg-primary-700 focus:!ring-primary-300 w-1/2 rounded-lg bg-blue-700 px-5 py-2 text-center text-sm font-medium text-white hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700"
+                  class="bg-primary-700 dark:bg-primary-600 hover:bg-primary-800 dark:hover:bg-primary-700 focus:ring-primary-300 w-1/2 rounded-lg px-5 py-2 text-center text-sm font-medium text-white focus:ring-4"
                   type="button"
                 >
                   Today
                 </button>
                 <button
-                  class="focus:!ring-primary-300 w-1/2 rounded-lg border border-gray-300 bg-white px-5 py-2 text-center text-sm font-medium text-gray-900 hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
+                  class="focus:ring-primary-300 w-1/2 rounded-lg border border-gray-300 bg-white px-5 py-2 text-center text-sm font-medium text-gray-900 hover:bg-gray-100 focus:ring-4 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
                   type="button"
                 >
                   Clear
@@ -350,5 +124,192 @@ import { DaysOfWeekComponent } from './days-of-week.component';
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => DatePickerComponent),
+      multi: true,
+    },
+    {
+      provide: CustomControl,
+      useExisting: DatePickerComponent,
+    },
+  ],
 })
-export class DatePickerComponent {}
+export class DatePickerComponent
+  extends CustomControl<Date>
+  implements AfterContentInit, ControlValueAccessor, OnChanges, OnInit
+{
+  months!: readonly Date[];
+  touched = false;
+  disabled = false;
+  showMonthStepper = true;
+  activeDate = startOfDay(new Date());
+  activeMonth?: Date;
+
+  private onChange?: (updatedValue: Date) => void;
+  private onTouched?: () => void;
+
+  @Input() value?: Date;
+  @Input() min?: Date | null;
+  @Input() monthAndYearFormat?: string;
+
+  // locale input is for demo purposes only - until there is an API for switching the locale at runtime
+  private _locale?: string;
+
+  @Input()
+  get locale() {
+    return this._locale;
+  }
+
+  set locale(locale: string | undefined) {
+    this._locale = locale || this.localeId;
+  }
+
+  private _firstDayOfWeek?: keyof typeof WeekDay;
+
+  @Input()
+  get firstDayOfWeek() {
+    return this._firstDayOfWeek || this.getDefaultFirstDayOfWeek();
+  }
+
+  set firstDayOfWeek(firstDayOfWeek: keyof typeof WeekDay) {
+    this._firstDayOfWeek = firstDayOfWeek;
+  }
+
+  private _firstMonth?: Date | null;
+
+  @Input()
+  set firstMonth(firstMonth: Date | undefined | null) {
+    this._firstMonth = firstMonth;
+    this.activeMonth = this._firstMonth || undefined;
+  }
+
+  get firstMonth(): Date | undefined | null {
+    return this._firstMonth;
+  }
+
+  private _numberOfMonths = 1;
+
+  @Input()
+  set numberOfMonths(numberOfMonths: any) {
+    this._numberOfMonths = coerceNumberProperty(numberOfMonths);
+    this.showMonthStepper = this._numberOfMonths <= 2;
+  }
+
+  get numberOfMonths() {
+    return this._numberOfMonths;
+  }
+
+  @Output() valueChange = new EventEmitter<Date>();
+
+  trackByMilliseconds = (_: number, month: Date) => {
+    // avoid destroying month and month-header components in one-month view (with month steppers)
+    // otherwise month stepper buttons would lose focus after press
+    // also avoid destroying them when changing firstMonth in multi-month view
+    return this.showMonthStepper || month.getTime();
+  };
+
+  constructor(
+    public changeDetectorRef: ChangeDetectorRef,
+    @Inject(LOCALE_ID) private readonly localeId: string,
+    private readonly elementRef: ElementRef,
+  ) {
+    super();
+  }
+
+  ngOnInit() {
+    if (!this.locale) {
+      this.locale = this.localeId;
+    }
+  }
+
+  ngAfterContentInit() {
+    // first lifecycle hook after attached FormControl calls writeValue() with the value passed to its constructor
+    this.months = this.getMonths();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (
+      (changes['numberOfMonths'] && !changes['numberOfMonths'].firstChange) ||
+      (changes['firstMonth'] && !changes['firstMonth'].firstChange)
+    ) {
+      this.months = this.getMonths();
+    }
+  }
+
+  onActiveDateChange(activeDate: Date) {
+    this.activeDate = activeDate;
+
+    if (!areDatesInSameMonth(this.activeDate, this.activeMonth || new Date())) {
+      this.activeMonth = startOfMonth(this.activeDate);
+      if (this.showMonthStepper) {
+        this.months = this.getMonths();
+      }
+    }
+
+    setTimeout(() => {
+      this.elementRef.nativeElement.querySelector('[tabindex="0"]').focus();
+    });
+  }
+
+  onActiveMonthChange(activeMonth: Date) {
+    this.activeMonth = activeMonth;
+    this.activeDate = setDate(this.activeMonth, this.activeDate.getDate());
+    this.months = this.getMonths();
+  }
+
+  onSelect(date: Date) {
+    if (!this.disabled) {
+      this.value = date;
+      this.activeMonth = date;
+      this.activeDate = date;
+      this.valueChange.emit(date);
+      if (this.onChange) {
+        this.onChange(date);
+      }
+      if (this.onTouched) {
+        this.onTouched();
+      }
+    }
+  }
+
+  writeValue(value: Date) {
+    // TODO: what if calendar or the given date is disabled?
+    this.value = isValidDate(value) ? startOfDay(value) : undefined;
+    this.changeDetectorRef.markForCheck();
+
+    if (this.showMonthStepper && this.value) {
+      this.activeMonth = this.value;
+      this.months = this.getMonths();
+    }
+  }
+
+  registerOnChange(onChangeCallback: (updatedValue: Date) => void) {
+    this.onChange = onChangeCallback;
+  }
+
+  registerOnTouched(onTouchedCallback: () => void) {
+    this.onTouched = () => {
+      this.touched = true;
+      onTouchedCallback();
+    };
+  }
+
+  setDisabledState(isDisabled: boolean) {
+    this.disabled = isDisabled;
+    this.changeDetectorRef.markForCheck();
+  }
+
+  private getMonths() {
+    const firstMonth = (this.showMonthStepper ? this.activeMonth : this.firstMonth) || new Date();
+    const startOfFirstMonth = startOfMonth(firstMonth);
+    return Array.from({ length: this.numberOfMonths }, (_, index) =>
+      addMonths(startOfFirstMonth, index),
+    );
+  }
+
+  private getDefaultFirstDayOfWeek() {
+    return WeekDay[getLocaleFirstDayOfWeek(this.locale!)] as keyof typeof WeekDay;
+  }
+}

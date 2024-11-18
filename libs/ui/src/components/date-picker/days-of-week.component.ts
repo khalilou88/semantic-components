@@ -1,12 +1,13 @@
+import { CommonModule, FormStyle, getLocaleDayNames, TranslationWidth } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   Inject,
+  Input,
   LOCALE_ID,
   OnInit,
   ViewEncapsulation,
 } from '@angular/core';
-import { CommonModule, FormStyle, getLocaleDayNames, TranslationWidth } from '@angular/common';
 
 @Component({
   selector: 'sc-days-of-week',
@@ -30,18 +31,35 @@ import { CommonModule, FormStyle, getLocaleDayNames, TranslationWidth } from '@a
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DaysOfWeekComponent implements OnInit {
-  narrowDaysOfWeek!: readonly string[];
   daysOfWeek!: readonly string[];
+  narrowDaysOfWeek!: readonly string[];
+
+  private _locale?: string;
+
+  @Input()
+  get locale() {
+    return this._locale;
+  }
+
+  set locale(locale: string | undefined) {
+    this._locale = locale || this.localeId;
+    this.daysOfWeek = this.getDaysOfWeek();
+    this.narrowDaysOfWeek = this.getNarrowDaysOfWeek();
+  }
 
   constructor(@Inject(LOCALE_ID) private readonly localeId: string) {}
 
-  ngOnInit() {
-    this.narrowDaysOfWeek = getLocaleDayNames(
-      this.localeId,
-      FormStyle.Format,
-      TranslationWidth.Narrow,
-    );
+  ngOnInit(): void {
+    if (!this.locale) {
+      this.locale = this.localeId;
+    }
+  }
 
-    this.daysOfWeek = getLocaleDayNames(this.localeId, FormStyle.Format, TranslationWidth.Wide);
+  private getDaysOfWeek() {
+    return getLocaleDayNames(this.locale!, FormStyle.Format, TranslationWidth.Wide);
+  }
+
+  private getNarrowDaysOfWeek() {
+    return getLocaleDayNames(this.locale!, FormStyle.Format, TranslationWidth.Narrow);
   }
 }
