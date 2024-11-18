@@ -9,7 +9,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
   template: `
     <div class="bg-gray-50 antialiased dark:bg-gray-900">
       <nav
-        class="fixed left-0 right-0 top-0 z-50 border-b border-gray-200 bg-white px-4 py-2.5 dark:border-gray-700 dark:bg-gray-800"
+        class="fixed inset-x-0 top-0 z-50 border-b border-gray-200 bg-white px-4 py-2.5 dark:border-gray-700 dark:bg-gray-800"
       >
         <div class="flex flex-wrap items-center justify-between">
           <div class="flex items-center justify-start">
@@ -20,7 +20,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
               aria-controls="drawer-navigation"
             >
               <svg
-                class="h-6 w-6"
+                class="size-6"
                 aria-hidden="true"
                 fill="currentColor"
                 viewBox="0 0 20 20"
@@ -33,7 +33,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                 ></path>
               </svg>
               <svg
-                class="hidden h-6 w-6"
+                class="hidden size-6"
                 aria-hidden="true"
                 fill="currentColor"
                 viewBox="0 0 20 20"
@@ -59,10 +59,10 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
             </a>
             <form class="hidden md:block md:pl-2" action="#" method="GET">
               <label class="sr-only" for="topbar-search">Search</label>
-              <div class="relative md:w-64 md:w-96">
+              <div class="relative md:w-96">
                 <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                   <svg
-                    class="h-5 w-5 text-gray-500 dark:text-gray-400"
+                    class="size-5 text-gray-500 dark:text-gray-400"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +75,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                   </svg>
                 </div>
                 <input
-                  class="focus:ring-primary-500 focus:border-primary-500 dark:focus:ring-primary-500 dark:focus:border-primary-500 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
+                  class="focus:ring-primary-500 focus:border-primary-500 dark:focus:ring-primary-500 dark:focus:border-primary-500 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400"
                   id="topbar-search"
                   type="text"
                   name="email"
@@ -93,7 +93,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
             >
               <span class="sr-only">Toggle search</span>
               <svg
-                class="h-6 w-6"
+                class="size-6"
                 aria-hidden="true"
                 fill="currentColor"
                 viewBox="0 0 20 20"
@@ -116,7 +116,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
               <span class="sr-only">View notifications</span>
               <!-- Bell icon -->
               <svg
-                class="h-6 w-6"
+                class="size-6"
                 aria-hidden="true"
                 fill="currentColor"
                 viewBox="0 0 20 20"
@@ -129,7 +129,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
             </button>
             <!-- Dropdown menu -->
             <div
-              class="z-50 my-4 hidden max-w-sm list-none divide-y divide-gray-100 overflow-hidden rounded rounded-xl bg-white text-base shadow-lg dark:divide-gray-600 dark:bg-gray-700"
+              class="z-50 my-4 hidden max-w-sm list-none divide-y divide-gray-100 overflow-hidden rounded-xl bg-white text-base shadow-lg dark:divide-gray-600 dark:bg-gray-700"
               id="notification-dropdown"
             >
               <div
@@ -142,17 +142,17 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                   class="flex border-b px-4 py-3 hover:bg-gray-100 dark:border-gray-600 dark:hover:bg-gray-600"
                   href="#"
                 >
-                  <div class="flex-shrink-0">
+                  <div class="shrink-0">
                     <img
-                      class="h-11 w-11 rounded-full"
+                      class="size-11 rounded-full"
                       src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
                       alt="Bonnie Green avatar"
                     />
                     <div
-                      class="bg-primary-700 absolute -mt-5 ml-6 flex h-5 w-5 items-center justify-center rounded-full border border-white dark:border-gray-700"
+                      class="bg-primary-700 absolute -mt-5 ml-6 flex size-5 items-center justify-center rounded-full border border-white dark:border-gray-700"
                     >
                       <svg
-                        class="h-3 w-3 text-white"
+                        class="size-3 text-white"
                         aria-hidden="true"
                         fill="currentColor"
                         viewBox="0 0 20 20"
@@ -182,17 +182,17 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                   class="flex border-b px-4 py-3 hover:bg-gray-100 dark:border-gray-600 dark:hover:bg-gray-600"
                   href="#"
                 >
-                  <div class="flex-shrink-0">
+                  <div class="shrink-0">
                     <img
-                      class="h-11 w-11 rounded-full"
+                      class="size-11 rounded-full"
                       src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
                       alt="Jese Leos avatar"
                     />
                     <div
-                      class="absolute -mt-5 ml-6 flex h-5 w-5 items-center justify-center rounded-full border border-white bg-gray-900 dark:border-gray-700"
+                      class="absolute -mt-5 ml-6 flex size-5 items-center justify-center rounded-full border border-white bg-gray-900 dark:border-gray-700"
                     >
                       <svg
-                        class="h-3 w-3 text-white"
+                        class="size-3 text-white"
                         aria-hidden="true"
                         fill="currentColor"
                         viewBox="0 0 20 20"
@@ -220,17 +220,17 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                   class="flex border-b px-4 py-3 hover:bg-gray-100 dark:border-gray-600 dark:hover:bg-gray-600"
                   href="#"
                 >
-                  <div class="flex-shrink-0">
+                  <div class="shrink-0">
                     <img
-                      class="h-11 w-11 rounded-full"
+                      class="size-11 rounded-full"
                       src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/joseph-mcfall.png"
                       alt="Joseph McFall avatar"
                     />
                     <div
-                      class="absolute -mt-5 ml-6 flex h-5 w-5 items-center justify-center rounded-full border border-white bg-red-600 dark:border-gray-700"
+                      class="absolute -mt-5 ml-6 flex size-5 items-center justify-center rounded-full border border-white bg-red-600 dark:border-gray-700"
                     >
                       <svg
-                        class="h-3 w-3 text-white"
+                        class="size-3 text-white"
                         aria-hidden="true"
                         fill="currentColor"
                         viewBox="0 0 20 20"
@@ -260,17 +260,17 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                   class="flex border-b px-4 py-3 hover:bg-gray-100 dark:border-gray-600 dark:hover:bg-gray-600"
                   href="#"
                 >
-                  <div class="flex-shrink-0">
+                  <div class="shrink-0">
                     <img
-                      class="h-11 w-11 rounded-full"
+                      class="size-11 rounded-full"
                       src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/roberta-casas.png"
                       alt="Roberta Casas image"
                     />
                     <div
-                      class="absolute -mt-5 ml-6 flex h-5 w-5 items-center justify-center rounded-full border border-white bg-green-400 dark:border-gray-700"
+                      class="absolute -mt-5 ml-6 flex size-5 items-center justify-center rounded-full border border-white bg-green-400 dark:border-gray-700"
                     >
                       <svg
-                        class="h-3 w-3 text-white"
+                        class="size-3 text-white"
                         aria-hidden="true"
                         fill="currentColor"
                         viewBox="0 0 20 20"
@@ -301,17 +301,17 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                   </div>
                 </a>
                 <a class="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600" href="#">
-                  <div class="flex-shrink-0">
+                  <div class="shrink-0">
                     <img
-                      class="h-11 w-11 rounded-full"
+                      class="size-11 rounded-full"
                       src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/robert-brown.png"
                       alt="Robert image"
                     />
                     <div
-                      class="absolute -mt-5 ml-6 flex h-5 w-5 items-center justify-center rounded-full border border-white bg-purple-500 dark:border-gray-700"
+                      class="absolute -mt-5 ml-6 flex size-5 items-center justify-center rounded-full border border-white bg-purple-500 dark:border-gray-700"
                     >
                       <svg
-                        class="h-3 w-3 text-white"
+                        class="size-3 text-white"
                         aria-hidden="true"
                         fill="currentColor"
                         viewBox="0 0 20 20"
@@ -341,7 +341,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
               >
                 <div class="inline-flex items-center">
                   <svg
-                    class="mr-2 h-4 w-4 text-gray-500 dark:text-gray-400"
+                    class="mr-2 size-4 text-gray-500 dark:text-gray-400"
                     aria-hidden="true"
                     fill="currentColor"
                     viewBox="0 0 20 20"
@@ -367,7 +367,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
               <span class="sr-only">View notifications</span>
               <!-- Icon -->
               <svg
-                class="h-6 w-6"
+                class="size-6"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
@@ -379,7 +379,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
             </button>
             <!-- Dropdown menu -->
             <div
-              class="z-50 my-4 hidden max-w-sm list-none divide-y divide-gray-100 overflow-hidden rounded rounded-xl bg-white text-base shadow-lg dark:divide-gray-600 dark:bg-gray-700"
+              class="z-50 my-4 hidden max-w-sm list-none divide-y divide-gray-100 overflow-hidden rounded-xl bg-white text-base shadow-lg dark:divide-gray-600 dark:bg-gray-700"
               id="apps-dropdown"
             >
               <div
@@ -393,7 +393,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                   href="#"
                 >
                   <svg
-                    class="mx-auto mb-1 h-7 w-7 text-gray-400 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-gray-400"
+                    class="mx-auto mb-1 size-7 text-gray-400 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-gray-400"
                     aria-hidden="true"
                     fill="currentColor"
                     viewBox="0 0 20 20"
@@ -412,7 +412,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                   href="#"
                 >
                   <svg
-                    class="mx-auto mb-1 h-7 w-7 text-gray-400 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-gray-400"
+                    class="mx-auto mb-1 size-7 text-gray-400 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-gray-400"
                     aria-hidden="true"
                     fill="currentColor"
                     viewBox="0 0 20 20"
@@ -429,7 +429,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                   href="#"
                 >
                   <svg
-                    class="mx-auto mb-1 h-7 w-7 text-gray-400 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-gray-400"
+                    class="mx-auto mb-1 size-7 text-gray-400 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-gray-400"
                     aria-hidden="true"
                     fill="currentColor"
                     viewBox="0 0 20 20"
@@ -448,7 +448,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                   href="#"
                 >
                   <svg
-                    class="mx-auto mb-1 h-7 w-7 text-gray-400 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-gray-400"
+                    class="mx-auto mb-1 size-7 text-gray-400 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-gray-400"
                     aria-hidden="true"
                     fill="currentColor"
                     viewBox="0 0 20 20"
@@ -467,7 +467,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                   href="#"
                 >
                   <svg
-                    class="mx-auto mb-1 h-7 w-7 text-gray-400 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-gray-400"
+                    class="mx-auto mb-1 size-7 text-gray-400 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-gray-400"
                     aria-hidden="true"
                     fill="currentColor"
                     viewBox="0 0 20 20"
@@ -486,7 +486,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                   href="#"
                 >
                   <svg
-                    class="mx-auto mb-1 h-7 w-7 text-gray-400 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-gray-400"
+                    class="mx-auto mb-1 size-7 text-gray-400 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-gray-400"
                     aria-hidden="true"
                     fill="currentColor"
                     viewBox="0 0 20 20"
@@ -506,7 +506,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                   href="#"
                 >
                   <svg
-                    class="mx-auto mb-1 h-7 w-7 text-gray-400 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-gray-400"
+                    class="mx-auto mb-1 size-7 text-gray-400 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-gray-400"
                     aria-hidden="true"
                     fill="currentColor"
                     viewBox="0 0 20 20"
@@ -528,7 +528,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                   href="#"
                 >
                   <svg
-                    class="mx-auto mb-1 h-7 w-7 text-gray-400 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-gray-400"
+                    class="mx-auto mb-1 size-7 text-gray-400 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-gray-400"
                     aria-hidden="true"
                     fill="currentColor"
                     viewBox="0 0 20 20"
@@ -547,7 +547,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                   href="#"
                 >
                   <svg
-                    class="mx-auto mb-1 h-7 w-7 text-gray-400 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-gray-400"
+                    class="mx-auto mb-1 size-7 text-gray-400 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-gray-400"
                     aria-hidden="true"
                     fill="none"
                     stroke="currentColor"
@@ -574,14 +574,14 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
             >
               <span class="sr-only">Open user menu</span>
               <img
-                class="h-8 w-8 rounded-full"
+                class="size-8 rounded-full"
                 src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gough.png"
                 alt="user photo"
               />
             </button>
             <!-- Dropdown menu -->
             <div
-              class="z-50 my-4 hidden w-56 list-none divide-y divide-gray-100 rounded rounded-xl bg-white text-base shadow dark:divide-gray-600 dark:bg-gray-700"
+              class="z-50 my-4 hidden w-56 list-none divide-y divide-gray-100 rounded-xl bg-white text-base shadow dark:divide-gray-600 dark:bg-gray-700"
               id="dropdown"
             >
               <div class="px-4 py-3">
@@ -617,7 +617,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                     href="#"
                   >
                     <svg
-                      class="mr-2 h-5 w-5 text-gray-400"
+                      class="mr-2 size-5 text-gray-400"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                       xmlns="http://www.w3.org/2000/svg"
@@ -637,7 +637,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                     href="#"
                   >
                     <svg
-                      class="mr-2 h-5 w-5 text-gray-400"
+                      class="mr-2 size-5 text-gray-400"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                       xmlns="http://www.w3.org/2000/svg"
@@ -656,7 +656,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                   >
                     <span class="flex items-center">
                       <svg
-                        class="text-primary-600 dark:text-primary-500 mr-2 h-5 w-5"
+                        class="text-primary-600 dark:text-primary-500 mr-2 size-5"
                         aria-hidden="true"
                         fill="currentColor"
                         viewBox="0 0 20 20"
@@ -671,7 +671,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                       Pro version
                     </span>
                     <svg
-                      class="h-5 w-5 text-gray-400"
+                      class="size-5 text-gray-400"
                       aria-hidden="true"
                       fill="currentColor"
                       viewBox="0 0 20 20"
@@ -714,7 +714,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
             <div class="relative">
               <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                 <svg
-                  class="h-5 w-5 text-gray-500 dark:text-gray-400"
+                  class="size-5 text-gray-500 dark:text-gray-400"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -727,7 +727,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                 </svg>
               </div>
               <input
-                class="focus:ring-primary-500 focus:border-primary-500 dark:focus:ring-primary-500 dark:focus:border-primary-500 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2 pl-10 text-sm text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
+                class="focus:ring-primary-500 focus:border-primary-500 dark:focus:ring-primary-500 dark:focus:border-primary-500 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2 pl-10 text-sm text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400"
                 id="sidebar-search"
                 type="text"
                 name="search"
@@ -742,7 +742,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                 href="#"
               >
                 <svg
-                  class="h-6 w-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+                  class="size-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
                   aria-hidden="true"
                   fill="currentColor"
                   viewBox="0 0 20 20"
@@ -762,7 +762,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                 data-collapse-toggle="dropdown-pages"
               >
                 <svg
-                  class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+                  class="size-6 shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
                   aria-hidden="true"
                   fill="currentColor"
                   viewBox="0 0 20 20"
@@ -776,7 +776,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                 </svg>
                 <span class="ml-3 flex-1 whitespace-nowrap text-left">Pages</span>
                 <svg
-                  class="h-6 w-6"
+                  class="size-6"
                   aria-hidden="true"
                   fill="currentColor"
                   viewBox="0 0 20 20"
@@ -828,7 +828,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                     data-collapse-toggle="dropdown-sales"
                   >
                     <svg
-                      class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+                      class="size-6 shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
                       aria-hidden="true"
                       fill="currentColor"
                       viewBox="0 0 20 20"
@@ -842,7 +842,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                     </svg>
                     <span class="ml-3 flex-1 whitespace-nowrap text-left">Components</span>
                     <svg
-                      class="h-6 w-6"
+                      class="size-6"
                       aria-hidden="true"
                       fill="currentColor"
                       viewBox="0 0 20 20"
@@ -895,7 +895,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                 href="#"
               >
                 <svg
-                  class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+                  class="size-6 shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
                   aria-hidden="true"
                   fill="currentColor"
                   viewBox="0 0 20 20"
@@ -910,7 +910,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                 </svg>
                 <span class="ml-3 flex-1 whitespace-nowrap">Messages</span>
                 <span
-                  class="text-primary-800 bg-primary-100 dark:bg-primary-200 dark:text-primary-800 inline-flex h-5 w-5 items-center justify-center rounded-full text-xs font-semibold"
+                  class="text-primary-800 bg-primary-100 dark:bg-primary-200 dark:text-primary-800 inline-flex size-5 items-center justify-center rounded-full text-xs font-semibold"
                 >
                   4
                 </span>
@@ -924,7 +924,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                 data-collapse-toggle="dropdown-authentication"
               >
                 <svg
-                  class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+                  class="size-6 shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
                   aria-hidden="true"
                   fill="currentColor"
                   viewBox="0 0 20 20"
@@ -938,7 +938,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                 </svg>
                 <span class="ml-3 flex-1 whitespace-nowrap text-left">Authentication</span>
                 <svg
-                  class="h-6 w-6"
+                  class="size-6"
                   aria-hidden="true"
                   fill="currentColor"
                   viewBox="0 0 20 20"
@@ -987,7 +987,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                 href="#"
               >
                 <svg
-                  class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+                  class="size-6 shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
                   aria-hidden="true"
                   fill="currentColor"
                   viewBox="0 0 20 20"
@@ -1010,7 +1010,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                 href="#"
               >
                 <svg
-                  class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+                  class="size-6 shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
                   aria-hidden="true"
                   fill="currentColor"
                   viewBox="0 0 20 20"
@@ -1030,7 +1030,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                 href="#"
               >
                 <svg
-                  class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+                  class="size-6 shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
                   aria-hidden="true"
                   fill="currentColor"
                   viewBox="0 0 20 20"
@@ -1055,7 +1055,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
             href="#"
           >
             <svg
-              class="h-6 w-6"
+              class="size-6"
               aria-hidden="true"
               fill="currentColor"
               viewBox="0 0 20 20"
@@ -1072,7 +1072,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
             data-tooltip-target="tooltip-settings"
           >
             <svg
-              class="h-6 w-6"
+              class="size-6"
               aria-hidden="true"
               fill="currentColor"
               viewBox="0 0 20 20"
@@ -1099,7 +1099,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
             data-dropdown-toggle="language-dropdown"
           >
             <svg
-              class="mt-0.5 h-5 w-5 rounded-full"
+              class="mt-0.5 size-5 rounded-full"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -1151,7 +1151,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                 >
                   <div class="inline-flex items-center">
                     <svg
-                      class="mr-2 h-3.5 w-3.5 rounded-full"
+                      class="mr-2 size-3.5 rounded-full"
                       id="flag-icon-css-us"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
@@ -1190,7 +1190,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                 >
                   <div class="inline-flex items-center">
                     <svg
-                      class="mr-2 h-3.5 w-3.5 rounded-full"
+                      class="mr-2 size-3.5 rounded-full"
                       id="flag-icon-css-de"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
@@ -1212,7 +1212,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                 >
                   <div class="inline-flex items-center">
                     <svg
-                      class="mr-2 h-3.5 w-3.5 rounded-full"
+                      class="mr-2 size-3.5 rounded-full"
                       id="flag-icon-css-it"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
@@ -1236,7 +1236,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
                 >
                   <div class="inline-flex items-center">
                     <svg
-                      class="mr-2 h-3.5 w-3.5 rounded-full"
+                      class="mr-2 size-3.5 rounded-full"
                       id="flag-icon-css-cn"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
