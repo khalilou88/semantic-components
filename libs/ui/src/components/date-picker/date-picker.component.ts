@@ -44,58 +44,33 @@ import { CustomControl } from './custom-control';
               <div
                 class="bg-white px-2 py-3 text-center font-semibold dark:bg-gray-700 dark:text-white"
               ></div>
-              <div class="mb-2 flex justify-between">
-                <button
-                  class="rounded-lg bg-white p-2.5 text-lg text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600 dark:hover:text-white"
-                  type="button"
-                >
-                  <svg
-                    class="size-4 text-gray-800 rtl:rotate-180 dark:text-white"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 14 10"
-                  >
-                    <path
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M13 5H1m0 0 4 4M1 5l4-4"
-                    ></path>
-                  </svg>
-                </button>
 
-                <sc-month-header />
-
-                <button
-                  class="rounded-lg bg-white p-2.5 text-lg text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600 dark:hover:text-white"
-                  type="button"
-                >
-                  <svg
-                    class="size-4 text-gray-800 rtl:rotate-180 dark:text-white"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 14 10"
-                  >
-                    <path
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M1 5h12m0 0L9 1m4 4L9 9"
-                    ></path>
-                  </svg>
-                </button>
-              </div>
+              @for (month of months; track $index) {
+                <sc-month-header
+                  [month]="month"
+                  [activeMonth]="activeMonth"
+                  [monthAndYearFormat]="monthAndYearFormat"
+                  [showMonthStepper]="showMonthStepper"
+                  [locale]="locale"
+                  (activeMonthChange)="onActiveMonthChange($event)"
+                />
+              }
             </div>
             <div class="p-1">
               <div class="flex">
                 <div class="">
+                  <sc-days-of-week [locale]="locale" />
+
                   @for (month of months; track $index) {
-                    <sc-days-of-week />
-                    <sc-month [month]="month" />
+                    <sc-month
+                      [month]="month"
+                      [selectedDate]="value"
+                      [min]="min"
+                      [activeDate]="activeDate"
+                      [locale]="locale"
+                      (selectedDateChange)="onSelect($event)"
+                      (activeDateChange)="onActiveDateChange($event)"
+                    />
                   }
                 </div>
               </div>
