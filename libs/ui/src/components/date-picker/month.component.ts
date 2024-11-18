@@ -31,7 +31,7 @@ export const keyCodesToDaySteps = new Map<number, DayStepDelta>([
 ]);
 
 @Component({
-  selector: 'sc-month',
+  selector: 'sc-month-days',
   standalone: true,
   imports: [CommonModule, NgClass],
   template: `
@@ -61,7 +61,7 @@ export const keyCodesToDaySteps = new Map<number, DayStepDelta>([
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MonthComponent implements AfterViewInit, OnChanges {
+export class MonthDaysComponent implements AfterViewInit, OnChanges {
   firstDayOfMonthIndex!: number;
 
   daysOfMonth!: readonly Date[];

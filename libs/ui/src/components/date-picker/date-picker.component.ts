@@ -19,7 +19,6 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MonthHeaderComponent } from './month-header.component';
-import { MonthComponent } from './month.component';
 import {
   addMonths,
   areDatesInSameMonth,
@@ -30,11 +29,12 @@ import {
 } from '../date-utils';
 import { CustomControl } from './custom-control';
 import { WeekDaysNamesComponent } from './week-days-names.component';
+import { MonthDaysComponent } from './month.component';
 
 @Component({
   selector: 'sc-date-picker',
   standalone: true,
-  imports: [CommonModule, WeekDaysNamesComponent, MonthHeaderComponent, MonthComponent],
+  imports: [CommonModule, WeekDaysNamesComponent, MonthHeaderComponent, MonthDaysComponent],
   template: `
     <div class="flex justify-center dark:bg-gray-900" id="exampleWrapper">
       <div id="datepicker-inline" inline-datepicker="">
@@ -62,7 +62,7 @@ import { WeekDaysNamesComponent } from './week-days-names.component';
                   <sc-week-days-names />
 
                   @for (month of months; track $index) {
-                    <sc-month
+                    <sc-month-days
                       [month]="month"
                       [selectedDate]="value"
                       [min]="min"
