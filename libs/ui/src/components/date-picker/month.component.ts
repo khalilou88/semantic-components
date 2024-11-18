@@ -35,6 +35,7 @@ export const keyCodesToDaySteps = new Map<number, DayStepDelta>([
   standalone: true,
   imports: [CommonModule, NgClass],
   template: `
+    <!-- TODO -->
     <div class="col-start-6"></div>
     <div class="grid w-64 grid-cols-7">
       @for (dayOfMonth of daysOfMonth; track $index; let index = $index) {
