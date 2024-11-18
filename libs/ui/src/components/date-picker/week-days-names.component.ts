@@ -44,6 +44,7 @@ export class WeekDaysNamesComponent implements OnInit {
     this.setLocaleDayNames();
   }
 
+  //https://github.com/angular/angular/issues/57193
   private setLocaleDayNames() {
     const intlNarrowFormatter = new Intl.DateTimeFormat(this.localeId, { weekday: 'narrow' });
     const intlShortFormatter = new Intl.DateTimeFormat(this.localeId, { weekday: 'short' });
