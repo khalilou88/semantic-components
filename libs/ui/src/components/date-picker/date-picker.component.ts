@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DaysOfWeekComponent } from './days-of-week.component';
 
 @Component({
   selector: 'sc-date-picker',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, DaysOfWeekComponent],
   template: `
     <div class="flex justify-center dark:bg-gray-900" id="exampleWrapper">
       <div id="datepicker-inline" inline-datepicker="">
@@ -66,43 +67,8 @@ import { CommonModule } from '@angular/common';
             <div class="p-1">
               <div class="flex">
                 <div class="">
-                  <div class="mb-1 grid grid-cols-7">
-                    <span
-                      class="h-6 text-center text-sm font-medium leading-6 text-gray-500 dark:text-gray-400"
-                    >
-                      Su
-                    </span>
-                    <span
-                      class="h-6 text-center text-sm font-medium leading-6 text-gray-500 dark:text-gray-400"
-                    >
-                      Mo
-                    </span>
-                    <span
-                      class="h-6 text-center text-sm font-medium leading-6 text-gray-500 dark:text-gray-400"
-                    >
-                      Tu
-                    </span>
-                    <span
-                      class="h-6 text-center text-sm font-medium leading-6 text-gray-500 dark:text-gray-400"
-                    >
-                      We
-                    </span>
-                    <span
-                      class="h-6 text-center text-sm font-medium leading-6 text-gray-500 dark:text-gray-400"
-                    >
-                      Th
-                    </span>
-                    <span
-                      class="h-6 text-center text-sm font-medium leading-6 text-gray-500 dark:text-gray-400"
-                    >
-                      Fr
-                    </span>
-                    <span
-                      class="h-6 text-center text-sm font-medium leading-6 text-gray-500 dark:text-gray-400"
-                    >
-                      Sa
-                    </span>
-                  </div>
+                  <sc-days-of-week />
+
                   <div class="grid w-64 grid-cols-7">
                     <span
                       class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
