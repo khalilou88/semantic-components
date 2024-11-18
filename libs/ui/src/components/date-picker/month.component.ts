@@ -1,5 +1,5 @@
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
-import { CommonModule, WeekDay } from '@angular/common';
+import { CommonModule, NgClass, WeekDay } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -34,12 +34,13 @@ export const keyCodesToDaySteps = new Map<number, DayStepDelta>([
 @Component({
   selector: 'sc-month',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgClass],
   template: `
     <div class="grid w-64 grid-cols-7">
-      @for (dayOfMonth of daysOfMonth; track $index) {
+      @for (dayOfMonth of daysOfMonth; track $index; let index = $index) {
         <span
           class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
+          [ngClass]="cssClass(index)"
         >
           {{ dayOfMonth | date: 'd' }}
         </span>
@@ -51,6 +52,43 @@ export const keyCodesToDaySteps = new Map<number, DayStepDelta>([
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MonthComponent implements AfterViewInit, OnChanges {
+  cssClass(index: number) {
+    if (index !== 0) {
+      return '';
+    }
+    let n = 0;
+
+    if (this.firstDayOfMonth === 'sunday') {
+      n = 1;
+    }
+
+    if (this.firstDayOfMonth === 'monday') {
+      n = 2;
+    }
+
+    if (this.firstDayOfMonth === 'tuesday') {
+      n = 3;
+    }
+
+    if (this.firstDayOfMonth === 'wednesday') {
+      n = 4;
+    }
+
+    if (this.firstDayOfMonth === 'thursday') {
+      n = 5;
+    }
+
+    if (this.firstDayOfMonth === 'friday') {
+      n = 6;
+    }
+
+    if (this.firstDayOfMonth === 'saturday') {
+      n = 7;
+    }
+
+    return `col-start-${n}`;
+  }
+
   daysOfMonth!: readonly Date[];
   firstDayOfMonth!: string;
   currentDate = startOfDay(new Date());
