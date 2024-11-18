@@ -12,7 +12,6 @@ import {
   SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
-
 import {
   addDays,
   areDatesInSameMonth,
@@ -38,12 +37,15 @@ export const keyCodesToDaySteps = new Map<number, DayStepDelta>([
   template: `
     <div class="grid w-64 grid-cols-7">
       @for (dayOfMonth of daysOfMonth; track $index; let index = $index) {
-        <span
+        <button
           class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
           [ngClass]="cssClass(index)"
+          [ngClass]="isSelected(dayOfMonth) ? '!bg-primary-700 dark:!bg-primary-600' : ''"
+          [attr.data-sc-date]="dayOfMonth | date: 'yyyy-MM-dd'"
+          (click)="onDateClick2($event)"
         >
           {{ dayOfMonth | date: 'd' }}
-        </span>
+        </button>
       }
     </div>
   `,
@@ -182,5 +184,15 @@ export class MonthComponent implements AfterViewInit, OnChanges {
 
   private isTimeElement(element: HTMLElement): element is HTMLTimeElement {
     return !!element && element.matches(this.dateSelector);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onDateClick2(event: any) {
+    console.log(event.target.dataset.scDate);
+    const selectedDate = new Date(event.target.dataset.scDate + 'T00:00');
+
+    if (isValidDate(selectedDate)) {
+      this.selectDate(selectedDate);
+    }
   }
 }
