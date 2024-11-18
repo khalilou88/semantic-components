@@ -29,7 +29,7 @@ import {
 } from '../date-utils';
 import { CustomControl } from './custom-control';
 import { WeekDaysNamesComponent } from './week-days-names.component';
-import { MonthDaysComponent } from './month.component';
+import { MonthDaysComponent } from './month-days.component';
 
 @Component({
   selector: 'sc-date-picker',
