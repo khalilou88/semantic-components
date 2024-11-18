@@ -15,11 +15,11 @@ import { CommonModule, FormStyle, getLocaleDayNames, TranslationWidth } from '@a
   template: `
     <div class="mb-1 grid grid-cols-7">
       @for (narrowDayOfWeek of narrowDaysOfWeek; track $index) {
-        <span
+        <abbr
           class="h-6 text-center text-sm font-medium leading-6 text-gray-500 dark:text-gray-400"
         >
           {{ narrowDayOfWeek }}
-        </span>
+        </abbr>
       }
     </div>
   `,
