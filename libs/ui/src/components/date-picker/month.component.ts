@@ -103,7 +103,7 @@ export class MonthComponent implements AfterViewInit, OnChanges {
   firstDayOfMonth!: string;
   currentDate = startOfDay(new Date());
 
-  private readonly dateSelector = 'time.month__date';
+  //private readonly dateSelector = 'time.month__date';
 
   @Input() selectedDate?: Date;
   @Input() min?: Date | null;
@@ -167,22 +167,22 @@ export class MonthComponent implements AfterViewInit, OnChanges {
     }
   }
 
-  onMonthClick(event: MouseEvent | Event) {
-    // should be MouseEvent | KeyboardEvent, but $event type for keyup.enter is not inferred correctly
-    const target = event.target as HTMLElement;
+  // onMonthClick(event: MouseEvent | Event) {
+  //   // should be MouseEvent | KeyboardEvent, but $event type for keyup.enter is not inferred correctly
+  //   const target = event.target as HTMLElement;
 
-    if (this.isTimeElement(target)) {
-      this.onDateClick(target);
-    }
-  }
+  //   if (this.isTimeElement(target)) {
+  //     this.onDateClick(target);
+  //   }
+  // }
 
-  private onDateClick(timeElement: HTMLTimeElement) {
-    const selectedDate = new Date(timeElement.dateTime + 'T00:00');
+  // private onDateClick(timeElement: HTMLTimeElement) {
+  //   const selectedDate = new Date(timeElement.dateTime + 'T00:00');
 
-    if (isValidDate(selectedDate)) {
-      this.selectDate(selectedDate);
-    }
-  }
+  //   if (isValidDate(selectedDate)) {
+  //     this.selectDate(selectedDate);
+  //   }
+  // }
 
   private selectDate(date: Date) {
     if (!this.isSelected(date) && !this.isDisabled(date)) {
@@ -190,9 +190,9 @@ export class MonthComponent implements AfterViewInit, OnChanges {
     }
   }
 
-  private isTimeElement(element: HTMLElement): element is HTMLTimeElement {
-    return !!element && element.matches(this.dateSelector);
-  }
+  // private isTimeElement(element: HTMLElement): element is HTMLTimeElement {
+  //   return !!element && element.matches(this.dateSelector);
+  // }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onDateClick2(event: any) {
