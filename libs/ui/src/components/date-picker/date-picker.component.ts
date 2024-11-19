@@ -22,35 +22,29 @@ import { MonthYearHeaderComponent } from './month-year-header.component';
       <div class="bg-white px-2 py-3 text-center font-semibold dark:bg-gray-700 dark:text-white">
         <sc-month-year-header [monthYear]="monthYear()" (monthYearChange)="setMonthYear($event)" />
       </div>
-      <div class="p-1">
-        <div class="flex">
-          <div class="">
-            <sc-week-days-names />
 
-            <sc-month-days
-              [days]="monthDays()"
-              [firstDayMonth]="firstDayMonth()"
-              [selectedDay]="selectedDay()"
-              (selectedDayChange)="setSelectedDay($event)"
-            />
-          </div>
-        </div>
-      </div>
-      <div class="">
-        <div class="mt-2 flex space-x-2 rtl:space-x-reverse">
-          <button
-            class="bg-primary-700 dark:bg-primary-600 hover:bg-primary-800 dark:hover:bg-primary-700 focus:ring-primary-300 w-1/2 rounded-lg px-5 py-2 text-center text-sm font-medium text-white focus:ring-4"
-            type="button"
-          >
-            Today
-          </button>
-          <button
-            class="focus:ring-primary-300 w-1/2 rounded-lg border border-gray-300 bg-white px-5 py-2 text-center text-sm font-medium text-gray-900 hover:bg-gray-100 focus:ring-4 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
-            type="button"
-          >
-            Clear
-          </button>
-        </div>
+      <sc-week-days-names />
+
+      <sc-month-days
+        [days]="monthDays()"
+        [firstDayMonth]="firstDayMonth()"
+        [selectedDay]="selectedDay()"
+        (selectedDayChange)="setSelectedDay($event)"
+      />
+
+      <div class="mt-2 flex space-x-2 rtl:space-x-reverse">
+        <button
+          class="bg-primary-700 dark:bg-primary-600 hover:bg-primary-800 dark:hover:bg-primary-700 focus:ring-primary-300 w-1/2 rounded-lg px-5 py-2 text-center text-sm font-medium text-white focus:ring-4"
+          type="button"
+        >
+          Today
+        </button>
+        <button
+          class="focus:ring-primary-300 w-1/2 rounded-lg border border-gray-300 bg-white px-5 py-2 text-center text-sm font-medium text-gray-900 hover:bg-gray-100 focus:ring-4 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
+          type="button"
+        >
+          Clear
+        </button>
       </div>
     </div>
   `,
