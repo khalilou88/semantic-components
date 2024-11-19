@@ -1,35 +1,18 @@
-import { coerceNumberProperty } from '@angular/cdk/coercion';
-import { CommonModule, getLocaleFirstDayOfWeek, WeekDay } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
-  AfterContentInit,
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
-  ElementRef,
-  EventEmitter,
   forwardRef,
   Inject,
-  Input,
   LOCALE_ID,
-  OnChanges,
   OnInit,
-  Output,
-  SimpleChanges,
+  signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { MonthHeaderComponent } from './month-header.component';
-import {
-  addMonths,
-  areDatesInSameMonth,
-  isValidDate,
-  setDate,
-  startOfDay,
-  startOfMonth,
-} from '../date-utils';
-import { CustomControl } from './custom-control';
-import { WeekDaysNamesComponent } from './week-days-names.component';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MonthDaysComponent } from './month-days.component';
+import { MonthHeaderComponent } from './month-header.component';
+import { WeekDaysNamesComponent } from './week-days-names.component';
 
 @Component({
   selector: 'sc-date-picker',
@@ -45,48 +28,41 @@ import { MonthDaysComponent } from './month-days.component';
                 class="bg-white px-2 py-3 text-center font-semibold dark:bg-gray-700 dark:text-white"
               ></div>
 
-              @for (month of months; track $index) {
-                <sc-month-header
-                  [month]="month"
-                  [activeMonth]="activeMonth"
-                  [monthAndYearFormat]="monthAndYearFormat"
-                  [showMonthStepper]="showMonthStepper"
-                  (activeMonthChange)="onActiveMonthChange($event)"
-                />
-              }
-            </div>
-            <div class="p-1">
-              <div class="flex">
-                <div class="">
-                  <sc-week-days-names />
+              <!--sc-month-header
+                [month]="month"
+                [activeMonth]="activeMonth"
+                [monthAndYearFormat]="monthAndYearFormat"
+                [showMonthStepper]="showMonthStepper"
+                (activeMonthChange)="onActiveMonthChange($event)"
+              />
+            </div-->
+              <div class="p-1">
+                <div class="flex">
+                  <div class="">
+                    <sc-week-days-names />
 
-                  @for (month of months; track $index) {
                     <sc-month-days
-                      [month]="month"
-                      [selectedDate]="value"
-                      [min]="min"
-                      [activeDate]="activeDate"
-                      (selectedDateChange)="onSelect($event)"
-                      (activeDateChange)="onActiveDateChange($event)"
+                      [days]="monthDays()"
+                      [firstDayOfMonthIndex]="firstDayOfMonthIndex()"
                     />
-                  }
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="">
-              <div class="mt-2 flex space-x-2 rtl:space-x-reverse">
-                <button
-                  class="bg-primary-700 dark:bg-primary-600 hover:bg-primary-800 dark:hover:bg-primary-700 focus:ring-primary-300 w-1/2 rounded-lg px-5 py-2 text-center text-sm font-medium text-white focus:ring-4"
-                  type="button"
-                >
-                  Today
-                </button>
-                <button
-                  class="focus:ring-primary-300 w-1/2 rounded-lg border border-gray-300 bg-white px-5 py-2 text-center text-sm font-medium text-gray-900 hover:bg-gray-100 focus:ring-4 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
-                  type="button"
-                >
-                  Clear
-                </button>
+              <div class="">
+                <div class="mt-2 flex space-x-2 rtl:space-x-reverse">
+                  <button
+                    class="bg-primary-700 dark:bg-primary-600 hover:bg-primary-800 dark:hover:bg-primary-700 focus:ring-primary-300 w-1/2 rounded-lg px-5 py-2 text-center text-sm font-medium text-white focus:ring-4"
+                    type="button"
+                  >
+                    Today
+                  </button>
+                  <button
+                    class="focus:ring-primary-300 w-1/2 rounded-lg border border-gray-300 bg-white px-5 py-2 text-center text-sm font-medium text-gray-900 hover:bg-gray-100 focus:ring-4 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
+                    type="button"
+                  >
+                    Clear
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -103,168 +79,62 @@ import { MonthDaysComponent } from './month-days.component';
       useExisting: forwardRef(() => DatePickerComponent),
       multi: true,
     },
-    {
-      provide: CustomControl,
-      useExisting: DatePickerComponent,
-    },
   ],
 })
-export class DatePickerComponent
-  extends CustomControl<Date>
-  implements AfterContentInit, ControlValueAccessor, OnChanges, OnInit
-{
-  months!: readonly Date[];
-  touched = false;
-  disabled = false;
-  showMonthStepper = true;
-  activeDate = startOfDay(new Date());
-  activeMonth?: Date;
+export class DatePickerComponent implements OnInit {
+  monthDays = signal<string[]>([]);
 
-  private onChange?: (updatedValue: Date) => void;
-  private onTouched?: () => void;
+  firstDayOfMonthIndex = signal<number>(2);
 
-  @Input() value?: Date;
-  @Input() min?: Date | null;
-  @Input() monthAndYearFormat?: string;
-
-  private _firstDayOfWeek?: keyof typeof WeekDay;
-
-  @Input()
-  get firstDayOfWeek() {
-    return this._firstDayOfWeek || 'Sunday';
-  }
-
-  set firstDayOfWeek(firstDayOfWeek: keyof typeof WeekDay) {
-    this._firstDayOfWeek = firstDayOfWeek;
-  }
-
-  private _firstMonth?: Date | null;
-
-  @Input()
-  set firstMonth(firstMonth: Date | undefined | null) {
-    this._firstMonth = firstMonth;
-    this.activeMonth = this._firstMonth || undefined;
-  }
-
-  get firstMonth(): Date | undefined | null {
-    return this._firstMonth;
-  }
-
-  private _numberOfMonths = 1;
-
-  @Input()
-  set numberOfMonths(numberOfMonths: any) {
-    this._numberOfMonths = coerceNumberProperty(numberOfMonths);
-    this.showMonthStepper = this._numberOfMonths <= 2;
-  }
-
-  get numberOfMonths() {
-    return this._numberOfMonths;
-  }
-
-  @Output() valueChange = new EventEmitter<Date>();
-
-  trackByMilliseconds = (_: number, month: Date) => {
-    // avoid destroying month and month-header components in one-month view (with month steppers)
-    // otherwise month stepper buttons would lose focus after press
-    // also avoid destroying them when changing firstMonth in multi-month view
-    return this.showMonthStepper || month.getTime();
-  };
-
-  constructor(
-    public changeDetectorRef: ChangeDetectorRef,
-    @Inject(LOCALE_ID) private readonly localeId: string,
-    private readonly elementRef: ElementRef,
-  ) {
-    super();
-  }
+  constructor(@Inject(LOCALE_ID) private readonly localeId: string) {}
 
   ngOnInit() {
-    console.log('');
+    this.getCurrentMonthDays();
   }
 
-  ngAfterContentInit() {
-    // first lifecycle hook after attached FormControl calls writeValue() with the value passed to its constructor
-    this.months = this.getMonths();
-  }
+  getCurrentMonthDays() {
+    const today = new Date();
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (
-      (changes['numberOfMonths'] && !changes['numberOfMonths'].firstChange) ||
-      (changes['firstMonth'] && !changes['firstMonth'].firstChange)
-    ) {
-      this.months = this.getMonths();
-    }
-  }
+    const year = today.getFullYear();
+    const month = today.getMonth();
 
-  onActiveDateChange(activeDate: Date) {
-    this.activeDate = activeDate;
+    // Month in JavaScript is 0-indexed (January is 0, February is 1, etc),
+    // but by using 0 as the day it will give us the last day of the prior
+    // month. So passing in 1 as the month number will return the last day
+    // of January, not February
+    const numOfDays = new Date(year, month - 1, 0).getDate();
 
-    if (!areDatesInSameMonth(this.activeDate, this.activeMonth || new Date())) {
-      this.activeMonth = startOfMonth(this.activeDate);
-      if (this.showMonthStepper) {
-        this.months = this.getMonths();
+    const days = [];
+
+    for (let i = 1; i <= numOfDays; i++) {
+      const date = new Date(year, month, i);
+
+      if (i === 1) {
+        //TODO check french calender
+        this.firstDayOfMonthIndex.set(date.getDay());
       }
+
+      days.push(`${date.getFullYear()}-${this.getMonth(date)}-${this.getDay(date)}`);
     }
 
-    setTimeout(() => {
-      this.elementRef.nativeElement.querySelector('[tabindex="0"]').focus();
+    console.log(days);
+
+    this.monthDays.set(days);
+  }
+
+  getMonth(date: Date) {
+    const m = date.getMonth() + 1;
+    return m.toLocaleString(this.localeId, {
+      minimumIntegerDigits: 2,
+      useGrouping: false,
     });
   }
 
-  onActiveMonthChange(activeMonth: Date) {
-    this.activeMonth = activeMonth;
-    this.activeDate = setDate(this.activeMonth, this.activeDate.getDate());
-    this.months = this.getMonths();
-  }
-
-  onSelect(date: Date) {
-    if (!this.disabled) {
-      this.value = date;
-      this.activeMonth = date;
-      this.activeDate = date;
-      this.valueChange.emit(date);
-      if (this.onChange) {
-        this.onChange(date);
-      }
-      if (this.onTouched) {
-        this.onTouched();
-      }
-    }
-  }
-
-  writeValue(value: Date) {
-    // TODO: what if calendar or the given date is disabled?
-    this.value = isValidDate(value) ? startOfDay(value) : undefined;
-    this.changeDetectorRef.markForCheck();
-
-    if (this.showMonthStepper && this.value) {
-      this.activeMonth = this.value;
-      this.months = this.getMonths();
-    }
-  }
-
-  registerOnChange(onChangeCallback: (updatedValue: Date) => void) {
-    this.onChange = onChangeCallback;
-  }
-
-  registerOnTouched(onTouchedCallback: () => void) {
-    this.onTouched = () => {
-      this.touched = true;
-      onTouchedCallback();
-    };
-  }
-
-  setDisabledState(isDisabled: boolean) {
-    this.disabled = isDisabled;
-    this.changeDetectorRef.markForCheck();
-  }
-
-  private getMonths() {
-    const firstMonth = (this.showMonthStepper ? this.activeMonth : this.firstMonth) || new Date();
-    const startOfFirstMonth = startOfMonth(firstMonth);
-    return Array.from({ length: this.numberOfMonths }, (_, index) =>
-      addMonths(startOfFirstMonth, index),
-    );
+  getDay(date: Date) {
+    const d = date.getDate();
+    return d.toLocaleString(this.localeId, {
+      minimumIntegerDigits: 2,
+      useGrouping: false,
+    });
   }
 }
