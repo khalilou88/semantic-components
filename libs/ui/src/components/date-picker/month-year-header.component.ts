@@ -2,15 +2,13 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  Inject,
   input,
-  LOCALE_ID,
   output,
   ViewEncapsulation,
 } from '@angular/core';
 
 @Component({
-  selector: 'sc-month-header',
+  selector: 'sc-month-year-header',
   standalone: true,
   imports: [CommonModule],
   template: `
@@ -73,10 +71,8 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MonthHeaderComponent {
+export class MonthYearHeaderComponent {
   monthYear = input.required<string>();
 
   monthYearChange = output<number>();
-
-  constructor(@Inject(LOCALE_ID) readonly localeId: string) {}
 }

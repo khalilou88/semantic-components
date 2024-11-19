@@ -10,13 +10,13 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { MonthDaysComponent } from './month-days.component';
-import { MonthHeaderComponent } from './month-header.component';
 import { WeekDaysNamesComponent } from './week-days-names.component';
+import { MonthYearHeaderComponent } from './month-year-header.component';
 
 @Component({
   selector: 'sc-date-picker',
   standalone: true,
-  imports: [CommonModule, WeekDaysNamesComponent, MonthHeaderComponent, MonthDaysComponent],
+  imports: [CommonModule, WeekDaysNamesComponent, MonthYearHeaderComponent, MonthDaysComponent],
   template: `
     <div class="flex justify-center dark:bg-gray-900" id="exampleWrapper">
       <div id="datepicker-inline" inline-datepicker="">
@@ -26,7 +26,7 @@ import { WeekDaysNamesComponent } from './week-days-names.component';
               <div
                 class="bg-white px-2 py-3 text-center font-semibold dark:bg-gray-700 dark:text-white"
               >
-                <sc-month-header
+                <sc-month-year-header
                   [monthYear]="monthYear()"
                   (monthYearChange)="setMonthYear($event)"
                 />
