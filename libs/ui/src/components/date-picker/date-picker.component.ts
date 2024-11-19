@@ -75,7 +75,7 @@ export class DatePickerComponent implements OnInit {
     // but by using 0 as the day it will give us the last day of the prior
     // month. So passing in 1 as the month number will return the last day
     // of January, not February
-    const numOfDays = new Date(this.year(), this.month() - 1, 0).getDate();
+    const numOfDays = new Date(this.year(), this.month() + 1, 0).getDate();
 
     const days = [];
 
