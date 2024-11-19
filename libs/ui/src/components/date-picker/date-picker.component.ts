@@ -26,16 +26,9 @@ import { WeekDaysNamesComponent } from './week-days-names.component';
             <div class="">
               <div
                 class="bg-white px-2 py-3 text-center font-semibold dark:bg-gray-700 dark:text-white"
-              ></div>
-
-              <!--sc-month-header
-                [month]="month"
-                [activeMonth]="activeMonth"
-                [monthAndYearFormat]="monthAndYearFormat"
-                [showMonthStepper]="showMonthStepper"
-                (activeMonthChange)="onActiveMonthChange($event)"
-              />
-            </div-->
+              >
+                <sc-month-header [month]="month()" />
+              </div>
               <div class="p-1">
                 <div class="flex">
                   <div class="">
@@ -82,21 +75,23 @@ import { WeekDaysNamesComponent } from './week-days-names.component';
   ],
 })
 export class DatePickerComponent implements OnInit {
+  month = signal<string>('');
   monthDays = signal<string[]>([]);
-
-  firstDayOfMonthIndex = signal<number>(2);
+  firstDayOfMonthIndex = signal<number>(0);
 
   constructor(@Inject(LOCALE_ID) private readonly localeId: string) {}
 
   ngOnInit() {
-    this.getCurrentMonthDays();
+    this.init();
   }
 
-  getCurrentMonthDays() {
+  init() {
     const today = new Date();
 
     const year = today.getFullYear();
     const month = today.getMonth();
+
+    this.month.set(`${year}-${this.twoDigits(month + 1)}`);
 
     // Month in JavaScript is 0-indexed (January is 0, February is 1, etc),
     // but by using 0 as the day it will give us the last day of the prior
@@ -114,7 +109,9 @@ export class DatePickerComponent implements OnInit {
         this.firstDayOfMonthIndex.set(date.getDay());
       }
 
-      days.push(`${date.getFullYear()}-${this.getMonth(date)}-${this.getDay(date)}`);
+      days.push(
+        `${date.getFullYear()}-${this.twoDigits(date.getMonth() + 1)}-${this.twoDigits(date.getDate())}`,
+      );
     }
 
     console.log(days);
@@ -122,17 +119,8 @@ export class DatePickerComponent implements OnInit {
     this.monthDays.set(days);
   }
 
-  getMonth(date: Date) {
-    const m = date.getMonth() + 1;
-    return m.toLocaleString(this.localeId, {
-      minimumIntegerDigits: 2,
-      useGrouping: false,
-    });
-  }
-
-  getDay(date: Date) {
-    const d = date.getDate();
-    return d.toLocaleString(this.localeId, {
+  twoDigits(n: number) {
+    return n.toLocaleString(this.localeId, {
       minimumIntegerDigits: 2,
       useGrouping: false,
     });

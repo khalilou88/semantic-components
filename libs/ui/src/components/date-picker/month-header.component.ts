@@ -1,15 +1,12 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
   Inject,
-  Input,
+  input,
   LOCALE_ID,
-  Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { addMonths, startOfMonth } from '../date-utils';
 import { MonthAndYearPipe } from './month-and-year.pipe';
 
 @Component({
@@ -21,7 +18,6 @@ import { MonthAndYearPipe } from './month-and-year.pipe';
       @if (showMonthStepper) {
         <button
           class="rounded-lg bg-white p-2.5 text-lg text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600 dark:hover:text-white"
-          (click)="stepMonth(-1)"
           aria-label="Previous month"
           type="button"
         >
@@ -47,13 +43,12 @@ import { MonthAndYearPipe } from './month-and-year.pipe';
         class="rounded-lg bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
         type="button"
       >
-        {{ month | monthAndYear: localeId : monthAndYearFormat }}
+        {{ month() }}
       </button>
 
       @if (showMonthStepper) {
         <button
           class="rounded-lg bg-white p-2.5 text-lg text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600 dark:hover:text-white"
-          (click)="stepMonth(1)"
           type="button"
           aria-label="Next month"
         >
@@ -81,18 +76,9 @@ import { MonthAndYearPipe } from './month-and-year.pipe';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MonthHeaderComponent {
-  @Input() month = startOfMonth(new Date());
-  @Input() activeMonth?: Date = startOfMonth(new Date());
-  @Input() showMonthStepper = true;
-  @Input() monthAndYearFormat?: string;
+  month = input.required<string>();
 
-  @Output() activeMonthChange = new EventEmitter<Date>();
+  showMonthStepper = true;
 
   constructor(@Inject(LOCALE_ID) readonly localeId: string) {}
-
-  stepMonth<Delta extends number>(delta: Delta) {
-    const activeMonth = addMonths(this.activeMonth || new Date(), delta);
-    this.activeMonthChange.emit(activeMonth);
-  }
-  // TODO: get the next month label from CLDR
 }
