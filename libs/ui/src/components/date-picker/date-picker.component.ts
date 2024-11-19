@@ -10,7 +10,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { MonthDaysComponent } from './month-days.component';
-import { WeekDaysNamesComponent } from './week-days-names.component';
+import { WeekDayName, WeekDaysNamesComponent } from './week-days-names.component';
 import { MonthYearHeaderComponent } from './month-year-header.component';
 
 @Component({
@@ -23,7 +23,7 @@ import { MonthYearHeaderComponent } from './month-year-header.component';
         <sc-month-year-header [monthYear]="monthYear()" (monthYearChange)="setMonthYear($event)" />
       </div>
 
-      <sc-week-days-names />
+      <sc-week-days-names [weekDaysNames]="weekDaysNames()" />
 
       <sc-month-days
         [days]="monthDays()"
@@ -55,6 +55,7 @@ import { MonthYearHeaderComponent } from './month-year-header.component';
 export class DatePickerComponent implements OnInit {
   year = signal<number>(0);
   month = signal<number>(0);
+  weekDaysNames = signal<WeekDayName[]>([]);
 
   monthYear = computed(() => {
     const options = {
@@ -92,7 +93,12 @@ export class DatePickerComponent implements OnInit {
 
   firstDayMonth = computed(() => {
     const date = new Date(this.year(), this.month(), 1);
-    return date.getDay();
+    const intlLongFormatter = new Intl.DateTimeFormat(this.localeId, { weekday: 'long' });
+
+    const dayName = intlLongFormatter.format(date);
+    return this.weekDaysNames()
+      .map((e) => e.long)
+      .indexOf(dayName);
   });
 
   selectedDay = signal<string>('');
@@ -101,6 +107,7 @@ export class DatePickerComponent implements OnInit {
 
   ngOnInit() {
     this.init();
+    this.setLocaleDayNames();
   }
 
   init() {
@@ -111,6 +118,42 @@ export class DatePickerComponent implements OnInit {
 
   setSelectedDay(day: string) {
     this.selectedDay.set(day);
+  }
+
+  //https://github.com/angular/angular/issues/57193
+  private setLocaleDayNames() {
+    const weekDaysNames = [];
+    const intlNarrowFormatter = new Intl.DateTimeFormat(this.localeId, { weekday: 'narrow' });
+    const intlShortFormatter = new Intl.DateTimeFormat(this.localeId, { weekday: 'short' });
+    const intlLongFormatter = new Intl.DateTimeFormat(this.localeId, { weekday: 'long' });
+
+    let k = 0;
+    const firstDayOfWeek = this.getFirstDayOfWeek();
+    if (firstDayOfWeek === 7) {
+      // First day of the week is Sunday
+      k = 3; // 3th January 2021 is a Sunday
+    }
+    if (firstDayOfWeek === 1) {
+      // First day of the week is Monday
+      k = 4; // 4th January 2021 is a Monday
+    }
+
+    for (let i = 0; i < 7; i += 1) {
+      const date = new Date(Date.UTC(2021, 0, i + k));
+      weekDaysNames.push({
+        narrow: intlNarrowFormatter.format(date),
+        short: intlShortFormatter.format(date),
+        long: intlLongFormatter.format(date),
+      });
+    }
+
+    this.weekDaysNames.set(weekDaysNames);
+  }
+
+  private getFirstDayOfWeek(): number {
+    const locale = new Intl.Locale(this.localeId);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return (locale as any).getWeekInfo().firstDay;
   }
 
   setMonthYear(n: number) {
