@@ -1,13 +1,20 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   standalone: true,
   imports: [RouterModule, CdkAccordionModule],
   selector: 'app-root',
   template: `
-    <div class="bg-gray-50 antialiased dark:bg-gray-900">
+    <div class="h-full bg-gray-50 antialiased dark:bg-gray-900">
       <nav
         class="fixed inset-x-0 top-0 z-50 border-b border-gray-200 bg-white px-4 py-2.5 dark:border-gray-700 dark:bg-gray-800"
       >
@@ -245,7 +252,7 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
         </div>
       </aside>
 
-      <main class="h-auto p-4 pt-20 md:ml-64">
+      <main class="h-full p-4 pt-20 md:ml-64">
         <router-outlet></router-outlet>
       </main>
     </div>
@@ -254,6 +261,13 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'showcase';
+
+  constructor(@Inject(DOCUMENT) private readonly document: Document) {}
+
+  ngOnInit() {
+    document.documentElement.classList.add('h-full');
+    this.document.body.classList.add('h-full');
+  }
 }
