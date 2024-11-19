@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   Inject,
   LOCALE_ID,
   OnInit,
@@ -25,7 +26,7 @@ import { WeekDaysNamesComponent } from './week-days-names.component';
               <div
                 class="bg-white px-2 py-3 text-center font-semibold dark:bg-gray-700 dark:text-white"
               >
-                <sc-month-header [month]="month()" />
+                <sc-month-header [month]="monthYear()" />
               </div>
               <div class="p-1">
                 <div class="flex">
@@ -34,7 +35,9 @@ import { WeekDaysNamesComponent } from './week-days-names.component';
 
                     <sc-month-days
                       [days]="monthDays()"
-                      [firstDayOfMonthIndex]="firstDayOfMonthIndex()"
+                      [firstDayMonth]="firstDayMonth()"
+                      [selectedDay]="selectedDay()"
+                      (selectedDayChange)="setSelectedDay($event)"
                     />
                   </div>
                 </div>
@@ -66,9 +69,49 @@ import { WeekDaysNamesComponent } from './week-days-names.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DatePickerComponent implements OnInit {
-  month = signal<string>('');
-  monthDays = signal<string[]>([]);
-  firstDayOfMonthIndex = signal<number>(0);
+  year = signal<number>(0);
+  month = signal<number>(0);
+
+  monthYear = computed(() => {
+    const options = {
+      month: 'long',
+      year: 'numeric',
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any;
+
+    const s = new Intl.DateTimeFormat(this.localeId, options).format(
+      new Date(this.year(), this.month(), 1),
+    );
+
+    return s;
+  });
+
+  monthDays = computed(() => {
+    // Month in JavaScript is 0-indexed (January is 0, February is 1, etc),
+    // but by using 0 as the day it will give us the last day of the prior
+    // month. So passing in 1 as the month number will return the last day
+    // of January, not February
+    const numOfDays = new Date(this.year(), this.month() - 1, 0).getDate();
+
+    const days = [];
+
+    for (let i = 1; i <= numOfDays; i++) {
+      const date = new Date(this.year(), this.month(), i);
+
+      days.push(
+        `${date.getFullYear()}-${this.twoDigits(date.getMonth() + 1)}-${this.twoDigits(date.getDate())}`,
+      );
+    }
+
+    return days;
+  });
+
+  firstDayMonth = computed(() => {
+    const date = new Date(this.year(), this.month(), 1);
+    return date.getDay();
+  });
+
+  selectedDay = signal<string>('');
 
   constructor(@Inject(LOCALE_ID) private readonly localeId: string) {}
 
@@ -78,43 +121,12 @@ export class DatePickerComponent implements OnInit {
 
   init() {
     const today = new Date();
+    this.year.set(today.getFullYear());
+    this.month.set(today.getMonth());
+  }
 
-    const options = {
-      month: 'long',
-      year: 'numeric',
-    } as any;
-
-    const a = new Intl.DateTimeFormat(this.localeId, options).format(today);
-    console.log();
-    this.month.set(a);
-
-    const year = today.getFullYear();
-    const month = today.getMonth();
-
-    // Month in JavaScript is 0-indexed (January is 0, February is 1, etc),
-    // but by using 0 as the day it will give us the last day of the prior
-    // month. So passing in 1 as the month number will return the last day
-    // of January, not February
-    const numOfDays = new Date(year, month - 1, 0).getDate();
-
-    const days = [];
-
-    for (let i = 1; i <= numOfDays; i++) {
-      const date = new Date(year, month, i);
-
-      if (i === 1) {
-        //TODO check french calender
-        this.firstDayOfMonthIndex.set(date.getDay());
-      }
-
-      days.push(
-        `${date.getFullYear()}-${this.twoDigits(date.getMonth() + 1)}-${this.twoDigits(date.getDate())}`,
-      );
-    }
-
-    console.log(days);
-
-    this.monthDays.set(days);
+  setSelectedDay(day: string) {
+    this.selectedDay.set(day);
   }
 
   twoDigits(n: number) {
