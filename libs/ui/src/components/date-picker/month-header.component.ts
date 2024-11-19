@@ -17,7 +17,7 @@ import {
     <div class="mb-2 flex justify-between">
       <button
         class="rounded-lg bg-white p-2.5 text-lg text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600 dark:hover:text-white"
-        (click)="monthChange.emit(-1)"
+        (click)="monthYearChange.emit(-1)"
         aria-label="Previous month"
         type="button"
       >
@@ -42,12 +42,12 @@ import {
         class="rounded-lg bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
         type="button"
       >
-        {{ month() }}
+        {{ monthYear() }}
       </button>
 
       <button
         class="rounded-lg bg-white p-2.5 text-lg text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600 dark:hover:text-white"
-        (click)="monthChange.emit(1)"
+        (click)="monthYearChange.emit(1)"
         type="button"
         aria-label="Next month"
       >
@@ -74,9 +74,9 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MonthHeaderComponent {
-  month = input.required<string>();
+  monthYear = input.required<string>();
 
-  monthChange = output<number>();
+  monthYearChange = output<number>();
 
   constructor(@Inject(LOCALE_ID) readonly localeId: string) {}
 }
