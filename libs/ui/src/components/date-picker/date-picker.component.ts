@@ -2,14 +2,12 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  forwardRef,
   Inject,
   LOCALE_ID,
   OnInit,
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MonthDaysComponent } from './month-days.component';
 import { MonthHeaderComponent } from './month-header.component';
 import { WeekDaysNamesComponent } from './week-days-names.component';
@@ -66,13 +64,6 @@ import { WeekDaysNamesComponent } from './week-days-names.component';
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => DatePickerComponent),
-      multi: true,
-    },
-  ],
 })
 export class DatePickerComponent implements OnInit {
   month = signal<string>('');
@@ -88,10 +79,17 @@ export class DatePickerComponent implements OnInit {
   init() {
     const today = new Date();
 
+    const options = {
+      month: 'long',
+      year: 'numeric',
+    } as any;
+
+    const a = new Intl.DateTimeFormat(this.localeId, options).format(today);
+    console.log();
+    this.month.set(a);
+
     const year = today.getFullYear();
     const month = today.getMonth();
-
-    this.month.set(`${year}-${this.twoDigits(month + 1)}`);
 
     // Month in JavaScript is 0-indexed (January is 0, February is 1, etc),
     // but by using 0 as the day it will give us the last day of the prior

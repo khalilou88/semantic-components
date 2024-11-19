@@ -7,12 +7,11 @@ import {
   LOCALE_ID,
   ViewEncapsulation,
 } from '@angular/core';
-import { MonthAndYearPipe } from './month-and-year.pipe';
 
 @Component({
   selector: 'sc-month-header',
   standalone: true,
-  imports: [CommonModule, MonthAndYearPipe],
+  imports: [CommonModule],
   template: `
     <div class="mb-2 flex justify-between">
       @if (showMonthStepper) {
