@@ -26,7 +26,7 @@ import { WeekDaysNamesComponent } from './week-days-names.component';
               <div
                 class="bg-white px-2 py-3 text-center font-semibold dark:bg-gray-700 dark:text-white"
               >
-                <sc-month-header [month]="monthYear()" />
+                <sc-month-header [month]="monthYear()" (monthChange)="setMonth($event)" />
               </div>
               <div class="p-1">
                 <div class="flex">
@@ -127,6 +127,26 @@ export class DatePickerComponent implements OnInit {
 
   setSelectedDay(day: string) {
     this.selectedDay.set(day);
+  }
+
+  setMonth(n: number) {
+    if (n === 1) {
+      if (this.month() < 11) {
+        this.month.update((value) => value + 1);
+      } else {
+        this.month.set(0);
+        this.year.update((value) => value + 1);
+      }
+    }
+
+    if (n === -1) {
+      if (this.month() > 0) {
+        this.month.update((value) => value - 1);
+      } else {
+        this.month.set(11);
+        this.year.update((value) => value - 1);
+      }
+    }
   }
 
   twoDigits(n: number) {
