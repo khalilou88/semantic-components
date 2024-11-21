@@ -1,6 +1,6 @@
 import { execSync } from 'child_process';
 import { mkdirSync, rmSync } from 'fs';
-import { join, dirname } from 'path';
+import { dirname, join } from 'path';
 
 describe('nx-generators', () => {
   let projectDirectory: string;

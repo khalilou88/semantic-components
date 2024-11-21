@@ -1,6 +1,6 @@
 import { CdkMenuItem } from '@angular/cdk/menu';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
 
 //TODO try to add CdkMenuItem
 

@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   input,
   output,
-  ViewEncapsulation,
 } from '@angular/core';
 
 @Component({

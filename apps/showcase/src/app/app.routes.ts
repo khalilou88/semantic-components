@@ -1,4 +1,5 @@
 import { Route } from '@angular/router';
+
 import { DatePickerPageComponent } from './pages/date-picker-page.component';
 import { DropdownPageComponent } from './pages/dropdown-page.component';
 import { EditorPageComponent } from './pages/editor-page.component';

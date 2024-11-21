@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+
 import { EditorComponent } from '@semantic-components/ui';
 
 @Component({

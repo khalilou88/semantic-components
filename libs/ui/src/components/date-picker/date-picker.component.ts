@@ -2,13 +2,14 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
   Inject,
   LOCALE_ID,
   OnInit,
-  signal,
   ViewEncapsulation,
+  computed,
+  signal,
 } from '@angular/core';
+
 import { MonthDaysComponent } from './month-days.component';
 import { MonthYearHeaderComponent } from './month-year-header.component';
 import { WeekDayName, WeekDaysNamesComponent } from './week-days-names.component';
