@@ -1,13 +1,26 @@
+import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
+import { Directionality } from '@angular/cdk/bidi';
+import { ENTER, ESCAPE, TAB, hasModifierKey } from '@angular/cdk/keycodes';
 import { CdkMenu, CdkMenuItem, CdkMenuTrigger } from '@angular/cdk/menu';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { _getEventTarget } from '@angular/cdk/platform';
+import { TemplatePortal } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   Inject,
+  Injector,
   LOCALE_ID,
   OnInit,
+  OutputEmitterRef,
+  TemplateRef,
+  ViewContainerRef,
   ViewEncapsulation,
+  inject,
+  output,
   signal,
+  viewChild,
 } from '@angular/core';
 
 import { InlineDatePickerComponent } from './inline-date-picker.component';
@@ -79,4 +92,183 @@ export class DatePickerComponent implements OnInit {
       .map(getPatternForPart)
       .join('');
   }
+  private readonly _injector = inject(Injector);
+
+  private readonly _isOpen = signal(false);
+
+  //TODO
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private readonly _input = {} as any;
+
+  private readonly _viewContainerRef = inject(ViewContainerRef);
+
+  private _overlayRef: OverlayRef | null = null;
+
+  /** Emits when the timepicker is opened. */
+  readonly opened: OutputEmitterRef<void> = output();
+
+  /** Emits when the timepicker is closed. */
+  readonly closed: OutputEmitterRef<void> = output();
+
+  private _portal: TemplatePortal<unknown> | null = null;
+
+  private readonly _overlay = inject(Overlay);
+
+  private readonly _dir = inject(Directionality, { optional: true });
+
+  protected _panelTemplate = viewChild.required<TemplateRef<unknown>>('panelTemplate');
+
+  /** Opens the timepicker. */
+  open(): void {
+    if (!this._input) {
+      return;
+    }
+
+    // Focus should already be on the input, but this call is in case the timepicker is opened
+    // programmatically. We need to call this even if the timepicker is already open, because
+    // the user might be clicking the toggle.
+    this._input.focus();
+
+    if (this._isOpen()) {
+      return;
+    }
+
+    this._isOpen.set(true);
+    //this._generateOptions();
+    const overlayRef = this._getOverlayRef();
+    overlayRef.updateSize({ width: this._input.getOverlayOrigin().nativeElement.offsetWidth });
+    this._portal ??= new TemplatePortal(this._panelTemplate(), this._viewContainerRef);
+    overlayRef.attach(this._portal);
+    // this._onOpenRender?.destroy();
+    // this._onOpenRender = afterNextRender(
+    //   () => {
+    //     const options = this._options();
+    //     this._syncSelectedState(this._input.value(), options, options[0]);
+    //     this._onOpenRender = null;
+    //   },
+    //   { injector: this._injector },
+    // );
+
+    this.opened.emit();
+  }
+
+  /** Closes the timepicker. */
+  close(): void {
+    if (this._isOpen()) {
+      this._isOpen.set(false);
+      this._overlayRef?.detach();
+      this.closed.emit();
+    }
+  }
+
+  /** Creates an overlay reference for the timepicker panel. */
+  private _getOverlayRef(): OverlayRef {
+    if (this._overlayRef) {
+      return this._overlayRef;
+    }
+
+    const positionStrategy = this._overlay
+      .position()
+      .flexibleConnectedTo(this._input.getOverlayOrigin())
+      .withFlexibleDimensions(false)
+      .withPush(false)
+      .withTransformOriginOn('.mat-timepicker-panel')
+      .withPositions([
+        {
+          originX: 'start',
+          originY: 'bottom',
+          overlayX: 'start',
+          overlayY: 'top',
+        },
+        {
+          originX: 'start',
+          originY: 'top',
+          overlayX: 'start',
+          overlayY: 'bottom',
+          panelClass: 'mat-timepicker-above',
+        },
+      ]);
+
+    this._overlayRef = this._overlay.create({
+      positionStrategy,
+      scrollStrategy: this._overlay.scrollStrategies.reposition(),
+      direction: this._dir || 'ltr',
+      hasBackdrop: false,
+    });
+
+    this._overlayRef.keydownEvents().subscribe((event) => {
+      this._handleKeydown(event);
+    });
+
+    this._overlayRef.outsidePointerEvents().subscribe((event) => {
+      const target = _getEventTarget(event) as HTMLElement;
+      const origin = this._input.getOverlayOrigin().nativeElement;
+
+      if (target && target !== origin && !origin.contains(target)) {
+        this.close();
+      }
+    });
+
+    return this._overlayRef;
+  }
+
+  /** Emits when the user selects a time. */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  readonly selected: OutputEmitterRef<any> = output();
+
+  /** Selects a specific time value. */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  protected _selectValue(value: any) {
+    this.close();
+    this.selected.emit({ value, source: this });
+    this._input.focus();
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  protected _options = {} as any;
+
+  private readonly _keyManager = new ActiveDescendantKeyManager(this._options, this._injector)
+    .withHomeAndEnd(true)
+    .withPageUpDown(true)
+    .withVerticalOrientation(true);
+
+  /** Handles keyboard events while the overlay is open. */
+  private _handleKeydown(event: KeyboardEvent): void {
+    const keyCode = event.keyCode;
+
+    if (keyCode === TAB) {
+      this.close();
+    } else if (keyCode === ESCAPE && !hasModifierKey(event)) {
+      event.preventDefault();
+      this.close();
+    } else if (keyCode === ENTER) {
+      event.preventDefault();
+
+      if (this._keyManager.activeItem) {
+        //this._selectValue(this._keyManager.activeItem.value);
+        console.log('here');
+      } else {
+        this.close();
+      }
+    } else {
+      const previousActive = this._keyManager.activeItem;
+      this._keyManager.onKeydown(event);
+      const currentActive = this._keyManager.activeItem;
+
+      if (currentActive && currentActive !== previousActive) {
+        scrollOptionIntoView(currentActive, 'nearest');
+      }
+    }
+  }
+}
+
+/**
+ * Scrolls an option into view.
+ * @param option Option to be scrolled into view.
+ * @param position Position to which to align the option relative to the scrollable container.
+ */
+//TODO
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function scrollOptionIntoView(option: any, position: ScrollLogicalPosition) {
+  option._getHostElement().scrollIntoView({ block: position, inline: position });
 }
