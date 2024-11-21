@@ -8,10 +8,10 @@ import { DatePickerComponent, InlineDatePickerComponent } from '@semantic-compon
   standalone: true,
   imports: [CommonModule, DatePickerComponent, InlineDatePickerComponent],
   template: `
-    <sc-inline-date-picker />
-    <br />
-    <br />
     <sc-date-picker />
+    <br />
+    <br />
+    <sc-inline-date-picker />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
