@@ -1,6 +1,4 @@
-import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { Directionality } from '@angular/cdk/bidi';
-import { ENTER, ESCAPE, TAB, hasModifierKey } from '@angular/cdk/keycodes';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { _getEventTarget } from '@angular/cdk/platform';
 import { ComponentPortal } from '@angular/cdk/portal';
@@ -97,9 +95,9 @@ export class DatePickerComponent implements OnInit {
   private _overlayRef: OverlayRef | null = null;
   private _portal: ComponentPortal<unknown> | null = null;
 
-  /** Emits when the timepicker is opened. */
+  /** Emits when the datepicker is opened. */
   readonly opened: OutputEmitterRef<void> = output();
-  /** Emits when the timepicker is closed. */
+  /** Emits when the datepicker is closed. */
   readonly closed: OutputEmitterRef<void> = output();
 
   /** Emits when the user selects a date. */
@@ -129,20 +127,11 @@ export class DatePickerComponent implements OnInit {
     this._portal ??= new ComponentPortal(InlineDatePickerComponent);
 
     overlayRef.attach(this._portal);
-    // this._onOpenRender?.destroy();
-    // this._onOpenRender = afterNextRender(
-    //   () => {
-    //     const options = this._options();
-    //     this._syncSelectedState(this._input.value(), options, options[0]);
-    //     this._onOpenRender = null;
-    //   },
-    //   { injector: this._injector },
-    // );
 
     this.opened.emit();
   }
 
-  /** Closes the timepicker. */
+  /** Closes the datepicker. */
   close(): void {
     if (this._isOpen()) {
       this._isOpen.set(false);
@@ -151,7 +140,7 @@ export class DatePickerComponent implements OnInit {
     }
   }
 
-  /** Creates an overlay reference for the timepicker panel. */
+  /** Creates an overlay reference for the datepicker panel. */
   private _getOverlayRef(): OverlayRef {
     if (this._overlayRef) {
       return this._overlayRef;
@@ -167,7 +156,7 @@ export class DatePickerComponent implements OnInit {
       .flexibleConnectedTo(_overlayOrigin)
       .withFlexibleDimensions(false)
       .withPush(false)
-      // .withTransformOriginOn('.mat-timepicker-panel')
+      // .withTransformOriginOn('.mat-datepicker-panel')
       .withPositions([
         {
           originX: 'start',
@@ -180,7 +169,7 @@ export class DatePickerComponent implements OnInit {
           originY: 'top',
           overlayX: 'start',
           overlayY: 'bottom',
-          //panelClass: 'mat-timepicker-above',
+          //panelClass: 'mat-datepicker-above',
         },
       ]);
 
