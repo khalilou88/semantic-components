@@ -14,7 +14,6 @@ import {
   LOCALE_ID,
   OnInit,
   OutputEmitterRef,
-  ViewContainerRef,
   ViewEncapsulation,
   inject,
   output,
@@ -88,7 +87,7 @@ export class DatePickerComponent implements OnInit {
   }
 
   private readonly _injector = inject(Injector);
-  private readonly _viewContainerRef = inject(ViewContainerRef);
+
   private readonly _dir = inject(Directionality, { optional: true });
   private readonly _overlay = inject(Overlay);
 
@@ -96,34 +95,33 @@ export class DatePickerComponent implements OnInit {
   private readonly _input = viewChild<ElementRef<HTMLInputElement>>('input');
   private readonly _overlayOrigin = viewChild<ElementRef<HTMLDivElement>>('overlayOrigin');
   private _overlayRef: OverlayRef | null = null;
+  private _portal: ComponentPortal<unknown> | null = null;
 
   /** Emits when the timepicker is opened. */
   readonly opened: OutputEmitterRef<void> = output();
   /** Emits when the timepicker is closed. */
   readonly closed: OutputEmitterRef<void> = output();
 
-  private _portal: ComponentPortal<unknown> | null = null;
-
-  /** Opens the timepicker. */
+  /** Opens the datepicker. */
   open(): void {
     if (!this._input) {
       return;
     }
 
-    // Focus should already be on the input, but this call is in case the timepicker is opened
-    // programmatically. We need to call this even if the timepicker is already open, because
+    // Focus should already be on the input, but this call is in case the datepicker is opened
+    // programmatically. We need to call this even if the datepicker is already open, because
     // the user might be clicking the toggle.
-    this._input()!.nativeElement.focus();
+    this._input()?.nativeElement.focus();
 
     if (this._isOpen()) {
       return;
     }
 
     this._isOpen.set(true);
-    //this._generateOptions();
+
     const overlayRef = this._getOverlayRef();
 
-    overlayRef.updateSize({ width: this._overlayOrigin()!.nativeElement.offsetWidth });
+    overlayRef.updateSize({ width: this._overlayOrigin()?.nativeElement.offsetWidth });
 
     this._portal ??= new ComponentPortal(InlineDatePickerComponent);
 
@@ -174,7 +172,7 @@ export class DatePickerComponent implements OnInit {
           originY: 'top',
           overlayX: 'start',
           overlayY: 'bottom',
-          panelClass: 'mat-timepicker-above',
+          //panelClass: 'mat-timepicker-above',
         },
       ]);
 
@@ -191,9 +189,9 @@ export class DatePickerComponent implements OnInit {
 
     this._overlayRef.outsidePointerEvents().subscribe((event) => {
       const target = _getEventTarget(event) as HTMLElement;
-      const origin = this._overlayOrigin()!.nativeElement;
+      const origin = this._overlayOrigin()?.nativeElement;
 
-      if (target && target !== origin && !origin.contains(target)) {
+      if (target && target !== origin && !origin?.contains(target)) {
         this.close();
       }
     });
