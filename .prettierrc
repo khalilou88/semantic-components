@@ -2,5 +2,11 @@
   "printWidth": 100,
   "singleQuote": true,
   "htmlWhitespaceSensitivity": "ignore",
-  "plugins": ["prettier-plugin-organize-attributes", "prettier-plugin-tailwindcss"]
+  "plugins": [
+    "@trivago/prettier-plugin-sort-imports",
+    "prettier-plugin-organize-attributes",
+    "prettier-plugin-tailwindcss"
+  ],
+  "importOrderParserPlugins": ["typescript", "decorators-legacy"],
+  "importOrder": ["^@angular/(.*)$", "^rxjs/(.*)$", "<THIRD_PARTY_MODULES>", "^[./]"]
 }

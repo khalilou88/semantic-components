@@ -1,3 +1,5 @@
+import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,8 +8,6 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { CdkAccordionModule } from '@angular/cdk/accordion';
-import { DOCUMENT } from '@angular/common';
 
 @Component({
   standalone: true,

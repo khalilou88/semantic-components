@@ -1,10 +1,10 @@
 import { Route } from '@angular/router';
-import { HomePageComponent } from './pages/home-page.component';
-import { TooltipPageComponent } from './pages/tooltip-page.component';
-import { EditorPageComponent } from './pages/editor-page.component';
 import { DatePickerPageComponent } from './pages/date-picker-page.component';
-import { NavPageComponent } from './pages/nav-page.component';
 import { DropdownPageComponent } from './pages/dropdown-page.component';
+import { EditorPageComponent } from './pages/editor-page.component';
+import { HomePageComponent } from './pages/home-page.component';
+import { NavPageComponent } from './pages/nav-page.component';
+import { TooltipPageComponent } from './pages/tooltip-page.component';
 
 export const appRoutes: Route[] = [
   { path: 'home', component: HomePageComponent },

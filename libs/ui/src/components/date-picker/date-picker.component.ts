@@ -10,8 +10,8 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { MonthDaysComponent } from './month-days.component';
-import { WeekDayName, WeekDaysNamesComponent } from './week-days-names.component';
 import { MonthYearHeaderComponent } from './month-year-header.component';
+import { WeekDayName, WeekDaysNamesComponent } from './week-days-names.component';
 
 @Component({
   selector: 'sc-date-picker',
