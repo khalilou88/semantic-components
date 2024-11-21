@@ -1,7 +1,6 @@
 import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { Directionality } from '@angular/cdk/bidi';
 import { ENTER, ESCAPE, TAB, hasModifierKey } from '@angular/cdk/keycodes';
-import { CdkMenu, CdkMenuItem, CdkMenuTrigger } from '@angular/cdk/menu';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { _getEventTarget } from '@angular/cdk/platform';
 import { TemplatePortal } from '@angular/cdk/portal';
@@ -9,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   Inject,
   Injector,
   LOCALE_ID,
@@ -28,10 +28,10 @@ import { InlineDatePickerComponent } from './inline-date-picker.component';
 @Component({
   selector: 'sc-date-picker',
   standalone: true,
-  imports: [CommonModule, InlineDatePickerComponent, CdkMenuTrigger, CdkMenu, CdkMenuItem],
+  imports: [CommonModule, InlineDatePickerComponent],
   template: `
-    <div class="relative max-w-sm" [cdkMenuTriggerFor]="menu">
-      <button class="absolute inset-y-0 end-0 flex items-center pe-3.5">
+    <div class="relative max-w-sm" #overlayOrigin>
+      <button class="absolute inset-y-0 end-0 flex items-center pe-3.5" (click)="open()">
         <svg
           class="size-4 text-gray-500 dark:text-gray-400"
           aria-hidden="true"
@@ -46,6 +46,7 @@ import { InlineDatePickerComponent } from './inline-date-picker.component';
       </button>
       <input
         class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pe-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+        #input
         type="text"
         placeholder="Select date"
       />
@@ -53,9 +54,7 @@ import { InlineDatePickerComponent } from './inline-date-picker.component';
     {{ dateFormatPattern() }}
 
     <ng-template #menu>
-      <div cdkMenu>
-        <sc-inline-date-picker />
-      </div>
+      <sc-inline-date-picker />
     </ng-template>
   `,
   styles: ``,
@@ -92,30 +91,23 @@ export class DatePickerComponent implements OnInit {
       .map(getPatternForPart)
       .join('');
   }
+
   private readonly _injector = inject(Injector);
+  private readonly _viewContainerRef = inject(ViewContainerRef);
+  private readonly _dir = inject(Directionality, { optional: true });
+  private readonly _overlay = inject(Overlay);
 
   private readonly _isOpen = signal(false);
-
-  //TODO
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private readonly _input = {} as any;
-
-  private readonly _viewContainerRef = inject(ViewContainerRef);
-
+  private readonly _input = viewChild<ElementRef<HTMLInputElement>>('input');
+  private readonly _overlayOrigin = viewChild<ElementRef<HTMLDivElement>>('overlayOrigin');
   private _overlayRef: OverlayRef | null = null;
 
   /** Emits when the timepicker is opened. */
   readonly opened: OutputEmitterRef<void> = output();
-
   /** Emits when the timepicker is closed. */
   readonly closed: OutputEmitterRef<void> = output();
 
   private _portal: TemplatePortal<unknown> | null = null;
-
-  private readonly _overlay = inject(Overlay);
-
-  private readonly _dir = inject(Directionality, { optional: true });
-
   protected _panelTemplate = viewChild.required<TemplateRef<unknown>>('panelTemplate');
 
   /** Opens the timepicker. */
@@ -127,7 +119,7 @@ export class DatePickerComponent implements OnInit {
     // Focus should already be on the input, but this call is in case the timepicker is opened
     // programmatically. We need to call this even if the timepicker is already open, because
     // the user might be clicking the toggle.
-    this._input.focus();
+    this._input()!.nativeElement.focus();
 
     if (this._isOpen()) {
       return;
@@ -136,7 +128,7 @@ export class DatePickerComponent implements OnInit {
     this._isOpen.set(true);
     //this._generateOptions();
     const overlayRef = this._getOverlayRef();
-    overlayRef.updateSize({ width: this._input.getOverlayOrigin().nativeElement.offsetWidth });
+    overlayRef.updateSize({ width: this._overlayOrigin()!.nativeElement.offsetWidth });
     this._portal ??= new TemplatePortal(this._panelTemplate(), this._viewContainerRef);
     overlayRef.attach(this._portal);
     // this._onOpenRender?.destroy();
@@ -169,7 +161,7 @@ export class DatePickerComponent implements OnInit {
 
     const positionStrategy = this._overlay
       .position()
-      .flexibleConnectedTo(this._input.getOverlayOrigin())
+      .flexibleConnectedTo(this._overlayOrigin()!)
       .withFlexibleDimensions(false)
       .withPush(false)
       .withTransformOriginOn('.mat-timepicker-panel')
@@ -202,7 +194,7 @@ export class DatePickerComponent implements OnInit {
 
     this._overlayRef.outsidePointerEvents().subscribe((event) => {
       const target = _getEventTarget(event) as HTMLElement;
-      const origin = this._input.getOverlayOrigin().nativeElement;
+      const origin = this._overlayOrigin()!.nativeElement;
 
       if (target && target !== origin && !origin.contains(target)) {
         this.close();
@@ -221,7 +213,7 @@ export class DatePickerComponent implements OnInit {
   protected _selectValue(value: any) {
     this.close();
     this.selected.emit({ value, source: this });
-    this._input.focus();
+    this._input()?.nativeElement.focus();
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
