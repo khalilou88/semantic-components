@@ -3,3 +3,4 @@ export * from './components/dropdown';
 export * from './components/editor';
 export * from './components/nav';
 export * from './components/tooltip';
+export * from './components/select';
