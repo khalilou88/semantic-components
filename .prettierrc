@@ -5,6 +5,7 @@
   "plugins": [
     "@trivago/prettier-plugin-sort-imports",
     "prettier-plugin-organize-attributes",
+    "prettier-plugin-classnames",
     "prettier-plugin-tailwindcss"
   ],
   "importOrderParserPlugins": ["typescript", "decorators-legacy"],
