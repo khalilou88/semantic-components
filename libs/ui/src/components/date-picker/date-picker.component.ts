@@ -7,6 +7,7 @@ import {
   LOCALE_ID,
   OnInit,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 
 import { InlineDatePickerComponent } from './inline-date-picker.component';
@@ -36,6 +37,7 @@ import { InlineDatePickerComponent } from './inline-date-picker.component';
         placeholder="Select date"
       />
     </div>
+    {{ dateFormatPattern() }}
 
     <ng-template #menu>
       <div cdkMenu>
@@ -48,9 +50,33 @@ import { InlineDatePickerComponent } from './inline-date-picker.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DatePickerComponent implements OnInit {
+  dateFormatPattern = signal<string>('');
+
   constructor(@Inject(LOCALE_ID) private readonly localeId: string) {}
 
   ngOnInit() {
-    console.log('fffff');
+    this.dateFormatPattern.set(this.getDateFormatPattern(this.localeId));
+  }
+
+  getDateFormatPattern(localeId: string) {
+    const getPatternForPart = (part: Intl.DateTimeFormatPart) => {
+      switch (part.type) {
+        case 'day':
+          return 'd'.repeat(part.value.length);
+        case 'month':
+          return 'M'.repeat(part.value.length);
+        case 'year':
+          return 'y'.repeat(part.value.length);
+        case 'literal':
+          return part.value;
+        default:
+          throw new Error('no default');
+      }
+    };
+
+    return new Intl.DateTimeFormat(localeId)
+      .formatToParts(new Date('2022-01-01'))
+      .map(getPatternForPart)
+      .join('');
   }
 }
