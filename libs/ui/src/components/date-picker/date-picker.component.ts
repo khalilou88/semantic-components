@@ -157,9 +157,14 @@ export class DatePickerComponent implements OnInit {
       return this._overlayRef;
     }
 
+    const _overlayOrigin = this._overlayOrigin();
+    if (_overlayOrigin === undefined) {
+      throw new Error('_overlayOrigin is undefined');
+    }
+
     const positionStrategy = this._overlay
       .position()
-      .flexibleConnectedTo(this._overlayOrigin()!)
+      .flexibleConnectedTo(_overlayOrigin)
       .withFlexibleDimensions(false)
       .withPush(false)
       // .withTransformOriginOn('.mat-timepicker-panel')
