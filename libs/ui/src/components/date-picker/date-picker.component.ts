@@ -102,6 +102,9 @@ export class DatePickerComponent implements OnInit {
   /** Emits when the timepicker is closed. */
   readonly closed: OutputEmitterRef<void> = output();
 
+  /** Emits when the user selects a date. */
+  readonly selected: OutputEmitterRef<string> = output();
+
   /** Opens the datepicker. */
   open(): void {
     if (!this._input) {
@@ -159,7 +162,7 @@ export class DatePickerComponent implements OnInit {
       .flexibleConnectedTo(this._overlayOrigin()!)
       .withFlexibleDimensions(false)
       .withPush(false)
-      .withTransformOriginOn('.mat-timepicker-panel')
+      // .withTransformOriginOn('.mat-timepicker-panel')
       .withPositions([
         {
           originX: 'start',
@@ -184,7 +187,7 @@ export class DatePickerComponent implements OnInit {
     });
 
     this._overlayRef.keydownEvents().subscribe((event) => {
-      this._handleKeydown(event);
+      console.log(event);
     });
 
     this._overlayRef.outsidePointerEvents().subscribe((event) => {
@@ -199,63 +202,10 @@ export class DatePickerComponent implements OnInit {
     return this._overlayRef;
   }
 
-  /** Emits when the user selects a time. */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  readonly selected: OutputEmitterRef<any> = output();
-
-  /** Selects a specific time value. */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  protected _selectValue(value: any) {
+  /** Selects a specific date value. */
+  protected _selectValue(value: string) {
     this.close();
-    this.selected.emit({ value, source: this });
+    this.selected.emit(value);
     this._input()?.nativeElement.focus();
   }
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  protected _options = {} as any;
-
-  private readonly _keyManager = new ActiveDescendantKeyManager(this._options, this._injector)
-    .withHomeAndEnd(true)
-    .withPageUpDown(true)
-    .withVerticalOrientation(true);
-
-  /** Handles keyboard events while the overlay is open. */
-  private _handleKeydown(event: KeyboardEvent): void {
-    const keyCode = event.keyCode;
-
-    if (keyCode === TAB) {
-      this.close();
-    } else if (keyCode === ESCAPE && !hasModifierKey(event)) {
-      event.preventDefault();
-      this.close();
-    } else if (keyCode === ENTER) {
-      event.preventDefault();
-
-      if (this._keyManager.activeItem) {
-        //this._selectValue(this._keyManager.activeItem.value);
-        console.log('here');
-      } else {
-        this.close();
-      }
-    } else {
-      const previousActive = this._keyManager.activeItem;
-      this._keyManager.onKeydown(event);
-      const currentActive = this._keyManager.activeItem;
-
-      if (currentActive && currentActive !== previousActive) {
-        scrollOptionIntoView(currentActive, 'nearest');
-      }
-    }
-  }
-}
-
-/**
- * Scrolls an option into view.
- * @param option Option to be scrolled into view.
- * @param position Position to which to align the option relative to the scrollable container.
- */
-//TODO
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function scrollOptionIntoView(option: any, position: ScrollLogicalPosition) {
-  option._getHostElement().scrollIntoView({ block: position, inline: position });
 }
