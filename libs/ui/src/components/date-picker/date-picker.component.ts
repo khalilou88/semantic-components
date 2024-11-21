@@ -3,7 +3,7 @@ import { Directionality } from '@angular/cdk/bidi';
 import { ENTER, ESCAPE, TAB, hasModifierKey } from '@angular/cdk/keycodes';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { _getEventTarget } from '@angular/cdk/platform';
-import { TemplatePortal } from '@angular/cdk/portal';
+import { ComponentPortal } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -14,7 +14,6 @@ import {
   LOCALE_ID,
   OnInit,
   OutputEmitterRef,
-  TemplateRef,
   ViewContainerRef,
   ViewEncapsulation,
   inject,
@@ -52,10 +51,6 @@ import { InlineDatePickerComponent } from './inline-date-picker.component';
       />
     </div>
     {{ dateFormatPattern() }}
-
-    <ng-template #menu>
-      <sc-inline-date-picker />
-    </ng-template>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -107,8 +102,7 @@ export class DatePickerComponent implements OnInit {
   /** Emits when the timepicker is closed. */
   readonly closed: OutputEmitterRef<void> = output();
 
-  private _portal: TemplatePortal<unknown> | null = null;
-  protected _panelTemplate = viewChild.required<TemplateRef<unknown>>('panelTemplate');
+  private _portal: ComponentPortal<unknown> | null = null;
 
   /** Opens the timepicker. */
   open(): void {
@@ -128,8 +122,11 @@ export class DatePickerComponent implements OnInit {
     this._isOpen.set(true);
     //this._generateOptions();
     const overlayRef = this._getOverlayRef();
+
     overlayRef.updateSize({ width: this._overlayOrigin()!.nativeElement.offsetWidth });
-    this._portal ??= new TemplatePortal(this._panelTemplate(), this._viewContainerRef);
+
+    this._portal ??= new ComponentPortal(InlineDatePickerComponent);
+
     overlayRef.attach(this._portal);
     // this._onOpenRender?.destroy();
     // this._onOpenRender = afterNextRender(
