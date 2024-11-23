@@ -59,12 +59,12 @@ export interface CustomSelectEvent {
         role="listbox"
         tabindex="{{ this.disabled ? -1 : 0 }}"
       ></div>
-      <span class="" (click)="onDropMenuIconClick($event)"></span>
+      <button class="" (click)="onDropMenuIconClick($event)">test</button>
       <ng-template class="dropdown" #overlayTemplate="cdkPortal" cdk-portal>
         <div class="">
-          <div class="" (keydown)="onKeyDown($event)">
+          <button class="" (keydown)="onKeyDown($event)">
             <ng-content />
-          </div>
+          </button>
         </div>
       </ng-template>
     </div>
@@ -86,6 +86,7 @@ export interface CustomSelectEvent {
   ],
 })
 export class SelectComponent implements OnInit, ControlValueAccessor, Validator {
+  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('id') public inputId = '';
 
   @Input() public label = '';
@@ -100,6 +101,7 @@ export class SelectComponent implements OnInit, ControlValueAccessor, Validator 
   @Input('aria-label') public ariaLabel = '';
   @Input('aria-labelledby') public ariaLabelledby = '';
 
+  // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() readonly change = new EventEmitter<CustomSelectEvent>();
 
   @ViewChild('select') public select!: ElementRef;
@@ -144,6 +146,7 @@ export class SelectComponent implements OnInit, ControlValueAccessor, Validator 
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   public writeValue(obj: any): void {}
 
   public onTouched(): void {
