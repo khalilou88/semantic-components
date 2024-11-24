@@ -4,6 +4,11 @@
       "factory": "./src/generators/ui-library/generator",
       "schema": "./src/generators/ui-library/schema.json",
       "description": "ui-library generator"
+    },
+    "heroicons": {
+      "factory": "./src/generators/heroicons/generator",
+      "schema": "./src/generators/heroicons/schema.json",
+      "description": "heroicons generator"
     }
   }
 }
