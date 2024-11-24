@@ -83,3 +83,7 @@ And join the Nx community:
 ## Useful links
 
 https://egghead.io/lessons/tailwind-configure-tailwind-in-a-nx-monorepo-with-potentially-multiple-apps-and-libs
+
+# Lib
+
+nx g @nx/angular:library libs/heroicons --publishable --import-path=@semantic-components/heroicons
