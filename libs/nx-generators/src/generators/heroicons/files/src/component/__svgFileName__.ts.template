@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@a
 
 @Component({
   selector: '<%= svgSelector %>',
+  standalone: true,
   imports: [NgClass],
   template: `
     <%= svgContent %>
