@@ -1,4 +1,5 @@
 import { Tree, formatFiles, generateFiles, names } from '@nx/devkit';
+import { readFileSync } from 'fs';
 
 import { HeroiconsGeneratorSchema } from './schema';
 
@@ -48,7 +49,7 @@ function generateIconsComponents(
   tree.children(iconsSourcePath).forEach((fileName) => {
     const name = path.parse(fileName).name;
 
-    const svgContent = tree.read(path.join(iconsSourcePath, fileName), 'utf-8');
+    const svgContent = readFileSync(path.join(iconsSourcePath, fileName), 'utf-8');
 
     const svgClassName = `Svg${names(name).className}Icon`;
     const svgFileName = `svg-${names(name).fileName}-icon`;
