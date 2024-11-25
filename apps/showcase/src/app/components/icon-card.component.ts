@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
 
+import { SvgBoldIcon } from '@semantic-components/heroicons/16/solid';
+
 export interface HeroIcon {
   size: 16 | 20 | 24;
   type: 'solid' | 'outline';
@@ -17,7 +19,7 @@ export interface HeroIcon {
     >
       <div class="h-56 w-full">
         <a href="#">
-          <img
+          <!--img
             class="mx-auto h-full dark:hidden"
             src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/ipad-keyboard.svg"
             alt=""
@@ -26,7 +28,9 @@ export interface HeroIcon {
             class="mx-auto hidden h-full dark:block"
             src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/ipad-keyboard-dark.svg"
             alt=""
-          />
+          /-->
+
+          <ng-container *ngComponentOutlet="getSvgComponent()" />
         </a>
       </div>
       <div class="pt-6">
@@ -258,4 +262,8 @@ export interface HeroIcon {
 })
 export class IconCardComponent {
   icon = input.required<HeroIcon>();
+
+  getSvgComponent() {
+    return SvgBoldIcon;
+  }
 }
