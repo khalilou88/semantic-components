@@ -16,9 +16,9 @@
     "baseUrl": ".",
     "paths": {
       "@semantic-components/heroicons": ["libs/heroicons/src/index.ts"],
-      "@semantic-components/heroicons/24/outline": ["libs/heroicons/24/outline/src/index.ts"],
       "@semantic-components/heroicons/16/solid": ["libs/heroicons/16/solid/src/index.ts"],
       "@semantic-components/heroicons/20/solid": ["libs/heroicons/20/solid/src/index.ts"],
+      "@semantic-components/heroicons/24/outline": ["libs/heroicons/24/outline/src/index.ts"],
       "@semantic-components/heroicons/24/solid": ["libs/heroicons/24/solid/src/index.ts"],
       "@semantic-components/ngx-schematics": ["libs/ngx-schematics/src/index.ts"],
       "@semantic-components/nx-generators": ["libs/nx-generators/src/index.ts"],
