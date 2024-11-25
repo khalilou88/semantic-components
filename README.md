@@ -102,6 +102,8 @@ npm install --save-dev @semantic-components/nx-generators
 
 nx generate @semantic-components/nx-generators:heroicons
 
+npm config set registry https://registry.npmjs.org/
+
 #
 
 nx g @nx/angular:library-secondary-entry-point --library=heroicons --name=solid/16
