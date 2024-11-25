@@ -1,4 +1,4 @@
-import { Tree, formatFiles, generateFiles } from '@nx/devkit';
+import { Tree, formatFiles, generateFiles, names } from '@nx/devkit';
 
 import { HeroiconsGeneratorSchema } from './schema';
 
@@ -14,9 +14,9 @@ export async function heroiconsGenerator(tree: Tree, options: HeroiconsGenerator
   tree.children(solid16IconsSourcePath).forEach((fileName) => {
     console.log(fileName);
 
-    const svgContent = '';
-    const svgClassName = '';
-    const svgFileName = '';
+    const svgContent = tree.read(path.join(solid16IconsSourcePath, fileName)).toString();
+    const svgClassName = `${names(fileName).className}Icon`;
+    const svgFileName = `${names(fileName).fileName}-icon`;
 
     const my_options = { svgContent, svgClassName, svgFileName };
 
