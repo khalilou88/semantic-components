@@ -89,3 +89,13 @@ https://egghead.io/lessons/tailwind-configure-tailwind-in-a-nx-monorepo-with-pot
 nx g @nx/angular:library libs/heroicons --publishable --import-path=@semantic-components/heroicons
 
 nx generate @nx/plugin:generator libs/nx-generators/src/generators/heroicons
+
+#Local dev
+
+npx nx local-registry
+
+npn nx release publish
+
+npm install @semantic-components/nx-generators
+
+nx generate @semantic-components/nx-generators:heroicons
