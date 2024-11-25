@@ -11,28 +11,28 @@ export async function heroiconsGenerator(tree: Tree, options: HeroiconsGenerator
   //1
   const solid16IconsSourcePath =
     'libs/nx-generators/src/generators/heroicons/files/optimized/16/solid';
-  const solid16IconsDestinationPath = path.join(iconsDestinationPath, '16', 'solid');
+  const solid16IconsDestinationPath = path.join(iconsDestinationPath, 'solid', '16');
 
   generateIconsComponents(tree, solid16IconsSourcePath, solid16IconsDestinationPath);
 
   //2
   const solid20IconsSourcePath =
     'libs/nx-generators/src/generators/heroicons/files/optimized/20/solid';
-  const solid20IconsDestinationPath = path.join(iconsDestinationPath, '20', 'solid');
+  const solid20IconsDestinationPath = path.join(iconsDestinationPath, 'solid', '20');
 
   generateIconsComponents(tree, solid20IconsSourcePath, solid20IconsDestinationPath);
 
   //3
   const outline24IconsSourcePath =
     'libs/nx-generators/src/generators/heroicons/files/optimized/24/outline';
-  const outline24IconsDestinationPath = path.join(iconsDestinationPath, '24', 'outline');
+  const outline24IconsDestinationPath = path.join(iconsDestinationPath, 'outline', '24');
 
   generateIconsComponents(tree, outline24IconsSourcePath, outline24IconsDestinationPath);
 
   //4
   const solid24IconsSourcePath =
     'libs/nx-generators/src/generators/heroicons/files/optimized/24/solid';
-  const solid24IconsDestinationPath = path.join(iconsDestinationPath, '24', 'solid');
+  const solid24IconsDestinationPath = path.join(iconsDestinationPath, 'solid', '24');
 
   generateIconsComponents(tree, solid24IconsSourcePath, solid24IconsDestinationPath);
 
