@@ -1,0 +1,6442 @@
+[
+  {
+    "name": "academic-cap",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "adjustments-horizontal",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "adjustments-vertical",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "archive-box-arrow-down",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "archive-box-x-mark",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "archive-box",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-down-circle",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-down-left",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-down-on-square-stack",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-down-on-square",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-down-right",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-down-tray",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-down",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-left-circle",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-left-end-on-rectangle",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-left-start-on-rectangle",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-left",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-long-down",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-long-left",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-long-right",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-long-up",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-path-rounded-square",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-path",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-right-circle",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-right-end-on-rectangle",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-right-start-on-rectangle",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-right",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-top-right-on-square",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-trending-down",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-trending-up",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-turn-down-left",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-turn-down-right",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-turn-left-down",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-turn-left-up",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-turn-right-down",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-turn-right-up",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-turn-up-left",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-turn-up-right",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-up-circle",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-up-left",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-up-on-square-stack",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-up-on-square",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-up-right",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-up-tray",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-up",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-uturn-down",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-uturn-left",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-uturn-right",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-uturn-up",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrows-pointing-in",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrows-pointing-out",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrows-right-left",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "arrows-up-down",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "at-symbol",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "backspace",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "backward",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "banknotes",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "bars-2",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "bars-3-bottom-left",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "bars-3-bottom-right",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "bars-3-center-left",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "bars-3",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "bars-4",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "bars-arrow-down",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "bars-arrow-up",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "battery-0",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "battery-100",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "battery-50",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "beaker",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "bell-alert",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "bell-slash",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "bell-snooze",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "bell",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "bold",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "bolt-slash",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "bolt",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "book-open",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "bookmark-slash",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "bookmark-square",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "bookmark",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "briefcase",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "bug-ant",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "building-library",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "building-office-2",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "building-office",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "building-storefront",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "cake",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "calculator",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "calendar-date-range",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "calendar-days",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "calendar",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "camera",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "chart-bar-square",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "chart-bar",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "chart-pie",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "chat-bubble-bottom-center-text",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "chat-bubble-bottom-center",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "chat-bubble-left-ellipsis",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "chat-bubble-left-right",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "chat-bubble-left",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "chat-bubble-oval-left-ellipsis",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "chat-bubble-oval-left",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "check-badge",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "check-circle",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "check",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "chevron-double-down",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "chevron-double-left",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "chevron-double-right",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "chevron-double-up",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "chevron-down",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "chevron-left",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "chevron-right",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "chevron-up-down",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "chevron-up",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "circle-stack",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "clipboard-document-check",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "clipboard-document-list",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "clipboard-document",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "clipboard",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "clock",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "cloud-arrow-down",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "cloud-arrow-up",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "cloud",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "code-bracket-square",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "code-bracket",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "cog-6-tooth",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "cog-8-tooth",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "cog",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "command-line",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "computer-desktop",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "cpu-chip",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "credit-card",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "cube-transparent",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "cube",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "currency-bangladeshi",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "currency-dollar",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "currency-euro",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "currency-pound",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "currency-rupee",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "currency-yen",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "cursor-arrow-rays",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "cursor-arrow-ripple",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "device-phone-mobile",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "device-tablet",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "divide",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "document-arrow-down",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "document-arrow-up",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "document-chart-bar",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "document-check",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "document-currency-bangladeshi",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "document-currency-dollar",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "document-currency-euro",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "document-currency-pound",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "document-currency-rupee",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "document-currency-yen",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "document-duplicate",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "document-magnifying-glass",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "document-minus",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "document-plus",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "document-text",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "document",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "ellipsis-horizontal-circle",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "ellipsis-horizontal",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "ellipsis-vertical",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "envelope-open",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "envelope",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "equals",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "exclamation-circle",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "exclamation-triangle",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "eye-dropper",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "eye-slash",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "eye",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "face-frown",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "face-smile",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "film",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "finger-print",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "fire",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "flag",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "folder-arrow-down",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "folder-minus",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "folder-open",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "folder-plus",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "folder",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "forward",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "funnel",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "gif",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "gift-top",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "gift",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "globe-alt",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "globe-americas",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "globe-asia-australia",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "globe-europe-africa",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "h1",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "h2",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "h3",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "hand-raised",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "hand-thumb-down",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "hand-thumb-up",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "hashtag",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "heart",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "home-modern",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "home",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "identification",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "inbox-arrow-down",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "inbox-stack",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "inbox",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "information-circle",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "italic",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "key",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "language",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "lifebuoy",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "light-bulb",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "link-slash",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "link",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "list-bullet",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "lock-closed",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "lock-open",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "magnifying-glass-circle",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "magnifying-glass-minus",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "magnifying-glass-plus",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "magnifying-glass",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "map-pin",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "map",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "megaphone",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "microphone",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "minus-circle",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "minus",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "moon",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "musical-note",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "newspaper",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "no-symbol",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "numbered-list",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "paint-brush",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "paper-airplane",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "paper-clip",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "pause-circle",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "pause",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "pencil-square",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "pencil",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "percent-badge",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "phone-arrow-down-left",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "phone-arrow-up-right",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "phone-x-mark",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "phone",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "photo",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "play-circle",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "play-pause",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "play",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "plus-circle",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "plus",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "power",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "presentation-chart-bar",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "presentation-chart-line",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "printer",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "puzzle-piece",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "qr-code",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "question-mark-circle",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "queue-list",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "radio",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "receipt-percent",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "receipt-refund",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "rectangle-group",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "rectangle-stack",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "rocket-launch",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "rss",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "scale",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "scissors",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "server-stack",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "server",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "share",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "shield-check",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "shield-exclamation",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "shopping-bag",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "shopping-cart",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "signal-slash",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "signal",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "slash",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "sparkles",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "speaker-wave",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "speaker-x-mark",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "square-2-stack",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "square-3-stack-3d",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "squares-2x2",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "squares-plus",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "star",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "stop-circle",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "stop",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "strikethrough",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "sun",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "swatch",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "table-cells",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "tag",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "ticket",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "trash",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "trophy",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "truck",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "tv",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "underline",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "user-circle",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "user-group",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "user-minus",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "user-plus",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "user",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "users",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "variable",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "video-camera-slash",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "video-camera",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "view-columns",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "viewfinder-circle",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "wallet",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "wifi",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "window",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "wrench-screwdriver",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "wrench",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "x-circle",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "x-mark",
+    "size": 16,
+    "type": "solid"
+  },
+  {
+    "name": "academic-cap",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "adjustments-horizontal",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "adjustments-vertical",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "archive-box-arrow-down",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "archive-box-x-mark",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "archive-box",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-down-circle",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-down-left",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-down-on-square-stack",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-down-on-square",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-down-right",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-down-tray",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-down",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-left-circle",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-left-end-on-rectangle",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-left-on-rectangle",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-left-start-on-rectangle",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-left",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-long-down",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-long-left",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-long-right",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-long-up",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-path-rounded-square",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-path",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-right-circle",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-right-end-on-rectangle",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-right-on-rectangle",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-right-start-on-rectangle",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-right",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-small-down",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-small-left",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-small-right",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-small-up",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-top-right-on-square",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-trending-down",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-trending-up",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-turn-down-left",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-turn-down-right",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-turn-left-down",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-turn-left-up",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-turn-right-down",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-turn-right-up",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-turn-up-left",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-turn-up-right",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-up-circle",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-up-left",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-up-on-square-stack",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-up-on-square",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-up-right",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-up-tray",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-up",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-uturn-down",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-uturn-left",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-uturn-right",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-uturn-up",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrows-pointing-in",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrows-pointing-out",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrows-right-left",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "arrows-up-down",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "at-symbol",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "backspace",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "backward",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "banknotes",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "bars-2",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "bars-3-bottom-left",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "bars-3-bottom-right",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "bars-3-center-left",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "bars-3",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "bars-4",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "bars-arrow-down",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "bars-arrow-up",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "battery-0",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "battery-100",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "battery-50",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "beaker",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "bell-alert",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "bell-slash",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "bell-snooze",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "bell",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "bold",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "bolt-slash",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "bolt",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "book-open",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "bookmark-slash",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "bookmark-square",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "bookmark",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "briefcase",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "bug-ant",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "building-library",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "building-office-2",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "building-office",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "building-storefront",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "cake",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "calculator",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "calendar-date-range",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "calendar-days",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "calendar",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "camera",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "chart-bar-square",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "chart-bar",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "chart-pie",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "chat-bubble-bottom-center-text",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "chat-bubble-bottom-center",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "chat-bubble-left-ellipsis",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "chat-bubble-left-right",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "chat-bubble-left",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "chat-bubble-oval-left-ellipsis",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "chat-bubble-oval-left",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "check-badge",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "check-circle",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "check",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "chevron-double-down",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "chevron-double-left",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "chevron-double-right",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "chevron-double-up",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "chevron-down",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "chevron-left",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "chevron-right",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "chevron-up-down",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "chevron-up",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "circle-stack",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "clipboard-document-check",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "clipboard-document-list",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "clipboard-document",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "clipboard",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "clock",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "cloud-arrow-down",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "cloud-arrow-up",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "cloud",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "code-bracket-square",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "code-bracket",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "cog-6-tooth",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "cog-8-tooth",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "cog",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "command-line",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "computer-desktop",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "cpu-chip",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "credit-card",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "cube-transparent",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "cube",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "currency-bangladeshi",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "currency-dollar",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "currency-euro",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "currency-pound",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "currency-rupee",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "currency-yen",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "cursor-arrow-rays",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "cursor-arrow-ripple",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "device-phone-mobile",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "device-tablet",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "divide",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "document-arrow-down",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "document-arrow-up",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "document-chart-bar",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "document-check",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "document-currency-bangladeshi",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "document-currency-dollar",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "document-currency-euro",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "document-currency-pound",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "document-currency-rupee",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "document-currency-yen",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "document-duplicate",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "document-magnifying-glass",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "document-minus",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "document-plus",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "document-text",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "document",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "ellipsis-horizontal-circle",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "ellipsis-horizontal",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "ellipsis-vertical",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "envelope-open",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "envelope",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "equals",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "exclamation-circle",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "exclamation-triangle",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "eye-dropper",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "eye-slash",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "eye",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "face-frown",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "face-smile",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "film",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "finger-print",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "fire",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "flag",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "folder-arrow-down",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "folder-minus",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "folder-open",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "folder-plus",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "folder",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "forward",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "funnel",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "gif",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "gift-top",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "gift",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "globe-alt",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "globe-americas",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "globe-asia-australia",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "globe-europe-africa",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "h1",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "h2",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "h3",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "hand-raised",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "hand-thumb-down",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "hand-thumb-up",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "hashtag",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "heart",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "home-modern",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "home",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "identification",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "inbox-arrow-down",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "inbox-stack",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "inbox",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "information-circle",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "italic",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "key",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "language",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "lifebuoy",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "light-bulb",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "link-slash",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "link",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "list-bullet",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "lock-closed",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "lock-open",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "magnifying-glass-circle",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "magnifying-glass-minus",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "magnifying-glass-plus",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "magnifying-glass",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "map-pin",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "map",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "megaphone",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "microphone",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "minus-circle",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "minus-small",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "minus",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "moon",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "musical-note",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "newspaper",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "no-symbol",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "numbered-list",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "paint-brush",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "paper-airplane",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "paper-clip",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "pause-circle",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "pause",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "pencil-square",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "pencil",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "percent-badge",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "phone-arrow-down-left",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "phone-arrow-up-right",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "phone-x-mark",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "phone",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "photo",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "play-circle",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "play-pause",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "play",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "plus-circle",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "plus-small",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "plus",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "power",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "presentation-chart-bar",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "presentation-chart-line",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "printer",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "puzzle-piece",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "qr-code",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "question-mark-circle",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "queue-list",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "radio",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "receipt-percent",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "receipt-refund",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "rectangle-group",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "rectangle-stack",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "rocket-launch",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "rss",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "scale",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "scissors",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "server-stack",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "server",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "share",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "shield-check",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "shield-exclamation",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "shopping-bag",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "shopping-cart",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "signal-slash",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "signal",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "slash",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "sparkles",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "speaker-wave",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "speaker-x-mark",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "square-2-stack",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "square-3-stack-3d",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "squares-2x2",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "squares-plus",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "star",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "stop-circle",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "stop",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "strikethrough",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "sun",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "swatch",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "table-cells",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "tag",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "ticket",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "trash",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "trophy",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "truck",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "tv",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "underline",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "user-circle",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "user-group",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "user-minus",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "user-plus",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "user",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "users",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "variable",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "video-camera-slash",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "video-camera",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "view-columns",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "viewfinder-circle",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "wallet",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "wifi",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "window",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "wrench-screwdriver",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "wrench",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "x-circle",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "x-mark",
+    "size": 20,
+    "type": "solid"
+  },
+  {
+    "name": "academic-cap",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "adjustments-horizontal",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "adjustments-vertical",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "archive-box-arrow-down",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "archive-box-x-mark",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "archive-box",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-down-circle",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-down-left",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-down-on-square-stack",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-down-on-square",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-down-right",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-down-tray",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-down",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-left-circle",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-left-end-on-rectangle",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-left-on-rectangle",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-left-start-on-rectangle",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-left",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-long-down",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-long-left",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-long-right",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-long-up",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-path-rounded-square",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-path",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-right-circle",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-right-end-on-rectangle",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-right-on-rectangle",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-right-start-on-rectangle",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-right",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-small-down",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-small-left",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-small-right",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-small-up",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-top-right-on-square",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-trending-down",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-trending-up",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-turn-down-left",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-turn-down-right",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-turn-left-down",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-turn-left-up",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-turn-right-down",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-turn-right-up",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-turn-up-left",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-turn-up-right",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-up-circle",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-up-left",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-up-on-square-stack",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-up-on-square",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-up-right",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-up-tray",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-up",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-uturn-down",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-uturn-left",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-uturn-right",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrow-uturn-up",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrows-pointing-in",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrows-pointing-out",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrows-right-left",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "arrows-up-down",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "at-symbol",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "backspace",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "backward",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "banknotes",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "bars-2",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "bars-3-bottom-left",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "bars-3-bottom-right",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "bars-3-center-left",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "bars-3",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "bars-4",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "bars-arrow-down",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "bars-arrow-up",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "battery-0",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "battery-100",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "battery-50",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "beaker",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "bell-alert",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "bell-slash",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "bell-snooze",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "bell",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "bold",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "bolt-slash",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "bolt",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "book-open",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "bookmark-slash",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "bookmark-square",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "bookmark",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "briefcase",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "bug-ant",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "building-library",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "building-office-2",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "building-office",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "building-storefront",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "cake",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "calculator",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "calendar-date-range",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "calendar-days",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "calendar",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "camera",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "chart-bar-square",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "chart-bar",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "chart-pie",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "chat-bubble-bottom-center-text",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "chat-bubble-bottom-center",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "chat-bubble-left-ellipsis",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "chat-bubble-left-right",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "chat-bubble-left",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "chat-bubble-oval-left-ellipsis",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "chat-bubble-oval-left",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "check-badge",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "check-circle",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "check",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "chevron-double-down",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "chevron-double-left",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "chevron-double-right",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "chevron-double-up",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "chevron-down",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "chevron-left",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "chevron-right",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "chevron-up-down",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "chevron-up",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "circle-stack",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "clipboard-document-check",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "clipboard-document-list",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "clipboard-document",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "clipboard",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "clock",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "cloud-arrow-down",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "cloud-arrow-up",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "cloud",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "code-bracket-square",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "code-bracket",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "cog-6-tooth",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "cog-8-tooth",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "cog",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "command-line",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "computer-desktop",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "cpu-chip",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "credit-card",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "cube-transparent",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "cube",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "currency-bangladeshi",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "currency-dollar",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "currency-euro",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "currency-pound",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "currency-rupee",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "currency-yen",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "cursor-arrow-rays",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "cursor-arrow-ripple",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "device-phone-mobile",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "device-tablet",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "divide",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "document-arrow-down",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "document-arrow-up",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "document-chart-bar",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "document-check",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "document-currency-bangladeshi",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "document-currency-dollar",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "document-currency-euro",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "document-currency-pound",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "document-currency-rupee",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "document-currency-yen",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "document-duplicate",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "document-magnifying-glass",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "document-minus",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "document-plus",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "document-text",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "document",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "ellipsis-horizontal-circle",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "ellipsis-horizontal",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "ellipsis-vertical",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "envelope-open",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "envelope",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "equals",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "exclamation-circle",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "exclamation-triangle",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "eye-dropper",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "eye-slash",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "eye",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "face-frown",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "face-smile",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "film",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "finger-print",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "fire",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "flag",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "folder-arrow-down",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "folder-minus",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "folder-open",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "folder-plus",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "folder",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "forward",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "funnel",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "gif",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "gift-top",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "gift",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "globe-alt",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "globe-americas",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "globe-asia-australia",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "globe-europe-africa",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "h1",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "h2",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "h3",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "hand-raised",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "hand-thumb-down",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "hand-thumb-up",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "hashtag",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "heart",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "home-modern",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "home",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "identification",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "inbox-arrow-down",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "inbox-stack",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "inbox",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "information-circle",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "italic",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "key",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "language",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "lifebuoy",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "light-bulb",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "link-slash",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "link",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "list-bullet",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "lock-closed",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "lock-open",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "magnifying-glass-circle",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "magnifying-glass-minus",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "magnifying-glass-plus",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "magnifying-glass",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "map-pin",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "map",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "megaphone",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "microphone",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "minus-circle",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "minus-small",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "minus",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "moon",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "musical-note",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "newspaper",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "no-symbol",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "numbered-list",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "paint-brush",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "paper-airplane",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "paper-clip",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "pause-circle",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "pause",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "pencil-square",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "pencil",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "percent-badge",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "phone-arrow-down-left",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "phone-arrow-up-right",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "phone-x-mark",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "phone",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "photo",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "play-circle",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "play-pause",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "play",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "plus-circle",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "plus-small",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "plus",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "power",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "presentation-chart-bar",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "presentation-chart-line",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "printer",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "puzzle-piece",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "qr-code",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "question-mark-circle",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "queue-list",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "radio",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "receipt-percent",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "receipt-refund",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "rectangle-group",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "rectangle-stack",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "rocket-launch",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "rss",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "scale",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "scissors",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "server-stack",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "server",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "share",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "shield-check",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "shield-exclamation",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "shopping-bag",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "shopping-cart",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "signal-slash",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "signal",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "slash",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "sparkles",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "speaker-wave",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "speaker-x-mark",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "square-2-stack",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "square-3-stack-3d",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "squares-2x2",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "squares-plus",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "star",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "stop-circle",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "stop",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "strikethrough",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "sun",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "swatch",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "table-cells",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "tag",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "ticket",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "trash",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "trophy",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "truck",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "tv",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "underline",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "user-circle",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "user-group",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "user-minus",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "user-plus",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "user",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "users",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "variable",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "video-camera-slash",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "video-camera",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "view-columns",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "viewfinder-circle",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "wallet",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "wifi",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "window",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "wrench-screwdriver",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "wrench",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "x-circle",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "x-mark",
+    "size": 24,
+    "type": "outline"
+  },
+  {
+    "name": "academic-cap",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "adjustments-horizontal",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "adjustments-vertical",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "archive-box-arrow-down",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "archive-box-x-mark",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "archive-box",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-down-circle",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-down-left",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-down-on-square-stack",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-down-on-square",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-down-right",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-down-tray",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-down",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-left-circle",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-left-end-on-rectangle",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-left-on-rectangle",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-left-start-on-rectangle",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-left",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-long-down",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-long-left",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-long-right",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-long-up",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-path-rounded-square",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-path",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-right-circle",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-right-end-on-rectangle",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-right-on-rectangle",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-right-start-on-rectangle",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-right",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-small-down",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-small-left",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-small-right",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-small-up",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-top-right-on-square",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-trending-down",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-trending-up",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-turn-down-left",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-turn-down-right",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-turn-left-down",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-turn-left-up",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-turn-right-down",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-turn-right-up",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-turn-up-left",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-turn-up-right",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-up-circle",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-up-left",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-up-on-square-stack",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-up-on-square",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-up-right",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-up-tray",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-up",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-uturn-down",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-uturn-left",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-uturn-right",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrow-uturn-up",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrows-pointing-in",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrows-pointing-out",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrows-right-left",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "arrows-up-down",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "at-symbol",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "backspace",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "backward",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "banknotes",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "bars-2",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "bars-3-bottom-left",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "bars-3-bottom-right",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "bars-3-center-left",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "bars-3",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "bars-4",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "bars-arrow-down",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "bars-arrow-up",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "battery-0",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "battery-100",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "battery-50",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "beaker",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "bell-alert",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "bell-slash",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "bell-snooze",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "bell",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "bold",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "bolt-slash",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "bolt",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "book-open",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "bookmark-slash",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "bookmark-square",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "bookmark",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "briefcase",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "bug-ant",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "building-library",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "building-office-2",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "building-office",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "building-storefront",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "cake",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "calculator",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "calendar-date-range",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "calendar-days",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "calendar",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "camera",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "chart-bar-square",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "chart-bar",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "chart-pie",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "chat-bubble-bottom-center-text",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "chat-bubble-bottom-center",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "chat-bubble-left-ellipsis",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "chat-bubble-left-right",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "chat-bubble-left",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "chat-bubble-oval-left-ellipsis",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "chat-bubble-oval-left",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "check-badge",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "check-circle",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "check",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "chevron-double-down",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "chevron-double-left",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "chevron-double-right",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "chevron-double-up",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "chevron-down",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "chevron-left",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "chevron-right",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "chevron-up-down",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "chevron-up",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "circle-stack",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "clipboard-document-check",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "clipboard-document-list",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "clipboard-document",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "clipboard",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "clock",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "cloud-arrow-down",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "cloud-arrow-up",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "cloud",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "code-bracket-square",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "code-bracket",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "cog-6-tooth",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "cog-8-tooth",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "cog",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "command-line",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "computer-desktop",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "cpu-chip",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "credit-card",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "cube-transparent",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "cube",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "currency-bangladeshi",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "currency-dollar",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "currency-euro",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "currency-pound",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "currency-rupee",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "currency-yen",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "cursor-arrow-rays",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "cursor-arrow-ripple",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "device-phone-mobile",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "device-tablet",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "divide",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "document-arrow-down",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "document-arrow-up",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "document-chart-bar",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "document-check",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "document-currency-bangladeshi",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "document-currency-dollar",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "document-currency-euro",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "document-currency-pound",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "document-currency-rupee",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "document-currency-yen",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "document-duplicate",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "document-magnifying-glass",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "document-minus",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "document-plus",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "document-text",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "document",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "ellipsis-horizontal-circle",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "ellipsis-horizontal",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "ellipsis-vertical",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "envelope-open",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "envelope",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "equals",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "exclamation-circle",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "exclamation-triangle",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "eye-dropper",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "eye-slash",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "eye",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "face-frown",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "face-smile",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "film",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "finger-print",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "fire",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "flag",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "folder-arrow-down",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "folder-minus",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "folder-open",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "folder-plus",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "folder",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "forward",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "funnel",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "gif",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "gift-top",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "gift",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "globe-alt",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "globe-americas",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "globe-asia-australia",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "globe-europe-africa",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "h1",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "h2",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "h3",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "hand-raised",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "hand-thumb-down",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "hand-thumb-up",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "hashtag",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "heart",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "home-modern",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "home",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "identification",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "inbox-arrow-down",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "inbox-stack",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "inbox",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "information-circle",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "italic",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "key",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "language",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "lifebuoy",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "light-bulb",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "link-slash",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "link",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "list-bullet",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "lock-closed",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "lock-open",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "magnifying-glass-circle",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "magnifying-glass-minus",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "magnifying-glass-plus",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "magnifying-glass",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "map-pin",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "map",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "megaphone",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "microphone",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "minus-circle",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "minus-small",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "minus",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "moon",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "musical-note",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "newspaper",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "no-symbol",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "numbered-list",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "paint-brush",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "paper-airplane",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "paper-clip",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "pause-circle",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "pause",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "pencil-square",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "pencil",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "percent-badge",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "phone-arrow-down-left",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "phone-arrow-up-right",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "phone-x-mark",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "phone",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "photo",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "play-circle",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "play-pause",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "play",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "plus-circle",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "plus-small",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "plus",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "power",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "presentation-chart-bar",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "presentation-chart-line",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "printer",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "puzzle-piece",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "qr-code",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "question-mark-circle",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "queue-list",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "radio",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "receipt-percent",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "receipt-refund",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "rectangle-group",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "rectangle-stack",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "rocket-launch",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "rss",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "scale",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "scissors",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "server-stack",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "server",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "share",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "shield-check",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "shield-exclamation",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "shopping-bag",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "shopping-cart",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "signal-slash",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "signal",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "slash",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "sparkles",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "speaker-wave",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "speaker-x-mark",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "square-2-stack",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "square-3-stack-3d",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "squares-2x2",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "squares-plus",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "star",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "stop-circle",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "stop",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "strikethrough",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "sun",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "swatch",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "table-cells",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "tag",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "ticket",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "trash",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "trophy",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "truck",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "tv",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "underline",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "user-circle",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "user-group",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "user-minus",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "user-plus",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "user",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "users",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "variable",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "video-camera-slash",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "video-camera",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "view-columns",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "viewfinder-circle",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "wallet",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "wifi",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "window",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "wrench-screwdriver",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "wrench",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "x-circle",
+    "size": 24,
+    "type": "solid"
+  },
+  {
+    "name": "x-mark",
+    "size": 24,
+    "type": "solid"
+  }
+]
