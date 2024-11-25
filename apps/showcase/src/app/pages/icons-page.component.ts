@@ -1,7 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  ViewEncapsulation,
+  signal,
+} from '@angular/core';
 
-import { IconCardComponent } from '../components/icon-card.component';
+import { HeroIcon, IconCardComponent } from '../components/icon-card.component';
 
 @Component({
   selector: 'app-icons-page',
@@ -238,7 +245,9 @@ import { IconCardComponent } from '../components/icon-card.component';
         </div>
 
         <div class="mb-4 grid gap-4 sm:grid-cols-2 md:mb-8 lg:grid-cols-3 xl:grid-cols-4">
-          <app-icon-card />
+          @for (icon of icons(); track $index) {
+            <app-icon-card [icon]="icon" />
+          }
         </div>
         <div class="w-full text-center">
           <button
@@ -1777,4 +1786,16 @@ import { IconCardComponent } from '../components/icon-card.component';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IconsPageComponent {}
+export class IconsPageComponent implements OnInit {
+  icons = signal<HeroIcon[]>([]);
+
+  url = 'heroicons.json';
+
+  constructor(private readonly http: HttpClient) {}
+
+  ngOnInit() {
+    this.http.get<HeroIcon[]>(this.url).subscribe((icons) => {
+      this.icons.set(icons);
+    });
+  }
+}

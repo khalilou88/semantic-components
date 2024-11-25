@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
+
+export interface HeroIcon {
+  size: 16 | 20 | 24;
+  type: 'solid' | 'outline';
+  name: string;
+}
 
 @Component({
   selector: 'app-icon-card',
@@ -250,4 +256,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IconCardComponent {}
+export class IconCardComponent {
+  icon = input.required<HeroIcon>();
+}
