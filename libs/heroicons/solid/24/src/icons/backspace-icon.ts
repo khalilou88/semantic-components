@@ -1,0 +1,23 @@
+import { NgClass } from '@angular/common';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
+
+@Component({
+  selector: 'backspace-icon',
+  standalone: true,
+  imports: [NgClass],
+  template: `
+    &lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; viewBox=&#34;0 0 24 24&#34;
+    fill=&#34;currentColor&#34; aria-hidden=&#34;true&#34; data-slot=&#34;icon&#34;&gt; &lt;path
+    fill-rule=&#34;evenodd&#34; d=&#34;M2.515 10.674a1.875 1.875 0 0 0 0 2.652L8.89
+    19.7c.352.351.829.549 1.326.549H19.5a3 3 0 0 0 3-3V6.75a3 3 0 0 0-3-3h-9.284c-.497
+    0-.974.198-1.326.55l-6.375 6.374ZM12.53 9.22a.75.75 0 1 0-1.06 1.06L13.19 12l-1.72 1.72a.75.75 0
+    1 0 1.06 1.06l1.72-1.72 1.72 1.72a.75.75 0 1 0 1.06-1.06L15.31 12l1.72-1.72a.75.75 0 1
+    0-1.06-1.06l-1.72 1.72-1.72-1.72Z&#34; clip-rule=&#34;evenodd&#34;/&gt; &lt;/svg&gt;
+  `,
+  styles: ``,
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class BackspaceIcon {
+  readonly class = input('');
+}
