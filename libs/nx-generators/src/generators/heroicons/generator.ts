@@ -18,8 +18,9 @@ export async function heroiconsGenerator(tree: Tree, options: HeroiconsGenerator
     const svgContent = tree.read(path.join(solid16IconsSourcePath, fileName)).toString();
     const svgClassName = `${names(fileName).className}Icon`;
     const svgFileName = `${names(fileName).fileName}-icon`;
+    const svgSelector = `${names(fileName).fileName}-icon`;
 
-    const my_options = { svgContent, svgClassName, svgFileName };
+    const my_options = { svgContent, svgClassName, svgFileName, svgSelector };
 
     generateFiles(
       tree,

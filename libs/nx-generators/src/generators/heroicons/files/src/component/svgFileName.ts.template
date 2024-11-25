@@ -2,7 +2,7 @@ import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
 
 @Component({
-  selector: 'sma-close-svg-icon',
+  selector: '<%= svgSelector %>',
   imports: [NgClass],
   template: `
     <%= svgContent %>
