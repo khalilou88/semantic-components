@@ -48,20 +48,19 @@ function generateIconsComponents(
   tree.children(iconsSourcePath).forEach((fileName) => {
     const name = path.parse(fileName).name;
 
-    const svgUrl = `./${fileName}`;
+    const svgContent = tree.read(path.join(iconsSourcePath, fileName), 'utf-8');
+
     const svgClassName = `Svg${names(name).className}Icon`;
     const svgFileName = `svg-${names(name).fileName}-icon`;
     const svgSelector = `svg-${names(name).fileName}-icon`;
 
     exports.push(`export * from './icons/${svgFileName}';`);
 
-    const o = { svgUrl, svgClassName, svgFileName, svgSelector };
-
-    generateFiles(tree, iconsSourcePath, path.join(iconsDestinationPath, 'icons'), {});
+    const o = { svgContent, svgClassName, svgFileName, svgSelector };
 
     generateFiles(
       tree,
-      path.join(__dirname, 'files', 'component'),
+      path.join(__dirname, 'files', 'src', 'component'),
       path.join(iconsDestinationPath, 'icons'),
       o,
     );
