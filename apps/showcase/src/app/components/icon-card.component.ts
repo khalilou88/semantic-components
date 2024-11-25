@@ -1,7 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
-
-import { SvgBoldIcon } from '@semantic-components/heroicons/16/solid';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  ViewEncapsulation,
+  input,
+  signal,
+} from '@angular/core';
 
 export interface HeroIcon {
   size: 16 | 20 | 24;
@@ -30,7 +35,9 @@ export interface HeroIcon {
             alt=""
           /-->
 
-          <ng-container *ngComponentOutlet="getSvgComponent()" />
+          @if (iconComponent()) {
+            <ng-container *ngComponentOutlet="iconComponent()" />
+          }
         </a>
       </div>
       <div class="pt-6">
@@ -260,10 +267,19 @@ export interface HeroIcon {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IconCardComponent {
+export class IconCardComponent implements OnInit {
   icon = input.required<HeroIcon>();
 
-  getSvgComponent() {
-    return SvgBoldIcon;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  iconComponent = signal<any | null>(null);
+
+  ngOnInit(): void {
+    this.getSvgComponent();
+  }
+
+  async getSvgComponent() {
+    const { SvgBoldIcon } = await import('@semantic-components/heroicons/16/solid');
+
+    this.iconComponent.set(SvgBoldIcon);
   }
 }
