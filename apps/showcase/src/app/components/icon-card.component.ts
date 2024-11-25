@@ -273,13 +273,15 @@ export class IconCardComponent implements OnInit {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   iconComponent = signal<any | null>(null);
 
+  iconComponentName = 'SvgBoldIcon';
+
   ngOnInit(): void {
     this.getSvgComponent();
   }
 
   async getSvgComponent() {
-    const { SvgBoldIcon } = await import('@semantic-components/heroicons/16/solid');
-
-    this.iconComponent.set(SvgBoldIcon);
+    import('@semantic-components/heroicons/16/solid').then((m) =>
+      this.iconComponent.set(m['SvgBoldIcon']),
+    );
   }
 }
