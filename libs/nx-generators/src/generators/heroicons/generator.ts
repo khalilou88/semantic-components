@@ -1,9 +1,7 @@
 import { Tree, formatFiles, generateFiles, names } from '@nx/devkit';
+import * as path from 'path';
 
 import { HeroiconsGeneratorSchema } from './schema';
-
-import path = require('path');
-import xmldom = require('xmldom');
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function heroiconsGenerator(tree: Tree, options: HeroiconsGeneratorSchema) {
@@ -49,10 +47,7 @@ function generateIconsComponents(
   tree.children(iconsSourcePath).forEach((fileName) => {
     const name = path.parse(fileName).name;
 
-    const svgContentAsString = tree.read(path.join(iconsSourcePath, fileName), 'utf-8');
-
-    const parser = new xmldom.DOMParser();
-    const svgContent = parser.parseFromString(svgContentAsString, 'image/svg+xml');
+    const svgContent = tree.read(path.join(iconsSourcePath, fileName), 'utf-8');
 
     const svgClassName = `Svg${names(name).className}Icon`;
     const svgFileName = `svg-${names(name).fileName}-icon`;
