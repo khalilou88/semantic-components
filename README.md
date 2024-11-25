@@ -101,3 +101,10 @@ $env:NX_DAEMON='false'
 npm install --save-dev @semantic-components/nx-generators
 
 nx generate @semantic-components/nx-generators:heroicons
+
+#
+
+nx g @nx/angular:library-secondary-entry-point --library=heroicons --name=solid/16
+nx g @nx/angular:library-secondary-entry-point --library=heroicons --name=solid/20
+nx g @nx/angular:library-secondary-entry-point --library=heroicons --name=solid/24
+nx g @nx/angular:library-secondary-entry-point --library=heroicons --name=outline/24
