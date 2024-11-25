@@ -5,9 +5,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@a
   selector: '<%= svgSelector %>',
   standalone: true,
   imports: [NgClass],
-  template: `
-    <%= svgContent %>
-  `,
+  templateUrl: '<%= svgUrl %>',
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
