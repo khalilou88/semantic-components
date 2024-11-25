@@ -60,7 +60,7 @@ function generateIconsComponents(
 
     generateFiles(
       tree,
-      path.join(__dirname, 'files', 'src', 'component'),
+      path.join(__dirname, 'files', 'component'),
       path.join(iconsDestinationPath, 'icons'),
       o,
     );
