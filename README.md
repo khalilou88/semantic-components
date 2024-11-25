@@ -96,6 +96,8 @@ npx nx local-registry
 
 npx nx release 0.0.2-1
 
+$env:NX_DAEMON='false'
+
 npm install --save-dev @semantic-components/nx-generators
 
 nx generate @semantic-components/nx-generators:heroicons
