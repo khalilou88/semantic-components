@@ -11,52 +11,28 @@ export async function heroiconsGenerator(tree: Tree, options: HeroiconsGenerator
   //1
   const solid16IconsSourcePath =
     'libs/nx-generators/src/generators/heroicons/files/optimized/16/solid';
-  const solid16IconsDestinationPath = path.join(
-    iconsDestinationPath,
-    'solid',
-    '16',
-    'src',
-    'icons',
-  );
+  const solid16IconsDestinationPath = path.join(iconsDestinationPath, 'solid', '16', 'src');
 
   generateIconsComponents(tree, solid16IconsSourcePath, solid16IconsDestinationPath);
 
   //2
   const solid20IconsSourcePath =
     'libs/nx-generators/src/generators/heroicons/files/optimized/20/solid';
-  const solid20IconsDestinationPath = path.join(
-    iconsDestinationPath,
-    'solid',
-    '20',
-    'src',
-    'icons',
-  );
+  const solid20IconsDestinationPath = path.join(iconsDestinationPath, 'solid', '20', 'src');
 
   generateIconsComponents(tree, solid20IconsSourcePath, solid20IconsDestinationPath);
 
   //3
   const outline24IconsSourcePath =
     'libs/nx-generators/src/generators/heroicons/files/optimized/24/outline';
-  const outline24IconsDestinationPath = path.join(
-    iconsDestinationPath,
-    'outline',
-    '24',
-    'src',
-    'icons',
-  );
+  const outline24IconsDestinationPath = path.join(iconsDestinationPath, 'outline', '24', 'src');
 
   generateIconsComponents(tree, outline24IconsSourcePath, outline24IconsDestinationPath);
 
   //4
   const solid24IconsSourcePath =
     'libs/nx-generators/src/generators/heroicons/files/optimized/24/solid';
-  const solid24IconsDestinationPath = path.join(
-    iconsDestinationPath,
-    'solid',
-    '24',
-    'src',
-    'icons',
-  );
+  const solid24IconsDestinationPath = path.join(iconsDestinationPath, 'solid', '24', 'src');
 
   generateIconsComponents(tree, solid24IconsSourcePath, solid24IconsDestinationPath);
 
@@ -65,26 +41,32 @@ export async function heroiconsGenerator(tree: Tree, options: HeroiconsGenerator
 
 function generateIconsComponents(
   tree: Tree,
-  solid16IconsSourcePath: string,
-  solid16IconsDestinationPath: string,
+  iconsSourcePath: string,
+  iconsDestinationPath: string,
 ) {
-  tree.children(solid16IconsSourcePath).forEach((fileName) => {
-    const svgContent = tree.read(path.join(solid16IconsSourcePath, fileName), 'utf-8');
-    const svgClassName = `${names(fileName).className}Icon`; //AcademicCapSvgIcon
-    const svgFileName = `${names(fileName).fileName}-icon`; //academic-cap.svg-icon.ts
-    const svgSelector = `${names(fileName).fileName}-icon`; //academic-cap.svg-icon
+  const exports = [];
+  tree.children(iconsSourcePath).forEach((fileName) => {
+    const name = path.parse(fileName).name;
+
+    const svgContent = tree.read(path.join(iconsSourcePath, fileName), 'utf-8');
+
+    const svgClassName = `${names(name).className}Icon`;
+    const svgFileName = `${names(name).fileName}-icon`;
+    const svgSelector = `${names(name).fileName}-icon`;
+
+    exports.push(`export * from './icons/${svgFileName}';`);
 
     const o = { svgContent, svgClassName, svgFileName, svgSelector };
 
     generateFiles(
       tree,
       path.join(__dirname, 'files', 'src', 'component'),
-      solid16IconsDestinationPath,
+      path.join(iconsDestinationPath, 'icons'),
       o,
     );
   });
 
-  //export * from './icons/academic-cap.svg-icon';
+  tree.write(path.join(iconsDestinationPath, 'index.ts'), exports.join('\r\n'));
 }
 
 export default heroiconsGenerator;
