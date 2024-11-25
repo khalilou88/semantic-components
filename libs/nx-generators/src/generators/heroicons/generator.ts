@@ -50,9 +50,9 @@ function generateIconsComponents(
 
     const svgContent = tree.read(path.join(iconsSourcePath, fileName), 'utf-8');
 
-    const svgClassName = `${names(name).className}Icon`;
-    const svgFileName = `${names(name).fileName}-icon`;
-    const svgSelector = `${names(name).fileName}-icon`;
+    const svgClassName = `Svg${names(name).className}Icon`;
+    const svgFileName = `svg-${names(name).fileName}-icon`;
+    const svgSelector = `svg-${names(name).fileName}-icon`;
 
     exports.push(`export * from './icons/${svgFileName}';`);
 
