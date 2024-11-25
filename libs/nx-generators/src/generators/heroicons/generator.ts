@@ -11,6 +11,12 @@ export async function heroiconsGenerator(tree: Tree, options: HeroiconsGenerator
   const solid16IconsSourcePath = path.join(__dirname, 'files', 'optimized', '16', 'solid');
   const solid16IconsDestinationPath = path.join(iconsDestinationPath, '16', 'solid');
 
+  console.log('here');
+
+  console.log(__dirname);
+
+  console.log(tree.children(solid16IconsSourcePath));
+
   tree.children(solid16IconsSourcePath).forEach((fileName) => {
     console.log(fileName);
 
