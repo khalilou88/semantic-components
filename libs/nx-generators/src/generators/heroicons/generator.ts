@@ -1,4 +1,4 @@
-import { Tree, formatFiles, generateFiles, names } from '@nx/devkit';
+import { Tree, formatFiles, generateFiles, names, workspaceRoot } from '@nx/devkit';
 
 import { HeroiconsGeneratorSchema } from './schema';
 
@@ -6,7 +6,7 @@ import path = require('path');
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function heroiconsGenerator(tree: Tree, options: HeroiconsGeneratorSchema) {
-  const iconsDestinationPath = 'libs/heroicons/src/icons';
+  const iconsDestinationPath = path.join(workspaceRoot, 'libs/heroicons/src/icons');
 
   const solid16IconsSourcePath = path.join(__dirname, 'files', 'optimized', '16', 'solid');
   const solid16IconsDestinationPath = path.join(iconsDestinationPath, '16', 'solid');

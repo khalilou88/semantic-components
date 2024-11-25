@@ -94,7 +94,7 @@ nx generate @nx/plugin:generator libs/nx-generators/src/generators/heroicons
 
 npx nx local-registry
 
-npn nx release publish
+npx nx release 0.0.2-1
 
 npm install --save-dev @semantic-components/nx-generators
 
