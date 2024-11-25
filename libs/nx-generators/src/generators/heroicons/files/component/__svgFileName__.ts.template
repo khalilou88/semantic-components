@@ -6,7 +6,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@a
   standalone: true,
   imports: [NgClass],
   template: `
-    <%= svgContent %>
+    <%- svgContent %>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
