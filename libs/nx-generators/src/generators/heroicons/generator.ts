@@ -49,7 +49,7 @@ function generateIconsComponents(
   tree.children(iconsSourcePath).forEach((fileName) => {
     const name = path.parse(fileName).name;
 
-    const svgContent = readFileSync(path.join(iconsSourcePath, fileName), 'utf-8');
+    const svgContent = readFileSync(path.join(iconsSourcePath, fileName), { encoding: 'utf8' });
 
     const svgClassName = `Svg${names(name).className}Icon`;
     const svgFileName = `svg-${names(name).fileName}-icon`;
