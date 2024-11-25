@@ -96,6 +96,6 @@ npx nx local-registry
 
 npn nx release publish
 
-npm install @semantic-components/nx-generators
+npm install --save-dev @semantic-components/nx-generators
 
 nx generate @semantic-components/nx-generators:heroicons
