@@ -101,7 +101,7 @@ import { RouterModule } from '@angular/router';
             <li>
               <a
                 class="group flex items-center rounded-lg p-2 text-base font-medium text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                href="#"
+                routerLink="/icons"
               >
                 <svg
                   class="size-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
@@ -113,10 +113,11 @@ import { RouterModule } from '@angular/router';
                   <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
                   <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
                 </svg>
-                <span class="ml-3">Overview</span>
+                <span class="ml-3">Heroicons</span>
               </a>
             </li>
-            <li>
+
+            <!--li>
               <button
                 class="group flex w-full items-center rounded-lg p-2 text-base font-medium text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                 type="button"
@@ -177,7 +178,7 @@ import { RouterModule } from '@angular/router';
                   </a>
                 </li>
               </ul>
-            </li>
+            </li-->
 
             <li>
               <cdk-accordion>
