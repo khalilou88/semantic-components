@@ -70,9 +70,9 @@ function generateIconsComponents(
 ) {
   tree.children(solid16IconsSourcePath).forEach((fileName) => {
     const svgContent = tree.read(path.join(solid16IconsSourcePath, fileName), 'utf-8');
-    const svgClassName = `${names(fileName).className}Icon`;
-    const svgFileName = `${names(fileName).fileName}-icon`;
-    const svgSelector = `${names(fileName).fileName}-icon`;
+    const svgClassName = `${names(fileName).className}Icon`; //AcademicCapSvgIcon
+    const svgFileName = `${names(fileName).fileName}-icon`; //academic-cap.svg-icon.ts
+    const svgSelector = `${names(fileName).fileName}-icon`; //academic-cap.svg-icon
 
     const o = { svgContent, svgClassName, svgFileName, svgSelector };
 
@@ -83,6 +83,8 @@ function generateIconsComponents(
       o,
     );
   });
+
+  //export * from './icons/academic-cap.svg-icon';
 }
 
 export default heroiconsGenerator;
