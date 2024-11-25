@@ -1,21 +1,26 @@
-import { Tree, addProjectConfiguration, formatFiles, generateFiles } from '@nx/devkit';
-import * as path from 'path';
+import { Tree, formatFiles, generateFiles } from '@nx/devkit';
 
 import { HeroiconsGeneratorSchema } from './schema';
 
+import path = require('path');
+
 export async function heroiconsGenerator(tree: Tree, options: HeroiconsGeneratorSchema) {
-  // const projectRoot = `libs/${options.name}`;
+  const iconsDestinationPath = 'libs/heroicons/src/icons';
 
-  const iconsFolder = 'libs/heroicons/src/icons';
+  const solid16IconsSourcePath = path.join(__dirname, 'files', 'optimized', '16', 'solid');
+  const solid16IconsDestinationPath = path.join(iconsDestinationPath, '16', 'solid');
 
-  // addProjectConfiguration(tree, options.name, {
-  //   root: projectRoot,
-  //   projectType: 'library',
-  //   sourceRoot: `${projectRoot}/src`,
-  //   targets: {},
-  // });
+  tree.children(solid16IconsSourcePath).forEach((fileName) => {
+    console.log(fileName);
 
-  generateFiles(tree, path.join(__dirname, 'files'), iconsFolder, options);
+    generateFiles(
+      tree,
+      path.join(__dirname, 'files', 'src', 'component'),
+      solid16IconsDestinationPath,
+      options,
+    );
+  });
+
   await formatFiles(tree);
 }
 
