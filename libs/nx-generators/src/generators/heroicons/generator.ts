@@ -4,6 +4,7 @@ import { HeroiconsGeneratorSchema } from './schema';
 
 import path = require('path');
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function heroiconsGenerator(tree: Tree, options: HeroiconsGeneratorSchema) {
   const iconsDestinationPath = 'libs/heroicons/src/icons';
 
@@ -13,11 +14,17 @@ export async function heroiconsGenerator(tree: Tree, options: HeroiconsGenerator
   tree.children(solid16IconsSourcePath).forEach((fileName) => {
     console.log(fileName);
 
+    const svgContent = '';
+    const svgClassName = '';
+    const svgFileName = '';
+
+    const my_options = { svgContent, svgClassName, svgFileName };
+
     generateFiles(
       tree,
       path.join(__dirname, 'files', 'src', 'component'),
       solid16IconsDestinationPath,
-      options,
+      my_options,
     );
   });
 
