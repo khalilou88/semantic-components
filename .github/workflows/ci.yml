@@ -37,6 +37,11 @@ jobs:
       - run: npx playwright install --with-deps
       - uses: nrwl/nx-set-shas@v4
 
+      # TODO fix e2e test
+      - name: Version
+        run: npx nx release version 0.0.0-e2e
+        shell: bash
+
       # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
       # - run: npx nx-cloud record -- echo Hello World
       # Nx Affected runs only tasks affected by the changes in this PR/commit. Learn more: https://nx.dev/ci/features/affected

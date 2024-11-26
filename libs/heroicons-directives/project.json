@@ -2,7 +2,7 @@
   "name": "heroicons-directives",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/heroicons-directives/src",
-  "prefix": "lib",
+  "prefix": "hero",
   "projectType": "library",
   "tags": [],
   "targets": {
