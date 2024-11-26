@@ -38,7 +38,7 @@ jobs:
       - uses: nrwl/nx-set-shas@v4
 
       # TODO fix e2e test
-      - name: Version
+      - name: Version for e2e tests
         run: npx nx release version 0.0.0-e2e
         shell: bash
 

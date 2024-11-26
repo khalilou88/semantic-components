@@ -12,7 +12,7 @@
         "jestConfig": "apps/nx-generators-e2e/jest.config.ts",
         "runInBand": true
       },
-      "dependsOn": ["^build", "^nx-release-publish"]
+      "dependsOn": ["^build"]
     }
   }
 }
