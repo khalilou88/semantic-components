@@ -16,7 +16,7 @@ First, install `@semantic-components/heroicons` from npm:
 npm install @semantic-components/heroicons
 ```
 
-Now each icon can be imported individually as a Angular component:
+Now each icon can be imported individually as an Angular component:
 
 ```js
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
