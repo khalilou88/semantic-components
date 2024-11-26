@@ -1,12 +1,7 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  ViewEncapsulation,
-  input,
-  signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
+
+import { SvgBoldIcon } from '@semantic-components/heroicons/16/solid';
 
 export interface HeroIcon {
   size: 16 | 20 | 24;
@@ -17,7 +12,7 @@ export interface HeroIcon {
 @Component({
   selector: 'app-icon-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, SvgBoldIcon],
   template: `
     <div
       class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800"
@@ -35,9 +30,7 @@ export interface HeroIcon {
             alt=""
           /-->
 
-          @if (iconComponent()) {
-            <ng-container *ngComponentOutlet="iconComponent()" />
-          }
+          <svg-bold-icon class="size-5" />
         </a>
       </div>
       <div class="pt-6">
@@ -267,21 +260,6 @@ export interface HeroIcon {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IconCardComponent implements OnInit {
+export class IconCardComponent {
   icon = input.required<HeroIcon>();
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  iconComponent = signal<any | null>(null);
-
-  iconComponentName = 'SvgBoldIcon';
-
-  ngOnInit(): void {
-    this.getSvgComponent();
-  }
-
-  async getSvgComponent() {
-    import('@semantic-components/heroicons/16/solid').then((m) =>
-      this.iconComponent.set(m['SvgBoldIcon']),
-    );
-  }
 }
