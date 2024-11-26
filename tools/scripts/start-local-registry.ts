@@ -3,6 +3,7 @@
  * It is meant to be called in jest's globalSetup.
  */
 import { startLocalRegistry } from '@nx/js/plugins/jest/local-registry';
+import { execSync } from 'child_process';
 import { releasePublish, releaseVersion } from 'nx/release';
 
 export default async () => {
@@ -27,6 +28,10 @@ export default async () => {
       skipLockFileUpdate: true,
     },
   });
+
+  //TODO build all project before publish
+  execSync(`npx nx run-many -t build`);
+
   await releasePublish({
     tag: 'e2e',
     firstRelease: true,

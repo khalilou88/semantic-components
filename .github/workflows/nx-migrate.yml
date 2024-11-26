@@ -75,11 +75,6 @@ jobs:
           git rm -f migrations.json
           git commit -m "build: remove migrations.json"
 
-      # TODO fix e2e test
-      - name: Version for e2e tests
-        run: npx nx release version 0.0.0-e2e
-        shell: bash
-
       - name: E2E tests
         id: e2e
         if: steps.nx-workspace-outdated.outputs.outdated == 'true'
