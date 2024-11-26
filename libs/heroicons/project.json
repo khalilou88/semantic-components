@@ -2,7 +2,7 @@
   "name": "heroicons",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/heroicons/src",
-  "prefix": "lib",
+  "prefix": "svg",
   "projectType": "library",
   "tags": [],
   "targets": {
