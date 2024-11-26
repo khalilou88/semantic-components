@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@semantic-components/heroicons": ["libs/heroicons/src/index.ts"],
+      "@semantic-components/heroicons-directives": ["libs/heroicons-directives/src/index.ts"],
       "@semantic-components/heroicons/16/solid": ["libs/heroicons/16/solid/src/index.ts"],
       "@semantic-components/heroicons/20/solid": ["libs/heroicons/20/solid/src/index.ts"],
       "@semantic-components/heroicons/24/outline": ["libs/heroicons/24/outline/src/index.ts"],

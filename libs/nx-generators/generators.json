@@ -14,6 +14,11 @@
       "factory": "./src/generators/heroicons-library/generator",
       "schema": "./src/generators/heroicons-library/schema.json",
       "description": "heroicons-library generator"
+    },
+    "heroicons-directives": {
+      "factory": "./src/generators/heroicons-directives/generator",
+      "schema": "./src/generators/heroicons-directives/schema.json",
+      "description": "heroicons-directives generator"
     }
   }
 }

@@ -92,6 +92,9 @@ nx generate @nx/plugin:generator libs/nx-generators/src/generators/heroicons
 
 nx generate @nx/plugin:generator libs/nx-generators/src/generators/heroicons-library
 
+nx g @nx/angular:library libs/heroicons-directives --publishable --import-path=@semantic-components/heroicons-directives
+nx generate @nx/plugin:generator libs/nx-generators/src/generators/heroicons-directives
+
 #Local dev
 
 npx nx local-registry
