@@ -63,7 +63,11 @@ function generateIconsComponents(
   tree.children(iconsSourcePath).forEach((fileName) => {
     const name = path.parse(fileName).name;
 
-    const svgContent = tree.read(path.join(iconsSourcePath, fileName), 'utf-8');
+    const svgContent1 = tree.read(path.join(iconsSourcePath, fileName), 'utf-8');
+
+    const re = /(<svg)/;
+    const svgContent = svgContent1.replace(re, '$1 [ngClass]="class()"');
+
     const svgClassName = `Svg${names(name).className}Icon`;
     const svgFileName = `svg-${names(name).fileName}-icon`;
     const svgSelector = `svg-${names(name).fileName}-icon`;

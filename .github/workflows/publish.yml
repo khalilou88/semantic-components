@@ -35,7 +35,7 @@ jobs:
         shell: bash
 
       - name: Version
-        run: npx nx release version 0.0.11
+        run: npx nx release version 0.0.12
         shell: bash
 
       - name: Publish packages
