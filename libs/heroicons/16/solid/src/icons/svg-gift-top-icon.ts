@@ -22,7 +22,11 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@a
       />
     </svg>
   `,
-  styles: ``,
+  styles: `
+    :host {
+      display: contents;
+    }
+  `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -8,7 +8,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@a
   template: `
     <%- svgContent %>
   `,
-  styles: ``,
+  styles: `:host { display: contents; }`,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
