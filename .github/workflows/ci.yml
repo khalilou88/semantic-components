@@ -37,4 +37,4 @@ jobs:
       - run: npx playwright install --with-deps
       - uses: nrwl/nx-set-shas@v4
 
-      - run: npx nx run-many -t lint test build e2e
+      - run: npx nx run-many -t lint test build e2e --skip-nx-cache
