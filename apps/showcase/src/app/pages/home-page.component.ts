@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { SvgBoldIcon } from '@semantic-components/heroicons/16/solid';
+import { SvgBeakerIcon } from '@semantic-components/heroicons/24/solid';
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [SvgBoldIcon],
+  imports: [SvgBeakerIcon],
   template: `
-    <svg-bold-icon class="size-5" />
+    <svg-beaker-icon class="size-6 text-blue-500" />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,

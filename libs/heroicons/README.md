@@ -1,106 +1,46 @@
-<p align="center">
-  <a href="https://heroicons.com" target="_blank">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/tailwindlabs/heroicons/HEAD/.github/logo-dark.svg">
-      <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/tailwindlabs/heroicons/HEAD/.github/logo-light.svg">
-      <img alt="Heroicons" width="315" height="117" style="max-width: 100%" src="https://raw.githubusercontent.com/tailwindlabs/heroicons/HEAD/.github/logo-light.svg">
-    </picture>
-  </a>
-</p>
+# @semantic-components/heroicons
 
-<p align="center">
-  Beautiful hand-crafted SVG icons, by the makers of Tailwind CSS. <br>Available as basic SVG icons and via first-party <a href="#react">React</a> and <a href="#vue">Vue</a> libraries.
-<p>
+`@semantic-components/heroicons` helps developers to use [heroicons icons](https://heroicons.com) inside [Angular](https://angular.dev) projects.
 
-<p align="center">
-  <a href="https://heroicons.com"><strong>Browse at Heroicons.com &rarr;</strong></a>
-</p>
+## Supported versions
 
-<p align="center">
-    <a href="https://github.com/tailwindlabs/heroicons/releases"><img src="https://img.shields.io/npm/v/heroicons" alt="Latest Release"></a>
-    <a href="https://github.com/tailwindlabs/heroicons/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/heroicons.svg" alt="License"></a>
-</p>
+| @semantic-components/heroicons | Angular | heroicons |
+| ------------------------------ | ------- | --------- |
+| 0.x.x                          | >= 18   | 2.1.5     |
 
-## Basic Usage
+## Usage
 
-The quickest way to use these icons is to simply copy the source for the icon you need from [heroicons.com](https://heroicons.com) and inline it directly into your HTML:
-
-```html
-<svg
-  class="size-6 text-gray-500"
-  fill="none"
-  viewBox="0 0 24 24"
-  stroke="currentColor"
-  stroke-width="2"
->
-  <path
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-  />
-</svg>
-```
-
-Both icon styles are preconfigured to be stylable by setting the `color` CSS property, either manually or using utility classes like `text-gray-500` in a framework like [Tailwind CSS](https://tailwindcss.com).
-
-## React
-
-First, install `@heroicons/react` from npm:
+First, install `@semantic-components/heroicons` from npm:
 
 ```sh
-npm install @heroicons/react
+npm install @semantic-components/heroicons
 ```
 
-Now each icon can be imported individually as a React component:
+Now each icon can be imported individually as a Angular component:
 
 ```js
-import { BeakerIcon } from '@heroicons/react/24/solid'
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-function MyComponent() {
-  return (
-    <div>
-      <BeakerIcon className="size-6 text-blue-500" />
-      <p>...</p>
-    </div>
-  )
-}
+import { SvgBeakerIcon } from '@semantic-components/heroicons/24/solid';
+
+@Component({
+  selector: 'app-home-page',
+  standalone: true,
+  imports: [SvgBeakerIcon],
+  template: `
+    <svg-beaker-icon class="size-6 text-blue-500" />
+  `,
+  styles: ``,
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class HomePageComponent {}
 ```
 
-The 24x24 outline icons can be imported from `@heroicons/react/24/outline`, the 24x24 solid icons can be imported from `@heroicons/react/24/solid`, the 20x20 solid icons can be imported from `@heroicons/react/20/solid`, and 16x16 solid icons can be imported from `@heroicons/react/16/solid`.
+The 24x24 outline icons can be imported from `@semantic-components/heroicons/24/outline`, the 24x24 solid icons can be imported from `@semantic-components/heroicons/24/solid`, the 20x20 solid icons can be imported from `@semantic-components/heroicons/20/solid`, and 16x16 solid icons can be imported from `@semantic-components/heroicons/16/solid`.
 
-Icons use an upper camel case naming convention and are always suffixed with the word `Icon`.
-
-[Browse the full list of icon names on UNPKG &rarr;](https://unpkg.com/browse/@heroicons/react/24/outline/)
-
-## Vue
-
-First, install `@heroicons/vue` from npm:
-
-```sh
-npm install @heroicons/vue
-```
-
-Now each icon can be imported individually as a Vue component:
-
-```vue
-<template>
-  <div>
-    <BeakerIcon class="size-6 text-blue-500" />
-    <p>...</p>
-  </div>
-</template>
-
-<script setup>
-import { BeakerIcon } from '@heroicons/vue/24/solid'
-</script>
-```
-
-The 24x24 outline icons can be imported from `@heroicons/vue/24/outline`, the 24x24 solid icons can be imported from `@heroicons/vue/24/solid`, the 20x20 solid icons can be imported from `@heroicons/vue/20/solid`, and the 16x16 solid icons can be imported from `@heroicons/vue/16/solid`.
-
-Icons use an upper camel case naming convention and are always suffixed with the word `Icon`.
-
-[Browse the full list of icon names on UNPKG &rarr;](https://unpkg.com/browse/@heroicons/vue/24/outline/)
+Icons use the Angular naming convention and are always prefixed with the word `svg` and suffixed with the word `icon`.
 
 ## License
 
-This library is MIT licensed.
+MIT © 2024-2024 Khalil LAGRIDA
