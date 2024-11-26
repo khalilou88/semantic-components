@@ -1,12 +1,12 @@
 # @semantic-components/heroicons
 
-`@semantic-components/heroicons` helps developers to use [heroicons icons](https://heroicons.com) inside [Angular](https://angular.dev) projects.
+`@semantic-components/heroicons` helps developers to use [Heroicons icons](https://heroicons.com) inside [Angular](https://angular.dev) projects.
 
 ## Supported versions
 
 | @semantic-components/heroicons | Angular | heroicons |
 | ------------------------------ | ------- | --------- |
-| 0.x.x                          | >= 18   | 2.1.5     |
+| 0.x.x                          | >= 18   | 2.2.0     |
 
 ## Usage
 
