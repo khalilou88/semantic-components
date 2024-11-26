@@ -23,7 +23,11 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@a
       <path d="M19.5 19.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0Z" />
     </svg>
   `,
-  styles: ``,
+  styles: `
+    :host {
+      display: contents;
+    }
+  `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

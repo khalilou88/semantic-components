@@ -24,7 +24,11 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@a
       <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z" />
     </svg>
   `,
-  styles: ``,
+  styles: `
+    :host {
+      display: contents;
+    }
+  `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

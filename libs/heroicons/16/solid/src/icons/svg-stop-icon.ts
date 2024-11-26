@@ -17,7 +17,11 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@a
       <rect width="10" height="10" x="3" y="3" rx="1.5" />
     </svg>
   `,
-  styles: ``,
+  styles: `
+    :host {
+      display: contents;
+    }
+  `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
