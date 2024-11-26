@@ -35,11 +35,11 @@ jobs:
         shell: bash
 
       - name: Version
-        run: npx nx release version patch
+        run: npx nx build heroicons
         shell: bash
 
       - name: Publish packages
-        run: npx nx release publish
+        run: npx nx release publish --projects=heroicons
         shell: bash
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}

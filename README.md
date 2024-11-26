@@ -110,3 +110,7 @@ nx g @nx/angular:library-secondary-entry-point --library=heroicons --name=solid/
 nx g @nx/angular:library-secondary-entry-point --library=heroicons --name=solid/20
 nx g @nx/angular:library-secondary-entry-point --library=heroicons --name=solid/24
 nx g @nx/angular:library-secondary-entry-point --library=heroicons --name=outline/24
+
+#
+
+nx release version patch --projects=heroicons
