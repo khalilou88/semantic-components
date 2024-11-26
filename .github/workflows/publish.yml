@@ -2,6 +2,13 @@ name: Publish
 
 on:
   workflow_dispatch:
+    inputs:
+      project_option:
+        type: choice
+        description: project to publish
+        options:
+          - nx-generators
+          - heroicons
   push:
     tags:
       - v*.*.*
@@ -35,11 +42,11 @@ jobs:
         shell: bash
 
       - name: Version
-        run: npx nx build heroicons
+        run: npx nx build ${{ github.event.inputs.project_option }}
         shell: bash
 
       - name: Publish packages
-        run: npx nx release publish --projects=heroicons
+        run: npx nx release publish --projects=${{ github.event.inputs.project_option }}
         shell: bash
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}

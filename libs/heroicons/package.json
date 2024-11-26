@@ -1,6 +1,6 @@
 {
   "name": "@semantic-components/heroicons",
-  "version": "0.0.16",
+  "version": "0.0.17-next.1",
   "private": false,
   "publishConfig": {
     "access": "public"
