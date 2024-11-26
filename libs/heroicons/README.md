@@ -4,9 +4,9 @@
 
 ## Supported versions
 
-| @semantic-components/heroicons | Angular | heroicons |
-| ------------------------------ | ------- | --------- |
-| 0.x.x                          | >= 18   | 2.2.0     |
+| @semantic-components/heroicons | Angular   | heroicons |
+| ------------------------------ | --------- | --------- |
+| 0.x.x                          | >= 17.1.0 | 2.2.0     |
 
 ## Usage
 

@@ -9,6 +9,11 @@
       "factory": "./src/generators/heroicons/generator",
       "schema": "./src/generators/heroicons/schema.json",
       "description": "heroicons generator"
+    },
+    "heroicons-library": {
+      "factory": "./src/generators/heroicons-library/generator",
+      "schema": "./src/generators/heroicons-library/schema.json",
+      "description": "heroicons-library generator"
     }
   }
 }
