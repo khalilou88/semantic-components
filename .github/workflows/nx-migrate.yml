@@ -79,7 +79,7 @@ jobs:
         id: e2e
         if: steps.nx-workspace-outdated.outputs.outdated == 'true'
         continue-on-error: true
-        run: npx nx affected -t lint test build e2e
+        run: npx nx affected -t lint test build e2e --parallel=false
         env:
           NX_VERBOSE_LOGGING: 'true'
           GITHUB_ACTIONS: 'true'
