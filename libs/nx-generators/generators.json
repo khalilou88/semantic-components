@@ -4,26 +4,6 @@
       "factory": "./src/generators/ui-library/generator",
       "schema": "./src/generators/ui-library/schema.json",
       "description": "ui-library generator"
-    },
-    "heroicons": {
-      "factory": "./src/generators/heroicons/generator",
-      "schema": "./src/generators/heroicons/schema.json",
-      "description": "heroicons generator"
-    },
-    "heroicons-library": {
-      "factory": "./src/generators/heroicons-library/generator",
-      "schema": "./src/generators/heroicons-library/schema.json",
-      "description": "heroicons-library generator"
-    },
-    "heroicons-directives": {
-      "factory": "./src/generators/heroicons-directives/generator",
-      "schema": "./src/generators/heroicons-directives/schema.json",
-      "description": "heroicons-directives generator"
-    },
-    "tabler-icons": {
-      "factory": "./src/generators/tabler-icons/generator",
-      "schema": "./src/generators/tabler-icons/schema.json",
-      "description": "tabler-icons generator"
     }
   }
 }
