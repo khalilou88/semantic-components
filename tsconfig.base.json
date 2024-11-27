@@ -24,6 +24,8 @@
       "@semantic-components/ngx-schematics": ["libs/ngx-schematics/src/index.ts"],
       "@semantic-components/nx-generators": ["libs/nx-generators/src/index.ts"],
       "@semantic-components/tabler-icons": ["libs/tabler-icons/src/index.ts"],
+      "@semantic-components/tabler-icons/filled": ["libs/tabler-icons/filled/src/index.ts"],
+      "@semantic-components/tabler-icons/outline": ["libs/tabler-icons/outline/src/index.ts"],
       "@semantic-components/ui": ["libs/ui/src/index.ts"]
     }
   },
