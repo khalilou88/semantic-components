@@ -9,6 +9,7 @@ on:
         options:
           - nx-generators
           - heroicons
+          - tabler-icons
   push:
     tags:
       - v*.*.*
