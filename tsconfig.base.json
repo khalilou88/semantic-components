@@ -23,6 +23,7 @@
       "@semantic-components/heroicons/24/solid": ["libs/heroicons/24/solid/src/index.ts"],
       "@semantic-components/ngx-schematics": ["libs/ngx-schematics/src/index.ts"],
       "@semantic-components/nx-generators": ["libs/nx-generators/src/index.ts"],
+      "@semantic-components/tabler-icons": ["libs/tabler-icons/src/index.ts"],
       "@semantic-components/ui": ["libs/ui/src/index.ts"]
     }
   },

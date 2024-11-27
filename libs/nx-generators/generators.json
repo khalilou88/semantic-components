@@ -19,6 +19,11 @@
       "factory": "./src/generators/heroicons-directives/generator",
       "schema": "./src/generators/heroicons-directives/schema.json",
       "description": "heroicons-directives generator"
+    },
+    "tabler-icons": {
+      "factory": "./src/generators/tabler-icons/generator",
+      "schema": "./src/generators/tabler-icons/schema.json",
+      "description": "tabler-icons generator"
     }
   }
 }

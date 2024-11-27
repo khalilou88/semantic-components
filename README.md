@@ -95,6 +95,11 @@ nx generate @nx/plugin:generator libs/nx-generators/src/generators/heroicons-lib
 nx g @nx/angular:library libs/heroicons-directives --publishable --import-path=@semantic-components/heroicons-directives
 nx generate @nx/plugin:generator libs/nx-generators/src/generators/heroicons-directives
 
+nx generate @nx/plugin:generator libs/nx-generators/src/generators/tabler-icons
+nx g @nx/angular:library libs/tabler-icons --publishable --import-path=@semantic-components/tabler-icons
+nx g @nx/angular:library-secondary-entry-point --library=tabler-icons --name=filled
+nx g @nx/angular:library-secondary-entry-point --library=tabler-icons --name=outline
+
 #Local dev
 
 npx nx local-registry
