@@ -123,6 +123,8 @@ nx g @nx/angular:library-secondary-entry-point --library=heroicons --name=outlin
 
 #
 
+nx release version patch --projects=nx-generators
+
 nx release version patch --projects=heroicons
 nx release version 0.0.17-next.1 --projects=heroicons --dry-run
 nx build heroicons
