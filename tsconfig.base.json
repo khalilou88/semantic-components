@@ -17,7 +17,6 @@
     "paths": {
       "@semantic-components/ngx-schematics": ["libs/ngx-schematics/src/index.ts"],
       "@semantic-components/nx-generators": ["libs/nx-generators/src/index.ts"],
-
       "@semantic-components/ui": ["libs/ui/src/index.ts"]
     }
   },

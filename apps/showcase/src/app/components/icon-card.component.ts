@@ -1,8 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
 
-import { SvgBoldIcon } from '@semantic-components/heroicons/16/solid';
-
 export interface HeroIcon {
   size: 16 | 20 | 24;
   type: 'solid' | 'outline';
@@ -12,7 +10,7 @@ export interface HeroIcon {
 @Component({
   selector: 'app-icon-card',
   standalone: true,
-  imports: [CommonModule, SvgBoldIcon],
+  imports: [CommonModule],
   template: `
     <div
       class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800"
@@ -29,8 +27,6 @@ export interface HeroIcon {
             src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/ipad-keyboard-dark.svg"
             alt=""
           /-->
-
-          <svg-bold-icon class="size-5" />
         </a>
       </div>
       <div class="pt-6">
