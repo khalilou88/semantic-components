@@ -13,4 +13,5 @@ updates:
       # Ignore all updates for angular
       - dependency-name: '@angular*'
       - dependency-name: 'ng-packagr'
+      - dependency-name: '@schematics/angular'
       - dependency-name: 'angular-eslint'
