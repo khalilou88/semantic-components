@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { EditorComponent } from '@semantic-components/ui';
+import { ScEditor } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-editor-page',
   standalone: true,
-  imports: [CommonModule, EditorComponent],
+  imports: [CommonModule, ScEditor],
   template: `
     <p>editor-page works!</p>
 
