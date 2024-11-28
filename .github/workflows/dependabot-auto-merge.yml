@@ -31,6 +31,8 @@ jobs:
       - name: Install dependencies
         run: npm i
 
+      - run: npx playwright install --with-deps
+
       - name: Checks
         id: checks
         run: npx nx run-many -t lint test build e2e
