@@ -30,7 +30,7 @@
     "@angular/cli": "~18.2.0",
     "@angular/compiler-cli": "~18.2.0",
     "@angular/language-service": "~18.2.0",
-    "@eslint/js": "^9.8.0",
+    "@eslint/js": "^9.15.0",
     "@nx/angular": "20.1.4",
     "@nx/devkit": "20.1.4",
     "@nx/eslint": "20.1.4",
