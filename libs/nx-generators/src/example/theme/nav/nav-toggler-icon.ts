@@ -1,4 +1,4 @@
-import { ScCommonStyles, ScElementStyles, ScStateStyles } from '../../utils';
+import { ScCommonStyles, ScElementStyles, ScStateStyles } from '../../../utils';
 
 const commonStyles: ScCommonStyles = {
   classes: [],

@@ -1,8 +1,8 @@
 import { ScTheme } from '../../utils';
-import { navStyles } from './nav';
-import { navLinkStyles } from './nav-link';
-import { navTogglerStyles } from './nav-toggler';
-import { navTogglerIconStyles } from './nav-toggler-icon';
+import { navStyles } from './nav/nav';
+import { navLinkStyles } from './nav/nav-link';
+import { navTogglerStyles } from './nav/nav-toggler';
+import { navTogglerIconStyles } from './nav/nav-toggler-icon';
 
 export const theme: ScTheme = {
   colors: {
