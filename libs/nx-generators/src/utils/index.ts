@@ -23,6 +23,8 @@ export interface ScColors {
   info: string;
   light: string;
   dark: string;
+  foreground: string;
+  background: string;
 }
 
 export interface ScFonts {

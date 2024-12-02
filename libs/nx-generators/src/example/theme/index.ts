@@ -14,6 +14,8 @@ export const theme: ScTheme = {
     info: '',
     light: '',
     dark: '',
+    foreground: '',
+    background: '',
   },
   darkModeColors: {
     primary: '',
@@ -24,6 +26,8 @@ export const theme: ScTheme = {
     info: '',
     light: '',
     dark: '',
+    foreground: '',
+    background: '',
   },
   fonts: {
     sans: 'Poppins',
