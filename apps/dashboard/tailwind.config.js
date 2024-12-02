@@ -8,9 +8,7 @@ module.exports = {
     ...createGlobPatternsForDependencies(__dirname),
   ],
   theme: {
-    extend: {
-      'bg-color': 'rgb(var(--bg-color))',
-    },
+    extend: {},
   },
   plugins: [],
   presets: [require('../../tailwind-workspace-preset')],

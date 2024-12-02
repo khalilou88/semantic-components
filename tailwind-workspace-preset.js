@@ -1,6 +1,9 @@
 module.exports = {
   theme: {
     extend: {
+      backgroundColor: {
+        'bg-color': 'rgb(var(--bg-color))',
+      },
       colors: {
         primary: {
           50: '#fff7ed',

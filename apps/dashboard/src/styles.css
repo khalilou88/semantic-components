@@ -10,10 +10,6 @@
   }
 }
 
-:root {
-  --bg-color: 30 41 59;
-}
-
 @layer debug {
   :root {
     --background: hsl(0 0% 100%);
