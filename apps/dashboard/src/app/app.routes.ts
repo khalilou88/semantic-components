@@ -1,3 +1,5 @@
 import { Route } from '@angular/router';
 
-export const appRoutes: Route[] = [];
+import { HomePageComponent } from './home-page/home-page.component';
+
+export const appRoutes: Route[] = [{ path: 'home', component: HomePageComponent }];
