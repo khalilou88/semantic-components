@@ -1,4 +1,4 @@
-import { ScApp, ScIcon, ScIconButton, ScLayout, ScNav, ScPage, ScSection } from '../utils';
+import { ScApp, ScIcon, ScLayout, ScMultipleIconsButton, ScNav, ScPage, ScSection } from '../utils';
 import { theme } from './theme';
 
 const togglerIcon1: ScIcon = {
@@ -13,7 +13,7 @@ const togglerIcon2: ScIcon = {
   library: 'lucide-icons',
 };
 
-const toggler: ScIconButton = {
+const toggler: ScMultipleIconsButton = {
   id: '',
   icons: [
     { state: 'nav-open', icon: togglerIcon1 },

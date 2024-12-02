@@ -47,12 +47,16 @@ export interface ScIconSate {
 }
 
 export interface ScIconButton extends ScButton {
+  icon: ScIcon;
+}
+
+export interface ScMultipleIconsButton extends ScButton {
   icons: ScIconSate[];
 }
 
 export interface ScNav extends ScElement {
   links: NavLink[];
-  toggler: ScIconButton;
+  toggler: ScMultipleIconsButton;
 }
 
 export interface NavLink extends ScElement {
