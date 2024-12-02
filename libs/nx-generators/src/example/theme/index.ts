@@ -15,6 +15,10 @@ export const theme: ScTheme = {
     light: '',
     dark: '',
   },
+  fonts: {
+    sans: 'Poppins',
+    mono: 'Fira Code',
+  },
   styles: [navStyles, navLinkStyles, navTogglerStyles, navTogglerIconStyles],
 };
 

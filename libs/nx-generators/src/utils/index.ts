@@ -25,8 +25,14 @@ export interface ScColors {
   dark: string;
 }
 
+export interface ScFonts {
+  sans: string;
+  mono: string;
+}
+
 export interface ScTheme {
   colors: ScColors;
+  fonts: ScFonts;
   styles: ScElementStyles[];
 }
 
