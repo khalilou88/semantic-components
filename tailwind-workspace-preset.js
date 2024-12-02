@@ -1,8 +1,9 @@
 module.exports = {
+  darkMode: 'selector',
   theme: {
     extend: {
       backgroundColor: {
-        'bg-color': 'rgb(var(--bg-color))',
+        background: 'rgb(var(--background))',
       },
       colors: {
         primary: {
