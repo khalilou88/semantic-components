@@ -14,7 +14,19 @@ export interface ScElementStyles {
   statesStyles: ScStateStyles[];
 }
 
+export interface ScColors {
+  primary: string;
+  secondary: string;
+  success: string;
+  danger: string;
+  warning: string;
+  info: string;
+  light: string;
+  dark: string;
+}
+
 export interface ScTheme {
+  colors: ScColors;
   styles: ScElementStyles[];
 }
 
