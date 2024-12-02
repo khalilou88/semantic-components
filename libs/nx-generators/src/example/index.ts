@@ -1,9 +1,30 @@
-import { ScApp, ScLayout, ScNav, ScPage, ScSection } from '../utils';
+import { ScApp, ScIcon, ScIconButton, ScLayout, ScNav, ScPage, ScSection } from '../utils';
 import { theme } from './theme';
+
+const togglerIcon1: ScIcon = {
+  id: '',
+  name: '',
+  library: 'lucide-icons',
+};
+
+const togglerIcon2: ScIcon = {
+  id: '',
+  name: '',
+  library: 'lucide-icons',
+};
+
+const toggler: ScIconButton = {
+  id: '',
+  icons: [
+    { state: 'nav-open', icon: togglerIcon1 },
+    { state: 'nav-closed', icon: togglerIcon2 },
+  ],
+};
 
 const nav: ScNav = {
   id: 'nav',
   links: [],
+  toggler: toggler,
 };
 
 const layout: ScLayout = {

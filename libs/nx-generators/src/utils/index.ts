@@ -33,8 +33,26 @@ export interface ScSection extends ScElement {
   layout: ScLayout;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type, @typescript-eslint/no-empty-interface
+export interface ScButton extends ScElement {}
+
+export interface ScIcon extends ScElement {
+  name: string;
+  library: 'heroicons' | 'tabler-icons' | 'lucide-icons';
+}
+
+export interface ScIconSate {
+  icon: ScIcon;
+  state: string;
+}
+
+export interface ScIconButton extends ScButton {
+  icons: ScIconSate[];
+}
+
 export interface ScNav extends ScElement {
   links: NavLink[];
+  toggler: ScIconButton;
 }
 
 export interface NavLink extends ScElement {
