@@ -1,4 +1,4 @@
-import { ScCommonStyles, ScElementStyles, ScStateStyles, ScTheme } from '../utils';
+import { ScCommonStyles, ScElementStyles, ScStateStyles } from '../../utils';
 
 const commonStyles: ScCommonStyles = {
   classes: [],
@@ -17,14 +17,8 @@ const navLinkActiveState: ScStateStyles = {
 };
 
 const navLinkStates: ScStateStyles[] = [navLinkDefaultState, navLinkActiveState];
-const navLinkStyles: ScElementStyles = {
+export const navLinkStyles: ScElementStyles = {
   name: 'navLink',
   commonStyles: commonStyles,
   statesStyles: navLinkStates,
 };
-
-export const theme: ScTheme = {
-  styles: [navLinkStyles],
-};
-
-console.log(theme);
