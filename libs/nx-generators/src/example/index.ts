@@ -13,7 +13,7 @@ const layout: ScLayout = {
 };
 
 const heroLayout: ScLayout = {
-  id: 'heroSection',
+  id: 'heroLayout',
   type: 'section',
   elements: [nav],
 };
