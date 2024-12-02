@@ -1,12 +1,17 @@
-export interface ScElementState {
+export interface ScStateStyles {
   name: string;
   lightModeClasses: string[];
   darkModeClasses: string[];
 }
 
+export interface ScCommonStyles {
+  classes: string[];
+}
+
 export interface ScElementStyles {
   name: string;
-  states: ScElementState[];
+  commonStyles: ScCommonStyles;
+  statesStyles: ScStateStyles[];
 }
 
 export interface ScTheme {
