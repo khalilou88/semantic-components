@@ -5,7 +5,17 @@ import { navTogglerStyles } from './nav/nav-toggler';
 import { navTogglerIconStyles } from './nav/nav-toggler-icon';
 
 export const theme: ScTheme = {
-  colors: {
+  lightModeColors: {
+    primary: '',
+    secondary: '',
+    success: '',
+    danger: '',
+    warning: '',
+    info: '',
+    light: '',
+    dark: '',
+  },
+  darkModeColors: {
     primary: '',
     secondary: '',
     success: '',

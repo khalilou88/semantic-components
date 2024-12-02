@@ -31,7 +31,8 @@ export interface ScFonts {
 }
 
 export interface ScTheme {
-  colors: ScColors;
+  lightModeColors: ScColors;
+  darkModeColors: ScColors;
   fonts: ScFonts;
   styles: ScElementStyles[];
 }
