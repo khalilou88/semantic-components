@@ -3,7 +3,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 
 @Component({
   selector: 'sc-time-picker',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <p>time-picker works!</p>

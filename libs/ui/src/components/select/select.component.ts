@@ -37,7 +37,6 @@ export interface CustomSelectEvent {
 
 @Component({
   selector: 'sc-select',
-  standalone: true,
   imports: [CommonModule, PortalModule],
   template: `
     <div class="" [class.required]="required">

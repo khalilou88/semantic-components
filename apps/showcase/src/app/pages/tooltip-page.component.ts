@@ -3,7 +3,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 
 @Component({
   selector: 'app-tooltip-page',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <p>tooltip-page works!</p>

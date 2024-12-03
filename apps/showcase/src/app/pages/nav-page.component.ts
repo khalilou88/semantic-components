@@ -6,7 +6,6 @@ import { NavComponent, SelectComponent, SelectOptionComponent } from '@semantic-
 
 @Component({
   selector: 'app-nav-page',
-  standalone: true,
   imports: [CommonModule, NavComponent, SelectComponent, SelectOptionComponent, FormsModule],
   template: `
     <sc-nav />

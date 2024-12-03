@@ -9,7 +9,6 @@ import {
 
 @Component({
   selector: 'sc-month-year-header',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <div class="mb-2 flex justify-between">

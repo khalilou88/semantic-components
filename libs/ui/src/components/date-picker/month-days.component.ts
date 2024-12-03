@@ -9,7 +9,6 @@ import {
 
 @Component({
   selector: 'sc-month-days',
-  standalone: true,
   imports: [CommonModule, NgClass],
   template: `
     <div class="grid w-64 grid-cols-7">

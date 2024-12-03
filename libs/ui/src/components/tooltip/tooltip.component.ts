@@ -3,7 +3,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 
 @Component({
   selector: 'sc-tooltip',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <p>tooltip works!</p>

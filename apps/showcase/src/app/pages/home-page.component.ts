@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 
 @Component({
   selector: 'app-home-page',
-  standalone: true,
   imports: [],
   template: ``,
   styles: ``,

@@ -9,7 +9,6 @@ export interface HeroIcon {
 
 @Component({
   selector: 'app-icon-card',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <div

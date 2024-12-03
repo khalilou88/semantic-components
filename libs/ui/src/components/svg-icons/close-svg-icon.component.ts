@@ -3,7 +3,6 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
 
 @Component({
   selector: 'sc-close-svg-icon',
-  standalone: true,
   imports: [CommonModule, NgClass],
   template: `
     <svg

@@ -16,7 +16,6 @@ import { WeekDayName, WeekDaysNamesComponent } from './week-days-names.component
 
 @Component({
   selector: 'sc-inline-date-picker',
-  standalone: true,
   imports: [CommonModule, WeekDaysNamesComponent, MonthYearHeaderComponent, MonthDaysComponent],
   template: `
     <div class="inline-block rounded-lg bg-white p-4 shadow-lg dark:bg-gray-700">

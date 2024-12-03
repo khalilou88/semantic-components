@@ -12,7 +12,6 @@ import { HeroIcon, IconCardComponent } from '../components/icon-card.component';
 
 @Component({
   selector: 'app-icons-page',
-  standalone: true,
   imports: [CommonModule, IconCardComponent],
   template: `
     <section class="bg-gray-50 py-8 antialiased md:py-12 dark:bg-gray-900">

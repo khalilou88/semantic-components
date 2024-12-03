@@ -5,7 +5,6 @@ import { ScEditor } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-editor-page',
-  standalone: true,
   imports: [CommonModule, ScEditor],
   template: `
     <p>editor-page works!</p>

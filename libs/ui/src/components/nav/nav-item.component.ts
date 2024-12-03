@@ -3,7 +3,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 
 @Component({
   selector: 'sc-nav-item',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <p>nav-item works!</p>
