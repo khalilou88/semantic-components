@@ -8,6 +8,7 @@ on:
         description: project to publish
         options:
           - nx-generators
+          - ui
 
   push:
     tags:
