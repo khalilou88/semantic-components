@@ -4,12 +4,10 @@ import { DatePickerPageComponent } from './pages/date-picker-page.component';
 import { DropdownPageComponent } from './pages/dropdown-page.component';
 import { EditorPageComponent } from './pages/editor-page.component';
 import { HomePageComponent } from './pages/home-page.component';
-import { IconsPageComponent } from './pages/icons-page.component';
 import { NavPageComponent } from './pages/nav-page.component';
 import { TooltipPageComponent } from './pages/tooltip-page.component';
 
 export const appRoutes: Route[] = [
-  { path: 'icons', component: IconsPageComponent },
   { path: 'home', component: HomePageComponent },
   { path: 'tooltip', component: TooltipPageComponent },
   { path: 'editor', component: EditorPageComponent },
