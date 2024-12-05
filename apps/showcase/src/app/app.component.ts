@@ -98,88 +98,6 @@ import { RouterModule } from '@angular/router';
           </form>
           <ul class="space-y-2">
             <li>
-              <a
-                class="group flex items-center rounded-lg p-2 text-base font-medium text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                routerLink="/icons"
-              >
-                <svg
-                  class="size-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-                  aria-hidden="true"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-                  <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-                </svg>
-                <span class="ml-3">Heroicons</span>
-              </a>
-            </li>
-
-            <!--li>
-              <button
-                class="group flex w-full items-center rounded-lg p-2 text-base font-medium text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                type="button"
-                aria-controls="dropdown-pages"
-                data-collapse-toggle="dropdown-pages"
-              >
-                <svg
-                  class="size-6 shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-                  aria-hidden="true"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-                <span class="ml-3 flex-1 whitespace-nowrap text-left">Pages</span>
-                <svg
-                  class="size-6"
-                  aria-hidden="true"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-              </button>
-              <ul class="hidden space-y-2 py-2" id="dropdown-pages">
-                <li>
-                  <a
-                    class="group flex w-full items-center rounded-lg p-2 pl-11 text-base font-medium text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                    href="#"
-                  >
-                    Settings
-                  </a>
-                </li>
-                <li>
-                  <a
-                    class="group flex w-full items-center rounded-lg p-2 pl-11 text-base font-medium text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                    href="#"
-                  >
-                    Kanban
-                  </a>
-                </li>
-                <li>
-                  <a
-                    class="group flex w-full items-center rounded-lg p-2 pl-11 text-base font-medium text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                    href="#"
-                  >
-                    Calendar
-                  </a>
-                </li>
-              </ul>
-            </li-->
-
-            <li>
               <cdk-accordion>
                 <cdk-accordion-item #item="cdkAccordionItem">
                   <button
@@ -189,17 +107,6 @@ import { RouterModule } from '@angular/router';
                     aria-controls="dropdown-sales"
                     data-collapse-toggle="dropdown-sales"
                   >
-                    <svg
-                      class="size-6 shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-                      aria-hidden="true"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"
-                      ></path>
-                    </svg>
                     <span class="ml-3 flex-1 whitespace-nowrap text-left">Components</span>
                     <svg
                       class="size-6"
@@ -220,6 +127,14 @@ import { RouterModule } from '@angular/router';
                     id="dropdown-sales"
                     [style.display]="item.expanded ? '' : 'none'"
                   >
+                    <li>
+                      <a
+                        class="group flex w-full items-center rounded-lg p-2 pl-11 text-base font-medium text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                        routerLink="/editor"
+                      >
+                        Editor
+                      </a>
+                    </li>
                     <li>
                       <a
                         class="group flex w-full items-center rounded-lg p-2 pl-11 text-base font-medium text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
