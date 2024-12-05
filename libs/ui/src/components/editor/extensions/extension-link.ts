@@ -5,7 +5,7 @@ import { ScEditor } from '../editor';
 import { ScExtensions } from '../extensions';
 
 @Component({
-  selector: 'sc-link-action',
+  selector: 'sc-extension-link',
   imports: [ScTooltip],
   template: `
     <button
@@ -63,13 +63,13 @@ import { ScExtensions } from '../extensions';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LinkActionComponent {
+export class ScExtensionLink {
   private readonly parent = inject(ScEditor, { host: true });
 
-  extensionsService = inject(ScExtensions);
+  extensions = inject(ScExtensions);
 
   constructor() {
-    this.extensionsService.link.set(true);
+    this.extensions.link.set(true);
   }
 
   get editor() {

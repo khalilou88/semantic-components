@@ -5,7 +5,7 @@ import { ScEditor } from '../editor';
 import { ScExtensions } from '../extensions';
 
 @Component({
-  selector: 'sc-text-align-action',
+  selector: 'sc-extension-text-align',
   imports: [ScTooltip],
   template: `
     <button
@@ -90,13 +90,13 @@ import { ScExtensions } from '../extensions';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TextAlignActionComponent {
+export class ScExtensionTextAlignAction {
   private readonly parent = inject(ScEditor, { host: true });
 
-  extensionsService = inject(ScExtensions);
+  extensions = inject(ScExtensions);
 
   constructor() {
-    this.extensionsService.textAlign.set(true);
+    this.extensions.textAlign.set(true);
   }
 
   get editor() {

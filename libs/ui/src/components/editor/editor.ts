@@ -25,6 +25,8 @@ import { ScExtensionColor } from './extensions/extension-color';
 import { ScExtensionFontFamily } from './extensions/extension-font-family';
 import { ScExtensionHighlight } from './extensions/extension-highlight';
 import { ScExtensionImage } from './extensions/extension-image';
+import { ScExtensionLink } from './extensions/extension-link';
+import { ScExtensionTextAlignAction } from './extensions/extension-text-align';
 import { ScExtensionUnderline } from './extensions/extension-underline';
 import { ScExtensionYoutube } from './extensions/extension-youtube';
 import { ScExtensionTextStyle } from './extensions/extention-text-style';
@@ -35,9 +37,7 @@ import { EditorToolbarDividerComponent } from './toolbar/editor-toolbar-divider.
 import { EditorToolbarLineComponent } from './toolbar/editor-toolbar-line.component';
 import { HistoryActionComponent } from './toolbar/history-action.component';
 import { ItalicActionComponent } from './toolbar/italic-action.component';
-import { LinkActionComponent } from './toolbar/link-action.component';
 import { OrderedListActionComponent } from './toolbar/ordered-list-action.component';
-import { TextAlignActionComponent } from './toolbar/text-align-action.component';
 import { TypographyActionComponent } from './toolbar/typography-action.component';
 
 @Component({
@@ -50,12 +50,12 @@ import { TypographyActionComponent } from './toolbar/typography-action.component
     ScExtensionYoutube,
     ScExtensionImage,
     ScExtensionFontFamily,
-    LinkActionComponent,
+    ScExtensionLink,
     ItalicActionComponent,
     BlockquoteActionComponent,
     BulletListActionComponent,
     OrderedListActionComponent,
-    TextAlignActionComponent,
+    ScExtensionTextAlignAction,
     ScExtensionTextStyle,
     TypographyActionComponent,
     HistoryActionComponent,
@@ -74,12 +74,12 @@ import { TypographyActionComponent } from './toolbar/typography-action.component
           <sc-italic-action />
           <sc-extension-underline />
           <sc-extension-highlight />
-          <sc-link-action />
+          <sc-extension-link />
           <sc-extension-text-style />
           <sc-extension-color />
           <sc-extension-font-family />
           <sc-editor-toolbar-divider />
-          <sc-text-align-action />
+          <sc-extension-text-align />
         </sc-editor-toolbar-line>
 
         <sc-editor-toolbar-line>
