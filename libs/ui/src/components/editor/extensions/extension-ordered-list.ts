@@ -5,7 +5,7 @@ import { ScEditor } from '../editor';
 import { ScExtensions } from '../extensions';
 
 @Component({
-  selector: 'sc-ordered-list-action',
+  selector: 'sc-extension-ordered-list',
   imports: [ScTooltip],
   template: `
     <button
@@ -38,13 +38,13 @@ import { ScExtensions } from '../extensions';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OrderedListActionComponent {
+export class ScExtensionOrderedList {
   private readonly parent = inject(ScEditor, { host: true });
 
-  extensionsService = inject(ScExtensions);
+  extensions = inject(ScExtensions);
 
   constructor() {
-    this.extensionsService.orderedList.set(true);
+    this.extensions.orderedList.set(true);
   }
 
   get editor() {
