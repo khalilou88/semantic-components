@@ -20,28 +20,29 @@ import ListItem from '@tiptap/extension-list-item';
 import Paragraph from '@tiptap/extension-paragraph';
 import Text from '@tiptap/extension-text';
 
-import { ScExtensions } from './extensions';
 import { ScExtensionBlockquote } from './extensions/extension-blockquote';
 import { ScExtensionBold } from './extensions/extension-bold';
 import { ScExtensionBulletList } from './extensions/extension-bullet-list';
+import { ScExtensionCode } from './extensions/extension-code';
 import { ScExtensionColor } from './extensions/extension-color';
 import { ScExtensionFontFamily } from './extensions/extension-font-family';
+import { ScExtensionHeading } from './extensions/extension-heading';
 import { ScExtensionHighlight } from './extensions/extension-highlight';
+import { ScExtensionHistory } from './extensions/extension-history';
 import { ScExtensionHorizontalRule } from './extensions/extension-horizontal-rule';
 import { ScExtensionImage } from './extensions/extension-image';
 import { ScExtensionItalic } from './extensions/extension-italic';
 import { ScExtensionLink } from './extensions/extension-link';
 import { ScExtensionOrderedList } from './extensions/extension-ordered-list';
+import { ScExtensionParagraph } from './extensions/extension-paragraph';
 import { ScExtensionStrike } from './extensions/extension-strike';
 import { ScExtensionTextAlignAction } from './extensions/extension-text-align';
 import { ScExtensionUnderline } from './extensions/extension-underline';
 import { ScExtensionYoutube } from './extensions/extension-youtube';
+import { ScExtensions } from './extensions/extensions';
 import { ScExtensionTextStyle } from './extensions/extention-text-style';
 import { EditorToolbarDividerComponent } from './toolbar/editor-toolbar-divider.component';
 import { EditorToolbarLineComponent } from './toolbar/editor-toolbar-line.component';
-import { ScExtensionCode } from './toolbar/extension-code';
-import { HistoryActionComponent } from './toolbar/history-action.component';
-import { TypographyActionComponent } from './toolbar/typography-action.component';
 
 @Component({
   selector: 'sc-editor',
@@ -60,13 +61,14 @@ import { TypographyActionComponent } from './toolbar/typography-action.component
     ScExtensionOrderedList,
     ScExtensionTextAlignAction,
     ScExtensionTextStyle,
-    TypographyActionComponent,
-    HistoryActionComponent,
+    ScExtensionParagraph,
+    ScExtensionHistory,
     EditorToolbarDividerComponent,
     EditorToolbarLineComponent,
     ScExtensionStrike,
     ScExtensionHorizontalRule,
     ScExtensionCode,
+    ScExtensionHeading,
   ],
   template: `
     <div
@@ -74,7 +76,7 @@ import { TypographyActionComponent } from './toolbar/typography-action.component
     >
       <div class="border-b px-3 py-1 dark:border-gray-600">
         <sc-editor-toolbar-line>
-          <sc-history-action />
+          <sc-extension-history />
           <sc-editor-toolbar-divider />
           <sc-extension-bold />
           <sc-extension-italic />
@@ -89,7 +91,8 @@ import { TypographyActionComponent } from './toolbar/typography-action.component
         </sc-editor-toolbar-line>
 
         <sc-editor-toolbar-line>
-          <sc-typography-action />
+          <sc-extension-heading />
+          <sc-extension-paragraph />
           <sc-editor-toolbar-divider />
           <sc-extension-image />
           <sc-extension-youtube />

@@ -3,8 +3,8 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@
 
 import { ScTooltip } from '../../tooltip';
 import { ScEditor } from '../editor';
-import { ScExtensions } from '../extensions';
 import { AddImageDialogComponent, ImageData } from '../toolbar/add-image-dialog.component';
+import { ScExtensions } from './extensions';
 
 @Component({
   selector: 'sc-extension-image',

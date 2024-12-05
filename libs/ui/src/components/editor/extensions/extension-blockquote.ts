@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@
 
 import { ScTooltip } from '../../tooltip';
 import { ScEditor } from '../editor';
-import { ScExtensions } from '../extensions';
+import { ScExtensions } from './extensions';
 
 @Component({
   selector: 'sc-extension-blockquote',

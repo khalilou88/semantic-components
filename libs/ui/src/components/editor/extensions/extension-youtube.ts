@@ -3,8 +3,8 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@
 
 import { ScTooltip } from '../../tooltip';
 import { ScEditor } from '../editor';
-import { ScExtensions } from '../extensions';
 import { AddVideoDialogComponent, VideoData } from '../toolbar/add-video-dialog.component';
+import { ScExtensions } from './extensions';
 
 @Component({
   selector: 'sc-extension-youtube',

@@ -4,10 +4,9 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@
 import { Level } from '@tiptap/extension-heading';
 
 import { ScEditor } from '../editor';
-import { ScExtensions } from '../extensions';
 
 @Component({
-  selector: 'sc-typography-action',
+  selector: 'sc-extension-heading',
   imports: [CdkMenuTrigger, CdkMenu, CdkMenuItem],
   template: `
     <button
@@ -37,33 +36,6 @@ import { ScExtensions } from '../extensions';
     <ng-template #typographyDropdown>
       <div class="z-10 w-72 rounded bg-white p-2 shadow dark:bg-gray-700" cdkMenu>
         <ul class="space-y-1 text-sm font-medium" aria-labelledby="typographyDropdownButton">
-          <li>
-            <button
-              class="flex w-full items-center justify-between rounded px-3 py-2 text-base text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
-              (cdkMenuItemTriggered)="setParagraph()"
-              cdkMenuItem
-              type="button"
-            >
-              Paragraph
-              <div class="space-x-1.5">
-                <kbd
-                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 dark:border-gray-500 dark:bg-gray-600 dark:text-gray-400"
-                >
-                  Cmd
-                </kbd>
-                <kbd
-                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 dark:border-gray-500 dark:bg-gray-600 dark:text-gray-400"
-                >
-                  Alt
-                </kbd>
-                <kbd
-                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 dark:border-gray-500 dark:bg-gray-600 dark:text-gray-400"
-                >
-                  0
-                </kbd>
-              </div>
-            </button>
-          </li>
           <li>
             <button
               class="flex w-full items-center justify-between rounded px-3 py-2 text-base text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
@@ -240,17 +212,11 @@ import { ScExtensions } from '../extensions';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TypographyActionComponent {
+export class ScExtensionHeading {
   private readonly parent = inject(ScEditor, { host: true });
-
-  extensions = inject(ScExtensions);
 
   get editor() {
     return this.parent.editor;
-  }
-
-  setParagraph() {
-    this.editor.chain().focus().setParagraph().run();
   }
 
   setHeadingLevel(level: Level) {
