@@ -1,7 +1,9 @@
+import { Dialog } from '@angular/cdk/dialog';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
 import { ScTooltip } from '../../tooltip';
 import { ScEditor } from '../editor';
+import { LinkData, ScAddLinkDialog } from '../toolbar/add-link-dialog';
 import { ScExtensions } from './extensions';
 
 @Component({
@@ -10,7 +12,7 @@ import { ScExtensions } from './extensions';
   template: `
     <button
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
-      (click)="toggleLink()"
+      (click)="openDialog()"
       type="button"
       scTooltip="Add link"
     >
@@ -65,6 +67,7 @@ import { ScExtensions } from './extensions';
 })
 export class ScExtensionLink {
   private readonly parent = inject(ScEditor, { host: true });
+  dialog = inject(Dialog);
 
   extensions = inject(ScExtensions);
 
@@ -76,11 +79,18 @@ export class ScExtensionLink {
     return this.parent.editor;
   }
 
-  toggleLink() {
-    //TODO
-    //const url = window.prompt('Enter image URL:', 'https://flowbite.com');
-    const url = 'https://flowbite.com';
-    this.editor.chain().focus().toggleLink({ href: url }).run();
+  openDialog() {
+    const dialogRef = this.dialog.open<LinkData>(ScAddLinkDialog, {
+      minWidth: '600px',
+    });
+
+    dialogRef.closed.subscribe((result) => {
+      this.editor
+        .chain()
+        .focus()
+        .toggleLink({ href: result?.url ?? '' })
+        .run();
+    });
   }
 
   removeLink() {
