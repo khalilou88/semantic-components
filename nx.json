@@ -20,7 +20,7 @@
     "projectsRelationship": "independent",
     "version": {
       "generatorOptions": {
-        "packageRoot": "dist/{projectRoot}"
+        "packageRoot": "{projectRoot}"
       }
     }
   },
