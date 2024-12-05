@@ -32,7 +32,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@a
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScTooltipContainer {
-  text = input<string>('');
+  text = input.required<string>();
 
   placement = input<string>('bottom');
 }
