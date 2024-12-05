@@ -9,7 +9,6 @@ export interface WeekDayName {
 
 @Component({
   selector: 'sc-week-days-names',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <div class="mb-1 grid grid-cols-7">

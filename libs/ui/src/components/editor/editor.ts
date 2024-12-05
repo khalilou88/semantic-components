@@ -3,7 +3,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 
 @Component({
   selector: 'sc-editor',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <p>editor works!</p>

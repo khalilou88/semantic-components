@@ -5,7 +5,6 @@ import { DatePickerComponent, InlineDatePickerComponent } from '@semantic-compon
 
 @Component({
   selector: 'app-date-picker-page',
-  standalone: true,
   imports: [CommonModule, DatePickerComponent, InlineDatePickerComponent],
   template: `
     <sc-date-picker />

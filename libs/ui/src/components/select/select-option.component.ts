@@ -9,7 +9,6 @@ import {
 
 @Component({
   selector: 'sc-select-option',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <ng-content></ng-content>

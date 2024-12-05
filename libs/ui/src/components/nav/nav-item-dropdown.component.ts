@@ -3,7 +3,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 
 @Component({
   selector: 'sc-nav-item-dropdown',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <li>

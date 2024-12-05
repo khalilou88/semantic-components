@@ -3,7 +3,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@a
 
 @Component({
   selector: 'sc-tooltip-container',
-  standalone: true,
   imports: [NgClass],
   template: `
     <div

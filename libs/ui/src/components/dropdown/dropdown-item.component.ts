@@ -6,7 +6,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@a
 
 @Component({
   selector: 'sc-dropdown-item',
-  standalone: true,
   imports: [CommonModule, CdkMenuItem],
   template: `
     <li>

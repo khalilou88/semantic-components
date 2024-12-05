@@ -9,7 +9,6 @@ import {
 
 @Component({
   selector: 'app-dropdown-page',
-  standalone: true,
   imports: [CommonModule, DropdownComponent, DropdownItemComponent, DropdownDividerComponent],
   template: `
     <sc-dropdown>

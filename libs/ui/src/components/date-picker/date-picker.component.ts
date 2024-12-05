@@ -23,7 +23,6 @@ import { InlineDatePickerComponent } from './inline-date-picker.component';
 
 @Component({
   selector: 'sc-date-picker',
-  standalone: true,
   imports: [CommonModule, InlineDatePickerComponent],
   template: `
     <div class="relative max-w-sm" #overlayOrigin>

@@ -5,7 +5,6 @@ import { ScTooltip } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-tooltip-page',
-  standalone: true,
   imports: [CommonModule, ScTooltip],
   template: `
     <button

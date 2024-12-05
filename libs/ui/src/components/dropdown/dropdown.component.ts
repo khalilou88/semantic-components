@@ -4,7 +4,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 
 @Component({
   selector: 'sc-dropdown',
-  standalone: true,
   imports: [CommonModule, CdkMenuTrigger, CdkMenu],
   template: `
     <!--ng-content select="dropdown-toggle" /-->
