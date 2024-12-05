@@ -35,4 +35,4 @@ import { ScTooltip } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TooltipPageComponent {}
+export default class TooltipPage {}
