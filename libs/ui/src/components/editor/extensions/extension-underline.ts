@@ -5,7 +5,7 @@ import { ScEditor } from '../editor';
 import { ScExtensions } from '../extensions';
 
 @Component({
-  selector: 'sc-underline-action',
+  selector: 'sc-extension-underline',
   imports: [ScTooltip],
   template: `
     <button
@@ -37,13 +37,13 @@ import { ScExtensions } from '../extensions';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UnderlineActionComponent {
+export class ScExtensionUnderline {
   private readonly parent = inject(ScEditor, { host: true });
 
-  extensionsService = inject(ScExtensions);
+  extensions = inject(ScExtensions);
 
   constructor() {
-    this.extensionsService.underline.set(true);
+    this.extensions.underline.set(true);
   }
 
   get editor() {

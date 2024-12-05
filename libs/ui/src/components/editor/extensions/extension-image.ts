@@ -4,10 +4,10 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@
 import { ScTooltip } from '../../tooltip';
 import { ScEditor } from '../editor';
 import { ScExtensions } from '../extensions';
-import { AddImageDialogComponent, ImageData } from './add-image-dialog.component';
+import { AddImageDialogComponent, ImageData } from '../toolbar/add-image-dialog.component';
 
 @Component({
-  selector: 'sc-image-action',
+  selector: 'sc-extension-image',
   imports: [ScTooltip, DialogModule],
   template: `
     <button
@@ -43,14 +43,14 @@ import { AddImageDialogComponent, ImageData } from './add-image-dialog.component
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ImageActionComponent {
+export class ScExtensionImage {
   private readonly parent = inject(ScEditor, { host: true });
   dialog = inject(Dialog);
 
-  extensionsService = inject(ScExtensions);
+  extensions = inject(ScExtensions);
 
   constructor() {
-    this.extensionsService.image.set(true);
+    this.extensions.image.set(true);
   }
 
   get editor() {

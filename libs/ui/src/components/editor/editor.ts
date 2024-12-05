@@ -24,6 +24,8 @@ import { ScExtensions } from './extensions';
 import { ScExtensionColor } from './extensions/extension-color';
 import { ScExtensionFontFamily } from './extensions/extension-font-family';
 import { ScExtensionHighlight } from './extensions/extension-highlight';
+import { ScExtensionImage } from './extensions/extension-image';
+import { ScExtensionUnderline } from './extensions/extension-underline';
 import { ScExtensionTextStyle } from './extensions/extention-text-style';
 import { BlockquoteActionComponent } from './toolbar/blockquote-action.component';
 import { BoldActionComponent } from './toolbar/bold-action.component';
@@ -31,13 +33,11 @@ import { BulletListActionComponent } from './toolbar/bullet-list-action.componen
 import { EditorToolbarDividerComponent } from './toolbar/editor-toolbar-divider.component';
 import { EditorToolbarLineComponent } from './toolbar/editor-toolbar-line.component';
 import { HistoryActionComponent } from './toolbar/history-action.component';
-import { ImageActionComponent } from './toolbar/image-action.component';
 import { ItalicActionComponent } from './toolbar/italic-action.component';
 import { LinkActionComponent } from './toolbar/link-action.component';
 import { OrderedListActionComponent } from './toolbar/ordered-list-action.component';
 import { TextAlignActionComponent } from './toolbar/text-align-action.component';
 import { TypographyActionComponent } from './toolbar/typography-action.component';
-import { UnderlineActionComponent } from './toolbar/underline-action.component';
 import { YoutubeActionComponent } from './toolbar/youtube-action.component';
 
 @Component({
@@ -46,9 +46,9 @@ import { YoutubeActionComponent } from './toolbar/youtube-action.component';
     ScExtensionHighlight,
     ScExtensionColor,
     BoldActionComponent,
-    UnderlineActionComponent,
+    ScExtensionUnderline,
     YoutubeActionComponent,
-    ImageActionComponent,
+    ScExtensionImage,
     ScExtensionFontFamily,
     LinkActionComponent,
     ItalicActionComponent,
@@ -72,7 +72,7 @@ import { YoutubeActionComponent } from './toolbar/youtube-action.component';
           <sc-editor-toolbar-divider />
           <sc-bold-action />
           <sc-italic-action />
-          <sc-underline-action />
+          <sc-extension-underline />
           <sc-extension-highlight />
           <sc-link-action />
           <sc-extension-text-style />
@@ -85,7 +85,7 @@ import { YoutubeActionComponent } from './toolbar/youtube-action.component';
         <sc-editor-toolbar-line>
           <sc-typography-action />
           <sc-editor-toolbar-divider />
-          <sc-image-action />
+          <sc-extension-image />
           <sc-youtube-action />
           <sc-bullet-list-action />
           <sc-ordered-list-action />
