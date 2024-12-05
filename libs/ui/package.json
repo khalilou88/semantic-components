@@ -10,6 +10,7 @@
     "@angular/core": ">=19.0.0",
     "@angular/cdk": ">=19.0.0",
     "@angular/forms": ">=19.0.0",
+    "@nx/angular": ">=20.0.0",
     "@angular/platform-browser": ">=19.0.0",
     "rxjs": "^7.8.0"
   },
