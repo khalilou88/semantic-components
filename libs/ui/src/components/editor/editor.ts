@@ -36,12 +36,12 @@ import { ScExtensionLink } from './extensions/extension-link';
 import { ScExtensionOrderedList } from './extensions/extension-ordered-list';
 import { ScExtensionParagraph } from './extensions/extension-paragraph';
 import { ScExtensionStrike } from './extensions/extension-strike';
+import { ScExtensionTable } from './extensions/extension-table';
 import { ScExtensionTextAlignAction } from './extensions/extension-text-align';
 import { ScExtensionTextStyle } from './extensions/extension-text-style';
 import { ScExtensionUnderline } from './extensions/extension-underline';
 import { ScExtensionYoutube } from './extensions/extension-youtube';
 import { ScExtensions } from './extensions/extensions';
-import { ScTable } from './table';
 import { ScExtensionsGroup } from './toolbar/extensions-group';
 import { ScExtensionsSeparator } from './toolbar/extensions-separator';
 
@@ -70,7 +70,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
     ScExtensionHorizontalRule,
     ScExtensionCode,
     ScExtensionHeading,
-    ScTable,
+    ScExtensionTable,
   ],
   template: `
     <div
@@ -108,7 +108,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
         </sc-extensions-group>
 
         <sc-extensions-group>
-          <sc-table />
+          <sc-extension-table />
         </sc-extensions-group>
       </div>
 

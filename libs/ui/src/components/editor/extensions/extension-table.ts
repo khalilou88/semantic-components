@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { ScTooltip } from '../tooltip';
-import { ScEditor } from './editor';
-import { ScExtensions } from './extensions/extensions';
-import { ScExtensionsSeparator } from './toolbar/extensions-separator';
+import { ScTooltip } from '../../tooltip';
+import { ScEditor } from '../editor';
+import { ScExtensionsSeparator } from '../toolbar/extensions-separator';
+import { ScExtensions } from './extensions';
 
 @Component({
-  selector: 'sc-table',
+  selector: 'sc-extension-table',
   imports: [ScTooltip, ScExtensionsSeparator],
   template: `
     <button
@@ -64,7 +64,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
 
     <button
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
-      id="addColumnBeforeButton"
+      (click)="addColumnBefore()"
       type="button"
       data-tooltip-target="tooltip-add-column-before"
       scTooltip="Add column before"
@@ -90,7 +90,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
 
     <button
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
-      id="addColumnAfterButton"
+      (click)="addColumnAfter()"
       type="button"
       data-tooltip-target="tooltip-add-column-after"
       scTooltip="Add column after"
@@ -116,7 +116,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
 
     <button
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
-      id="removeColumnButton"
+      (click)="deleteColumn()"
       type="button"
       data-tooltip-target="tooltip-remove-column"
       scTooltip="Remove column"
@@ -144,7 +144,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
 
     <button
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
-      id="addRowBeforeButton"
+      (click)="addRowBefore()"
       type="button"
       data-tooltip-target="tooltip-add-row-before"
       scTooltip="Add row before"
@@ -170,7 +170,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
 
     <button
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
-      id="addRowAfterButton"
+      (click)="addRowAfter()"
       type="button"
       data-tooltip-target="tooltip-add-row-after"
       scTooltip="Add row after"
@@ -196,7 +196,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
 
     <button
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
-      id="removeRowButton"
+      (click)="deleteRow()"
       type="button"
       data-tooltip-target="tooltip-remove-row"
       scTooltip="Remove row"
@@ -222,7 +222,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
 
     <button
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
-      id="mergeCellsButton"
+      (click)="mergeCells()"
       type="button"
       data-tooltip-target="tooltip-merge-cells"
       scTooltip="Merge cells"
@@ -248,7 +248,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
 
     <button
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
-      id="splitCellsButton"
+      (click)="splitCell()"
       type="button"
       data-tooltip-target="tooltip-split-cells"
       scTooltip="Split cells"
@@ -274,7 +274,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
 
     <button
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
-      id="mergeOrSplitButton"
+      (click)="mergeOrSplit()"
       type="button"
       data-tooltip-target="tooltip-merge-or-split"
       scTooltip="Merge or split"
@@ -302,7 +302,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
 
     <button
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
-      id="toggleHeaderColumnButton"
+      (click)="toggleHeaderColumn()"
       type="button"
       data-tooltip-target="tooltip-toggle-header-column"
       scTooltip="Toggle header column"
@@ -328,7 +328,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
 
     <button
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
-      id="toggleHeaderRowButton"
+      (click)="toggleHeaderRow()"
       type="button"
       data-tooltip-target="tooltip-toggle-header-row"
       scTooltip="Toggle header row"
@@ -354,7 +354,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
 
     <button
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
-      id="toggleHeaderCellButton"
+      (click)="toggleHeaderCell()"
       type="button"
       data-tooltip-target="tooltip-toggle-header-cell"
       scTooltip="Toggle header cell"
@@ -380,10 +380,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
 
     <button
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
-      data-modal-toggle="cell-attribute-modal"
-      data-modal-target="cell-attribute-modal"
       type="button"
-      data-tooltip-target="tooltip-add-cell-attribute"
       scTooltip="Add cell attribute"
     >
       <svg
@@ -409,7 +406,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
 
     <button
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
-      id="fixTablesButton"
+      (click)="fixTables()"
       type="button"
       data-tooltip-target="tooltip-fix-tables"
       scTooltip="Fix tables"
@@ -435,9 +432,8 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
 
     <button
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
-      id="previousCellButton"
+      (click)="goToPreviousCell()"
       type="button"
-      data-tooltip-target="tooltip-previous-cell"
       scTooltip="Previous cell"
     >
       <svg
@@ -461,7 +457,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
 
     <button
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
-      id="nextCellButton"
+      (click)="goToNextCell()"
       type="button"
       data-tooltip-target="tooltip-next-cell"
       scTooltip="Next cell"
@@ -489,7 +485,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScTable {
+export class ScExtensionTable {
   private readonly parent = inject(ScEditor, { host: true });
 
   extensions = inject(ScExtensions);
@@ -508,5 +504,65 @@ export class ScTable {
 
   deleteTable() {
     this.editor.chain().focus().deleteTable().run();
+  }
+
+  addColumnBefore() {
+    this.editor.chain().focus().addColumnBefore().run();
+  }
+
+  addColumnAfter() {
+    this.editor.chain().focus().addColumnAfter().run();
+  }
+
+  deleteColumn() {
+    this.editor.chain().focus().deleteColumn().run();
+  }
+
+  addRowBefore() {
+    this.editor.chain().focus().addRowBefore().run();
+  }
+
+  addRowAfter() {
+    this.editor.chain().focus().addRowAfter().run();
+  }
+
+  deleteRow() {
+    this.editor.chain().focus().deleteRow().run();
+  }
+
+  mergeCells() {
+    this.editor.chain().focus().mergeCells().run();
+  }
+
+  splitCell() {
+    this.editor.chain().focus().splitCell().run();
+  }
+
+  mergeOrSplit() {
+    this.editor.chain().focus().mergeOrSplit().run();
+  }
+
+  toggleHeaderColumn() {
+    this.editor.chain().focus().toggleHeaderColumn().run();
+  }
+
+  toggleHeaderRow() {
+    this.editor.chain().focus().toggleHeaderRow().run();
+  }
+
+  toggleHeaderCell() {
+    this.editor.chain().focus().toggleHeaderCell().run();
+  }
+
+  fixTables() {
+    this.editor.commands.fixTables();
+  }
+
+  goToPreviousCell() {
+    this.editor.chain().focus().goToPreviousCell().run();
+  }
+
+  goToNextCell() {
+    this.editor.chain().focus().goToNextCell().run();
   }
 }
