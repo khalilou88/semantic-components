@@ -21,12 +21,12 @@ import Paragraph from '@tiptap/extension-paragraph';
 import Text from '@tiptap/extension-text';
 
 import { ScExtensions } from './extensions';
+import { ScExtensionColor } from './extensions/extension-color';
 import { ScExtensionHighlight } from './extensions/extension-highlight';
 import { ScExtensionTextStyle } from './extensions/extention-text-style';
 import { BlockquoteActionComponent } from './toolbar/blockquote-action.component';
 import { BoldActionComponent } from './toolbar/bold-action.component';
 import { BulletListActionComponent } from './toolbar/bullet-list-action.component';
-import { ColorActionComponent } from './toolbar/color-action.component';
 import { EditorToolbarDividerComponent } from './toolbar/editor-toolbar-divider.component';
 import { EditorToolbarLineComponent } from './toolbar/editor-toolbar-line.component';
 import { FontFamilyActionComponent } from './toolbar/font-family-action.component';
@@ -44,7 +44,7 @@ import { YoutubeActionComponent } from './toolbar/youtube-action.component';
   selector: 'sc-editor',
   imports: [
     ScExtensionHighlight,
-    ColorActionComponent,
+    ScExtensionColor,
     BoldActionComponent,
     UnderlineActionComponent,
     YoutubeActionComponent,
@@ -76,7 +76,7 @@ import { YoutubeActionComponent } from './toolbar/youtube-action.component';
           <sc-extension-highlight />
           <sc-link-action />
           <sc-extension-text-style />
-          <sc-color-action />
+          <sc-extension-color />
           <sc-font-family-action />
           <sc-editor-toolbar-divider />
           <sc-text-align-action />
