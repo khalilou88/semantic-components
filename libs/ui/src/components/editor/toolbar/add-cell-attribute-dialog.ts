@@ -12,7 +12,7 @@ export interface AttributeData {
   imports: [ReactiveFormsModule],
   template: `
     <div
-      class="fixed left-0 right-0 top-0 z-50 h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden md:inset-0"
+      class="fixed inset-x-0 top-0 z-50 h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden md:inset-0"
       id="cell-attribute-modal"
       tabindex="-1"
     >
@@ -25,13 +25,13 @@ export interface AttributeData {
           >
             <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Add cell attribute</h3>
             <button
-              class="end-2.5 ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+              class="end-2.5 ms-auto inline-flex size-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
               (click)="dialogRef.close()"
               type="button"
               data-modal-hide="cell-attribute-modal"
             >
               <svg
-                class="h-3 w-3"
+                class="size-3"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
