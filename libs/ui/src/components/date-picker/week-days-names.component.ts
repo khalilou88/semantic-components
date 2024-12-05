@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
 
 export interface WeekDayName {
@@ -9,7 +8,7 @@ export interface WeekDayName {
 
 @Component({
   selector: 'sc-week-days-names',
-  imports: [CommonModule],
+  imports: [],
   template: `
     <div class="mb-1 grid grid-cols-7">
       @for (weekDayName of weekDaysNames(); track weekDayName.long) {

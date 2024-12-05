@@ -1,10 +1,9 @@
 import { CdkMenu, CdkMenuTrigger } from '@angular/cdk/menu';
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'sc-dropdown',
-  imports: [CommonModule, CdkMenuTrigger, CdkMenu],
+  imports: [CdkMenuTrigger, CdkMenu],
   template: `
     <!--ng-content select="dropdown-toggle" /-->
 

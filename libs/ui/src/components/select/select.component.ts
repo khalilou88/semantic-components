@@ -1,6 +1,6 @@
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { CdkPortal, PortalModule } from '@angular/cdk/portal';
-import { CommonModule } from '@angular/common';
+import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -37,7 +37,7 @@ export interface CustomSelectEvent {
 
 @Component({
   selector: 'sc-select',
-  imports: [CommonModule, PortalModule],
+  imports: [PortalModule, NgClass],
   template: `
     <div class="" [class.required]="required">
       @if (label.length > 0) {

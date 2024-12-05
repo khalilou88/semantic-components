@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -16,7 +15,7 @@ import { WeekDayName, WeekDaysNamesComponent } from './week-days-names.component
 
 @Component({
   selector: 'sc-inline-date-picker',
-  imports: [CommonModule, WeekDaysNamesComponent, MonthYearHeaderComponent, MonthDaysComponent],
+  imports: [WeekDaysNamesComponent, MonthYearHeaderComponent, MonthDaysComponent],
   template: `
     <div class="inline-block rounded-lg bg-white p-4 shadow-lg dark:bg-gray-700">
       <div class="bg-white px-2 py-3 text-center font-semibold dark:bg-gray-700 dark:text-white">

@@ -115,6 +115,16 @@
       "viewEncapsulation": "None",
       "changeDetection": "OnPush",
       "path": "libs/ui/src/components"
+    },
+    "@schematics/angular:component": {
+      "type": "",
+      "style": "css",
+      "skipTests": true,
+      "inlineStyle": true,
+      "inlineTemplate": true,
+      "flat": true,
+      "viewEncapsulation": "None",
+      "changeDetection": "OnPush"
     }
   }
 }

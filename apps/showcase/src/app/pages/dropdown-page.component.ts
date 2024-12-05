@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import {
@@ -9,7 +8,7 @@ import {
 
 @Component({
   selector: 'app-dropdown-page',
-  imports: [CommonModule, DropdownComponent, DropdownItemComponent, DropdownDividerComponent],
+  imports: [DropdownComponent, DropdownItemComponent, DropdownDividerComponent],
   template: `
     <sc-dropdown>
       <ng-container ngProjectAs="dropdown-items">

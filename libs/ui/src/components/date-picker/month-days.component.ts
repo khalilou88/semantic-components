@@ -9,7 +9,7 @@ import {
 
 @Component({
   selector: 'sc-month-days',
-  imports: [CommonModule, NgClass],
+  imports: [NgClass],
   template: `
     <div class="grid w-64 grid-cols-7">
       @for (day of days(); track $index; let index = $index) {

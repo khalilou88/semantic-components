@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -9,7 +8,7 @@ import {
 
 @Component({
   selector: 'sc-select-option',
-  imports: [CommonModule],
+  imports: [],
   template: `
     <ng-content></ng-content>
   `,

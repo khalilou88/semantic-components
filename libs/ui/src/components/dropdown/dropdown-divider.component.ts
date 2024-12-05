@@ -1,9 +1,8 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'sc-dropdown-divider',
-  imports: [CommonModule],
+  imports: [],
   template: `
     <li class="py-2"><hr /></li>
   `,

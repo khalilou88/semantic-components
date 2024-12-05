@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -9,7 +8,7 @@ import {
 
 @Component({
   selector: 'sc-month-year-header',
-  imports: [CommonModule],
+  imports: [],
   template: `
     <div class="mb-2 flex justify-between">
       <button

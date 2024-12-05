@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -6,7 +5,7 @@ import { NavComponent, SelectComponent, SelectOptionComponent } from '@semantic-
 
 @Component({
   selector: 'app-nav-page',
-  imports: [CommonModule, NavComponent, SelectComponent, SelectOptionComponent, FormsModule],
+  imports: [NavComponent, SelectComponent, SelectOptionComponent, FormsModule],
   template: `
     <sc-nav />
 

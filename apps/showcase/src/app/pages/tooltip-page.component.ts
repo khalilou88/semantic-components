@@ -1,11 +1,10 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import { ScTooltip } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-tooltip-page',
-  imports: [CommonModule, ScTooltip],
+  imports: [ScTooltip],
   template: `
     <button
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"

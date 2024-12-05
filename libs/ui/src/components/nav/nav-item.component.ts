@@ -1,9 +1,8 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'sc-nav-item',
-  imports: [CommonModule],
+  imports: [],
   template: `
     <p>nav-item works!</p>
   `,

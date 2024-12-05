@@ -1,9 +1,8 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'sc-time-picker',
-  imports: [CommonModule],
+  imports: [],
   template: `
     <p>time-picker works!</p>
   `,

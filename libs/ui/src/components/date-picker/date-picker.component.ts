@@ -2,7 +2,6 @@ import { Directionality } from '@angular/cdk/bidi';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { _getEventTarget } from '@angular/cdk/platform';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -23,7 +22,7 @@ import { InlineDatePickerComponent } from './inline-date-picker.component';
 
 @Component({
   selector: 'sc-date-picker',
-  imports: [CommonModule, InlineDatePickerComponent],
+  imports: [],
   template: `
     <div class="relative max-w-sm" #overlayOrigin>
       <button class="absolute inset-y-0 end-0 flex items-center pe-3.5" (click)="open()">
