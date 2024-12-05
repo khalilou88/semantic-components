@@ -39,6 +39,7 @@ import { ScExtensionYoutube } from './extensions/extension-youtube';
 import { ScExtensionTextStyle } from './extensions/extention-text-style';
 import { EditorToolbarDividerComponent } from './toolbar/editor-toolbar-divider.component';
 import { EditorToolbarLineComponent } from './toolbar/editor-toolbar-line.component';
+import { ScExtensionCode } from './toolbar/extension-code';
 import { HistoryActionComponent } from './toolbar/history-action.component';
 import { TypographyActionComponent } from './toolbar/typography-action.component';
 
@@ -65,6 +66,7 @@ import { TypographyActionComponent } from './toolbar/typography-action.component
     EditorToolbarLineComponent,
     ScExtensionStrike,
     ScExtensionHorizontalRule,
+    ScExtensionCode,
   ],
   template: `
     <div
@@ -97,6 +99,7 @@ import { TypographyActionComponent } from './toolbar/typography-action.component
           <sc-editor-toolbar-divider />
           <sc-extension-strike />
           <sc-extension-horizontal-rule />
+          <sc-extension-code />
         </sc-editor-toolbar-line>
       </div>
 
