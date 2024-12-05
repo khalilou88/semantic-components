@@ -16,7 +16,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Editor } from '@tiptap/core';
 import Document from '@tiptap/extension-document';
 import Heading from '@tiptap/extension-heading';
-import ListItem from '@tiptap/extension-list-item';
 import Paragraph from '@tiptap/extension-paragraph';
 import Text from '@tiptap/extension-text';
 
@@ -164,7 +163,6 @@ export class ScEditor implements ControlValueAccessor {
     extensions.push(Heading);
     extensions.push(Paragraph);
     extensions.push(Text);
-    extensions.push(ListItem);
 
     if (this.extensions.highlight()) {
       const Highlight = (await import('@tiptap/extension-highlight')).Highlight;
@@ -213,6 +211,11 @@ export class ScEditor implements ControlValueAccessor {
           types: ['heading', 'paragraph'],
         }),
       );
+    }
+
+    if (this.extensions.bulletList() || this.extensions.orderedList()) {
+      const ListItem = (await import('@tiptap/extension-list-item')).ListItem;
+      extensions.push(ListItem);
     }
 
     if (this.extensions.bulletList()) {
