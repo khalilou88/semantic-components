@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'sc-editor-toolbar-line',
+  selector: 'sc-extensions-separator',
   imports: [],
   template: `
-    <div class="flex flex-wrap items-center gap-1 py-1">
-      <ng-content />
+    <div class="px-1">
+      <span class="block h-4 w-px bg-gray-300 dark:bg-gray-600"></span>
     </div>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EditorToolbarLineComponent {}
+export class ScExtensionsSeparator {}

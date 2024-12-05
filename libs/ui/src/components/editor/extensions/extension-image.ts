@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@
 
 import { ScTooltip } from '../../tooltip';
 import { ScEditor } from '../editor';
-import { AddImageDialogComponent, ImageData } from '../toolbar/add-image-dialog.component';
+import { ImageData, ScAddImageDialog } from '../toolbar/add-image-dialog';
 import { ScExtensions } from './extensions';
 
 @Component({
@@ -72,7 +72,7 @@ export class ScExtensionImage {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open<ImageData>(AddImageDialogComponent, {
+    const dialogRef = this.dialog.open<ImageData>(ScAddImageDialog, {
       minWidth: '600px',
     });
 

@@ -41,8 +41,8 @@ import { ScExtensionUnderline } from './extensions/extension-underline';
 import { ScExtensionYoutube } from './extensions/extension-youtube';
 import { ScExtensions } from './extensions/extensions';
 import { ScExtensionTextStyle } from './extensions/extention-text-style';
-import { EditorToolbarDividerComponent } from './toolbar/editor-toolbar-divider.component';
-import { EditorToolbarLineComponent } from './toolbar/editor-toolbar-line.component';
+import { ScExtensionsGroup } from './toolbar/extensions-group';
+import { ScExtensionsSeparator } from './toolbar/extensions-separator';
 
 @Component({
   selector: 'sc-editor',
@@ -63,8 +63,8 @@ import { EditorToolbarLineComponent } from './toolbar/editor-toolbar-line.compon
     ScExtensionTextStyle,
     ScExtensionParagraph,
     ScExtensionHistory,
-    EditorToolbarDividerComponent,
-    EditorToolbarLineComponent,
+    ScExtensionsSeparator,
+    ScExtensionsGroup,
     ScExtensionStrike,
     ScExtensionHorizontalRule,
     ScExtensionCode,
@@ -75,9 +75,9 @@ import { EditorToolbarLineComponent } from './toolbar/editor-toolbar-line.compon
       class="w-full rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-600 dark:bg-gray-700"
     >
       <div class="border-b px-3 py-1 dark:border-gray-600">
-        <sc-editor-toolbar-line>
+        <sc-extensions-group>
           <sc-extension-history />
-          <sc-editor-toolbar-divider />
+          <sc-extensions-separator />
           <sc-extension-bold />
           <sc-extension-italic />
           <sc-extension-underline />
@@ -86,24 +86,24 @@ import { EditorToolbarLineComponent } from './toolbar/editor-toolbar-line.compon
           <sc-extension-text-style />
           <sc-extension-color />
           <sc-extension-font-family />
-          <sc-editor-toolbar-divider />
+          <sc-extensions-separator />
           <sc-extension-text-align />
-        </sc-editor-toolbar-line>
+        </sc-extensions-group>
 
-        <sc-editor-toolbar-line>
+        <sc-extensions-group>
           <sc-extension-heading />
           <sc-extension-paragraph />
-          <sc-editor-toolbar-divider />
+          <sc-extensions-separator />
           <sc-extension-image />
           <sc-extension-youtube />
           <sc-extension-bullet-list />
           <sc-extension-ordered-list />
           <sc-extension-blockquote />
-          <sc-editor-toolbar-divider />
+          <sc-extensions-separator />
           <sc-extension-strike />
           <sc-extension-horizontal-rule />
           <sc-extension-code />
-        </sc-editor-toolbar-line>
+        </sc-extensions-group>
       </div>
 
       <div class="rounded-b-lg bg-white px-4 py-2 dark:bg-gray-800">

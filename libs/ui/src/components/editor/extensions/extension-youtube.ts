@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@
 
 import { ScTooltip } from '../../tooltip';
 import { ScEditor } from '../editor';
-import { AddVideoDialogComponent, VideoData } from '../toolbar/add-video-dialog.component';
+import { ScAddVideoDialog, VideoData } from '../toolbar/add-video-dialog';
 import { ScExtensions } from './extensions';
 
 @Component({
@@ -63,7 +63,7 @@ export class ScExtensionYoutube {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open<VideoData>(AddVideoDialogComponent, {
+    const dialogRef = this.dialog.open<VideoData>(ScAddVideoDialog, {
       minWidth: '600px',
     });
 
