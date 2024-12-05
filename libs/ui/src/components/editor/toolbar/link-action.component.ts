@@ -12,7 +12,7 @@ import { ExtensionsService } from '../extensions.service';
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
       (click)="toggleLink()"
       type="button"
-      smaTooltip="Add link"
+      scTooltip="Add link"
     >
       <svg
         class="size-5"
@@ -38,7 +38,7 @@ import { ExtensionsService } from '../extensions.service';
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
       (click)="removeLink()"
       type="button"
-      smaTooltip="Remove link"
+      scTooltip="Remove link"
     >
       <svg
         class="size-5"

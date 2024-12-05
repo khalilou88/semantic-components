@@ -14,7 +14,7 @@ import { AddImageDialogComponent, ImageData } from './add-image-dialog.component
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
       (click)="openDialog()"
       type="button"
-      smaTooltip="Add image"
+      scTooltip="Add image"
     >
       <svg
         class="size-5"

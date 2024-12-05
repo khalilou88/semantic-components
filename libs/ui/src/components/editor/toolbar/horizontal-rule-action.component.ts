@@ -12,7 +12,7 @@ import { ExtensionsService } from '../extensions.service';
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
       (click)="setHorizontalRule()"
       type="button"
-      smaTooltip="Toggle Horizontal Rule"
+      scTooltip="Toggle Horizontal Rule"
     >
       <svg
         class="size-5"

@@ -12,7 +12,7 @@ import { ExtensionsService } from '../extensions.service';
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
       (click)="setLeftAlign()"
       type="button"
-      smaTooltip="Align left"
+      scTooltip="Align left"
     >
       <svg
         class="size-5"
@@ -38,7 +38,7 @@ import { ExtensionsService } from '../extensions.service';
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
       (click)="setCenterAlign()"
       type="button"
-      smaTooltip="Align center"
+      scTooltip="Align center"
     >
       <svg
         class="size-5"
@@ -64,7 +64,7 @@ import { ExtensionsService } from '../extensions.service';
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
       (click)="setRightAlignButton()"
       type="button"
-      smaTooltip="Align right"
+      scTooltip="Align right"
     >
       <svg
         class="size-5"

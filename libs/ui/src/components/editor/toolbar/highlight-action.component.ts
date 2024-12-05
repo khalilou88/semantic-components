@@ -11,7 +11,7 @@ import { ExtensionsService } from '../extensions.service';
     <button
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
       (click)="toggleHighlight()"
-      smaTooltip="Toggle highlight"
+      scTooltip="Toggle highlight"
       type="button"
     >
       <svg
