@@ -37,7 +37,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
 
     <button
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
-      id="deleteTableButton"
+      (click)="deleteTable()"
       type="button"
       scTooltip="Delete table"
     >
@@ -504,5 +504,9 @@ export class ScTable {
 
   insertTable() {
     this.editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run();
+  }
+
+  deleteTable() {
+    this.editor.chain().focus().deleteTable().run();
   }
 }
