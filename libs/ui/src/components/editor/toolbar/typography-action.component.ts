@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@
 import { Level } from '@tiptap/extension-heading';
 
 import { ScEditor } from '../editor';
-import { ExtensionsService } from '../extensions.service';
+import { ScExtensions } from '../extensions';
 
 @Component({
   selector: 'sc-typography-action',
@@ -243,7 +243,7 @@ import { ExtensionsService } from '../extensions.service';
 export class TypographyActionComponent {
   private readonly parent = inject(ScEditor, { host: true });
 
-  extensionsService = inject(ExtensionsService);
+  extensionsService = inject(ScExtensions);
 
   get editor() {
     return this.parent.editor;

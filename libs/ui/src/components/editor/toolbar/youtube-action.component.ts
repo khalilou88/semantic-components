@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@
 
 import { ScTooltip } from '../../tooltip';
 import { ScEditor } from '../editor';
-import { ExtensionsService } from '../extensions.service';
+import { ScExtensions } from '../extensions';
 import { AddVideoDialogComponent, VideoData } from './add-video-dialog.component';
 
 @Component({
@@ -42,7 +42,7 @@ export class YoutubeActionComponent {
   private readonly parent = inject(ScEditor, { host: true });
   dialog = inject(Dialog);
 
-  extensionsService = inject(ExtensionsService);
+  extensionsService = inject(ScExtensions);
 
   constructor() {
     this.extensionsService.youtube.set(true);

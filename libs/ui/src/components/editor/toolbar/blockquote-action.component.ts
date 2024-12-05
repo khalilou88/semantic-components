@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@
 
 import { ScTooltip } from '../../tooltip';
 import { ScEditor } from '../editor';
-import { ExtensionsService } from '../extensions.service';
+import { ScExtensions } from '../extensions';
 
 @Component({
   selector: 'sc-blockquote-action',
@@ -39,7 +39,7 @@ import { ExtensionsService } from '../extensions.service';
 export class BlockquoteActionComponent {
   private readonly parent = inject(ScEditor, { host: true });
 
-  extensionsService = inject(ExtensionsService);
+  extensionsService = inject(ScExtensions);
 
   constructor() {
     this.extensionsService.blockquote.set(true);

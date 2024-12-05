@@ -3,7 +3,7 @@ import { Injectable, signal } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class ExtensionsService {
+export class ScExtensions {
   highlight = signal<boolean>(false);
   color = signal<boolean>(false);
   underline = signal<boolean>(false);

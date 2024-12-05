@@ -3,10 +3,10 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@
 
 import { ScTooltip } from '../../tooltip';
 import { ScEditor } from '../editor';
-import { ExtensionsService } from '../extensions.service';
+import { ScExtensions } from '../extensions';
 
 @Component({
-  selector: 'sc-text-style-action',
+  selector: 'sc-extension-text-style',
   imports: [CdkMenuTrigger, CdkMenu, CdkMenuItem, ScTooltip],
   template: `
     <button
@@ -116,13 +116,13 @@ import { ExtensionsService } from '../extensions.service';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TextStyleActionComponent {
+export class ScExtensionTextStyle {
   private readonly parent = inject(ScEditor, { host: true });
 
-  extensionsService = inject(ExtensionsService);
+  extensions = inject(ScExtensions);
 
   constructor() {
-    this.extensionsService.textStyle.set(true);
+    this.extensions.textStyle.set(true);
   }
 
   get editor() {

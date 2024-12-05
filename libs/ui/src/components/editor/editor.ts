@@ -20,7 +20,8 @@ import ListItem from '@tiptap/extension-list-item';
 import Paragraph from '@tiptap/extension-paragraph';
 import Text from '@tiptap/extension-text';
 
-import { ExtensionsService } from './extensions.service';
+import { ScExtensions } from './extensions';
+import { ScExtensionTextStyle } from './extensions/extention-text-style';
 import { BlockquoteActionComponent } from './toolbar/blockquote-action.component';
 import { BoldActionComponent } from './toolbar/bold-action.component';
 import { BulletListActionComponent } from './toolbar/bullet-list-action.component';
@@ -35,7 +36,6 @@ import { ItalicActionComponent } from './toolbar/italic-action.component';
 import { LinkActionComponent } from './toolbar/link-action.component';
 import { OrderedListActionComponent } from './toolbar/ordered-list-action.component';
 import { TextAlignActionComponent } from './toolbar/text-align-action.component';
-import { TextStyleActionComponent } from './toolbar/text-style-action.component';
 import { TypographyActionComponent } from './toolbar/typography-action.component';
 import { UnderlineActionComponent } from './toolbar/underline-action.component';
 import { YoutubeActionComponent } from './toolbar/youtube-action.component';
@@ -56,7 +56,7 @@ import { YoutubeActionComponent } from './toolbar/youtube-action.component';
     BulletListActionComponent,
     OrderedListActionComponent,
     TextAlignActionComponent,
-    TextStyleActionComponent,
+    ScExtensionTextStyle,
     TypographyActionComponent,
     HistoryActionComponent,
     EditorToolbarDividerComponent,
@@ -75,7 +75,7 @@ import { YoutubeActionComponent } from './toolbar/youtube-action.component';
           <sc-underline-action />
           <sc-highlight-action />
           <sc-link-action />
-          <sc-text-style-action />
+          <sc-extension-text-style />
           <sc-color-action />
           <sc-font-family-action />
           <sc-editor-toolbar-divider />
@@ -131,7 +131,7 @@ export class ScEditor implements ControlValueAccessor {
 
   editor!: Editor;
 
-  extensionsService = inject(ExtensionsService);
+  extensionsService = inject(ScExtensions);
 
   constructor() {
     afterNextRender(() => {
