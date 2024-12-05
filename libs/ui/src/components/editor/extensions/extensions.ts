@@ -22,4 +22,6 @@ export class ScExtensions {
   horizontalRule = signal<boolean>(false);
   textStyle = signal<boolean>(false);
   history = signal<boolean>(false);
+
+  table = signal<boolean>(false);
 }

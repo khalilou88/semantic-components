@@ -1,6 +1,8 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
 import { ScTooltip } from '../tooltip';
+import { ScEditor } from './editor';
+import { ScExtensions } from './extensions/extensions';
 import { ScExtensionsSeparator } from './toolbar/extensions-separator';
 
 @Component({
@@ -9,9 +11,8 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
   template: `
     <button
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
-      id="addTableButton"
+      (click)="insertTable()"
       type="button"
-      data-tooltip-target="tooltip-table"
       scTooltip="Add table"
     >
       <svg
@@ -488,4 +489,20 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScTable {}
+export class ScTable {
+  private readonly parent = inject(ScEditor, { host: true });
+
+  extensions = inject(ScExtensions);
+
+  constructor() {
+    this.extensions.table.set(true);
+  }
+
+  get editor() {
+    return this.parent.editor;
+  }
+
+  insertTable() {
+    this.editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run();
+  }
+}

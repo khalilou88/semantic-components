@@ -260,6 +260,25 @@ export class ScEditor implements ControlValueAccessor {
       extensions.push(History);
     }
 
+    if (this.extensions.table()) {
+      const TableHeader = (await import('@tiptap/extension-table-header')).TableHeader;
+      extensions.push(TableHeader);
+
+      const TableRow = (await import('@tiptap/extension-table-row')).TableRow;
+      extensions.push(TableRow);
+
+      const TableCell = (await import('@tiptap/extension-table-cell')).TableCell;
+      extensions.push(TableCell);
+
+      const Table = (await import('@tiptap/extension-table')).Table;
+
+      extensions.push(
+        Table.configure({
+          resizable: true,
+        }),
+      );
+    }
+
     this.editor = new Editor({
       element: this.editorDiv().nativeElement,
       extensions: extensions,
