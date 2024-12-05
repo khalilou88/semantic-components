@@ -12,7 +12,7 @@ import { ScEditor } from '../editor';
       [cdkMenuTriggerFor]="typographyDropdown"
       type="button"
     >
-      Format
+      Paragraph
       <svg
         class="-me-0.5 ms-1.5 size-3.5"
         aria-hidden="true"
