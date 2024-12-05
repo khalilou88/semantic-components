@@ -2,7 +2,6 @@
   "name": "@semantic-components/ngx-schematics",
   "version": "0.3.0",
   "peerDependencies": {
-    "@angular/common": ">=19.0.0",
     "@angular/core": ">=19.0.0"
   },
   "sideEffects": false,
