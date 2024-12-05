@@ -5,7 +5,7 @@ import { ScEditor } from '../editor';
 import { ScExtensions } from '../extensions';
 
 @Component({
-  selector: 'sc-horizontal-rule-action',
+  selector: 'sc-extension-horizontal-rule',
   imports: [ScTooltip],
   template: `
     <button
@@ -37,7 +37,7 @@ import { ScExtensions } from '../extensions';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HorizontalRuleActionComponent {
+export class ScExtensionHorizontalRule {
   private readonly parent = inject(ScEditor, { host: true });
 
   extensions = inject(ScExtensions);

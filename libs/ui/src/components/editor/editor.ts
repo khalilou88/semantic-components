@@ -26,6 +26,7 @@ import { ScExtensionBulletList } from './extensions/extension-bullet-list';
 import { ScExtensionColor } from './extensions/extension-color';
 import { ScExtensionFontFamily } from './extensions/extension-font-family';
 import { ScExtensionHighlight } from './extensions/extension-highlight';
+import { ScExtensionHorizontalRule } from './extensions/extension-horizontal-rule';
 import { ScExtensionImage } from './extensions/extension-image';
 import { ScExtensionItalic } from './extensions/extension-italic';
 import { ScExtensionLink } from './extensions/extension-link';
@@ -63,6 +64,7 @@ import { TypographyActionComponent } from './toolbar/typography-action.component
     EditorToolbarDividerComponent,
     EditorToolbarLineComponent,
     ScExtensionStrike,
+    ScExtensionHorizontalRule,
   ],
   template: `
     <div
@@ -94,6 +96,7 @@ import { TypographyActionComponent } from './toolbar/typography-action.component
           <sc-blockquote-action />
           <sc-editor-toolbar-divider />
           <sc-extension-strike />
+          <sc-extension-horizontal-rule />
         </sc-editor-toolbar-line>
       </div>
 
