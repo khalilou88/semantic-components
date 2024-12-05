@@ -5,7 +5,7 @@ import { ScEditor } from '../editor';
 import { ScExtensions } from '../extensions';
 
 @Component({
-  selector: 'sc-bullet-list-action',
+  selector: 'sc-extension-bullet-list',
   imports: [ScTooltip],
   template: `
     <button
@@ -37,13 +37,13 @@ import { ScExtensions } from '../extensions';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BulletListActionComponent {
+export class ScExtensionBulletList {
   private readonly parent = inject(ScEditor, { host: true });
 
-  extensionsService = inject(ScExtensions);
+  extensions = inject(ScExtensions);
 
   constructor() {
-    this.extensionsService.bulletList.set(true);
+    this.extensions.bulletList.set(true);
   }
 
   get editor() {
