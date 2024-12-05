@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@
 
 import { Level } from '@tiptap/extension-heading';
 
+import { ScEditor } from '../editor';
 import { ExtensionsService } from '../extensions.service';
 
 @Component({
