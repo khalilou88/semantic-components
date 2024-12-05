@@ -243,7 +243,7 @@ import { ScExtensions } from '../extensions';
 export class TypographyActionComponent {
   private readonly parent = inject(ScEditor, { host: true });
 
-  extensionsService = inject(ScExtensions);
+  extensions = inject(ScExtensions);
 
   get editor() {
     return this.parent.editor;

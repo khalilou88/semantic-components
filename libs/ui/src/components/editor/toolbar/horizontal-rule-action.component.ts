@@ -40,10 +40,10 @@ import { ScExtensions } from '../extensions';
 export class HorizontalRuleActionComponent {
   private readonly parent = inject(ScEditor, { host: true });
 
-  extensionsService = inject(ScExtensions);
+  extensions = inject(ScExtensions);
 
   constructor() {
-    this.extensionsService.horizontalRule.set(true);
+    this.extensions.horizontalRule.set(true);
   }
 
   get editor() {

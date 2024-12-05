@@ -41,10 +41,10 @@ import { ScExtensions } from '../extensions';
 export class BoldActionComponent {
   private readonly parent = inject(ScEditor, { host: true });
 
-  extensionsService = inject(ScExtensions);
+  extensions = inject(ScExtensions);
 
   constructor() {
-    this.extensionsService.bold.set(true);
+    this.extensions.bold.set(true);
   }
 
   get editor() {

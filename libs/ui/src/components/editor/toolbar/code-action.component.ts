@@ -41,10 +41,10 @@ import { ScExtensions } from '../extensions';
 export class CodeActionComponent {
   private readonly parent = inject(ScEditor, { host: true });
 
-  extensionsService = inject(ScExtensions);
+  extensions = inject(ScExtensions);
 
   constructor() {
-    this.extensionsService.code.set(true);
+    this.extensions.code.set(true);
   }
 
   get editor() {

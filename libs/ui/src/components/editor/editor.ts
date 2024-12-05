@@ -26,6 +26,7 @@ import { ScExtensionColor } from './extensions/extension-color';
 import { ScExtensionFontFamily } from './extensions/extension-font-family';
 import { ScExtensionHighlight } from './extensions/extension-highlight';
 import { ScExtensionImage } from './extensions/extension-image';
+import { ScExtensionItalic } from './extensions/extension-italic';
 import { ScExtensionLink } from './extensions/extension-link';
 import { ScExtensionOrderedList } from './extensions/extension-ordered-list';
 import { ScExtensionStrike } from './extensions/extension-strike';
@@ -38,7 +39,6 @@ import { BoldActionComponent } from './toolbar/bold-action.component';
 import { EditorToolbarDividerComponent } from './toolbar/editor-toolbar-divider.component';
 import { EditorToolbarLineComponent } from './toolbar/editor-toolbar-line.component';
 import { HistoryActionComponent } from './toolbar/history-action.component';
-import { ItalicActionComponent } from './toolbar/italic-action.component';
 import { TypographyActionComponent } from './toolbar/typography-action.component';
 
 @Component({
@@ -52,7 +52,7 @@ import { TypographyActionComponent } from './toolbar/typography-action.component
     ScExtensionImage,
     ScExtensionFontFamily,
     ScExtensionLink,
-    ItalicActionComponent,
+    ScExtensionItalic,
     BlockquoteActionComponent,
     ScExtensionBulletList,
     ScExtensionOrderedList,
@@ -73,7 +73,7 @@ import { TypographyActionComponent } from './toolbar/typography-action.component
           <sc-history-action />
           <sc-editor-toolbar-divider />
           <sc-bold-action />
-          <sc-italic-action />
+          <sc-extension-italic />
           <sc-extension-underline />
           <sc-extension-highlight />
           <sc-extension-link />

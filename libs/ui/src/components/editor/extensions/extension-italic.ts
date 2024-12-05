@@ -5,7 +5,7 @@ import { ScEditor } from '../editor';
 import { ScExtensions } from '../extensions';
 
 @Component({
-  selector: 'sc-italic-action',
+  selector: 'sc-extension-italic',
   imports: [ScTooltip],
   template: `
     <button
@@ -38,13 +38,13 @@ import { ScExtensions } from '../extensions';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ItalicActionComponent {
+export class ScExtensionItalic {
   private readonly parent = inject(ScEditor, { host: true });
 
-  extensionsService = inject(ScExtensions);
+  extensions = inject(ScExtensions);
 
   constructor() {
-    this.extensionsService.italic.set(true);
+    this.extensions.italic.set(true);
   }
 
   get editor() {

@@ -67,10 +67,10 @@ import { ScExtensions } from '../extensions';
 export class HistoryActionComponent {
   private readonly parent = inject(ScEditor, { host: true });
 
-  extensionsService = inject(ScExtensions);
+  extensions = inject(ScExtensions);
 
   constructor() {
-    this.extensionsService.history.set(true);
+    this.extensions.history.set(true);
   }
 
   get editor() {

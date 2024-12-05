@@ -39,10 +39,10 @@ import { ScExtensions } from '../extensions';
 export class BlockquoteActionComponent {
   private readonly parent = inject(ScEditor, { host: true });
 
-  extensionsService = inject(ScExtensions);
+  extensions = inject(ScExtensions);
 
   constructor() {
-    this.extensionsService.blockquote.set(true);
+    this.extensions.blockquote.set(true);
   }
 
   get editor() {
