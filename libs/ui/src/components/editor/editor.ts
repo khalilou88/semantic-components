@@ -1,14 +1,283 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  ViewEncapsulation,
+  afterNextRender,
+  forwardRef,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+
+import { Editor } from '@tiptap/core';
+import Document from '@tiptap/extension-document';
+import Heading from '@tiptap/extension-heading';
+import ListItem from '@tiptap/extension-list-item';
+import Paragraph from '@tiptap/extension-paragraph';
+import Text from '@tiptap/extension-text';
+
+import { ExtensionsService } from './extensions.service';
+import { BlockquoteActionComponent } from './toolbar/blockquote-action.component';
+import { BoldActionComponent } from './toolbar/bold-action.component';
+import { BulletListActionComponent } from './toolbar/bullet-list-action.component';
+import { ColorActionComponent } from './toolbar/color-action.component';
+import { EditorToolbarDividerComponent } from './toolbar/editor-toolbar-divider.component';
+import { EditorToolbarLineComponent } from './toolbar/editor-toolbar-line.component';
+import { FontFamilyActionComponent } from './toolbar/font-family-action.component';
+import { HighlightActionComponent } from './toolbar/highlight-action.component';
+import { HistoryActionComponent } from './toolbar/history-action.component';
+import { ImageActionComponent } from './toolbar/image-action.component';
+import { ItalicActionComponent } from './toolbar/italic-action.component';
+import { LinkActionComponent } from './toolbar/link-action.component';
+import { OrderedListActionComponent } from './toolbar/ordered-list-action.component';
+import { TextAlignActionComponent } from './toolbar/text-align-action.component';
+import { TextStyleActionComponent } from './toolbar/text-style-action.component';
+import { TypographyActionComponent } from './toolbar/typography-action.component';
+import { UnderlineActionComponent } from './toolbar/underline-action.component';
+import { YoutubeActionComponent } from './toolbar/youtube-action.component';
 
 @Component({
   selector: 'sc-editor',
-  imports: [CommonModule],
+  imports: [
+    HighlightActionComponent,
+    ColorActionComponent,
+    BoldActionComponent,
+    UnderlineActionComponent,
+    YoutubeActionComponent,
+    ImageActionComponent,
+    FontFamilyActionComponent,
+    LinkActionComponent,
+    ItalicActionComponent,
+    BlockquoteActionComponent,
+    BulletListActionComponent,
+    OrderedListActionComponent,
+    TextAlignActionComponent,
+    TextStyleActionComponent,
+    TypographyActionComponent,
+    HistoryActionComponent,
+    EditorToolbarDividerComponent,
+    EditorToolbarLineComponent,
+  ],
   template: `
-    <p>editor works!</p>
+    <div
+      class="w-full rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-600 dark:bg-gray-700"
+    >
+      <div class="border-b px-3 py-1 dark:border-gray-600">
+        <sc-editor-toolbar-line>
+          <sc-history-action />
+          <sc-editor-toolbar-divider />
+          <sc-bold-action />
+          <sc-italic-action />
+          <sc-underline-action />
+          <sc-highlight-action />
+          <sc-link-action />
+          <sc-text-style-action />
+          <sc-color-action />
+          <sc-font-family-action />
+          <sc-editor-toolbar-divider />
+          <sc-text-align-action />
+        </sc-editor-toolbar-line>
+
+        <sc-editor-toolbar-line>
+          <sc-typography-action />
+          <sc-editor-toolbar-divider />
+          <sc-image-action />
+          <sc-youtube-action />
+          <sc-bullet-list-action />
+          <sc-ordered-list-action />
+          <sc-blockquote-action />
+        </sc-editor-toolbar-line>
+      </div>
+
+      <div class="rounded-b-lg bg-white px-4 py-2 dark:bg-gray-800">
+        <label class="sr-only" for="wysiwyg-example">Publish post</label>
+        <div
+          class="block w-full border-0 bg-white px-0 text-sm text-gray-800 focus:ring-0 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-400"
+          #editorDiv
+        ></div>
+      </div>
+    </div>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => ScEditor),
+      multi: true,
+    },
+  ],
 })
-export class ScEditor {}
+export class ScEditor implements ControlValueAccessor {
+  private readonly _cdr = inject(ChangeDetectorRef);
+
+  readonly editorDiv = viewChild.required<ElementRef>('editorDiv');
+
+  _value = signal('');
+
+  _isEditable = signal(true);
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  _onChange: (value: string) => void = () => {};
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  _onTouched: () => void = () => {};
+
+  editor!: Editor;
+
+  extensionsService = inject(ExtensionsService);
+
+  constructor() {
+    afterNextRender(() => {
+      this.createEditor();
+    });
+  }
+
+  async createEditor() {
+    const extensions = [];
+    extensions.push(Document);
+    extensions.push(Heading);
+    extensions.push(Paragraph);
+    extensions.push(Text);
+    extensions.push(ListItem);
+
+    if (this.extensionsService.highlight()) {
+      const TextStyle = (await import('@tiptap/extension-text-style')).TextStyle;
+      extensions.push(TextStyle);
+    }
+
+    if (this.extensionsService.highlight()) {
+      const Highlight = (await import('@tiptap/extension-highlight')).Highlight;
+      extensions.push(Highlight);
+    }
+
+    if (this.extensionsService.color()) {
+      const Color = (await import('@tiptap/extension-color')).Color;
+      extensions.push(Color);
+    }
+
+    if (this.extensionsService.fontFamily()) {
+      const FontFamily = (await import('@tiptap/extension-font-family')).FontFamily;
+      extensions.push(FontFamily);
+    }
+
+    if (this.extensionsService.underline()) {
+      const Underline = (await import('@tiptap/extension-underline')).Underline;
+      extensions.push(Underline);
+    }
+
+    if (this.extensionsService.image()) {
+      const Image = (await import('@tiptap/extension-image')).Image;
+      extensions.push(Image);
+    }
+
+    if (this.extensionsService.youtube()) {
+      const Youtube = (await import('@tiptap/extension-youtube')).Youtube;
+      extensions.push(Youtube);
+    }
+
+    if (this.extensionsService.link()) {
+      const Link = (await import('@tiptap/extension-link')).Link;
+      extensions.push(Link);
+    }
+
+    if (this.extensionsService.textAlign()) {
+      const TextAlign = (await import('@tiptap/extension-text-align')).TextAlign;
+      extensions.push(
+        TextAlign.configure({
+          types: ['heading', 'paragraph'],
+        }),
+      );
+    }
+
+    if (this.extensionsService.bulletList()) {
+      const BulletList = (await import('@tiptap/extension-bullet-list')).BulletList;
+      extensions.push(BulletList);
+    }
+
+    if (this.extensionsService.orderedList()) {
+      const OrderedList = (await import('@tiptap/extension-ordered-list')).OrderedList;
+      extensions.push(OrderedList);
+    }
+
+    if (this.extensionsService.strike()) {
+      const Strike = (await import('@tiptap/extension-strike')).Strike;
+      extensions.push(Strike);
+    }
+
+    if (this.extensionsService.italic()) {
+      const Italic = (await import('@tiptap/extension-italic')).Italic;
+      extensions.push(Italic);
+    }
+
+    if (this.extensionsService.bold()) {
+      const Bold = (await import('@tiptap/extension-bold')).Bold;
+      extensions.push(Bold);
+    }
+
+    if (this.extensionsService.horizontalRule()) {
+      const HorizontalRule = (await import('@tiptap/extension-horizontal-rule')).HorizontalRule;
+      extensions.push(HorizontalRule);
+    }
+
+    if (this.extensionsService.blockquote()) {
+      const Blockquote = (await import('@tiptap/extension-blockquote')).Blockquote;
+      extensions.push(Blockquote);
+    }
+
+    if (this.extensionsService.code()) {
+      const Code = (await import('@tiptap/extension-code')).Code;
+      extensions.push(Code);
+    }
+
+    if (this.extensionsService.history()) {
+      const History = (await import('@tiptap/extension-history')).History;
+      extensions.push(History);
+    }
+
+    this.editor = new Editor({
+      element: this.editorDiv().nativeElement,
+      extensions: extensions,
+      content: this._value(),
+      editable: this._isEditable(),
+      editorProps: {
+        attributes: {
+          class: 'prose lg:prose-lg dark:prose-invert focus:outline-none prose-blue max-w-none',
+        },
+      },
+    });
+
+    this.editor.on('update', ({ editor }) => {
+      this.setHtmlContent(editor.getHTML());
+    });
+
+    this.editor.on('blur', () => {
+      this._onTouched();
+    });
+  }
+
+  writeValue(value: string): void {
+    this._value.set(value);
+  }
+
+  registerOnChange(fn: (value: string) => void): void {
+    this._onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this._onTouched = fn;
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+    this._isEditable.set(!isDisabled);
+  }
+
+  setHtmlContent(htmlContent: string) {
+    this._value.set(htmlContent);
+    this._onChange(htmlContent);
+    this._cdr.markForCheck();
+  }
+}
