@@ -21,6 +21,7 @@ import Paragraph from '@tiptap/extension-paragraph';
 import Text from '@tiptap/extension-text';
 
 import { ScExtensions } from './extensions';
+import { ScExtensionHighlight } from './extensions/extension-highlight';
 import { ScExtensionTextStyle } from './extensions/extention-text-style';
 import { BlockquoteActionComponent } from './toolbar/blockquote-action.component';
 import { BoldActionComponent } from './toolbar/bold-action.component';
@@ -29,7 +30,6 @@ import { ColorActionComponent } from './toolbar/color-action.component';
 import { EditorToolbarDividerComponent } from './toolbar/editor-toolbar-divider.component';
 import { EditorToolbarLineComponent } from './toolbar/editor-toolbar-line.component';
 import { FontFamilyActionComponent } from './toolbar/font-family-action.component';
-import { HighlightActionComponent } from './toolbar/highlight-action.component';
 import { HistoryActionComponent } from './toolbar/history-action.component';
 import { ImageActionComponent } from './toolbar/image-action.component';
 import { ItalicActionComponent } from './toolbar/italic-action.component';
@@ -43,7 +43,7 @@ import { YoutubeActionComponent } from './toolbar/youtube-action.component';
 @Component({
   selector: 'sc-editor',
   imports: [
-    HighlightActionComponent,
+    ScExtensionHighlight,
     ColorActionComponent,
     BoldActionComponent,
     UnderlineActionComponent,
@@ -73,7 +73,7 @@ import { YoutubeActionComponent } from './toolbar/youtube-action.component';
           <sc-bold-action />
           <sc-italic-action />
           <sc-underline-action />
-          <sc-highlight-action />
+          <sc-extension-highlight />
           <sc-link-action />
           <sc-extension-text-style />
           <sc-color-action />
@@ -147,14 +147,14 @@ export class ScEditor implements ControlValueAccessor {
     extensions.push(Text);
     extensions.push(ListItem);
 
-    if (this.extensions.textStyle()) {
-      const TextStyle = (await import('@tiptap/extension-text-style')).TextStyle;
-      extensions.push(TextStyle);
-    }
-
     if (this.extensions.highlight()) {
       const Highlight = (await import('@tiptap/extension-highlight')).Highlight;
       extensions.push(Highlight);
+    }
+
+    if (this.extensions.textStyle()) {
+      const TextStyle = (await import('@tiptap/extension-text-style')).TextStyle;
+      extensions.push(TextStyle);
     }
 
     if (this.extensions.color()) {
