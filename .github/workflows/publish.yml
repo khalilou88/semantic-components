@@ -1,54 +1,51 @@
 name: Publish
 
 on:
+  # Run manually using the GitHub UI
   workflow_dispatch:
     inputs:
-      project_option:
-        type: choice
-        description: project to publish
-        options:
-          - nx-generators
-          - ui
+      version:
+        description: 'Version to publish'
+        required: false
+        default: ''
 
-  push:
-    tags:
-      - v*.*.*
+  # ...or whenever a GitHub release gets created
+  release:
+    types: [published]
 
 jobs:
-  test:
-    name: Publish
+  publish:
+    name: Publish to npm
     runs-on: ubuntu-latest
     permissions:
       contents: read
       id-token: write # needed for provenance data generation
-    timeout-minutes: 10
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 0 # need to fetch all the tags
 
-      - name: Install Node
+      - name: Use Node.js v20
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          registry-url: https://registry.npmjs.org/
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
-        shell: bash
+        # run: npm ci
+        run: npm i
 
-      - name: Print Environment Info
-        run: npx nx report
-        shell: bash
+      - name: Apply updated version to packages
+        run: |
+          # Use the version from the workflow input if it's set, otherwise
+          VERSION=${{ github.event.inputs.version || github.ref_name }}
+          npx nx release version --specifier $VERSION
 
-      - name: Build project
-        run: npx nx build ${{ github.event.inputs.project_option }}
-        shell: bash
-
-      - name: Publish packages
-        run: npx nx release publish --projects=${{ github.event.inputs.project_option }}
-        shell: bash
+      - name: Publish
+        run: |
+          npx nx release publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
