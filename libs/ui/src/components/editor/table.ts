@@ -16,7 +16,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
       scTooltip="Add table"
     >
       <svg
-        class="h-5 w-5"
+        class="size-5"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -42,7 +42,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
       scTooltip="Delete table"
     >
       <svg
-        class="h-5 w-5"
+        class="size-5"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
@@ -70,7 +70,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
       scTooltip="Add column before"
     >
       <svg
-        class="h-5 w-5"
+        class="size-5"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
@@ -96,7 +96,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
       scTooltip="Add column after"
     >
       <svg
-        class="h-5 w-5"
+        class="size-5"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
@@ -122,7 +122,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
       scTooltip="Remove column"
     >
       <svg
-        class="h-5 w-5"
+        class="size-5"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
@@ -150,7 +150,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
       scTooltip="Add row before"
     >
       <svg
-        class="h-5 w-5"
+        class="size-5"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
@@ -176,7 +176,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
       scTooltip="Add row after"
     >
       <svg
-        class="h-5 w-5"
+        class="size-5"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
@@ -202,7 +202,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
       scTooltip="Remove row"
     >
       <svg
-        class="h-5 w-5"
+        class="size-5"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
@@ -228,7 +228,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
       scTooltip="Merge cells"
     >
       <svg
-        class="h-5 w-5"
+        class="size-5"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
@@ -254,7 +254,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
       scTooltip="Split cells"
     >
       <svg
-        class="h-5 w-5"
+        class="size-5"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
@@ -280,7 +280,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
       scTooltip="Merge or split"
     >
       <svg
-        class="h-5 w-5"
+        class="size-5"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
@@ -308,7 +308,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
       scTooltip="Toggle header column"
     >
       <svg
-        class="h-5 w-5"
+        class="size-5"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
@@ -334,7 +334,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
       scTooltip="Toggle header row"
     >
       <svg
-        class="h-5 w-5"
+        class="size-5"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
@@ -360,7 +360,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
       scTooltip="Toggle header cell"
     >
       <svg
-        class="h-5 w-5"
+        class="size-5"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
@@ -387,7 +387,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
       scTooltip="Add cell attribute"
     >
       <svg
-        class="h-5 w-5"
+        class="size-5"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
@@ -415,7 +415,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
       scTooltip="Fix tables"
     >
       <svg
-        class="h-5 w-5"
+        class="size-5"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
@@ -441,7 +441,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
       scTooltip="Previous cell"
     >
       <svg
-        class="h-5 w-5"
+        class="size-5"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
@@ -467,7 +467,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
       scTooltip="Next cell"
     >
       <svg
-        class="h-5 w-5"
+        class="size-5"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
