@@ -1,7 +1,9 @@
+import { Dialog } from '@angular/cdk/dialog';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
 import { ScTooltip } from '../../tooltip';
 import { ScEditor } from '../editor';
+import { AttributeData, ScAddCellAttributeDialog } from '../toolbar/add-cell-attribute-dialog';
 import { ScExtensionsSeparator } from '../toolbar/extensions-separator';
 import { ScExtensions } from './extensions';
 
@@ -380,6 +382,7 @@ import { ScExtensions } from './extensions';
 
     <button
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+      (click)="openDialog()"
       type="button"
       scTooltip="Add cell attribute"
     >
@@ -487,6 +490,7 @@ import { ScExtensions } from './extensions';
 })
 export class ScExtensionTable {
   private readonly parent = inject(ScEditor, { host: true });
+  dialog = inject(Dialog);
 
   extensions = inject(ScExtensions);
 
@@ -564,5 +568,16 @@ export class ScExtensionTable {
 
   goToNextCell() {
     this.editor.chain().focus().goToNextCell().run();
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open<AttributeData>(ScAddCellAttributeDialog, {
+      minWidth: '600px',
+    });
+
+    dialogRef.closed.subscribe((result) => {
+      console.log(result);
+      this.editor.commands.setCellAttribute(result?.name ?? '', result?.value ?? '');
+    });
   }
 }
