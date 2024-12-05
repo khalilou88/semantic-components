@@ -5,7 +5,7 @@ import { ScEditor } from '../editor';
 import { ScExtensions } from '../extensions';
 
 @Component({
-  selector: 'sc-blockquote-action',
+  selector: 'sc-extension-blockquote',
   imports: [ScTooltip],
   template: `
     <button
@@ -36,7 +36,7 @@ import { ScExtensions } from '../extensions';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BlockquoteActionComponent {
+export class ScExtensionBlockquote {
   private readonly parent = inject(ScEditor, { host: true });
 
   extensions = inject(ScExtensions);

@@ -21,6 +21,7 @@ import Paragraph from '@tiptap/extension-paragraph';
 import Text from '@tiptap/extension-text';
 
 import { ScExtensions } from './extensions';
+import { ScExtensionBlockquote } from './extensions/extension-blockquote';
 import { ScExtensionBold } from './extensions/extension-bold';
 import { ScExtensionBulletList } from './extensions/extension-bullet-list';
 import { ScExtensionColor } from './extensions/extension-color';
@@ -36,7 +37,6 @@ import { ScExtensionTextAlignAction } from './extensions/extension-text-align';
 import { ScExtensionUnderline } from './extensions/extension-underline';
 import { ScExtensionYoutube } from './extensions/extension-youtube';
 import { ScExtensionTextStyle } from './extensions/extention-text-style';
-import { BlockquoteActionComponent } from './toolbar/blockquote-action.component';
 import { EditorToolbarDividerComponent } from './toolbar/editor-toolbar-divider.component';
 import { EditorToolbarLineComponent } from './toolbar/editor-toolbar-line.component';
 import { HistoryActionComponent } from './toolbar/history-action.component';
@@ -54,7 +54,7 @@ import { TypographyActionComponent } from './toolbar/typography-action.component
     ScExtensionFontFamily,
     ScExtensionLink,
     ScExtensionItalic,
-    BlockquoteActionComponent,
+    ScExtensionBlockquote,
     ScExtensionBulletList,
     ScExtensionOrderedList,
     ScExtensionTextAlignAction,
@@ -93,7 +93,7 @@ import { TypographyActionComponent } from './toolbar/typography-action.component
           <sc-extension-youtube />
           <sc-extension-bullet-list />
           <sc-extension-ordered-list />
-          <sc-blockquote-action />
+          <sc-extension-blockquote />
           <sc-editor-toolbar-divider />
           <sc-extension-strike />
           <sc-extension-horizontal-rule />
