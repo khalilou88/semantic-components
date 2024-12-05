@@ -4,10 +4,10 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@
 import { ScTooltip } from '../../tooltip';
 import { ScEditor } from '../editor';
 import { ScExtensions } from '../extensions';
-import { AddVideoDialogComponent, VideoData } from './add-video-dialog.component';
+import { AddVideoDialogComponent, VideoData } from '../toolbar/add-video-dialog.component';
 
 @Component({
-  selector: 'sc-youtube-action',
+  selector: 'sc-extension-youtube',
   imports: [ScTooltip, DialogModule],
   template: `
     <button
@@ -38,14 +38,14 @@ import { AddVideoDialogComponent, VideoData } from './add-video-dialog.component
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class YoutubeActionComponent {
+export class ScExtensionYoutube {
   private readonly parent = inject(ScEditor, { host: true });
   dialog = inject(Dialog);
 
-  extensionsService = inject(ScExtensions);
+  extensions = inject(ScExtensions);
 
   constructor() {
-    this.extensionsService.youtube.set(true);
+    this.extensions.youtube.set(true);
   }
 
   get editor() {

@@ -26,6 +26,7 @@ import { ScExtensionFontFamily } from './extensions/extension-font-family';
 import { ScExtensionHighlight } from './extensions/extension-highlight';
 import { ScExtensionImage } from './extensions/extension-image';
 import { ScExtensionUnderline } from './extensions/extension-underline';
+import { ScExtensionYoutube } from './extensions/extension-youtube';
 import { ScExtensionTextStyle } from './extensions/extention-text-style';
 import { BlockquoteActionComponent } from './toolbar/blockquote-action.component';
 import { BoldActionComponent } from './toolbar/bold-action.component';
@@ -38,7 +39,6 @@ import { LinkActionComponent } from './toolbar/link-action.component';
 import { OrderedListActionComponent } from './toolbar/ordered-list-action.component';
 import { TextAlignActionComponent } from './toolbar/text-align-action.component';
 import { TypographyActionComponent } from './toolbar/typography-action.component';
-import { YoutubeActionComponent } from './toolbar/youtube-action.component';
 
 @Component({
   selector: 'sc-editor',
@@ -47,7 +47,7 @@ import { YoutubeActionComponent } from './toolbar/youtube-action.component';
     ScExtensionColor,
     BoldActionComponent,
     ScExtensionUnderline,
-    YoutubeActionComponent,
+    ScExtensionYoutube,
     ScExtensionImage,
     ScExtensionFontFamily,
     LinkActionComponent,
@@ -86,7 +86,7 @@ import { YoutubeActionComponent } from './toolbar/youtube-action.component';
           <sc-typography-action />
           <sc-editor-toolbar-divider />
           <sc-extension-image />
-          <sc-youtube-action />
+          <sc-extension-youtube />
           <sc-bullet-list-action />
           <sc-ordered-list-action />
           <sc-blockquote-action />
