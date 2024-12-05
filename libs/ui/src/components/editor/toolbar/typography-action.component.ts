@@ -12,9 +12,7 @@ import { ExtensionsService } from '../extensions.service';
   template: `
     <button
       class="flex items-center justify-center rounded-lg bg-gray-100 px-3 py-1.5 text-sm font-medium text-gray-500 hover:bg-gray-200 hover:text-gray-900 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-50 dark:bg-gray-600 dark:text-gray-400 dark:hover:bg-gray-500 dark:hover:text-white dark:focus:ring-gray-600"
-      id="typographyDropdownButton"
       [cdkMenuTriggerFor]="typographyDropdown"
-      data-dropdown-toggle="typographyDropdown"
       type="button"
     >
       Format
@@ -37,11 +35,7 @@ import { ExtensionsService } from '../extensions.service';
 
     <!-- Heading Dropdown -->
     <ng-template #typographyDropdown>
-      <div
-        class="z-10 w-72 rounded bg-white p-2 shadow dark:bg-gray-700"
-        id="typographyDropdown"
-        cdkMenu
-      >
+      <div class="z-10 w-72 rounded bg-white p-2 shadow dark:bg-gray-700" cdkMenu>
         <ul class="space-y-1 text-sm font-medium" aria-labelledby="typographyDropdownButton">
           <li>
             <button
@@ -250,10 +244,6 @@ export class TypographyActionComponent {
   private readonly parent = inject(ScEditor, { host: true });
 
   extensionsService = inject(ExtensionsService);
-
-  // constructor() {
-  //   this.extensionsService.typography.set(true);
-  // }
 
   get editor() {
     return this.parent.editor;

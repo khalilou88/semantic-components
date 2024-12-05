@@ -147,7 +147,7 @@ export class ScEditor implements ControlValueAccessor {
     extensions.push(Text);
     extensions.push(ListItem);
 
-    if (this.extensionsService.highlight()) {
+    if (this.extensionsService.textStyle()) {
       const TextStyle = (await import('@tiptap/extension-text-style')).TextStyle;
       extensions.push(TextStyle);
     }
