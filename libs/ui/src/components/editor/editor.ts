@@ -41,6 +41,7 @@ import { ScExtensionUnderline } from './extensions/extension-underline';
 import { ScExtensionYoutube } from './extensions/extension-youtube';
 import { ScExtensions } from './extensions/extensions';
 import { ScExtensionTextStyle } from './extensions/extention-text-style';
+import { ScTable } from './table';
 import { ScExtensionsGroup } from './toolbar/extensions-group';
 import { ScExtensionsSeparator } from './toolbar/extensions-separator';
 
@@ -69,6 +70,7 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
     ScExtensionHorizontalRule,
     ScExtensionCode,
     ScExtensionHeading,
+    ScTable,
   ],
   template: `
     <div
@@ -103,6 +105,10 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
           <sc-extension-strike />
           <sc-extension-horizontal-rule />
           <sc-extension-code />
+        </sc-extensions-group>
+
+        <sc-extensions-group>
+          <sc-table />
         </sc-extensions-group>
       </div>
 
