@@ -2,6 +2,14 @@
   "printWidth": 100,
   "singleQuote": true,
   "htmlWhitespaceSensitivity": "ignore",
+  "overrides": [
+    {
+      "files": "*.html",
+      "options": {
+        "parser": "html"
+      }
+    }
+  ],
   "plugins": [
     "@trivago/prettier-plugin-sort-imports",
     "prettier-plugin-organize-attributes",
