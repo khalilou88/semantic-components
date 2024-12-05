@@ -437,10 +437,10 @@ import { ScExtensions } from '../extensions';
 export class ScExtensionColor {
   private readonly parent = inject(ScEditor, { host: true });
 
-  extensionsService = inject(ScExtensions);
+  extensions = inject(ScExtensions);
 
   constructor() {
-    this.extensionsService.color.set(true);
+    this.extensions.color.set(true);
   }
 
   get editor() {

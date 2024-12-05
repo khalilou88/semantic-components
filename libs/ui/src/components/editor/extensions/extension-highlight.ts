@@ -40,10 +40,10 @@ import { ScExtensions } from '../extensions';
 export class ScExtensionHighlight {
   private readonly parent = inject(ScEditor, { host: true });
 
-  extensionsService = inject(ScExtensions);
+  extensions = inject(ScExtensions);
 
   constructor() {
-    this.extensionsService.highlight.set(true);
+    this.extensions.highlight.set(true);
   }
 
   get editor() {

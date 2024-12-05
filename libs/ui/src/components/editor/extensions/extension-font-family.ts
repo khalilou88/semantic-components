@@ -6,7 +6,7 @@ import { ScEditor } from '../editor';
 import { ScExtensions } from '../extensions';
 
 @Component({
-  selector: 'sc-font-family-action',
+  selector: 'sc-extension-font-family',
   imports: [CdkMenuTrigger, CdkMenu, CdkMenuItem, ScTooltip],
   template: `
     <button
@@ -157,13 +157,13 @@ import { ScExtensions } from '../extensions';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FontFamilyActionComponent {
+export class ScExtensionFontFamily {
   private readonly parent = inject(ScEditor, { host: true });
 
-  extensionsService = inject(ScExtensions);
+  extensions = inject(ScExtensions);
 
   constructor() {
-    this.extensionsService.fontFamily.set(true);
+    this.extensions.fontFamily.set(true);
   }
 
   get editor() {

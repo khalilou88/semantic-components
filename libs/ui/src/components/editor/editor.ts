@@ -22,6 +22,7 @@ import Text from '@tiptap/extension-text';
 
 import { ScExtensions } from './extensions';
 import { ScExtensionColor } from './extensions/extension-color';
+import { ScExtensionFontFamily } from './extensions/extension-font-family';
 import { ScExtensionHighlight } from './extensions/extension-highlight';
 import { ScExtensionTextStyle } from './extensions/extention-text-style';
 import { BlockquoteActionComponent } from './toolbar/blockquote-action.component';
@@ -29,7 +30,6 @@ import { BoldActionComponent } from './toolbar/bold-action.component';
 import { BulletListActionComponent } from './toolbar/bullet-list-action.component';
 import { EditorToolbarDividerComponent } from './toolbar/editor-toolbar-divider.component';
 import { EditorToolbarLineComponent } from './toolbar/editor-toolbar-line.component';
-import { FontFamilyActionComponent } from './toolbar/font-family-action.component';
 import { HistoryActionComponent } from './toolbar/history-action.component';
 import { ImageActionComponent } from './toolbar/image-action.component';
 import { ItalicActionComponent } from './toolbar/italic-action.component';
@@ -49,7 +49,7 @@ import { YoutubeActionComponent } from './toolbar/youtube-action.component';
     UnderlineActionComponent,
     YoutubeActionComponent,
     ImageActionComponent,
-    FontFamilyActionComponent,
+    ScExtensionFontFamily,
     LinkActionComponent,
     ItalicActionComponent,
     BlockquoteActionComponent,
@@ -77,7 +77,7 @@ import { YoutubeActionComponent } from './toolbar/youtube-action.component';
           <sc-link-action />
           <sc-extension-text-style />
           <sc-extension-color />
-          <sc-font-family-action />
+          <sc-extension-font-family />
           <sc-editor-toolbar-divider />
           <sc-text-align-action />
         </sc-editor-toolbar-line>
