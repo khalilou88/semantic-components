@@ -12,12 +12,13 @@ import {
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { ScPageEvent } from './page-event';
+import { ScPageItem } from './page-item';
 
 /** The default page size if there is no page size and there are no provided page size options. */
 const DEFAULT_PAGE_SIZE = 10;
 
 @Component({
-  selector: 'sma-paginator',
+  selector: 'sc-paginator',
   imports: [ScPageItem, ReactiveFormsModule, NgClass],
   template: `
     <nav
@@ -115,7 +116,7 @@ const DEFAULT_PAGE_SIZE = 10;
         </li>
 
         @for (page of pageRanges(); track $index) {
-          <sma-page-item
+          <sc-page-item
             [page]="page"
             [currentPage]="currentPage()"
             (pageChanged)="changePage($event)"
@@ -195,7 +196,7 @@ const DEFAULT_PAGE_SIZE = 10;
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PaginatorComponent implements OnInit {
+export class ScPaginator implements OnInit {
   /** The one-based page index of the displayed list of items. Defaulted to 1. */
   currentPage = input<number>(1);
 
