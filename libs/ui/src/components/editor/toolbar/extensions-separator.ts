@@ -4,11 +4,13 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   selector: 'sc-extensions-separator',
   imports: [],
   template: `
-    <div class="px-1">
-      <span class="block h-4 w-px bg-gray-300 dark:bg-gray-600"></span>
-    </div>
+    <span class="inline-block h-4 w-px bg-gray-300 dark:bg-gray-600"></span>
   `,
-  styles: ``,
+  styles: `
+    :host {
+      @apply px-1;
+    }
+  `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
