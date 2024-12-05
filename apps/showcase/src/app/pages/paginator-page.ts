@@ -9,7 +9,7 @@ import { ScPageEvent, ScPaginator } from '@semantic-components/ui';
     <sc-paginator
       [currentPage]="currentPage()"
       [pageSize]="pageSize()"
-      [totalItems]="totalItems()"
+      [totalSize]="totalSize()"
       (pageChanged)="setPageEvent($event)"
       aria-label="Select page"
     />
@@ -21,7 +21,7 @@ import { ScPageEvent, ScPaginator } from '@semantic-components/ui';
 export default class PaginatorPage {
   currentPage = signal<number>(1);
   pageSize = signal<number>(10);
-  totalItems = signal<number>(65);
+  totalSize = signal<number>(65);
 
   setPageEvent(pageEvent: ScPageEvent) {
     this.currentPage.set(pageEvent.page);

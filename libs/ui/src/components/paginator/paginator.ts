@@ -48,7 +48,7 @@ const DEFAULT_PAGE_SIZE = 10;
           {{ firstItemPage() }}-{{ lastItemPage() }}
         </span>
         of
-        <span class="font-semibold text-gray-900 dark:text-white">{{ totalItems() }}</span>
+        <span class="font-semibold text-gray-900 dark:text-white">{{ totalSize() }}</span>
       </span>
       <ul class="inline-flex items-stretch -space-x-px">
         @if (showFirstLastButtons()) {
@@ -201,7 +201,7 @@ export class ScPaginator implements OnInit {
   currentPage = input<number>(1);
 
   /** The total number of items that are being paginated. */
-  totalItems = input.required<number>();
+  totalSize = input.required<number>();
 
   /** The set of provided page size options to display to the user. */
   pageSizeOptions = input<number[]>([5, DEFAULT_PAGE_SIZE, 25]);
@@ -235,7 +235,7 @@ export class ScPaginator implements OnInit {
 
   pageSizeFormControl = new FormControl(this.pageSize());
 
-  numberOfPages = computed(() => Math.ceil(this.totalItems() / this.pageSize()));
+  numberOfPages = computed(() => Math.ceil(this.totalSize() / this.pageSize()));
 
   range(start: number, end: number) {
     return Array.from({ length: end - start + 1 }, (_, i) => i + start);
@@ -284,7 +284,7 @@ export class ScPaginator implements OnInit {
   });
 
   firstItemPage = computed(() => {
-    if (this.totalItems() === 0) {
+    if (this.totalSize() === 0) {
       return 0;
     }
     return this.pageSize() * (this.currentPage() - 1) + 1;
@@ -293,11 +293,11 @@ export class ScPaginator implements OnInit {
   lastItemPage = computed(() => {
     const a = this.firstItemPage() + this.pageSize() - 1;
 
-    if (a < this.totalItems()) {
+    if (a < this.totalSize()) {
       return a;
     }
 
-    return this.totalItems();
+    return this.totalSize();
   });
 
   firstPage() {
