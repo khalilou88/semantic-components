@@ -20,7 +20,6 @@ import { ScTooltipContainer } from './tooltip-container';
 
 @Directive({
   selector: '[scTooltip]',
-  standalone: true,
 })
 export class ScTooltip implements OnInit, OnDestroy {
   private readonly overlayPositionBuilder = inject(OverlayPositionBuilder);
