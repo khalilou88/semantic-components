@@ -28,6 +28,7 @@ import { ScExtensionHighlight } from './extensions/extension-highlight';
 import { ScExtensionImage } from './extensions/extension-image';
 import { ScExtensionLink } from './extensions/extension-link';
 import { ScExtensionOrderedList } from './extensions/extension-ordered-list';
+import { ScExtensionStrike } from './extensions/extension-strike';
 import { ScExtensionTextAlignAction } from './extensions/extension-text-align';
 import { ScExtensionUnderline } from './extensions/extension-underline';
 import { ScExtensionYoutube } from './extensions/extension-youtube';
@@ -61,6 +62,7 @@ import { TypographyActionComponent } from './toolbar/typography-action.component
     HistoryActionComponent,
     EditorToolbarDividerComponent,
     EditorToolbarLineComponent,
+    ScExtensionStrike,
   ],
   template: `
     <div
@@ -90,6 +92,8 @@ import { TypographyActionComponent } from './toolbar/typography-action.component
           <sc-extension-bullet-list />
           <sc-extension-ordered-list />
           <sc-blockquote-action />
+          <sc-editor-toolbar-divider />
+          <sc-extension-strike />
         </sc-editor-toolbar-line>
       </div>
 

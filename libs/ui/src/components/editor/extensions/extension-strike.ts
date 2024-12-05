@@ -5,7 +5,7 @@ import { ScEditor } from '../editor';
 import { ScExtensions } from '../extensions';
 
 @Component({
-  selector: 'sc-strike-action',
+  selector: 'sc-extension-strike',
   imports: [ScTooltip],
   template: `
     <button
@@ -38,13 +38,13 @@ import { ScExtensions } from '../extensions';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StrikeActionComponent {
+export class ScExtensionStrike {
   private readonly parent = inject(ScEditor, { host: true });
 
-  extensionsService = inject(ScExtensions);
+  extensions = inject(ScExtensions);
 
   constructor() {
-    this.extensionsService.strike.set(true);
+    this.extensions.strike.set(true);
   }
 
   get editor() {
