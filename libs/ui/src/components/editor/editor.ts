@@ -7,6 +7,7 @@ import {
   afterNextRender,
   forwardRef,
   inject,
+  input,
   signal,
   viewChild,
 } from '@angular/core';
@@ -120,6 +121,8 @@ export class ScEditor implements ControlValueAccessor {
   _value = signal('');
 
   _isEditable = signal(true);
+
+  class = input<string>('');
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   _onChange: (value: string) => void = () => {};
@@ -245,7 +248,7 @@ export class ScEditor implements ControlValueAccessor {
       editable: this._isEditable(),
       editorProps: {
         attributes: {
-          class: 'prose lg:prose-lg dark:prose-invert focus:outline-none prose-blue max-w-none',
+          class: this.class(),
         },
       },
     });
