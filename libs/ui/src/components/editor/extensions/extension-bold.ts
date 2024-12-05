@@ -5,7 +5,7 @@ import { ScEditor } from '../editor';
 import { ScExtensions } from '../extensions';
 
 @Component({
-  selector: 'sc-bold-action',
+  selector: 'sc-extension-bold',
   imports: [ScTooltip],
   template: `
     <button
@@ -38,7 +38,7 @@ import { ScExtensions } from '../extensions';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BoldActionComponent {
+export class ScExtensionBold {
   private readonly parent = inject(ScEditor, { host: true });
 
   extensions = inject(ScExtensions);
