@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  effect,
-  inject,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
 import { SvgMoonIcon, SvgSunIcon } from '@semantic-icons/tabler-icons/filled';
 
@@ -41,17 +35,6 @@ import { ScTheme } from './theme';
 })
 export class ScThemeToggler {
   theme = inject(ScTheme);
-
-  constructor() {
-    effect(() => {
-      if (this.theme.value() !== undefined) {
-        localStorage['theme'] = this.theme.value();
-      }
-
-      // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-      document.documentElement.classList.toggle('dark', this.theme.value() === 'dark');
-    });
-  }
 
   toggleTheme() {
     if (this.theme.value() === 'light') {
