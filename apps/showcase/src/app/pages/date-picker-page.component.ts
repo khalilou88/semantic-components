@@ -6,6 +6,8 @@ import { DatePickerComponent, InlineDatePickerComponent } from '@semantic-compon
   selector: 'app-date-picker-page',
   imports: [DatePickerComponent, InlineDatePickerComponent],
   template: `
+    <p class="bg-primary-700">p</p>
+
     <sc-date-picker />
     <br />
     <br />
