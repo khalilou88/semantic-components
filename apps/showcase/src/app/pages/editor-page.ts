@@ -9,7 +9,7 @@ import { ScEditor } from '@semantic-components/ui';
   template: `
     <form [formGroup]="editorForm">
       <sc-editor
-        class="prose lg:prose-lg dark:prose-invert max-w-none focus:outline-none"
+        class="prose max-w-none lg:prose-lg dark:prose-invert focus:outline-none"
         formControlName="content"
       />
     </form>
