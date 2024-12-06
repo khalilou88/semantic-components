@@ -39,11 +39,11 @@ import { SvgMoonIcon, SvgSunIcon } from '@semantic-icons/tabler-icons/filled';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScThemeToggler {
-  theme = signal<'init' | 'light' | 'dark'>('init');
+  theme = signal<'light' | 'dark' | undefined>(undefined);
 
   constructor() {
     effect(() => {
-      if (this.theme() !== 'init') {
+      if (this.theme() !== undefined) {
         localStorage['theme'] = this.theme();
       }
 
