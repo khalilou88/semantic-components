@@ -21,11 +21,11 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                 <div class="text-center">
                   <div class="-mx-2 mb-3 flex flex-row flex-wrap gap-y-2">
                     <div class="w-[30%] text-xs md:w-1/5 lg:w-[9%]">
-                      <div class="mx-2 mb-1 rounded bg-primary p-4"></div>
+                      <div class="bg-primary mx-2 mb-1 rounded p-4"></div>
                       <div>primary</div>
                     </div>
                     <div class="w-[30%] text-xs md:w-1/5 lg:w-[9%]">
-                      <div class="mx-2 mb-1 rounded bg-secondary p-4"></div>
+                      <div class="bg-secondary mx-2 mb-1 rounded p-4"></div>
                       <div>secondary</div>
                     </div>
                     <div class="w-[30%] text-xs md:w-1/5 lg:w-[9%]">
