@@ -8,7 +8,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
       <div class="container relative ml-0">
         <div class="max-w-[720px]">
           <h1 class="mb-2 font-semibold tracking-tight">Tailwind CSS Colors</h1>
-          <p class="mb-1 text-muted"></p>
         </div>
 
         <div class="mt-4">
