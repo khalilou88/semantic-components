@@ -15,11 +15,12 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
           <div class="max-w-[720px]">
             <h2 class="font-semibold" id="defaults">Defaults</h2>
           </div>
-          <div class="col mb-6">
+
+          <div class="mb-6">
             <div class="w-full overflow-hidden rounded-lg border shadow-sm">
               <div class="mb-0 p-6">
-                <div class="row text-center">
-                  <div class="col -mx-2 mb-3 flex flex-row flex-wrap gap-y-2">
+                <div class="text-center">
+                  <div class="-mx-2 mb-3 flex flex-row flex-wrap gap-y-2">
                     <div class="w-[30%] text-xs md:w-1/5 lg:w-[9%]">
                       <div class="mx-2 mb-1 rounded bg-primary p-4"></div>
                       <div>primary</div>
@@ -57,6 +58,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
               </div>
             </div>
           </div>
+
           <div class="col max-w-[720px]">
             <h2 class="h5 font-semibold" id="shades">Shades</h2>
           </div>
