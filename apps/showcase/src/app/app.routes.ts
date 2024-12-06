@@ -1,19 +1,21 @@
 import { Route } from '@angular/router';
 
-import { DatePickerPageComponent } from './pages/date-picker-page.component';
-import { DropdownPageComponent } from './pages/dropdown-page.component';
+import ColorsPage from './pages/colors-page';
+import DatePickerPage from './pages/date-picker-page';
+import DropdownPage from './pages/dropdown-page';
 import EditorPage from './pages/editor-page';
-import { HomePageComponent } from './pages/home-page.component';
-import { NavPageComponent } from './pages/nav-page.component';
+import HomePage from './pages/home-page';
+import NavPage from './pages/nav-page';
 import PaginatorPage from './pages/paginator-page';
 import TooltipPage from './pages/tooltip-page';
 
 export const appRoutes: Route[] = [
-  { path: 'home', component: HomePageComponent },
+  { path: 'home', component: HomePage },
   { path: 'tooltip', component: TooltipPage },
   { path: 'editor', component: EditorPage },
   { path: 'paginator', component: PaginatorPage },
-  { path: 'nav', component: NavPageComponent },
-  { path: 'date-picker', component: DatePickerPageComponent },
-  { path: 'dropdown', component: DropdownPageComponent },
+  { path: 'nav', component: NavPage },
+  { path: 'date-picker', component: DatePickerPage },
+  { path: 'dropdown', component: DropdownPage },
+  { path: 'colors', component: ColorsPage },
 ];

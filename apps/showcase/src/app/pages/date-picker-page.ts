@@ -17,4 +17,4 @@ import { DatePickerComponent, InlineDatePickerComponent } from '@semantic-compon
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DatePickerPageComponent {}
+export default class DatePickerPage {}

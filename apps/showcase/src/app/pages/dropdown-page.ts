@@ -24,4 +24,4 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DropdownPageComponent {}
+export default class DropdownPage {}

@@ -12,4 +12,4 @@ import { NavComponent } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavPageComponent {}
+export default class NavPage {}
