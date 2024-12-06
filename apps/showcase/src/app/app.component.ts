@@ -9,8 +9,10 @@ import {
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { ScThemeToggler } from '@semantic-components/ui';
+
 @Component({
-  imports: [RouterModule, CdkAccordionModule],
+  imports: [RouterModule, CdkAccordionModule, ScThemeToggler],
   selector: 'app-root',
   template: `
     <div class="h-full bg-gray-50 antialiased dark:bg-gray-900">
@@ -58,6 +60,8 @@ import { RouterModule } from '@angular/router';
                 Semantic Components
               </span>
             </a>
+
+            <sc-theme-toggler />
           </div>
         </div>
       </nav>
