@@ -8,24 +8,13 @@
 
 @layer base {
   :root {
-    --color-primary-50: 93.07% 0.035 246.88;
-    --color-primary-100: 86.08% 0.072 248.67;
-    --color-primary-200: 73.19% 0.144 250.66;
-    --color-primary-300: 62.64% 0.204 255.23;
-    --color-primary-400: 48.47% 0.163 255.62;
-    --color-primary-500: 32.33% 0.103 253.89;
-    --color-primary-600: 28.11% 0.087 252.93;
-    --color-primary-700: 23.65% 0.068 250.7;
-    --color-primary-800: 18.75% 0.052 249.04;
-    --color-primary-900: 13.78% 0.031 239.31;
-    --color-primary-950: 10.82% 0.022 233.51;
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 210 100% 20%;
+    --primary: 221.2 83.2% 53.3%;
     --primary-foreground: 210 40% 98%;
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
