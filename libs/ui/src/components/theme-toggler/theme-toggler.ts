@@ -39,23 +39,28 @@ import { SvgMoonIcon, SvgSunIcon } from '@semantic-icons/tabler-icons/filled';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScThemeToggler {
-  theme = signal<'light' | 'dark'>('light');
+  theme = signal<'init' | 'light' | 'dark'>('init');
 
   constructor() {
     effect(() => {
-      localStorage['theme'] = this.theme();
+      if (this.theme() !== 'init') {
+        localStorage['theme'] = this.theme();
+      }
 
       // On page load or when changing themes, best to add inline in `head` to avoid FOUC
       document.documentElement.classList.toggle('dark', this.theme() === 'dark');
     });
 
     afterNextRender(() => {
+      const localStorageTheme = localStorage['theme'];
       const isDarkode =
-        localStorage['theme'] === 'dark' ||
+        localStorageTheme === 'dark' ||
         (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
 
       if (isDarkode) {
         this.theme.set('dark');
+      } else {
+        this.theme.set('light');
       }
     });
   }
