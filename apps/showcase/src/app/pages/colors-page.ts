@@ -8,32 +8,17 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 
     <h1>Primary colors</h1>
 
-    <h2>Light mode</h2>
-
-    <div class="flex">
-      <div class="m-5">
-        <div class="border mx-2 mb-1 rounded bg-primary p-4"></div>
-        <div>Default</div>
-      </div>
-
-      <div class="m-5">
-        <div class="border mx-2 mb-1 rounded bg-primary-foreground p-4"></div>
-        <div>Foreground</div>
-      </div>
+    <div class="bg-background">
+      <h2 class="text-primary">Light mode</h2>
+      <p class="bg-primary text-primary-foreground p-4">Primary Button</p>
     </div>
 
-    <h2>Dark mode</h2>
+    <br />
+    <br />
 
-    <div class="dark flex">
-      <div class="m-5">
-        <div class="border mx-2 mb-1 rounded bg-primary p-4"></div>
-        <div>Default</div>
-      </div>
-
-      <div class="m-5">
-        <div class="border mx-2 mb-1 rounded bg-primary-foreground p-4"></div>
-        <div>Foreground</div>
-      </div>
+    <div class="dark bg-background">
+      <h2 class="text-primary">Dark mode</h2>
+      <p class="bg-primary text-primary-foreground p-4">Primary Button</p>
     </div>
   `,
   styles: ``,
