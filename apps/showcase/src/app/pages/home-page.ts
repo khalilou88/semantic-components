@@ -7,16 +7,13 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     <div class="relative grow pt-2" id="style-guide-content" hx-swap-oob="true">
       <div class="container relative ml-0">
         <div class="max-w-[720px]">
-          <h1 class="mb-2 font-semibold tracking-tight">Tailwind CSS Colors - Versoly UI</h1>
+          <h1 class="mb-2 font-semibold tracking-tight">Tailwind CSS Colors</h1>
           <p class="mb-1 text-muted"></p>
-          <div class="flex flex-row gap-x-2">
-            <span class="badge bg-dark">Added in 1.0</span>
-          </div>
         </div>
 
         <div class="mt-4">
           <div class="max-w-[720px]">
-            <h2 class="h5 font-semibold" id="defaults">Defaults</h2>
+            <h2 class="font-semibold" id="defaults">Defaults</h2>
           </div>
           <div class="col mb-6">
             <div class="w-full overflow-hidden rounded-lg border shadow-sm">
