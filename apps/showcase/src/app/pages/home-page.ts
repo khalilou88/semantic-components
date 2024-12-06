@@ -8,13 +8,14 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
       <div class="container relative ml-0">
         <div class="max-w-[720px]">
           <h1 class="mb-2 font-semibold tracking-tight">Tailwind CSS Colors - Versoly UI</h1>
-          <p class="text-muted mb-1"></p>
+          <p class="mb-1 text-muted"></p>
           <div class="flex flex-row gap-x-2">
             <span class="badge bg-dark">Added in 1.0</span>
           </div>
         </div>
-        <div class="row mt-4">
-          <div class="col max-w-[720px]">
+
+        <div class="mt-4">
+          <div class="max-w-[720px]">
             <h2 class="h5 font-semibold" id="defaults">Defaults</h2>
           </div>
           <div class="col mb-6">
@@ -23,11 +24,11 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                 <div class="row text-center">
                   <div class="col -mx-2 mb-3 flex flex-row flex-wrap gap-y-2">
                     <div class="w-[30%] text-xs md:w-1/5 lg:w-[9%]">
-                      <div class="bg-primary mx-2 mb-1 rounded p-4"></div>
+                      <div class="mx-2 mb-1 rounded bg-primary p-4"></div>
                       <div>primary</div>
                     </div>
                     <div class="w-[30%] text-xs md:w-1/5 lg:w-[9%]">
-                      <div class="bg-secondary mx-2 mb-1 rounded p-4"></div>
+                      <div class="mx-2 mb-1 rounded bg-secondary p-4"></div>
                       <div>secondary</div>
                     </div>
                     <div class="w-[30%] text-xs md:w-1/5 lg:w-[9%]">
@@ -51,7 +52,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                       <div>danger</div>
                     </div>
                     <div class="w-[30%] text-xs md:w-1/5 lg:w-[9%]">
-                      <div class="bg-warning mx-2 mb-1 rounded p-4"></div>
+                      <div class="mx-2 mb-1 rounded bg-warning p-4"></div>
                       <div>warning</div>
                     </div>
                   </div>
@@ -68,47 +69,47 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                 <div class="row text-center">
                   <div class="col -mx-2 mb-3 flex flex-row flex-wrap gap-y-2">
                     <div class="w-[30%] text-xs md:w-1/5 lg:w-[9%]">
-                      <div class="bg-primary-50 mx-2 mb-1 rounded p-4"></div>
+                      <div class="mx-2 mb-1 rounded bg-primary-50 p-4"></div>
                       <div>primary 50</div>
                     </div>
                     <div class="w-[30%] text-xs md:w-1/5 lg:w-[9%]">
-                      <div class="bg-primary-100 mx-2 mb-1 rounded p-4"></div>
+                      <div class="mx-2 mb-1 rounded bg-primary-100 p-4"></div>
                       <div>primary 100</div>
                     </div>
                     <div class="w-[30%] text-xs md:w-1/5 lg:w-[9%]">
-                      <div class="bg-primary-200 mx-2 mb-1 rounded p-4"></div>
+                      <div class="mx-2 mb-1 rounded bg-primary-200 p-4"></div>
                       <div>primary 200</div>
                     </div>
                     <div class="w-[30%] text-xs md:w-1/5 lg:w-[9%]">
-                      <div class="bg-primary-300 mx-2 mb-1 rounded p-4"></div>
+                      <div class="mx-2 mb-1 rounded bg-primary-300 p-4"></div>
                       <div>primary 300</div>
                     </div>
                     <div class="w-[30%] text-xs md:w-1/5 lg:w-[9%]">
-                      <div class="bg-primary-400 mx-2 mb-1 rounded p-4"></div>
+                      <div class="mx-2 mb-1 rounded bg-primary-400 p-4"></div>
                       <div>primary 400</div>
                     </div>
                     <div class="w-[30%] text-xs md:w-1/5 lg:w-[9%]">
-                      <div class="bg-primary-500 mx-2 mb-1 rounded p-4"></div>
+                      <div class="mx-2 mb-1 rounded bg-primary-500 p-4"></div>
                       <div>primary 500</div>
                     </div>
                     <div class="w-[30%] text-xs md:w-1/5 lg:w-[9%]">
-                      <div class="bg-primary-600 mx-2 mb-1 rounded p-4"></div>
+                      <div class="mx-2 mb-1 rounded bg-primary-600 p-4"></div>
                       <div>primary 600</div>
                     </div>
                     <div class="w-[30%] text-xs md:w-1/5 lg:w-[9%]">
-                      <div class="bg-primary-700 mx-2 mb-1 rounded p-4"></div>
+                      <div class="mx-2 mb-1 rounded bg-primary-700 p-4"></div>
                       <div>primary 700</div>
                     </div>
                     <div class="w-[30%] text-xs md:w-1/5 lg:w-[9%]">
-                      <div class="bg-primary-800 mx-2 mb-1 rounded p-4"></div>
+                      <div class="mx-2 mb-1 rounded bg-primary-800 p-4"></div>
                       <div>primary 800</div>
                     </div>
                     <div class="w-[30%] text-xs md:w-1/5 lg:w-[9%]">
-                      <div class="bg-primary-900 mx-2 mb-1 rounded p-4"></div>
+                      <div class="mx-2 mb-1 rounded bg-primary-900 p-4"></div>
                       <div>primary 900</div>
                     </div>
                     <div class="w-[30%] text-xs md:w-1/5 lg:w-[9%]">
-                      <div class="bg-primary-950 mx-2 mb-1 rounded p-4"></div>
+                      <div class="mx-2 mb-1 rounded bg-primary-950 p-4"></div>
                       <div>primary 950</div>
                     </div>
                   </div>
@@ -285,25 +286,25 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   <div class="col -mx-2 mb-3 flex flex-row flex-wrap gap-y-2">
                     <div class="w-[30%] text-xs md:w-1/5 lg:w-[9%]">
                       <div
-                        class="from-primary to-secondary mx-2 mb-1 rounded bg-gradient-to-br p-4"
+                        class="mx-2 mb-1 rounded bg-gradient-to-br from-primary to-secondary p-4"
                       ></div>
                       <div>Primary to Secondary</div>
                     </div>
                     <div class="w-[30%] text-xs md:w-1/5 lg:w-[9%]">
                       <div
-                        class="from-primary to-tertiary mx-2 mb-1 rounded bg-gradient-to-br p-4"
+                        class="to-tertiary mx-2 mb-1 rounded bg-gradient-to-br from-primary p-4"
                       ></div>
                       <div>Primary to Tertiary</div>
                     </div>
                     <div class="w-[30%] text-xs md:w-1/5 lg:w-[9%]">
                       <div
-                        class="from-secondary to-tertiary mx-2 mb-1 rounded bg-gradient-to-br p-4"
+                        class="to-tertiary mx-2 mb-1 rounded bg-gradient-to-br from-secondary p-4"
                       ></div>
                       <div>Secondary to Tertiary</div>
                     </div>
                     <div class="w-[30%] text-xs md:w-1/5 lg:w-[9%]">
                       <div
-                        class="from-primary-50 to-primary-200 mx-2 mb-1 rounded bg-gradient-to-br p-4"
+                        class="mx-2 mb-1 rounded bg-gradient-to-br from-primary-50 to-primary-200 p-4"
                       ></div>
                       <div>Primary 50 to Primary 200</div>
                     </div>
