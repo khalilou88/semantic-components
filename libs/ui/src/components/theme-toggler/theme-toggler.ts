@@ -2,12 +2,13 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
-  afterNextRender,
   effect,
-  signal,
+  inject,
 } from '@angular/core';
 
 import { SvgMoonIcon, SvgSunIcon } from '@semantic-icons/tabler-icons/filled';
+
+import { ScTheme } from './theme';
 
 @Component({
   selector: 'sc-theme-toggler',
@@ -18,11 +19,11 @@ import { SvgMoonIcon, SvgSunIcon } from '@semantic-icons/tabler-icons/filled';
       (click)="toggleTheme()"
       type="button"
     >
-      @if (theme() === 'light') {
+      @if (theme.value() === 'light') {
         <svg-moon-icon class="size-6" />
       }
 
-      @if (theme() === 'dark') {
+      @if (theme.value() === 'dark') {
         <svg-sun-icon class="size-6" />
       }
     </button>
@@ -39,37 +40,24 @@ import { SvgMoonIcon, SvgSunIcon } from '@semantic-icons/tabler-icons/filled';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScThemeToggler {
-  theme = signal<'light' | 'dark' | undefined>(undefined);
+  theme = inject(ScTheme);
 
   constructor() {
     effect(() => {
-      if (this.theme() !== undefined) {
-        localStorage['theme'] = this.theme();
+      if (this.theme.value() !== undefined) {
+        localStorage['theme'] = this.theme.value();
       }
 
       // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-      document.documentElement.classList.toggle('dark', this.theme() === 'dark');
-    });
-
-    afterNextRender(() => {
-      const localStorageTheme = localStorage['theme'];
-      const isDarkode =
-        localStorageTheme === 'dark' ||
-        (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
-
-      if (isDarkode) {
-        this.theme.set('dark');
-      } else {
-        this.theme.set('light');
-      }
+      document.documentElement.classList.toggle('dark', this.theme.value() === 'dark');
     });
   }
 
   toggleTheme() {
-    if (this.theme() === 'light') {
-      this.theme.set('dark');
+    if (this.theme.value() === 'light') {
+      this.theme.value.set('dark');
     } else {
-      this.theme.set('light');
+      this.theme.value.set('light');
     }
   }
 }
