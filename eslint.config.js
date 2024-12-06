@@ -7,6 +7,13 @@ module.exports = [
   ...nx.configs['flat/javascript'],
   ...tailwind.configs['flat/recommended'],
   {
+    settings: {
+      tailwindcss: {
+        config: 'tailwind.config.js',
+      },
+    },
+  },
+  {
     ignores: ['**/dist'],
   },
   {
@@ -29,11 +36,7 @@ module.exports = [
   },
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
-    settings: {
-      tailwindcss: {
-        config: 'tailwind.config.js',
-      },
-    },
+    // Override or add rules here
     rules: {},
   },
   {
