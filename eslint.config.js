@@ -11,11 +11,6 @@ module.exports = [
   },
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
-    settings: {
-      tailwindcss: {
-        config: path.join(__dirname, './tailwind.config.js'),
-      },
-    },
     rules: {
       '@nx/enforce-module-boundaries': [
         'error',
