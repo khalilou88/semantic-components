@@ -11,7 +11,6 @@
     "@angular/cdk": ">=19.0.0",
     "@angular/forms": ">=19.0.0",
     "@tiptap/core": "^2.10.3",
-    "@semantic-icons/lucide-icons": "^0.0.1",
     "@semantic-icons/tabler-icons": "^0.3.0",
     "@tiptap/extension-blockquote": "^2.10.3",
     "@tiptap/extension-bold": "^2.10.3",
