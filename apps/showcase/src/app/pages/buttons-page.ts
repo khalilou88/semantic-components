@@ -4,13 +4,14 @@ import {
   ScBtnDanger,
   ScBtnGhost,
   ScBtnLink,
+  ScBtnOutlinePrimary,
   ScBtnPrimary,
   ScBtnSecondary,
 } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-buttons-page',
-  imports: [ScBtnPrimary, ScBtnSecondary, ScBtnDanger, ScBtnGhost, ScBtnLink],
+  imports: [ScBtnPrimary, ScBtnSecondary, ScBtnDanger, ScBtnGhost, ScBtnLink, ScBtnOutlinePrimary],
   template: `
     <button sc-btn-primary type="button">Primary</button>
     <button sc-btn-secondary type="button">Secondary</button>
@@ -21,6 +22,19 @@ import {
     <button sc-btn-ghost type="button">Ghost</button>
     <button class="btn btn-dark" type="button">Dark</button>
     <button sc-btn-link type="button">Link</button>
+
+    <br />
+    <br />
+    <br />
+
+    <button sc-btn-outline-primary type="button">Primary</button>
+    <button class="btn btn-outline-secondary" type="button">Secondary</button>
+    <button class="btn btn-outline-success" type="button">Success</button>
+    <button class="btn btn-outline-danger" type="button">Danger</button>
+    <button class="btn btn-outline-warning" type="button">Warning</button>
+    <button class="btn btn-outline-info" type="button">Info</button>
+    <button class="btn btn-outline-light" type="button">Light</button>
+    <button class="btn btn-outline-dark" type="button">Dark</button>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
