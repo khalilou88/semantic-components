@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'sc-btn-secondary',
+  selector: 'button[sc-btn-secondary]',
   imports: [],
   template: `
     <ng-content></ng-content>
