@@ -1,24 +1,17 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import {
-  ScBtnDanger,
-  ScBtnGhost,
-  ScBtnLink,
-  ScBtnOutline,
-  ScBtnPrimary,
-  ScBtnSecondary,
-} from '@semantic-components/ui';
+import { ScButton } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-buttons-page',
-  imports: [ScBtnPrimary, ScBtnSecondary, ScBtnDanger, ScBtnOutline, ScBtnGhost, ScBtnLink],
+  imports: [ScButton],
   template: `
-    <button sc-btn-primary type="button">Primary</button>
-    <button sc-btn-secondary type="button">Secondary</button>
-    <button sc-btn-danger type="button">Danger</button>
-    <button sc-btn-outline type="button">Outline</button>
-    <button sc-btn-ghost type="button">Ghost</button>
-    <button sc-btn-link type="button">Link</button>
+    <button sc-button type="button">Primary</button>
+    <button sc-button variant="secondary" type="button">Secondary</button>
+    <button sc-button variant="destructive" type="button">Destructive</button>
+    <button sc-button variant="outline" type="button">Outline</button>
+    <button sc-button variant="ghost" type="button">Ghost</button>
+    <button sc-button variant="link" type="button">Link</button>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
