@@ -6,7 +6,7 @@ import { ScBtnPrimary } from '@semantic-components/ui';
   selector: 'app-buttons-page',
   imports: [ScBtnPrimary],
   template: `
-    <button scBtnPrimary type="button">Primary</button>
+    <button sc-btn-primary type="button">Primary</button>
     <button class="btn btn-secondary" type="button">Secondary</button>
     <button class="btn btn-success" type="button">Success</button>
     <button class="btn btn-danger" type="button">Danger</button>

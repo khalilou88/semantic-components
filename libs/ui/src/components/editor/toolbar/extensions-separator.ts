@@ -7,7 +7,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     <span class="inline-block h-4 w-px bg-gray-300 dark:bg-gray-600"></span>
   `,
   styles: `
-    :host {
+    sc-extensions-separator {
       @apply px-1;
     }
   `,
