@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@a
   selector: 'button[sc-button]',
   imports: [],
   template: `
-    <ng-content></ng-content>
+    <ng-content />
   `,
   host: {
     '[class.sc-button]': 'true',
