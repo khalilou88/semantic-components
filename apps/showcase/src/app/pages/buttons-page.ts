@@ -1,10 +1,16 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { ScBtnDanger, ScBtnGhost, ScBtnPrimary, ScBtnSecondary } from '@semantic-components/ui';
+import {
+  ScBtnDanger,
+  ScBtnGhost,
+  ScBtnLink,
+  ScBtnPrimary,
+  ScBtnSecondary,
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-buttons-page',
-  imports: [ScBtnPrimary, ScBtnSecondary, ScBtnDanger, ScBtnGhost],
+  imports: [ScBtnPrimary, ScBtnSecondary, ScBtnDanger, ScBtnGhost, ScBtnLink],
   template: `
     <button sc-btn-primary type="button">Primary</button>
     <button sc-btn-secondary type="button">Secondary</button>
@@ -14,8 +20,7 @@ import { ScBtnDanger, ScBtnGhost, ScBtnPrimary, ScBtnSecondary } from '@semantic
     <button class="btn btn-info" type="button">Info</button>
     <button sc-btn-ghost type="button">Ghost</button>
     <button class="btn btn-dark" type="button">Dark</button>
-
-    <button class="btn btn-link" type="button">Link</button>
+    <button sc-btn-link type="button">Link</button>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
