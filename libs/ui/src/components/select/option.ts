@@ -46,5 +46,6 @@ export class ScOption {
   select() {
     this.state.selectedValue.set(this.value());
     this.state.selectedLabel.set(this.label().nativeElement.textContent ?? '');
+    this.state.closeOverlay.set(true);
   }
 }
