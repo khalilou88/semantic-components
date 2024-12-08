@@ -10,7 +10,7 @@ import { ScNavLink, ScNavList } from '@semantic-components/ui';
     <nav>
       <ul sc-nav-list>
         <li>
-          <a sc-nav-link routerLink="home">Home</a>
+          <a sc-nav-link routerLink="/home">Home</a>
         </li>
         <li>
           <a sc-nav-link routerLink="about">About</a>
