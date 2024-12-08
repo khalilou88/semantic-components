@@ -6,7 +6,14 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   template: `
     <p>sidebar-header works!</p>
   `,
-  styles: ``,
+  host: {
+    '[attr.data-sidebar]': 'header',
+  },
+  styles: `
+    sc-sidebar-header {
+      @apply flex flex-col gap-2 p-2;
+    }
+  `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

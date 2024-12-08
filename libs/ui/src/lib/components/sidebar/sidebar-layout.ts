@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { SvgChevronRightIcon, SvgPanelLeftIcon } from '@semantic-icons/lucide-icons';
+import { SvgPanelLeftIcon } from '@semantic-icons/lucide-icons';
 
 import { ScButton } from '../button';
 import { ScSidebar } from './sidebar';
@@ -18,7 +18,15 @@ import { ScSidebar } from './sidebar';
   selector: 'sc-sidebar-layout',
   imports: [ScSidebar, SvgPanelLeftIcon, RouterModule, ScButton],
   template: `
-    <sc-sidebar />
+    <div
+      class="group peer hidden md:block text-sidebar-foreground"
+      [attr.data-state]="state()"
+      [attr.data-collapsible]="state() === 'collapsed' ? 'collapsible' : ''"
+      [attr.data-variant]="variant()"
+      [attr.data-side]="side()"
+    >
+      <sc-sidebar />
+    </div>
 
     <main class="border-2 border-green-600">
       <button
@@ -45,6 +53,12 @@ import { ScSidebar } from './sidebar';
 })
 export class ScSidebarLayout implements OnInit {
   constructor(@Inject(DOCUMENT) private readonly document: Document) {}
+
+  state = signal<string>('');
+
+  side = signal<'left' | 'right'>('left');
+  variant = signal<'sidebar' | 'floating' | 'inset'>('sidebar');
+  // collapsible = signal<'offcanvas' | 'icon' | 'none'>('offcanvas');
 
   opened = signal<boolean>(true);
 

@@ -6,7 +6,11 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   template: `
     <p>sidebar-footer works!</p>
   `,
-  styles: ``,
+  styles: `
+    sc-sidebar-footer {
+      @apply flex flex-col gap-2 p-2;
+    }
+  `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
