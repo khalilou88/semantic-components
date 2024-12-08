@@ -1,79 +1,30 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { CdkMenu, CdkMenuTrigger } from '@angular/cdk/menu';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
+
+import { ScNavButton } from './nav-button';
 
 @Component({
-  selector: 'sc-nav-item-dropdown',
-  imports: [],
+  selector: 'li[sc-nav-item-dropdown]',
+  imports: [CdkMenuTrigger, CdkMenu, ScNavButton],
   template: `
-    <li>
-      <button
-        class="flex w-full items-center justify-between rounded px-3 py-2 text-gray-900 hover:bg-gray-100 md:w-auto md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:focus:text-white md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
-        id="dropdownNavbarLink"
-        data-dropdown-toggle="dropdownNavbar"
-      >
-        Dropdown
-        <svg
-          class="ms-2.5 size-2.5"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 10 6"
-        >
-          <path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="m1 1 4 4 4-4"
-          />
-        </svg>
-      </button>
-      <!-- Dropdown menu -->
+    <button [cdkMenuTriggerFor]="menu" sc-nav-button type="button">{{ title() }}</button>
+    <ng-template #menu>
       <div
-        class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white font-normal shadow dark:divide-gray-600 dark:bg-gray-700"
-        id="dropdownNavbar"
+        cdkMenu
+        lass="origin-top-center relative mt-1.5 h-[var(--radix-navigation-menu-viewport-height)] w-full overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-90 md:w-[var(--radix-navigation-menu-viewport-width)]"
       >
-        <ul
-          class="py-2 text-sm text-gray-700 dark:text-gray-400"
-          aria-labelledby="dropdownLargeButton"
+        <div
+          class="left-0 top-0 w-full data-[motion^=from-]:animate-in data-[motion^=to-]:animate-out data-[motion^=from-]:fade-in data-[motion^=to-]:fade-out data-[motion=from-end]:slide-in-from-right-52 data-[motion=from-start]:slide-in-from-left-52 data-[motion=to-end]:slide-out-to-right-52 data-[motion=to-start]:slide-out-to-left-52 md:absolute md:w-auto"
         >
-          <li>
-            <a
-              class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-              href="javascript:void(0)"
-            >
-              Dashboard
-            </a>
-          </li>
-          <li>
-            <a
-              class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-              href="javascript:void(0)"
-            >
-              Settings
-            </a>
-          </li>
-          <li>
-            <a
-              class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-              href="javascript:void(0)"
-            >
-              Earnings
-            </a>
-          </li>
-        </ul>
-        <div class="py-1">
-          <a
-            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
-            href="javascript:void(0)"
-          >
-            Sign out
-          </a>
+          <ng-content />
         </div>
       </div>
-    </li>
+    </ng-template>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScNavItemDropdown {}
+export class ScNavItemDropdown {
+  title = input.required<string>();
+}
