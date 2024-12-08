@@ -9,6 +9,7 @@ import HomePage from './pages/home-page';
 import NavPage from './pages/nav-page';
 import NotFoundPage from './pages/not-found-page';
 import PaginatorPage from './pages/paginator-page';
+import { SelectPage } from './pages/select-page';
 import ThemeTogglerPage from './pages/theme-toggler-page';
 import TooltipPage from './pages/tooltip-page';
 
@@ -19,6 +20,7 @@ export const appRoutes: Route[] = [
   { path: 'paginator', component: PaginatorPage, title: 'Paginator Page' },
   { path: 'buttons', component: ButtonsPage, title: 'Buttons Page' },
   { path: 'nav', component: NavPage, title: 'Nav Page' },
+  { path: 'select', component: SelectPage, title: 'Select Page' },
   { path: 'date-picker', component: DatePickerPage, title: 'DatePicker Page' },
   { path: 'dropdown', component: DropdownPage, title: 'Dropdown Page' },
   { path: 'colors', component: ColorsPage, title: 'Colors Page' },
