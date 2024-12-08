@@ -29,7 +29,7 @@ import { ScLabel, ScOption, ScSelect } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SelectPage {
+export default class SelectPage {
   selectForm = new FormGroup({
     car: new FormControl(''),
   });

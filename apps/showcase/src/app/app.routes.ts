@@ -9,7 +9,8 @@ import HomePage from './pages/home-page';
 import NavPage from './pages/nav-page';
 import NotFoundPage from './pages/not-found-page';
 import PaginatorPage from './pages/paginator-page';
-import { SelectPage } from './pages/select-page';
+import ProgressPage from './pages/progress-page';
+import SelectPage from './pages/select-page';
 import ThemeTogglerPage from './pages/theme-toggler-page';
 import TooltipPage from './pages/tooltip-page';
 
@@ -21,6 +22,7 @@ export const appRoutes: Route[] = [
   { path: 'buttons', component: ButtonsPage, title: 'Buttons Page' },
   { path: 'nav', component: NavPage, title: 'Nav Page' },
   { path: 'select', component: SelectPage, title: 'Select Page' },
+  { path: 'progress', component: ProgressPage, title: 'Progress Page' },
   { path: 'date-picker', component: DatePickerPage, title: 'DatePicker Page' },
   { path: 'dropdown', component: DropdownPage, title: 'Dropdown Page' },
   { path: 'colors', component: ColorsPage, title: 'Colors Page' },
