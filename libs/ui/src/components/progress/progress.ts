@@ -38,6 +38,6 @@ export class ScProgress {
   value = input<number>(0);
 
   transform = computed(() => {
-    return `translateX(-${100 - (this.value() || 0)}%)`;
+    return `translateX(-${100 - this.value()}%)`;
   });
 }
