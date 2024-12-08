@@ -1,4 +1,5 @@
 import { Directionality } from '@angular/cdk/bidi';
+import { ESCAPE, TAB, hasModifierKey } from '@angular/cdk/keycodes';
 import { Overlay, OverlayModule, OverlayRef } from '@angular/cdk/overlay';
 import { _getEventTarget } from '@angular/cdk/platform';
 import { TemplatePortal } from '@angular/cdk/portal';
@@ -119,9 +120,9 @@ export class ScSelect {
       hasBackdrop: false,
     });
 
-    // this._overlayRef.keydownEvents().subscribe((event) => {
-    //   this._handleKeydown(event);
-    // });
+    this._overlayRef.keydownEvents().subscribe((event) => {
+      this._handleKeydown(event);
+    });
 
     this._overlayRef.outsidePointerEvents().subscribe((event) => {
       const target = _getEventTarget(event) as HTMLElement;
@@ -154,5 +155,19 @@ export class ScSelect {
       this.state.isOpen.set(false);
       this._overlayRef?.detach();
     }
+  }
+
+  /** Handles keyboard events while the overlay is open. */
+  private _handleKeydown(event: KeyboardEvent): void {
+    const keyCode = event.keyCode;
+
+    if (keyCode === TAB) {
+      this.close();
+    } else if (keyCode === ESCAPE && !hasModifierKey(event)) {
+      event.preventDefault();
+      this.close();
+    }
+
+    //TODO handle keyCode === ENTER and other cases
   }
 }
