@@ -65,9 +65,12 @@ import { ScSelectState } from './select-state';
   ],
 })
 export class ScSelect implements ControlValueAccessor {
-  static id = 0;
+  static nextId = 0;
+
+  id: number = 0;
+
   _getPanelId() {
-    return `panel-${ScSelect.id++}`;
+    return `panel-${this.id}`;
   }
   private readonly _cdr = inject(ChangeDetectorRef);
 
@@ -86,6 +89,8 @@ export class ScSelect implements ControlValueAccessor {
   placeholder = input<string>('');
 
   constructor() {
+    this.id = ++ScSelect.nextId;
+
     effect(() => {
       const selectedValue = this.state.selectedValue();
       this.setValue(selectedValue);
