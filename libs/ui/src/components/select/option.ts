@@ -1,9 +1,11 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   ViewEncapsulation,
   inject,
   input,
+  viewChild,
 } from '@angular/core';
 
 import { SvgCheckIcon } from '@semantic-icons/lucide-icons';
@@ -25,7 +27,9 @@ import { ScSelectState } from './select-state';
         </span>
       }
 
-      <ng-content />
+      <span #label>
+        <ng-content />
+      </span>
     </button>
   `,
   styles: ``,
@@ -37,7 +41,10 @@ export class ScOption {
 
   value = input.required<string>();
 
+  label = viewChild<ElementRef<HTMLSpanElement>>('label');
+
   select() {
     this.state.selectedValue.set(this.value());
+    this.state.selectedLabel.set(this.label()?.nativeElement.textContent ?? '');
   }
 }

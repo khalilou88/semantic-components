@@ -1,5 +1,12 @@
 import { CdkMenu, CdkMenuTrigger } from '@angular/cdk/menu';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  inject,
+  input,
+} from '@angular/core';
 
 import { SvgChevronDownIcon } from '@semantic-icons/lucide-icons';
 
@@ -15,7 +22,7 @@ import { ScSelectState } from './select-state';
       type="button"
       role="combobox"
     >
-      {{ placeholder() }}
+      {{ label() }}
       <svg-chevron-down-icon class="h-4 w-4 opacity-50" />
     </button>
 
@@ -34,5 +41,15 @@ import { ScSelectState } from './select-state';
   providers: [ScSelectState],
 })
 export class ScSelect {
+  state = inject(ScSelectState);
+
   placeholder = input<string>('');
+
+  label = computed(() => {
+    if (this.state.selectedLabel()) {
+      return this.state.selectedLabel();
+    }
+
+    return this.placeholder();
+  });
 }
