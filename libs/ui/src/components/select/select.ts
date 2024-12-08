@@ -1,5 +1,6 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { Overlay, OverlayModule, OverlayRef } from '@angular/cdk/overlay';
+import { _getEventTarget } from '@angular/cdk/platform';
 import { TemplatePortal } from '@angular/cdk/portal';
 import {
   AfterRenderRef,
@@ -113,14 +114,14 @@ export class ScSelect {
     //   this._handleKeydown(event);
     // });
 
-    // this._overlayRef.outsidePointerEvents().subscribe((event) => {
-    //   const target = _getEventTarget(event) as HTMLElement;
-    //   const origin = this._input.getOverlayOrigin().nativeElement;
+    this._overlayRef.outsidePointerEvents().subscribe((event) => {
+      const target = _getEventTarget(event) as HTMLElement;
+      const origin = this.scSelectTrigger().nativeElement;
 
-    //   if (target && target !== origin && !origin.contains(target)) {
-    //     this.close();
-    //   }
-    // });
+      if (target && target !== origin && !origin.contains(target)) {
+        this.close();
+      }
+    });
 
     return this._overlayRef;
   }
