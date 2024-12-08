@@ -1,21 +1,19 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { ScLabel, ScSelect } from '@semantic-components/ui';
+import { ScLabel, ScOption, ScSelect } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-select-page',
-  imports: [ScLabel, ScSelect],
+  imports: [ScLabel, ScSelect, ScOption],
   template: `
     <label sc-label for="cars">Choose a car:</label>
 
-    <br />
-
-    <select id="cars" sc-select name="cars">
-      <option value="volvo">Volvo</option>
-      <option value="saab">Saab</option>
-      <option value="mercedes">Mercedes</option>
-      <option value="audi">Audi</option>
-    </select>
+    <sc-select id="cars" name="cars">
+      <sc-option value="volvo">Volvo</sc-option>
+      <sc-option value="saab">Saab</sc-option>
+      <sc-option value="mercedes">Mercedes</sc-option>
+      <sc-option value="audi">Audi</sc-option>
+    </sc-select>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
