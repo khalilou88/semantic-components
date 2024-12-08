@@ -1,14 +1,13 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { RouterModule } from '@angular/router';
 
 @Component({
-  imports: [RouterModule],
-  selector: 'app-root',
+  selector: 'sc-sidebar-header',
+  imports: [],
   template: `
-    <router-outlet></router-outlet>
+    <p>sidebar-header works!</p>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {}
+export class ScSidebarHeader {}

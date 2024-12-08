@@ -11,3 +11,4 @@ export * from './lib/components/label';
 export * from './lib/components/textarea';
 export * from './lib/components/select';
 export * from './lib/components/progress';
+export * from './lib/components/sidebar';

@@ -1,5 +1,7 @@
 import { Route } from '@angular/router';
 
+import { ScSidebarLayout } from '@semantic-components/ui';
+
 import ButtonsPage from './pages/buttons-page';
 import ColorsPage from './pages/colors-page';
 import DatePickerPage from './pages/date-picker-page';
@@ -15,22 +17,28 @@ import ThemeTogglerPage from './pages/theme-toggler-page';
 import TooltipPage from './pages/tooltip-page';
 
 export const appRoutes: Route[] = [
-  { path: 'home', component: HomePage, title: 'Home Page' },
-  { path: 'tooltip', component: TooltipPage, title: 'Tooltip Page' },
-  { path: 'editor', component: EditorPage, title: 'Editor Page' },
-  { path: 'paginator', component: PaginatorPage, title: 'Paginator Page' },
-  { path: 'buttons', component: ButtonsPage, title: 'Buttons Page' },
-  { path: 'nav', component: NavPage, title: 'Nav Page' },
-  { path: 'select', component: SelectPage, title: 'Select Page' },
-  { path: 'progress', component: ProgressPage, title: 'Progress Page' },
-  { path: 'date-picker', component: DatePickerPage, title: 'DatePicker Page' },
-  { path: 'dropdown', component: DropdownPage, title: 'Dropdown Page' },
-  { path: 'colors', component: ColorsPage, title: 'Colors Page' },
-  { path: 'theme-toggler', component: ThemeTogglerPage, title: 'ThemeToggler Page' },
-  { path: '', redirectTo: '/home', pathMatch: 'full' }, // redirect to `home`
   {
-    path: '**',
-    component: NotFoundPage,
-    title: '404 Not Found Page',
-  }, // Wildcard route for a 404 page
+    path: '',
+    component: ScSidebarLayout,
+    children: [
+      { path: 'home', component: HomePage, title: 'Home Page' },
+      { path: 'tooltip', component: TooltipPage, title: 'Tooltip Page' },
+      { path: 'editor', component: EditorPage, title: 'Editor Page' },
+      { path: 'paginator', component: PaginatorPage, title: 'Paginator Page' },
+      { path: 'buttons', component: ButtonsPage, title: 'Buttons Page' },
+      { path: 'nav', component: NavPage, title: 'Nav Page' },
+      { path: 'select', component: SelectPage, title: 'Select Page' },
+      { path: 'progress', component: ProgressPage, title: 'Progress Page' },
+      { path: 'date-picker', component: DatePickerPage, title: 'DatePicker Page' },
+      { path: 'dropdown', component: DropdownPage, title: 'Dropdown Page' },
+      { path: 'colors', component: ColorsPage, title: 'Colors Page' },
+      { path: 'theme-toggler', component: ThemeTogglerPage, title: 'ThemeToggler Page' },
+      { path: '', redirectTo: '/home', pathMatch: 'full' }, // redirect to `home`
+      {
+        path: '**',
+        component: NotFoundPage,
+        title: '404 Not Found Page',
+      }, // Wildcard route for a 404 page
+    ],
+  },
 ];
