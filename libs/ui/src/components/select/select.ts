@@ -25,7 +25,6 @@ import { SvgChevronDownIcon } from '@semantic-icons/lucide-icons';
       </div>
     </ng-template>
   `,
-  host: {},
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
