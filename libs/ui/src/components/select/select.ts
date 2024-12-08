@@ -8,7 +8,6 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  Injector,
   TemplateRef,
   ViewContainerRef,
   ViewEncapsulation,
@@ -70,7 +69,6 @@ export class ScSelect implements ControlValueAccessor {
   _overlay = inject(Overlay);
   _dir = inject(Directionality, { optional: true });
   _viewContainerRef = inject(ViewContainerRef);
-  _injector = inject(Injector);
 
   private _portal: TemplatePortal<unknown> | null = null;
 
