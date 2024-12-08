@@ -67,7 +67,7 @@ import { ScSelectState } from './select-state';
 export class ScSelect implements ControlValueAccessor {
   static nextId = 0;
 
-  id: number = 0;
+  id = 0;
 
   _getPanelId() {
     return `panel-${this.id}`;
