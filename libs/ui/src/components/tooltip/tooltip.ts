@@ -1,9 +1,4 @@
-import {
-  Overlay,
-  OverlayPositionBuilder,
-  OverlayRef,
-  PositionStrategy,
-} from '@angular/cdk/overlay';
+import { ConnectedPosition, Overlay, OverlayRef, PositionStrategy } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import {
   ComponentRef,
@@ -22,12 +17,12 @@ import { ScTooltipContainer } from './tooltip-container';
   selector: '[scTooltip]',
 })
 export class ScTooltip implements OnInit, OnDestroy {
-  private readonly overlayPositionBuilder = inject(OverlayPositionBuilder);
   private readonly elementRef = inject(ElementRef);
   private readonly overlay = inject(Overlay);
-
-  readonly text = input('', { alias: 'scTooltip' });
   private overlayRef!: OverlayRef;
+
+  message = input('', { alias: 'scTooltip' });
+  position = input<'left' | 'right' | 'above' | 'below'>('below');
 
   ngOnInit() {
     const positionStrategy = this.getPositionStrategy();
@@ -64,26 +59,66 @@ export class ScTooltip implements OnInit, OnDestroy {
     const tooltipRef: ComponentRef<ScTooltipContainer> = this.overlayRef.attach(tooltipPortal);
 
     // Pass content to tooltip component instance
-    tooltipRef.instance.text = this.text;
+    tooltipRef.instance.message = this.message;
   }
 
   private getPositionStrategy(): PositionStrategy {
     return this.overlay
       .position()
       .flexibleConnectedTo(this.elementRef)
-      .withPositions([
-        {
-          originX: 'center',
-          originY: 'bottom',
-          overlayX: 'center',
-          overlayY: 'top',
-        },
-        {
-          originX: 'center',
-          originY: 'top',
-          overlayX: 'center',
-          overlayY: 'bottom',
-        },
-      ]);
+      .withPositions(this.getPositions());
+  }
+
+  getPositions(): ConnectedPosition[] {
+    switch (this.position()) {
+      case 'above': {
+        return [
+          {
+            originX: 'center',
+            originY: 'top',
+            overlayX: 'center',
+            overlayY: 'bottom',
+            offsetY: -4,
+          },
+        ];
+      }
+      case 'below': {
+        return [
+          {
+            originX: 'center',
+            originY: 'bottom',
+            overlayX: 'center',
+            overlayY: 'top',
+            offsetY: 4,
+          },
+        ];
+      }
+      case 'left': {
+        return [
+          {
+            originX: 'start',
+            originY: 'center',
+            overlayX: 'end',
+            overlayY: 'center',
+            offsetX: -4,
+          },
+        ];
+      }
+      case 'right': {
+        return [
+          {
+            originX: 'end',
+            originY: 'center',
+            overlayX: 'start',
+            overlayY: 'center',
+            offsetX: 4,
+          },
+        ];
+      }
+
+      default: {
+        throw new Error('Error in switch case');
+      }
+    }
   }
 }
