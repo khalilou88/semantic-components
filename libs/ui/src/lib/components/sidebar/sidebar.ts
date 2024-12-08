@@ -20,7 +20,7 @@ const SIDEBAR_WIDTH_MOBILE = 18; //"18rem"
   },
   styles: `
     sc-sidebar {
-      @apply flex h-full flex-col bg-sidebar text-sidebar-foreground;
+      @apply flex h-full flex-col bg-sidebar text-sidebar-foreground border-2 border-blue-600;
     }
   `,
   encapsulation: ViewEncapsulation.None,

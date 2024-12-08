@@ -9,27 +9,35 @@ import {
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { SvgChevronRightIcon } from '@semantic-icons/lucide-icons';
+import { SvgChevronRightIcon, SvgPanelLeftIcon } from '@semantic-icons/lucide-icons';
 
 import { ScButton } from '../button';
 import { ScSidebar } from './sidebar';
 
 @Component({
   selector: 'sc-sidebar-layout',
-  imports: [ScSidebar, SvgChevronRightIcon, RouterModule, ScButton],
+  imports: [ScSidebar, SvgPanelLeftIcon, RouterModule, ScButton],
   template: `
     <sc-sidebar />
 
-    <main class="">
-      <button sc-button type="button" size="icon">
-        <svg-chevron-right-icon />
+    <main class="border-2 border-green-600">
+      <button
+        (click)="toggleSidebar()"
+        sc-button
+        type="button"
+        size="icon"
+        variant="ghost"
+        data-sidebar="trigger"
+      >
+        <svg-panel-left-icon />
+        <span class="sr-only">Toggle Sidebar</span>
       </button>
       <router-outlet></router-outlet>
     </main>
   `,
   styles: `
     sc-sidebar-layout {
-      @apply flex min-h-svh w-full;
+      @apply flex min-h-svh w-full border-2 border-rose-600;
     }
   `,
   encapsulation: ViewEncapsulation.None,
@@ -45,7 +53,7 @@ export class ScSidebarLayout implements OnInit {
     this.document.body.classList.add('h-full');
   }
 
-  toggleNav() {
+  toggleSidebar() {
     this.opened.update((value) => !value);
   }
 }
