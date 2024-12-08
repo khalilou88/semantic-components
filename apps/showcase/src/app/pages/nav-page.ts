@@ -18,7 +18,6 @@ import { ScNav, ScNavItemDropdown, ScNavLink, ScNavList } from '@semantic-compon
         <li>
           <a sc-nav-link routerLink="shop">Shop</a>
         </li>
-
         <li sc-nav-item-dropdown title="Dropdown">
           <ul>
             <li><a sc-nav-link href="#">Action</a></li>
