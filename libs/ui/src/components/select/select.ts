@@ -3,6 +3,8 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@a
 
 import { SvgChevronDownIcon } from '@semantic-icons/lucide-icons';
 
+import { ScSelectState } from './select-state';
+
 @Component({
   selector: 'sc-select',
   imports: [SvgChevronDownIcon, CdkMenuTrigger, CdkMenu],
@@ -29,6 +31,7 @@ import { SvgChevronDownIcon } from '@semantic-icons/lucide-icons';
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [ScSelectState],
 })
 export class ScSelect {
   placeholder = input<string>('');

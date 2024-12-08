@@ -2,11 +2,13 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  inject,
   input,
-  output,
 } from '@angular/core';
 
 import { SvgCheckIcon } from '@semantic-icons/lucide-icons';
+
+import { ScSelectState } from './select-state';
 
 @Component({
   selector: 'sc-option',
@@ -17,9 +19,11 @@ import { SvgCheckIcon } from '@semantic-icons/lucide-icons';
       (click)="select()"
       type="button"
     >
-      <span class="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
-        <svg-check-icon class="h-4 w-4" />
-      </span>
+      @if (state.selectedValue() === value()) {
+        <span class="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+          <svg-check-icon class="h-4 w-4" />
+        </span>
+      }
 
       <ng-content />
     </button>
@@ -29,11 +33,11 @@ import { SvgCheckIcon } from '@semantic-icons/lucide-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScOption {
+  state = inject(ScSelectState);
+
   value = input.required<string>();
 
-  selected = output<string>();
-
   select() {
-    this.selected.emit(this.value());
+    this.state.selectedValue.set(this.value());
   }
 }
