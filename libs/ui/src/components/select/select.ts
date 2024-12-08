@@ -33,6 +33,8 @@ import { ScSelectState } from './select-state';
       class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
       #scSelectTrigger
       [disabled]="isDisabled()"
+      [attr.aria-expanded]="_isExpanded()"
+      [attr.aria-controls]="_getPanelId()"
       (click)="open()"
       type="button"
       role="combobox"
@@ -44,6 +46,7 @@ import { ScSelectState } from './select-state';
     <ng-template #panelTemplate>
       <div
         class="relative z-50 max-h-96 w-full min-w-32 overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2"
+        [id]="_getPanelId()"
       >
         <ng-content />
       </div>
@@ -62,6 +65,10 @@ import { ScSelectState } from './select-state';
   ],
 })
 export class ScSelect implements ControlValueAccessor {
+  static id = 0;
+  _getPanelId() {
+    return `panel-${ScSelect.id++}`;
+  }
   private readonly _cdr = inject(ChangeDetectorRef);
 
   state = inject(ScSelectState);
@@ -130,6 +137,10 @@ export class ScSelect implements ControlValueAccessor {
     }
 
     return this.placeholder();
+  });
+
+  _isExpanded = computed(() => {
+    return this.state.isOpen();
   });
 
   private _overlayRef: OverlayRef | null = null;
