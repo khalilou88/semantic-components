@@ -6,3 +6,5 @@ export * from './components/date-picker';
 export * from './components/nav';
 export * from './components/theme-toggler';
 export * from './components/button';
+export * from './components/input';
+export * from './components/label';

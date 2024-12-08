@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
 
 @Component({
-  selector: 'button[sc-button]',
+  selector: 'button[sc-button], a[sc-button]',
   imports: [],
   template: `
     <ng-content />
