@@ -5,6 +5,7 @@ import { _getEventTarget } from '@angular/cdk/platform';
 import { TemplatePortal } from '@angular/cdk/portal';
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   Injector,
@@ -13,10 +14,13 @@ import {
   ViewEncapsulation,
   computed,
   effect,
+  forwardRef,
   inject,
   input,
+  signal,
   viewChild,
 } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { SvgChevronDownIcon } from '@semantic-icons/lucide-icons';
 
@@ -29,6 +33,7 @@ import { ScSelectState } from './select-state';
     <button
       class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
       #scSelectTrigger
+      [disabled]="isDisabled()"
       (click)="open()"
       type="button"
       role="combobox"
@@ -48,9 +53,18 @@ import { ScSelectState } from './select-state';
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [ScSelectState],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => ScSelect),
+      multi: true,
+    },
+    ScSelectState,
+  ],
 })
-export class ScSelect {
+export class ScSelect implements ControlValueAccessor {
+  private readonly _cdr = inject(ChangeDetectorRef);
+
   state = inject(ScSelectState);
 
   _overlay = inject(Overlay);
@@ -68,6 +82,9 @@ export class ScSelect {
 
   constructor() {
     effect(() => {
+      const selectedValue = this.state.selectedValue();
+      this.setValue(selectedValue);
+
       const closeOverlay = this.state.closeOverlay();
 
       if (closeOverlay) {
@@ -76,6 +93,36 @@ export class ScSelect {
         this.state.closeOverlay.set(false);
       }
     });
+  }
+
+  _value = signal('');
+
+  isDisabled = signal(false);
+
+  writeValue(value: string): void {
+    this._value.set(value);
+  }
+
+  setValue(value: string) {
+    this._value.set(value);
+    this._onChange(value);
+    this._cdr.markForCheck();
+  }
+
+  _onChange: (value: string) => void = () => {};
+
+  _onTouched: () => void = () => {};
+
+  registerOnChange(fn: (value: string) => void): void {
+    this._onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this._onTouched = fn;
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+    this.isDisabled.set(isDisabled);
   }
 
   label = computed(() => {
