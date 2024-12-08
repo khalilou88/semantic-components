@@ -1,13 +1,20 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'sc-nav',
+  selector: 'nav[sc-nav]',
   imports: [],
   template: `
-    <p>nav works!</p>
+    <ng-content />
   `,
-  styles: ``,
+  host: {
+    '[class.sc-nav]': 'true',
+  },
+  styles: `
+    .sc-nav {
+      @apply relative z-10 flex max-w-max flex-1 items-center justify-center;
+    }
+  `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavComponent {}
+export class ScNav {}

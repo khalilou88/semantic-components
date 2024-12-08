@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-import { ScNavLink, ScNavList } from '@semantic-components/ui';
+import { ScNav, ScNavLink, ScNavList } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-nav-page',
-  imports: [ScNavLink, RouterLink, ScNavList],
+  imports: [ScNavLink, RouterLink, ScNavList, ScNav],
   template: `
-    <nav>
+    <nav sc-nav>
       <ul sc-nav-list>
         <li>
           <a sc-nav-link routerLink="/home">Home</a>
