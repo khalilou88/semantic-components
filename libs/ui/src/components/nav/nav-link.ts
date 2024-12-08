@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { ScNavButtonBase } from './nav-button-base';
+
 @Component({
   selector: 'a[sc-nav-link]',
   imports: [],
@@ -9,14 +11,9 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   host: {
     routerLinkActive: 'active-page',
     ariaCurrentWhenActive: 'page',
-    '[class.sc-nav-link]': 'true',
   },
-  styles: `
-    .sc-nav-link {
-      @apply inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50;
-    }
-  `,
+  styleUrl: './nav-button-base.css',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScNavLink {}
+export class ScNavLink extends ScNavButtonBase {}

@@ -3,11 +3,12 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 @Component({
   selector: 'sc-nav-button-base',
   imports: [],
-  template: `
-    <p>nav-button-base works!</p>
-  `,
+  template: ``,
+  host: {
+    '[class.sc-nav-button-base]': 'true',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavButtonBase {}
+export class ScNavButtonBase {}
