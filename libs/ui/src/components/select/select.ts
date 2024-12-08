@@ -1,5 +1,5 @@
 import { CdkMenu, CdkMenuTrigger } from '@angular/cdk/menu';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
 
 import { SvgChevronDownIcon } from '@semantic-icons/lucide-icons';
 
@@ -12,7 +12,7 @@ import { SvgChevronDownIcon } from '@semantic-icons/lucide-icons';
       [cdkMenuTriggerFor]="options"
       type="menu"
     >
-      Select a fruit
+      {{ placeholder() }}
       <svg-chevron-down-icon class="h-4 w-4 opacity-50" />
     </button>
 
@@ -30,4 +30,6 @@ import { SvgChevronDownIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSelect {}
+export class ScSelect {
+  placeholder = input<string>('');
+}

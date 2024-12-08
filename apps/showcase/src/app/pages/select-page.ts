@@ -9,7 +9,7 @@ import { ScLabel, ScOption, ScSelect } from '@semantic-components/ui';
     <label sc-label for="cars">Choose a car:</label>
 
     <div class="w-[180px]">
-      <sc-select id="cars" name="cars">
+      <sc-select id="cars" name="cars" placeholder="Select a car">
         <sc-option value="volvo">Volvo</sc-option>
         <sc-option value="saab">Saab</sc-option>
         <sc-option value="mercedes">Mercedes</sc-option>
