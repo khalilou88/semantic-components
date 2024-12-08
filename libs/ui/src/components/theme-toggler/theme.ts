@@ -7,8 +7,6 @@ export class ScTheme {
   value = signal<'light' | 'dark' | undefined>(undefined);
 
   constructor() {
-    console.log('effect');
-
     effect(() => {
       if (this.value() !== undefined) {
         localStorage['theme'] = this.value();
@@ -20,7 +18,6 @@ export class ScTheme {
   }
 
   init() {
-    console.log('init');
     afterNextRender(() => {
       const localStorageTheme = localStorage['theme'];
       const isDarkode =
