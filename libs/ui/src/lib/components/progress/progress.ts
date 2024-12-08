@@ -10,10 +10,7 @@ import {
   selector: 'sc-progress',
   imports: [],
   template: `
-    <div
-      class="h-full w-full flex-1 bg-primary transition-all"
-      [style.transform]="transform()"
-    ></div>
+    <div class="size-full flex-1 bg-primary transition-all" [style.transform]="transform()"></div>
   `,
   host: {
     // Sets the role for this component to "progressbar"
