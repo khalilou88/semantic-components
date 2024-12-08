@@ -41,10 +41,10 @@ export class ScOption {
 
   value = input.required<string>();
 
-  label = viewChild<ElementRef<HTMLSpanElement>>('label');
+  label = viewChild.required<ElementRef<HTMLSpanElement>>('label');
 
   select() {
     this.state.selectedValue.set(this.value());
-    this.state.selectedLabel.set(this.label()?.nativeElement.textContent ?? '');
+    this.state.selectedLabel.set(this.label().nativeElement.textContent ?? '');
   }
 }
