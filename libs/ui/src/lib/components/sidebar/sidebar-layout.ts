@@ -5,6 +5,7 @@ import {
   Inject,
   OnInit,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -26,15 +27,25 @@ import { ScSidebar } from './sidebar';
       <router-outlet></router-outlet>
     </main>
   `,
-  styles: ``,
+  styles: `
+    sc-sidebar-layout {
+      @apply flex min-h-svh w-full;
+    }
+  `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSidebarLayout implements OnInit {
   constructor(@Inject(DOCUMENT) private readonly document: Document) {}
 
+  opened = signal<boolean>(true);
+
   ngOnInit() {
     document.documentElement.classList.add('h-full');
     this.document.body.classList.add('h-full');
+  }
+
+  toggleNav() {
+    this.opened.update((value) => !value);
   }
 }
