@@ -166,12 +166,14 @@ export class ScSelect implements ControlValueAccessor {
           originY: 'bottom',
           overlayX: 'start',
           overlayY: 'top',
+          offsetY: 8,
         },
         {
           originX: 'start',
           originY: 'top',
           overlayX: 'start',
           overlayY: 'bottom',
+          offsetY: -8,
         },
       ]);
 
