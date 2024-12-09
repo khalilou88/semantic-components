@@ -66,7 +66,7 @@ const DEFAULT_PAGE_SIZE = 10;
         <span class="font-semibold text-gray-900 dark:text-white">{{ totalSize() }}</span>
       </span-->
 
-      <ul class="inline-flex items-stretch -space-x-px">
+      <ul class="flex flex-row items-center gap-1">
         @if (showFirstLastButtons()) {
           <li>
             <a
