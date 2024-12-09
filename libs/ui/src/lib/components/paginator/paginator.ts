@@ -30,7 +30,6 @@ const DEFAULT_PAGE_SIZE = 10;
   imports: [
     ScPageItem,
     ReactiveFormsModule,
-
     ScPagination,
     ScButton,
     SvgChevronLeftIcon,
@@ -42,14 +41,8 @@ const DEFAULT_PAGE_SIZE = 10;
     <nav sc-pagination>
       @if (!hidePageSize()) {
         <div>
-          <label class="text-sm font-normal text-gray-500 dark:text-gray-400" for="items-per-page">
-            Items per page:
-          </label>
-          <select
-            class="w-14 rounded border border-gray-300 bg-gray-50 p-2 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-            id="items-per-page"
-            [formControl]="pageSizeFormControl"
-          >
+          <label class="" for="items-per-page">Items per page:</label>
+          <select class="" id="items-per-page" [formControl]="pageSizeFormControl">
             @for (pageSizeOption of pageSizeOptions(); track $index) {
               <option [value]="pageSizeOption">{{ pageSizeOption }}</option>
             }
@@ -57,14 +50,12 @@ const DEFAULT_PAGE_SIZE = 10;
         </div>
       }
 
-      <!--span class="text-sm font-normal text-gray-500 dark:text-gray-400">
+      <div class="">
         Showing
-        <span class="font-semibold text-gray-900 dark:text-white">
-          {{ firstItemPage() }}-{{ lastItemPage() }}
-        </span>
+        <span>{{ firstItemPage() }}-{{ lastItemPage() }}</span>
         of
-        <span class="font-semibold text-gray-900 dark:text-white">{{ totalSize() }}</span>
-      </span-->
+        <span>{{ totalSize() }}</span>
+      </div>
 
       <ul class="flex flex-row items-center gap-1">
         @if (showFirstLastButtons()) {
