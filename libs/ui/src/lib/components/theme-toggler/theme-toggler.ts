@@ -1,33 +1,31 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { SvgMoonIcon, SvgSunIcon } from '@semantic-icons/tabler-icons/filled';
+import { SvgMoonIcon, SvgSunIcon } from '@semantic-icons/lucide-icons';
 
+import { ScButton } from '../button';
+import { ScTooltip } from '../tooltip';
 import { ScTheme } from './theme';
 
 @Component({
   selector: 'sc-theme-toggler',
-  imports: [SvgMoonIcon, SvgSunIcon],
+  imports: [SvgMoonIcon, SvgSunIcon, ScTooltip, ScButton],
   template: `
     <button
-      class="rounded-lg p-2.5 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
       (click)="toggleTheme()"
+      sc-button
+      variant="outline"
+      size="icon"
       type="button"
+      scTooltip="Toggle dark mode"
     >
       @if (theme.value() === 'light') {
-        <svg-moon-icon class="size-6" />
+        <svg-moon-icon />
       }
 
       @if (theme.value() === 'dark') {
-        <svg-sun-icon class="size-6" />
+        <svg-sun-icon />
       }
     </button>
-    <div
-      class="invisible absolute z-10 inline-block rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300"
-      role="tooltip"
-    >
-      Toggle dark mode
-      <div class=" " data-popper-arrow></div>
-    </div>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
