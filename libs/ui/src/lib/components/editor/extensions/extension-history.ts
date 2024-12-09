@@ -1,19 +1,15 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
+import { ScButton } from '../../button';
 import { ScTooltip } from '../../tooltip';
 import { ScEditor } from '../editor';
 import { ScExtensions } from './extensions';
 
 @Component({
   selector: 'sc-extension-history',
-  imports: [ScTooltip],
+  imports: [ScTooltip, ScButton],
   template: `
-    <button
-      class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
-      (click)="undo()"
-      type="button"
-      scTooltip="Undo"
-    >
+    <button (click)="undo()" sc-button variant="outline" size="icon" type="button" scTooltip="Undo">
       <svg
         class="size-5"
         aria-hidden="true"
