@@ -1,11 +1,9 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
 
+import { SIDEBAR_WIDTH } from './constants';
 import { ScSidebarContent } from './sidebar-content';
 import { ScSidebarFooter } from './sidebar-footer';
 import { ScSidebarHeader } from './sidebar-header';
-
-const SIDEBAR_WIDTH = 16; //"16rem"
-const SIDEBAR_WIDTH_MOBILE = 18; //"18rem"
 
 @Component({
   selector: 'sc-sidebar',

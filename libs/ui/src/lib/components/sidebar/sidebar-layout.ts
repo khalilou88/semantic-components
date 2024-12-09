@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 import { SvgPanelLeftIcon } from '@semantic-icons/lucide-icons';
 
 import { ScButton } from '../button';
+import { SIDEBAR_WIDTH } from './constants';
 import { ScSidebar } from './sidebar';
 
 @Component({
@@ -28,6 +29,7 @@ import { ScSidebar } from './sidebar';
       <!-- This is what handles the sidebar gap on desktop -->
       <div
         class="duration-200 relative h-svh w-[--sidebar-width] bg-transparent transition-[width] ease-linear group-data-[collapsible=offcanvas]:w-0 group-data-[side=right]:rotate-180"
+        [style.width.rem]="sidebarWidth()"
         [ngClass]="
           variant() === 'floating' || variant() === 'inset'
             ? 'group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4))]'
@@ -37,6 +39,7 @@ import { ScSidebar } from './sidebar';
 
       <div
         class="duration-200 fixed inset-y-0 z-10 hidden h-svh w-[--sidebar-width] transition-[left,right,width] ease-linear md:flex"
+        [style.width.rem]="sidebarWidth()"
         [ngClass]="{
           'left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]':
             side() === 'left',
@@ -83,6 +86,8 @@ export class ScSidebarLayout implements OnInit {
   side = signal<'left' | 'right'>('left');
   variant = signal<'sidebar' | 'floating' | 'inset'>('sidebar');
   // collapsible = signal<'offcanvas' | 'icon' | 'none'>('offcanvas');
+
+  sidebarWidth = signal<number>(SIDEBAR_WIDTH);
 
   opened = signal<boolean>(true);
 
