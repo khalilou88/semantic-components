@@ -10,10 +10,10 @@ export interface WeekDayName {
   selector: 'sc-week-days-names',
   imports: [],
   template: `
-    <div class="mb-1 grid grid-cols-7">
+    <div class="grid grid-cols-7">
       @for (weekDayName of weekDaysNames(); track weekDayName.long) {
         <abbr
-          class="h-6 text-center text-sm font-medium leading-6 text-gray-500 dark:text-gray-400"
+          class="text-muted-foreground rounded-md w-9 font-normal text-[0.8rem]"
           [title]="weekDayName.long"
           [attr.aria-label]="weekDayName.long"
         >

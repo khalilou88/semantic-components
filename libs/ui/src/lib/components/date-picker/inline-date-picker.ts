@@ -9,18 +9,17 @@ import {
   signal,
 } from '@angular/core';
 
+import { ScCard } from '../card';
 import { ScMonthDays } from './month-days';
 import { ScMonthYearHeader } from './month-year-header';
 import { ScWeekDaysNames, WeekDayName } from './week-days-names';
 
 @Component({
   selector: 'sc-inline-date-picker',
-  imports: [ScWeekDaysNames, ScMonthYearHeader, ScMonthDays],
+  imports: [ScWeekDaysNames, ScMonthYearHeader, ScMonthDays, ScCard],
   template: `
-    <div class="inline-block rounded-lg bg-white p-4 shadow-lg dark:bg-gray-700">
-      <div class="bg-white px-2 py-3 text-center font-semibold dark:bg-gray-700 dark:text-white">
-        <sc-month-year-header [monthYear]="monthYear()" (monthYearChange)="setMonthYear($event)" />
-      </div>
+    <div sc-card>
+      <sc-month-year-header [monthYear]="monthYear()" (monthYearChange)="setMonthYear($event)" />
 
       <sc-week-days-names [weekDaysNames]="weekDaysNames()" />
 
