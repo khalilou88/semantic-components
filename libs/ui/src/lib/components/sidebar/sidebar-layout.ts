@@ -9,6 +9,7 @@ import {
   ViewEncapsulation,
   computed,
   inject,
+  linkedSignal,
   signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -66,7 +67,7 @@ import { ScSidebar } from './sidebar';
       </div>
     </div>
 
-    <main class=" z-50">
+    <main class="z-50">
       <button
         (click)="toggleSidebar()"
         sc-button
@@ -78,19 +79,6 @@ import { ScSidebar } from './sidebar';
         <svg-panel-left-icon />
         <span class="sr-only">Toggle Sidebar</span>
       </button>
-
-      <br />
-      {{ open() }}
-      <br />
-      {{ openMobile() }}
-      <br />
-      {{ state() }}
-      <br />
-      {{ side() }}
-      <br />
-      {{ variant() }}
-      <br />
-      {{ collapsible() }}
 
       <router-outlet></router-outlet>
     </main>
@@ -109,13 +97,18 @@ export class ScSidebarLayout implements OnInit {
 
   constructor(@Inject(DOCUMENT) private readonly document: Document) {}
 
-  open = signal<boolean>(true);
+  open = linkedSignal<boolean>(() => {
+    if (this.isMobile()) {
+      return false;
+    }
+
+    return true;
+  });
 
   state = computed<'expanded' | 'collapsed'>(() => {
     return this.open() ? 'expanded' : 'collapsed';
   });
 
-  openMobile = signal<boolean>(false);
   isMobile = signal<boolean>(false);
 
   side = signal<'left' | 'right'>('left');
@@ -123,11 +116,11 @@ export class ScSidebarLayout implements OnInit {
   collapsible = signal<'offcanvas' | 'icon' | 'none'>('offcanvas');
 
   sidebarWidth = computed<number>(() => {
-    if (this.open()) {
+    if (this.open() && !this.isMobile()) {
       return SIDEBAR_WIDTH;
     }
 
-    if (this.openMobile()) {
+    if (this.open() && this.isMobile()) {
       return SIDEBAR_WIDTH_MOBILE;
     }
 
@@ -147,10 +140,6 @@ export class ScSidebarLayout implements OnInit {
   }
 
   toggleSidebar() {
-    if (this.isMobile()) {
-      this.openMobile.update((value) => !value);
-    } else {
-      this.open.update((value) => !value);
-    }
+    this.open.update((value) => !value);
   }
 }
