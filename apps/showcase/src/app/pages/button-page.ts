@@ -58,4 +58,4 @@ import { SvgChevronRightIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ButtonsPage {}
+export default class ButtonPage {}
