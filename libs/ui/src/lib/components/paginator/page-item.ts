@@ -28,6 +28,7 @@ import { ScButton } from '../button';
           [size]="'icon'"
           (click)="selectPage()"
           sc-button
+          href="javascript:void(0)"
         >
           {{ page() }}
         </a>

@@ -76,6 +76,7 @@ const DEFAULT_PAGE_SIZE = 10;
               sc-button
               variant="outline"
               size="icon"
+              href="javascript:void(0)"
             >
               <svg-chevrons-left-icon />
               <span class="sr-only">First page</span>
@@ -91,6 +92,7 @@ const DEFAULT_PAGE_SIZE = 10;
             sc-button
             variant="outline"
             size="icon"
+            href="javascript:void(0)"
           >
             <svg-chevron-left-icon />
             <span class="sr-only">Previous page</span>
@@ -113,6 +115,7 @@ const DEFAULT_PAGE_SIZE = 10;
             sc-button
             variant="outline"
             size="icon"
+            href="javascript:void(0)"
           >
             <svg-chevron-right-icon />
             <span class="sr-only">Next page</span>
@@ -128,6 +131,7 @@ const DEFAULT_PAGE_SIZE = 10;
               sc-button
               variant="outline"
               size="icon"
+              href="javascript:void(0)"
             >
               <svg-chevrons-right-icon />
               <span class="sr-only">Last page</span>
