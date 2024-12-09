@@ -2,6 +2,7 @@ import { Route } from '@angular/router';
 
 import { ScSidebarLayout } from '@semantic-components/ui';
 
+import BreadcrumbPage from './pages/breadcrumb-page';
 import ButtonPage from './pages/button-page';
 import ColorsPage from './pages/colors-page';
 import DatePickerPage from './pages/date-picker-page';
@@ -28,6 +29,7 @@ export const appRoutes: Route[] = [
       { path: 'button', component: ButtonPage, title: 'Buttons Page' },
       { path: 'nav', component: NavPage, title: 'Nav Page' },
       { path: 'select', component: SelectPage, title: 'Select Page' },
+      { path: 'breadcrumb', component: BreadcrumbPage, title: 'Breadcrumb Page' },
       { path: 'progress', component: ProgressPage, title: 'Progress Page' },
       { path: 'date-picker', component: DatePickerPage, title: 'DatePicker Page' },
       { path: 'dropdown', component: DropdownPage, title: 'Dropdown Page' },

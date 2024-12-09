@@ -245,9 +245,7 @@ import { RouterModule } from '@angular/router';
           </a>
           <a
             class="group flex w-full items-center px-2 py-1 font-normal text-foreground underline-offset-2 hover:underline"
-            target=""
-            rel=""
-            href="/docs/components/breadcrumb"
+            routerLink="/breadcrumb"
           >
             Breadcrumb
           </a>
