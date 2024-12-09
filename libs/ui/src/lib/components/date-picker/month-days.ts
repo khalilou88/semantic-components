@@ -8,12 +8,23 @@ import {
 } from '@angular/core';
 
 import { ScButton } from '../button';
+import { WeekDayName } from './util';
 
 @Component({
   selector: 'sc-month-days',
   imports: [NgClass, ScButton],
   template: `
     <div class="grid grid-cols-7">
+      @for (weekDayName of weekDaysNames(); track weekDayName.long) {
+        <abbr
+          class="text-muted-foreground text-center"
+          [title]="weekDayName.long"
+          [attr.aria-label]="weekDayName.long"
+        >
+          {{ weekDayName.short }}
+        </abbr>
+      }
+
       @for (day of days(); track $index; let index = $index) {
         <button
           [ngClass]="{
@@ -41,6 +52,8 @@ import { ScButton } from '../button';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScMonthDays {
+  weekDaysNames = input.required<WeekDayName[]>();
+
   days = input.required<string[]>();
   firstDayMonth = input.required<number>();
   selectedDay = input<string>('');

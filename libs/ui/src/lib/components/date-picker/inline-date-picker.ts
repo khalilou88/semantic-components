@@ -13,11 +13,11 @@ import { ScButton } from '../button';
 import { ScCard, ScCardHeader } from '../card';
 import { ScMonthDays } from './month-days';
 import { ScMonthYearHeader } from './month-year-header';
-import { ScWeekDaysNames, WeekDayName } from './week-days-names';
+import { WeekDayName } from './util';
 
 @Component({
   selector: 'sc-inline-date-picker',
-  imports: [ScWeekDaysNames, ScMonthYearHeader, ScMonthDays, ScCard, ScCardHeader, ScButton],
+  imports: [ScMonthYearHeader, ScMonthDays, ScCard, ScCardHeader, ScButton],
   template: `
     <div sc-card>
       <div sc-card-header>
@@ -25,9 +25,8 @@ import { ScWeekDaysNames, WeekDayName } from './week-days-names';
       </div>
 
       <div class="p-6 pt-0">
-        <sc-week-days-names [weekDaysNames]="weekDaysNames()" />
-
         <sc-month-days
+          [weekDaysNames]="weekDaysNames()"
           [days]="monthDays()"
           [firstDayMonth]="firstDayMonth()"
           [selectedDay]="selectedDay()"
