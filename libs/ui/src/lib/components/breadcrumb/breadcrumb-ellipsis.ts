@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { SvgEllipsisIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'span[sc-breadcrumb-elipssis]',
+  selector: 'span[sc-breadcrumb-ellipsis]',
   imports: [SvgEllipsisIcon],
   template: `
     <svg-ellipsis-icon class="size-4" />
@@ -12,14 +12,14 @@ import { SvgEllipsisIcon } from '@semantic-icons/lucide-icons';
   host: {
     role: 'presentation',
     '[attr.aria-hidden]': 'true',
-    '[class.sc-breadcrumb-elipssis]': 'true',
+    '[class.sc-breadcrumb-ellipsis]': 'true',
   },
   styles: `
-    .sc-breadcrumb-elipssis {
+    .sc-breadcrumb-ellipsis {
       @apply flex h-9 w-9 items-center justify-center;
     }
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScBreadcrumbElipssis {}
+export class ScBreadcrumbEllipsis {}

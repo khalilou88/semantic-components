@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 
 import {
   ScBreadcrumb,
-  ScBreadcrumbElipssis,
+  ScBreadcrumbEllipsis,
   ScBreadcrumbItem,
   ScBreadcrumbLink,
   ScBreadcrumbList,
@@ -21,7 +21,7 @@ import { SvgChevronRightIcon } from '@semantic-icons/lucide-icons';
     ScBreadcrumbPage,
     ScBreadcrumbSeparator,
     SvgChevronRightIcon,
-    ScBreadcrumbElipssis,
+    ScBreadcrumbEllipsis,
   ],
   template: `
     <div class="space-y-2">
@@ -49,7 +49,7 @@ import { SvgChevronRightIcon } from '@semantic-icons/lucide-icons';
 
         <li sc-breadcrumb-separator><svg-chevron-right-icon /></li>
 
-        <li sc-breadcrumb-item><span sc-breadcrumb-elipssis></span></li>
+        <li sc-breadcrumb-item><span sc-breadcrumb-ellipsis></span></li>
 
         <li sc-breadcrumb-separator><svg-chevron-right-icon /></li>
 
