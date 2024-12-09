@@ -69,34 +69,32 @@ const DEFAULT_PAGE_SIZE = 10;
       <ul class="flex flex-row items-center gap-1">
         @if (showFirstLastButtons()) {
           <li>
-            <a
-              [attr.disabled]="isPrevPageDisabled()"
+            <button
+              [disabled]="isPrevPageDisabled()"
               [attr.aria-label]="'Go to first page'"
               (click)="firstPage()"
               sc-button
               variant="outline"
               size="icon"
-              href="javascript:void(0)"
             >
               <svg-chevrons-left-icon />
               <span class="sr-only">First page</span>
-            </a>
+            </button>
           </li>
         }
 
         <li>
-          <a
-            [attr.disabled]="isPrevPageDisabled()"
+          <button
+            [disabled]="isPrevPageDisabled()"
             [attr.aria-label]="'Go to previous page'"
             (click)="prevPage()"
             sc-button
             variant="outline"
             size="icon"
-            href="javascript:void(0)"
           >
             <svg-chevron-left-icon />
             <span class="sr-only">Previous page</span>
-          </a>
+          </button>
         </li>
 
         @for (page of pageRanges(); track $index) {
@@ -108,34 +106,32 @@ const DEFAULT_PAGE_SIZE = 10;
         }
 
         <li>
-          <a
-            [attr.disabled]="isNextPageDisabled()"
+          <button
+            [disabled]="isNextPageDisabled()"
             [attr.aria-label]="'Go to next page'"
             (click)="nextPage()"
             sc-button
             variant="outline"
             size="icon"
-            href="javascript:void(0)"
           >
             <svg-chevron-right-icon />
             <span class="sr-only">Next page</span>
-          </a>
+          </button>
         </li>
 
         @if (showFirstLastButtons()) {
           <li>
-            <a
-              [attr.disabled]="isNextPageDisabled()"
+            <button
+              [disabled]="isNextPageDisabled()"
               [attr.aria-label]="'Go to last page'"
               (click)="lastPage()"
               sc-button
               variant="outline"
               size="icon"
-              href="javascript:void(0)"
             >
               <svg-chevrons-right-icon />
               <span class="sr-only">Last page</span>
-            </a>
+            </button>
           </li>
         }
       </ul>
