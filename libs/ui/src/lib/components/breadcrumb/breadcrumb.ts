@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
 
 @Component({
   selector: 'nav[sc-breadcrumb]',
@@ -7,7 +7,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     <ng-content />
   `,
   host: {
-    '[attr.aria-label]': 'breadcrumb',
+    '[attr.aria-label]': 'ariaLabel',
     '[class.sc-breadcrumb]': 'true',
   },
   styles: `
@@ -18,4 +18,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScBreadcrumb {}
+export class ScBreadcrumb {
+  ariaLabel = 'breadcrumb';
+}

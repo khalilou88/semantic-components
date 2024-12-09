@@ -9,7 +9,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   host: {
     role: 'link',
     '[attr.aria-disabled]': 'true',
-    '[attr.aria-current]': 'page',
+    '[attr.aria-current]': '"page"',
     '[class.sc-breadcrumb-page]': 'true',
   },
   styles: `
