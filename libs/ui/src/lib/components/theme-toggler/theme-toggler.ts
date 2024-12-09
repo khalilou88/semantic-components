@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  inject,
+  signal,
+} from '@angular/core';
 
 import { SvgMoonIcon, SvgSunIcon } from '@semantic-icons/lucide-icons';
 
@@ -11,12 +18,12 @@ import { ScTheme } from './theme';
   imports: [SvgMoonIcon, SvgSunIcon, ScTooltip, ScButton],
   template: `
     <button
+      [scTooltip]="message()"
       (click)="toggleTheme()"
       sc-button
       variant="outline"
       size="icon"
       type="button"
-      scTooltip="Toggle dark mode"
     >
       @if (theme.value() === 'light') {
         <svg-moon-icon />
@@ -33,6 +40,14 @@ import { ScTheme } from './theme';
 })
 export class ScThemeToggler {
   theme = inject(ScTheme);
+
+  message = computed(() => {
+    if (this.theme.value() === 'light') {
+      return 'Toggle dark mode';
+    }
+
+    return 'Toggle light mode';
+  });
 
   toggleTheme() {
     if (this.theme.value() === 'light') {
