@@ -13,7 +13,7 @@ export interface WeekDayName {
     <div class="grid grid-cols-7">
       @for (weekDayName of weekDaysNames(); track weekDayName.long) {
         <abbr
-          class="text-muted-foreground rounded-md w-9 font-normal text-[0.8rem]"
+          class="w-9 rounded-md text-[0.8rem] font-normal text-muted-foreground"
           [title]="weekDayName.long"
           [attr.aria-label]="weekDayName.long"
         >

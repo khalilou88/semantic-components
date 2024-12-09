@@ -48,7 +48,7 @@ import { SvgChevronRightIcon } from '@semantic-icons/lucide-icons';
     <button sc-button variant="destructive" type="button" size="icon">
       <svg-chevron-right-icon />
     </button>
-    <button sc-button variant="outline" type="button" size="icon">
+    <button class="size-20" sc-button variant="outline" type="button" size="icon">
       <svg-chevron-right-icon />
     </button>
     <button sc-button variant="ghost" type="button" size="icon"><svg-chevron-right-icon /></button>
