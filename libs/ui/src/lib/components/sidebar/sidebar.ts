@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
 
-import { SIDEBAR_WIDTH } from './constants';
 import { ScSidebarContent } from './sidebar-content';
 import { ScSidebarFooter } from './sidebar-footer';
 import { ScSidebarHeader } from './sidebar-header';
@@ -33,19 +32,9 @@ import { ScSidebarHeader } from './sidebar-header';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSidebar {
-  side = signal<'left' | 'right'>('left');
-  variant = signal<'sidebar' | 'floating' | 'inset'>('sidebar');
-  collapsible = signal<'offcanvas' | 'icon' | 'none'>('offcanvas');
-
-  sidebarWidth = signal<number>(SIDEBAR_WIDTH);
-
-  isMobile = signal<boolean>(false);
-
-  // width = computed(() => {
-  //   if (this.opened()) {
-  //     return 256;
-  //   } else {
-  //     return 0;
-  //   }
-  // });
+  side = input.required<'left' | 'right'>();
+  variant = input.required<'sidebar' | 'floating' | 'inset'>();
+  collapsible = input.required<'offcanvas' | 'icon' | 'none'>();
+  sidebarWidth = input.required<number>();
+  isMobile = input.required<boolean>();
 }

@@ -1,12 +1,17 @@
+import { BreakpointObserver, LayoutModule } from '@angular/cdk/layout';
 import { DOCUMENT, NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   Inject,
   OnInit,
   ViewEncapsulation,
+  computed,
+  inject,
   signal,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterModule } from '@angular/router';
 
 import { SvgPanelLeftIcon } from '@semantic-icons/lucide-icons';
@@ -17,7 +22,7 @@ import { ScSidebar } from './sidebar';
 
 @Component({
   selector: 'sc-sidebar-layout',
-  imports: [ScSidebar, SvgPanelLeftIcon, RouterModule, ScButton, NgClass],
+  imports: [ScSidebar, SvgPanelLeftIcon, RouterModule, ScButton, NgClass, LayoutModule],
   template: `
     <div
       class="group peer hidden md:block text-sidebar-foreground"
@@ -51,7 +56,13 @@ import { ScSidebar } from './sidebar';
             variant() !== 'floating' && variant() !== 'inset',
         }"
       >
-        <sc-sidebar />
+        <sc-sidebar
+          [side]="side()"
+          [variant]="variant()"
+          [collapsible]="collapsible()"
+          [sidebarWidth]="sidebarWidth()"
+          [isMobile]="isMobile()"
+        />
       </div>
     </div>
 
@@ -79,24 +90,41 @@ import { ScSidebar } from './sidebar';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSidebarLayout implements OnInit {
+  breakpointObserver = inject(BreakpointObserver);
+  destroyRef = inject(DestroyRef);
+
   constructor(@Inject(DOCUMENT) private readonly document: Document) {}
 
-  state = signal<string>('');
+  open = signal<boolean>(true);
+
+  state = computed<'expanded' | 'collapsed'>(() => {
+    return this.open() ? 'expanded' : 'collapsed';
+  });
+
+  openMobile = signal<boolean>(false);
+  isMobile = signal<boolean>(false);
 
   side = signal<'left' | 'right'>('left');
   variant = signal<'sidebar' | 'floating' | 'inset'>('sidebar');
-  // collapsible = signal<'offcanvas' | 'icon' | 'none'>('offcanvas');
+  collapsible = signal<'offcanvas' | 'icon' | 'none'>('offcanvas');
 
   sidebarWidth = signal<number>(SIDEBAR_WIDTH);
-
-  opened = signal<boolean>(true);
 
   ngOnInit() {
     document.documentElement.classList.add('h-full');
     this.document.body.classList.add('h-full');
+
+    this.breakpointObserver
+      .observe(`(min-width: 1024px)`)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((state) => {
+        console.log(state);
+      });
   }
 
   toggleSidebar() {
-    this.opened.update((value) => !value);
+    this.isMobile()
+      ? this.openMobile.update((value) => !value)
+      : this.open.update((value) => !value);
   }
 }
