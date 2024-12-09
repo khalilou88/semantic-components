@@ -1,10 +1,26 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import {
+  ScBreadcrumb,
+  ScBreadcrumbItem,
+  ScBreadcrumbLink,
+  ScBreadcrumbList,
+  ScBreadcrumbPage,
+} from '@semantic-components/ui';
+
 @Component({
   selector: 'app-breadcrumb-page',
-  imports: [],
+  imports: [ScBreadcrumb, ScBreadcrumbList, ScBreadcrumbItem, ScBreadcrumbLink, ScBreadcrumbPage],
   template: `
-    <p>breadcrumb-page works!</p>
+    <nav sc-breadcrumb>
+      <ol sc-breadcrumb-list>
+        <li sc-breadcrumb-item><a sc-breadcrumb-link href="#">Home</a></li>
+        <li sc-breadcrumb-item><a sc-breadcrumb-link href="#">Library</a></li>
+        <li sc-breadcrumb-item>
+          <span sc-breadcrumb-page>Data</span>
+        </li>
+      </ol>
+    </nav>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,

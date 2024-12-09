@@ -12,3 +12,4 @@ export * from './lib/components/textarea';
 export * from './lib/components/select';
 export * from './lib/components/progress';
 export * from './lib/components/sidebar';
+export * from './lib/components/breadcrumb';

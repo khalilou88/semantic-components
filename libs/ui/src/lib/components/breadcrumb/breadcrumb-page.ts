@@ -1,20 +1,22 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'nav[sc-breadcrumb]',
+  selector: 'span[sc-breadcrumb-page]',
   imports: [],
   template: `
     <ng-content />
   `,
   host: {
-    '[attr.aria-label]': 'breadcrumb',
+    role: 'link',
+    '[attr.aria-disabled]': 'true',
+    '[attr.aria-current]': 'page',
   },
   styles: `
-    sc-breadcrumb {
-      @apply flex flex-wrap items-center gap-1.5 break-words text-sm text-muted-foreground sm:gap-2.5;
+    sc-breadcrumb-page {
+      @apply font-normal text-foreground;
     }
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScBreadcrumb {}
+export class ScBreadcrumbPage {}

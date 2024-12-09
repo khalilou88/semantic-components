@@ -1,20 +1,17 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'nav[sc-breadcrumb]',
+  selector: 'li[sc-breadcrumb-item]',
   imports: [],
   template: `
     <ng-content />
   `,
-  host: {
-    '[attr.aria-label]': 'breadcrumb',
-  },
   styles: `
-    sc-breadcrumb {
-      @apply flex flex-wrap items-center gap-1.5 break-words text-sm text-muted-foreground sm:gap-2.5;
+    sc-breadcrumb-item {
+      @apply inline-flex items-center gap-1.5;
     }
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScBreadcrumb {}
+export class ScBreadcrumbItem {}
