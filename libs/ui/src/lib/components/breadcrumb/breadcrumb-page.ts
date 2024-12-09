@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
+
+import { cn } from '../../utils';
 
 @Component({
   selector: 'span[sc-breadcrumb-page]',
@@ -10,14 +18,14 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     role: 'link',
     '[attr.aria-disabled]': 'true',
     '[attr.aria-current]': '"page"',
-    '[class.sc-breadcrumb-page]': 'true',
+    '[class]': 'classes()',
   },
-  styles: `
-    .sc-breadcrumb-page {
-      @apply font-normal text-foreground;
-    }
-  `,
+  styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScBreadcrumbPage {}
+export class ScBreadcrumbPage {
+  class = input<string>('');
+
+  classes = computed(() => cn('font-normal text-foreground', this.class()));
+}

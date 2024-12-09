@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
+
+import { cn } from '../../utils';
 
 @Component({
   selector: 'li[sc-breadcrumb-item]',
@@ -7,14 +15,14 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     <ng-content />
   `,
   host: {
-    '[class.sc-breadcrumb-item]': 'true',
+    '[class]': 'classes()',
   },
-  styles: `
-    .sc-breadcrumb-item {
-      @apply inline-flex items-center gap-1.5;
-    }
-  `,
+  styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScBreadcrumbItem {}
+export class ScBreadcrumbItem {
+  class = input<string>('');
+
+  classes = computed(() => cn('inline-flex items-center gap-1.5', this.class()));
+}

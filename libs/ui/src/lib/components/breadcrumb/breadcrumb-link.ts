@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
+
+import { cn } from '../../utils';
 
 @Component({
   selector: 'a[sc-breadcrumb-link]',
@@ -7,14 +15,14 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     <ng-content />
   `,
   host: {
-    '[class.sc-breadcrumb-link]': 'true',
+    '[class]': 'classes()',
   },
-  styles: `
-    .sc-breadcrumb-link {
-      @apply transition-colors hover:text-foreground;
-    }
-  `,
+  styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScBreadcrumbLink {}
+export class ScBreadcrumbLink {
+  class = input<string>('');
+
+  classes = computed(() => cn('transition-colors hover:text-foreground', this.class()));
+}

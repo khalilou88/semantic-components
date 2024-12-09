@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
+
+import { cn } from '../../utils';
 
 @Component({
   selector: 'li[sc-breadcrumb-separator]',
@@ -9,14 +17,14 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   host: {
     role: 'presentation',
     '[attr.aria-hidden]': 'true',
-    '[class.sc-breadcrumb-separator]': 'true',
+    '[class]': 'classes()',
   },
-  styles: `
-    .sc-breadcrumb-separator {
-      @apply [&>svg]:w-3.5 [&>svg]:h-3.5;
-    }
-  `,
+  styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScBreadcrumbSeparator {}
+export class ScBreadcrumbSeparator {
+  class = input<string>('');
+
+  classes = computed(() => cn('[&>svg]:w-3.5 [&>svg]:h-3.5', this.class()));
+}
