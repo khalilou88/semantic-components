@@ -19,7 +19,6 @@
     "@angular/platform-browser": "19.0.3",
     "@angular/platform-browser-dynamic": "19.0.3",
     "@angular/router": "19.0.3",
-    "@semantic-components/ui": "^0.3.1",
     "@semantic-icons/lucide-icons": "^0.0.1",
     "@tiptap/core": "^2.10.3",
     "@tiptap/extension-blockquote": "^2.10.3",
