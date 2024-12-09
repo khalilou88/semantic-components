@@ -24,6 +24,14 @@ import { SvgChevronRightIcon } from '@semantic-icons/lucide-icons';
     ScBreadcrumbElipssis,
   ],
   template: `
+    <div class="space-y-2">
+      <h1 class="scroll-m-20 text-3xl font-bold tracking-tight">Breadcrumb</h1>
+
+      <p class="text-base text-muted-foreground">
+        <span>Displays the path to the current resource using a hierarchy of links.</span>
+      </p>
+    </div>
+
     <nav sc-breadcrumb>
       <ol sc-breadcrumb-list>
         <li sc-breadcrumb-item><a sc-breadcrumb-link href="#">Home</a></li>
