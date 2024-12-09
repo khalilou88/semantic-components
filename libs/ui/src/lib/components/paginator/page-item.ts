@@ -17,7 +17,7 @@ import { ScButton } from '../button';
   template: `
     <li>
       @if (page() === '...') {
-        <span class="flex h-9 w-9 items-center justify-center" [attr.aria-hidden]="true">
+        <span class="flex size-9 items-center justify-center" [attr.aria-hidden]="true">
           <svg-ellipsis-icon class="size-4" />
           <span class="sr-only">More pages</span>
         </span>

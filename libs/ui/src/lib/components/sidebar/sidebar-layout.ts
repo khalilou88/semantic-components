@@ -80,7 +80,7 @@ import { ScSidebar } from './sidebar';
         <span class="sr-only">Toggle Sidebar</span>
       </button>
 
-      <main class="mx-10 my-10">
+      <main class="m-10">
         <router-outlet></router-outlet>
       </main>
     </main>
