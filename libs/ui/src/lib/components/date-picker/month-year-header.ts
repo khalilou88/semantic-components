@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
   input,
   output,
+  signal,
 } from '@angular/core';
 
 import { SvgChevronLeftIcon, SvgChevronRightIcon } from '@semantic-icons/lucide-icons';
@@ -41,15 +42,16 @@ import { ScButton } from '../button';
       <svg-chevron-right-icon />
     </button>
   `,
-  styles: `
-    .sc-month-year-header {
-      @apply flex justify-between;
-    }
-  `,
+  host: {
+    '[class]': 'classes()',
+  },
+  styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScMonthYearHeader {
+  classes = signal<string>('flex justify-between');
+
   monthYear = input.required<string>();
 
   monthYearChange = output<number>();
