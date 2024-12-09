@@ -17,7 +17,7 @@ import { RouterModule } from '@angular/router';
 import { SvgPanelLeftIcon } from '@semantic-icons/lucide-icons';
 
 import { ScButton } from '../button';
-import { SIDEBAR_WIDTH } from './constants';
+import { SIDEBAR_WIDTH, SIDEBAR_WIDTH_MOBILE } from './constants';
 import { ScSidebar } from './sidebar';
 
 @Component({
@@ -66,7 +66,7 @@ import { ScSidebar } from './sidebar';
       </div>
     </div>
 
-    <main class="border-2 border-green-600">
+    <main class=" z-50">
       <button
         (click)="toggleSidebar()"
         sc-button
@@ -78,12 +78,26 @@ import { ScSidebar } from './sidebar';
         <svg-panel-left-icon />
         <span class="sr-only">Toggle Sidebar</span>
       </button>
+
+      <br />
+      {{ open() }}
+      <br />
+      {{ openMobile() }}
+      <br />
+      {{ state() }}
+      <br />
+      {{ side() }}
+      <br />
+      {{ variant() }}
+      <br />
+      {{ collapsible() }}
+
       <router-outlet></router-outlet>
     </main>
   `,
   styles: `
     sc-sidebar-layout {
-      @apply flex min-h-svh w-full border-2 border-rose-600;
+      @apply flex min-h-svh w-full;
     }
   `,
   encapsulation: ViewEncapsulation.None,
@@ -108,7 +122,17 @@ export class ScSidebarLayout implements OnInit {
   variant = signal<'sidebar' | 'floating' | 'inset'>('sidebar');
   collapsible = signal<'offcanvas' | 'icon' | 'none'>('offcanvas');
 
-  sidebarWidth = signal<number>(SIDEBAR_WIDTH);
+  sidebarWidth = computed<number>(() => {
+    if (this.open()) {
+      return SIDEBAR_WIDTH;
+    }
+
+    if (this.openMobile()) {
+      return SIDEBAR_WIDTH_MOBILE;
+    }
+
+    return 0;
+  });
 
   ngOnInit() {
     document.documentElement.classList.add('h-full');
