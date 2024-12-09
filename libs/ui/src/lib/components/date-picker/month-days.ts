@@ -7,14 +7,15 @@ import {
   output,
 } from '@angular/core';
 
+import { ScButton } from '../button';
+
 @Component({
   selector: 'sc-month-days',
-  imports: [NgClass],
+  imports: [NgClass, ScButton],
   template: `
-    <div class="grid w-64 grid-cols-7">
+    <div class="grid grid-cols-7">
       @for (day of days(); track $index; let index = $index) {
         <button
-          class="block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
           [ngClass]="{
             'col-start-1': index === 0 && firstDayMonth() === 0,
             'col-start-2': index === 0 && firstDayMonth() === 1,
@@ -23,10 +24,12 @@ import {
             'col-start-5': index === 0 && firstDayMonth() === 4,
             'col-start-6': index === 0 && firstDayMonth() === 5,
             'col-start-7': index === 0 && firstDayMonth() === 6,
-            '!bg-primary-700 dark:!bg-primary-600 !text-white': isSelected(day),
           }"
           [attr.data-sc-day]="day"
+          [variant]="isSelected(day) ? 'primary' : 'ghost'"
           (click)="setSelectedDay($event)"
+          sc-button
+          size="icon"
         >
           {{ day.slice(-2) }}
         </button>
