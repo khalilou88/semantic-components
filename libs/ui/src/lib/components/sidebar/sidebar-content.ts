@@ -164,19 +164,19 @@ import { RouterModule } from '@angular/router';
         <h4 class="mb-1 rounded-md px-2 py-1 text-sm font-semibold">Components</h4>
         <div class="grid grid-flow-row auto-rows-max gap-0.5 text-sm">
           <a
-            class="group flex w-full items-center px-2 py-1 font-normal text-foreground underline-offset-2 hover:underline underline"
+            class="group flex w-full items-center px-2 py-1 font-normal text-foreground underline underline-offset-2 hover:underline"
             routerLink="/editor"
           >
             Editor
           </a>
           <a
-            class="group flex w-full items-center px-2 py-1 font-normal text-foreground underline-offset-2 hover:underline underline"
+            class="group flex w-full items-center px-2 py-1 font-normal text-foreground underline underline-offset-2 hover:underline"
             routerLink="/theme-toggler"
           >
             Theme toggler
           </a>
           <a
-            class="group flex w-full items-center px-2 py-1 font-normal text-foreground underline-offset-2 hover:underline underline"
+            class="group flex w-full items-center px-2 py-1 font-normal text-foreground underline underline-offset-2 hover:underline"
             routerLink="/dropdown"
           >
             Dropdown
@@ -196,7 +196,7 @@ import { RouterModule } from '@angular/router';
           </a>
 
           <a
-            class="group flex w-full items-center px-2 py-1 font-normal text-foreground underline-offset-2 hover:underline underline"
+            class="group flex w-full items-center px-2 py-1 font-normal text-foreground underline underline-offset-2 hover:underline"
             target=""
             rel=""
             href="/docs/components/accordion"

@@ -26,7 +26,7 @@ import { ScSidebar } from './sidebar';
   imports: [ScSidebar, SvgPanelLeftIcon, RouterModule, ScButton, NgClass, LayoutModule],
   template: `
     <div
-      class="group peer hidden md:block text-sidebar-foreground"
+      class="group peer hidden text-sidebar-foreground md:block"
       [attr.data-state]="state()"
       [attr.data-collapsible]="state() === 'collapsed' ? 'collapsible' : ''"
       [attr.data-variant]="variant()"
@@ -34,7 +34,7 @@ import { ScSidebar } from './sidebar';
     >
       <!-- This is what handles the sidebar gap on desktop -->
       <div
-        class="duration-200 relative h-svh w-[--sidebar-width] bg-transparent transition-[width] ease-linear group-data-[collapsible=offcanvas]:w-0 group-data-[side=right]:rotate-180"
+        class="relative h-svh w-[--sidebar-width] bg-transparent transition-[width] duration-200 ease-linear group-data-[collapsible=offcanvas]:w-0 group-data-[side=right]:rotate-180"
         [style.width.rem]="sidebarWidth()"
         [ngClass]="
           variant() === 'floating' || variant() === 'inset'
@@ -44,7 +44,7 @@ import { ScSidebar } from './sidebar';
       ></div>
 
       <div
-        class="duration-200 fixed inset-y-0 z-10 hidden h-svh w-[--sidebar-width] transition-[left,right,width] ease-linear md:flex"
+        class="fixed inset-y-0 z-10 hidden h-svh w-[--sidebar-width] transition-[left,right,width] duration-200 ease-linear md:flex"
         [style.width.rem]="sidebarWidth()"
         [ngClass]="{
           'left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]':

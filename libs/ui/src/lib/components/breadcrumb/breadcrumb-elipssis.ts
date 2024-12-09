@@ -6,7 +6,7 @@ import { SvgEllipsisIcon } from '@semantic-icons/lucide-icons';
   selector: 'span[sc-breadcrumb-elipssis]',
   imports: [SvgEllipsisIcon],
   template: `
-    <svg-ellipsis-icon class="h-4 w-4" />
+    <svg-ellipsis-icon class="size-4" />
     <span class="sr-only">More</span>
   `,
   host: {
