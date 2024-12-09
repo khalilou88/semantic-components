@@ -6,8 +6,11 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   template: `
     <ng-content />
   `,
+  host: {
+    '[class.sc-breadcrumb-link]': 'true',
+  },
   styles: `
-    sc-breadcrumb-link {
+    .sc-breadcrumb-link {
       @apply transition-colors hover:text-foreground;
     }
   `,

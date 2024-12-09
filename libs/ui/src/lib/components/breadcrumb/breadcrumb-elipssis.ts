@@ -12,9 +12,10 @@ import { SvgEllipsisIcon } from '@semantic-icons/lucide-icons';
   host: {
     role: 'presentation',
     '[attr.aria-hidden]': 'true',
+    '[class.sc-breadcrumb-elipssis]': 'true',
   },
   styles: `
-    sc-breadcrumb-elipssis {
+    .sc-breadcrumb-elipssis {
       @apply flex h-9 w-9 items-center justify-center;
     }
   `,

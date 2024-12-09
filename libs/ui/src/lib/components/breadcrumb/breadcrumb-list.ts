@@ -6,8 +6,11 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   template: `
     <ng-content />
   `,
+  host: {
+    '[class.sc-breadcrumb-list]': 'true',
+  },
   styles: `
-    sc-breadcrumb-list {
+    .sc-breadcrumb-list {
       @apply flex flex-wrap items-center gap-1.5 break-words text-sm text-muted-foreground sm:gap-2.5;
     }
   `,

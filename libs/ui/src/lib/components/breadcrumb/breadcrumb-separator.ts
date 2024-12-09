@@ -9,9 +9,10 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   host: {
     role: 'presentation',
     '[attr.aria-hidden]': 'true',
+    '[class.sc-breadcrumb-separator]': 'true',
   },
   styles: `
-    sc-breadcrumb-separator {
+    .sc-breadcrumb-separator {
       @apply [&>svg]:w-3.5 [&>svg]:h-3.5;
     }
   `,

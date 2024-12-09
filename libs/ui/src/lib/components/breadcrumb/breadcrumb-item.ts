@@ -6,8 +6,11 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   template: `
     <ng-content />
   `,
+  host: {
+    '[class.sc-breadcrumb-item]': 'true',
+  },
   styles: `
-    sc-breadcrumb-item {
+    .sc-breadcrumb-item {
       @apply inline-flex items-center gap-1.5;
     }
   `,
