@@ -1,4 +1,3 @@
-import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -11,20 +10,36 @@ import {
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
+import {
+  SvgChevronLeftIcon,
+  SvgChevronRightIcon,
+  SvgChevronsLeftIcon,
+  SvgChevronsRightIcon,
+} from '@semantic-icons/lucide-icons';
+
+import { ScButton } from '../button';
 import { ScPageEvent } from './page-event';
 import { ScPageItem } from './page-item';
+import { ScPagination } from './pagination';
 
 /** The default page size if there is no page size and there are no provided page size options. */
 const DEFAULT_PAGE_SIZE = 10;
 
 @Component({
   selector: 'sc-paginator',
-  imports: [ScPageItem, ReactiveFormsModule, NgClass],
+  imports: [
+    ScPageItem,
+    ReactiveFormsModule,
+
+    ScPagination,
+    ScButton,
+    SvgChevronLeftIcon,
+    SvgChevronsLeftIcon,
+    SvgChevronRightIcon,
+    SvgChevronsRightIcon,
+  ],
   template: `
-    <nav
-      class="flex flex-col items-start justify-between space-y-3 p-4 md:flex-row md:items-center md:space-y-0"
-      aria-label="Table navigation"
-    >
+    <nav sc-pagination>
       @if (!hidePageSize()) {
         <div>
           <label class="text-sm font-normal text-gray-500 dark:text-gray-400" for="items-per-page">
@@ -42,76 +57,43 @@ const DEFAULT_PAGE_SIZE = 10;
         </div>
       }
 
-      <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
+      <!--span class="text-sm font-normal text-gray-500 dark:text-gray-400">
         Showing
         <span class="font-semibold text-gray-900 dark:text-white">
           {{ firstItemPage() }}-{{ lastItemPage() }}
         </span>
         of
         <span class="font-semibold text-gray-900 dark:text-white">{{ totalSize() }}</span>
-      </span>
+      </span-->
+
       <ul class="inline-flex items-stretch -space-x-px">
         @if (showFirstLastButtons()) {
           <li>
             <a
-              class="ml-0 flex h-full items-center justify-center rounded-l-lg border border-gray-300 bg-white px-3 py-1.5 leading-tight text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
-              [ngClass]="
-                isPrevPageDisabled()
-                  ? ''
-                  : 'hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-white'
-              "
               [attr.disabled]="isPrevPageDisabled()"
+              [attr.aria-label]="'Go to first page'"
               (click)="firstPage()"
-              href="javascript:void(0)"
+              sc-button
+              variant="outline"
+              size="icon"
             >
+              <svg-chevrons-left-icon />
               <span class="sr-only">First page</span>
-              <svg
-                class="size-6 text-gray-800 dark:text-white"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="m17 16-4-4 4-4m-6 8-4-4 4-4"
-                />
-              </svg>
             </a>
           </li>
         }
 
         <li>
           <a
-            class="ml-0 flex h-full items-center justify-center border border-gray-300 bg-white px-3 py-1.5 leading-tight text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
-            [ngClass]="{
-              'hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-white':
-                !isPrevPageDisabled(),
-              'rounded-l-lg': !showFirstLastButtons(),
-            }"
             [attr.disabled]="isPrevPageDisabled()"
+            [attr.aria-label]="'Go to previous page'"
             (click)="prevPage()"
-            href="javascript:void(0)"
+            sc-button
+            variant="outline"
+            size="icon"
           >
-            <span class="sr-only">Previous</span>
-            <svg
-              class="size-5"
-              aria-hidden="true"
-              fill="currentColor"
-              viewbox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                clip-rule="evenodd"
-              />
-            </svg>
+            <svg-chevron-left-icon />
+            <span class="sr-only">Previous page</span>
           </a>
         </li>
 
@@ -125,64 +107,30 @@ const DEFAULT_PAGE_SIZE = 10;
 
         <li>
           <a
-            class="flex h-full items-center justify-center border border-gray-300 bg-white px-3 py-1.5 leading-tight text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
             [attr.disabled]="isNextPageDisabled()"
-            [ngClass]="{
-              'hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-white':
-                !isNextPageDisabled(),
-              'rounded-r-lg': !showFirstLastButtons(),
-            }"
+            [attr.aria-label]="'Go to next page'"
             (click)="nextPage()"
-            href="javascript:void(0)"
+            sc-button
+            variant="outline"
+            size="icon"
           >
-            <span class="sr-only">Next</span>
-            <svg
-              class="size-5"
-              aria-hidden="true"
-              fill="currentColor"
-              viewbox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                clip-rule="evenodd"
-              />
-            </svg>
+            <svg-chevron-right-icon />
+            <span class="sr-only">Next page</span>
           </a>
         </li>
 
         @if (showFirstLastButtons()) {
           <li>
             <a
-              class="flex h-full items-center justify-center rounded-r-lg border border-gray-300 bg-white px-3 py-1.5 leading-tight text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
               [attr.disabled]="isNextPageDisabled()"
-              [ngClass]="
-                isNextPageDisabled()
-                  ? ''
-                  : 'hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-white'
-              "
+              [attr.aria-label]="'Go to last page'"
               (click)="lastPage()"
-              href="javascript:void(0)"
+              sc-button
+              variant="outline"
+              size="icon"
             >
+              <svg-chevrons-right-icon />
               <span class="sr-only">Last page</span>
-              <svg
-                class="size-6 text-gray-800 dark:text-white"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="m7 16 4-4-4-4m6 8 4-4-4-4"
-                />
-              </svg>
             </a>
           </li>
         }

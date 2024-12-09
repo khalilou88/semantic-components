@@ -7,11 +7,12 @@ import { ScPageEvent, ScPaginator } from '@semantic-components/ui';
   imports: [ScPaginator],
   template: `
     <sc-paginator
+      [hidePageSize]="true"
+      [showFirstLastButtons]="true"
       [currentPage]="currentPage()"
       [pageSize]="pageSize()"
       [totalSize]="totalSize()"
       (pageChanged)="setPageEvent($event)"
-      aria-label="Select page"
     />
   `,
   styles: ``,
