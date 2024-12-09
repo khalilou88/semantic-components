@@ -37,7 +37,7 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MonthDaysComponent {
+export class ScMonthDays {
   days = input.required<string[]>();
   firstDayMonth = input.required<number>();
   selectedDay = input<string>('');

@@ -26,6 +26,6 @@ export interface WeekDayName {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WeekDaysNamesComponent {
+export class ScWeekDaysNames {
   weekDaysNames = input.required<WeekDayName[]>();
 }

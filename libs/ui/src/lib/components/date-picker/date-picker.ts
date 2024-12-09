@@ -18,7 +18,7 @@ import {
   viewChild,
 } from '@angular/core';
 
-import { InlineDatePickerComponent } from './inline-date-picker.component';
+import { ScInlineDatePicker } from './inline-date-picker';
 
 @Component({
   selector: 'sc-date-picker',
@@ -51,7 +51,7 @@ import { InlineDatePickerComponent } from './inline-date-picker.component';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DatePickerComponent implements OnInit {
+export class ScDatePicker implements OnInit {
   dateFormatPattern = signal<string>('');
 
   constructor(@Inject(LOCALE_ID) private readonly localeId: string) {}
@@ -122,7 +122,7 @@ export class DatePickerComponent implements OnInit {
 
     overlayRef.updateSize({ width: this._overlayOrigin()?.nativeElement.offsetWidth });
 
-    this._portal ??= new ComponentPortal(InlineDatePickerComponent);
+    this._portal ??= new ComponentPortal(ScInlineDatePicker);
 
     overlayRef.attach(this._portal);
 

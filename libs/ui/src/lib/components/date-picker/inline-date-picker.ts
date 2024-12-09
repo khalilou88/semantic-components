@@ -9,13 +9,13 @@ import {
   signal,
 } from '@angular/core';
 
-import { MonthDaysComponent } from './month-days.component';
-import { MonthYearHeaderComponent } from './month-year-header.component';
-import { WeekDayName, WeekDaysNamesComponent } from './week-days-names.component';
+import { ScMonthDays } from './month-days';
+import { ScMonthYearHeader } from './month-year-header';
+import { ScWeekDaysNames, WeekDayName } from './week-days-names';
 
 @Component({
   selector: 'sc-inline-date-picker',
-  imports: [WeekDaysNamesComponent, MonthYearHeaderComponent, MonthDaysComponent],
+  imports: [ScWeekDaysNames, ScMonthYearHeader, ScMonthDays],
   template: `
     <div class="inline-block rounded-lg bg-white p-4 shadow-lg dark:bg-gray-700">
       <div class="bg-white px-2 py-3 text-center font-semibold dark:bg-gray-700 dark:text-white">
@@ -51,7 +51,7 @@ import { WeekDayName, WeekDaysNamesComponent } from './week-days-names.component
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InlineDatePickerComponent implements OnInit {
+export class ScInlineDatePicker implements OnInit {
   year = signal<number>(0);
   month = signal<number>(0);
   weekDaysNames = signal<WeekDayName[]>([]);

@@ -69,7 +69,7 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MonthYearHeaderComponent {
+export class ScMonthYearHeader {
   monthYear = input.required<string>();
 
   monthYearChange = output<number>();
