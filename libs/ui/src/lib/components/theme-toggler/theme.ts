@@ -20,11 +20,11 @@ export class ScTheme {
   init() {
     afterNextRender(() => {
       const localStorageTheme = localStorage['theme'];
-      const isDarkode =
+      const isDarkMode =
         localStorageTheme === 'dark' ||
         (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
 
-      if (isDarkode) {
+      if (isDarkMode) {
         this.value.set('dark');
       } else {
         this.value.set('light');
