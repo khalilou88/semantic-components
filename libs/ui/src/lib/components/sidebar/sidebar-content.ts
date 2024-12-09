@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
   selector: 'sc-sidebar-content',
   imports: [RouterModule],
   template: `
-    <div class="w-full">
+    <div class="w-full pl-5">
       <div class="pb-4">
         <h4 class="mb-1 rounded-md px-2 py-1 text-sm font-semibold">Getting Started</h4>
         <div class="grid grid-flow-row auto-rows-max gap-0.5 text-sm">
