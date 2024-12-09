@@ -24,7 +24,7 @@ import { ScButton } from '../button';
       } @else {
         <a
           [attr.aria-current]="isActive() ? 'page' : undefined"
-          [variant]="isActive() ? 'outline' : 'ghost'"
+          [variant]="isActive() ? 'secondary' : 'outline'"
           [size]="'icon'"
           (click)="selectPage()"
           sc-button
