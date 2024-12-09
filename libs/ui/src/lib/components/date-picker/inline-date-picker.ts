@@ -26,14 +26,14 @@ import { ScWeekDaysNames, WeekDayName } from './week-days-names';
 
       <div class="p-6 pt-0">
         <sc-week-days-names [weekDaysNames]="weekDaysNames()" />
-      </div>
 
-      <sc-month-days
-        [days]="monthDays()"
-        [firstDayMonth]="firstDayMonth()"
-        [selectedDay]="selectedDay()"
-        (selectedDayChange)="setSelectedDay($event)"
-      />
+        <sc-month-days
+          [days]="monthDays()"
+          [firstDayMonth]="firstDayMonth()"
+          [selectedDay]="selectedDay()"
+          (selectedDayChange)="setSelectedDay($event)"
+        />
+      </div>
 
       <div class="flex justify-between p-6 pt-0">
         <button sc-button variant="outline" type="button">Cancel</button>
