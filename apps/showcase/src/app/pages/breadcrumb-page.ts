@@ -25,6 +25,17 @@ import { SvgChevronRightIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div class="space-y-2">
+      <nav sc-breadcrumb>
+        <ol sc-breadcrumb-list>
+          <li sc-breadcrumb-item><a sc-breadcrumb-link>Components</a></li>
+
+          <li sc-breadcrumb-separator><svg-chevron-right-icon /></li>
+          <li sc-breadcrumb-item>
+            <span sc-breadcrumb-page>Breadcrumb</span>
+          </li>
+        </ol>
+      </nav>
+
       <h1 class="scroll-m-20 text-3xl font-bold tracking-tight">Breadcrumb</h1>
 
       <p class="text-base text-muted-foreground">
