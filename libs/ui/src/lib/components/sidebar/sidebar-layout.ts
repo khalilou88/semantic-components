@@ -147,8 +147,10 @@ export class ScSidebarLayout implements OnInit {
   }
 
   toggleSidebar() {
-    this.isMobile()
-      ? this.openMobile.update((value) => !value)
-      : this.open.update((value) => !value);
+    if (this.isMobile()) {
+      this.openMobile.update((value) => !value);
+    } else {
+      this.open.update((value) => !value);
+    }
   }
 }
