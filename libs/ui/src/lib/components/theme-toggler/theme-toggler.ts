@@ -4,7 +4,6 @@ import {
   ViewEncapsulation,
   computed,
   inject,
-  signal,
 } from '@angular/core';
 
 import { SvgMoonIcon, SvgSunIcon } from '@semantic-icons/lucide-icons';
