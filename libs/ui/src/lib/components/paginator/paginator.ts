@@ -38,25 +38,25 @@ const DEFAULT_PAGE_SIZE = 10;
     SvgChevronsRightIcon,
   ],
   template: `
-    <nav sc-pagination>
-      @if (!hidePageSize()) {
-        <div>
-          <label class="" for="items-per-page">Items per page:</label>
-          <select class="" id="items-per-page" [formControl]="pageSizeFormControl">
-            @for (pageSizeOption of pageSizeOptions(); track $index) {
-              <option [value]="pageSizeOption">{{ pageSizeOption }}</option>
-            }
-          </select>
-        </div>
-      }
-
-      <div class="">
-        Showing
-        <span>{{ firstItemPage() }}-{{ lastItemPage() }}</span>
-        of
-        <span>{{ totalSize() }}</span>
+    @if (!hidePageSize()) {
+      <div>
+        <label class="" for="items-per-page">Items per page:</label>
+        <select class="" id="items-per-page" [formControl]="pageSizeFormControl">
+          @for (pageSizeOption of pageSizeOptions(); track $index) {
+            <option [value]="pageSizeOption">{{ pageSizeOption }}</option>
+          }
+        </select>
       </div>
+    }
 
+    <div class="">
+      Showing
+      <span>{{ firstItemPage() }}-{{ lastItemPage() }}</span>
+      of
+      <span>{{ totalSize() }}</span>
+    </div>
+
+    <nav sc-pagination>
       <ul class="flex flex-row items-center gap-1">
         @if (showFirstLastButtons()) {
           <li>
@@ -128,10 +128,14 @@ const DEFAULT_PAGE_SIZE = 10;
       </ul>
     </nav>
   `,
-  styles: ``,
   host: {
-    role: 'group',
+    '[class.sc-paginator]': 'true',
   },
+  styles: `
+    .sc-paginator {
+      @apply flex;
+    }
+  `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
