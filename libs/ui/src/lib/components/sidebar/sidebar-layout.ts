@@ -1,4 +1,4 @@
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -16,7 +16,7 @@ import { ScSidebar } from './sidebar';
 
 @Component({
   selector: 'sc-sidebar-layout',
-  imports: [ScSidebar, SvgPanelLeftIcon, RouterModule, ScButton],
+  imports: [ScSidebar, SvgPanelLeftIcon, RouterModule, ScButton, NgClass],
   template: `
     <div
       class="group peer hidden md:block text-sidebar-foreground"
@@ -25,7 +25,31 @@ import { ScSidebar } from './sidebar';
       [attr.data-variant]="variant()"
       [attr.data-side]="side()"
     >
-      <sc-sidebar />
+      <!-- This is what handles the sidebar gap on desktop -->
+      <div
+        class="duration-200 relative h-svh w-[--sidebar-width] bg-transparent transition-[width] ease-linear group-data-[collapsible=offcanvas]:w-0 group-data-[side=right]:rotate-180"
+        [ngClass]="
+          variant() === 'floating' || variant() === 'inset'
+            ? 'group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4))]'
+            : 'group-data-[collapsible=icon]:w-[--sidebar-width-icon]'
+        "
+      ></div>
+
+      <div
+        class="duration-200 fixed inset-y-0 z-10 hidden h-svh w-[--sidebar-width] transition-[left,right,width] ease-linear md:flex"
+        [ngClass]="{
+          'left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]':
+            side() === 'left',
+          'right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]':
+            side() !== 'left',
+          'p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4)_+2px)]':
+            variant() === 'floating' || variant() === 'inset',
+          'group-data-[collapsible=icon]:w-[--sidebar-width-icon] group-data-[side=left]:border-r group-data-[side=right]:border-l':
+            variant() !== 'floating' && variant() !== 'inset',
+        }"
+      >
+        <sc-sidebar />
+      </div>
     </div>
 
     <main class="border-2 border-green-600">
