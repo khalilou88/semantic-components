@@ -1,6 +1,14 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
 
 import { SvgEllipsisIcon } from '@semantic-icons/lucide-icons';
+
+import { cn } from '../../utils';
 
 @Component({
   selector: 'span[sc-breadcrumb-ellipsis]',
@@ -12,14 +20,14 @@ import { SvgEllipsisIcon } from '@semantic-icons/lucide-icons';
   host: {
     role: 'presentation',
     '[attr.aria-hidden]': 'true',
-    '[class.sc-breadcrumb-ellipsis]': 'true',
+    '[class]': 'classes()',
   },
-  styles: `
-    .sc-breadcrumb-ellipsis {
-      @apply flex h-9 w-9 items-center justify-center;
-    }
-  `,
+  styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScBreadcrumbEllipsis {}
+export class ScBreadcrumbEllipsis {
+  class = input<string>('');
+
+  classes = computed(() => cn('flex h-9 w-9 items-center justify-center', this.class()));
+}

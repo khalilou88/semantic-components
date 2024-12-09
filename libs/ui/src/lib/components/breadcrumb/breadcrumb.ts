@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
+
+import { cn } from '../../utils';
 
 @Component({
   selector: 'nav[sc-breadcrumb]',
@@ -8,16 +16,21 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@
   `,
   host: {
     '[attr.aria-label]': 'ariaLabel',
-    '[class.sc-breadcrumb]': 'true',
+    '[class]': 'classes()',
   },
-  styles: `
-    .sc-breadcrumb {
-      @apply flex flex-wrap items-center gap-1.5 break-words text-sm text-muted-foreground sm:gap-2.5;
-    }
-  `,
+  styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScBreadcrumb {
   ariaLabel = 'breadcrumb';
+
+  class = input<string>('');
+
+  classes = computed(() =>
+    cn(
+      'flex flex-wrap items-center gap-1.5 break-words text-sm text-muted-foreground sm:gap-2.5',
+      this.class(),
+    ),
+  );
 }
