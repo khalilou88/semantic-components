@@ -9,19 +9,24 @@ import {
   signal,
 } from '@angular/core';
 
-import { ScCard } from '../card';
+import { ScButton } from '../button';
+import { ScCard, ScCardHeader } from '../card';
 import { ScMonthDays } from './month-days';
 import { ScMonthYearHeader } from './month-year-header';
 import { ScWeekDaysNames, WeekDayName } from './week-days-names';
 
 @Component({
   selector: 'sc-inline-date-picker',
-  imports: [ScWeekDaysNames, ScMonthYearHeader, ScMonthDays, ScCard],
+  imports: [ScWeekDaysNames, ScMonthYearHeader, ScMonthDays, ScCard, ScCardHeader, ScButton],
   template: `
     <div sc-card>
-      <sc-month-year-header [monthYear]="monthYear()" (monthYearChange)="setMonthYear($event)" />
+      <div sc-card-header>
+        <sc-month-year-header [monthYear]="monthYear()" (monthYearChange)="setMonthYear($event)" />
+      </div>
 
-      <sc-week-days-names [weekDaysNames]="weekDaysNames()" />
+      <div class="p-6 pt-0">
+        <sc-week-days-names [weekDaysNames]="weekDaysNames()" />
+      </div>
 
       <sc-month-days
         [days]="monthDays()"
@@ -30,19 +35,9 @@ import { ScWeekDaysNames, WeekDayName } from './week-days-names';
         (selectedDayChange)="setSelectedDay($event)"
       />
 
-      <div class="mt-2 flex space-x-2 rtl:space-x-reverse">
-        <button
-          class="bg-primary-700 hover:bg-primary-800 dark:hover:bg-primary-700 focus:ring-primary-300 dark:bg-primary-600 w-1/2 rounded-lg px-5 py-2 text-center text-sm font-medium text-white focus:ring-4"
-          type="button"
-        >
-          Today
-        </button>
-        <button
-          class="focus:ring-primary-300 w-1/2 rounded-lg border border-gray-300 bg-white px-5 py-2 text-center text-sm font-medium text-gray-900 hover:bg-gray-100 focus:ring-4 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"
-          type="button"
-        >
-          Clear
-        </button>
+      <div class="flex justify-between p-6 pt-0">
+        <button sc-button variant="outline" type="button">Cancel</button>
+        <button sc-button type="button">Done</button>
       </div>
     </div>
   `,
