@@ -1,3 +1,4 @@
+export * from './dialog';
 export * from './dialog-header';
 export * from './dialog-title';
 export * from './dialog-description';
