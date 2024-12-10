@@ -1,13 +1,28 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
+
+import { cn } from '../../utils';
 
 @Component({
-  selector: 'sc-alert-dialog-description',
+  selector: 'p[sc-alert-dialog-description]',
   imports: [],
   template: `
-    <p>alert-dialog-description works!</p>
+    <ng-content />
   `,
+  host: {
+    '[class]': 'classes()',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AlertDialogDescription {}
+export class scAlertDialogDescription {
+  class = input<string>('');
+
+  classes = computed(() => cn('text-sm text-muted-foreground', this.class()));
+}

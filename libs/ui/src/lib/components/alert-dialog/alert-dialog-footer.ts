@@ -1,13 +1,30 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
+
+import { cn } from '../../utils';
 
 @Component({
-  selector: 'sc-alert-dialog-footer',
+  selector: 'div[sc-alert-dialog-footer]',
   imports: [],
   template: `
-    <p>alert-dialog-footer works!</p>
+    <ng-content />
   `,
+  host: {
+    '[class]': 'classes()',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AlertDialogFooter {}
+export class ScAlertDialogFooter {
+  class = input<string>('');
+
+  classes = computed(() =>
+    cn('flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2', this.class()),
+  );
+}
