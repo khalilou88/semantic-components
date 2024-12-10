@@ -43,4 +43,8 @@ import { ScAlertDialogTitle } from './alert-dialog-title';
 })
 export class ScAlertDialog {
   dialogRef = inject(DialogRef);
+
+  constructor() {
+    this.dialogRef.disableClose = true;
+  }
 }
