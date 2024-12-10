@@ -1,59 +1,38 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { ScButton } from '../../button';
+import { SvgRedoIcon, SvgUndoIcon } from '@semantic-icons/lucide-icons';
+
+import { ScToggle } from '../../toggle';
 import { ScTooltip } from '../../tooltip';
 import { ScEditor } from '../editor';
 import { ScExtensions } from './extensions';
 
 @Component({
   selector: 'sc-extension-history',
-  imports: [ScTooltip, ScButton],
+  imports: [ScTooltip, ScToggle, SvgUndoIcon, SvgRedoIcon],
   template: `
-    <button (click)="undo()" sc-button variant="outline" size="icon" type="button" scTooltip="Undo">
-      <svg
-        class="size-5"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        fill="none"
-        viewBox="0 0 24 24"
-      >
-        <path
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M3 9h13a5 5 0 0 1 0 10H7M3 9l4-4M3 9l4 4"
-        />
-      </svg>
-      <span class="sr-only">Undo</span>
+    <button
+      [attr.aria-label]="ariaLabel1"
+      [scTooltip]="ariaLabel1"
+      (click)="undo()"
+      sc-toggle
+      variant="outline"
+      type="button"
+    >
+      <svg-undo-icon />
+      <span class="sr-only">{{ ariaLabel1 }}</span>
     </button>
 
     <button
-      class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+      [attr.aria-label]="ariaLabel2"
+      [scTooltip]="ariaLabel2"
       (click)="redo()"
+      sc-toggle
+      variant="outline"
       type="button"
-      scTooltip="Redo"
     >
-      <svg
-        class="size-5"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        fill="none"
-        viewBox="0 0 24 24"
-      >
-        <path
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M21 9H8a5 5 0 0 0 0 10h9m4-10-4-4m4 4-4 4"
-        />
-      </svg>
-      <span class="sr-only">Redo</span>
+      <svg-redo-icon />
+      <span class="sr-only">{{ ariaLabel2 }}</span>
     </button>
   `,
   styles: ``,
@@ -61,6 +40,9 @@ import { ScExtensions } from './extensions';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScExtensionHistory {
+  ariaLabel1 = 'Undo';
+  ariaLabel2 = 'Redo';
+
   private readonly parent = inject(ScEditor, { host: true });
 
   extensions = inject(ScExtensions);
