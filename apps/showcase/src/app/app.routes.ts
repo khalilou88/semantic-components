@@ -15,6 +15,7 @@ import PaginatorPage from './pages/paginator-page';
 import ProgressPage from './pages/progress-page';
 import SelectPage from './pages/select-page';
 import ThemeTogglerPage from './pages/theme-toggler-page';
+import TogglePage from './pages/toggle-page';
 import TooltipPage from './pages/tooltip-page';
 
 export const appRoutes: Route[] = [
@@ -26,7 +27,8 @@ export const appRoutes: Route[] = [
       { path: 'tooltip', component: TooltipPage, title: 'Tooltip Page' },
       { path: 'editor', component: EditorPage, title: 'Editor Page' },
       { path: 'paginator', component: PaginatorPage, title: 'Paginator Page' },
-      { path: 'button', component: ButtonPage, title: 'Buttons Page' },
+      { path: 'button', component: ButtonPage, title: 'Button Page' },
+      { path: 'toggle', component: TogglePage, title: 'Toggle Page' },
       { path: 'nav', component: NavPage, title: 'Nav Page' },
       { path: 'select', component: SelectPage, title: 'Select Page' },
       { path: 'breadcrumb', component: BreadcrumbPage, title: 'Breadcrumb Page' },

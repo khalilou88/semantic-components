@@ -13,3 +13,4 @@ export * from './lib/components/select';
 export * from './lib/components/progress';
 export * from './lib/components/sidebar';
 export * from './lib/components/breadcrumb';
+export * from './lib/components/toggle';
