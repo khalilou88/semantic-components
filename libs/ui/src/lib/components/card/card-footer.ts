@@ -1,13 +1,28 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
+
+import { cn } from '../../utils';
 
 @Component({
-  selector: 'sc-card-footer',
+  selector: 'div[sc-card-footer]',
   imports: [],
   template: `
-    <p>card-footer works!</p>
+    <ng-content />
   `,
+  host: {
+    '[class]': 'classes()',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CardFooter {}
+export class ScCardFooter {
+  class = input<string>('');
+
+  classes = computed(() => cn('flex items-center p-6 pt-0', this.class()));
+}

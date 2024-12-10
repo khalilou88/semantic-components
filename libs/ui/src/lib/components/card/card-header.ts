@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
+
+import { cn } from '../../utils';
 
 @Component({
   selector: 'div[sc-card-header]',
@@ -7,14 +15,14 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     <ng-content />
   `,
   host: {
-    '[class.sc-card-header]': 'true',
+    '[class]': 'classes()',
   },
-  styles: `
-    .sc-card-header {
-      @apply flex flex-col space-y-1.5 p-6;
-    }
-  `,
+  styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCardHeader {}
+export class ScCardHeader {
+  class = input<string>('');
+
+  classes = computed(() => cn('flex flex-col space-y-1.5 p-6', this.class()));
+}

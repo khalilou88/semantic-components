@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
+
+import { cn } from '../../utils';
 
 @Component({
   selector: 'div[sc-card]',
@@ -7,14 +15,16 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     <ng-content />
   `,
   host: {
-    '[class.sc-card]': 'true',
+    '[class]': 'classes()',
   },
-  styles: `
-    .sc-card {
-      @apply rounded-lg border bg-card text-card-foreground shadow-sm;
-    }
-  `,
+  styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCard {}
+export class ScCard {
+  class = input<string>('');
+
+  classes = computed(() =>
+    cn('rounded-lg border bg-card text-card-foreground shadow-sm', this.class()),
+  );
+}
