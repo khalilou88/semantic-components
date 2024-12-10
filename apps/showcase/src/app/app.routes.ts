@@ -6,6 +6,7 @@ import BreadcrumbPage from './pages/breadcrumb-page';
 import ButtonPage from './pages/button-page';
 import ColorsPage from './pages/colors-page';
 import DatePickerPage from './pages/date-picker-page';
+import DialogPage from './pages/dialog-page';
 import DropdownPage from './pages/dropdown-page';
 import EditorPage from './pages/editor-page';
 import HomePage from './pages/home-page';
@@ -31,6 +32,7 @@ export const appRoutes: Route[] = [
       { path: 'toggle', component: TogglePage, title: 'Toggle Page' },
       { path: 'nav', component: NavPage, title: 'Nav Page' },
       { path: 'select', component: SelectPage, title: 'Select Page' },
+      { path: 'dialog', component: DialogPage, title: 'Sialog Page' },
       { path: 'breadcrumb', component: BreadcrumbPage, title: 'Breadcrumb Page' },
       { path: 'progress', component: ProgressPage, title: 'Progress Page' },
       { path: 'date-picker', component: DatePickerPage, title: 'DatePicker Page' },

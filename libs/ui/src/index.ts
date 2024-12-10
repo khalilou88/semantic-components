@@ -14,3 +14,4 @@ export * from './lib/components/progress';
 export * from './lib/components/sidebar';
 export * from './lib/components/breadcrumb';
 export * from './lib/components/toggle';
+export * from './lib/components/dialog';

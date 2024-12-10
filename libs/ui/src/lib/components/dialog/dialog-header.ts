@@ -1,13 +1,28 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
+
+import { cn } from '../../utils';
 
 @Component({
-  selector: 'sc-dialog-header',
+  selector: 'div[sc-dialog-header]',
   imports: [],
   template: `
-    <p>dialog-header works!</p>
+    <ng-content />
   `,
+  host: {
+    '[class]': 'classes()',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DialogHeader {}
+export class ScDialogHeader {
+  class = input<string>('');
+
+  classes = computed(() => cn('flex flex-col space-y-1.5 text-center sm:text-left', this.class()));
+}
