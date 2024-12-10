@@ -19,7 +19,6 @@ export default class DialogPage {
   openDialog() {
     this.dialog.open(ScDialog, {
       minWidth: '300px',
-      data: {},
     });
   }
 }

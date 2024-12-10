@@ -1,4 +1,4 @@
-import { DIALOG_DATA } from '@angular/cdk/dialog';
+import { DialogRef } from '@angular/cdk/dialog';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
 import { SvgXIcon } from '@semantic-icons/lucide-icons';
@@ -25,7 +25,7 @@ import { ScDialogTitle } from './dialog-title';
   ],
   template: `
     <div sc-dialog-content>
-      <button sc-dialog-close>
+      <button (click)="dialogRef.close()" sc-dialog-close>
         <svg-x-icon class="size-4" />
         <span class="sr-only">Close</span>
       </button>
@@ -46,5 +46,5 @@ import { ScDialogTitle } from './dialog-title';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScDialog {
-  data = inject(DIALOG_DATA);
+  dialogRef = inject(DialogRef);
 }
