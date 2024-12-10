@@ -1,37 +1,26 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
+import { SvgListOrderedIcon } from '@semantic-icons/lucide-icons';
+
+import { ScToggle } from '../../toggle';
 import { ScTooltip } from '../../tooltip';
 import { ScEditor } from '../editor';
 import { ScExtensions } from './extensions';
 
 @Component({
   selector: 'sc-extension-ordered-list',
-  imports: [ScTooltip],
+  imports: [ScTooltip, ScToggle, SvgListOrderedIcon],
   template: `
     <button
-      class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+      [attr.aria-label]="ariaLabel"
+      [scTooltip]="ariaLabel"
       (click)="toggleOrderedList()"
       type="button"
-      scTooltip="Toggle ordered list"
+      sc-toggle
+      variant="outline"
     >
-      <svg
-        class="size-5"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        fill="none"
-        viewBox="0 0 24 24"
-      >
-        <path
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M12 6h8m-8 6h8m-8 6h8M4 16a2 2 0 1 1 3.321 1.5L4 20h5M4 5l2-1v6m-2 0h4"
-        />
-      </svg>
-      <span class="sr-only">Toggle ordered list</span>
+      <svg-list-ordered-icon />
+      <span class="sr-only">{{ ariaLabel }}</span>
     </button>
   `,
   styles: ``,
@@ -39,6 +28,8 @@ import { ScExtensions } from './extensions';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScExtensionOrderedList {
+  ariaLabel = 'Toggle ordered list';
+
   private readonly parent = inject(ScEditor, { host: true });
 
   extensions = inject(ScExtensions);
