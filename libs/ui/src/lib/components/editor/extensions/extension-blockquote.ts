@@ -20,7 +20,6 @@ import { ScExtensions } from './extensions';
       type="button"
     >
       <svg-quote-icon />
-
       <span class="sr-only">{{ ariaLabel }}</span>
     </button>
   `,
