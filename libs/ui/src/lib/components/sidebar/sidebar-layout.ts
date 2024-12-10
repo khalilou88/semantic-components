@@ -67,7 +67,7 @@ import { ScSidebar } from './sidebar';
       </div>
     </div>
 
-    <main class="z-50">
+    <div class="z-50 w-full">
       <button
         (click)="toggleSidebar()"
         sc-button
@@ -80,10 +80,10 @@ import { ScSidebar } from './sidebar';
         <span class="sr-only">Toggle Sidebar</span>
       </button>
 
-      <main class="m-10">
+      <main class="m-10 w-full">
         <router-outlet></router-outlet>
       </main>
-    </main>
+    </div>
   `,
   styles: `
     sc-sidebar-layout {
