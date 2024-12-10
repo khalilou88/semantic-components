@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@
 
 import {
   ScDialogClose,
+  ScDialogContent,
   ScDialogDescription,
   ScDialogFooter,
   ScDialogHeader,
@@ -48,21 +49,24 @@ export default class DialogPage {
     ScDialogFooter,
     ScDialogClose,
     SvgXIcon,
+    ScDialogContent,
   ],
   template: `
-    <div sc-dialog-header>
-      <h2 sc-dialog-title>Edit profile</h2>
+    <div sc-dialog-content>
+      <div sc-dialog-header>
+        <h2 sc-dialog-title>Edit profile</h2>
 
-      <p sc-dialog-description>Make changes to your profile here. Click save when you're done.</p>
+        <p sc-dialog-description>Make changes to your profile here. Click save when you're done.</p>
 
-      <button sc-dialog-close>
-        <svg-x-icon />
-        <span class="sr-only">Close</span>
-      </button>
-    </div>
+        <button sc-dialog-close>
+          <svg-x-icon />
+          <span class="sr-only">Close</span>
+        </button>
+      </div>
 
-    <div sc-dialog-footer>
-      <button type="submit">Save changes</button>
+      <div sc-dialog-footer>
+        <button type="submit">Save changes</button>
+      </div>
     </div>
   `,
   styles: ``,

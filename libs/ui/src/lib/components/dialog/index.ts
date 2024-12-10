@@ -3,3 +3,4 @@ export * from './dialog-title';
 export * from './dialog-description';
 export * from './dialog-footer';
 export * from './dialog-close';
+export * from './dialog-content';
