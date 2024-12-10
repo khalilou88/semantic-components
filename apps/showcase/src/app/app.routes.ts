@@ -2,6 +2,7 @@ import { Route } from '@angular/router';
 
 import { ScSidebarLayout } from '@semantic-components/ui';
 
+import AlertDialogPage from './pages/alert-dialog-page';
 import BreadcrumbPage from './pages/breadcrumb-page';
 import ButtonPage from './pages/button-page';
 import ColorsPage from './pages/colors-page';
@@ -24,6 +25,7 @@ export const appRoutes: Route[] = [
     path: '',
     component: ScSidebarLayout,
     children: [
+      { path: 'alert-dialog', component: AlertDialogPage, title: 'Alert Dialog Page' },
       { path: 'home', component: HomePage, title: 'Home Page' },
       { path: 'tooltip', component: TooltipPage, title: 'Tooltip Page' },
       { path: 'editor', component: EditorPage, title: 'Editor Page' },
