@@ -24,5 +24,5 @@ import { cn } from '../../utils';
 export class ScDialogHeader {
   class = input<string>('');
 
-  classes = computed(() => cn('flex flex-col space-y-1.5 text-center sm:text-left', this.class()));
+  classes = computed(() => cn(' flex flex-col space-y-1.5 text-center sm:text-left', this.class()));
 }

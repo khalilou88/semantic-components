@@ -53,15 +53,15 @@ export default class DialogPage {
   ],
   template: `
     <div sc-dialog-content>
+      <button sc-dialog-close>
+        <svg-x-icon />
+        <span class="sr-only">Close</span>
+      </button>
+
       <div sc-dialog-header>
         <h2 sc-dialog-title>Edit profile</h2>
 
         <p sc-dialog-description>Make changes to your profile here. Click save when you're done.</p>
-
-        <button sc-dialog-close>
-          <svg-x-icon />
-          <span class="sr-only">Close</span>
-        </button>
       </div>
 
       <div sc-dialog-footer>
