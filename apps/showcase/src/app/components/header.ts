@@ -123,7 +123,6 @@ import { SvgGithubIcon, SvgMenuIcon, SvgXIcon } from '@semantic-icons/lucide-ico
             class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
           >
             <button sc-button variant="ghost" size="icon" type="button">
-              <span class="absolute -inset-1.5"></span>
               <span class="sr-only">View notifications</span>
 
               <svg-github-icon />
