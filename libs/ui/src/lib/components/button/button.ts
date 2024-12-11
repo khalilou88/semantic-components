@@ -6,7 +6,7 @@ import {
   input,
 } from '@angular/core';
 
-import { cva } from 'class-variance-authority';
+import { VariantProps, cva } from 'class-variance-authority';
 
 import { cn } from '../../utils';
 
@@ -36,6 +36,8 @@ const buttonVariants = cva(
   },
 );
 
+type ButtonVariants = VariantProps<typeof buttonVariants>;
+
 @Component({
   selector: 'button[sc-button], a[sc-button]',
   imports: [],
@@ -50,11 +52,9 @@ const buttonVariants = cva(
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScButton {
-  variant = input<'primary' | 'secondary' | 'destructive' | 'outline' | 'ghost' | 'link'>(
-    'primary',
-  );
+  variant = input<ButtonVariants['variant']>('primary');
 
-  size = input<'default' | 'sm' | 'lg' | 'icon'>('default');
+  size = input<ButtonVariants['size']>('default');
 
   class = input<string>('');
 
