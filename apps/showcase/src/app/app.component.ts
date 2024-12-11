@@ -2,9 +2,9 @@ import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  Inject,
   OnInit,
   ViewEncapsulation,
+  inject,
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -20,7 +20,9 @@ import { RouterModule } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
-  constructor(@Inject(DOCUMENT) private readonly document: Document) {}
+  private readonly document = inject<Document>(DOCUMENT);
+
+  constructor() {}
 
   ngOnInit() {
     this.document.body.classList.add('sc-body');

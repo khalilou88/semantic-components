@@ -1,11 +1,11 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Inject,
   LOCALE_ID,
   OnInit,
   ViewEncapsulation,
   computed,
+  inject,
   signal,
 } from '@angular/core';
 
@@ -45,6 +45,8 @@ import { WeekDayName } from './util';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScInlineDatePicker implements OnInit {
+  private readonly localeId = inject(LOCALE_ID);
+
   year = signal<number>(0);
   month = signal<number>(0);
   weekDaysNames = signal<WeekDayName[]>([]);
@@ -95,7 +97,7 @@ export class ScInlineDatePicker implements OnInit {
 
   selectedDay = signal<string>('');
 
-  constructor(@Inject(LOCALE_ID) private readonly localeId: string) {}
+  constructor() {}
 
   ngOnInit() {
     this.init();

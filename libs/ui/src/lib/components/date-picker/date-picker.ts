@@ -6,7 +6,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  Inject,
   Injector,
   LOCALE_ID,
   OnInit,
@@ -52,9 +51,11 @@ import { ScInlineDatePicker } from './inline-date-picker';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScDatePicker implements OnInit {
+  private readonly localeId = inject(LOCALE_ID);
+
   dateFormatPattern = signal<string>('');
 
-  constructor(@Inject(LOCALE_ID) private readonly localeId: string) {}
+  constructor() {}
 
   ngOnInit() {
     this.dateFormatPattern.set(this.getDateFormatPattern(this.localeId));
