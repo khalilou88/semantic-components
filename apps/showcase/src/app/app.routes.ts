@@ -2,6 +2,7 @@ import { Route } from '@angular/router';
 
 import { ScSidebarLayout } from '@semantic-components/ui';
 
+import StackedLayout from './layouts/stacked-layout';
 import AlertDialogPage from './pages/alert-dialog-page';
 import BreadcrumbPage from './pages/breadcrumb-page';
 import ButtonPage from './pages/button-page';
@@ -11,6 +12,7 @@ import DialogPage from './pages/dialog-page';
 import DropdownPage from './pages/dropdown-page';
 import EditorPage from './pages/editor-page';
 import HomePage from './pages/home-page';
+import LandingPage from './pages/landing-page';
 import NavPage from './pages/nav-page';
 import NotFoundPage from './pages/not-found-page';
 import PaginatorPage from './pages/paginator-page';
@@ -21,6 +23,12 @@ import TogglePage from './pages/toggle-page';
 import TooltipPage from './pages/tooltip-page';
 
 export const appRoutes: Route[] = [
+  {
+    path: 'landing',
+    component: StackedLayout,
+    children: [{ path: '', component: LandingPage, title: 'Landing Page' }],
+  },
+
   {
     path: '',
     component: ScSidebarLayout,
@@ -41,12 +49,13 @@ export const appRoutes: Route[] = [
       { path: 'dropdown', component: DropdownPage, title: 'Dropdown Page' },
       { path: 'colors', component: ColorsPage, title: 'Colors Page' },
       { path: 'theme-toggler', component: ThemeTogglerPage, title: 'ThemeToggler Page' },
-      { path: '', redirectTo: '/home', pathMatch: 'full' }, // redirect to `home`
+      { path: '', redirectTo: '/landing', pathMatch: 'full' },
       {
+        // Wildcard route for a 404 page
         path: '**',
         component: NotFoundPage,
         title: '404 Not Found Page',
-      }, // Wildcard route for a 404 page
+      },
     ],
   },
 ];
