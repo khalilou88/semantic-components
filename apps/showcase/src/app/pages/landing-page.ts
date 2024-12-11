@@ -12,7 +12,7 @@ import { SvgArrowRightIcon, SvgGithubIcon } from '@semantic-icons/lucide-icons';
       <div class="mx-auto flex max-w-container flex-col gap-12 pt-16 sm:gap-24">
         <div class="flex flex-col items-center gap-6 text-center sm:gap-12">
           <div class="animate-appear" sc-badge variant="outline">
-            <span class="text-muted-foreground">New version of Launch UI is out!</span>
+            <span class="text-muted-foreground">New version of Semantic Components is out!</span>
             <a class="flex items-center gap-1" href="/">
               Get started
               <svg-arrow-right-icon class="h-3 w-3" />
