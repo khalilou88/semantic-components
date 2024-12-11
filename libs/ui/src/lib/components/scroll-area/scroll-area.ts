@@ -1,6 +1,8 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   ViewEncapsulation,
   computed,
   input,
@@ -34,10 +36,18 @@ import { cn } from '../../utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScScrollArea {
+export class ScScrollArea implements AfterViewInit {
   class = input<string>('');
 
   classes = computed(() => cn('', this.class()));
 
   visibility = input<ScrollbarVisibility>('native');
+
+  constructor(private host: ElementRef) {}
+
+  ngAfterViewInit() {
+    let height = this.host.nativeElement.scrollHeight;
+
+    console.log(height);
+  }
 }
