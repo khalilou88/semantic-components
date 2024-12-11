@@ -7,8 +7,27 @@ import {
   input,
 } from '@angular/core';
 
+import { VariantProps, cva } from 'class-variance-authority';
+
 import { cn } from '../../utils';
 import { ScSidebarState } from './sidebar-state';
+
+const sidebarStates = cva(
+  'absolute top-0 h-full left-0 bg-sidebar text-sidebar-foreground border-4 border-indigo-500/100',
+  {
+    variants: {
+      state: {
+        close: 'hidden',
+        open: 'z-50',
+      },
+    },
+    defaultVariants: {
+      state: 'close',
+    },
+  },
+);
+
+type SidebarStates = VariantProps<typeof sidebarStates>;
 
 @Component({
   selector: 'sc-sidebar',
@@ -27,14 +46,13 @@ import { ScSidebarState } from './sidebar-state';
 export class ScSidebar {
   sidebarState = inject(ScSidebarState);
 
+  state = computed<SidebarStates['state']>(() => {
+    return this.sidebarState.open() ? 'open' : 'close';
+  });
+
   class = input<string>('');
 
-  classes = computed(() =>
-    cn(
-      'absolute top-0 h-full left-0 bg-sidebar text-sidebar-foreground z-50 border-4 border-indigo-500/100',
-      this.class(),
-    ),
-  );
+  classes = computed(() => cn(sidebarStates({ state: this.state() }), this.class()));
 
   sidebarWidth = computed<number>(() => {
     if (this.sidebarState.open()) {

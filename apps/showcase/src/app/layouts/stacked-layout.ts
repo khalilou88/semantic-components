@@ -15,7 +15,7 @@ import { SidebarContent } from '../components/sidebar-content';
         <app-sidebar-content />
       </sc-sidebar>
 
-      <main class="w-full">
+      <main class="w-full bg-background">
         <app-header />
         <div class="mt-10">
           <router-outlet></router-outlet>

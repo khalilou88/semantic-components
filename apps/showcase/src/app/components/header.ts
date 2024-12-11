@@ -8,7 +8,7 @@ import { ScSidebarState } from 'libs/ui/src/lib/components/sidebar/sidebar-state
   selector: 'app-header',
   imports: [ScThemeToggler, SvgGithubIcon, ScButton, SvgMenuIcon, SvgXIcon],
   template: `
-    <div class="sticky top-0 border-b-2">
+    <div class="sticky top-0 border-b-2 z-10 bg-background">
       <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div class="relative flex h-16 items-center justify-between">
           <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -40,7 +40,7 @@ import { ScSidebarState } from 'libs/ui/src/lib/components/sidebar/sidebar-state
 
             <div class="hidden sm:ml-6 sm:block">
               <nav
-                class="relative z-10 flex max-w-max flex-1 items-center justify-center"
+                class="relative flex max-w-max flex-1 items-center justify-center"
                 aria-label="Main"
                 data-orientation="horizontal"
                 dir="ltr"
