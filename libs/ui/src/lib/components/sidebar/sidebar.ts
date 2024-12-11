@@ -34,7 +34,7 @@ type SidebarStates = VariantProps<typeof sidebarStates>;
   selector: 'sc-sidebar',
   imports: [ScSidebarToggler],
   template: `
-    <sc-sidebar-toggler />
+    <sc-sidebar-toggler class="absolute right-1 top-1" />
 
     <ng-content />
   `,

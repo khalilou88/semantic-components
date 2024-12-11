@@ -18,7 +18,7 @@ import { ScSidebarState } from './sidebar-state';
   imports: [ScButton, SvgMenuIcon, SvgXIcon],
   template: `
     <button
-      class="classes()"
+      [class]="classes()"
       (click)="toggle()"
       sc-button
       data-sidebar="trigger"
