@@ -11,9 +11,9 @@ import {
 import { VariantProps, cva } from 'class-variance-authority';
 
 import { cn } from '../../utils';
+import { ScSheetToggler } from './sheet-toggler';
+import { ScSheetTrigger } from './sheet-trigger';
 import { SidebarContent } from './sidebar-content';
-import { ScSidebarState } from './sidebar-state';
-import { ScSidebarToggler } from './sidebar-toggler';
 
 const sheetVariants = cva(
   'relative z-50 gap-4 bg-background p-6 shadow-lg transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500',
@@ -37,10 +37,10 @@ const sheetVariants = cva(
 export type SheetVariants = VariantProps<typeof sheetVariants>;
 
 @Component({
-  selector: 'sc-sidebar',
-  imports: [ScSidebarToggler, SidebarContent],
+  selector: 'sc-sheet',
+  imports: [ScSheetToggler, SidebarContent],
   template: `
-    <sc-sidebar-toggler class="absolute right-1 top-1" />
+    <sc-sheet-toggler class="absolute right-1 top-1" />
 
     <app-sidebar-content />
   `,
@@ -52,8 +52,8 @@ export type SheetVariants = VariantProps<typeof sheetVariants>;
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSidebar {
-  sidebarState = inject(ScSidebarState);
+export class ScSheet {
+  sidebarState = inject(ScSheetTrigger);
 
   state = computed<'open' | 'closed'>(() => {
     return this.sidebarState.open() ? 'open' : 'closed';

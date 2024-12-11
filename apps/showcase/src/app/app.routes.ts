@@ -1,7 +1,5 @@
 import { Route } from '@angular/router';
 
-import { ScSidebarLayout } from '@semantic-components/ui';
-
 import StackedLayout from './layouts/stacked-layout';
 import AlertDialogPage from './pages/alert-dialog-page';
 import BreadcrumbPage from './pages/breadcrumb-page';

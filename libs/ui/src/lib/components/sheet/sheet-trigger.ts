@@ -9,12 +9,12 @@ import {
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ComponentRef, Injectable, inject, signal } from '@angular/core';
 
-import { ScSidebar, SheetVariants } from './sidebar';
+import { ScSheet, SheetVariants } from './sheet';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ScSidebarState {
+export class ScSheetTrigger {
   private _overlayContainer = inject(OverlayContainer);
 
   private readonly overlay = inject(Overlay);
@@ -30,9 +30,9 @@ export class ScSidebarState {
 
     this.updateSize(side);
 
-    const tooltipPortal = new ComponentPortal(ScSidebar);
+    const tooltipPortal = new ComponentPortal(ScSheet);
 
-    const tooltipRef: ComponentRef<ScSidebar> = this.overlayRef.attach(tooltipPortal);
+    const tooltipRef: ComponentRef<ScSheet> = this.overlayRef.attach(tooltipPortal);
 
     tooltipRef.instance.side.set(side);
   }

@@ -1,22 +1,15 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { ScSidebarContainer } from '@semantic-components/ui';
-
 import { Header } from '../components/header';
 
 @Component({
   selector: 'app-stacked-layout',
-  imports: [RouterModule, Header, ScSidebarContainer],
+  imports: [RouterModule, Header],
   template: `
-    <sc-sidebar-container>
-      <main class="w-full bg-background">
-        <app-header />
-        <div class="mt-10">
-          <router-outlet></router-outlet>
-        </div>
-      </main>
-    </sc-sidebar-container>
+    <app-header />
+
+    <router-outlet></router-outlet>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,

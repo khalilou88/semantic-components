@@ -1,17 +1,17 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { ScButton, ScSidebarToggler, ScThemeToggler } from '@semantic-components/ui';
+import { ScButton, ScSheetToggler, ScThemeToggler } from '@semantic-components/ui';
 import { SvgGithubIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-header',
-  imports: [ScThemeToggler, SvgGithubIcon, ScButton, ScSidebarToggler],
+  imports: [ScThemeToggler, SvgGithubIcon, ScButton, ScSheetToggler],
   template: `
     <div class="sticky top-0 border-b-2 z-10 bg-background">
       <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div class="relative flex h-16 items-center justify-between">
           <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-            <sc-sidebar-toggler />
+            <sc-sheet-toggler />
           </div>
           <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div class="flex shrink-0 items-center">
@@ -102,7 +102,7 @@ import { SvgGithubIcon } from '@semantic-icons/lucide-icons';
           <div
             class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
           >
-            <sc-sidebar-toggler />
+            <sc-sheet-toggler />
 
             <button sc-button variant="ghost" size="icon" type="button">
               <span class="sr-only">View notifications</span>

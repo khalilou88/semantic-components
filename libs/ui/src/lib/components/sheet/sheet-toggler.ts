@@ -11,10 +11,10 @@ import { SvgMenuIcon, SvgXIcon } from '@semantic-icons/lucide-icons';
 
 import { cn } from '../../utils';
 import { ScButton } from '../button';
-import { ScSidebarState } from './sidebar-state';
+import { ScSheetTrigger } from './sheet-trigger';
 
 @Component({
-  selector: 'sc-sidebar-toggler',
+  selector: 'sc-sheet-toggler',
   imports: [ScButton, SvgMenuIcon, SvgXIcon],
   template: `
     <button
@@ -41,8 +41,8 @@ import { ScSidebarState } from './sidebar-state';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSidebarToggler {
-  sidebarState = inject(ScSidebarState);
+export class ScSheetToggler {
+  sidebarState = inject(ScSheetTrigger);
 
   class = input<string>('');
 
