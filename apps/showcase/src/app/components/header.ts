@@ -121,6 +121,26 @@ import { SvgGithubIcon, SvgMenuIcon, SvgXIcon } from '@semantic-icons/lucide-ico
           <div
             class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
           >
+            <button
+              (click)="toggle()"
+              sc-button
+              variant="ghost"
+              size="icon"
+              type="button"
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+            >
+              <span class="sr-only">Open main menu</span>
+
+              @if (open()) {
+                <svg-x-icon />
+              }
+
+              @if (!open()) {
+                <svg-menu-icon />
+              }
+            </button>
+
             <button sc-button variant="ghost" size="icon" type="button">
               <span class="sr-only">View notifications</span>
 
