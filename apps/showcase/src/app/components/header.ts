@@ -1,15 +1,8 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  inject,
-  signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
 import { ScButton, ScThemeToggler } from '@semantic-components/ui';
 import { SvgGithubIcon, SvgMenuIcon, SvgXIcon } from '@semantic-icons/lucide-icons';
-
-import { SidebarState } from '../services/sidebar-state';
+import { ScSidebarState } from 'libs/ui/src/lib/components/sidebar/sidebar-state';
 
 @Component({
   selector: 'app-header',
@@ -166,7 +159,7 @@ import { SidebarState } from '../services/sidebar-state';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Header {
-  sidebarState = inject(SidebarState);
+  sidebarState = inject(ScSidebarState);
 
   toggle() {
     this.sidebarState.open.update((value) => !value);

@@ -1,22 +1,25 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { ScSidebar, ScSidebarContainer } from '@semantic-components/ui';
+
 import { Header } from '../components/header';
-import { Sidebar } from '../components/sidebar';
-import { SidebarContainer } from '../components/sidebar-container';
+import { SidebarContent } from '../components/sidebar-content';
 
 @Component({
   selector: 'app-stacked-layout',
-  imports: [RouterModule, Header, SidebarContainer, Sidebar],
+  imports: [RouterModule, Header, ScSidebarContainer, ScSidebar, SidebarContent],
   template: `
-    <app-sidebar-container>
-      <app-sidebar />
+    <sc-sidebar-container>
+      <sc-sidebar>
+        <app-sidebar-content />
+      </sc-sidebar>
 
       <main>
         <app-header />
         <router-outlet></router-outlet>
       </main>
-    </app-sidebar-container>
+    </sc-sidebar-container>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,

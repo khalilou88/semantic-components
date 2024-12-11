@@ -6,10 +6,10 @@ import {
   input,
 } from '@angular/core';
 
-import { cn } from 'libs/ui/src/lib/utils';
+import { cn } from '../../utils';
 
 @Component({
-  selector: 'app-sidebar-container',
+  selector: 'sc-sidebar-container',
   imports: [],
   template: `
     <ng-content />
@@ -21,7 +21,7 @@ import { cn } from 'libs/ui/src/lib/utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SidebarContainer {
+export class ScSidebarContainer {
   class = input<string>('');
 
   classes = computed(() =>

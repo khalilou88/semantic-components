@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'sc-sidebar-content',
+  selector: 'app-sidebar-content',
   imports: [RouterModule],
   template: `
     <div class="w-full pl-5">
@@ -575,4 +575,4 @@ import { RouterModule } from '@angular/router';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSidebarContent {}
+export class SidebarContent {}

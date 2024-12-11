@@ -3,6 +3,6 @@ import { Injectable, signal } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class SidebarState {
+export class ScSidebarState {
   open = signal<boolean>(false);
 }
