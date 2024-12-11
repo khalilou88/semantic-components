@@ -9,10 +9,10 @@ import {
 import { cn } from 'libs/ui/src/lib/utils';
 
 @Component({
-  selector: 'app-sidebar-container',
+  selector: 'app-sidebar',
   imports: [],
   template: `
-    <ng-content />
+    <p>sidebar works!</p>
   `,
   host: {
     '[class]': 'classes()',
@@ -21,8 +21,8 @@ import { cn } from 'libs/ui/src/lib/utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SidebarContainer {
+export class Sidebar {
   class = input<string>('');
 
-  classes = computed(() => cn('flex min-h-svh w-full border-4 border-red-500/100', this.class()));
+  classes = computed(() => cn('border-4 border-indigo-500/100', this.class()));
 }
