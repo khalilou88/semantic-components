@@ -15,9 +15,11 @@ import { SidebarContent } from '../components/sidebar-content';
         <app-sidebar-content />
       </sc-sidebar>
 
-      <main>
+      <main class="w-full">
         <app-header />
-        <router-outlet></router-outlet>
+        <div class="mt-10">
+          <router-outlet></router-outlet>
+        </div>
       </main>
     </sc-sidebar-container>
   `,

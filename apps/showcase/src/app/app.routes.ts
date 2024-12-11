@@ -24,15 +24,10 @@ import TooltipPage from './pages/tooltip-page';
 
 export const appRoutes: Route[] = [
   {
-    path: 'landing',
-    component: StackedLayout,
-    children: [{ path: '', component: LandingPage, title: 'Landing Page' }],
-  },
-
-  {
     path: '',
-    component: ScSidebarLayout,
+    component: StackedLayout,
     children: [
+      { path: 'landing', component: LandingPage, title: 'Landing Page' },
       { path: 'alert-dialog', component: AlertDialogPage, title: 'Alert Dialog Page' },
       { path: 'home', component: HomePage, title: 'Home Page' },
       { path: 'tooltip', component: TooltipPage, title: 'Tooltip Page' },
