@@ -1,7 +1,15 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  inject,
+  input,
+} from '@angular/core';
 
 import { SvgMenuIcon, SvgXIcon } from '@semantic-icons/lucide-icons';
 
+import { cn } from '../../utils';
 import { ScButton } from '../button';
 import { ScSidebarState } from './sidebar-state';
 
@@ -10,6 +18,7 @@ import { ScSidebarState } from './sidebar-state';
   imports: [ScButton, SvgMenuIcon, SvgXIcon],
   template: `
     <button
+      class="classes()"
       (click)="toggle()"
       sc-button
       data-sidebar="trigger"
@@ -34,6 +43,10 @@ import { ScSidebarState } from './sidebar-state';
 })
 export class ScSidebarToggler {
   sidebarState = inject(ScSidebarState);
+
+  class = input<string>('');
+
+  classes = computed(() => cn('', this.class()));
 
   toggle() {
     this.sidebarState.open.update((value) => !value);
