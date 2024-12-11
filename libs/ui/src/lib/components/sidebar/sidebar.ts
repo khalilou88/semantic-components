@@ -30,7 +30,10 @@ export class ScSidebar {
   class = input<string>('');
 
   classes = computed(() =>
-    cn('absolute top-0 h-full left-0 border-4 border-indigo-500/100', this.class()),
+    cn(
+      'absolute top-0 h-full left-0 bg-sidebar text-sidebar-foreground z-50 border-4 border-indigo-500/100',
+      this.class(),
+    ),
   );
 
   sidebarWidth = computed<number>(() => {
