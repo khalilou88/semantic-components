@@ -7,7 +7,7 @@ import { ScScrollArea } from '../scroll-area';
   selector: 'app-sidebar-content',
   imports: [RouterModule, ScScrollArea],
   template: `
-    <div class="w-full pt-5 pl-5" sc-scroll-area>
+    <div class="w-full pl-5 pt-5" sc-scroll-area>
       <div class="pb-4">
         <h4 class="mb-1 rounded-md px-2 py-1 text-sm font-semibold">Getting Started</h4>
         <div class="grid grid-flow-row auto-rows-max gap-0.5 text-sm">

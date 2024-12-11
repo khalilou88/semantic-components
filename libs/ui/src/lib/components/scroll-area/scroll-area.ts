@@ -46,7 +46,7 @@ export class ScScrollArea implements AfterViewInit {
   constructor(private host: ElementRef) {}
 
   ngAfterViewInit() {
-    let height = this.host.nativeElement.scrollHeight;
+    const height = this.host.nativeElement.scrollHeight;
 
     console.log(height);
   }
