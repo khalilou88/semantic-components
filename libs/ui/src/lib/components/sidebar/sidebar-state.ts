@@ -23,7 +23,7 @@ export class ScSidebarState {
   open = signal<boolean>(false);
 
   openSheet() {
-    const side: SheetVariants['side'] = 'bottom';
+    const side: SheetVariants['side'] = 'left';
 
     const positionStrategy = this.getPositionStrategy(side);
     this.overlayRef = this.overlay.create({ positionStrategy });
