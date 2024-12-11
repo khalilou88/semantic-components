@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 import { ScBadge, ScButton } from '@semantic-components/ui';
 import { SvgArrowRightIcon, SvgGithubIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-landing-page',
-  imports: [SvgArrowRightIcon, SvgGithubIcon, ScButton, ScBadge],
+  imports: [SvgArrowRightIcon, SvgGithubIcon, ScButton, ScBadge, RouterLink],
   template: `
     <section class="fade-bottom overflow-hidden pb-0 sm:pb-0 md:pb-0">
       <div class="mx-auto flex max-w-container flex-col gap-12 pt-16 sm:gap-24">
@@ -28,9 +29,9 @@ import { SvgArrowRightIcon, SvgGithubIcon } from '@semantic-icons/lucide-icons';
             Landing page components built with React, Shadcn/ui and Tailwind that will make your
             website feel premium.
           </p>
-          <div class="relative z-10 flex animate-appear justify-center gap-4 opacity-0 delay-300">
-            <div class="relative z-10 flex animate-appear justify-center gap-4 opacity-0 delay-300">
-              <a variant="primary" size="lg" sc-button routerLink="/get-started"></a>
+          <div class="relative z-10 flex animate-appear justify-center gap-4  delay-300">
+            <div class="relative z-10 flex animate-appear justify-center gap-4  delay-300">
+              <a variant="primary" size="lg" sc-button routerLink="/get-started">Get started</a>
 
               <a variant="secondary" size="lg" sc-button>
                 <svg-github-icon class="mr-2 h-4 w-4" />
