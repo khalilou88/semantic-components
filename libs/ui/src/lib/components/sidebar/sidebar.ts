@@ -11,6 +11,7 @@ import { VariantProps, cva } from 'class-variance-authority';
 
 import { cn } from '../../utils';
 import { ScSidebarState } from './sidebar-state';
+import { ScSidebarToggler } from './sidebar-toggler';
 
 const sidebarStates = cva(
   'absolute top-0 h-full left-0 bg-sidebar text-sidebar-foreground border-4 border-indigo-500/100',
@@ -31,8 +32,10 @@ type SidebarStates = VariantProps<typeof sidebarStates>;
 
 @Component({
   selector: 'sc-sidebar',
-  imports: [],
+  imports: [ScSidebarToggler],
   template: `
+    <sc-sidebar-toggler />
+
     <ng-content />
   `,
   host: {

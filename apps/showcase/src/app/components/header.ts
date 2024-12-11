@@ -1,36 +1,22 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { ScButton, ScSidebarState, ScThemeToggler } from '@semantic-components/ui';
-import { SvgGithubIcon, SvgMenuIcon, SvgXIcon } from '@semantic-icons/lucide-icons';
+import {
+  ScButton,
+  ScSidebarState,
+  ScSidebarToggler,
+  ScThemeToggler,
+} from '@semantic-components/ui';
+import { SvgGithubIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-header',
-  imports: [ScThemeToggler, SvgGithubIcon, ScButton, SvgMenuIcon, SvgXIcon],
+  imports: [ScThemeToggler, SvgGithubIcon, ScButton, ScSidebarToggler],
   template: `
     <div class="sticky top-0 border-b-2 z-10 bg-background">
       <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div class="relative flex h-16 items-center justify-between">
           <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-            <!-- Mobile menu button-->
-            <button
-              (click)="toggle()"
-              sc-button
-              variant="ghost"
-              size="icon"
-              type="button"
-              aria-controls="mobile-menu"
-              aria-expanded="false"
-            >
-              <span class="sr-only">Open main menu</span>
-
-              @if (sidebarState.open()) {
-                <svg-x-icon />
-              }
-
-              @if (!sidebarState.open()) {
-                <svg-menu-icon />
-              }
-            </button>
+            <sc-sidebar-toggler />
           </div>
           <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div class="flex shrink-0 items-center">
@@ -121,26 +107,6 @@ import { SvgGithubIcon, SvgMenuIcon, SvgXIcon } from '@semantic-icons/lucide-ico
           <div
             class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
           >
-            <button
-              (click)="toggle()"
-              sc-button
-              variant="ghost"
-              size="icon"
-              type="button"
-              aria-controls="mobile-menu"
-              aria-expanded="false"
-            >
-              <span class="sr-only">Open main menu</span>
-
-              @if (sidebarState.open()) {
-                <svg-x-icon />
-              }
-
-              @if (!sidebarState.open()) {
-                <svg-menu-icon />
-              }
-            </button>
-
             <button sc-button variant="ghost" size="icon" type="button">
               <span class="sr-only">View notifications</span>
 
@@ -159,8 +125,4 @@ import { SvgGithubIcon, SvgMenuIcon, SvgXIcon } from '@semantic-icons/lucide-ico
 })
 export class Header {
   sidebarState = inject(ScSidebarState);
-
-  toggle() {
-    this.sidebarState.open.update((value) => !value);
-  }
 }
