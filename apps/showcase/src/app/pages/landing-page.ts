@@ -21,13 +21,12 @@ import { SvgArrowRightIcon, SvgGithubIcon } from '@semantic-icons/lucide-icons';
           <h1
             class="relative z-10 inline-block animate-appear bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-4xl font-semibold leading-tight text-transparent drop-shadow-2xl sm:text-6xl sm:leading-tight md:text-8xl md:leading-tight"
           >
-            Give your big idea the website it deserves
+            Build your next angular app even faster.
           </h1>
           <p
-            class="text-md relative z-10 max-w-[550px] animate-appear font-medium text-muted-foreground opacity-0 delay-100 sm:text-xl"
+            class="text-md relative z-10 max-w-[550px] animate-appear font-medium text-muted-foreground  delay-100 sm:text-xl"
           >
-            Landing page components built with React, Shadcn/ui and Tailwind that will make your
-            website feel premium.
+            Ui components built with Angular and Tailwind and inspired by Shadcn/ui.
           </p>
           <div class="relative z-10 flex animate-appear justify-center gap-4  delay-300">
             <div class="relative z-10 flex animate-appear justify-center gap-4  delay-300">
@@ -40,12 +39,12 @@ import { SvgArrowRightIcon, SvgGithubIcon } from '@semantic-icons/lucide-icons';
             </div>
           </div>
           <!--div class="relative pt-12">
-            <MockupFrame class="animate-appear opacity-0 delay-700" size="small">
+            <MockupFrame class="animate-appear  delay-700" size="small">
               <Mockup type="responsive">
                 <Image src="{src}" alt="Launch UI app screenshot" width="{1248}" height="{765}" />
               </Mockup>
             </MockupFrame>
-            <Glow variant="top" class="animate-appear-zoom opacity-0 delay-1000" />
+            <Glow variant="top" class="animate-appear-zoom  delay-1000" />
           </div-->
         </div>
       </div>
