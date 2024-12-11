@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
 
 import { ScButton, ScThemeToggler } from '@semantic-components/ui';
-import { SvgGithubIcon, SvgMenuIcon } from '@semantic-icons/lucide-icons';
+import { SvgGithubIcon, SvgMenuIcon, SvgXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-header',
-  imports: [ScThemeToggler, SvgGithubIcon, ScButton, SvgMenuIcon],
+  imports: [ScThemeToggler, SvgGithubIcon, ScButton, SvgMenuIcon, SvgXIcon],
   template: `
     <div class="">
       <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -25,17 +25,7 @@ import { SvgGithubIcon, SvgMenuIcon } from '@semantic-icons/lucide-icons';
               <span class="sr-only">Open main menu</span>
 
               @if (open()) {
-                <svg
-                  class=" size-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                  data-slot="icon"
-                >
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                </svg>
+                <svg-x-icon />
               }
 
               @if (!open()) {
