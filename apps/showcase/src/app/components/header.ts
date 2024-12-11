@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { ScButton, ScThemeToggler } from '@semantic-components/ui';
+import { ScButton, ScSidebarState, ScThemeToggler } from '@semantic-components/ui';
 import { SvgGithubIcon, SvgMenuIcon, SvgXIcon } from '@semantic-icons/lucide-icons';
-import { ScSidebarState } from 'libs/ui/src/lib/components/sidebar/sidebar-state';
 
 @Component({
   selector: 'app-header',
