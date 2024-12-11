@@ -23,12 +23,12 @@ export class ScSidebarState {
   open = signal<boolean>(false);
 
   openSheet() {
-    const side: SheetVariants['side'] = 'left';
+    const side: SheetVariants['side'] = 'right';
 
     const positionStrategy = this.getPositionStrategy(side);
     this.overlayRef = this.overlay.create({ positionStrategy });
 
-    this.overlayRef.updateSize({ width: 620 });
+    this.updateSize(side);
 
     const tooltipPortal = new ComponentPortal(ScSidebar);
 
@@ -89,12 +89,35 @@ export class ScSidebarState {
       case 'right': {
         return [
           {
-            originX: 'start',
+            originX: 'end',
             originY: 'top',
-            overlayX: 'start',
+            overlayX: 'end',
             overlayY: 'top',
           },
         ];
+      }
+
+      default: {
+        throw new Error('Error in switch case');
+      }
+    }
+  }
+
+  updateSize(side: SheetVariants['side']): void {
+    switch (side) {
+      case 'top': {
+        return;
+      }
+      case 'bottom': {
+        return;
+      }
+      case 'left': {
+        this.overlayRef.updateSize({ width: 620 });
+        return;
+      }
+      case 'right': {
+        this.overlayRef.updateSize({ width: 620 });
+        return;
       }
 
       default: {
