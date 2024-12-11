@@ -97,8 +97,6 @@ export class ScInlineDatePicker implements OnInit {
 
   selectedDay = signal<string>('');
 
-  constructor() {}
-
   ngOnInit() {
     this.init();
     this.setLocaleDayNames();

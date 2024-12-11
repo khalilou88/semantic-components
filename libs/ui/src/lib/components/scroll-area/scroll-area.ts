@@ -46,8 +46,6 @@ export class ScScrollArea implements AfterViewInit {
 
   visibility = input<ScrollbarVisibility>('native');
 
-  constructor() {}
-
   ngAfterViewInit() {
     const height = this.host.nativeElement.scrollHeight;
 

@@ -22,8 +22,6 @@ import { RouterModule } from '@angular/router';
 export class AppComponent implements OnInit {
   private readonly document = inject<Document>(DOCUMENT);
 
-  constructor() {}
-
   ngOnInit() {
     this.document.body.classList.add('sc-body');
   }

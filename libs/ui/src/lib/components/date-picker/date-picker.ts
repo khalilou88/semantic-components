@@ -55,8 +55,6 @@ export class ScDatePicker implements OnInit {
 
   dateFormatPattern = signal<string>('');
 
-  constructor() {}
-
   ngOnInit() {
     this.dateFormatPattern.set(this.getDateFormatPattern(this.localeId));
   }
