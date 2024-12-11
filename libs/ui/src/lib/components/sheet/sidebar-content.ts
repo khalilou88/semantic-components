@@ -1,11 +1,13 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { ScScrollArea } from '../scroll-area';
+
 @Component({
   selector: 'app-sidebar-content',
-  imports: [RouterModule],
+  imports: [RouterModule, ScScrollArea],
   template: `
-    <div class="w-full pl-5">
+    <div class="w-full pl-5" sc-scroll-area>
       <div class="pb-4">
         <h4 class="mb-1 rounded-md px-2 py-1 text-sm font-semibold">Getting Started</h4>
         <div class="grid grid-flow-row auto-rows-max gap-0.5 text-sm">
