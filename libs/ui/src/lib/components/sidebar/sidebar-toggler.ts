@@ -49,6 +49,6 @@ export class ScSidebarToggler {
   classes = computed(() => cn('', this.class()));
 
   toggle() {
-    this.sidebarState.open.update((value) => !value);
+    this.sidebarState.toggle();
   }
 }

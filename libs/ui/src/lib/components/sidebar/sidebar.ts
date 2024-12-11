@@ -5,42 +5,48 @@ import {
   computed,
   inject,
   input,
+  signal,
 } from '@angular/core';
 
 import { VariantProps, cva } from 'class-variance-authority';
 
 import { cn } from '../../utils';
+import { SidebarContent } from './sidebar-content';
 import { ScSidebarState } from './sidebar-state';
 import { ScSidebarToggler } from './sidebar-toggler';
 
-const sidebarStates = cva(
-  'absolute top-0 h-full left-0 bg-sidebar text-sidebar-foreground border-4 border-indigo-500/100',
+const sheetVariants = cva(
+  'relative z-50 gap-4 bg-background p-6 shadow-lg transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500',
   {
     variants: {
-      state: {
-        close: 'hidden',
-        open: 'z-50',
+      side: {
+        top: 'border-b data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top',
+        bottom:
+          'border-t data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom',
+        left: 'h-full w-3/4 border-r data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left sm:max-w-sm',
+        right:
+          'h-full w-3/4  border-l data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-sm',
       },
     },
     defaultVariants: {
-      state: 'close',
+      side: 'right',
     },
   },
 );
 
-type SidebarStates = VariantProps<typeof sidebarStates>;
+export type SheetVariants = VariantProps<typeof sheetVariants>;
 
 @Component({
   selector: 'sc-sidebar',
-  imports: [ScSidebarToggler],
+  imports: [ScSidebarToggler, SidebarContent],
   template: `
     <sc-sidebar-toggler class="absolute right-1 top-1" />
 
-    <ng-content />
+    <app-sidebar-content />
   `,
   host: {
     '[class]': 'classes()',
-    '[style.width.rem]': 'sidebarWidth()',
+    '[attr.data-state]': 'state()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -49,19 +55,13 @@ type SidebarStates = VariantProps<typeof sidebarStates>;
 export class ScSidebar {
   sidebarState = inject(ScSidebarState);
 
-  state = computed<SidebarStates['state']>(() => {
-    return this.sidebarState.open() ? 'open' : 'close';
+  state = computed<'open' | 'closed'>(() => {
+    return this.sidebarState.open() ? 'open' : 'closed';
   });
+
+  side = signal<SheetVariants['side']>('right');
 
   class = input<string>('');
 
-  classes = computed(() => cn(sidebarStates({ state: this.state() }), this.class()));
-
-  sidebarWidth = computed<number>(() => {
-    if (this.sidebarState.open()) {
-      return 18; //"18rem"
-    }
-
-    return 0;
-  });
+  classes = computed(() => cn(sheetVariants({ side: this.side() }), this.class()));
 }
