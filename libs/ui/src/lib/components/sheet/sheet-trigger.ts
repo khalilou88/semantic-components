@@ -1,4 +1,3 @@
-import { Dialog } from '@angular/cdk/dialog';
 import {
   ConnectedPosition,
   Overlay,
@@ -25,6 +24,8 @@ export class ScSheetTrigger {
   openSheet() {
     const side: SheetVariants['side'] = 'left';
 
+    this._overlayContainer.getContainerElement().classList.add('sc-overlay-container');
+
     const positionStrategy = this.getPositionStrategy(side);
     this.overlayRef = this.overlay.create({ positionStrategy });
 
@@ -41,6 +42,7 @@ export class ScSheetTrigger {
     if (this.overlayRef?.hasAttached() === true) {
       this.overlayRef?.detach();
       this.open.set(false);
+      this._overlayContainer.getContainerElement().classList.remove('sc-overlay-container');
     } else {
       this.openSheet();
       this.open.set(true);
