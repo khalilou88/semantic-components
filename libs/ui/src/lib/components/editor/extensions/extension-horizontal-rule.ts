@@ -1,36 +1,26 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
+import { SvgMinusIcon } from '@semantic-icons/lucide-icons';
+
+import { ScToggle } from '../../toggle';
 import { ScTooltip } from '../../tooltip';
 import { ScEditor } from '../editor';
 import { ScExtensions } from './extensions';
 
 @Component({
   selector: 'sc-extension-horizontal-rule',
-  imports: [ScTooltip],
+  imports: [ScTooltip, ScToggle, SvgMinusIcon],
   template: `
     <button
-      class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+      [attr.aria-label]="ariaLabel"
+      [scTooltip]="ariaLabel"
       (click)="setHorizontalRule()"
+      sc-toggle
+      variant="outline"
       type="button"
-      scTooltip="Toggle Horizontal Rule"
     >
-      <svg
-        class="size-5"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        fill="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M5 12h14" />
-        <path
-          stroke="currentColor"
-          stroke-linecap="round"
-          d="M6 9.5h12m-12 9h12M6 7.5h12m-12 9h12M6 5.5h12m-12 9h12"
-        />
-      </svg>
-      <span class="sr-only">Toggle Horizontal Rule</span>
+      <svg-minus-icon />
+      <span class="sr-only">{{ ariaLabel }}</span>
     </button>
   `,
   styles: ``,
@@ -38,6 +28,8 @@ import { ScExtensions } from './extensions';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScExtensionHorizontalRule {
+  ariaLabel = 'Toggle Horizontal Rule';
+
   private readonly parent = inject(ScEditor, { host: true });
 
   extensions = inject(ScExtensions);

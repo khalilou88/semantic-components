@@ -1,11 +1,15 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import { ScButton } from '@semantic-components/ui';
-import { SvgChevronRightIcon } from '@semantic-icons/lucide-icons';
+import {
+  SvgChevronRightIcon,
+  SvgLoaderCircleIcon,
+  SvgLoaderIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-buttons-page',
-  imports: [ScButton, SvgChevronRightIcon],
+  imports: [ScButton, SvgChevronRightIcon, SvgLoaderCircleIcon],
   template: `
     <button sc-button type="button">Primary</button>
     <button sc-button variant="secondary" type="button">Secondary</button>
@@ -53,6 +57,15 @@ import { SvgChevronRightIcon } from '@semantic-icons/lucide-icons';
     </button>
     <button sc-button variant="ghost" type="button" size="icon"><svg-chevron-right-icon /></button>
     <button sc-button variant="link" type="button" size="icon"><svg-chevron-right-icon /></button>
+
+    <br />
+    <br />
+    <br />
+
+    <button sc-button disabled>
+      <svg-loader-circle-icon class="animate-spin" />
+      Please wait
+    </button>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,

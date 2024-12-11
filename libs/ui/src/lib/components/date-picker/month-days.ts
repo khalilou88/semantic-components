@@ -17,7 +17,7 @@ import { WeekDayName } from './util';
     <div class="grid grid-cols-7">
       @for (weekDayName of weekDaysNames(); track weekDayName.long) {
         <abbr
-          class="text-muted-foreground text-center"
+          class="text-center text-muted-foreground"
           [title]="weekDayName.long"
           [attr.aria-label]="weekDayName.long"
         >

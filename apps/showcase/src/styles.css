@@ -68,3 +68,11 @@
     --sidebar-ring: 240 4.9% 83.9%;
   }
 }
+
+.sc-body {
+  @apply min-h-screen bg-background font-sans antialiased;
+}
+
+.sc-overlay-container {
+  @apply bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0;
+}

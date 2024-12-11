@@ -1,36 +1,26 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
+import { SvgUnderlineIcon } from '@semantic-icons/lucide-icons';
+
+import { ScToggle } from '../../toggle';
 import { ScTooltip } from '../../tooltip';
 import { ScEditor } from '../editor';
 import { ScExtensions } from './extensions';
 
 @Component({
   selector: 'sc-extension-underline',
-  imports: [ScTooltip],
+  imports: [ScTooltip, SvgUnderlineIcon, ScToggle],
   template: `
     <button
-      class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+      [attr.aria-label]="ariaLabel"
+      [scTooltip]="ariaLabel"
       (click)="toggleUnderline()"
+      sc-toggle
+      variant="outline"
       type="button"
-      scTooltip="Toggle underline"
     >
-      <svg
-        class="size-5"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        fill="none"
-        viewBox="0 0 24 24"
-      >
-        <path
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-width="2"
-          d="M6 19h12M8 5v9a4 4 0 0 0 8 0V5M6 5h4m4 0h4"
-        />
-      </svg>
-      <span class="sr-only">Underline</span>
+      <svg-underline-icon />
+      <span class="sr-only">{{ ariaLabel }}</span>
     </button>
   `,
   styles: ``,
@@ -38,6 +28,8 @@ import { ScExtensions } from './extensions';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScExtensionUnderline {
+  ariaLabel = 'Toggle underline';
+
   private readonly parent = inject(ScEditor, { host: true });
 
   extensions = inject(ScExtensions);

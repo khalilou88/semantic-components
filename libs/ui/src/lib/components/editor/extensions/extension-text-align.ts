@@ -1,89 +1,54 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
+import {
+  SvgAlignCenterIcon,
+  SvgAlignLeftIcon,
+  SvgAlignRightIcon,
+} from '@semantic-icons/lucide-icons';
+
+import { ScToggle } from '../../toggle';
 import { ScTooltip } from '../../tooltip';
 import { ScEditor } from '../editor';
 import { ScExtensions } from './extensions';
 
 @Component({
   selector: 'sc-extension-text-align',
-  imports: [ScTooltip],
+  imports: [ScTooltip, SvgAlignLeftIcon, SvgAlignRightIcon, SvgAlignCenterIcon, ScToggle],
   template: `
     <button
-      class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+      [attr.aria-label]="ariaLabel1"
+      [scTooltip]="ariaLabel1"
       (click)="setLeftAlign()"
       type="button"
-      scTooltip="Align left"
+      sc-toggle
+      variant="outline"
     >
-      <svg
-        class="size-5"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        fill="none"
-        viewBox="0 0 24 24"
-      >
-        <path
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M6 6h8m-8 4h12M6 14h8m-8 4h12"
-        />
-      </svg>
-      <span class="sr-only">Align left</span>
+      <svg-align-left-icon />
+      <span class="sr-only">{{ ariaLabel1 }}</span>
     </button>
 
     <button
-      class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+      [attr.aria-label]="ariaLabel2"
+      [scTooltip]="ariaLabel2"
       (click)="setCenterAlign()"
       type="button"
-      scTooltip="Align center"
+      sc-toggle
+      variant="outline"
     >
-      <svg
-        class="size-5"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        fill="none"
-        viewBox="0 0 24 24"
-      >
-        <path
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M8 6h8M6 10h12M8 14h8M6 18h12"
-        />
-      </svg>
-      <span class="sr-only">Align center</span>
+      <svg-align-center-icon />
+      <span class="sr-only">{{ ariaLabel2 }}</span>
     </button>
 
     <button
-      class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
-      (click)="setRightAlignButton()"
+      [attr.aria-label]="ariaLabel3"
+      [scTooltip]="ariaLabel3"
+      (click)="setRightAlign()"
       type="button"
-      scTooltip="Align right"
+      sc-toggle
+      variant="outline"
     >
-      <svg
-        class="size-5"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        fill="none"
-        viewBox="0 0 24 24"
-      >
-        <path
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M18 6h-8m8 4H6m12 4h-8m8 4H6"
-        />
-      </svg>
-      <span class="sr-only">Align right</span>
+      <svg-align-right-icon />
+      <span class="sr-only">{{ ariaLabel3 }}</span>
     </button>
   `,
   styles: ``,
@@ -91,6 +56,10 @@ import { ScExtensions } from './extensions';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScExtensionTextAlignAction {
+  ariaLabel1 = 'Align left';
+  ariaLabel2 = 'Align center';
+  ariaLabel3 = 'Align right';
+
   private readonly parent = inject(ScEditor, { host: true });
 
   extensions = inject(ScExtensions);
@@ -111,7 +80,7 @@ export class ScExtensionTextAlignAction {
     this.editor.chain().focus().setTextAlign('center').run();
   }
 
-  setRightAlignButton() {
+  setRightAlign() {
     this.editor.chain().focus().setTextAlign('right').run();
   }
 }

@@ -1,37 +1,26 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
+import { SvgBoldIcon } from '@semantic-icons/lucide-icons';
+
+import { ScToggle } from '../../toggle';
 import { ScTooltip } from '../../tooltip';
 import { ScEditor } from '../editor';
 import { ScExtensions } from './extensions';
 
 @Component({
   selector: 'sc-extension-bold',
-  imports: [ScTooltip],
+  imports: [ScTooltip, ScToggle, SvgBoldIcon],
   template: `
     <button
-      class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+      [attr.aria-label]="ariaLabel"
+      [scTooltip]="ariaLabel"
       (click)="toggleBold()"
+      sc-toggle
+      variant="outline"
       type="button"
-      scTooltip="Toggle bold"
     >
-      <svg
-        class="size-5"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        fill="none"
-        viewBox="0 0 24 24"
-      >
-        <path
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M8 5h4.5a3.5 3.5 0 1 1 0 7H8m0-7v7m0-7H6m2 7h6.5a3.5 3.5 0 1 1 0 7H8m0-7v7m0 0H6"
-        />
-      </svg>
-      <span class="sr-only">Bold</span>
+      <svg-bold-icon />
+      <span class="sr-only">{{ ariaLabel }}</span>
     </button>
   `,
   styles: ``,
@@ -39,6 +28,8 @@ import { ScExtensions } from './extensions';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScExtensionBold {
+  ariaLabel = 'Toggle Bold';
+
   private readonly parent = inject(ScEditor, { host: true });
 
   extensions = inject(ScExtensions);

@@ -1,17 +1,13 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'sc-sidebar-footer',
+  selector: 'app-toggle-page',
   imports: [],
   template: `
-    <p>sidebar-footer works!</p>
+    <p>toggle-page works!</p>
   `,
-  styles: `
-    sc-sidebar-footer {
-      @apply flex flex-col gap-2 p-2;
-    }
-  `,
+  styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSidebarFooter {}
+export default class TogglePage {}

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'sc-sidebar-content',
+  selector: 'app-sidebar-content',
   imports: [RouterModule],
   template: `
     <div class="w-full pl-5">
@@ -213,9 +213,7 @@ import { RouterModule } from '@angular/router';
           </a>
           <a
             class="group flex w-full items-center px-2 py-1 font-normal text-foreground underline-offset-2 hover:underline"
-            target=""
-            rel=""
-            href="/docs/components/alert-dialog"
+            routerLink="/alert-dialog"
           >
             Alert Dialog
           </a>
@@ -341,9 +339,7 @@ import { RouterModule } from '@angular/router';
           </a>
           <a
             class="group flex w-full items-center px-2 py-1 font-normal text-foreground underline-offset-2 hover:underline"
-            target=""
-            rel=""
-            href="/docs/components/dialog"
+            routerLink="/dialog"
           >
             Dialog
           </a>
@@ -549,9 +545,7 @@ import { RouterModule } from '@angular/router';
           </a>
           <a
             class="group flex w-full items-center px-2 py-1 font-normal text-foreground underline-offset-2 hover:underline"
-            target=""
-            rel=""
-            href="/docs/components/toggle"
+            routerLink="/nav"
           >
             Toggle
           </a>
@@ -581,4 +575,4 @@ import { RouterModule } from '@angular/router';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSidebarContent {}
+export class SidebarContent {}

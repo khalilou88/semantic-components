@@ -117,6 +117,8 @@
       "path": "libs/ui/src/components"
     },
     "@schematics/angular:component": {
+      "name": "components/",
+      "project": "ui",
       "type": "",
       "style": "css",
       "skipTests": true,
