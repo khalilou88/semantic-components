@@ -130,8 +130,8 @@ export class ScSidebarLayout implements OnInit {
   });
 
   ngOnInit() {
-    document.documentElement.classList.add('h-full');
-    this.document.body.classList.add('h-full');
+    // document.documentElement.classList.add('h-full');
+    // this.document.body.classList.add('h-full');
 
     this.breakpointObserver
       .observe(`(min-width: 1024px)`)
