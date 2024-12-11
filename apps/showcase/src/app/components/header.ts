@@ -1,7 +1,15 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  inject,
+  signal,
+} from '@angular/core';
 
 import { ScButton, ScThemeToggler } from '@semantic-components/ui';
 import { SvgGithubIcon, SvgMenuIcon, SvgXIcon } from '@semantic-icons/lucide-icons';
+
+import { SidebarState } from '../services/sidebar-state';
 
 @Component({
   selector: 'app-header',
@@ -23,11 +31,11 @@ import { SvgGithubIcon, SvgMenuIcon, SvgXIcon } from '@semantic-icons/lucide-ico
             >
               <span class="sr-only">Open main menu</span>
 
-              @if (open()) {
+              @if (sidebarState.open()) {
                 <svg-x-icon />
               }
 
-              @if (!open()) {
+              @if (!sidebarState.open()) {
                 <svg-menu-icon />
               }
             </button>
@@ -132,11 +140,11 @@ import { SvgGithubIcon, SvgMenuIcon, SvgXIcon } from '@semantic-icons/lucide-ico
             >
               <span class="sr-only">Open main menu</span>
 
-              @if (open()) {
+              @if (sidebarState.open()) {
                 <svg-x-icon />
               }
 
-              @if (!open()) {
+              @if (!sidebarState.open()) {
                 <svg-menu-icon />
               }
             </button>
@@ -158,9 +166,9 @@ import { SvgGithubIcon, SvgMenuIcon, SvgXIcon } from '@semantic-icons/lucide-ico
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Header {
-  open = signal<boolean>(false);
+  sidebarState = inject(SidebarState);
 
   toggle() {
-    this.open.update((value) => !value);
+    this.sidebarState.open.update((value) => !value);
   }
 }

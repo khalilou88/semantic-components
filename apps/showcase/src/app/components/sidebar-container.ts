@@ -24,5 +24,7 @@ import { cn } from 'libs/ui/src/lib/utils';
 export class SidebarContainer {
   class = input<string>('');
 
-  classes = computed(() => cn('flex min-h-svh w-full border-4 border-red-500/100', this.class()));
+  classes = computed(() =>
+    cn('relative flex min-h-svh w-full border-4 border-red-500/100', this.class()),
+  );
 }
