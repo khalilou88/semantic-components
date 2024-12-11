@@ -15,10 +15,12 @@ import NavPage from './pages/nav-page';
 import NotFoundPage from './pages/not-found-page';
 import PaginatorPage from './pages/paginator-page';
 import ProgressPage from './pages/progress-page';
+import ScrollAreaPage from './pages/scroll-area-page';
 import SelectPage from './pages/select-page';
 import ThemeTogglerPage from './pages/theme-toggler-page';
 import TogglePage from './pages/toggle-page';
 import TooltipPage from './pages/tooltip-page';
+import TypographyPage from './pages/typography-page';
 
 export const appRoutes: Route[] = [
   {
@@ -28,8 +30,10 @@ export const appRoutes: Route[] = [
       { path: 'landing', component: LandingPage, title: 'Landing Page' },
       { path: 'alert-dialog', component: AlertDialogPage, title: 'Alert Dialog Page' },
       { path: 'home', component: HomePage, title: 'Home Page' },
+      { path: 'typography', component: TypographyPage, title: 'Typography Page' },
       { path: 'tooltip', component: TooltipPage, title: 'Tooltip Page' },
       { path: 'editor', component: EditorPage, title: 'Editor Page' },
+      { path: 'scroll-area', component: ScrollAreaPage, title: 'Scroll area Page' },
       { path: 'paginator', component: PaginatorPage, title: 'Paginator Page' },
       { path: 'button', component: ButtonPage, title: 'Button Page' },
       { path: 'toggle', component: TogglePage, title: 'Toggle Page' },
