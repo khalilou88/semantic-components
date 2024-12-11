@@ -20,9 +20,9 @@ const sheetVariants = cva(
   {
     variants: {
       side: {
-        top: 'border-b data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top',
+        top: 'h-full w-full border-b data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top',
         bottom:
-          'border-t data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom',
+          'h-full w-full border-t data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom',
         left: 'h-full w-full  border-r data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left sm:max-w-sm',
         right:
           'h-full w-full  border-l data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-sm',

@@ -23,7 +23,7 @@ export class ScSidebarState {
   open = signal<boolean>(false);
 
   openSheet() {
-    const side: SheetVariants['side'] = 'right';
+    const side: SheetVariants['side'] = 'bottom';
 
     const positionStrategy = this.getPositionStrategy(side);
     this.overlayRef = this.overlay.create({ positionStrategy });
@@ -69,10 +69,10 @@ export class ScSidebarState {
       case 'bottom': {
         return [
           {
-            originX: 'start',
-            originY: 'top',
-            overlayX: 'start',
-            overlayY: 'top',
+            originX: 'end',
+            originY: 'bottom',
+            overlayX: 'end',
+            overlayY: 'bottom',
           },
         ];
       }
@@ -106,9 +106,11 @@ export class ScSidebarState {
   updateSize(side: SheetVariants['side']): void {
     switch (side) {
       case 'top': {
+        this.overlayRef.updateSize({ height: 300, width: '100%' });
         return;
       }
       case 'bottom': {
+        this.overlayRef.updateSize({ height: 300, width: '100%' });
         return;
       }
       case 'left': {
