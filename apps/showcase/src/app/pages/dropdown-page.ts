@@ -1,14 +1,10 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import {
-  DropdownComponent,
-  DropdownDividerComponent,
-  DropdownItemComponent,
-} from '@semantic-components/ui';
+import { ScDropdown, ScDropdownDivider, ScDropdownItem } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-dropdown-page',
-  imports: [DropdownComponent, DropdownItemComponent, DropdownDividerComponent],
+  imports: [ScDropdown, ScDropdownItem, ScDropdownDivider],
   template: `
     <sc-dropdown>
       <ng-container ngProjectAs="dropdown-items">
