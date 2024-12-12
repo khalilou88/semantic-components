@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
   computed,
   input,
+  signal,
 } from '@angular/core';
 
 import { cn } from '../../utils';
@@ -24,10 +25,15 @@ import { cn } from '../../utils';
 export class ScSlider {
   class = input<string>('');
 
+  thumbClass = signal(
+    '[&::-webkit-slider-thumb]:size-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-primary [&::-webkit-slider-thumb]:bg-background [&::-webkit-slider-thumb]:ring-offset-background [&::-webkit-slider-thumb]:transition-colors [&::-webkit-slider-thumb]:focus-visible:outline-none [&::-webkit-slider-thumb]:focus-visible:ring-2 [&::-webkit-slider-thumb]:focus-visible:ring-ring [&::-webkit-slider-thumb]:focus-visible:ring-offset-2 [&::-webkit-slider-thumb]:disabled:pointer-events-none [&::-webkit-slider-thumb]:disabled:opacity-50',
+  );
+
+  trackClass = signal(
+    '[&::-webkit-slider-runnable-track]:h-2 [&::-webkit-slider-runnable-track]:w-full  [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-secondary',
+  );
+
   classes = computed(() =>
-    cn(
-      'appearance-none bg-transparent [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-black/25 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-[50px] [&::-webkit-slider-thumb]:w-[50px] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-purple-500',
-      this.class(),
-    ),
+    cn('appearance-none bg-transparent', this.thumbClass(), this.trackClass(), this.class()),
   );
 }
