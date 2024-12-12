@@ -37,5 +37,5 @@ export class ScTab {
 
   active = signal<boolean>(false);
 
-  label = viewChild.required<TemplateRef<any>>('label');
+  label = viewChild.required<TemplateRef<unknown>>('label');
 }
