@@ -1,9 +1,12 @@
-import { Injectable, afterNextRender, effect, signal } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Injectable, afterNextRender, effect, inject, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ScTheme {
+  private readonly document = inject<Document>(DOCUMENT);
+
   value = signal<'light' | 'dark' | undefined>(undefined);
 
   constructor() {
@@ -13,7 +16,7 @@ export class ScTheme {
       }
 
       // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-      document.documentElement.classList.toggle('dark', this.value() === 'dark');
+      this.document.documentElement.classList.toggle('dark', this.value() === 'dark');
     });
   }
 
