@@ -56,8 +56,6 @@ export class ScTabs implements AfterViewInit {
   readonly tabs = contentChildren(ScTab, { descendants: true });
 
   ngAfterViewInit() {
-    console.log(this.tabs());
-
     // get all active tabs
     let activeTabs = this.tabs().filter((tab) => tab.active());
 
