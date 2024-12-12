@@ -21,3 +21,4 @@ export * from './lib/components/scroll-area';
 export * from './lib/components/tabs';
 export * from './lib/components/card';
 export * from './lib/components/toast';
+export * from './lib/components/slider';
