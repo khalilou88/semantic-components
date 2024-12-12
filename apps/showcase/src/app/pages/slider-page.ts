@@ -26,6 +26,6 @@ import { ScSlider } from '@semantic-components/ui';
 })
 export default class SliderPage {
   sliderForm = new FormGroup({
-    range: new FormControl(),
+    range: new FormControl(20),
   });
 }
