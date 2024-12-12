@@ -10,7 +10,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 
     <div class="bg-background">
       <h2 class="text-primary">Light mode</h2>
-      <p class="bg-primary text-primary-foreground p-4">Primary Button</p>
+      <p class="bg-primary p-4 text-primary-foreground">Primary Button</p>
     </div>
 
     <br />
@@ -18,7 +18,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 
     <div class="dark bg-background">
       <h2 class="text-primary">Dark mode</h2>
-      <p class="bg-primary text-primary-foreground p-4">Primary Button</p>
+      <p class="bg-primary p-4 text-primary-foreground">Primary Button</p>
     </div>
   `,
   styles: ``,

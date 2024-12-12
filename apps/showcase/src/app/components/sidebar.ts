@@ -5,7 +5,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   imports: [],
   template: `
     <aside
-      class="fixed top-14 z-30 hidden h-[calc(100vh-3.5rem)] w-full shrink-0 border-r border-border/40 dark:border-border md:sticky md:block"
+      class="fixed top-14 z-30 hidden h-[calc(100vh-3.5rem)] w-full shrink-0 border-r border-border/40 md:sticky md:block dark:border-border"
     >
       <div class="no-scrollbar h-full overflow-auto py-6 pr-6 lg:py-8">
         <div class="w-full">
@@ -452,7 +452,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                 Resizable
               </a>
               <a
-                class="group flex w-full items-center px-2 py-1 font-normal text-foreground underline-offset-2 hover:underline underline"
+                class="group flex w-full items-center px-2 py-1 font-normal text-foreground underline underline-offset-2 hover:underline"
                 href="/docs/components/scroll-area"
                 target=""
                 rel=""

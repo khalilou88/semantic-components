@@ -9,31 +9,31 @@ import { SvgArrowRightIcon, SvgGithubIcon } from '@semantic-icons/lucide-icons';
   imports: [SvgArrowRightIcon, SvgGithubIcon, ScButton, ScBadge, RouterLink],
   template: `
     <section class="fade-bottom overflow-hidden pb-0 sm:pb-0 md:pb-0">
-      <div class="mx-auto flex max-w-container flex-col gap-12 pt-16 sm:gap-24">
+      <div class="max-w-container mx-auto flex flex-col gap-12 pt-16 sm:gap-24">
         <div class="flex flex-col items-center gap-6 text-center sm:gap-12">
           <div class="animate-appear" sc-badge variant="outline">
             <span class="text-muted-foreground">New version of Semantic Components is out!</span>
             <a class="flex items-center gap-1" href="/">
               Get started
-              <svg-arrow-right-icon class="h-3 w-3" />
+              <svg-arrow-right-icon class="size-3" />
             </a>
           </div>
           <h1
-            class="relative z-10 inline-block animate-appear bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-4xl font-semibold leading-tight text-transparent drop-shadow-2xl sm:text-6xl sm:leading-tight md:text-8xl md:leading-tight"
+            class="animate-appear relative z-10 inline-block bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-4xl font-semibold leading-tight text-transparent drop-shadow-2xl sm:text-6xl sm:leading-tight md:text-8xl md:leading-tight"
           >
             Build your next angular app even faster.
           </h1>
           <p
-            class="text-md relative z-10 max-w-[550px] animate-appear font-medium text-muted-foreground  delay-100 sm:text-xl"
+            class="text-md animate-appear relative z-10 max-w-[550px] font-medium text-muted-foreground  delay-100 sm:text-xl"
           >
             Ui components built with Angular and Tailwind and inspired by Shadcn/ui.
           </p>
-          <div class="relative z-10 flex animate-appear justify-center gap-4  delay-300">
-            <div class="relative z-10 flex animate-appear justify-center gap-4  delay-300">
+          <div class="animate-appear relative z-10 flex justify-center gap-4  delay-300">
+            <div class="animate-appear relative z-10 flex justify-center gap-4  delay-300">
               <a variant="primary" size="lg" sc-button routerLink="/get-started">Get started</a>
 
               <a variant="secondary" size="lg" sc-button>
-                <svg-github-icon class="mr-2 h-4 w-4" />
+                <svg-github-icon class="mr-2 size-4" />
                 Github
               </a>
             </div>

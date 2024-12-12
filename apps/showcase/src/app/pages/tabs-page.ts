@@ -2,6 +2,12 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 
 import {
   ScButton,
+  ScCard,
+  ScCardContent,
+  ScCardDescription,
+  ScCardFooter,
+  ScCardHeader,
+  ScCardTitle,
   ScInput,
   ScLabel,
   ScTab,
@@ -9,14 +15,6 @@ import {
   ScTabLabel,
   ScTabs,
 } from '@semantic-components/ui';
-import {
-  ScCard,
-  ScCardContent,
-  ScCardDescription,
-  ScCardFooter,
-  ScCardHeader,
-  ScCardTitle,
-} from 'libs/ui/src/lib/components/card';
 
 @Component({
   selector: 'app-tabs-page',

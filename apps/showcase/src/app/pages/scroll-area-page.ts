@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   selector: 'app-scroll-area-page',
   imports: [],
   template: `
-    <div class="flex m-10">
+    <div class="m-10 flex">
       <div class="mx-auto w-full min-w-0 max-w-3xl">
         <div class="mb-4 flex items-center space-x-1 text-sm leading-none text-muted-foreground">
           <div class="truncate">Docs</div>
@@ -24,7 +24,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
         </div>
         <div class="flex items-center space-x-2 pt-4">
           <a
-            class="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 gap-1"
+            class="inline-flex items-center gap-1 rounded-md border border-transparent bg-secondary px-2.5 py-0.5 text-xs font-semibold text-secondary-foreground transition-colors hover:bg-secondary/80 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
             href="https://www.radix-ui.com/docs/primitives/components/scroll-area"
             target="_blank"
             rel="noreferrer"
@@ -32,7 +32,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
             Docs
           </a>
           <a
-            class="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 gap-1"
+            class="inline-flex items-center gap-1 rounded-md border border-transparent bg-secondary px-2.5 py-0.5 text-xs font-semibold text-secondary-foreground transition-colors hover:bg-secondary/80 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
             href="https://www.radix-ui.com/docs/primitives/components/scroll-area#api-reference"
             target="_blank"
             rel="noreferrer"
@@ -46,13 +46,13 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
               <div class="relative mr-auto w-full" dir="ltr" data-orientation="horizontal">
                 <div class="flex items-center justify-between pb-3">
                   <div
-                    class="inline-flex h-9 items-center text-muted-foreground w-full justify-start rounded-none border-b bg-transparent p-0"
+                    class="inline-flex h-9 w-full items-center justify-start rounded-none border-b bg-transparent p-0 text-muted-foreground"
                     style="outline: none;"
                     tabindex="0"
                     data-orientation="horizontal"
                   >
                     <button
-                      class="inline-flex items-center justify-center whitespace-nowrap py-1 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none"
+                      class="relative inline-flex h-9 items-center justify-center whitespace-nowrap rounded-none border-b-2 border-b-transparent bg-transparent px-4 py-1 pb-3 pt-2 text-sm font-semibold text-muted-foreground shadow-none ring-offset-background transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:border-b-primary data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-none"
                       id="radix-:r17g:-trigger-preview"
                       tabindex="-1"
                       type="button"
@@ -63,7 +63,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                       Preview
                     </button>
                     <button
-                      class="inline-flex items-center justify-center whitespace-nowrap py-1 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none"
+                      class="relative inline-flex h-9 items-center justify-center whitespace-nowrap rounded-none border-b-2 border-b-transparent bg-transparent px-4 py-1 pb-3 pt-2 text-sm font-semibold text-muted-foreground shadow-none ring-offset-background transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:border-b-primary data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-none"
                       id="radix-:r17g:-trigger-code"
                       tabindex="-1"
                       type="button"
@@ -76,7 +76,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   </div>
                 </div>
                 <div
-                  class="mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 relative rounded-md border"
+                  class="relative mt-2 rounded-md border ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                   id="radix-:r17g:-content-preview"
                   style="animation-duration: 0s;"
                   tabindex="0"
@@ -85,7 +85,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                 >
                   <div class="flex items-center justify-between p-4">
                     <button
-                      class="flex items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1 h-7 w-[145px] text-xs [&amp;_svg]:h-4 [&amp;_svg]:w-4"
+                      class="flex h-7 w-[145px] items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-xs shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 [&_svg]:size-4"
                       dir="ltr"
                       type="button"
                       data-state="closed"
@@ -98,27 +98,27 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                         action="javascript:throw new Error('A React form was unexpectedly submitted. If you called form.submit() manually, consider using form.requestSubmit() instead. If you're trying to use event.stopPropagation() in a submit event handler, consider also calling event.preventDefault().')"
                       >
                         <button
-                          class="inline-flex items-center justify-center whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 shadow py-2 z-50 h-[calc(theme(spacing.7)_-_1px)] gap-1 rounded-[6px] bg-black px-3 text-xs text-white hover:bg-black hover:text-white dark:bg-white dark:text-black"
+                          class="z-50 inline-flex h-[calc(theme(spacing.7)_-_1px)] items-center justify-center gap-1 whitespace-nowrap rounded-[6px] bg-black px-3 py-2 text-xs font-medium text-white shadow transition-colors hover:bg-black hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 dark:bg-white dark:text-black [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                         >
                           Open in
                         </button>
                       </form>
                       <button
-                        class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background shadow-sm relative z-10 h-7 w-7 text-foreground opacity-100 hover:bg-muted hover:text-foreground [&amp;_svg]:h-3.5 [&amp;_svg]:w-3.5"
+                        class="relative z-10 inline-flex size-7 items-center justify-center gap-2 whitespace-nowrap rounded-md border border-input bg-background text-sm font-medium text-foreground opacity-100 shadow-sm transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                       >
                         <span class="sr-only">Copy</span>
                       </button>
                     </div>
                   </div>
                   <div class="theme-zinc w-full" style="--radius: 0.5rem;">
-                    <div class="preview flex min-h-[350px] w-full justify-center p-10 items-center">
+                    <div class="preview flex min-h-[350px] w-full items-center justify-center p-10">
                       <div
-                        class="relative overflow-hidden h-72 w-48 rounded-md border"
+                        class="relative h-72 w-48 overflow-hidden rounded-md border"
                         dir="ltr"
                         style="position: relative; --radix-scroll-area-corner-width: 0px; --radix-scroll-area-corner-height: 0px;"
                       >
                         <div
-                          class="h-full w-full rounded-[inherit]"
+                          class="size-full rounded-[inherit]"
                           style="overflow: hidden scroll;"
                           data-radix-scroll-area-viewport=""
                         >
@@ -127,350 +127,350 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                               <h4 class="mb-4 text-sm font-medium leading-none">Tags</h4>
                               <div class="text-sm">v1.2.0-beta.50</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.49</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.48</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.47</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.46</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.45</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.44</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.43</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.42</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.41</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.40</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.39</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.38</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.37</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.36</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.35</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.34</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.33</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.32</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.31</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.30</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.29</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.28</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.27</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.26</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.25</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.24</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.23</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.22</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.21</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.20</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.19</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.18</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.17</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.16</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.15</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.14</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.13</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.12</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.11</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.10</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.9</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.8</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.7</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.6</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.5</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.4</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.3</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.2</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
                               </div>
                               <div class="text-sm">v1.2.0-beta.1</div>
                               <div
-                                class="shrink-0 bg-border h-[1px] w-full my-2"
+                                class="my-2 h-px w-full shrink-0 bg-border"
                                 data-orientation="horizontal"
                               >
                                 &nbsp;
@@ -502,13 +502,13 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
             </h2>
             <div class="relative mt-6 w-full" dir="ltr" data-orientation="horizontal">
               <div
-                class="inline-flex h-9 items-center text-muted-foreground w-full justify-start rounded-none border-b bg-transparent p-0"
+                class="inline-flex h-9 w-full items-center justify-start rounded-none border-b bg-transparent p-0 text-muted-foreground"
                 style="outline: none;"
                 tabindex="0"
                 data-orientation="horizontal"
               >
                 <button
-                  class="inline-flex items-center justify-center whitespace-nowrap py-1 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none"
+                  class="relative inline-flex h-9 items-center justify-center whitespace-nowrap rounded-none border-b-2 border-b-transparent bg-transparent px-4 py-1 pb-3 pt-2 text-sm font-semibold text-muted-foreground shadow-none ring-offset-background transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:border-b-primary data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-none"
                   id="radix-:r17k:-trigger-cli"
                   tabindex="-1"
                   type="button"
@@ -519,7 +519,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   CLI
                 </button>
                 <button
-                  class="inline-flex items-center justify-center whitespace-nowrap py-1 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none"
+                  class="relative inline-flex h-9 items-center justify-center whitespace-nowrap rounded-none border-b-2 border-b-transparent bg-transparent px-4 py-1 pb-3 pt-2 text-sm font-semibold text-muted-foreground shadow-none ring-offset-background transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:border-b-primary data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-none"
                   id="radix-:r17k:-trigger-manual"
                   tabindex="-1"
                   type="button"
@@ -531,7 +531,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                 </button>
               </div>
               <div
-                class="mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 relative [&amp;_h3.font-heading]:text-base [&amp;_h3.font-heading]:font-semibold"
+                class="relative mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 [&_h3.font-heading]:text-base [&_h3.font-heading]:font-semibold"
                 id="radix-:r17k:-content-cli"
                 style="animation-duration: 0s;"
                 tabindex="0"
@@ -545,7 +545,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                     data-theme="default"
                   ><code class="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm" data-language="bash" data-theme="default"><span class="line"><span style="color: #b392f0;">npx</span><span style="color: #9ecbff;"> shadcn latest</span><span style="color: #9ecbff;"> add</span><span style="color: #9ecbff;"> scroll-area</span></span></code></pre>
                   <button
-                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 z-10 h-6 w-6 text-zinc-50 hover:bg-zinc-700 hover:text-zinc-50 absolute right-4 top-4"
+                    class="absolute right-4 top-4 z-10 inline-flex size-6 items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium text-zinc-50 transition-colors hover:bg-zinc-700 hover:text-zinc-50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     id="radix-:r17n:"
                     type="button"
                     data-state="closed"
@@ -555,7 +555,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                 </div>
               </div>
               <div
-                class="mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 relative [&amp;_h3.font-heading]:text-base [&amp;_h3.font-heading]:font-semibold"
+                class="relative mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 [&_h3.font-heading]:text-base [&_h3.font-heading]:font-semibold"
                 id="radix-:r17k:-content-manual"
                 tabindex="0"
                 hidden=""
@@ -578,7 +578,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                 data-theme="default"
               ><code class="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm" data-language="tsx" data-theme="default"><span class="line"><span style="color: #f97583;">import</span><span style="color: #e1e4e8;"> ScrollArea  </span><span style="color: #f97583;">from</span><span style="color: #9ecbff;"> "components/ui/scroll-area"</span></span></code></pre>
               <button
-                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 z-10 h-6 w-6 text-zinc-50 hover:bg-zinc-700 hover:text-zinc-50 [&amp;_svg]:h-3 [&amp;_svg]:w-3 absolute right-4 top-4"
+                class="absolute right-4 top-4 z-10 inline-flex size-6 items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium text-zinc-50 transition-colors hover:bg-zinc-700 hover:text-zinc-50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none  [&_svg]:size-4 [&_svg]:shrink-0"
               >
                 <span class="sr-only">Copy</span>
               </button>
@@ -597,7 +597,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 <span class="line"><span style="color: #e1e4e8;"> started laughing, they couldn't stop.</span></span>
 <span class="line"><span style="color: #e1e4e8;">&lt;/</span><span style="color: #79b8ff;">ScrollArea</span><span style="color: #e1e4e8;">&gt;</span></span></code></pre>
               <button
-                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 z-10 h-6 w-6 text-zinc-50 hover:bg-zinc-700 hover:text-zinc-50 [&amp;_svg]:h-3 [&amp;_svg]:w-3 absolute right-4 top-4"
+                class="absolute right-4 top-4 z-10 inline-flex size-6 items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium text-zinc-50 transition-colors hover:bg-zinc-700 hover:text-zinc-50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none  [&_svg]:size-4 [&_svg]:shrink-0"
               >
                 <span class="sr-only">Copy</span>
               </button>
@@ -618,13 +618,13 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
               <div class="relative mr-auto w-full" dir="ltr" data-orientation="horizontal">
                 <div class="flex items-center justify-between pb-3">
                   <div
-                    class="inline-flex h-9 items-center text-muted-foreground w-full justify-start rounded-none border-b bg-transparent p-0"
+                    class="inline-flex h-9 w-full items-center justify-start rounded-none border-b bg-transparent p-0 text-muted-foreground"
                     style="outline: none;"
                     tabindex="0"
                     data-orientation="horizontal"
                   >
                     <button
-                      class="inline-flex items-center justify-center whitespace-nowrap py-1 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none"
+                      class="relative inline-flex h-9 items-center justify-center whitespace-nowrap rounded-none border-b-2 border-b-transparent bg-transparent px-4 py-1 pb-3 pt-2 text-sm font-semibold text-muted-foreground shadow-none ring-offset-background transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:border-b-primary data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-none"
                       id="radix-:r17p:-trigger-preview"
                       tabindex="-1"
                       type="button"
@@ -635,7 +635,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                       Preview
                     </button>
                     <button
-                      class="inline-flex items-center justify-center whitespace-nowrap py-1 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none"
+                      class="relative inline-flex h-9 items-center justify-center whitespace-nowrap rounded-none border-b-2 border-b-transparent bg-transparent px-4 py-1 pb-3 pt-2 text-sm font-semibold text-muted-foreground shadow-none ring-offset-background transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:border-b-primary data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-none"
                       id="radix-:r17p:-trigger-code"
                       tabindex="-1"
                       type="button"
@@ -648,7 +648,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   </div>
                 </div>
                 <div
-                  class="mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 relative rounded-md border"
+                  class="relative mt-2 rounded-md border ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                   id="radix-:r17p:-content-preview"
                   style="animation-duration: 0s;"
                   tabindex="0"
@@ -657,7 +657,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                 >
                   <div class="flex items-center justify-between p-4">
                     <button
-                      class="flex items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1 h-7 w-[145px] text-xs [&amp;_svg]:h-4 [&amp;_svg]:w-4"
+                      class="flex h-7 w-[145px] items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-xs shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 [&_svg]:size-4"
                       dir="ltr"
                       type="button"
                       data-state="closed"
@@ -667,21 +667,21 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                     </button>
                     <div class="flex items-center gap-2">
                       <button
-                        class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background shadow-sm relative z-10 h-7 w-7 text-foreground opacity-100 hover:bg-muted hover:text-foreground [&amp;_svg]:h-3.5 [&amp;_svg]:w-3.5"
+                        class="relative z-10 inline-flex size-7 items-center justify-center gap-2 whitespace-nowrap rounded-md border border-input bg-background text-sm font-medium text-foreground opacity-100 shadow-sm transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none  [&_svg]:size-4 [&_svg]:shrink-0"
                       >
                         <span class="sr-only">Copy</span>
                       </button>
                     </div>
                   </div>
                   <div class="theme-zinc w-full" style="--radius: 0.5rem;">
-                    <div class="preview flex min-h-[350px] w-full justify-center p-10 items-center">
+                    <div class="preview flex min-h-[350px] w-full items-center justify-center p-10">
                       <div
-                        class="relative overflow-hidden w-96 whitespace-nowrap rounded-md border"
+                        class="relative w-96 overflow-hidden whitespace-nowrap rounded-md border"
                         dir="ltr"
                         style="position: relative; --radix-scroll-area-corner-width: 0px; --radix-scroll-area-corner-height: 0px;"
                       >
                         <div
-                          class="h-full w-full rounded-[inherit]"
+                          class="size-full rounded-[inherit]"
                           style="overflow: scroll;"
                           data-radix-scroll-area-viewport=""
                         >
@@ -690,7 +690,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                               <figure class="shrink-0">
                                 <div class="overflow-hidden rounded-md">
                                   <img
-                                    class="aspect-[3/4] h-fit w-fit object-cover"
+                                    class="aspect-[3/4] size-fit object-cover"
                                     style="color: transparent;"
                                     src="/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1465869185982-5a1a7522cbcb%3Fauto%3Dformat%26fit%3Dcrop%26w%3D300%26q%3D80&amp;w=640&amp;q=75"
                                     srcset="
@@ -711,7 +711,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                               <figure class="shrink-0">
                                 <div class="overflow-hidden rounded-md">
                                   <img
-                                    class="aspect-[3/4] h-fit w-fit object-cover"
+                                    class="aspect-[3/4] size-fit object-cover"
                                     style="color: transparent;"
                                     src="/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1548516173-3cabfa4607e9%3Fauto%3Dformat%26fit%3Dcrop%26w%3D300%26q%3D80&amp;w=640&amp;q=75"
                                     srcset="
@@ -732,7 +732,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                               <figure class="shrink-0">
                                 <div class="overflow-hidden rounded-md">
                                   <img
-                                    class="aspect-[3/4] h-fit w-fit object-cover"
+                                    class="aspect-[3/4] size-fit object-cover"
                                     style="color: transparent;"
                                     src="/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1494337480532-3725c85fd2ab%3Fauto%3Dformat%26fit%3Dcrop%26w%3D300%26q%3D80&amp;w=640&amp;q=75"
                                     srcset="
@@ -775,13 +775,13 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
         </div>
         <div class="flex flex-row items-center justify-between">
           <a
-            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2"
+            class="inline-flex h-9 items-center justify-center gap-2 whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
             href="/docs/components/resizable"
           >
             Resizable
           </a>
           <a
-            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2 ml-auto"
+            class="ml-auto inline-flex h-9 items-center justify-center gap-2 whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
             href="/docs/components/select"
           >
             Select
@@ -796,7 +796,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
               <ul class="m-0 list-none">
                 <li class="mt-0 pt-2">
                   <a
-                    class="inline-block no-underline transition-colors hover:text-foreground font-medium text-foreground"
+                    class="inline-block font-medium text-foreground no-underline transition-colors hover:text-foreground"
                     href="#installation"
                   >
                     Installation
@@ -804,7 +804,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                 </li>
                 <li class="mt-0 pt-2">
                   <a
-                    class="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
+                    class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
                     href="#usage"
                   >
                     Usage
@@ -812,7 +812,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                 </li>
                 <li class="mt-0 pt-2">
                   <a
-                    class="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
+                    class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
                     href="#examples"
                   >
                     Examples
@@ -820,7 +820,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   <ul class="m-0 list-none pl-4">
                     <li class="mt-0 pt-2">
                       <a
-                        class="inline-block no-underline transition-colors hover:text-foreground text-muted-foreground"
+                        class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
                         href="#horizontal-scrolling"
                       >
                         Horizontal Scrolling

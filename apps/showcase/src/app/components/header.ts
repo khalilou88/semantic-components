@@ -7,7 +7,7 @@ import { SvgGithubIcon } from '@semantic-icons/lucide-icons';
   selector: 'app-header',
   imports: [ScThemeToggler, SvgGithubIcon, ScButton, ScSheetToggler],
   template: `
-    <div class="sticky top-0 border-b-2 z-10 bg-background">
+    <div class="sticky top-0 z-10 border-b-2 bg-background">
       <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div class="relative flex h-16 items-center justify-between">
           <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -33,7 +33,7 @@ import { SvgGithubIcon } from '@semantic-icons/lucide-icons';
                   >
                     <li>
                       <button
-                        class="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50 group"
+                        class="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
                         id="radix-:r9j:-trigger-radix-:r9k:"
                         data-state="closed"
                         aria-expanded="false"
@@ -42,7 +42,7 @@ import { SvgGithubIcon } from '@semantic-icons/lucide-icons';
                       >
                         Getting started
                         <svg
-                          class="lucide lucide-chevron-down relative top-[1px] ml-1 h-3 w-3 transition duration-200 group-data-[state=open]:rotate-180"
+                          class="lucide lucide-chevron-down relative top-px ml-1 size-3 transition duration-200 group-data-[state=open]:rotate-180"
                           xmlns="http://www.w3.org/2000/svg"
                           width="24"
                           height="24"
@@ -60,7 +60,7 @@ import { SvgGithubIcon } from '@semantic-icons/lucide-icons';
                     </li>
                     <li>
                       <button
-                        class="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50 group"
+                        class="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
                         id="radix-:r9j:-trigger-radix-:r9l:"
                         data-state="closed"
                         aria-expanded="false"
@@ -69,7 +69,7 @@ import { SvgGithubIcon } from '@semantic-icons/lucide-icons';
                       >
                         Components
                         <svg
-                          class="lucide lucide-chevron-down relative top-[1px] ml-1 h-3 w-3 transition duration-200 group-data-[state=open]:rotate-180"
+                          class="lucide lucide-chevron-down relative top-px ml-1 size-3 transition duration-200 group-data-[state=open]:rotate-180"
                           xmlns="http://www.w3.org/2000/svg"
                           width="24"
                           height="24"
