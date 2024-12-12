@@ -1,10 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
+  TemplateRef,
   ViewEncapsulation,
   computed,
   input,
   signal,
+  viewChild,
 } from '@angular/core';
 
 import { cn } from '../../utils';
@@ -13,8 +16,12 @@ import { cn } from '../../utils';
   selector: 'sc-tab',
   imports: [],
   template: `
+    <ng-template #label>
+      <ng-content select="sc-tab-label" />
+    </ng-template>
+
     @if (active()) {
-      <ng-content />
+      <ng-content select="sc-tab-content" />
     }
   `,
   host: {
@@ -30,4 +37,6 @@ export class ScTab {
   classes = computed(() => cn('', this.class()));
 
   active = signal<boolean>(false);
+
+  label = viewChild.required<TemplateRef<any>>('label');
 }

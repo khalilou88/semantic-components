@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -13,8 +14,16 @@ import { ScTab } from './tab';
 
 @Component({
   selector: 'sc-tabs',
-  imports: [],
+  imports: [CommonModule],
   template: `
+    @for (tab of tabs(); track tab) {
+      <li (click)="selectTab(tab)">
+        <ng-container [ngTemplateOutlet]="tab.label()"></ng-container>
+      </li>
+    } @empty {
+      <li>There are no tabs.</li>
+    }
+
     <ng-content />
   `,
   host: {
