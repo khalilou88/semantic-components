@@ -22,7 +22,12 @@
           }
         ],
         "styles": ["apps/showcase/src/styles.css"],
-        "scripts": []
+        "scripts": [],
+        "server": "apps/showcase/src/main.server.ts",
+        "ssr": {
+          "entry": "apps/showcase/src/server.ts"
+        },
+        "outputMode": "server"
       },
       "configurations": {
         "production": {
