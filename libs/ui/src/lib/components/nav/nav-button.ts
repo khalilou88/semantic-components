@@ -1,5 +1,12 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
 
+import { cn } from '../../utils';
 import { ScNavButtonBase } from './nav-button-base';
 
 @Component({
@@ -8,9 +15,15 @@ import { ScNavButtonBase } from './nav-button-base';
   template: `
     <ng-content />
   `,
-  host: {},
-  styleUrl: './nav-button-base.css',
+  host: {
+    '[class]': 'classes()',
+  },
+  styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScNavButton extends ScNavButtonBase {}
+export class ScNavButton extends ScNavButtonBase {
+  class = input<string>('');
+
+  classes = computed(() => cn(this.baseClass(), this.class()));
+}
