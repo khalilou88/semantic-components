@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   selector: 'app-scroll-area-page',
   imports: [],
   template: `
-    <div class="flex">
+    <div class="flex m-10">
       <div class="mx-auto w-full min-w-0 max-w-3xl">
         <div class="mb-4 flex items-center space-x-1 text-sm leading-none text-muted-foreground">
           <div class="truncate">Docs</div>

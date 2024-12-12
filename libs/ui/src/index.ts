@@ -18,3 +18,4 @@ export * from './lib/components/dialog';
 export * from './lib/components/alert-dialog';
 export * from './lib/components/badge';
 export * from './lib/components/scroll-area';
+export * from './lib/components/tabs';
