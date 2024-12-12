@@ -13,16 +13,16 @@ import { cn } from '../../utils';
 const scLeadingVariants = cva('', {
   variants: {
     level: {
-      h1: '',
-      h2: '',
-      h3: '',
-      h4: '',
-      h5: '',
-      h6: '',
+      1: '',
+      2: '',
+      3: '',
+      4: '',
+      5: '',
+      6: '',
     },
   },
   defaultVariants: {
-    level: 'h1',
+    level: 1,
   },
 });
 
@@ -42,7 +42,7 @@ type ScLeadingVariants = VariantProps<typeof scLeadingVariants>;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScLeading {
-  level = input<ScLeadingVariants['level']>('h1');
+  level = input<ScLeadingVariants['level']>(1);
 
   class = input<string>('');
 
