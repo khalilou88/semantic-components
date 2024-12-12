@@ -67,7 +67,29 @@ import {
 
       <sc-tab>
         <sc-tab-label>Password</sc-tab-label>
-        <sc-tab-content>Content 2</sc-tab-content>
+        <sc-tab-content>
+          <div sc-card>
+            <div sc-card-header>
+              <h2 sc-card-title>Password</h2>
+              <p sc-card-description>
+                Change your password here. After saving, you'll be logged out.
+              </p>
+            </div>
+            <div class="space-y-2" sc-card-content>
+              <div class="space-y-1">
+                <label sc-label for="current">Current password</label>
+                <input id="current" sc-input type="password" />
+              </div>
+              <div class="space-y-1">
+                <label sc-label for="new">New password</label>
+                <input id="new" sc-input type="password" />
+              </div>
+            </div>
+            <div sc-card-footer>
+              <button sc-button>Save password</button>
+            </div>
+          </div>
+        </sc-tab-content>
       </sc-tab>
     </sc-tabs>
   `,
