@@ -18,7 +18,7 @@ import { ScSlider } from '@semantic-components/ui';
     <br />
     <br />
 
-    {{ sliderForm | json }}
+    {{ sliderForm.value | json }}
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
