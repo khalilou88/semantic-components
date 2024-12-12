@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   TemplateRef,
   ViewEncapsulation,
   computed,
