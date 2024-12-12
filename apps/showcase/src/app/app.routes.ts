@@ -22,6 +22,7 @@ export const appRoutes: Route[] = [
             title: 'Alert Dialog Page',
           },
           { path: 'home', loadComponent: () => import('./pages/home-page'), title: 'Home Page' },
+          { path: 'toast', loadComponent: () => import('./pages/toast-page'), title: 'Toast Page' },
           {
             path: 'dropdown-menu',
             loadComponent: () => import('./pages/dropdown-menu-page'),
