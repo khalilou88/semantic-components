@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
+
+import { cn } from '../../utils';
 
 @Component({
   selector: 'label[sc-label]',
@@ -7,14 +15,19 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     <ng-content />
   `,
   host: {
-    '[class.sc-label]': 'true',
+    '[class]': 'classes()',
   },
-  styles: `
-    .sc-label {
-      @apply text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70;
-    }
-  `,
+  styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScLabel {}
+export class ScLabel {
+  class = input<string>('');
+
+  classes = computed(() =>
+    cn(
+      'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
+      this.class(),
+    ),
+  );
+}
