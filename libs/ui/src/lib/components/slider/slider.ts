@@ -30,7 +30,7 @@ export class ScSlider {
   );
 
   trackClass = signal(
-    '[&::-webkit-slider-runnable-track]:h-2 [&::-webkit-slider-runnable-track]:w-full  [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-secondary',
+    '[&::-webkit-slider-runnable-track]:h-3 [&::-webkit-slider-runnable-track]:w-full  [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-secondary',
   );
 
   classes = computed(() =>
