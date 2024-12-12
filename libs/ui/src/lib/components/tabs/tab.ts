@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
   computed,
   input,
+  signal,
 } from '@angular/core';
 
 import { cn } from '../../utils';
@@ -12,7 +13,9 @@ import { cn } from '../../utils';
   selector: 'sc-tab',
   imports: [],
   template: `
-    <ng-content />
+    @if (active()) {
+      <ng-content />
+    }
   `,
   host: {
     '[class]': 'classes()',
@@ -24,10 +27,7 @@ import { cn } from '../../utils';
 export class ScTab {
   class = input<string>('');
 
-  classes = computed(() =>
-    cn(
-      'inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground',
-      this.class(),
-    ),
-  );
+  classes = computed(() => cn('', this.class()));
+
+  active = signal<boolean>(false);
 }
