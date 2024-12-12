@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
+
+import { cn } from '../../utils';
 
 @Component({
   selector: 'nav[sc-pagination]',
@@ -9,14 +17,14 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   host: {
     role: 'navigation',
     '[attr.aria-label]': '"pagination"',
-    '[class.sc-pagination]': 'true',
+    '[class]': 'classes()',
   },
-  styles: `
-    .sc-pagination {
-      @apply mx-auto flex w-full justify-center;
-    }
-  `,
+  styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScPagination {}
+export class ScPagination {
+  class = input<string>('');
+
+  classes = computed(() => cn('mx-auto flex w-full justify-center', this.class()));
+}
