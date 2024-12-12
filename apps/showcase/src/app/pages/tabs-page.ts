@@ -36,7 +36,7 @@ import {
     ScButton,
   ],
   template: `
-    <sc-tabs class="w-[400px]" labelsHostClass="grid w-full grid-cols-2" contentsHostClass="">
+    <sc-tabs class="w-[400px]" labelsHostClass="grid w-full grid-cols-2">
       <sc-tab>
         <sc-tab-label>Account</sc-tab-label>
         <sc-tab-content>

@@ -20,6 +20,7 @@ import { ScTab } from './tab';
       @for (tab of tabs(); track tab) {
         <button
           class="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm"
+          [attr.data-state]="tab.active() ? 'active' : ''"
           (click)="selectTab(tab)"
         >
           <ng-container [ngTemplateOutlet]="tab.label()"></ng-container>
@@ -29,9 +30,7 @@ import { ScTab } from './tab';
       }
     </div>
 
-    <div [class]="contentsHostClasses()">
-      <ng-content />
-    </div>
+    <ng-content />
   `,
   host: {
     '[class]': 'classes()',
@@ -53,10 +52,6 @@ export class ScTabs implements AfterViewInit {
       this.labelsHostClass(),
     ),
   );
-
-  contentsHostClass = input<string>('');
-
-  contentsHostClasses = computed(() => cn('', this.contentsHostClass()));
 
   readonly tabs = contentChildren(ScTab, { descendants: true });
 
