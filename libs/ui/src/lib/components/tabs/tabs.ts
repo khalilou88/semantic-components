@@ -57,7 +57,7 @@ export class ScTabs implements AfterViewInit {
 
   ngAfterViewInit() {
     // get all active tabs
-    let activeTabs = this.tabs().filter((tab) => tab.active());
+    const activeTabs = this.tabs().filter((tab) => tab.active());
 
     if (activeTabs.length > 1) {
       throw new Error('Only one tab can be active');
