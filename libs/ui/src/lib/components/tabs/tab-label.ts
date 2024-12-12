@@ -9,7 +9,7 @@ import {
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'sc-tabs-list',
+  selector: 'sc-tab-label',
   imports: [],
   template: `
     <ng-content />
@@ -21,13 +21,8 @@ import { cn } from '../../utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TabsList {
+export class ScTabLabel {
   class = input<string>('');
 
-  classes = computed(() =>
-    cn(
-      'inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground',
-      this.class(),
-    ),
-  );
+  classes = computed(() => cn('', this.class()));
 }

@@ -19,6 +19,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@a
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DropdownItemComponent {
+export class ScDropdownItem {
   text = input.required<string>();
 }

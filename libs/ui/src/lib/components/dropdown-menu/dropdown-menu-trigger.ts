@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'sc-time-picker',
+  selector: 'sc-dropdown-menu-trigger',
   imports: [],
   template: `
-    <p>time-picker works!</p>
+    <p>dropdown-menu-trigger works!</p>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TimePickerComponent {}
+export class DropdownMenuTrigger {}

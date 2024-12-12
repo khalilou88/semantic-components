@@ -23,6 +23,13 @@ export const appRoutes: Route[] = [
           },
           { path: 'home', loadComponent: () => import('./pages/home-page'), title: 'Home Page' },
           {
+            path: 'dropdown-menu',
+            loadComponent: () => import('./pages/dropdown-menu-page'),
+            title: 'Dropdown Menu Page',
+          },
+          { path: 'card', loadComponent: () => import('./pages/card-page'), title: 'Card Page' },
+          { path: 'tabs', loadComponent: () => import('./pages/tabs-page'), title: 'Tabs Page' },
+          {
             path: 'typography',
             loadComponent: () => import('./pages/typography-page'),
             title: 'Typography Page',

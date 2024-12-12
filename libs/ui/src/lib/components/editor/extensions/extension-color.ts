@@ -83,8 +83,6 @@ export class ScExtensionColor {
 
   constructor() {
     this.extensions.color.set(true);
-
-    console.log(colors);
   }
 
   get editor() {

@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
+
+import { cn } from '../../../utils';
 
 @Component({
   selector: 'sc-extensions-separator',
@@ -6,12 +14,15 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   template: `
     <span class="inline-block h-4 w-px bg-gray-300 dark:bg-gray-600"></span>
   `,
-  styles: `
-    sc-extensions-separator {
-      @apply px-1;
-    }
-  `,
+  host: {
+    '[class]': 'classes()',
+  },
+  styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScExtensionsSeparator {}
+export class ScExtensionsSeparator {
+  class = input<string>('');
+
+  classes = computed(() => cn('px-1', this.class()));
+}

@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
+
+import { cn } from '../../utils';
 
 @Component({
   selector: 'nav[sc-nav]',
@@ -7,14 +15,16 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     <ng-content />
   `,
   host: {
-    '[class.sc-nav]': 'true',
+    '[class]': 'classes()',
   },
-  styles: `
-    .sc-nav {
-      @apply relative z-10 flex max-w-max flex-1 items-center justify-center;
-    }
-  `,
+  styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScNav {}
+export class ScNav {
+  class = input<string>('');
+
+  classes = computed(() =>
+    cn('relative z-10 flex max-w-max flex-1 items-center justify-center', this.class()),
+  );
+}

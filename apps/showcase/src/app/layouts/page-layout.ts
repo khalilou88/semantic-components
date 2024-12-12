@@ -9,7 +9,10 @@ import { Sidebar } from '../components/sidebar';
   template: `
     <div class="container flex">
       <app-sidebar />
-      <router-outlet></router-outlet>
+      <div class="m-10">
+        <router-outlet></router-outlet>
+        <div></div>
+      </div>
     </div>
   `,
   styles: ``,

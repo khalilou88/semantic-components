@@ -576,7 +576,6 @@ export class ScExtensionTable {
     });
 
     dialogRef.closed.subscribe((result) => {
-      console.log(result);
       this.editor.commands.setCellAttribute(result?.name ?? '', result?.value ?? '');
     });
   }

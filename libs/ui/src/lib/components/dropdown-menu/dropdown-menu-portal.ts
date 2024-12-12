@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'sc-dropdown-divider',
+  selector: 'sc-dropdown-menu-portal',
   imports: [],
   template: `
-    <li class="py-2"><hr /></li>
+    <p>dropdown-menu-portal works!</p>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DropdownDividerComponent {}
+export class DropdownMenuPortal {}

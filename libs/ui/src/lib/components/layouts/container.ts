@@ -9,7 +9,7 @@ import {
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'sc-tabs-content',
+  selector: 'div[sc-container]',
   imports: [],
   template: `
     <ng-content />
@@ -21,13 +21,9 @@ import { cn } from '../../utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScTabsContent {
+export class scContainer {
   class = input<string>('');
 
-  classes = computed(() =>
-    cn(
-      'mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-      this.class(),
-    ),
-  );
+  //TODO add more cases
+  classes = computed(() => cn('container', this.class()));
 }

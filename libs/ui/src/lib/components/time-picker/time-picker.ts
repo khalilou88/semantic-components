@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'sc-date-time-picker',
+  selector: 'sc-time-picker',
   imports: [],
   template: `
-    <p>date-time-picker works!</p>
+    <p>time-picker works!</p>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DateTimePickerComponent {}
+export class ScTimePicker {}

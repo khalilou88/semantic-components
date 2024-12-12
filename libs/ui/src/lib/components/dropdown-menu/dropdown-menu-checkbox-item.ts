@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'sc-leading',
+  selector: 'sc-dropdown-menu-checkbox-item',
   imports: [],
   template: `
-    <p>leading works!</p>
+    <p>dropdown-menu-checkbox-item works!</p>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScLeading {}
+export class DropdownMenuCheckboxItem {}
