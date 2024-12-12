@@ -24,5 +24,10 @@ import { cn } from '../../utils';
 export class ScTabContent {
   class = input<string>('');
 
-  classes = computed(() => cn('', this.class()));
+  classes = computed(() =>
+    cn(
+      'mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+      this.class(),
+    ),
+  );
 }

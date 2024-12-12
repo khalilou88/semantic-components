@@ -6,14 +6,14 @@ import { ScTab, ScTabContent, ScTabLabel, ScTabs } from '@semantic-components/ui
   selector: 'app-tabs-page',
   imports: [ScTabs, ScTab, ScTabLabel, ScTabContent],
   template: `
-    <sc-tabs>
+    <sc-tabs class="w-[400px]" labelsHostClass="grid w-full grid-cols-2" contentsHostClass="">
       <sc-tab>
-        <sc-tab-label>Label 1</sc-tab-label>
+        <sc-tab-label>Account</sc-tab-label>
         <sc-tab-content>Content 1</sc-tab-content>
       </sc-tab>
 
       <sc-tab>
-        <sc-tab-label>Label 2</sc-tab-label>
+        <sc-tab-label>Password</sc-tab-label>
         <sc-tab-content>Content 2</sc-tab-content>
       </sc-tab>
     </sc-tabs>
