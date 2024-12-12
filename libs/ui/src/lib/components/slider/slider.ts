@@ -3,6 +3,7 @@ import {
   Component,
   ViewEncapsulation,
   computed,
+  effect,
   input,
   signal,
 } from '@angular/core';
@@ -40,7 +41,15 @@ export class ScSlider {
 
   min = input<number>(0);
 
-  max = input<number>(100);
+  max = input<number>(0);
 
-  step = input<number>(1);
+  step = input<number>(0);
+
+  constructor() {
+    effect(() => {
+      console.log('min ', this.min());
+      console.log('max ', this.max());
+      console.log('step ', this.step());
+    });
+  }
 }
