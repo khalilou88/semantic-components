@@ -30,10 +30,14 @@ export class ScSlider {
   );
 
   trackClass = signal(
-    '[&::-webkit-slider-runnable-track]:h-3 [&::-webkit-slider-runnable-track]:w-full  [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-secondary',
+    '[&::-webkit-slider-runnable-track]:h-3 [&::-webkit-slider-runnable-track]:w-full [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-secondary',
   );
 
   classes = computed(() =>
     cn('appearance-none bg-transparent', this.thumbClass(), this.trackClass(), this.class()),
   );
+
+  max = input<number>(100);
+
+  step = input<number>(0);
 }
