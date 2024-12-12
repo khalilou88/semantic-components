@@ -17,6 +17,7 @@ import {
   SvgChevronsRightIcon,
 } from '@semantic-icons/lucide-icons';
 
+import { cn } from '../../utils';
 import { ScButton } from '../button';
 import { ScPageEvent } from './page-event';
 import { ScPageItem } from './page-item';
@@ -129,17 +130,17 @@ const DEFAULT_PAGE_SIZE = 10;
     </nav>
   `,
   host: {
-    '[class.sc-paginator]': 'true',
+    '[class]': 'classes()',
   },
-  styles: `
-    .sc-paginator {
-      @apply flex;
-    }
-  `,
+  styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScPaginator implements OnInit {
+  class = input<string>('');
+
+  classes = computed(() => cn('flex', this.class()));
+
   /** The one-based page index of the displayed list of items. Defaulted to 1. */
   currentPage = input<number>(1);
 
