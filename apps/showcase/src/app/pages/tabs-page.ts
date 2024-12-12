@@ -1,9 +1,19 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { ScTab, ScTabContent, ScTabLabel, ScTabs } from '@semantic-components/ui';
+import {
+  ScButton,
+  ScInput,
+  ScLabel,
+  ScTab,
+  ScTabContent,
+  ScTabLabel,
+  ScTabs,
+} from '@semantic-components/ui';
 import {
   ScCard,
+  ScCardContent,
   ScCardDescription,
+  ScCardFooter,
   ScCardHeader,
   ScCardTitle,
 } from 'libs/ui/src/lib/components/card';
@@ -19,6 +29,11 @@ import {
     ScCardHeader,
     ScCardTitle,
     ScCardDescription,
+    ScCardContent,
+    ScCardFooter,
+    ScLabel,
+    ScInput,
+    ScButton,
   ],
   template: `
     <sc-tabs class="w-[400px]" labelsHostClass="grid w-full grid-cols-2" contentsHostClass="">
@@ -31,6 +46,20 @@ import {
               <p sc-card-description>
                 Make changes to your account here. Click save when you're done.
               </p>
+            </div>
+
+            <div class="space-y-2" sc-card-content>
+              <div class="space-y-1">
+                <label sc-label for="name">Name</label>
+                <input id="name" sc-input value="Pedro Duarte" />
+              </div>
+              <div class="space-y-1">
+                <label sc-label for="username">Username</label>
+                <input id="username" sc-input value="@peduarte" />
+              </div>
+            </div>
+            <div sc-card-footer>
+              <button sc-button type="submit">Save changes</button>
             </div>
           </div>
         </sc-tab-content>
