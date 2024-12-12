@@ -6,6 +6,8 @@ import {
   input,
 } from '@angular/core';
 
+import { cn } from '../../utils';
+
 @Component({
   selector: 'sc-progress',
   imports: [],
@@ -20,17 +22,19 @@ import {
     'aria-valuemax': '100',
     // Binding that updates the current value of the progressbar.
     '[attr.aria-valuenow]': 'value()',
-    '[class.sc-progress]': 'true',
+    '[class]': 'classes()',
   },
-  styles: `
-    .sc-progress {
-      @apply block relative h-4 w-full overflow-hidden rounded-full bg-secondary;
-    }
-  `,
+  styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScProgress {
+  class = input<string>('');
+
+  classes = computed(() =>
+    cn('block relative h-4 w-full overflow-hidden rounded-full bg-secondary', this.class()),
+  );
+
   /** Current value of the progressbar. */
   value = input<number>(0);
 
