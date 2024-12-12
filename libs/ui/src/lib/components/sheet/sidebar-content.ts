@@ -1,6 +1,13 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { cn } from '../../utils';
 import { ScScrollArea } from '../scroll-area';
 
 @Component({
@@ -567,12 +574,20 @@ import { ScScrollArea } from '../scroll-area';
       </div>
     </div>
   `,
-  styles: `
-    sc-sidebar-content {
-      @apply flex min-h-0 flex-1 flex-col gap-2 overflow-auto group-data-[collapsible=icon]:overflow-hidden;
-    }
-  `,
+  host: {
+    '[class]': 'classes()',
+  },
+  styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SidebarContent {}
+export class SidebarContent {
+  class = input<string>('');
+
+  classes = computed(() =>
+    cn(
+      'flex min-h-0 flex-1 flex-col gap-2 overflow-auto group-data-[collapsible=icon]:overflow-hidden',
+      this.class(),
+    ),
+  );
+}
