@@ -51,12 +51,11 @@ export class ScCarouselPrevious {
   scCarousel = inject(ScCarousel);
 
   canScrollPrev() {
-    //return this.scCarousel.emblaApi.canScrollPrev;
-    return true;
+    return this.scCarousel.carouselApi.canScrollPrev();
   }
 
   scrollPrev() {
     console.log('scrollPrev');
-    this.scCarousel.emblaApi.scrollPrev();
+    this.scCarousel.carouselApi.scrollPrev();
   }
 }

@@ -39,7 +39,7 @@ export class ScCarousel {
 
   emblaNode = inject(ElementRef);
 
-  emblaApi!: EmblaCarouselType;
+  private emblaApi!: EmblaCarouselType;
 
   options = input<EmblaOptionsType>({ loop: false });
 
@@ -58,6 +58,10 @@ export class ScCarousel {
       console.log('this.plugins()');
       console.log(this.plugins());
     });
+  }
+
+  get carouselApi() {
+    return this.emblaApi;
   }
 
   //TODO
