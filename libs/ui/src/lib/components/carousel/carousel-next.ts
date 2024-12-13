@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 
 import { cn } from '../../utils';
+import { ButtonVariants, buttonVariants } from '../button';
 
 @Component({
   selector: 'button[sc-carousel-next]',
@@ -28,10 +29,15 @@ import { cn } from '../../utils';
 export class ScCarouselNext {
   orientation = input<'horizontal'>('horizontal');
 
+  variant = input<ButtonVariants['variant']>('primary');
+
+  size = input<ButtonVariants['size']>('default');
+
   class = input<string>('');
 
   classes = computed(() =>
     cn(
+      buttonVariants({ variant: this.variant(), size: this.size() }),
       'absolute h-8 w-8 rounded-full',
       this.orientation() === 'horizontal'
         ? '-right-12 top-1/2 -translate-y-1/2'
