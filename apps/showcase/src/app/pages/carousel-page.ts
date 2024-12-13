@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import {
+  ScCard,
+  ScCardContent,
   ScCarousel,
   ScCarouselItem,
   ScCarouselItems,
@@ -19,15 +21,26 @@ import { SvgArrowLeftIcon, SvgArrowRightIcon } from '@semantic-icons/lucide-icon
     ScCarouselNext,
     SvgArrowLeftIcon,
     SvgArrowRightIcon,
+    ScCard,
+    ScCardContent,
   ],
   template: `
     <div class="m-10">
-      <div sc-carousel>
+      <div class="w-full max-w-xs" sc-carousel>
         <div sc-carousel-items>
-          <div sc-carousel-item>Slide 1</div>
-          <div sc-carousel-item>Slide 2</div>
-          <div sc-carousel-item>Slide 3</div>
+          @for (item of items; track $index) {
+            <div sc-carousel-item>
+              <div class="p-1">
+                <div sc-card>
+                  <div class="flex aspect-square items-center justify-center p-6" sc-card-content>
+                    <span class="text-4xl font-semibold">{{ item }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
         </div>
+
         <button sc-carousel-previous variant="secondary" size="icon">
           <svg-arrow-left-icon class="h-4 w-4" />
         </button>
@@ -41,4 +54,6 @@ import { SvgArrowLeftIcon, SvgArrowRightIcon } from '@semantic-icons/lucide-icon
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class CarouselPage {}
+export default class CarouselPage {
+  items = [1, 2, 3, 4, 5];
+}
