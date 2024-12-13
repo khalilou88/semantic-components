@@ -44,6 +44,7 @@ export class ScCarousel {
     });
   }
 
+  //TODO
   handleKeyDown() {
     console.log('handleKeyDown');
   }
