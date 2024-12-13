@@ -26,7 +26,7 @@ import { cn } from '../../utils';
   `,
   host: {
     role: 'region',
-    'attr.aria-roledescription': '"carousel"',
+    '[attr.aria-roledescription]': '"carousel"',
     '[class]': 'classes()',
   },
   styles: ``,
@@ -34,13 +34,11 @@ import { cn } from '../../utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCarousel {
+  emblaNode = inject(ElementRef);
+
   class = input<string>('');
 
   classes = computed(() => cn('relative', this.class()));
-
-  emblaNode = inject(ElementRef);
-
-  private emblaApi!: EmblaCarouselType;
 
   options = input<EmblaOptionsType>({ loop: false });
 
@@ -49,6 +47,8 @@ export class ScCarousel {
   canScrollPrev = signal(false);
 
   canScrollNext = signal(false);
+
+  private emblaApi!: EmblaCarouselType;
 
   get carouselApi() {
     return this.emblaApi;
