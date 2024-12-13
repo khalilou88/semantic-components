@@ -1,13 +1,34 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
+
+import { cn } from '../../utils';
 
 @Component({
-  selector: 'sc-carousel',
+  selector: 'div[sc-carousel]',
   imports: [],
   template: `
-    <p>carousel works!</p>
+    <ng-content />
   `,
+  host: {
+    role: 'region',
+    'attr.aria-roledescription': '"carousel"',
+    '[class]': 'classes()',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Carousel {}
+export class Carousel {
+  class = input<string>('');
+
+  classes = computed(() => cn('relative', this.class()));
+
+  handleKeyDown() {
+    console.log('handleKeyDown');
+  }
+}
