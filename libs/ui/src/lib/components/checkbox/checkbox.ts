@@ -7,19 +7,25 @@ import {
   signal,
 } from '@angular/core';
 
-import { SvgCheckIcon } from '@semantic-icons/lucide-icons';
-
 import { cn } from '../../utils';
 
 @Component({
   selector: 'input[sc-checkbox]',
-  imports: [SvgCheckIcon],
+  imports: [],
   template: `
     <ng-content />
-
-    <svg-check-icon
-      class="absolute w-4 h-4 pointer-events-none hidden peer-checked:block stroke-white mt-1 outline-none"
-    />
+    <svg
+      class="absolute top-0 left-0 w-4 h-4 pointer-events-none  stroke-white mt-1 outline-none"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
   `,
   host: {
     '[class]': 'classes()',
@@ -31,13 +37,13 @@ import { cn } from '../../utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCheckbox {
-  state = signal('checked');
+  state = signal('');
 
   class = input<string>('');
 
   classes = computed(() =>
     cn(
-      'appearance-none relative peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground',
+      'peer relative top-0 left-0 appearance-none shrink-0 w-4 h-4 border-2 border-blue-200 rounded-sm mt-1 bg-white focus:outline-none focus:ring-offset-0 focus:ring-1 focus:ring-blue-100 checked:bg-blue-500 checked:border-0 disabled:border-steel-400 disabled:bg-steel-400',
       this.class(),
     ),
   );
@@ -51,4 +57,6 @@ export class ScCheckbox {
       this.state.set('checked');
     }
   }
+
+  //https://marek-rozmus.medium.com/styling-checkbox-with-tailwind-46a92c157e2d
 }
