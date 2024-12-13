@@ -20,6 +20,8 @@ import { SvgCheckIcon } from '@semantic-icons/lucide-icons';
 
     <input sc-checkbox type="checkbox" />
 
+    <sc-checkbox />
+
     <br />
     <br />
     <br />
