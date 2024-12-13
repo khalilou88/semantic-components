@@ -9,7 +9,7 @@ import {
   input,
 } from '@angular/core';
 
-import EmblaCarousel from 'embla-carousel';
+import EmblaCarousel, { EmblaOptionsType } from 'embla-carousel';
 
 import { cn } from '../../utils';
 
@@ -35,10 +35,11 @@ export class ScCarousel {
 
   private emblaNode = inject(ElementRef);
 
+  options = input<EmblaOptionsType>({ loop: false });
+
   constructor() {
     afterNextRender(() => {
-      const options = { loop: false };
-      const emblaApi = EmblaCarousel(this.emblaNode.nativeElement, options);
+      const emblaApi = EmblaCarousel(this.emblaNode.nativeElement, this.options());
 
       console.log(emblaApi.slideNodes()); // Access API
     });
