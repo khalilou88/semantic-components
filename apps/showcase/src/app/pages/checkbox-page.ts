@@ -1,38 +1,19 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { ScCheckbox } from '@semantic-components/ui';
-import { SvgCheckIcon } from '@semantic-icons/lucide-icons';
+import { ScCheckbox, ScCheckboxContainer } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-checkbox-page',
-  imports: [ScCheckbox, SvgCheckIcon],
+  imports: [ScCheckbox, ScCheckboxContainer],
   template: `
-    <input type="checkbox" />
-
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-
-    <input sc-checkbox type="checkbox" />
-
-    <sc-checkbox />
-
-    <br />
-    <br />
-    <br />
-    <br />
-
-    <div class="bg-blue-500">
-      <svg-check-icon
-        class=" w-4 h-4 pointer-events-none  peer-checked:block stroke-white mt-1 outline-none"
-      />
+    <div sc-checkbox-container>
+      <input sc-checkbox type="checkbox" />
     </div>
 
+    <br />
+    <br />
+    <br />
+    <br />
     <br />
     <br />
     <br />

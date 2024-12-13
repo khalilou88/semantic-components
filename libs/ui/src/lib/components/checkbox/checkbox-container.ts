@@ -1,17 +1,28 @@
-import { ChangeDetectionStrategy, Component, TemplateRef, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
+
+import { cn } from '../../utils';
 
 @Component({
-  selector: 'sc-checkbox-container',
+  selector: 'div[sc-checkbox-container]',
   imports: [],
   template: `
-    <div class="flex">
-      <ng-template [ngTemplateOutlet]="template"></ng-template>
-    </div>
+    <ng-content />
   `,
+  host: {
+    '[class]': 'classes()',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCheckboxContainer {
-  template?: TemplateRef<unknown>;
+  class = input<string>('');
+
+  classes = computed(() => cn('flex', this.class()));
 }
