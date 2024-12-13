@@ -27,7 +27,7 @@ import { ScSlider } from '@semantic-components/ui';
     <br />
 
     <span
-      class="relative flex touch-none select-none items-center w-[60%]"
+      class="relative flex w-3/5 touch-none select-none items-center"
       dir="ltr"
       data-orientation="horizontal"
       aria-disabled="false"
@@ -47,7 +47,7 @@ import { ScSlider } from '@semantic-components/ui';
         style="transform: var(--radix-slider-thumb-transform); position: absolute; left: calc(34% + 3.2px);"
       >
         <span
-          class="block h-5 w-5 rounded-full border-2 border-primary bg-background ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+          class="block size-5 rounded-full border-2 border-primary bg-background ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
           role="slider"
           aria-valuemin="0"
           aria-valuemax="100"

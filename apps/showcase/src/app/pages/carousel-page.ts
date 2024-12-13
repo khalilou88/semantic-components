@@ -49,10 +49,10 @@ import Autoplay from 'embla-carousel-autoplay';
         </div>
 
         <button sc-carousel-previous variant="secondary" size="icon">
-          <svg-arrow-left-icon class="h-4 w-4" />
+          <svg-arrow-left-icon class="size-4" />
         </button>
         <button sc-carousel-next variant="secondary" size="icon">
-          <svg-arrow-right-icon class="h-4 w-4" />
+          <svg-arrow-right-icon class="size-4" />
         </button>
       </div>
     </div>
