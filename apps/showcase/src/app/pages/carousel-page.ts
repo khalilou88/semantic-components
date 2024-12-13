@@ -15,7 +15,7 @@ import {
   ScCarouselPrevious,
 } from '@semantic-components/ui';
 import { SvgArrowLeftIcon, SvgArrowRightIcon } from '@semantic-icons/lucide-icons';
-import { EmblaPluginType } from 'embla-carousel';
+import { EmblaOptionsType, EmblaPluginType } from 'embla-carousel';
 import Autoplay from 'embla-carousel-autoplay';
 
 @Component({
@@ -33,7 +33,7 @@ import Autoplay from 'embla-carousel-autoplay';
   ],
   template: `
     <div class="m-10">
-      <div class="w-full max-w-xs" [plugins]="plugins" sc-carousel>
+      <div class="w-full max-w-xs" [plugins]="plugins" [plugins]="plugins" sc-carousel>
         <div sc-carousel-items>
           @for (item of items; track $index) {
             <div sc-carousel-item>
@@ -64,11 +64,7 @@ import Autoplay from 'embla-carousel-autoplay';
 export default class CarouselPage {
   items = Array.from({ length: 5 }, (_, i) => i + 1);
 
-  plugins: EmblaPluginType[] = [];
+  options: EmblaOptionsType = { loop: false };
 
-  constructor() {
-    afterNextRender(() => {
-      this.plugins = [Autoplay()];
-    });
-  }
+  plugins: EmblaPluginType[] = [Autoplay()];
 }

@@ -49,7 +49,14 @@ export class ScCarousel {
     afterNextRender(() => {
       this.emblaApi = EmblaCarousel(this.emblaNode.nativeElement, this.options(), this.plugins());
 
-      console.log(this.emblaApi.slideNodes()); // Access API
+      console.log('this.emblaApi.slideNodes()');
+      console.log(this.emblaApi.slideNodes());
+
+      console.log('this.options()');
+      console.log(this.options());
+
+      console.log('this.plugins()');
+      console.log(this.plugins());
     });
   }
 
