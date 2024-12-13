@@ -3,10 +3,12 @@ import {
   Component,
   ViewEncapsulation,
   computed,
+  inject,
   input,
 } from '@angular/core';
 
 import { cn } from '../../utils';
+import { ScCarousel } from './carousel';
 
 @Component({
   selector: 'div[sc-carousel-item]',
@@ -24,14 +26,14 @@ import { cn } from '../../utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCarouselItem {
-  orientation = input<'horizontal'>('horizontal');
+  scCarousel = inject(ScCarousel);
 
   class = input<string>('');
 
   classes = computed(() =>
     cn(
       'min-w-0 shrink-0 grow-0 basis-full',
-      this.orientation() === 'horizontal' ? 'pl-4' : 'pt-4',
+      this.scCarousel.orientation() === 'horizontal' ? 'pl-4' : 'pt-4',
       this.class(),
     ),
   );

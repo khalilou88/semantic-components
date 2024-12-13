@@ -22,7 +22,9 @@ import { cn } from '../../utils';
   selector: 'div[sc-carousel]',
   imports: [],
   template: `
-    <ng-content />
+    <div class="overflow-hidden">
+      <ng-content />
+    </div>
   `,
   host: {
     role: 'region',
@@ -54,6 +56,8 @@ export class ScCarousel {
   get carouselApi() {
     return this.emblaApi;
   }
+
+  orientation = input<'horizontal'>('horizontal');
 
   constructor() {
     afterNextRender(() => {
