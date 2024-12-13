@@ -20,7 +20,7 @@ import { ScCarousel } from './carousel';
   `,
   host: {
     '[class]': 'classes()',
-    '[disabled]': '!canScrollNext()',
+    '[disabled]': 'disabled()',
     '(click)': 'scrollNext()',
   },
   styles: ``,
@@ -47,8 +47,8 @@ export class ScCarouselNext {
     ),
   );
 
-  canScrollNext() {
-    return this.scCarousel.canScrollNext();
+  disabled() {
+    return !this.scCarousel.canScrollNext();
   }
 
   scrollNext() {

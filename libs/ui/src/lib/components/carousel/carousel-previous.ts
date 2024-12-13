@@ -20,7 +20,7 @@ import { ScCarousel } from './carousel';
   `,
   host: {
     '[class]': 'classes()',
-    '[disabled]': '!canScrollPrev()',
+    '[disabled]': 'disabled()',
     '(click)': 'scrollPrev()',
   },
   styles: ``,
@@ -47,8 +47,8 @@ export class ScCarouselPrevious {
     ),
   );
 
-  canScrollPrev() {
-    return this.scCarousel.canScrollPrev();
+  disabled() {
+    return !this.scCarousel.canScrollPrev();
   }
 
   scrollPrev() {
