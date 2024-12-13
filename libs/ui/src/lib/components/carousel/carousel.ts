@@ -97,4 +97,6 @@ export class ScCarousel {
     console.log('scrollNext');
     this.emblaApi.scrollNext();
   }
+
+  //TODO buttons not showing and handleKeyDown not working
 }
