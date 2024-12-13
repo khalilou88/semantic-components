@@ -54,6 +54,8 @@
     "@tiptap/pm": "^2.10.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "embla-carousel": "^8.5.1",
+    "embla-carousel-autoplay": "^8.5.1",
     "express": "~4.18.2",
     "ngx-scrollbar": "^16.1.1",
     "rxjs": "~7.8.1",

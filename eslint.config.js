@@ -41,7 +41,7 @@ module.exports = [
       'tailwindcss/no-custom-classname': [
         'error',
         {
-          whitelist: ['bg-primary'],
+          whitelist: ['destructive', 'bg-primary'],
         },
       ],
     },

@@ -23,6 +23,17 @@ export const appRoutes: Route[] = [
           },
           { path: 'home', loadComponent: () => import('./pages/home-page'), title: 'Home Page' },
           {
+            path: 'carousel',
+            loadComponent: () => import('./pages/carousel-page'),
+            title: 'Carousel Page',
+          },
+          {
+            path: 'slider',
+            loadComponent: () => import('./pages/slider-page'),
+            title: 'Slider Page',
+          },
+          { path: 'toast', loadComponent: () => import('./pages/toast-page'), title: 'Toast Page' },
+          {
             path: 'dropdown-menu',
             loadComponent: () => import('./pages/dropdown-menu-page'),
             title: 'Dropdown Menu Page',
