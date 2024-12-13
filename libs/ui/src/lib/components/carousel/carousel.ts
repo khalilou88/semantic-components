@@ -28,6 +28,7 @@ import { cn } from '../../utils';
     role: 'region',
     '[attr.aria-roledescription]': '"carousel"',
     '[class]': 'classes()',
+    '(keydown)': 'handleKeydown($event)',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -73,8 +74,23 @@ export class ScCarousel {
     else this.canScrollNext.set(false);
   };
 
-  //TODO
-  handleKeyDown() {
-    console.log('handleKeyDown');
+  handleKeyDown(event: KeyboardEvent) {
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      this.scrollPrev();
+    } else if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      this.scrollNext();
+    }
+  }
+
+  scrollPrev() {
+    console.log('scrollPrev');
+    this.emblaApi.scrollPrev();
+  }
+
+  scrollNext() {
+    console.log('scrollNext');
+    this.emblaApi.scrollNext();
   }
 }
