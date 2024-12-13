@@ -58,25 +58,23 @@ export class ScCarousel {
     afterNextRender(() => {
       this.emblaApi = EmblaCarousel(this.emblaNode.nativeElement, this.options(), this.plugins());
 
-      console.log('this.emblaApi.canScrollPrev()');
-      console.log(this.emblaApi.canScrollPrev());
-
-      console.log('this.emblaApi.canScrollNext()');
-      console.log(this.emblaApi.canScrollNext());
-
       this.canScrollPrev.set(this.emblaApi.canScrollPrev());
       this.canScrollNext.set(this.emblaApi.canScrollNext());
 
-      console.log('this.emblaApi.slideNodes()');
-      console.log(this.emblaApi.slideNodes());
-
-      console.log('this.options()');
-      console.log(this.options());
-
-      console.log('this.plugins()');
-      console.log(this.plugins());
+      this.emblaApi
+        .on('select', this.togglePrevNextBtnsState)
+        .on('init', this.togglePrevNextBtnsState)
+        .on('reInit', this.togglePrevNextBtnsState);
     });
   }
+
+  togglePrevNextBtnsState = (): void => {
+    if (this.emblaApi.canScrollPrev()) this.canScrollPrev.set(true);
+    else this.canScrollPrev.set(false);
+
+    if (this.emblaApi.canScrollNext()) this.canScrollNext.set(true);
+    else this.canScrollNext.set(false);
+  };
 
   //TODO
   handleKeyDown() {
