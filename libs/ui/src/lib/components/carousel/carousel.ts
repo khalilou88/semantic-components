@@ -57,7 +57,9 @@ export class ScCarousel {
     return this.emblaApi;
   }
 
-  orientation = input<'horizontal'>('horizontal');
+  orientation = computed<'horizontal' | 'vertical'>(() => {
+    return this.options()?.axis === 'y' ? 'vertical' : 'horizontal';
+  });
 
   constructor() {
     afterNextRender(() => {
