@@ -23,7 +23,7 @@ import { cn } from '../../utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Carousel {
+export class ScCarousel {
   class = input<string>('');
 
   classes = computed(() => cn('relative', this.class()));

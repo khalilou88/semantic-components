@@ -21,7 +21,7 @@ import { cn } from '../../utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CarouselItems {
+export class ScCarouselItems {
   orientation = input<'horizontal'>('horizontal');
 
   class = input<string>('');
