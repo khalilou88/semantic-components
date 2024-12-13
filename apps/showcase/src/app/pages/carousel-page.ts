@@ -55,5 +55,5 @@ import { SvgArrowLeftIcon, SvgArrowRightIcon } from '@semantic-icons/lucide-icon
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class CarouselPage {
-  items = [1, 2, 3, 4, 5];
+  items = Array.from({ length: 5 }, (_, i) => i + 1);
 }

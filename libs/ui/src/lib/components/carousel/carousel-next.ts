@@ -3,12 +3,14 @@ import {
   Component,
   ViewEncapsulation,
   computed,
+  inject,
   input,
   signal,
 } from '@angular/core';
 
 import { cn } from '../../utils';
 import { ButtonVariants, buttonVariants } from '../button';
+import { ScCarousel } from './carousel';
 
 @Component({
   selector: 'button[sc-carousel-next]',
@@ -19,8 +21,8 @@ import { ButtonVariants, buttonVariants } from '../button';
   `,
   host: {
     '[class]': 'classes()',
-    disabled: '!canScrollNext()',
-    click: 'scrollNext()',
+    '[disabled]': '!canScrollNext()',
+    '(click)': 'scrollNext()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -46,9 +48,14 @@ export class ScCarouselNext {
     ),
   );
 
-  canScrollNext = signal(false);
+  scCarousel = inject(ScCarousel);
+
+  canScrollNext() {
+    return this.scCarousel.emblaApi.canScrollPrev();
+  }
 
   scrollNext() {
     console.log('scrollNext');
+    this.scCarousel.emblaApi.scrollNext();
   }
 }
