@@ -51,7 +51,8 @@ export class ScCarouselNext {
   scCarousel = inject(ScCarousel);
 
   canScrollNext() {
-    return this.scCarousel.emblaApi.canScrollPrev();
+    //return this.scCarousel.emblaApi.canScrollPrev;
+    return true;
   }
 
   scrollNext() {
