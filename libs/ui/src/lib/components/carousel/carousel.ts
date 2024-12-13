@@ -22,9 +22,7 @@ import { cn } from '../../utils';
   selector: 'div[sc-carousel]',
   imports: [],
   template: `
-    <div class="overflow-hidden">
-      <ng-content />
-    </div>
+    <ng-content />
   `,
   host: {
     role: 'region',
@@ -41,7 +39,7 @@ export class ScCarousel {
 
   class = input<string>('');
 
-  classes = computed(() => cn('relative', this.class()));
+  classes = computed(() => cn('relative overflow-hidden', this.class()));
 
   options = input<EmblaOptionsType>({ loop: false });
 
