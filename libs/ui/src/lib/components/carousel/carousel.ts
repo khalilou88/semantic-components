@@ -39,7 +39,9 @@ export class ScCarousel {
 
   class = input<string>('');
 
-  classes = computed(() => cn('relative overflow-hidden', this.class()));
+  //classes = computed(() => cn('relative overflow-hidden', this.class()));
+
+  classes = computed(() => cn('relative', this.class()));
 
   options = input<EmblaOptionsType>({ loop: false });
 
