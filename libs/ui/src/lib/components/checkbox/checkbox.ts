@@ -5,7 +5,9 @@ import {
   ViewEncapsulation,
   afterNextRender,
   computed,
+  effect,
   input,
+  signal,
 } from '@angular/core';
 
 import { cn } from '../../utils';
@@ -19,6 +21,7 @@ import { SVG } from './svg';
   `,
   host: {
     '[class]': 'classes()',
+    '(click)': 'toggle()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -34,9 +37,21 @@ export class ScCheckbox {
     ),
   );
 
+  checked = signal<boolean>(false);
+
   constructor(private viewContainer: ViewContainerRef) {
-    afterNextRender(() => {
-      this.viewContainer.createComponent(SVG);
+    effect(() => {
+      console.log('yyyyy');
+
+      if (this.checked() === true) {
+        this.viewContainer.createComponent(SVG);
+      }
     });
+
+    afterNextRender(() => {});
+  }
+
+  toggle() {
+    this.checked.update((v) => !v);
   }
 }
