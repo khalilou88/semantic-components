@@ -9,6 +9,7 @@ import {
   ScCard,
   ScCardContent,
   ScCarousel,
+  ScCarouselContainer,
   ScCarouselItem,
   ScCarouselItems,
   ScCarouselNext,
@@ -30,10 +31,11 @@ import Autoplay from 'embla-carousel-autoplay';
     SvgArrowRightIcon,
     ScCard,
     ScCardContent,
+    ScCarouselContainer,
   ],
   template: `
-    <div class="m-10">
-      <div class="w-full max-w-xs" [plugins]="plugins" [plugins]="plugins" sc-carousel>
+    <div class="m-10 w-full max-w-xs" sc-carousel-container>
+      <div [plugins]="plugins" [plugins]="plugins" sc-carousel>
         <div sc-carousel-items>
           @for (item of items; track $index) {
             <div sc-carousel-item>
