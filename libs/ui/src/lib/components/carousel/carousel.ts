@@ -58,6 +58,9 @@ export class ScCarousel {
     afterNextRender(() => {
       this.emblaApi = EmblaCarousel(this.emblaNode.nativeElement, this.options(), this.plugins());
 
+      this.canScrollPrev.set(this.emblaApi.canScrollPrev());
+      this.canScrollNext.set(this.emblaApi.canScrollNext());
+
       console.log('this.emblaApi.slideNodes()');
       console.log(this.emblaApi.slideNodes());
 
