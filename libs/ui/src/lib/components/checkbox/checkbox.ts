@@ -29,7 +29,7 @@ export class ScCheckbox {
 
   classes = computed(() =>
     cn(
-      'peer relative appearance-none shrink-0 w-4 h-4 border-2 border-blue-200 rounded-sm mt-1 bg-white focus:outline-none focus:ring-offset-0 focus:ring-1 focus:ring-blue-100 checked:bg-blue-500 checked:border-0 disabled:border-steel-400 disabled:bg-steel-400',
+      'flex peer appearance-none shrink-0 w-4 h-4 border-2 border-blue-200 rounded-sm bg-white focus:outline-none focus:ring-offset-0 focus:ring-1 focus:ring-blue-100 checked:bg-blue-500 checked:border-0 disabled:border-steel-400 disabled:bg-steel-400',
       this.class(),
     ),
   );

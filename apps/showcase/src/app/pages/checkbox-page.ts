@@ -1,14 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { ScCheckbox, ScCheckboxContainer } from '@semantic-components/ui';
+import { ScCheckbox } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-checkbox-page',
-  imports: [ScCheckbox, ScCheckboxContainer],
+  imports: [ScCheckbox],
   template: `
-    <div sc-checkbox-container>
-      <input sc-checkbox type="checkbox" />
-    </div>
+    <input sc-checkbox type="checkbox" />
 
     <br />
     <br />

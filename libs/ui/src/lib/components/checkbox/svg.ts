@@ -36,7 +36,7 @@ export class SVG {
 
   classes = computed(() =>
     cn(
-      'absolute w-4 h-4 pointer-events-none hidden peer-checked:block stroke-white mt-1 outline-none',
+      'relative bottom-4 w-4 h-4 pointer-events-none hidden peer-checked:block stroke-white outline-none',
       this.class(),
     ),
   );
