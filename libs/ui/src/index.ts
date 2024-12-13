@@ -22,3 +22,4 @@ export * from './lib/components/tabs';
 export * from './lib/components/card';
 export * from './lib/components/toast';
 export * from './lib/components/slider';
+export * from './lib/components/carousel';

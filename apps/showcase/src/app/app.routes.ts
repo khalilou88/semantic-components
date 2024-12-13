@@ -23,6 +23,11 @@ export const appRoutes: Route[] = [
           },
           { path: 'home', loadComponent: () => import('./pages/home-page'), title: 'Home Page' },
           {
+            path: 'carousel',
+            loadComponent: () => import('./pages/carousel-page'),
+            title: 'Carousel Page',
+          },
+          {
             path: 'slider',
             loadComponent: () => import('./pages/slider-page'),
             title: 'Slider Page',
