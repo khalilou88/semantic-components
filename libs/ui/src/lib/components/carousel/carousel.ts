@@ -46,9 +46,9 @@ export class ScCarousel {
 
   plugins = input<EmblaPluginType[]>([]);
 
-  canScrollNext = signal(false);
-
   canScrollPrev = signal(false);
+
+  canScrollNext = signal(false);
 
   get carouselApi() {
     return this.emblaApi;
@@ -57,6 +57,12 @@ export class ScCarousel {
   constructor() {
     afterNextRender(() => {
       this.emblaApi = EmblaCarousel(this.emblaNode.nativeElement, this.options(), this.plugins());
+
+      console.log('this.emblaApi.canScrollPrev()');
+      console.log(this.emblaApi.canScrollPrev());
+
+      console.log('this.emblaApi.canScrollNext()');
+      console.log(this.emblaApi.canScrollNext());
 
       this.canScrollPrev.set(this.emblaApi.canScrollPrev());
       this.canScrollNext.set(this.emblaApi.canScrollNext());

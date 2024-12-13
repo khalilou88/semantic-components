@@ -50,7 +50,7 @@ export class ScCarouselNext {
   scCarousel = inject(ScCarousel);
 
   canScrollNext() {
-    return this.scCarousel.canScrollPrev();
+    return this.scCarousel.canScrollNext();
   }
 
   scrollNext() {
