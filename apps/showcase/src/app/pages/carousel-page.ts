@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  afterNextRender,
+} from '@angular/core';
 
 import {
   ScCard,
@@ -10,6 +15,8 @@ import {
   ScCarouselPrevious,
 } from '@semantic-components/ui';
 import { SvgArrowLeftIcon, SvgArrowRightIcon } from '@semantic-icons/lucide-icons';
+import { EmblaPluginType } from 'embla-carousel';
+import Autoplay from 'embla-carousel-autoplay';
 
 @Component({
   selector: 'app-carousel-page',
@@ -26,7 +33,7 @@ import { SvgArrowLeftIcon, SvgArrowRightIcon } from '@semantic-icons/lucide-icon
   ],
   template: `
     <div class="m-10">
-      <div class="w-full max-w-xs" sc-carousel>
+      <div class="w-full max-w-xs" [plugins]="plugins" sc-carousel>
         <div sc-carousel-items>
           @for (item of items; track $index) {
             <div sc-carousel-item>
@@ -56,4 +63,12 @@ import { SvgArrowLeftIcon, SvgArrowRightIcon } from '@semantic-icons/lucide-icon
 })
 export default class CarouselPage {
   items = Array.from({ length: 5 }, (_, i) => i + 1);
+
+  plugins: EmblaPluginType[] = [];
+
+  constructor() {
+    afterNextRender(() => {
+      this.plugins = [Autoplay()];
+    });
+  }
 }
