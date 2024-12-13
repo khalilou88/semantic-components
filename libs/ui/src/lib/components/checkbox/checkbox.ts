@@ -12,6 +12,7 @@ import { cn } from '../../utils';
   selector: 'input[sc-checkbox]',
   imports: [],
   template: `
+    <ng-content />
     <svg
       class="absolute w-4 h-4 pointer-events-none hidden peer-checked:block stroke-white mt-1 outline-none"
       xmlns="http://www.w3.org/2000/svg"
