@@ -45,6 +45,8 @@ export class ScCheckbox {
 
       if (this.checked() === true) {
         this.viewContainer.createComponent(SVG);
+      } else {
+        this.viewContainer.detach();
       }
     });
 
