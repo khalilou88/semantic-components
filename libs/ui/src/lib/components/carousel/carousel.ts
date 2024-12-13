@@ -7,6 +7,7 @@ import {
   computed,
   inject,
   input,
+  signal,
 } from '@angular/core';
 
 import EmblaCarousel, {
@@ -45,6 +46,14 @@ export class ScCarousel {
 
   plugins = input<EmblaPluginType[]>([]);
 
+  canScrollNext = signal(false);
+
+  canScrollPrev = signal(false);
+
+  get carouselApi() {
+    return this.emblaApi;
+  }
+
   constructor() {
     afterNextRender(() => {
       this.emblaApi = EmblaCarousel(this.emblaNode.nativeElement, this.options(), this.plugins());
@@ -58,10 +67,6 @@ export class ScCarousel {
       console.log('this.plugins()');
       console.log(this.plugins());
     });
-  }
-
-  get carouselApi() {
-    return this.emblaApi;
   }
 
   //TODO

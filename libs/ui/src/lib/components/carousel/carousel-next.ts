@@ -5,7 +5,6 @@ import {
   computed,
   inject,
   input,
-  signal,
 } from '@angular/core';
 
 import { cn } from '../../utils';
@@ -51,11 +50,10 @@ export class ScCarouselNext {
   scCarousel = inject(ScCarousel);
 
   canScrollNext() {
-    return this.scCarousel.carouselApi.canScrollPrev();
+    return this.scCarousel.canScrollPrev();
   }
 
   scrollNext() {
-    console.log('scrollNext');
     this.scCarousel.carouselApi.scrollNext();
   }
 }
