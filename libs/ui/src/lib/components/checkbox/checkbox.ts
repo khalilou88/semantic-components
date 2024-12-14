@@ -92,7 +92,7 @@ export class ScCheckbox implements ControlValueAccessor {
   });
 
   state = computed(() => {
-    return this.checked() ? 'checked' : '';
+    return this.isChecked() ? 'checked' : '';
   });
 
   toggle() {
