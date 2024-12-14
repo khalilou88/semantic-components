@@ -5,6 +5,7 @@ import {
   Component,
   ViewEncapsulation,
   computed,
+  effect,
   forwardRef,
   inject,
   input,
@@ -22,12 +23,12 @@ import { cn } from '../../utils';
   template: `
     <input
       [class]="checkboxClasses()"
-      [disabled]="isDisabled()"
+      [disabled]="disabled()"
       [attr.data-state]="state()"
       type="checkbox"
     />
 
-    @if (isChecked() === true) {
+    @if (checked() === true) {
       <svg-check-icon [class]="svgClasses()" />
     }
   `,
@@ -73,22 +74,26 @@ export class ScCheckbox implements ControlValueAccessor {
 
   checked = model<BooleanInput>(false);
 
-  isChecked = computed(() => {
-    return coerceBooleanProperty(this.checked());
-  });
-
   disabled = model<BooleanInput>(false);
 
-  isDisabled = computed(() => {
-    return coerceBooleanProperty(this.disabled());
+  state = computed(() => {
+    return this.checked() ? 'checked' : '';
   });
 
-  state = computed(() => {
-    return this.isChecked() ? 'checked' : '';
-  });
+  constructor() {
+    effect(() => {
+      if (this.checked() !== true || this.checked() !== false) {
+        this.checked.update((v) => coerceBooleanProperty(v));
+      }
+
+      if (this.disabled() !== true || this.disabled() !== false) {
+        this.disabled.update((v) => coerceBooleanProperty(v));
+      }
+    });
+  }
 
   toggle() {
-    if (this.isDisabled()) {
+    if (this.disabled()) {
       return;
     }
 
