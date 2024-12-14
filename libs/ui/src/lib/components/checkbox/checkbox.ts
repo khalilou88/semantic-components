@@ -23,8 +23,7 @@ import { cn } from '../../utils';
 
     @if (checked() === true) {
       <svg-check-icon
-        class="absolute w-4 h-4 cursor-pointer data-[state=checked]:text-primary-foreground outline-none"
-        [attr.data-state]="state()"
+        class="absolute w-4 h-4 cursor-pointer text-primary-foreground outline-none"
       />
     }
   `,
