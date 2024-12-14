@@ -23,7 +23,7 @@ import { cn } from '../../utils';
 
     @if (checked() === true) {
       <svg-check-icon
-        class="absolute w-4 h-4 cursor-pointer text-primary-foreground outline-none"
+        class="absolute w-4 h-4 outline-none cursor-pointer text-primary-foreground"
       />
     }
   `,
