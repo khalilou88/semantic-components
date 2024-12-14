@@ -17,6 +17,7 @@ import { cn } from '../../utils';
   template: `
     <input
       class="peer relative appearance-none h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
+      [attr.data-state]="state()"
       type="checkbox"
     />
 
@@ -26,7 +27,6 @@ import { cn } from '../../utils';
   `,
   host: {
     '[class]': 'classes()',
-    '[attr.data-state]': 'state()',
     '(click)': 'toggle()',
   },
   styles: ``,
@@ -36,7 +36,7 @@ import { cn } from '../../utils';
 export class ScCheckbox {
   class = input<string>('');
 
-  classes = computed(() => cn('w-full flex gap-2', this.class()));
+  classes = computed(() => cn('flex', this.class()));
 
   state = computed(() => {
     return this.checked() ? 'checked' : '';
