@@ -50,13 +50,13 @@ export class ScCheckbox implements ControlValueAccessor {
 
   class = input<string>('');
 
-  classes = computed(() => cn('flex', this.class()));
+  classes = computed(() => cn('flex relative', this.class()));
 
   checkboxClass = input<string>('');
 
   checkboxClasses = computed(() =>
     cn(
-      'peer relative appearance-none h-4 w-4 shrink-0 cursor-pointer rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground',
+      'peer appearance-none h-4 w-4 shrink-0 cursor-pointer rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground',
       this.checkboxClass(),
     ),
   );
@@ -64,7 +64,10 @@ export class ScCheckbox implements ControlValueAccessor {
   svgClass = input<string>('');
 
   svgClasses = computed(() =>
-    cn('absolute w-4 h-4 outline-none cursor-pointer text-primary-foreground', this.svgClass()),
+    cn(
+      'absolute top-0 left-0 w-4 h-4 outline-none cursor-pointer text-primary-foreground',
+      this.svgClass(),
+    ),
   );
 
   checked = model<boolean>(false);
