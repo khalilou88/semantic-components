@@ -9,6 +9,7 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         node_version: ['20']
+      fail-fast: false
     runs-on: ${{ matrix.os }}
     steps:
       - name: Check out repository code
@@ -24,6 +25,9 @@ jobs:
           rm -f package-lock.json
 
       - name: Install dependencies
+        run: npm i
+
+      - name: Install dependencies second time
         run: npm i
 
       - name: Setup Git
