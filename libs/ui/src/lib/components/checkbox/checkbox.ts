@@ -1,9 +1,11 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ViewEncapsulation,
   computed,
   forwardRef,
+  inject,
   input,
   model,
 } from '@angular/core';
@@ -46,6 +48,8 @@ import { cn } from '../../utils';
   ],
 })
 export class ScCheckbox implements ControlValueAccessor {
+  private readonly _cdr = inject(ChangeDetectorRef);
+
   class = input<string>('');
 
   classes = computed(() => cn('flex', this.class()));
@@ -59,7 +63,11 @@ export class ScCheckbox implements ControlValueAccessor {
   });
 
   toggle() {
-    this.checked.update((v) => !v);
+    const v = !this.checked();
+    this.checked.set(v);
+
+    this.onChange(v);
+    this._cdr.markForCheck();
   }
 
   writeValue(value: boolean): void {
