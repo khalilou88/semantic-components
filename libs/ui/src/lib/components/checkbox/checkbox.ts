@@ -71,15 +71,23 @@ export class ScCheckbox implements ControlValueAccessor {
     ),
   );
 
-  checked = model<string | boolean>(false);
+  checked = model<'true' | 'false' | '' | boolean>(false);
 
   isChecked = computed(() => {
+    if (this.checked() === '') {
+      return true;
+    }
+
     return coerceBooleanProperty(this.checked());
   });
 
-  disabled = model<string | boolean>(false);
+  disabled = model<'true' | 'false' | '' | boolean>(false);
 
   isDisabled = computed(() => {
+    if (this.disabled() === '') {
+      return true;
+    }
+
     return coerceBooleanProperty(this.disabled());
   });
 

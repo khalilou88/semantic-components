@@ -30,6 +30,11 @@ import { ScCheckbox } from '@semantic-components/ui';
     <br />
     <br />
     checked
+
+    <input checked type="checkbox" />
+    <input checked="true" type="checkbox" />
+    <input [checked]="true" type="checkbox" />
+
     <sc-checkbox checked />
     <sc-checkbox checked="true" />
     <sc-checkbox [checked]="true" />
