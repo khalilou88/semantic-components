@@ -1,3 +1,4 @@
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -21,12 +22,12 @@ import { cn } from '../../utils';
   template: `
     <input
       [class]="checkboxClasses()"
-      [disabled]="disabled()"
+      [disabled]="isDisabled()"
       [attr.data-state]="state()"
       type="checkbox"
     />
 
-    @if (checked() === true) {
+    @if (isChecked() === true) {
       <svg-check-icon [class]="svgClasses()" />
     }
   `,
@@ -70,9 +71,17 @@ export class ScCheckbox implements ControlValueAccessor {
     ),
   );
 
-  checked = model<boolean>(false);
+  checked = model<string | boolean>(false);
 
-  disabled = model(false);
+  isChecked = computed(() => {
+    return coerceBooleanProperty(this.checked());
+  });
+
+  disabled = model<string | boolean>(false);
+
+  isDisabled = computed(() => {
+    return coerceBooleanProperty(this.disabled());
+  });
 
   state = computed(() => {
     return this.checked() ? 'checked' : '';

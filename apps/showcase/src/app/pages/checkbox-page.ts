@@ -20,6 +20,22 @@ import { ScCheckbox } from '@semantic-components/ui';
     <br />
     <br />
     <br />
+    disabled
+    <sc-checkbox disabled />
+    <sc-checkbox disabled="true" />
+    <sc-checkbox [disabled]="true" />
+
+    <br />
+    <br />
+    <br />
+    <br />
+    checked
+    <sc-checkbox checked />
+    <sc-checkbox checked="true" />
+    <sc-checkbox [checked]="true" />
+    <br />
+    <br />
+    <br />
 
     <button
       class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
