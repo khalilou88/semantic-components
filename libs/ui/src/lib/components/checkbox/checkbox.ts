@@ -22,7 +22,10 @@ import { cn } from '../../utils';
     />
 
     @if (checked() === true) {
-      <svg-check-icon class="absolute w-4 h-4 pointer-events-none stroke-white outline-none" />
+      <svg-check-icon
+        class="absolute w-4 h-4 pointer-events-none data-[state=checked]:text-primary-foreground outline-none"
+        [attr.data-state]="state()"
+      />
     }
   `,
   host: {
