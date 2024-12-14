@@ -82,11 +82,11 @@ export class ScCheckbox implements ControlValueAccessor {
 
   constructor() {
     effect(() => {
-      if (this.checked() !== true || this.checked() !== false) {
+      if (this.checked() !== true && this.checked() !== false) {
         this.checked.update((v) => coerceBooleanProperty(v));
       }
 
-      if (this.disabled() !== true || this.disabled() !== false) {
+      if (this.disabled() !== true && this.disabled() !== false) {
         this.disabled.update((v) => coerceBooleanProperty(v));
       }
     });
