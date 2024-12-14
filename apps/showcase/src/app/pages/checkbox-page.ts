@@ -1,12 +1,21 @@
+import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import { ScCheckbox } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-checkbox-page',
-  imports: [ScCheckbox],
+  imports: [ScCheckbox, ReactiveFormsModule, JsonPipe],
   template: `
-    <sc-checkbox />
+    <form [formGroup]="checkForm">
+      <sc-checkbox formControlName="check" />
+    </form>
+
+    <br />
+    <br />
+    <br />
+    {{ checkForm.value | json }}
 
     <br />
     <br />
@@ -26,4 +35,8 @@ import { ScCheckbox } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class CheckboxPage {}
+export default class CheckboxPage {
+  checkForm = new FormGroup({
+    check: new FormControl(),
+  });
+}
