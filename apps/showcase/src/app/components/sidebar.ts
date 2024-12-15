@@ -6,7 +6,7 @@ import {
   input,
 } from '@angular/core';
 
-import { cn } from 'libs/ui/src/lib/utils';
+import { cn } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-sidebar',
