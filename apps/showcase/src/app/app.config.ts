@@ -8,7 +8,7 @@ import {
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter } from '@angular/router';
 
-import { scThemeProviderFactory } from '@semantic-components/ui';
+import { scThemeProvider } from '@semantic-components/ui';
 
 import { appRoutes } from './app.routes';
 
@@ -18,7 +18,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(appRoutes),
     provideHttpClient(withFetch()),
     provideAnimationsAsync(),
-    provideAppInitializer(scThemeProviderFactory()),
+    provideAppInitializer(scThemeProvider()),
     { provide: LOCALE_ID, useValue: 'fr' },
   ],
 };

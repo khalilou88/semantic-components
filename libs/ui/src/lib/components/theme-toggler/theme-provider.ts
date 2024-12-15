@@ -2,6 +2,6 @@ import { inject } from '@angular/core';
 
 import { ScTheme } from './theme';
 
-export function scThemeProviderFactory() {
+export function scThemeProvider() {
   return () => inject(ScTheme).init();
 }

@@ -24,3 +24,4 @@ export * from './lib/components/toast';
 export * from './lib/components/slider';
 export * from './lib/components/carousel';
 export * from './lib/components/checkbox';
+export * from './lib/components/accordion';
