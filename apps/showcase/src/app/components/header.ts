@@ -20,7 +20,7 @@ import { LayoutState } from '../services/layout-state';
   selector: 'app-header',
   imports: [ScThemeToggler, SvgGithubIcon, ScButton, ScSheetToggler],
   template: `
-    <div class="z-10 border-b border-border/40 bg-background" #headerContent>
+    <div class="z-50 border-b border-border/40 bg-background" #headerContent>
       <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div class="relative flex h-16 items-center justify-between">
           <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -131,6 +131,7 @@ import { LayoutState } from '../services/layout-state';
   `,
   host: {
     '[class]': 'classes()',
+    '[style.bottom.px]': 'layoutState.headerHeight()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -139,12 +140,7 @@ import { LayoutState } from '../services/layout-state';
 export class Header implements AfterViewChecked {
   class = input<string>('');
 
-  classes = computed(() =>
-    cn(
-      'fixed bottom-[calc(100vh-theme(spacing.16))] left-0 right-0 top-0 bg-blue-200',
-      this.class(),
-    ),
-  );
+  classes = computed(() => cn('fixed top-0 left-0 right-0', this.class()));
 
   layoutState = inject(LayoutState);
 
