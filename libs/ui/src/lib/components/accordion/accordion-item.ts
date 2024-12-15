@@ -24,18 +24,8 @@ import { ScAccordionTrigger } from './accordion-trigger';
   ],
   template: `
     <cdk-accordion-item #accordionItem="cdkAccordionItem">
-      <h3 sc-accordion-header data-orientation="vertical" data-state="closed">
-        <button
-          id="radix-:r14n:"
-          (click)="accordionItem.toggle()"
-          sc-accordion-trigger
-          type="button"
-          aria-controls="radix-:r14o:"
-          aria-expanded="false"
-          data-state="closed"
-          data-orientation="vertical"
-          data-radix-collection-item=""
-        >
+      <h3 sc-accordion-header>
+        <button (click)="accordionItem.toggle()" sc-accordion-trigger type="button">
           <ng-content select="sc-accordion-item-description" />
 
           {{ accordionItem.expanded ? 'close' : 'open' }}
