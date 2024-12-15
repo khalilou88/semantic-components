@@ -1,13 +1,26 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  AfterViewChecked,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  HostListener,
+  ViewEncapsulation,
+  computed,
+  inject,
+  input,
+  viewChild,
+} from '@angular/core';
 
-import { ScButton, ScSheetToggler, ScThemeToggler } from '@semantic-components/ui';
+import { ScButton, ScSheetToggler, ScThemeToggler, cn } from '@semantic-components/ui';
 import { SvgGithubIcon } from '@semantic-icons/lucide-icons';
+
+import { LayoutState } from '../services/layout-state';
 
 @Component({
   selector: 'app-header',
   imports: [ScThemeToggler, SvgGithubIcon, ScButton, ScSheetToggler],
   template: `
-    <div class="sticky top-0 z-10 border-b border-border/40 bg-background">
+    <div class="z-10 border-b border-border/40 bg-background" #headerContent>
       <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div class="relative flex h-16 items-center justify-between">
           <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -116,8 +129,38 @@ import { SvgGithubIcon } from '@semantic-icons/lucide-icons';
       </div>
     </div>
   `,
+  host: {
+    '[class]': 'classes()',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Header {}
+export class Header implements AfterViewChecked {
+  class = input<string>('');
+
+  classes = computed(() =>
+    cn(
+      'fixed bottom-[calc(100vh-theme(spacing.16))] left-0 right-0 top-0 bg-blue-200',
+      this.class(),
+    ),
+  );
+
+  layoutState = inject(LayoutState);
+
+  readonly headerContentRef = viewChild.required<ElementRef>('headerContent');
+
+  ngAfterViewChecked() {
+    this.setHeaderHeight();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  public onResize(): void {
+    this.setHeaderHeight();
+  }
+
+  setHeaderHeight() {
+    const height = this.headerContentRef().nativeElement.offsetHeight;
+    this.layoutState.headerHeight.set(height);
+  }
+}
