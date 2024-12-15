@@ -4,6 +4,14 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   selector: 'app-footer',
   imports: [],
   template: `
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
     <p>footer works!</p>
   `,
   styles: ``,
