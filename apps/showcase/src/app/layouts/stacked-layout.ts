@@ -7,17 +7,15 @@ import {
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { Footer } from '../components/footer';
 import { Header } from '../components/header';
 import { LayoutState } from '../services/layout-state';
 
 @Component({
   selector: 'app-stacked-layout',
-  imports: [RouterModule, Header, Footer],
+  imports: [RouterModule, Header],
   template: `
     <app-header />
     <router-outlet></router-outlet>
-    <app-footer />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
