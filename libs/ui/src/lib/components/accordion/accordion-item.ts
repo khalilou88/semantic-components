@@ -1,13 +1,31 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
+
+import { cn } from '../../utils';
 
 @Component({
-  selector: 'sc-accordion-item',
-  imports: [],
+  selector: 'div[sc-accordion-item]',
+  imports: [CdkAccordionModule],
   template: `
-    <p>accordion-item works!</p>
+    <cdk-accordion-item #accordionItem="cdkAccordionItem">
+      <ng-content />
+    </cdk-accordion-item>
   `,
+  host: {
+    '[class]': 'classes()',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScAccordionItem {}
+export class ScAccordionItem {
+  class = input<string>('');
+
+  classes = computed(() => cn('border-b', this.class()));
+}
