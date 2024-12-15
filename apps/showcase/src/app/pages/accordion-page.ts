@@ -1,15 +1,26 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { ScAccordionHeader, ScAccordionTrigger } from '@semantic-components/ui';
+import {
+  ScAccordion,
+  ScAccordionHeader,
+  ScAccordionItem,
+  ScAccordionTrigger,
+} from '@semantic-components/ui';
 import { SvgChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-accordion-page',
-  imports: [SvgChevronDownIcon, ScAccordionHeader, ScAccordionTrigger],
+  imports: [
+    SvgChevronDownIcon,
+    ScAccordionHeader,
+    ScAccordionTrigger,
+    ScAccordion,
+    ScAccordionItem,
+  ],
   template: `
     <div class="preview flex min-h-[350px] w-full justify-center p-10 items-center">
-      <div class="w-full" data-orientation="vertical">
-        <div class="border-b" data-state="closed" data-orientation="vertical">
+      <div class="w-full" sc-accordion data-orientation="vertical">
+        <div sc-accordion-item data-state="closed" data-orientation="vertical">
           <h3 sc-accordion-header data-orientation="vertical" data-state="closed">
             <button
               id="radix-:r14n:"
@@ -37,7 +48,7 @@ import { SvgChevronDownIcon } from '@semantic-icons/lucide-icons';
             style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);"
           ></div>
         </div>
-        <div class="border-b" data-state="closed" data-orientation="vertical">
+        <div sc-accordion-item data-state="closed" data-orientation="vertical">
           <h3 sc-accordion-header data-orientation="vertical" data-state="closed">
             <button
               id="radix-:r14p:"
@@ -65,7 +76,7 @@ import { SvgChevronDownIcon } from '@semantic-icons/lucide-icons';
             style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);"
           ></div>
         </div>
-        <div class="border-b" data-state="closed" data-orientation="vertical">
+        <div sc-accordion-item data-state="closed" data-orientation="vertical">
           <h3 sc-accordion-header data-orientation="vertical" data-state="closed">
             <button
               id="radix-:r14r:"
