@@ -3,7 +3,7 @@ import { Route } from '@angular/router';
 export const appRoutes: Route[] = [
   {
     path: '',
-    loadComponent: () => import('./layouts/page-layout'),
+    loadComponent: () => import('./layouts/stacked-layout'),
     children: [
       {
         path: 'landing',
@@ -12,7 +12,7 @@ export const appRoutes: Route[] = [
       },
       {
         path: '',
-        loadComponent: () => import('./layouts/stacked-layout'),
+        loadComponent: () => import('./layouts/sidebar-layout'),
         children: [
           {
             path: 'alert-dialog',
