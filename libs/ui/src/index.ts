@@ -1,3 +1,4 @@
+export * from './lib/utils';
 export * from './lib/components/editor';
 export * from './lib/components/tooltip';
 export * from './lib/components/paginator';
