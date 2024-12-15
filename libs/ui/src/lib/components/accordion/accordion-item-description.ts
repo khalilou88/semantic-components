@@ -9,12 +9,10 @@ import {
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'div[sc-accordion-content]',
+  selector: 'span[sc-accordion-item-description]',
   imports: [],
   template: `
-    <div class="pb-4 pt-0">
-      <ng-content />
-    </div>
+    <ng-content />
   `,
   host: {
     '[class]': 'classes()',
@@ -23,13 +21,8 @@ import { cn } from '../../utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScAccordionContent {
+export class ScAccordionItemDescription {
   class = input<string>('');
 
-  classes = computed(() =>
-    cn(
-      'overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down',
-      this.class(),
-    ),
-  );
+  classes = computed(() => cn('', this.class()));
 }
