@@ -7,12 +7,9 @@ import { Sidebar } from '../components/sidebar';
   selector: 'app-page-layout',
   imports: [Sidebar, RouterModule],
   template: `
-    <div class="container flex">
+    <div class="grid grid-cols-5 grid-rows-1 gap-4">
       <app-sidebar />
-      <div class="m-10">
-        <router-outlet></router-outlet>
-        <div></div>
-      </div>
+      <router-outlet></router-outlet>
     </div>
   `,
   styles: ``,
