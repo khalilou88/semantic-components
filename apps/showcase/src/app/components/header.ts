@@ -7,7 +7,7 @@ import { SvgGithubIcon } from '@semantic-icons/lucide-icons';
   selector: 'app-header',
   imports: [ScThemeToggler, SvgGithubIcon, ScButton, ScSheetToggler],
   template: `
-    <div class="sticky top-0 z-10 border-b-2 bg-background">
+    <div class="sticky top-0 z-10 border-b border-border/40 bg-background">
       <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div class="relative flex h-16 items-center justify-between">
           <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">

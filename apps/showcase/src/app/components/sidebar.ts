@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
+
+import { cn } from 'libs/ui/src/lib/utils';
 
 @Component({
   selector: 'app-sidebar',
@@ -577,8 +585,15 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
       </div>
     </aside>
   `,
+  host: {
+    '[class]': 'classes()',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Sidebar {}
+export class Sidebar {
+  class = input<string>('');
+
+  classes = computed(() => cn('', this.class()));
+}

@@ -8,8 +8,9 @@ import { Header } from '../components/header';
   imports: [RouterModule, Header],
   template: `
     <app-header />
-
-    <router-outlet></router-outlet>
+    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+      <router-outlet></router-outlet>
+    </div>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
