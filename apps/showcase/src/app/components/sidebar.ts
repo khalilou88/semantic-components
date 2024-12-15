@@ -590,6 +590,8 @@ import { LayoutState } from '../services/layout-state';
   `,
   host: {
     '[class]': 'classes()',
+    '[style.height.px]': 'layoutState.sidebarHeight()',
+    '[style.top.px]': 'layoutState.headerHeight()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -600,10 +602,5 @@ export class Sidebar {
 
   class = input<string>('');
 
-  classes = computed(() =>
-    cn(
-      'sticky top-16 h-[calc(100vh-theme(spacing.16))] w-40 overflow-y-auto bg-green-200',
-      this.class(),
-    ),
-  );
+  classes = computed(() => cn('sticky w-40 overflow-y-auto', this.class()));
 }
