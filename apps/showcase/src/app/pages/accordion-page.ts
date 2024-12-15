@@ -19,7 +19,6 @@ import {
           <sc-accordion-content
             id="radix-:r14o:"
             data-state="closed"
-            hidden=""
             role="region"
             aria-labelledby="radix-:r14n:"
             data-orientation="vertical"
@@ -33,7 +32,6 @@ import {
           <sc-accordion-content
             id="radix-:r14q:"
             data-state="closed"
-            hidden=""
             role="region"
             aria-labelledby="radix-:r14p:"
             data-orientation="vertical"
@@ -47,7 +45,6 @@ import {
           <sc-accordion-content
             id="radix-:r14s:"
             data-state="closed"
-            hidden=""
             role="region"
             aria-labelledby="radix-:r14r:"
             data-orientation="vertical"
