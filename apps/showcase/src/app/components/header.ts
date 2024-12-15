@@ -131,7 +131,7 @@ import { LayoutState } from '../services/layout-state';
   `,
   host: {
     '[class]': 'classes()',
-    '[style.bottom.px]': 'layoutState.headerHeight()',
+    '[style.bottom.px]': 'layoutState.sidebarHeight()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
