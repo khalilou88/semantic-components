@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   ViewEncapsulation,
+  afterNextRender,
   computed,
   effect,
   inject,
@@ -264,10 +265,23 @@ export class ScSlider {
   classes = computed(() => cn('range-input', this.thumbClass(), this.trackClass(), this.class()));
 
   constructor() {
-    effect(() => {});
+    effect(() => {
+      console.log('this.value()');
+      console.log(this.value());
+    });
+
+    afterNextRender(() => {
+      const v = this.host.nativeElement.value;
+
+      this.f(v);
+    });
   }
 
   private host = inject(ElementRef);
+
+  max = input<number>(100);
+
+  value = input<number>(0);
 
   handleInput(event: KeyboardEvent) {
     console.log(event);
@@ -276,7 +290,14 @@ export class ScSlider {
 
     const currentValue = +(event.target as HTMLInputElement).value;
 
-    const progress = (currentValue / this.host.nativeElement.max) * 100;
+    console.log('this.host.nativeElement.max');
+    console.log(this.host.nativeElement.max);
+
+    this.f(currentValue);
+  }
+
+  f(currentValue: number) {
+    const progress = (currentValue / this.max()) * 100;
 
     this.host.nativeElement.style.background = `linear-gradient(to right, #f50 ${progress}%, #ccc ${progress}%)`;
   }
