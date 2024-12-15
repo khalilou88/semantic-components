@@ -9,7 +9,7 @@ import {
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'button[sc-accordion-trigger]',
+  selector: 'h3[sc-accordion-header]',
   imports: [],
   template: `
     <ng-content />
@@ -21,13 +21,8 @@ import { cn } from '../../utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScAccordionTrigger {
+export class ScAccordionHeader {
   class = input<string>('');
 
-  classes = computed(() =>
-    cn(
-      'flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180',
-      this.class(),
-    ),
-  );
+  classes = computed(() => cn('flex', this.class()));
 }
