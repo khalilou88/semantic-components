@@ -22,16 +22,6 @@ import { ScSlider } from '@semantic-components/ui';
 
     <br />
     <br />
-
-    HTML CSS JSResult Skip Results Iframe EDIT ON
-    <h1>Custom CSS range slider</h1>
-
-    <!--  range 2  -->
-    <div class="range">
-      <input class="range-input" id="range2" type="range" min="0" max="50" value="0" />
-      <div class="value2">0</div>
-    </div>
-
     <br />
     <br />
     <br />
