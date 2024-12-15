@@ -2,8 +2,10 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 
 import {
   ScAccordion,
+  ScAccordionContent,
   ScAccordionHeader,
   ScAccordionItem,
+  ScAccordionItemDescription,
   ScAccordionTrigger,
 } from '@semantic-components/ui';
 import { SvgChevronDownIcon } from '@semantic-icons/lucide-icons';
@@ -16,6 +18,8 @@ import { SvgChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScAccordionTrigger,
     ScAccordion,
     ScAccordionItem,
+    ScAccordionContent,
+    ScAccordionItemDescription,
   ],
   template: `
     <div class="preview flex min-h-[350px] w-full justify-center p-10 items-center">
@@ -32,14 +36,14 @@ import { SvgChevronDownIcon } from '@semantic-icons/lucide-icons';
               data-orientation="vertical"
               data-radix-collection-item=""
             >
-              Is it accessible?
+              <span sc-accordion-item-description>Is it accessible?</span>
 
               <svg-chevron-down-icon class="h-4 w-4 shrink-0 transition-transform duration-200" />
             </button>
           </h3>
           <div
-            class="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
             id="radix-:r14o:"
+            sc-accordion-content
             data-state="closed"
             hidden=""
             role="region"
@@ -60,14 +64,14 @@ import { SvgChevronDownIcon } from '@semantic-icons/lucide-icons';
               data-orientation="vertical"
               data-radix-collection-item=""
             >
-              Is it styled?
+              <span sc-accordion-item-description>Is it styled?</span>
 
               <svg-chevron-down-icon class="h-4 w-4 shrink-0 transition-transform duration-200" />
             </button>
           </h3>
           <div
-            class="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
             id="radix-:r14q:"
+            sc-accordion-content
             data-state="closed"
             hidden=""
             role="region"
@@ -88,14 +92,14 @@ import { SvgChevronDownIcon } from '@semantic-icons/lucide-icons';
               data-orientation="vertical"
               data-radix-collection-item=""
             >
-              Is it animated?
+              <span sc-accordion-item-description>Is it animated?</span>
 
               <svg-chevron-down-icon class="h-4 w-4 shrink-0 transition-transform duration-200" />
             </button>
           </h3>
           <div
-            class="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
             id="radix-:r14s:"
+            sc-accordion-content
             data-state="closed"
             hidden=""
             role="region"
