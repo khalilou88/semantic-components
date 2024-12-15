@@ -9,7 +9,7 @@ import {
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'span[sc-accordion-item-description]',
+  selector: 'sc-accordion-item-description',
   imports: [],
   template: `
     <ng-content />
