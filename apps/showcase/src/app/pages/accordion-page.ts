@@ -1,18 +1,19 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { ScAccordionHeader, ScAccordionTrigger } from '@semantic-components/ui';
 import { SvgChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-accordion-page',
-  imports: [SvgChevronDownIcon],
+  imports: [SvgChevronDownIcon, ScAccordionHeader, ScAccordionTrigger],
   template: `
     <div class="preview flex min-h-[350px] w-full justify-center p-10 items-center">
       <div class="w-full" data-orientation="vertical">
         <div class="border-b" data-state="closed" data-orientation="vertical">
-          <h3 class="flex" data-orientation="vertical" data-state="closed">
+          <h3 sc-accordion-header data-orientation="vertical" data-state="closed">
             <button
-              class="flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline [&amp;[data-state=open]>svg]:rotate-180"
               id="radix-:r14n:"
+              sc-accordion-trigger
               type="button"
               aria-controls="radix-:r14o:"
               aria-expanded="false"
@@ -37,10 +38,10 @@ import { SvgChevronDownIcon } from '@semantic-icons/lucide-icons';
           ></div>
         </div>
         <div class="border-b" data-state="closed" data-orientation="vertical">
-          <h3 class="flex" data-orientation="vertical" data-state="closed">
+          <h3 sc-accordion-header data-orientation="vertical" data-state="closed">
             <button
-              class="flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline [&amp;[data-state=open]>svg]:rotate-180"
               id="radix-:r14p:"
+              sc-accordion-trigger
               type="button"
               aria-controls="radix-:r14q:"
               aria-expanded="false"
@@ -65,10 +66,10 @@ import { SvgChevronDownIcon } from '@semantic-icons/lucide-icons';
           ></div>
         </div>
         <div class="border-b" data-state="closed" data-orientation="vertical">
-          <h3 class="flex" data-orientation="vertical" data-state="closed">
+          <h3 sc-accordion-header data-orientation="vertical" data-state="closed">
             <button
-              class="flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline [&amp;[data-state=open]>svg]:rotate-180"
               id="radix-:r14r:"
+              sc-accordion-trigger
               type="button"
               aria-controls="radix-:r14s:"
               aria-expanded="false"
