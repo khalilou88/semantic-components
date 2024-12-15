@@ -1,10 +1,13 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { Header } from '../components/header';
+
 @Component({
   selector: 'app-page-layout',
-  imports: [RouterModule],
+  imports: [RouterModule, Header],
   template: `
+    <app-header />
     <router-outlet></router-outlet>
   `,
   styles: ``,

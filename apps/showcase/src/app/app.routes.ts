@@ -1,11 +1,9 @@
 import { Route } from '@angular/router';
 
-import DialogPage from './pages/dialog-page';
-
 export const appRoutes: Route[] = [
   {
     path: '',
-    loadComponent: () => import('./layouts/stacked-layout'),
+    loadComponent: () => import('./layouts/page-layout'),
     children: [
       {
         path: 'landing',
@@ -14,7 +12,7 @@ export const appRoutes: Route[] = [
       },
       {
         path: '',
-        loadComponent: () => import('./layouts/page-layout'),
+        loadComponent: () => import('./layouts/stacked-layout'),
         children: [
           {
             path: 'alert-dialog',
