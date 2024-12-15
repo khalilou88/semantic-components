@@ -27,6 +27,7 @@ import { ScAccordionTrigger } from './accordion-trigger';
       <h3 sc-accordion-header data-orientation="vertical" data-state="closed">
         <button
           id="radix-:r14n:"
+          (click)="accordionItem.toggle()"
           sc-accordion-trigger
           type="button"
           aria-controls="radix-:r14o:"
@@ -36,6 +37,8 @@ import { ScAccordionTrigger } from './accordion-trigger';
           data-radix-collection-item=""
         >
           <ng-content select="sc-accordion-item-description" />
+
+          {{ accordionItem.expanded ? 'close' : 'open' }}
 
           <svg-chevron-down-icon class="h-4 w-4 shrink-0 transition-transform duration-200" />
         </button>
