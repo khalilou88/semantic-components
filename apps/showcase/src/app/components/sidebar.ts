@@ -3,17 +3,20 @@ import {
   Component,
   ViewEncapsulation,
   computed,
+  inject,
   input,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/ui';
+
+import { LayoutState } from '../services/layout-state';
 
 @Component({
   selector: 'app-sidebar',
   imports: [],
   template: `
     <aside
-      class="fixed top-14 z-30 hidden h-[calc(100vh-3.5rem)] w-full shrink-0 border-r border-border/40 md:sticky md:block dark:border-border"
+      class="hidden w-full shrink-0 border-r border-border/40 md:sticky md:block dark:border-border"
     >
       <div class="no-scrollbar h-full overflow-auto py-6 pr-6 lg:py-8">
         <div class="w-full">
@@ -593,7 +596,14 @@ import { cn } from '@semantic-components/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Sidebar {
+  layoutState = inject(LayoutState);
+
   class = input<string>('');
 
-  classes = computed(() => cn('', this.class()));
+  classes = computed(() =>
+    cn(
+      'sticky top-16 h-[calc(100vh-theme(spacing.16))] w-40 overflow-y-auto bg-green-200',
+      this.class(),
+    ),
+  );
 }
