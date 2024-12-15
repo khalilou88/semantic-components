@@ -9,7 +9,7 @@ import {
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'div[sc-accordion-content]',
+  selector: 'sc-accordion-content',
   imports: [],
   template: `
     <div class="pb-4 pt-0">

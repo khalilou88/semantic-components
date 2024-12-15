@@ -16,44 +16,44 @@ import {
         <div sc-accordion-item data-state="closed" data-orientation="vertical">
           <sc-accordion-item-description>Is it accessible?</sc-accordion-item-description>
 
-          <div
+          <sc-accordion-content
             id="radix-:r14o:"
-            sc-accordion-content
             data-state="closed"
             hidden=""
             role="region"
             aria-labelledby="radix-:r14n:"
             data-orientation="vertical"
-            style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);"
-          ></div>
+          >
+            Yes. It adheres to the WAI-ARIA design pattern.
+          </sc-accordion-content>
         </div>
         <div sc-accordion-item data-state="closed" data-orientation="vertical">
           <sc-accordion-item-description>Is it styled?</sc-accordion-item-description>
 
-          <div
+          <sc-accordion-content
             id="radix-:r14q:"
-            sc-accordion-content
             data-state="closed"
             hidden=""
             role="region"
             aria-labelledby="radix-:r14p:"
             data-orientation="vertical"
-            style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);"
-          ></div>
+          >
+            Yes. It comes with default styles that matches the other components&apos; aesthetic.
+          </sc-accordion-content>
         </div>
         <div sc-accordion-item data-state="closed" data-orientation="vertical">
           <sc-accordion-item-description>Is it animated?</sc-accordion-item-description>
 
-          <div
+          <sc-accordion-content
             id="radix-:r14s:"
-            sc-accordion-content
             data-state="closed"
             hidden=""
             role="region"
             aria-labelledby="radix-:r14r:"
             data-orientation="vertical"
-            style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);"
-          ></div>
+          >
+            Yes. It&apos;s animated by default, but you can disable it if you prefer.
+          </sc-accordion-content>
         </div>
       </div>
     </div>
