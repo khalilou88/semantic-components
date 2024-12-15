@@ -14,7 +14,7 @@ import { ScAccordionHeader } from './accordion-header';
 import { ScAccordionTrigger } from './accordion-trigger';
 
 @Component({
-  selector: 'div[sc-accordion-item]',
+  selector: 'sc-accordion-item',
   imports: [
     CdkAccordionModule,
     SvgChevronDownIcon,

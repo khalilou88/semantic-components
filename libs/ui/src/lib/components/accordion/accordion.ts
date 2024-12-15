@@ -10,7 +10,7 @@ import {
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'div[sc-accordion]',
+  selector: 'sc-accordion',
   imports: [CdkAccordionModule],
   template: `
     <cdk-accordion>
