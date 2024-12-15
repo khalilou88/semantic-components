@@ -28,7 +28,7 @@ import { ScAccordionTrigger } from './accordion-trigger';
         <button (click)="accordionItem.toggle()" sc-accordion-trigger type="button">
           <ng-content select="sc-accordion-item-description" />
 
-          <svg-chevron-down-icon class="h-4 w-4 shrink-0 transition-transform duration-200" />
+          <svg-chevron-down-icon class="size-4 shrink-0 transition-transform duration-200" />
         </button>
       </h3>
 
