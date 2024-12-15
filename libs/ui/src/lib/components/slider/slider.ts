@@ -5,8 +5,10 @@ import {
   ViewEncapsulation,
   afterNextRender,
   computed,
+  effect,
   inject,
   input,
+  model,
   signal,
 } from '@angular/core';
 
@@ -31,29 +33,42 @@ export class ScSlider {
 
   class = input<string>('');
 
-  thumbClass = signal('');
+  trackClass = signal(
+    '[&::-webkit-slider-runnable-track]:h-2 [&::-webkit-slider-runnable-track]:rounded-full',
+  );
 
-  trackClass = signal('');
+  thumbClass = signal(
+    '[&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:-mt-1.5',
+  );
 
-  classes = computed(() => cn('range-input', this.thumbClass(), this.trackClass(), this.class()));
+  classes = computed(() =>
+    cn(
+      'appearance-none bg-transparent w-full rounded-full',
+      this.trackClass(),
+      this.thumbClass(),
+      this.class(),
+    ),
+  );
 
+  value = model<number>(0);
+  min = input<number>(0);
   max = input<number>(100);
 
   constructor() {
+    effect(() => {
+      const progress = (this.value() / this.max()) * 100;
+      this.host.nativeElement.style.background = `linear-gradient(to right, hsl(var(--primary)) ${progress}%, #ccc ${progress}%)`;
+    });
+
     afterNextRender(() => {
-      this.f(this.host.nativeElement.value);
+      if (this.host.nativeElement.value > 0) {
+        this.value.set(this.host.nativeElement.value);
+      }
     });
   }
 
   handleInput(event: KeyboardEvent) {
     if (!event.target) return;
-
-    const currentValue = +(event.target as HTMLInputElement).value;
-    this.f(currentValue);
-  }
-
-  f(currentValue: number) {
-    const progress = (currentValue / this.max()) * 100;
-    this.host.nativeElement.style.background = `linear-gradient(to right, #f50 ${progress}%, #ccc ${progress}%)`;
+    this.value.set(+(event.target as HTMLInputElement).value);
   }
 }
