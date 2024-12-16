@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
   computed,
   input,
+  signal,
 } from '@angular/core';
 
 import { cn } from '../../utils';
@@ -13,15 +14,16 @@ import { cn } from '../../utils';
   imports: [],
   template: `
     <input
-      class="peer appearance-none w-11 h-5 bg-slate-100 rounded-full checked:bg-slate-800 cursor-pointer transition-colors duration-300"
-      id="switch-component"
-      checked
+      [class]="classes()"
+      [id]="id()"
+      [checked]="checked()"
+      [attr.data-state]="state()"
       type="checkbox"
     />
-    <label
-      class="absolute top-0 left-0 w-5 h-5 bg-white rounded-full border border-slate-300 shadow-sm transition-transform duration-300 peer-checked:translate-x-6 peer-checked:border-slate-800 cursor-pointer"
-      for="switch-component"
-    ></label>
+    <span
+      class="absolute top-0 left-0 pointer-events-none block h-5 w-5 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0"
+      [attr.data-state]="state()"
+    ></span>
   `,
   host: {
     '[class]': 'hostClasses()',
@@ -33,9 +35,20 @@ import { cn } from '../../utils';
 export class ScSwitch {
   hostClass = input<string>('');
 
-  hostClasses = computed(() => cn('relative inline-block w-11 h-5', this.hostClass()));
+  hostClasses = computed(() => cn('relative inline-block h-6 w-11', this.hostClass()));
 
   class = input<string>('');
 
-  classes = computed(() => cn('', this.class()));
+  classes = computed(() =>
+    cn(
+      'peer appearance-none inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input',
+      this.class(),
+    ),
+  );
+
+  state = signal('unchecked');
+
+  id = input('');
+
+  checked = signal('false');
 }

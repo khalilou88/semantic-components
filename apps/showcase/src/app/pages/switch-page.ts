@@ -6,6 +6,10 @@ import { ScSwitch } from '@semantic-components/ui';
   selector: 'app-switch-page',
   imports: [ScSwitch],
   template: `
+    <br />
+    <br />
+    <br />
+
     <sc-switch />
 
     <div class="preview flex min-h-[350px] w-full justify-center p-10 items-center">
@@ -19,10 +23,7 @@ import { ScSwitch } from '@semantic-components/ui';
           data-state="unchecked"
           value="on"
         >
-          <span
-            class="pointer-events-none block h-5 w-5 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0"
-            data-state="unchecked"
-          ></span>
+          <span data-state="unchecked"></span>
         </button>
         <label
           class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
