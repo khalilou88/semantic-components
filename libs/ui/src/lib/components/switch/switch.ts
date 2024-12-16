@@ -1,11 +1,17 @@
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ViewEncapsulation,
   computed,
+  effect,
+  forwardRef,
+  inject,
   input,
-  signal,
+  model,
 } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { cn } from '../../utils';
 
@@ -19,6 +25,7 @@ import { cn } from '../../utils';
       [checked]="checked()"
       [attr.data-state]="state()"
       type="checkbox"
+      role="switch"
     />
     <span
       class="absolute top-0 left-0 pointer-events-none block h-5 w-5 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0"
@@ -31,8 +38,17 @@ import { cn } from '../../utils';
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => ScSwitch),
+      multi: true,
+    },
+  ],
 })
-export class ScSwitch {
+export class ScSwitch implements ControlValueAccessor {
+  private readonly _cdr = inject(ChangeDetectorRef);
+
   hostClass = input<string>('');
 
   hostClasses = computed(() => cn('relative inline-block h-6 w-11', this.hostClass()));
@@ -46,9 +62,58 @@ export class ScSwitch {
     ),
   );
 
-  state = signal('unchecked');
-
   id = input('');
 
-  checked = signal('false');
+  checked = model<BooleanInput>(false);
+
+  disabled = model<BooleanInput>(false);
+
+  state = computed(() => {
+    return this.checked() ? 'checked' : 'unchecked';
+  });
+
+  constructor() {
+    effect(() => {
+      if (this.checked() !== true && this.checked() !== false) {
+        this.checked.update((v) => coerceBooleanProperty(v));
+      }
+
+      if (this.disabled() !== true && this.disabled() !== false) {
+        this.disabled.update((v) => coerceBooleanProperty(v));
+      }
+    });
+  }
+
+  toggle() {
+    if (this.disabled()) {
+      return;
+    }
+
+    const v = !this.checked();
+    this.checked.set(v);
+
+    this.onChange(v);
+    this._cdr.markForCheck();
+  }
+
+  writeValue(value: boolean): void {
+    this.checked.set(value);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onChange: any = () => {};
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onTouch: any = () => {};
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouch = fn;
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+    this.disabled.set(isDisabled);
+  }
 }
