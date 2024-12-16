@@ -1,13 +1,31 @@
+import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+
+import { ScSwitch } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-switch-page',
-  imports: [],
+  imports: [ScSwitch, ReactiveFormsModule, JsonPipe],
   template: `
-    <p>switch-page works!</p>
+    <br />
+    <br />
+    <br />
+    <form [formGroup]="switchForm">
+      <sc-switch formControlName="switch">Airplane Mode</sc-switch>
+    </form>
+
+    <br />
+    <br />
+    <br />
+    {{ switchForm.value | json }}
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SwitchPage {}
+export default class SwitchPage {
+  switchForm = new FormGroup({
+    switch: new FormControl(),
+  });
+}
