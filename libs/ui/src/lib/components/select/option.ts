@@ -22,9 +22,10 @@ import { ScSelectState } from './select-state';
       type="button"
     >
       @if (state.selectedValue() === value()) {
-        <span class="absolute left-2 flex size-3.5 items-center justify-center">
-          <svg-check-icon class="size-4" />
-        </span>
+        <svg-check-icon
+          class="size-4"
+          hostClass="absolute left-2 flex size-3.5 items-center justify-center"
+        />
       }
 
       <span #label>
