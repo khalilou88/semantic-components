@@ -38,12 +38,12 @@ export class ScSlider {
   );
 
   thumbClass = signal(
-    '[&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:-mt-1.5',
+    '[&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:size-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:-mt-1.5 [&::-moz-range-thumb]:border-none [&::-moz-range-thumb]:rounded-none [&::-moz-range-thumb]:size-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-primary',
   );
 
   classes = computed(() =>
     cn(
-      'appearance-none bg-transparent w-full rounded-full',
+      'appearance-none bg-transparent w-full rounded-full h-2',
       this.trackClass(),
       this.thumbClass(),
       this.class(),
