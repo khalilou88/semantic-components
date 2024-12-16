@@ -6,10 +6,12 @@ import {
   computed,
   input,
   numberAttribute,
+  viewChildren,
 } from '@angular/core';
-import { FormArray, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { cn } from '../../utils';
+import { ScInputOTPSlot } from './input-otp-slot';
 
 @Component({
   selector: 'sc-input-otp',
@@ -35,13 +37,20 @@ export class ScInputOtp {
     transform: booleanAttribute,
   });
 
-  inputs = computed<FormArray>(() => {
-    const arr = [];
-
-    for (let i = 0; i < this.size(); i++) {
-      arr.push(new FormControl(''));
-    }
-
-    return new FormArray(arr);
+  formGroup = new FormGroup({
+    inputs: new FormArray([]),
   });
+
+  get inputs(): FormArray {
+    return this.formGroup.get('inputs') as FormArray;
+  }
+
+  slots = viewChildren(ScInputOTPSlot);
+
+  constructor() {
+    for (let i = 0; i < this.slots().length; i++) {
+      this.slots()[i].index.set(i);
+      this.inputs.push(new FormControl('', Validators.required));
+    }
+  }
 }

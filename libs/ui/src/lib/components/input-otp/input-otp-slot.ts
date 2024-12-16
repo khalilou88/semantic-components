@@ -5,6 +5,7 @@ import {
   ViewEncapsulation,
   computed,
   input,
+  signal,
 } from '@angular/core';
 
 import { cn } from '../../utils';
@@ -34,9 +35,11 @@ import { cn } from '../../utils';
 export class ScInputOTPSlot {
   class = input<string>('');
 
+  classes = computed(() => cn('', this.class()));
+
+  index = signal<number>(-1);
+
   isActive = false;
 
   hasFakeCaret = false;
-
-  classes = computed(() => cn('', this.class()));
 }
