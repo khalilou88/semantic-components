@@ -6,12 +6,8 @@ import { ScRadioGroup, ScRadioGroupItem } from '@semantic-components/ui';
   selector: 'app-radio-group-page',
   imports: [ScRadioGroup, ScRadioGroupItem],
   template: `
-    <br />
-    <br />
-    <br />
-
     <div class="m-10">
-      <div sc-radio-group>
+      <sc-radio-group>
         <sc-radio-group-item id="flexRadioDefault1" name="flexRadioDefault">
           Default radio
         </sc-radio-group-item>
@@ -23,7 +19,7 @@ import { ScRadioGroup, ScRadioGroupItem } from '@semantic-components/ui';
         <sc-radio-group-item id="flexRadioDefault18" name="flexRadioDefault">
           Compact
         </sc-radio-group-item>
-      </div>
+      </sc-radio-group>
     </div>
   `,
   styles: ``,

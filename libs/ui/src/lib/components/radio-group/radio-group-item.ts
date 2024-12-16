@@ -1,21 +1,18 @@
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { BooleanInput } from '@angular/cdk/coercion';
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   ViewEncapsulation,
   computed,
-  effect,
-  forwardRef,
   inject,
   input,
-  model,
+  output,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { SvgCircleIcon } from '@semantic-icons/lucide-icons';
 
 import { cn } from '../../utils';
+import { ScRadioGroupState } from './radio-group-state';
 
 @Component({
   selector: 'sc-radio-group-item',
@@ -38,22 +35,20 @@ import { cn } from '../../utils';
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ScRadioGroupItem),
-      multi: true,
-    },
-  ],
 })
-export class ScRadioGroupItem implements ControlValueAccessor {
-  private readonly _cdr = inject(ChangeDetectorRef);
+export class ScRadioGroupItem {
+  state = inject(ScRadioGroupState);
 
   id = input<string>('');
   name = input<string>('');
-  checked = model<BooleanInput>(false);
 
-  disabled = model<BooleanInput>(false);
+  value = input<string>('');
+
+  checked = computed(() => {
+    return this.value() === this.state.selectedValue();
+  });
+
+  disabled = input<BooleanInput>(false);
 
   class = input<string>('row-start-1 col-start-1');
 
@@ -76,48 +71,13 @@ export class ScRadioGroupItem implements ControlValueAccessor {
 
   circleClasses = computed(() => cn('h-2.5 w-2.5 fill-primary text-primary', this.circleClass()));
 
-  constructor() {
-    effect(() => {
-      if (this.checked() !== true && this.checked() !== false) {
-        this.checked.update((v) => coerceBooleanProperty(v));
-      }
-
-      if (this.disabled() !== true && this.disabled() !== false) {
-        this.disabled.update((v) => coerceBooleanProperty(v));
-      }
-    });
-  }
+  radioChecked = output<void>();
 
   toggle() {
     if (this.disabled()) {
       return;
     }
 
-    const v = !this.checked();
-    this.checked.set(v);
-
-    this.onChange(v);
-    this._cdr.markForCheck();
-  }
-
-  writeValue(value: boolean): void {
-    this.checked.set(value);
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onChange: any = () => {};
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onTouch: any = () => {};
-
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouch = fn;
-  }
-
-  setDisabledState?(isDisabled: boolean): void {
-    this.disabled.set(isDisabled);
+    this.state.selectedValue.set(this.value());
   }
 }
