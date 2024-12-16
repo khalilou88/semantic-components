@@ -29,6 +29,16 @@ export const appRoutes: Route[] = [
                 title: 'Home Page',
               },
               {
+                path: 'radio-group',
+                loadComponent: () => import('./pages/radio-group-page'),
+                title: 'Radio Group Page',
+              },
+              {
+                path: 'switch',
+                loadComponent: () => import('./pages/switch-page'),
+                title: 'Switch Page',
+              },
+              {
                 path: 'accordion',
                 loadComponent: () => import('./pages/accordion-page'),
                 title: 'Accordion Page',
