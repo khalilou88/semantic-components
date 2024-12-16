@@ -1,4 +1,3 @@
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -11,6 +10,7 @@ import {
   forwardRef,
   inject,
   input,
+  model,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -50,12 +50,12 @@ export class ScRadioGroup implements ControlValueAccessor {
 
   name = input<string>('');
 
-  defaultValue = input<string | undefined>(undefined);
+  value = model<string | undefined>(undefined);
 
   constructor() {
     afterNextRender(() => {
-      if (this.defaultValue !== undefined) {
-        this.state.selectedValue.set(this.defaultValue());
+      if (this.value !== undefined) {
+        this.state.selectedValue.set(this.value());
       }
     });
 
@@ -67,7 +67,18 @@ export class ScRadioGroup implements ControlValueAccessor {
       if (this.name()) {
         this.state.name.set(this.name());
       }
+
+      const v = this.state.selectedValue();
+      if (v !== undefined) {
+        this.setValue(v);
+      }
     });
+  }
+
+  setValue(newValue: string) {
+    this.value.set(newValue);
+    this.onChange(newValue);
+    this._cdr.markForCheck();
   }
 
   writeValue(value: string): void {
