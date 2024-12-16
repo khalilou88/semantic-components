@@ -14,23 +14,28 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { cn } from '../../utils';
+import { ScLabel } from '../label';
 
 @Component({
   selector: 'sc-switch',
-  imports: [],
+  imports: [ScLabel],
   template: `
-    <input
-      [class]="classes()"
-      [id]="id()"
-      [checked]="checked()"
-      [attr.data-state]="state()"
-      type="checkbox"
-      role="switch"
-    />
-    <span
-      class="absolute top-0 left-0 pointer-events-none block h-5 w-5 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0"
-      [attr.data-state]="state()"
-    ></span>
+    <div class="relative inline-block h-6 w-11">
+      <input
+        [class]="classes()"
+        [id]="id()"
+        [checked]="checked()"
+        [attr.data-state]="state()"
+        type="checkbox"
+        role="switch"
+      />
+      <span
+        class="absolute top-0 left-0 pointer-events-none block h-5 w-5 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0"
+        [attr.data-state]="state()"
+      ></span>
+    </div>
+
+    <label [for]="id()" sc-label><ng-content /></label>
   `,
   host: {
     '[class]': 'hostClasses()',
@@ -52,7 +57,7 @@ export class ScSwitch implements ControlValueAccessor {
 
   hostClass = input<string>('');
 
-  hostClasses = computed(() => cn('relative inline-block h-6 w-11', this.hostClass()));
+  hostClasses = computed(() => cn('flex items-center space-x-2', this.hostClass()));
 
   class = input<string>('');
 

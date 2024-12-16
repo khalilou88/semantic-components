@@ -10,7 +10,7 @@ import { ScSwitch } from '@semantic-components/ui';
     <br />
     <br />
 
-    <sc-switch />
+    <sc-switch>Airplane Mode</sc-switch>
 
     <div class="preview flex min-h-[350px] w-full justify-center p-10 items-center">
       <div class="flex items-center space-x-2">
