@@ -4,13 +4,15 @@ import {
   ViewEncapsulation,
   computed,
   input,
+  numberAttribute,
 } from '@angular/core';
+import { FormArray, FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { cn } from '../../utils';
 
 @Component({
   selector: 'sc-input-otp',
-  imports: [],
+  imports: [ReactiveFormsModule],
   template: `
     <ng-content />
   `,
@@ -23,5 +25,17 @@ import { cn } from '../../utils';
 export class ScInputOtp {
   class = input<string>('');
 
-  classes = computed(() => cn('', this.class()));
+  classes = computed(() => cn('flex items-center gap-2 has-[:disabled]:opacity-50', this.class()));
+
+  size = input.required({ transform: numberAttribute });
+
+  inputs = computed<FormArray>(() => {
+    const arr = [];
+
+    for (let i = 0; i < this.size(); i++) {
+      arr.push(new FormControl(''));
+    }
+
+    return new FormArray(arr);
+  });
 }

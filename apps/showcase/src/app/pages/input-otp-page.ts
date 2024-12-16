@@ -11,14 +11,14 @@ import {
   selector: 'app-input-otp-page',
   imports: [ScInputOTPGroup, ScInputOtp, ScInputOTPSeparator, ScInputOTPSlot],
   template: `
-    <sc-input-otp>
-      <sc-input-otp-group size="3">
+    <sc-input-otp size="6">
+      <sc-input-otp-group>
         <sc-input-otp-slot />
         <sc-input-otp-slot />
         <sc-input-otp-slot />
       </sc-input-otp-group>
       <sc-input-otp-separator />
-      <sc-input-otp-group size="3">
+      <sc-input-otp-group>
         <sc-input-otp-slot />
         <sc-input-otp-slot />
         <sc-input-otp-slot />
