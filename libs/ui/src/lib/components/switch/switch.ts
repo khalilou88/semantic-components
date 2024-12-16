@@ -34,6 +34,7 @@ import { cn } from '../../utils';
   `,
   host: {
     '[class]': 'hostClasses()',
+    '(click)': 'toggle()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
