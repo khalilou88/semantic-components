@@ -65,7 +65,7 @@ export class ScRadioGroupItem implements ControlValueAccessor {
   hostClasses = computed(() => cn('', this.hostClass()));
 
   circleHostClass = input<string>(
-    'row-start-1 col-start-1  h-4 w-4 flex items-center justify-center',
+    'row-start-1 col-start-1 h-4 w-4 flex items-center justify-center',
   );
 
   circleClass = input<string>('');
