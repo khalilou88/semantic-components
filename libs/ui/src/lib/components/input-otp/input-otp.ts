@@ -1,15 +1,18 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ViewEncapsulation,
+  afterNextRender,
   booleanAttribute,
   computed,
+  contentChildren,
   forwardRef,
+  inject,
   input,
   model,
   numberAttribute,
   signal,
-  viewChildren,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
@@ -45,6 +48,8 @@ import { ScInputOTPSlot } from './input-otp-slot';
   ],
 })
 export class ScInputOtp implements ControlValueAccessor {
+  private readonly _cdr = inject(ChangeDetectorRef);
+
   class = input<string>('');
 
   classes = computed(() => cn('flex items-center gap-2 has-[:disabled]:opacity-50', this.class()));
@@ -64,14 +69,17 @@ export class ScInputOtp implements ControlValueAccessor {
     return this.formGroup.get('inputs') as FormArray;
   }
 
-  slots = viewChildren(ScInputOTPSlot);
+  slots = contentChildren(ScInputOTPSlot, { descendants: true });
 
   constructor() {
-    for (let i = 0; i < this.slots().length; i++) {
-      const control = new FormControl('', Validators.required);
-      this.slots()[i].control = control;
-      this.inputs.push(control);
-    }
+    afterNextRender(() => {
+      for (let i = 0; i < this.slots().length; i++) {
+        const formControl = new FormControl('', Validators.required);
+
+        this.slots()[i].formControl.set(formControl);
+        this.inputs.push(formControl);
+      }
+    });
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     this.formGroup.valueChanges.pipe(takeUntilDestroyed()).subscribe((value) => {
@@ -91,6 +99,9 @@ export class ScInputOtp implements ControlValueAccessor {
     //   return;
     // }
     this._value.set(tel);
+
+    this.onChange(tel);
+    this._cdr.markForCheck();
   }
 
   readonly _value = model<string | null>(null, { alias: 'value' });

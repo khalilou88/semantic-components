@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
   computed,
   input,
+  signal,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
@@ -13,12 +14,15 @@ import { cn } from '../../utils';
   selector: 'sc-input-otp-slot',
   imports: [ReactiveFormsModule],
   template: `
-    <input
-      class="relative flex h-10 w-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md"
-      [formControl]="control"
-      type="text"
-      inputmode="numeric"
-    />
+    @let control = formControl();
+    @if (control !== null) {
+      <input
+        class="relative flex h-10 w-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md"
+        [formControl]="control"
+        type="text"
+        inputmode="numeric"
+      />
+    }
 
     <!--div
       class="relative flex h-10 w-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md"
@@ -43,7 +47,7 @@ export class ScInputOTPSlot {
 
   classes = computed(() => cn('', this.class()));
 
-  control!: FormControl;
+  formControl = signal<FormControl | null>(null);
 
   isActive = false;
 
