@@ -1,13 +1,27 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
+
+import { cn } from '../../utils';
 
 @Component({
   selector: 'sc-input-otp',
   imports: [],
   template: `
-    <p>input-otp works!</p>
+    <ng-content />
   `,
-  styles: ``,
+  host: {
+    '[class]': 'classes()',
+  },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputOtp {}
+export class ScInputOtp {
+  class = input<string>('');
+
+  classes = computed(() => cn('', this.class()));
+}

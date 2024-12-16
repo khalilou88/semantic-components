@@ -29,6 +29,11 @@ export const appRoutes: Route[] = [
                 title: 'Home Page',
               },
               {
+                path: 'input-otp',
+                loadComponent: () => import('./pages/input-otp-page'),
+                title: 'Input OTP Page',
+              },
+              {
                 path: 'radio-group',
                 loadComponent: () => import('./pages/radio-group-page'),
                 title: 'Radio Group Page',
