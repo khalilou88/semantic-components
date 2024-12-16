@@ -21,11 +21,15 @@ import { cn } from '../../utils';
   selector: 'sc-radio-group-item',
   imports: [SvgCircleIcon],
   template: `
-    <input id="id()" [class]="classes()" [disabled]="disabled()" type="radio" name="name()" />
+    <div class="grid grid-cols-[1fr]">
+      <input [id]="id()" [class]="classes()" [disabled]="disabled()" [name]="name()" type="radio" />
 
-    @if (checked() === true) {
-      <svg-circle-icon [hostClass]="circleHostClass()" [class]="circleClasses()" />
-    }
+      @if (checked() === true) {
+        <svg-circle-icon [hostClass]="circleHostClass()" [class]="circleClasses()" />
+      }
+    </div>
+
+    <label [for]="id()" sc-label><ng-content /></label>
   `,
   host: {
     '[class]': 'hostClasses()',
@@ -60,9 +64,9 @@ export class ScRadioGroupItem implements ControlValueAccessor {
     ),
   );
 
-  hostClass = input<string>('grid grid-cols-[1fr]');
+  hostClass = input<string>('');
 
-  hostClasses = computed(() => cn('', this.hostClass()));
+  hostClasses = computed(() => cn('flex items-center space-x-2', this.hostClass()));
 
   circleHostClass = input<string>(
     'row-start-1 col-start-1 h-4 w-4 flex items-center justify-center',
