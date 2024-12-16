@@ -39,10 +39,10 @@ import { ScRadioGroupState } from './radio-group-state';
 export class ScRadioGroupItem {
   state = inject(ScRadioGroupState);
 
-  id = input<string>('');
+  id = input.required<string>();
   name = input<string>('');
 
-  value = input<string>('');
+  value = input.required<string>();
 
   checked = computed(() => {
     return this.value() === this.state.selectedValue();

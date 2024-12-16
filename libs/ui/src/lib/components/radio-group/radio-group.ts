@@ -4,6 +4,7 @@ import {
   ChangeDetectorRef,
   Component,
   ViewEncapsulation,
+  afterNextRender,
   computed,
   effect,
   forwardRef,
@@ -46,7 +47,13 @@ export class ScRadioGroup implements ControlValueAccessor {
 
   disabled = input<BooleanInput>(false);
 
+  defaultValue = input<string>('');
+
   constructor() {
+    afterNextRender(() => {
+      this.state.selectedValue.set(this.defaultValue());
+    });
+
     effect(() => {
       if (this.disabled() !== true && this.disabled() !== false) {
         this.state.disabled.update((v) => coerceBooleanProperty(v));
