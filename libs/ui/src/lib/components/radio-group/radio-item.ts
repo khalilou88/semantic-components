@@ -15,7 +15,7 @@ import { cn } from '../../utils';
 import { ScRadioGroupState } from './radio-group-state';
 
 @Component({
-  selector: 'sc-radio-group-item',
+  selector: 'sc-radio-item',
   imports: [SvgCircleIcon],
   template: `
     <div class="grid grid-cols-[1fr]">
@@ -36,16 +36,19 @@ import { ScRadioGroupState } from './radio-group-state';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScRadioGroupItem {
+export class ScRadioItem {
   state = inject(ScRadioGroupState);
 
   id = input.required<string>();
-  name = input<string>('');
 
   value = input.required<string>();
 
   checked = computed(() => {
     return this.value() === this.state.selectedValue();
+  });
+
+  name = computed(() => {
+    return this.state.name();
   });
 
   disabled = input<BooleanInput>(false);

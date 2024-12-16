@@ -1,10 +1,11 @@
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ViewEncapsulation,
   afterNextRender,
+  booleanAttribute,
   computed,
   effect,
   forwardRef,
@@ -45,18 +46,26 @@ export class ScRadioGroup implements ControlValueAccessor {
 
   classes = computed(() => cn('grid gap-2', this.class()));
 
-  disabled = input<BooleanInput>(false);
+  disabled = input(false, { transform: booleanAttribute });
 
-  defaultValue = input<string>('');
+  name = input<string>('');
+
+  defaultValue = input<string | undefined>(undefined);
 
   constructor() {
     afterNextRender(() => {
-      this.state.selectedValue.set(this.defaultValue());
+      if (this.defaultValue !== undefined) {
+        this.state.selectedValue.set(this.defaultValue());
+      }
     });
 
     effect(() => {
-      if (this.disabled() !== true && this.disabled() !== false) {
-        this.state.disabled.update((v) => coerceBooleanProperty(v));
+      if (this.disabled() === true || this.disabled() === false) {
+        this.state.disabled.set(this.disabled());
+      }
+
+      if (this.name()) {
+        this.state.name.set(this.name());
       }
     });
   }
