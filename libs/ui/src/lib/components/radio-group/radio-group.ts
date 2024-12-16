@@ -1,13 +1,28 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
+
+import { cn } from '../../utils';
 
 @Component({
-  selector: 'sc-radio-group',
+  selector: 'div[sc-radio-group]',
   imports: [],
   template: `
-    <p>radio-group works!</p>
+    <ng-content />
   `,
+  host: {
+    '[class]': 'classes()',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScRadioGroup {}
+export class ScRadioGroup {
+  class = input<string>('');
+
+  classes = computed(() => cn('grid gap-2', this.class()));
+}
