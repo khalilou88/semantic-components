@@ -1,4 +1,6 @@
+import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import {
   ScInputOTPGroup,
@@ -9,22 +11,36 @@ import {
 
 @Component({
   selector: 'app-input-otp-page',
-  imports: [ScInputOTPGroup, ScInputOtp, ScInputOTPSeparator, ScInputOTPSlot],
+  imports: [
+    ScInputOTPGroup,
+    ScInputOtp,
+    ScInputOTPSeparator,
+    ScInputOTPSlot,
+    ReactiveFormsModule,
+    JsonPipe,
+  ],
   template: `
-    <sc-input-otp size="6">
-      <sc-input-otp-group>
-        <sc-input-otp-slot />
-        <sc-input-otp-slot />
-        <sc-input-otp-slot />
-      </sc-input-otp-group>
-      <sc-input-otp-separator />
-      <sc-input-otp-group>
-        <sc-input-otp-slot />
-        <sc-input-otp-slot />
-        <sc-input-otp-slot />
-      </sc-input-otp-group>
-    </sc-input-otp>
+    <form [formGroup]="inputOtpGroupForm">
+      <sc-input-otp size="6" formControlName="otp">
+        <sc-input-otp-group>
+          <sc-input-otp-slot />
+          <sc-input-otp-slot />
+          <sc-input-otp-slot />
+        </sc-input-otp-group>
+        <sc-input-otp-separator />
+        <sc-input-otp-group>
+          <sc-input-otp-slot />
+          <sc-input-otp-slot />
+          <sc-input-otp-slot />
+        </sc-input-otp-group>
+      </sc-input-otp>
+    </form>
 
+    <br />
+    <br />
+    <br />
+    <br />
+    {{ inputOtpGroupForm.value | json }}
     <br />
     <br />
     <br />
@@ -96,4 +112,8 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class InputOtpPage {}
+export default class InputOtpPage {
+  inputOtpGroupForm = new FormGroup({
+    otp: new FormControl(''),
+  });
+}
