@@ -77,7 +77,7 @@ export class ScCheckbox implements ControlValueAccessor {
   disabled = model<BooleanInput>(false);
 
   state = computed(() => {
-    return this.checked() ? 'checked' : '';
+    return this.checked() ? 'checked' : 'unchecked';
   });
 
   constructor() {
