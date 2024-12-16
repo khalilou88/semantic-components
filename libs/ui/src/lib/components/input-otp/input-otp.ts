@@ -49,8 +49,9 @@ export class ScInputOtp {
 
   constructor() {
     for (let i = 0; i < this.slots().length; i++) {
-      this.slots()[i].index.set(i);
-      this.inputs.push(new FormControl('', Validators.required));
+      const control = new FormControl('', Validators.required);
+      this.slots()[i].control = control;
+      this.inputs.push(control);
     }
   }
 }
