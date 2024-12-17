@@ -15,7 +15,6 @@ import {
   inject,
   input,
   model,
-  numberAttribute,
   signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -64,8 +63,6 @@ export class ScInputOtp implements ControlValueAccessor, OnDestroy {
   class = input<string>('');
 
   classes = computed(() => cn('flex items-center gap-2 has-[:disabled]:opacity-50', this.class()));
-
-  size = input.required({ transform: numberAttribute });
 
   readonly _required = input<boolean, unknown>(false, {
     alias: 'required',

@@ -24,7 +24,7 @@ import {
   template: `
     <div class="m-10">
       <form [formGroup]="inputOtpGroupForm">
-        <sc-input-otp size="6" formControlName="otp">
+        <sc-input-otp formControlName="otp">
           <sc-input-otp-group>
             <sc-input-otp-slot />
             <sc-input-otp-slot />
