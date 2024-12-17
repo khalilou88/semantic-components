@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -11,10 +12,10 @@ import { cn } from '../../utils';
 
 @Component({
   selector: 'sc-aspect-ratio',
-  imports: [],
+  imports: [NgOptimizedImage],
   template: `
     <div [class]="wrapperClass()" [style]="wrapperStyle()">
-      <img [class]="imageClasses()" [src]="src()" [alt]="alt()" [style]="imageStyle()" fill />
+      <img [class]="imageClasses()" [ngSrc]="src()" [alt]="alt()" [style]="imageStyle()" fill />
     </div>
   `,
   host: {
