@@ -1,4 +1,5 @@
 import {
+  AfterViewChecked,
   ChangeDetectionStrategy,
   Component,
   HostListener,
@@ -21,7 +22,7 @@ import { LayoutState } from '../services/layout-state';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class StackedLayout {
+export default class StackedLayout implements AfterViewChecked {
   layoutState = inject(LayoutState);
 
   ngAfterViewChecked() {

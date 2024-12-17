@@ -20,7 +20,7 @@ import { InputOtpHandler } from './input-otp-handler';
     @let control = formControl();
     @if (control !== null) {
       <input
-        class="w-full h-full shadow-none ring-0 border-0 outline-none text-center bg-transparent"
+        class="size-full border-0 bg-transparent text-center shadow-none outline-none ring-0"
         #input
         [formControl]="control"
         [readonly]="!isActive()"

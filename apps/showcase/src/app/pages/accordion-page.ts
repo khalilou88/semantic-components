@@ -11,7 +11,7 @@ import {
   selector: 'app-accordion-page',
   imports: [ScAccordion, ScAccordionItem, ScAccordionContent, ScAccordionItemDescription],
   template: `
-    <div class="preview flex min-h-[350px] w-full justify-center p-10 items-center">
+    <div class="preview flex min-h-[350px] w-full items-center justify-center p-10">
       <sc-accordion class="w-full">
         <sc-accordion-item>
           <sc-accordion-item-description>Is it accessible?</sc-accordion-item-description>

@@ -51,7 +51,7 @@ import {
       <sc-form-field-custom-control />
       <br />
 
-      <div class="preview flex min-h-[350px] w-full justify-center p-10 items-center">
+      <div class="preview flex min-h-[350px] w-full items-center justify-center p-10">
         <noscript></noscript>
         <div
           class="flex items-center gap-2 has-[:disabled]:opacity-50"
@@ -60,13 +60,13 @@ import {
         >
           <div class="flex items-center">
             <div
-              class="relative flex h-10 w-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md"
+              class="relative flex size-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md"
             ></div>
             <div
-              class="relative flex h-10 w-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md"
+              class="relative flex size-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md"
             ></div>
             <div
-              class="relative flex h-10 w-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md"
+              class="relative flex size-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md"
             ></div>
           </div>
           <div role="separator">
@@ -87,13 +87,13 @@ import {
           </div>
           <div class="flex items-center">
             <div
-              class="relative flex h-10 w-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md"
+              class="relative flex size-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md"
             ></div>
             <div
-              class="relative flex h-10 w-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md"
+              class="relative flex size-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md"
             ></div>
             <div
-              class="relative flex h-10 w-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md"
+              class="relative flex size-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md"
             ></div>
           </div>
           <div style="position: absolute; inset: 0px; pointer-events: none;">
