@@ -6,6 +6,7 @@ import {
   inject,
   input,
   signal,
+  viewChild,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
@@ -20,6 +21,7 @@ import { InputOtpHandler } from './input-otp-handler';
     @if (control !== null) {
       <input
         class="w-full h-full shadow-none ring-0 border-0 outline-none text-center"
+        #input
         [formControl]="control"
         [readonly]="!isActive()"
         (input)="_handleInput()"
@@ -56,12 +58,9 @@ export class ScInputOTPSlot {
 
   isActive = signal(false);
 
+  readonly input = viewChild.required<HTMLInputElement>('input');
+
   _handleInput(): void {
-    //this.autoFocusNext(control, nextElement);
-    //this.onChange(this.value);
-
-    console.log('a');
-
     this.inputOtpHandler.inputIndex.set(this.index);
   }
 }

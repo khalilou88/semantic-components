@@ -1,3 +1,4 @@
+import { FocusMonitor } from '@angular/cdk/a11y';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -52,6 +53,7 @@ import { ScInputOTPSlot } from './input-otp-slot';
 })
 export class ScInputOtp implements ControlValueAccessor {
   inputOtpHandler = inject(InputOtpHandler);
+  private readonly _focusMonitor = inject(FocusMonitor);
 
   private readonly _cdr = inject(ChangeDetectorRef);
 
@@ -78,10 +80,11 @@ export class ScInputOtp implements ControlValueAccessor {
 
   constructor() {
     effect(() => {
-      if (this.inputOtpHandler.inputIndex() !== -1) {
-        console.log('this.inputOtpHandler.inputIndex()');
-        console.log(this.inputOtpHandler.inputIndex());
-
+      if (
+        this.inputOtpHandler.inputIndex() !== -1 &&
+        this.inputOtpHandler.inputIndex() < this.slots().length - 1 &&
+        this.slots().length > 1
+      ) {
         const index = this.inputOtpHandler.inputIndex();
 
         const currentSlot = this.slots()[index];
@@ -89,6 +92,7 @@ export class ScInputOtp implements ControlValueAccessor {
 
         const nextSlot = this.slots()[index + 1];
         nextSlot.isActive.set(true);
+        this._focusMonitor.focusVia(nextSlot.input(), 'program');
       }
     });
 
