@@ -5,6 +5,7 @@ import {
   Directive,
   ElementRef,
   HostListener,
+  OnDestroy,
   TemplateRef,
   ViewContainerRef,
   inject,
@@ -16,7 +17,7 @@ import { ScHoverCard } from './hover-card';
 @Directive({
   selector: '[scHoverCardTrigger]',
 })
-export class ScHoverCardTrigger {
+export class ScHoverCardTrigger implements OnDestroy {
   private element = inject<ElementRef<HTMLElement>>(ElementRef);
   private overlay = inject(Overlay);
   private viewContainer = inject(ViewContainerRef);
