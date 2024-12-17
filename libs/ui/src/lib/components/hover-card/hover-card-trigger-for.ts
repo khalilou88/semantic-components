@@ -15,14 +15,14 @@ import {
 import { ScHoverCard } from './hover-card';
 
 @Directive({
-  selector: '[scHoverCardTrigger]',
+  selector: '[scHoverCardTriggerFor]',
 })
-export class ScHoverCardTrigger implements OnDestroy {
+export class ScHoverCardTriggerFor implements OnDestroy {
   private element = inject<ElementRef<HTMLElement>>(ElementRef);
   private overlay = inject(Overlay);
   private viewContainer = inject(ViewContainerRef);
 
-  readonly scHoverCardTrigger = input.required<TemplateRef<unknown>>();
+  readonly scHoverCardTriggerFor = input.required<TemplateRef<unknown>>();
 
   private overlayRef: OverlayRef | null = null;
 
@@ -67,7 +67,7 @@ export class ScHoverCardTrigger implements OnDestroy {
     // Attach tooltip portal to overlay
     const componentRef: ComponentRef<ScHoverCard> = this.overlayRef.attach(componentPortal);
 
-    componentRef.instance.templateRef.set(this.scHoverCardTrigger());
+    componentRef.instance.templateRef.set(this.scHoverCardTriggerFor());
   }
 
   private getPositionStrategy(): PositionStrategy {
