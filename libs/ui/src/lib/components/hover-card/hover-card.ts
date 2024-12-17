@@ -1,13 +1,25 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  TemplateRef,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 
 @Component({
   selector: 'sc-hover-card',
-  imports: [],
+  imports: [NgTemplateOutlet],
   template: `
-    <p>hover-card works!</p>
+    @if (templateRef) {
+      <ng-container *ngTemplateOutlet="templateRef"></ng-container>
+    }
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HoverCard {}
+export class ScHoverCard {
+  @Input() templateRef!: TemplateRef<unknown>;
+}

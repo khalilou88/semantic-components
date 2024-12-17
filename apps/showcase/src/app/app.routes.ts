@@ -29,6 +29,11 @@ export const appRoutes: Route[] = [
                 title: 'Home Page',
               },
               {
+                path: 'hover-card',
+                loadComponent: () => import('./pages/hover-card-page'),
+                title: 'Hover Card Page',
+              },
+              {
                 path: 'input-otp',
                 loadComponent: () => import('./pages/input-otp-page'),
                 title: 'Input OTP Page',
