@@ -17,7 +17,7 @@ import { cn } from '../../utils';
     @let control = formControl();
     @if (control !== null) {
       <input
-        class="w-full h-full"
+        class="w-full h-full shadow-none ring-0 border-0 outline-none text-center"
         [formControl]="control"
         [readonly]="!isActive"
         (input)="_handleInput()"
