@@ -66,7 +66,7 @@ export class ScHoverCardTrigger {
     // Attach tooltip portal to overlay
     const componentRef: ComponentRef<ScHoverCard> = this.overlayRef.attach(componentPortal);
 
-    componentRef.instance.templateRef = this.scHoverCardTrigger();
+    componentRef.instance.templateRef.set(this.scHoverCardTrigger());
   }
 
   private getPositionStrategy(): PositionStrategy {

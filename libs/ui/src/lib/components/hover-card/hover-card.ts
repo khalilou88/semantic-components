@@ -3,9 +3,8 @@ import {
   ChangeDetectionStrategy,
   Component,
   TemplateRef,
-  ViewChild,
   ViewEncapsulation,
-  input,
+  signal,
 } from '@angular/core';
 
 @Component({
@@ -21,5 +20,5 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScHoverCard {
-  readonly templateRef = input.required<TemplateRef<unknown>>();
+  templateRef = signal<TemplateRef<unknown> | null>(null);
 }
