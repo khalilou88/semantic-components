@@ -6,7 +6,7 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { AbstractControl, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { cn } from '../../utils';
 
@@ -28,17 +28,6 @@ import { cn } from '../../utils';
         size="1"
       />
     }
-
-    <!--div
-      class="relative flex h-10 w-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md"
-      [ngClass]="{ 'z-10 ring-2 ring-ring ring-offset-background': isActive }"
-    >
-      @if (hasFakeCaret) {
-        <div class="pointer-events-none absolute inset-0 flex items-center justify-center">
-          <div class="h-4 w-px animate-caret-blink bg-foreground duration-1000"></div>
-        </div>
-      }
-    </div-->
   `,
   host: {
     '[class]': 'classes()',
@@ -52,7 +41,7 @@ export class ScInputOTPSlot {
 
   classes = computed(() =>
     cn(
-      'relative flex h-10 w-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md',
+      'flex h-10 w-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md',
       this.isActive && 'z-10 ring-2 ring-ring ring-offset-background',
       this.class(),
     ),
