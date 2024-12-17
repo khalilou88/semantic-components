@@ -29,6 +29,11 @@ export const appRoutes: Route[] = [
                 title: 'Home Page',
               },
               {
+                path: 'aspect-ratio',
+                loadComponent: () => import('./pages/aspect-ratio-page'),
+                title: 'Aspect Ratio Page',
+              },
+              {
                 path: 'hover-card',
                 loadComponent: () => import('./pages/hover-card-page'),
                 title: 'Hover Card Page',
