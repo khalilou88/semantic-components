@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
   computed,
   input,
+  signal,
 } from '@angular/core';
 
 import { cn } from '../../utils';
@@ -12,20 +13,36 @@ import { cn } from '../../utils';
   selector: 'sc-aspect-ratio',
   imports: [],
   template: `
-    <div style="position: absolute; inset: 0px;">
-      <ng-content />
+    <div [class]="wrapperClass()" [style]="wrapperStyle()">
+      <img [class]="imageClasses()" [src]="src()" [alt]="alt()" fill />
     </div>
   `,
   host: {
-    '[class]': 'classes()',
-    '[style]': '"position: relative; width: 100%; padding-bottom: 56.25%;"',
+    '[class]': 'hostClasses()',
+    '[style]': 'hostStyle()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScAspectRatio {
-  class = input<string>('');
+  imageClass = input<string>('');
 
-  classes = computed(() => cn('', this.class()));
+  imageClasses = computed(() => cn('h-full w-full rounded-md object-cover', this.imageClass()));
+
+  hostClass = input<string>('');
+
+  hostClasses = computed(() => cn('h-full w-full rounded-md object-cover', this.hostClass()));
+
+  hostStyle = computed(() => {
+    return `position: relative; width: 100%; padding-bottom: 56.25%;`;
+  });
+
+  wrapperClass = input<string>('');
+
+  wrapperStyle = signal('position: absolute; inset: 0px;');
+
+  ratio = input<string>('1 / 1');
+  src = input.required<string>();
+  alt = input<string>('');
 }

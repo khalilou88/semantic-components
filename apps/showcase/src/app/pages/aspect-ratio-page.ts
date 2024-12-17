@@ -7,14 +7,12 @@ import { ScAspectRatio } from '@semantic-components/ui';
   imports: [ScAspectRatio],
   template: `
     <div class="preview flex min-h-[350px] w-full justify-center p-10 items-center">
-      <sc-aspect-ratio class="bg-muted" ratio="16 / 9">
-        <img
-          class="h-full w-full rounded-md object-cover"
-          src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80"
-          alt="Photo by Drew Beamer"
-          fill
-        />
-      </sc-aspect-ratio>
+      <sc-aspect-ratio
+        wrapperClass="bg-muted"
+        ratio="16 / 9"
+        src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80"
+        alt="Photo by Drew Beamer"
+      />
     </div>
 
     <div class="preview flex min-h-[350px] w-full justify-center p-10 items-center">
