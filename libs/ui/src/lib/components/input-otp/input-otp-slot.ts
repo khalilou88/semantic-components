@@ -16,7 +16,15 @@ import { cn } from '../../utils';
   template: `
     @let control = formControl();
     @if (control !== null) {
-      <input class="w-full h-full" [formControl]="control" type="text" inputmode="numeric" />
+      <input
+        class="w-full h-full"
+        [formControl]="control"
+        type="text"
+        inputmode="numeric"
+        autocomplete="one-time-code"
+        maxLength="1"
+        size="1"
+      />
     }
 
     <!--div
