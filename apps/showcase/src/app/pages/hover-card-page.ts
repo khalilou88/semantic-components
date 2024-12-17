@@ -14,7 +14,7 @@ import { SvgCalendarDaysIcon } from '@semantic-icons/lucide-icons';
 
       <ng-template #templateForHoverCardTrigger>
         <div class="flex justify-between space-x-4">
-          <sc-avatar src="https://github.com/vercel.png" fallback="VC"></sc-avatar>
+          <sc-avatar src="https://github.com/vercel.png" fallback="VC" />
           <div class="space-y-1">
             <h4 class="text-sm font-semibold">&#64;nextjs</h4>
             <p class="text-sm">The React Framework – created and maintained by &#64;vercel.</p>
