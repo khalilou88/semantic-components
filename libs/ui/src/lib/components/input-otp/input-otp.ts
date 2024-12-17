@@ -3,6 +3,8 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ElementRef,
+  OnDestroy,
   ViewEncapsulation,
   afterNextRender,
   booleanAttribute,
@@ -26,6 +28,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+
+import { Subject } from 'rxjs';
 
 import { cn } from '../../utils';
 import { InputOtpHandler } from './input-otp-handler';
@@ -51,7 +55,7 @@ import { ScInputOTPSlot } from './input-otp-slot';
     InputOtpHandler,
   ],
 })
-export class ScInputOtp implements ControlValueAccessor {
+export class ScInputOtp implements ControlValueAccessor, OnDestroy {
   inputOtpHandler = inject(InputOtpHandler);
   private readonly _focusMonitor = inject(FocusMonitor);
 
@@ -166,5 +170,13 @@ export class ScInputOtp implements ControlValueAccessor {
 
   setDisabledState(isDisabled: boolean): void {
     this._disabledByCva.set(isDisabled);
+  }
+
+  private readonly _elementRef = inject(ElementRef);
+  //TODO use stateChanges to handle state changes
+  readonly stateChanges = new Subject<void>();
+  ngOnDestroy() {
+    this.stateChanges.complete();
+    this._focusMonitor.stopMonitoring(this._elementRef);
   }
 }
