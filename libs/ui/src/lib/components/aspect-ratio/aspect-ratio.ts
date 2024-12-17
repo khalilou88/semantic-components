@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  booleanAttribute,
   computed,
   input,
   signal,
@@ -15,7 +16,18 @@ import { cn } from '../../utils';
   imports: [NgOptimizedImage],
   template: `
     <div [class]="wrapperClass()" [style]="wrapperStyle()">
-      <img [class]="imageClasses()" [ngSrc]="src()" [alt]="alt()" [style]="imageStyle()" fill />
+      @if (priority()) {
+        <img
+          [class]="imageClasses()"
+          [ngSrc]="src()"
+          [alt]="alt()"
+          [style]="imageStyle()"
+          fill
+          priority
+        />
+      } @else {
+        <img [class]="imageClasses()" [ngSrc]="src()" [alt]="alt()" [style]="imageStyle()" fill />
+      }
     </div>
   `,
   host: {
@@ -56,4 +68,6 @@ export class ScAspectRatio {
   ratio = input<string>('1 / 1');
   src = input.required<string>();
   alt = input<string>('');
+
+  priority = input<boolean, unknown>(false, { transform: booleanAttribute });
 }
