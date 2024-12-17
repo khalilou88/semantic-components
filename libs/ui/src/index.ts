@@ -31,3 +31,4 @@ export * from './lib/components/radio-group';
 export * from './lib/components/input-otp';
 export * from './lib/components/tel-input';
 export * from './lib/components/hover-card';
+export * from './lib/components/avatar';
