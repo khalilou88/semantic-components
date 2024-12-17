@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  afterNextRender,
   computed,
   contentChildren,
   input,
@@ -39,7 +39,7 @@ import { ScTab } from './tab';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScTabs implements AfterViewInit {
+export class ScTabs {
   class = input<string>('');
 
   classes = computed(() => cn('', this.class()));
@@ -55,18 +55,20 @@ export class ScTabs implements AfterViewInit {
 
   readonly tabs = contentChildren(ScTab, { descendants: true });
 
-  ngAfterViewInit() {
-    // get all active tabs
-    const activeTabs = this.tabs().filter((tab) => tab.active());
+  constructor() {
+    afterNextRender(() => {
+      // get all active tabs
+      const activeTabs = this.tabs().filter((tab) => tab.active());
 
-    if (activeTabs.length > 1) {
-      throw new Error('Only one tab can be active');
-    }
+      if (activeTabs.length > 1) {
+        throw new Error('Only one tab can be active');
+      }
 
-    // if there is no active tab set, activate the first
-    if (activeTabs.length === 0) {
-      this.selectTab(this.tabs()[0]);
-    }
+      // if there is no active tab set, activate the first
+      if (activeTabs.length === 0) {
+        this.selectTab(this.tabs()[0]);
+      }
+    });
   }
 
   selectTab(tab: ScTab) {
