@@ -74,9 +74,15 @@ export class ScInputOtp implements ControlValueAccessor {
   constructor() {
     afterNextRender(() => {
       for (let i = 0; i < this.slots().length; i++) {
+        const slot = this.slots()[i];
+
+        if (i === 0) {
+          slot.isActive = true;
+        }
+
         const formControl = new FormControl('', Validators.required);
 
-        this.slots()[i].formControl.set(formControl);
+        slot.formControl.set(formControl);
         this.inputs.push(formControl);
       }
     });

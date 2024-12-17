@@ -6,7 +6,7 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { cn } from '../../utils';
 
@@ -19,6 +19,8 @@ import { cn } from '../../utils';
       <input
         class="w-full h-full"
         [formControl]="control"
+        [readonly]="!isActive"
+        (input)="_handleInput()"
         type="text"
         inputmode="numeric"
         autocomplete="one-time-code"
@@ -61,4 +63,11 @@ export class ScInputOTPSlot {
   isActive = false;
 
   hasFakeCaret = false;
+
+  _handleInput(): void {
+    //this.autoFocusNext(control, nextElement);
+    //this.onChange(this.value);
+
+    console.log('a');
+  }
 }
