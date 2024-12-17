@@ -7,6 +7,7 @@ import {
   booleanAttribute,
   computed,
   contentChildren,
+  effect,
   forwardRef,
   inject,
   input,
@@ -26,6 +27,7 @@ import {
 } from '@angular/forms';
 
 import { cn } from '../../utils';
+import { InputOtpHandler } from './input-otp-handler';
 import { ScInputOTPSlot } from './input-otp-slot';
 
 @Component({
@@ -45,9 +47,12 @@ import { ScInputOTPSlot } from './input-otp-slot';
       useExisting: forwardRef(() => ScInputOtp),
       multi: true,
     },
+    InputOtpHandler,
   ],
 })
 export class ScInputOtp implements ControlValueAccessor {
+  inputOtpHandler = inject(InputOtpHandler);
+
   private readonly _cdr = inject(ChangeDetectorRef);
 
   class = input<string>('');
@@ -72,16 +77,32 @@ export class ScInputOtp implements ControlValueAccessor {
   slots = contentChildren(ScInputOTPSlot, { descendants: true });
 
   constructor() {
+    effect(() => {
+      if (this.inputOtpHandler.inputIndex() !== -1) {
+        console.log('this.inputOtpHandler.inputIndex()');
+        console.log(this.inputOtpHandler.inputIndex());
+
+        const index = this.inputOtpHandler.inputIndex();
+
+        const currentSlot = this.slots()[index];
+        currentSlot.isActive.set(false);
+
+        const nextSlot = this.slots()[index + 1];
+        nextSlot.isActive.set(true);
+      }
+    });
+
     afterNextRender(() => {
       for (let i = 0; i < this.slots().length; i++) {
         const slot = this.slots()[i];
 
         if (i === 0) {
-          slot.isActive = true;
+          slot.isActive.set(true);
         }
 
         const formControl = new FormControl('', Validators.required);
 
+        slot.index = i;
         slot.formControl.set(formControl);
         this.inputs.push(formControl);
       }
