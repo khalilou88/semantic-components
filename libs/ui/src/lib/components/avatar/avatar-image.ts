@@ -27,17 +27,21 @@ import { cn } from '../../utils';
 export class ScAvatarImage {
   class = input<string>('');
 
-  classes = computed(() => cn('aspect-square h-full w-full', this.class()));
+  classes = computed(() =>
+    cn(
+      'aspect-square h-full w-full',
+      (this.state() === 'loading' || this.state() === 'error') && 'invisible',
+      this.class(),
+    ),
+  );
 
-  private readonly _loaded = signal(false);
-
-  handleError() {
-    this._loaded.set(false);
-  }
+  state = signal<'loading' | 'loaded' | 'error'>('loading');
 
   handleLoad() {
-    this._loaded.set(true);
+    this.state.set('loaded');
   }
 
-  public canShow = computed(() => this._loaded());
+  handleError() {
+    this.state.set('error');
+  }
 }

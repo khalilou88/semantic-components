@@ -3,8 +3,8 @@ import {
   Component,
   ViewEncapsulation,
   computed,
+  contentChild,
   input,
-  viewChild,
 } from '@angular/core';
 
 import { cn } from '../../utils';
@@ -15,7 +15,10 @@ import { ScAvatarImage } from './avatar-image';
   selector: 'sc-avatar',
   imports: [ScAvatarImage, ScAvatarFallback],
   template: `
-    @if (avatarImage()?.canShow()) {
+    @if (avatarImage()?.state() === 'loading') {
+      <img [alt]="alt()" [src]="src()" sc-avatar-image />
+      <div sc-avatar-fallback>{{ fallback() }}</div>
+    } @else if (avatarImage()?.state() === 'loaded') {
       <img [alt]="alt()" [src]="src()" sc-avatar-image />
     } @else {
       <div sc-avatar-fallback>{{ fallback() }}</div>
@@ -39,5 +42,5 @@ export class ScAvatar {
   alt = input<string>('');
   fallback = input<string>('');
 
-  protected readonly avatarImage = viewChild(ScAvatarImage);
+  protected readonly avatarImage = contentChild(ScAvatarImage);
 }
