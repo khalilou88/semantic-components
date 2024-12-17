@@ -14,7 +14,7 @@ import { cn } from '../../utils';
   imports: [],
   template: `
     <div [class]="wrapperClass()" [style]="wrapperStyle()">
-      <img [class]="imageClasses()" [src]="src()" [alt]="alt()" fill />
+      <img [class]="imageClasses()" [src]="src()" [alt]="alt()" [style]="imageStyle()" fill />
     </div>
   `,
   host: {
@@ -30,12 +30,22 @@ export class ScAspectRatio {
 
   imageClasses = computed(() => cn('h-full w-full rounded-md object-cover', this.imageClass()));
 
+  imageStyle = signal(
+    'position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;',
+  );
+
   hostClass = input<string>('');
 
   hostClasses = computed(() => cn('h-full w-full rounded-md object-cover', this.hostClass()));
 
   hostStyle = computed(() => {
-    return `position: relative; width: 100%; padding-bottom: 56.25%;`;
+    const parts = this.ratio()
+      .split('/')
+      .map((s) => +s);
+
+    const paddingBottom = (parts[1] / parts[0]) * 100;
+
+    return `position: relative; width: 100%; padding-bottom: ${paddingBottom}%;`;
   });
 
   wrapperClass = input<string>('');
