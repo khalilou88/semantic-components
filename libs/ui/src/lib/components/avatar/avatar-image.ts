@@ -4,7 +4,6 @@ import {
   ViewEncapsulation,
   computed,
   input,
-  output,
   signal,
 } from '@angular/core';
 
@@ -31,21 +30,19 @@ export class ScAvatarImage {
   classes = computed(() =>
     cn(
       'aspect-square h-full w-full',
-      (this.state() === 'loading' || this.state() === 'error') && 'invisible',
+      this.state() === 'loading' && 'invisible h-0 w-0',
+      this.state() === 'error' && 'hidden',
       this.class(),
     ),
   );
 
   state = signal<'loading' | 'loaded' | 'error'>('loading');
-  stateChanged = output<'loading' | 'loaded' | 'error'>();
 
   handleLoad() {
     this.state.set('loaded');
-    this.stateChanged.emit('loaded');
   }
 
   handleError() {
     this.state.set('error');
-    this.stateChanged.emit('error');
   }
 }
