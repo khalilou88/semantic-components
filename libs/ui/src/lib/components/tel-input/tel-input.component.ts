@@ -43,7 +43,7 @@ export class TelModel {
 }
 
 @Component({
-  selector: 'sma-tel-input',
+  selector: 'sc-tel-input',
   imports: [FormsModule, ReactiveFormsModule],
   template: `
     <div

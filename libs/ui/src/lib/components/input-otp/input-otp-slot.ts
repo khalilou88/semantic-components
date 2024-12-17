@@ -16,12 +16,7 @@ import { cn } from '../../utils';
   template: `
     @let control = formControl();
     @if (control !== null) {
-      <input
-        class="relative flex h-10 w-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md"
-        [formControl]="control"
-        type="text"
-        inputmode="numeric"
-      />
+      <input class="w-full h-full" [formControl]="control" type="text" inputmode="numeric" />
     }
 
     <!--div
@@ -45,7 +40,12 @@ import { cn } from '../../utils';
 export class ScInputOTPSlot {
   class = input<string>('');
 
-  classes = computed(() => cn('', this.class()));
+  classes = computed(() =>
+    cn(
+      'relative flex h-10 w-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md',
+      this.class(),
+    ),
+  );
 
   formControl = signal<FormControl | null>(null);
 
