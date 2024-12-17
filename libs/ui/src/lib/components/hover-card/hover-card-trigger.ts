@@ -5,10 +5,10 @@ import {
   Directive,
   ElementRef,
   HostListener,
-  Input,
   TemplateRef,
   ViewContainerRef,
   inject,
+  input,
 } from '@angular/core';
 
 import { ScHoverCard } from './hover-card';
@@ -21,7 +21,7 @@ export class ScHoverCardTrigger {
   private overlay = inject(Overlay);
   private viewContainer = inject(ViewContainerRef);
 
-  @Input() scHoverCardTrigger!: TemplateRef<unknown>;
+  readonly scHoverCardTrigger = input.required<TemplateRef<unknown>>();
 
   private overlayRef: OverlayRef | null = null;
 
@@ -66,7 +66,7 @@ export class ScHoverCardTrigger {
     // Attach tooltip portal to overlay
     const componentRef: ComponentRef<ScHoverCard> = this.overlayRef.attach(componentPortal);
 
-    componentRef.instance.templateRef = this.scHoverCardTrigger;
+    componentRef.instance.templateRef = this.scHoverCardTrigger();
   }
 
   private getPositionStrategy(): PositionStrategy {
