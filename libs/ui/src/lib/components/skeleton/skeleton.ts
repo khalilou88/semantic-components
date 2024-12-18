@@ -1,13 +1,28 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
+
+import { cn } from '../../utils';
 
 @Component({
-  selector: 'sc-skeleton',
+  selector: 'div[sc-skeleton]',
   imports: [],
   template: `
-    <p>skeleton works!</p>
+    <ng-content />
   `,
+  host: {
+    '[class]': 'classes()',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Skeleton {}
+export class ScSkeleton {
+  class = input<string>('');
+
+  classes = computed(() => cn('animate-pulse rounded-md bg-muted', this.class()));
+}

@@ -29,6 +29,11 @@ export const appRoutes: Route[] = [
                 title: 'Home Page',
               },
               {
+                path: 'skeleton',
+                loadComponent: () => import('./pages/skeleton-page'),
+                title: 'Skeleton Page',
+              },
+              {
                 path: 'alert',
                 loadComponent: () => import('./pages/alert-page'),
                 title: 'Alert Page',
