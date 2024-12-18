@@ -52,6 +52,9 @@ export class ScPopoverTriggerFor implements OnDestroy {
       this.overlayRef = this.overlay.create({ positionStrategy });
     }
 
+    //TODO make this a input
+    this.overlayRef.updateSize({ width: 320 });
+
     // const injector = Injector.create({
     //   providers: [
     //     {
