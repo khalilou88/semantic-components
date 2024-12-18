@@ -7,6 +7,7 @@ import {
   ScMenuSeparator,
   ScMenuShortcut,
   ScMenuSub,
+  ScMenuSubContent,
   ScMenuSubTrigger,
 } from '@semantic-components/ui';
 import {
@@ -50,6 +51,7 @@ import {
     ScMenuItem,
     ScMenuSub,
     ScMenuSubTrigger,
+    ScMenuSubContent,
   ],
   template: `
     <div class="m-10">
@@ -90,19 +92,21 @@ import {
           </sc-menu-sub-trigger>
 
           <ng-template #sub_menu_1>
-            <sc-menu-item>
-              <svg-mail-icon />
-              <span>Email</span>
-            </sc-menu-item>
-            <sc-menu-item>
-              <svg-message-square-icon />
-              <span>Message</span>
-            </sc-menu-item>
-            <sc-menu-separator />
-            <sc-menu-item>
-              <svg-circle-plus-icon />
-              <span>More...</span>
-            </sc-menu-item>
+            <sc-menu-sub-content>
+              <sc-menu-item>
+                <svg-mail-icon />
+                <span>Email</span>
+              </sc-menu-item>
+              <sc-menu-item>
+                <svg-message-square-icon />
+                <span>Message</span>
+              </sc-menu-item>
+              <sc-menu-separator />
+              <sc-menu-item>
+                <svg-circle-plus-icon />
+                <span>More...</span>
+              </sc-menu-item>
+            </sc-menu-sub-content>
           </ng-template>
         </sc-menu-sub>
         <sc-menu-item>
