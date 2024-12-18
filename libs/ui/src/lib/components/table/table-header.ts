@@ -9,7 +9,7 @@ import {
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'table[sc-table]',
+  selector: 'thead[sc-table-header]',
   imports: [],
   template: `
     <ng-content />
@@ -21,8 +21,8 @@ import { cn } from '../../utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScTable {
+export class ScTableHeader {
   class = input<string>('');
 
-  classes = computed(() => cn('w-full caption-bottom text-sm', this.class()));
+  classes = computed(() => cn('[&_tr]:border-b', this.class()));
 }
