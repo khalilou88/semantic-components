@@ -6,7 +6,7 @@ import { ScAspectRatio } from '@semantic-components/ui';
   selector: 'app-aspect-ratio-page',
   imports: [ScAspectRatio],
   template: `
-    <div class="preview flex min-h-[350px] w-full justify-center p-10 items-center">
+    <div class="preview flex min-h-[350px] w-full items-center justify-center p-10">
       <sc-aspect-ratio
         wrapperClass="bg-muted"
         ratio="16 / 9"
@@ -15,14 +15,14 @@ import { ScAspectRatio } from '@semantic-components/ui';
       />
     </div>
 
-    <div class="preview flex min-h-[350px] w-full justify-center p-10 items-center">
+    <div class="preview flex min-h-[350px] w-full items-center justify-center p-10">
       <div
         data-radix-aspect-ratio-wrapper=""
         style="position: relative; width: 100%; padding-bottom: 56.25%;"
       >
         <div class="bg-muted" style="position: absolute; inset: 0px;">
           <img
-            class="h-full w-full rounded-md object-cover"
+            class="size-full rounded-md object-cover"
             alt="Photo by Drew Beamer"
             loading="lazy"
             decoding="async"
