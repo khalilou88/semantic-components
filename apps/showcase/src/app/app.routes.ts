@@ -29,6 +29,16 @@ export const appRoutes: Route[] = [
                 title: 'Home Page',
               },
               {
+                path: 'table',
+                loadComponent: () => import('./pages/table-page'),
+                title: 'Table Page',
+              },
+              {
+                path: 'data-table',
+                loadComponent: () => import('./pages/data-table-page'),
+                title: 'Data Table Page',
+              },
+              {
                 path: 'skeleton',
                 loadComponent: () => import('./pages/skeleton-page'),
                 title: 'Skeleton Page',

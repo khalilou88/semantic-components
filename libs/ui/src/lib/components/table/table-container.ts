@@ -9,7 +9,7 @@ import {
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'table[sc-table]',
+  selector: 'div[sc-table-container]',
   imports: [],
   template: `
     <ng-content />
@@ -21,8 +21,8 @@ import { cn } from '../../utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScTable {
+export class ScTableContainer {
   class = input<string>('');
 
-  classes = computed(() => cn('w-full caption-bottom text-sm', this.class()));
+  classes = computed(() => cn('relative w-full overflow-auto', this.class()));
 }
