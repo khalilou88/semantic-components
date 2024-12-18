@@ -22,7 +22,7 @@ import { ScRadioGroupState } from './radio-group-state';
       <input [id]="id()" [class]="classes()" [disabled]="disabled()" [name]="name()" type="radio" />
 
       @if (checked() === true) {
-        <svg-circle-icon [hostClass]="circleHostClass()" [class]="circleClasses()" />
+        <svg-circle-icon [class]="circleHostClass()" [svgClass]="circleClasses()" />
       }
     </div>
 
