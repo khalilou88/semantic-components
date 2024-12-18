@@ -1,13 +1,15 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { ScCommand } from '@semantic-components/ui';
+
 @Component({
-  selector: 'sc-command',
-  imports: [],
+  selector: 'app-command-page',
+  imports: [ScCommand],
   template: `
-    <p>command works!</p>
+    <p>command-page works!</p>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCommand {}
+export default class CommandPage {}
