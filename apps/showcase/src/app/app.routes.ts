@@ -29,6 +29,11 @@ export const appRoutes: Route[] = [
                 title: 'Home Page',
               },
               {
+                path: 'context-menu',
+                loadComponent: () => import('./pages/context-menu-page'),
+                title: 'Context Menu Page',
+              },
+              {
                 path: 'popover',
                 loadComponent: () => import('./pages/popover-page'),
                 title: 'Popover Page',

@@ -38,3 +38,4 @@ export * from './lib/components/skeleton';
 export * from './lib/components/table';
 export * from './lib/components/data-table';
 export * from './lib/components/popover';
+export * from './lib/components/context-menu';
