@@ -19,7 +19,7 @@ import { SvgCalendarDaysIcon } from '@semantic-icons/lucide-icons';
             <h4 class="text-sm font-semibold">&#64;nextjs</h4>
             <p class="text-sm">The React Framework – created and maintained by &#64;vercel.</p>
             <div class="flex items-center pt-2">
-              <svg-calendar-days-icon class="mr-2 h-4 w-4 opacity-70" />
+              <svg-calendar-days-icon class="mr-2 size-4 opacity-70" />
               <span class="text-xs text-muted-foreground">Joined December 2021</span>
             </div>
           </div>
