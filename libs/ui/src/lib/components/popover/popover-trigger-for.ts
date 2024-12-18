@@ -81,14 +81,16 @@ export class ScPopoverTriggerFor implements OnDestroy {
           originY: 'top',
           overlayX: 'center',
           overlayY: 'bottom',
-          panelClass: 'top',
+          // panelClass: 'top',
+          offsetY: -8,
         },
         {
           originX: 'center',
           originY: 'bottom',
           overlayX: 'center',
           overlayY: 'top',
-          panelClass: 'bottom',
+          // panelClass: 'bottom',
+          offsetY: 8,
         },
       ]);
   }
