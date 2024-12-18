@@ -39,7 +39,7 @@ import { ScSelectState } from './select-state';
 export class ScOption {
   state = inject(ScSelectState);
 
-  value = input.required<string>();
+  value = input.required<unknown>();
 
   label = viewChild.required<ElementRef<HTMLSpanElement>>('label');
 
