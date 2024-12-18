@@ -4,9 +4,9 @@ import {
   ChangeDetectionStrategy,
   Component,
   ComponentRef,
+  ContentChild,
   ElementRef,
   TemplateRef,
-  ViewChild,
   ViewContainerRef,
   ViewEncapsulation,
   computed,
@@ -39,7 +39,7 @@ export class ScMenuSub {
 
   private overlayRef: OverlayRef | null = null;
 
-  @ViewChild(TemplateRef) menuSubRef: TemplateRef<unknown> | undefined;
+  @ContentChild(TemplateRef) menuSubRef: TemplateRef<unknown> | undefined;
 
   open() {
     console.log('open sub menu');

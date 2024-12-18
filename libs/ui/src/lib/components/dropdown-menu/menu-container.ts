@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -8,9 +9,8 @@ import {
 
 @Component({
   selector: 'sc-menu-container',
-  imports: [],
+  imports: [NgTemplateOutlet],
   template: `
-    <p>I am here</p>
     @if (templateRef()) {
       <ng-container *ngTemplateOutlet="templateRef()"></ng-container>
     }
