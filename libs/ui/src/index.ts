@@ -2,7 +2,6 @@ export * from './lib/utils';
 export * from './lib/components/editor';
 export * from './lib/components/tooltip';
 export * from './lib/components/paginator';
-export * from './lib/components/dropdown';
 export * from './lib/components/date-picker';
 export * from './lib/components/nav';
 export * from './lib/components/theme-toggler';
