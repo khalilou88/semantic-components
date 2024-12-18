@@ -15,7 +15,9 @@ import { ScPopover } from './popover';
 
 @Directive({
   selector: '[scPopoverTriggerFor]',
-  exportAs: 'scPopoverTrigger',
+  host: {
+    '(click)': 'open()',
+  },
 })
 export class ScPopoverTriggerFor implements OnDestroy {
   private element = inject<ElementRef<HTMLElement>>(ElementRef);
