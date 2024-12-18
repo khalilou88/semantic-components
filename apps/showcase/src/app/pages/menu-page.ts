@@ -181,4 +181,4 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class DropdownMenuPage {}
+export default class MenuPage {}

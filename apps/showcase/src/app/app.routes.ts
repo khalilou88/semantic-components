@@ -109,9 +109,9 @@ export const appRoutes: Route[] = [
                 title: 'Toast Page',
               },
               {
-                path: 'dropdown-menu',
-                loadComponent: () => import('./pages/dropdown-menu-page'),
-                title: 'Dropdown Menu Page',
+                path: 'menu',
+                loadComponent: () => import('./pages/menu-page'),
+                title: 'Menu Page',
               },
               {
                 path: 'card',
