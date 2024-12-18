@@ -16,6 +16,8 @@ import { cn } from '../../utils';
   `,
   host: {
     '[class]': 'classes()',
+    '(click)': 'open()',
+    '(mouseover)': 'open()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -25,4 +27,8 @@ export class ScMenuSub {
   class = input<string>('');
 
   classes = computed(() => cn('', this.class()));
+
+  open() {
+    console.log('open sub menu');
+  }
 }
