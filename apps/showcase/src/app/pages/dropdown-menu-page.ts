@@ -1,10 +1,13 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import {
+  ScMenuCheckboxItem,
   ScMenuContent,
   ScMenuGroup,
   ScMenuItem,
   ScMenuLabel,
+  ScMenuRadioGroup,
+  ScMenuRadioItem,
   ScMenuSeparator,
   ScMenuShortcut,
   ScMenuSub,
@@ -54,6 +57,9 @@ import {
     ScMenuSubTrigger,
     ScMenuSubContent,
     ScMenuContent,
+    ScMenuCheckboxItem,
+    ScMenuRadioItem,
+    ScMenuRadioGroup,
   ],
   template: `
     <div class="m-10">
@@ -139,6 +145,37 @@ import {
         </sc-menu-item>
       </sc-menu-content>
     </div>
+
+    <br />
+    <br />
+    <br />
+    <br />
+
+    Checkboxes
+
+    <sc-menu-content>
+      <sc-menu-label>Appearance</sc-menu-label>
+      <sc-menu-separator />
+      <sc-menu-checkbox-item checked>Status Bar</sc-menu-checkbox-item>
+      <sc-menu-checkbox-item checked disabled>Activity Bar</sc-menu-checkbox-item>
+      <sc-menu-checkbox-item checked>Panel</sc-menu-checkbox-item>
+    </sc-menu-content>
+
+    <br />
+    <br />
+    <br />
+
+    Radio Group
+
+    <sc-menu-content>
+      <sc-menu-label>Panel Position</sc-menu-label>
+      <sc-menu-separator />
+      <sc-menu-radio-group value="position">
+        <sc-menu-radio-item value="top">Top</sc-menu-radio-item>
+        <sc-menu-radio-item value="bottom">Bottom</sc-menu-radio-item>
+        <sc-menu-radio-item value="right">Right</sc-menu-radio-item>
+      </sc-menu-radio-group>
+    </sc-menu-content>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
