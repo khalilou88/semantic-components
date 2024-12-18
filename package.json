@@ -21,7 +21,7 @@
     "@angular/platform-server": "~19.0.4",
     "@angular/router": "19.0.4",
     "@angular/ssr": "19.0.5",
-    "@semantic-icons/lucide-icons": "^0.7.0",
+    "@semantic-icons/lucide-icons": "^0.8.0",
     "@tiptap/core": "^2.10.3",
     "@tiptap/extension-blockquote": "^2.10.3",
     "@tiptap/extension-bold": "^2.10.3",
