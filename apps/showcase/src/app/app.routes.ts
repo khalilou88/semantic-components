@@ -29,6 +29,11 @@ export const appRoutes: Route[] = [
                 title: 'Home Page',
               },
               {
+                path: 'alert',
+                loadComponent: () => import('./pages/alert-page'),
+                title: 'Alert Page',
+              },
+              {
                 path: 'aspect-ratio',
                 loadComponent: () => import('./pages/aspect-ratio-page'),
                 title: 'Aspect Ratio Page',
