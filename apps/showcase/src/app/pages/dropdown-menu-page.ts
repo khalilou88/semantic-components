@@ -140,11 +140,7 @@ import {
       </sc-menu-content>
     </div>
   `,
-  styles: `
-    .svg {
-      @apply size-4;
-    }
-  `,
+  styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
