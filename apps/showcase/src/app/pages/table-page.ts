@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import {
+  ScTable,
   ScTableBody,
   ScTableCaption,
   ScTableCell,
@@ -10,7 +11,6 @@ import {
   ScTableHeader,
   ScTableRow,
 } from '@semantic-components/ui';
-import ScTable from 'libs/ui/src/lib/components/table/table';
 
 @Component({
   selector: 'app-table-page',

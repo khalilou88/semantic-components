@@ -21,7 +21,7 @@ import { cn } from '../../utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ScTable {
+export class ScTable {
   class = input<string>('');
 
   classes = computed(() => cn('w-full caption-bottom text-sm', this.class()));
