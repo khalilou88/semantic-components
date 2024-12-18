@@ -85,7 +85,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                 >
                   <div class="flex items-center justify-between p-4">
                     <button
-                      class="flex h-7 w-[145px] items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-xs shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 [&_svg]:size-4"
+                      class="flex h-7 w-[145px] items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-xs shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 [&_.svg]:size-4"
                       dir="ltr"
                       type="button"
                       data-state="closed"
@@ -98,13 +98,13 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                         action="javascript:throw new Error('A React form was unexpectedly submitted. If you called form.submit() manually, consider using form.requestSubmit() instead. If you're trying to use event.stopPropagation() in a submit event handler, consider also calling event.preventDefault().')"
                       >
                         <button
-                          class="z-50 inline-flex h-[calc(theme(spacing.7)_-_1px)] items-center justify-center gap-1 whitespace-nowrap rounded-[6px] bg-black px-3 py-2 text-xs font-medium text-white shadow transition-colors hover:bg-black hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 dark:bg-white dark:text-black [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
+                          class="z-50 inline-flex h-[calc(theme(spacing.7)_-_1px)] items-center justify-center gap-1 whitespace-nowrap rounded-[6px] bg-black px-3 py-2 text-xs font-medium text-white shadow transition-colors hover:bg-black hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 dark:bg-white dark:text-black [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
                         >
                           Open in
                         </button>
                       </form>
                       <button
-                        class="relative z-10 inline-flex size-7 items-center justify-center gap-2 whitespace-nowrap rounded-md border border-input bg-background text-sm font-medium text-foreground opacity-100 shadow-sm transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
+                        class="relative z-10 inline-flex size-7 items-center justify-center gap-2 whitespace-nowrap rounded-md border border-input bg-background text-sm font-medium text-foreground opacity-100 shadow-sm transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
                       >
                         <span class="sr-only">Copy</span>
                       </button>
@@ -545,7 +545,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                     data-theme="default"
                   ><code class="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm" data-language="bash" data-theme="default"><span class="line"><span style="color: #b392f0;">npx</span><span style="color: #9ecbff;"> shadcn latest</span><span style="color: #9ecbff;"> add</span><span style="color: #9ecbff;"> scroll-area</span></span></code></pre>
                   <button
-                    class="absolute right-4 top-4 z-10 inline-flex size-6 items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium text-zinc-50 transition-colors hover:bg-zinc-700 hover:text-zinc-50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
+                    class="absolute right-4 top-4 z-10 inline-flex size-6 items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium text-zinc-50 transition-colors hover:bg-zinc-700 hover:text-zinc-50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
                     id="radix-:r17n:"
                     type="button"
                     data-state="closed"
@@ -578,7 +578,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                 data-theme="default"
               ><code class="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm" data-language="tsx" data-theme="default"><span class="line"><span style="color: #f97583;">import</span><span style="color: #e1e4e8;"> ScrollArea  </span><span style="color: #f97583;">from</span><span style="color: #9ecbff;"> "components/ui/scroll-area"</span></span></code></pre>
               <button
-                class="absolute right-4 top-4 z-10 inline-flex size-6 items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium text-zinc-50 transition-colors hover:bg-zinc-700 hover:text-zinc-50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none  [&_svg]:size-4 [&_svg]:shrink-0"
+                class="absolute right-4 top-4 z-10 inline-flex size-6 items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium text-zinc-50 transition-colors hover:bg-zinc-700 hover:text-zinc-50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_.svg]:pointer-events-none  [&_.svg]:size-4 [&_.svg]:shrink-0"
               >
                 <span class="sr-only">Copy</span>
               </button>
@@ -597,7 +597,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 <span class="line"><span style="color: #e1e4e8;"> started laughing, they couldn't stop.</span></span>
 <span class="line"><span style="color: #e1e4e8;">&lt;/</span><span style="color: #79b8ff;">ScrollArea</span><span style="color: #e1e4e8;">&gt;</span></span></code></pre>
               <button
-                class="absolute right-4 top-4 z-10 inline-flex size-6 items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium text-zinc-50 transition-colors hover:bg-zinc-700 hover:text-zinc-50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none  [&_svg]:size-4 [&_svg]:shrink-0"
+                class="absolute right-4 top-4 z-10 inline-flex size-6 items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium text-zinc-50 transition-colors hover:bg-zinc-700 hover:text-zinc-50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_.svg]:pointer-events-none  [&_.svg]:size-4 [&_.svg]:shrink-0"
               >
                 <span class="sr-only">Copy</span>
               </button>
@@ -657,7 +657,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                 >
                   <div class="flex items-center justify-between p-4">
                     <button
-                      class="flex h-7 w-[145px] items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-xs shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 [&_svg]:size-4"
+                      class="flex h-7 w-[145px] items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-xs shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 [&_.svg]:size-4"
                       dir="ltr"
                       type="button"
                       data-state="closed"
@@ -667,7 +667,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                     </button>
                     <div class="flex items-center gap-2">
                       <button
-                        class="relative z-10 inline-flex size-7 items-center justify-center gap-2 whitespace-nowrap rounded-md border border-input bg-background text-sm font-medium text-foreground opacity-100 shadow-sm transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none  [&_svg]:size-4 [&_svg]:shrink-0"
+                        class="relative z-10 inline-flex size-7 items-center justify-center gap-2 whitespace-nowrap rounded-md border border-input bg-background text-sm font-medium text-foreground opacity-100 shadow-sm transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_.svg]:pointer-events-none  [&_.svg]:size-4 [&_.svg]:shrink-0"
                       >
                         <span class="sr-only">Copy</span>
                       </button>
@@ -775,13 +775,13 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
         </div>
         <div class="flex flex-row items-center justify-between">
           <a
-            class="inline-flex h-9 items-center justify-center gap-2 whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
+            class="inline-flex h-9 items-center justify-center gap-2 whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
             href="/docs/components/resizable"
           >
             Resizable
           </a>
           <a
-            class="ml-auto inline-flex h-9 items-center justify-center gap-2 whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
+            class="ml-auto inline-flex h-9 items-center justify-center gap-2 whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
             href="/docs/components/select"
           >
             Select
