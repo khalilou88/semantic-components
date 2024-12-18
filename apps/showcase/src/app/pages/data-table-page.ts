@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { ScDataTable } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-data-table-page',
-  imports: [],
+  imports: [ScDataTable],
   template: `
-    <p>data-table-page works!</p>
+    <sc-data-table />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
