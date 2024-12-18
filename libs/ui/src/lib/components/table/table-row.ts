@@ -9,7 +9,7 @@ import {
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'table[sc-table]',
+  selector: 'tr[sc-table-row]',
   imports: [],
   template: `
     <ng-content />
@@ -21,8 +21,10 @@ import { cn } from '../../utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ScTable {
+export class ScTableRow {
   class = input<string>('');
 
-  classes = computed(() => cn('w-full caption-bottom text-sm', this.class()));
+  classes = computed(() =>
+    cn('border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted', this.class()),
+  );
 }

@@ -9,7 +9,7 @@ import {
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'table[sc-table]',
+  selector: 'tfoot[sc-table-footer]',
   imports: [],
   template: `
     <ng-content />
@@ -21,8 +21,10 @@ import { cn } from '../../utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ScTable {
+export class ScTableFooter {
   class = input<string>('');
 
-  classes = computed(() => cn('w-full caption-bottom text-sm', this.class()));
+  classes = computed(() =>
+    cn('border-t bg-muted/50 font-medium [&>tr]:last:border-b-0', this.class()),
+  );
 }

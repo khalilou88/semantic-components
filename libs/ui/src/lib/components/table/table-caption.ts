@@ -9,7 +9,7 @@ import {
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'table[sc-table]',
+  selector: 'caption[sc-table-caption]',
   imports: [],
   template: `
     <ng-content />
@@ -21,8 +21,8 @@ import { cn } from '../../utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ScTable {
+export class ScTableCaption {
   class = input<string>('');
 
-  classes = computed(() => cn('w-full caption-bottom text-sm', this.class()));
+  classes = computed(() => cn('mt-4 text-sm text-muted-foreground', this.class()));
 }
