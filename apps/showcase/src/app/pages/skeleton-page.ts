@@ -1,8 +1,10 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { ScSkeleton } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-skeleton-page',
-  imports: [],
+  imports: [ScSkeleton],
   template: `
     <p>skeleton-page works!</p>
   `,
@@ -10,4 +12,4 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SkeletonPage {}
+export default class SkeletonPage {}

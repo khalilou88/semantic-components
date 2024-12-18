@@ -34,3 +34,4 @@ export * from './lib/components/tel-input';
 export * from './lib/components/hover-card';
 export * from './lib/components/avatar';
 export * from './lib/components/aspect-ratio';
+export * from './lib/components/skeleton';
