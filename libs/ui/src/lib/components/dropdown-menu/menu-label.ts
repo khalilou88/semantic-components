@@ -30,7 +30,7 @@ export class ScMenuLabel {
   );
 
   readonly _inset = input<boolean, unknown>(false, {
-    alias: 'required',
+    alias: 'inset',
     transform: booleanAttribute,
   });
 }
