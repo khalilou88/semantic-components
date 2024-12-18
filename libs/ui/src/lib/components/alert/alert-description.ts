@@ -1,13 +1,28 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
+
+import { cn } from '../../utils';
 
 @Component({
-  selector: 'sc-alert-description',
+  selector: 'p[sc-alert-description]',
   imports: [],
   template: `
-    <p>alert-description works!</p>
+    <ng-content />
   `,
+  host: {
+    '[class]': 'classes()',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScAlertDescription {}
+export class ScAlertDescription {
+  class = input<string>('');
+
+  classes = computed(() => cn('text-sm [&_p]:leading-relaxed', this.class()));
+}
