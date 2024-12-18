@@ -43,9 +43,9 @@ const DEFAULT_PAGE_SIZE = 10;
   ],
   template: `
     @if (!hidePageSize()) {
-      <div>
-        <label class="" for="items-per-page">Items per page:</label>
-        <sc-select class="" id="items-per-page" [formControl]="pageSizeFormControl">
+      <div class="flex items-center space-x-2">
+        <label class="text-sm font-medium" for="items-per-page">Items per page:</label>
+        <sc-select class="w-20" id="items-per-page" [formControl]="pageSizeFormControl">
           @for (pageSizeOption of pageSizeOptions(); track $index) {
             <sc-option [value]="pageSizeOption">{{ pageSizeOption }}</sc-option>
           }
@@ -53,7 +53,7 @@ const DEFAULT_PAGE_SIZE = 10;
       </div>
     }
 
-    <div class="">
+    <div class="flex w-[100px] items-center justify-center text-sm font-medium">
       Showing
       <span>{{ firstItemPage() }}-{{ lastItemPage() }}</span>
       of

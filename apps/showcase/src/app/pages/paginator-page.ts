@@ -6,14 +6,16 @@ import { ScPageEvent, ScPaginator } from '@semantic-components/ui';
   selector: 'app-paginator-page',
   imports: [ScPaginator],
   template: `
-    <sc-paginator
-      [hidePageSize]="false"
-      [showFirstLastButtons]="true"
-      [currentPage]="currentPage()"
-      [pageSize]="pageSize()"
-      [totalSize]="totalSize()"
-      (pageChanged)="setPageEvent($event)"
-    />
+    <div class="m-10">
+      <sc-paginator
+        [hidePageSize]="false"
+        [showFirstLastButtons]="true"
+        [currentPage]="currentPage()"
+        [pageSize]="pageSize()"
+        [totalSize]="totalSize()"
+        (pageChanged)="setPageEvent($event)"
+      />
+    </div>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
