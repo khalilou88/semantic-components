@@ -6,7 +6,7 @@ import { ScButton, ScInput, ScLabel, ScPopoverTriggerFor } from '@semantic-compo
   selector: 'app-popover-page',
   imports: [ScButton, ScLabel, ScInput, ScPopoverTriggerFor],
   template: `
-    <button sc-button variant="outline" scPopoverTriggerFor="popover">Open popover</button>
+    <button [scPopoverTriggerFor]="popover" sc-button variant="outline">Open popover</button>
 
     <ng-template #popover>
       <div class="grid gap-4">
