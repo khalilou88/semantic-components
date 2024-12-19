@@ -40,3 +40,4 @@ export * from './lib/components/popover';
 export * from './lib/components/context-menu';
 export * from './lib/components/menu';
 export * from './lib/components/command';
+export * from './lib/components/collapsible';
