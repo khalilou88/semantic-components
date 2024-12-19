@@ -9,7 +9,7 @@ import {
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'sc-command',
+  selector: 'sc-command-input',
   imports: [],
   template: `
     <ng-content />
@@ -21,7 +21,7 @@ import { cn } from '../../utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCommand {
+export class ScCommandInput {
   class = input<string>('');
 
   classes = computed(() => cn('', this.class()));
