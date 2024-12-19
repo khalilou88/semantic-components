@@ -2,8 +2,6 @@ import { CdkMenuItem, CdkMenuTrigger } from '@angular/cdk/menu';
 import {
   ChangeDetectionStrategy,
   Component,
-  ContentChild,
-  TemplateRef,
   ViewEncapsulation,
   computed,
   input,
@@ -27,7 +25,7 @@ import { cn } from '../../utils';
     CdkMenuItem,
     {
       directive: CdkMenuTrigger,
-      inputs: ['cdkMenuTriggerFor: templateRef'],
+      inputs: ['cdkMenuTriggerFor: scMenubarTriggerFor'],
     },
   ],
 })
@@ -41,5 +39,5 @@ export class ScMenubarTrigger {
     ),
   );
 
-  @ContentChild(TemplateRef) templateRef: TemplateRef<unknown> | undefined;
+  scMenubarTriggerFor = input.required();
 }

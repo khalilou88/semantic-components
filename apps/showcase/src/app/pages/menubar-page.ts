@@ -33,9 +33,9 @@ import {
     <div class="m-10">
       <sc-menubar>
         <sc-menubar-item>
-          <sc-menubar-trigger>File</sc-menubar-trigger>
+          <sc-menubar-trigger [scMenubarTriggerFor]="file">File</sc-menubar-trigger>
 
-          <ng-template>
+          <ng-template #file>
             <sc-menu-item>
               New Tab
               <span sc-menu-shortcut>⌘T</span>
@@ -63,7 +63,7 @@ import {
         </sc-menubar-item>
 
         <sc-menubar-item>
-          <sc-menubar-trigger>Edit</sc-menubar-trigger>
+          <sc-menubar-trigger [scMenubarTriggerFor]="file">Edit</sc-menubar-trigger>
           <ng-template>
             <sc-menu-item>
               Undo
@@ -92,7 +92,7 @@ import {
         </sc-menubar-item>
 
         <sc-menubar-item>
-          <sc-menubar-trigger>View</sc-menubar-trigger>
+          <sc-menubar-trigger [scMenubarTriggerFor]="file">View</sc-menubar-trigger>
           <ng-template>
             <sc-menu-checkbox-item>Always Show Bookmarks Bar</sc-menu-checkbox-item>
             <sc-menu-checkbox-item checked>Always Show Full URLs</sc-menu-checkbox-item>
@@ -113,7 +113,7 @@ import {
         </sc-menubar-item>
 
         <sc-menubar-item>
-          <sc-menubar-trigger>Profiles</sc-menubar-trigger>
+          <sc-menubar-trigger [scMenubarTriggerFor]="file">Profiles</sc-menubar-trigger>
           <ng-template>
             <sc-menu-radio-group value="benoit">
               <sc-menu-radio-item value="andy">Andy</sc-menu-radio-item>

@@ -26,7 +26,7 @@ import { cn } from '../../utils';
 export class ScMenubarItem {
   class = input<string>('');
 
-  classes = computed(() => cn('', this.class()));
+  classes = computed(() => cn('block', this.class()));
 
   @ContentChild(TemplateRef) templateRef: TemplateRef<unknown> | undefined;
 }
