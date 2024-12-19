@@ -30,7 +30,7 @@ import { cn } from '../../utils';
 export class ScCommandInput {
   class = input<string>('');
 
-  classes = computed(() => cn('flex items-center border-b px-3 [&_.svg]:size-5', this.class()));
+  classes = computed(() => cn('flex items-center border-b px-3', this.class()));
 
   placeholder = input('');
 }
