@@ -13,9 +13,7 @@ import { ScCommand } from './command';
   selector: 'sc-command-dialog',
   imports: [ScCommand],
   template: `
-    <sc-command
-      class="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:size-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:size-5"
-    >
+    <sc-command class="">
       <ng-content />
     </sc-command>
   `,
@@ -29,5 +27,5 @@ import { ScCommand } from './command';
 export class ScCommandDialog {
   class = input<string>('');
 
-  classes = computed(() => cn('overflow-hidden p-0 shadow-lg', this.class()));
+  classes = computed(() => cn('block overflow-hidden p-0 shadow-lg', this.class()));
 }

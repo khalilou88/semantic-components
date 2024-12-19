@@ -25,6 +25,6 @@ export class ScCommandShortcut {
   class = input<string>('');
 
   classes = computed(() =>
-    cn('ml-auto text-xs tracking-widest text-muted-foreground', this.class()),
+    cn('block ml-auto text-xs tracking-widest text-muted-foreground', this.class()),
   );
 }

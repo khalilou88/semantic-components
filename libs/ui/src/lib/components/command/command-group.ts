@@ -7,13 +7,13 @@ import {
 } from '@angular/core';
 
 import { cn } from '../../utils';
+import { ScCommandGroupHeading } from './command-group-heading';
 
 @Component({
   selector: 'sc-command-group',
-  imports: [],
+  imports: [ScCommandGroupHeading],
   template: `
-    <!-- TODO remove use of cmdk-group-heading -->
-    <div cmdk-group-heading>{{ heading() }}</div>
+    <sc-command-group-heading>{{ heading() }}</sc-command-group-heading>
     <ng-content />
   `,
   host: {
@@ -26,12 +26,7 @@ import { cn } from '../../utils';
 export class ScCommandGroup {
   class = input<string>('');
 
-  classes = computed(() =>
-    cn(
-      'overflow-hidden p-1 text-foreground [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground',
-      this.class(),
-    ),
-  );
+  classes = computed(() => cn('block overflow-hidden p-1 text-foreground px-2', this.class()));
 
   heading = input('');
 }
