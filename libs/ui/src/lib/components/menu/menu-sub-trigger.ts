@@ -38,7 +38,7 @@ export class ScMenuSubTrigger {
 
   classes = computed(() =>
     cn(
-      'w-full flex cursor-default gap-2 select-none items-center rounded-sm py-1.5 text-sm outline-none focus:bg-accent data-[state=open]:bg-accent [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0',
+      'flex cursor-default gap-2 select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent data-[state=open]:bg-accent [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0',
       this._inset() && 'pl-8',
       this.class(),
     ),
