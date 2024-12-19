@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { ScContextMenuTriggerFor } from '@semantic-components/ui';
+import { ScContextMenuTriggerFor, ScMenu, ScMenuItem } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-context-menu-page',
-  imports: [ScContextMenuTriggerFor],
+  imports: [ScContextMenuTriggerFor, ScMenu, ScMenuItem],
   template: `
     <div
       class="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm"
@@ -14,10 +14,10 @@ import { ScContextMenuTriggerFor } from '@semantic-components/ui';
     </div>
 
     <ng-template #context_menu>
-      <div class="">
-        <button class="">Cut</button>
-        <button class="">Copy</button>
-        <button class="">Link</button>
+      <div sc-menu>
+        <button sc-menu-item>Cut</button>
+        <button sc-menu-item>Copy</button>
+        <button sc-menu-item>Link</button>
       </div>
     </ng-template>
   `,
