@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'sc-menubar',
+  selector: 'app-menubar-page',
   imports: [],
   template: `
-    <p>menubar works!</p>
+    <p>menubar-page works!</p>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScMenubar {}
+export default class MenubarPage {}
