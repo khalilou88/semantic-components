@@ -1,21 +1,12 @@
-import { Overlay, OverlayRef, PositionStrategy } from '@angular/cdk/overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
 import {
   ChangeDetectionStrategy,
   Component,
-  ComponentRef,
-  ContentChild,
-  ElementRef,
-  TemplateRef,
-  ViewContainerRef,
   ViewEncapsulation,
   computed,
-  inject,
   input,
 } from '@angular/core';
 
 import { cn } from '../../utils';
-import { ScMenuContainer } from './menu-container';
 
 @Component({
   selector: 'sc-menu-sub',
@@ -25,8 +16,6 @@ import { ScMenuContainer } from './menu-container';
   `,
   host: {
     '[class]': 'classes()',
-    // '(click)': 'open()',
-    // '(mouseover)': 'open()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -35,72 +24,10 @@ import { ScMenuContainer } from './menu-container';
 export class ScMenuSub {
   class = input<string>('');
 
-  classes = computed(() => cn('', this.class()));
-
-  private overlayRef: OverlayRef | null = null;
-
-  @ContentChild(TemplateRef) menuSubRef: TemplateRef<unknown> | undefined;
-
-  open() {
-    console.log('open sub menu');
-
-    if (this.overlayRef?.hasAttached() === true) {
-      return;
-    }
-
-    this.attachTooltip();
-  }
-
-  private element = inject<ElementRef<HTMLElement>>(ElementRef);
-  private overlay = inject(Overlay);
-  private viewContainer = inject(ViewContainerRef);
-
-  private attachTooltip(): void {
-    if (this.overlayRef === null) {
-      const positionStrategy = this.getPositionStrategy();
-      this.overlayRef = this.overlay.create({ positionStrategy });
-    }
-
-    // const injector = Injector.create({
-    //   providers: [
-    //     {
-    //       provide: TOOLTIP_DATA,
-    //       useValue: this.appTooltip,
-    //     },
-    //   ],
-    // });
-    const componentPortal = new ComponentPortal(ScMenuContainer, this.viewContainer);
-
-    // Attach tooltip portal to overlay
-    const componentRef: ComponentRef<ScMenuContainer> = this.overlayRef.attach(componentPortal);
-
-    console.log('this.menuSubRef');
-    console.log(this.menuSubRef);
-
-    if (this.menuSubRef !== undefined) {
-      componentRef.instance.templateRef.set(this.menuSubRef);
-    }
-  }
-
-  private getPositionStrategy(): PositionStrategy {
-    return this.overlay
-      .position()
-      .flexibleConnectedTo(this.element)
-      .withPositions([
-        {
-          originX: 'center',
-          originY: 'top',
-          overlayX: 'center',
-          overlayY: 'bottom',
-          panelClass: 'top',
-        },
-        {
-          originX: 'center',
-          originY: 'bottom',
-          overlayX: 'center',
-          overlayY: 'top',
-          panelClass: 'bottom',
-        },
-      ]);
-  }
+  classes = computed(() =>
+    cn(
+      'z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
+      this.class(),
+    ),
+  );
 }

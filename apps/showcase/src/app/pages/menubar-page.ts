@@ -32,6 +32,7 @@ import {
     ScMenuSub,
     ScMenubarItem,
     ScMenu,
+    ScMenuSub,
   ],
   template: `
     <div class="m-10">
@@ -51,14 +52,17 @@ import {
               </sc-menu-item>
               <sc-menu-item disabled>New Incognito Window</sc-menu-item>
               <sc-menu-separator />
-              <sc-menu-sub>
-                <sc-menu-sub-trigger>Share</sc-menu-sub-trigger>
-                <ng-template>
-                  <sc-menu-item>Email link</sc-menu-item>
-                  <sc-menu-item>Messages</sc-menu-item>
-                  <sc-menu-item>Notes</sc-menu-item>
+              <sc-menu-item>
+                <sc-menu-sub-trigger [scMenuSubTriggerFor]="share">Share</sc-menu-sub-trigger>
+                <ng-template #share>
+                  <sc-menu-sub>
+                    <sc-menu-item>Email link</sc-menu-item>
+                    <sc-menu-item>Messages</sc-menu-item>
+                    <sc-menu-item>Notes</sc-menu-item>
+                  </sc-menu-sub>
                 </ng-template>
-              </sc-menu-sub>
+              </sc-menu-item>
+
               <sc-menu-separator />
               <sc-menu-item>
                 Print...
@@ -81,16 +85,18 @@ import {
                 <span sc-menu-shortcut>⇧⌘Z</span>
               </sc-menu-item>
               <sc-menu-separator />
-              <sc-menu-sub>
-                <sc-menu-sub-trigger>Find</sc-menu-sub-trigger>
-                <ng-template>
-                  <sc-menu-item>Search the web</sc-menu-item>
-                  <sc-menu-separator />
-                  <sc-menu-item>Find...</sc-menu-item>
-                  <sc-menu-item>Find Next</sc-menu-item>
-                  <sc-menu-item>Find Previous</sc-menu-item>
+              <sc-menu-item>
+                <sc-menu-sub-trigger [scMenuSubTriggerFor]="find">Find</sc-menu-sub-trigger>
+                <ng-template #find>
+                  <sc-menu-sub>
+                    <sc-menu-item>Search the web</sc-menu-item>
+                    <sc-menu-separator />
+                    <sc-menu-item>Find...</sc-menu-item>
+                    <sc-menu-item>Find Next</sc-menu-item>
+                    <sc-menu-item>Find Previous</sc-menu-item>
+                  </sc-menu-sub>
                 </ng-template>
-              </sc-menu-sub>
+              </sc-menu-item>
               <sc-menu-separator />
               <sc-menu-item>Cut</sc-menu-item>
               <sc-menu-item>Copy</sc-menu-item>

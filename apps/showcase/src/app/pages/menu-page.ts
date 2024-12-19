@@ -11,7 +11,6 @@ import {
   ScMenuSeparator,
   ScMenuShortcut,
   ScMenuSub,
-  ScMenuSubContent,
   ScMenuSubTrigger,
 } from '@semantic-components/ui';
 import {
@@ -55,7 +54,6 @@ import {
     ScMenuItem,
     ScMenuSub,
     ScMenuSubTrigger,
-    ScMenuSubContent,
     ScMenuContent,
     ScMenuCheckboxItem,
     ScMenuRadioItem,
@@ -95,13 +93,13 @@ import {
             <span>Team</span>
           </sc-menu-item>
           <sc-menu-sub>
-            <sc-menu-sub-trigger>
+            <sc-menu-sub-trigger [scMenuSubTriggerFor]="sub_menu_1">
               <svg-user-plus-icon />
               <span>Invite users</span>
             </sc-menu-sub-trigger>
 
             <ng-template #sub_menu_1>
-              <sc-menu-sub-content>
+              <sc-menu-sub>
                 <sc-menu-item>
                   <svg-mail-icon />
                   <span>Email</span>
@@ -115,7 +113,7 @@ import {
                   <svg-circle-plus-icon />
                   <span>More...</span>
                 </sc-menu-item>
-              </sc-menu-sub-content>
+              </sc-menu-sub>
             </ng-template>
           </sc-menu-sub>
           <sc-menu-item>
