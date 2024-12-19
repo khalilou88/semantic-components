@@ -24,5 +24,5 @@ import { cn } from '../../utils';
 export class ScCommandEmpty {
   class = input<string>('');
 
-  classes = computed(() => cn('py-6 text-center text-sm', this.class()));
+  classes = computed(() => cn('block py-6 text-center text-sm', this.class()));
 }
