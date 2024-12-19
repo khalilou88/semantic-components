@@ -1,35 +1,65 @@
 name: Publish
 
 on:
-  # Run manually using the GitHub UI
   workflow_dispatch:
 
+  push:
+    tags:
+      - v*.*.*
+
 jobs:
-  publish:
-    name: Publish to npm
+  test:
+    name: Publish
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       id-token: write # needed for provenance data generation
+    timeout-minutes: 10
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # need to fetch all the tags
+          fetch-depth: 0
 
-      - name: Use Node.js v20
+      - name: Install Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          registry-url: 'https://registry.npmjs.org'
-          cache: 'npm'
+          registry-url: https://registry.npmjs.org/
 
       - name: Install dependencies
-        run: npm i
+        run: npm install --legacy-peer-deps
+        shell: bash
 
-      - name: Publish
-        run: |
-          npx nx release publish
+      - name: Print Environment Info
+        run: npx nx report
+        shell: bash
+
+      - name: Version
+        run: npx nx release version minor
+        shell: bash
+
+      - run: npx nx run-many -t build
+
+      - name: Publish packages
+        run: npx nx release publish
+        shell: bash
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
+
+      - name: Setup Git
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+
+      - name: Commit changes
+        run: |
+          git add .
+          [[ $(git status --porcelain) ]] && git commit -m "build: publish packages" || echo "nothing to commit"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
