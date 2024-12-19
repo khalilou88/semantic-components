@@ -8,7 +8,7 @@ on:
       - v*.*.*
 
 jobs:
-  test:
+  publish:
     name: Publish
     runs-on: ubuntu-latest
     permissions:
@@ -38,8 +38,6 @@ jobs:
       - name: Version
         run: npx nx release version minor
         shell: bash
-
-      - run: npx nx run-many -t build
 
       - name: Publish packages
         run: npx nx release publish
