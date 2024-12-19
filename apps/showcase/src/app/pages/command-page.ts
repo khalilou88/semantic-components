@@ -3,10 +3,12 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import {
   ScCommand,
   ScCommandEmpty,
+  ScCommandError,
   ScCommandGroup,
   ScCommandInput,
   ScCommandItem,
   ScCommandList,
+  ScCommandLoading,
   ScCommandSeparator,
   ScCommandShortcut,
 } from '@semantic-components/ui';
@@ -36,12 +38,16 @@ import {
     SvgUserIcon,
     SvgCreditCardIcon,
     SvgSettingsIcon,
+    ScCommandError,
+    ScCommandLoading,
   ],
   template: `
     <div class="m-10">
       <sc-command class="rounded-lg border shadow-md md:min-w-[450px]">
         <sc-command-input placeholder="Type a command or search..." />
         <sc-command-list>
+          <sc-command-loading>Loading.</sc-command-loading>
+          <sc-command-error>Error.</sc-command-error>
           <sc-command-empty>No results found.</sc-command-empty>
           <sc-command-group heading="Suggestions">
             <sc-command-item>
