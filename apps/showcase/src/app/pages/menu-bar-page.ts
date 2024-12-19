@@ -1,13 +1,4 @@
-import {
-  CdkMenu,
-  CdkMenuBar,
-  CdkMenuGroup,
-  CdkMenuItem,
-  CdkMenuItemCheckbox,
-  CdkMenuItemRadio,
-  CdkMenuModule,
-  CdkMenuTrigger,
-} from '@angular/cdk/menu';
+import { CdkMenuModule } from '@angular/cdk/menu';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import {
@@ -23,13 +14,6 @@ import { SvgChevronRightIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-menu-bar-page',
   imports: [
-    CdkMenuBar,
-    CdkMenuItem,
-    CdkMenuTrigger,
-    CdkMenu,
-    CdkMenuGroup,
-    CdkMenuItemCheckbox,
-    CdkMenuItemRadio,
     CdkMenuModule,
     ScMenuBar,
     ScMenuItem,
