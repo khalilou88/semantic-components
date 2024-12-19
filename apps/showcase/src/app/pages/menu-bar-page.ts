@@ -14,19 +14,14 @@ import {
   ScMenu,
   ScMenuBar,
   ScMenuBarItem,
-  ScMenuCheckboxItem,
   ScMenuItem,
-  ScMenuRadioGroup,
-  ScMenuRadioItem,
   ScMenuSeparator,
-  ScMenuShortcut,
-  ScMenuSub,
-  ScMenuSubTrigger,
-  ScMenubarTrigger,
+  ScMenuTriggerFor,
 } from '@semantic-components/ui';
+import { SvgChevronRightIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-menubar-page',
+  selector: 'app-menu-bar-page',
   imports: [
     CdkMenuBar,
     CdkMenuItem,
@@ -37,41 +32,35 @@ import {
     CdkMenuItemRadio,
     CdkMenuModule,
     ScMenuBar,
-    ScMenuSeparator,
-    ScMenubarTrigger,
-    ScMenuShortcut,
     ScMenuItem,
-    ScMenuSubTrigger,
-    ScMenuCheckboxItem,
-    ScMenuRadioGroup,
-    ScMenuRadioItem,
-    ScMenuSub,
     ScMenuBarItem,
     ScMenu,
-    ScMenuSub,
+    SvgChevronRightIcon,
+    ScMenuSeparator,
+    ScMenuTriggerFor,
   ],
   template: `
     <div class="m-10">
       <div sc-menu-bar>
-        <button [cdkMenuTriggerFor]="file" sc-menu-bar-item>File</button>
-        <button [cdkMenuTriggerFor]="edit" sc-menu-bar-item>Edit</button>
-        <button [cdkMenuTriggerFor]="format" sc-menu-bar-item>Format</button>
+        <button [scMenuTriggerFor]="file" sc-menu-bar-item>File</button>
+        <button [scMenuTriggerFor]="edit" sc-menu-bar-item>Edit</button>
+        <button [scMenuTriggerFor]="format" sc-menu-bar-item>Format</button>
       </div>
 
       <ng-template #file>
         <div sc-menu>
           <button sc-menu-item>Share</button>
-          <hr />
-          <button [cdkMenuTriggerFor]="new_doc" sc-menu-item>
+          <hr sc-menu-separator />
+          <button [scMenuTriggerFor]="new_doc" sc-menu-item>
             New
-            <span>&#10148;</span>
+            <svg-chevron-right-icon class="ml-auto" />
           </button>
           <button sc-menu-item>Open</button>
           <button sc-menu-item>Make a Copy</button>
           <hr />
-          <button [cdkMenuTriggerFor]="download" sc-menu-item>
+          <button [scMenuTriggerFor]="download" sc-menu-item>
             Download
-            <span>&#10148;</span>
+            <svg-chevron-right-icon class="ml-auto" />
           </button>
         </div>
       </ng-template>

@@ -10,3 +10,4 @@ export * from './menu-sub-trigger';
 export * from './menu-checkbox-item';
 export * from './menu-radio-group';
 export * from './menu-radio-item';
+export * from './menu-trigger-for';
