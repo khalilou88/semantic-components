@@ -9,7 +9,7 @@ import {
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'span[sc-menu-shortcut]',
+  selector: 'sc-menubar-trigger',
   imports: [],
   template: `
     <ng-content />
@@ -21,10 +21,13 @@ import { cn } from '../../utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScMenuShortcut {
+export class ScMenubarTrigger {
   class = input<string>('');
 
   classes = computed(() =>
-    cn('ml-auto text-xs tracking-widest text-muted-foreground', this.class()),
+    cn(
+      'flex cursor-default select-none items-center rounded-sm px-3 py-1.5 text-sm font-medium outline-none focus:bg-accent focus:text-accent-foreground data-[state=open]:bg-accent data-[state=open]:text-accent-foreground',
+      this.class(),
+    ),
   );
 }
