@@ -3,10 +3,12 @@ import {
   Component,
   ViewEncapsulation,
   computed,
+  inject,
   input,
 } from '@angular/core';
 
 import { cn } from '../../utils';
+import { ScCollapsibleState } from './collapsible-state';
 
 @Component({
   selector: 'sc-collapsible-trigger',
@@ -16,13 +18,20 @@ import { cn } from '../../utils';
   `,
   host: {
     '[class]': 'classes()',
+    '(click)': 'toggle()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCollapsibleTrigger {
+  state = inject(ScCollapsibleState);
+
   class = input<string>('');
 
   classes = computed(() => cn('', this.class()));
+
+  toggle() {
+    this.state.isToggled.next();
+  }
 }
