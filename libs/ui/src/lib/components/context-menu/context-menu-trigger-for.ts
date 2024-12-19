@@ -12,8 +12,4 @@ import { Directive, TemplateRef, input } from '@angular/core';
 })
 export class ScContextMenuTriggerFor {
   readonly scContextMenuTriggerFor = input.required<TemplateRef<unknown>>();
-
-  constructor() {
-    console.log('yes');
-  }
 }
