@@ -1,3 +1,4 @@
+import { CdkMenuModule } from '@angular/cdk/menu';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import {
@@ -18,6 +19,7 @@ import {
 @Component({
   selector: 'app-menubar-page',
   imports: [
+    CdkMenuModule,
     ScMenubar,
     ScMenuSeparator,
     ScMenubarTrigger,
