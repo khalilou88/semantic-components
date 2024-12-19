@@ -1,3 +1,2 @@
-export * from './menubar';
-export * from './menubar-item';
-export * from './menubar-trigger';
+export * from './menu-bar';
+export * from './menu-bar-item';

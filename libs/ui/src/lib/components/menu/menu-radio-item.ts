@@ -1,3 +1,4 @@
+import { CdkMenuItemRadio } from '@angular/cdk/menu';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -11,18 +12,14 @@ import { SvgCircleIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'sc-menu-radio-item',
+  selector: 'button[sc-menu-radio-item]',
   imports: [SvgCircleIcon],
   template: `
-    <div
-      class="relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
-    >
-      <span class="absolute left-2 flex size-3.5 items-center justify-center">
-        <svg-circle-icon class="size-2 fill-current" />
-      </span>
+    <span class="absolute left-2 flex size-3.5 items-center justify-center">
+      <svg-circle-icon class="size-2 fill-current" />
+    </span>
 
-      <ng-content />
-    </div>
+    <ng-content />
   `,
   host: {
     '[class]': 'classes()',
@@ -30,11 +27,17 @@ import { cn } from '../../utils';
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  hostDirectives: [CdkMenuItemRadio],
 })
 export class ScMenuRadioItem {
   class = input<string>('');
 
-  classes = computed(() => cn('', this.class()));
+  classes = computed(() =>
+    cn(
+      'relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      this.class(),
+    ),
+  );
 
   value = input('');
 }
