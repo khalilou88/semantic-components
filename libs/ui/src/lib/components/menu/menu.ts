@@ -8,10 +8,8 @@ import {
 
 import { cn } from '../../utils';
 
-//TODO maybe remove this and keep only scMenu
-
 @Component({
-  selector: 'sc-menu-content',
+  selector: 'sc-menu',
   imports: [],
   template: `
     <ng-content />
@@ -23,7 +21,7 @@ import { cn } from '../../utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScMenuContent {
+export class ScMenu {
   class = input<string>('');
 
   classes = computed(() =>

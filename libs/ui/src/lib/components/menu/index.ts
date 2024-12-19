@@ -1,3 +1,4 @@
+export * from './menu';
 export * from './menu-content';
 export * from './menu-label';
 export * from './menu-shortcut';

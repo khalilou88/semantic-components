@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import {
+  ScMenu,
   ScMenuCheckboxItem,
   ScMenuItem,
   ScMenuRadioGroup,
@@ -28,6 +29,7 @@ import {
     ScMenuRadioItem,
     ScMenuSub,
     ScMenubarItem,
+    ScMenu,
   ],
   template: `
     <div class="m-10">
@@ -36,29 +38,31 @@ import {
           <sc-menubar-trigger [scMenubarTriggerFor]="file">File</sc-menubar-trigger>
 
           <ng-template #file>
-            <sc-menu-item>
-              New Tab
-              <span sc-menu-shortcut>⌘T</span>
-            </sc-menu-item>
-            <sc-menu-item>
-              New Window
-              <span sc-menu-shortcut>⌘N</span>
-            </sc-menu-item>
-            <sc-menu-item disabled>New Incognito Window</sc-menu-item>
-            <sc-menu-separator />
-            <sc-menu-sub>
-              <sc-menu-sub-trigger>Share</sc-menu-sub-trigger>
-              <ng-template>
-                <sc-menu-item>Email link</sc-menu-item>
-                <sc-menu-item>Messages</sc-menu-item>
-                <sc-menu-item>Notes</sc-menu-item>
-              </ng-template>
-            </sc-menu-sub>
-            <sc-menu-separator />
-            <sc-menu-item>
-              Print...
-              <span sc-menu-shortcut>⌘P</span>
-            </sc-menu-item>
+            <sc-menu>
+              <sc-menu-item>
+                New Tab
+                <span sc-menu-shortcut>⌘T</span>
+              </sc-menu-item>
+              <sc-menu-item>
+                New Window
+                <span sc-menu-shortcut>⌘N</span>
+              </sc-menu-item>
+              <sc-menu-item disabled>New Incognito Window</sc-menu-item>
+              <sc-menu-separator />
+              <sc-menu-sub>
+                <sc-menu-sub-trigger>Share</sc-menu-sub-trigger>
+                <ng-template>
+                  <sc-menu-item>Email link</sc-menu-item>
+                  <sc-menu-item>Messages</sc-menu-item>
+                  <sc-menu-item>Notes</sc-menu-item>
+                </ng-template>
+              </sc-menu-sub>
+              <sc-menu-separator />
+              <sc-menu-item>
+                Print...
+                <span sc-menu-shortcut>⌘P</span>
+              </sc-menu-item>
+            </sc-menu>
           </ng-template>
         </sc-menubar-item>
 
