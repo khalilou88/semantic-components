@@ -17,34 +17,22 @@ import {
   viewChild,
 } from '@angular/core';
 
+import { SvgCalendarIcon } from '@semantic-icons/lucide-icons';
+
+import { ScInput } from '../input';
 import { ScInlineDatePicker } from './inline-date-picker';
 
 @Component({
   selector: 'sc-date-picker',
-  imports: [],
+  imports: [ScInput, SvgCalendarIcon],
   template: `
-    <div class="relative max-w-sm" #overlayOrigin>
-      <button class="absolute inset-y-0 end-0 flex items-center pe-3.5" (click)="open()">
-        <svg
-          class="size-4 text-gray-500 dark:text-gray-400"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-        >
-          <path
-            d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
-          />
-        </svg>
-      </button>
-      <input
-        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pe-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-        #input
-        type="text"
-        placeholder="Select date"
-      />
-    </div>
     {{ dateFormatPattern() }}
+    <div class="relative" #overlayOrigin>
+      <button class="absolute inset-y-0 end-0  pe-2" (click)="open()">
+        <svg-calendar-icon />
+      </button>
+      <input #input sc-input type="text" placeholder="Select date" />
+    </div>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -109,7 +97,8 @@ export class ScDatePicker implements OnInit {
     // Focus should already be on the input, but this call is in case the datepicker is opened
     // programmatically. We need to call this even if the datepicker is already open, because
     // the user might be clicking the toggle.
-    this._input()?.nativeElement.focus();
+    //TODO
+    // this._input()?.nativeElement.focus();
 
     if (this._isOpen()) {
       return;
@@ -119,7 +108,9 @@ export class ScDatePicker implements OnInit {
 
     const overlayRef = this._getOverlayRef();
 
-    overlayRef.updateSize({ width: this._overlayOrigin()?.nativeElement.offsetWidth });
+    //overlayRef.updateSize({ width: this._overlayOrigin()?.nativeElement.offsetWidth });
+
+    overlayRef.updateSize({ width: 400 });
 
     this._portal ??= new ComponentPortal(ScInlineDatePicker);
 
