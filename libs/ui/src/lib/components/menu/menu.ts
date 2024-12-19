@@ -10,7 +10,7 @@ import {
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'sc-menu',
+  selector: 'div[sc-menu]',
   imports: [],
   template: `
     <ng-content />

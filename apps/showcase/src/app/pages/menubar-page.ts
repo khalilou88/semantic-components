@@ -53,23 +53,23 @@ import {
   template: `
     <div class="m-10">
       <div sc-menu-bar>
-        <button [cdkMenuTriggerFor]="file" sc-menu-bar-item cdkMenuItem>File</button>
-        <button [cdkMenuTriggerFor]="edit" sc-menu-bar-item cdkMenuItem>Edit</button>
-        <button [cdkMenuTriggerFor]="format" sc-menu-bar-item cdkMenuItem>Format</button>
+        <button [cdkMenuTriggerFor]="file" sc-menu-bar-item>File</button>
+        <button [cdkMenuTriggerFor]="edit" sc-menu-bar-item>Edit</button>
+        <button [cdkMenuTriggerFor]="format" sc-menu-bar-item>Format</button>
       </div>
 
       <ng-template #file>
-        <div class="example-menu" cdkMenu>
-          <button class="example-menu-item" cdkMenuItem>Share</button>
+        <div sc-menu>
+          <button sc-menu-item>Share</button>
           <hr />
-          <button class="example-menu-item" [cdkMenuTriggerFor]="new_doc" cdkMenuItem>
+          <button [cdkMenuTriggerFor]="new_doc" sc-menu-item>
             New
             <span>&#10148;</span>
           </button>
-          <button class="example-menu-item" cdkMenuItem>Open</button>
-          <button class="example-menu-item" cdkMenuItem>Make a Copy</button>
+          <button sc-menu-item>Open</button>
+          <button sc-menu-item>Make a Copy</button>
           <hr />
-          <button class="example-menu-item" [cdkMenuTriggerFor]="download" cdkMenuItem>
+          <button [cdkMenuTriggerFor]="download" sc-menu-item>
             Download
             <span>&#10148;</span>
           </button>
@@ -77,18 +77,18 @@ import {
       </ng-template>
 
       <ng-template #edit>
-        <div class="example-menu" cdkMenu>
-          <button class="example-menu-item" cdkMenuItem>Undo</button>
-          <button class="example-menu-item" cdkMenuItem>Redo</button>
+        <div sc-menu>
+          <button sc-menu-item>Undo</button>
+          <button sc-menu-item>Redo</button>
           <hr />
-          <button class="example-menu-item" cdkMenuItem>Cut</button>
-          <button class="example-menu-item" cdkMenuItem>Copy</button>
-          <button class="example-menu-item" cdkMenuItem>Paste</button>
+          <button sc-menu-item>Cut</button>
+          <button sc-menu-item>Copy</button>
+          <button sc-menu-item>Paste</button>
         </div>
       </ng-template>
 
       <ng-template #format>
-        <div class="example-menu" cdkMenu>
+        <div sc-menu>
           <div class="example-menu-group" cdkMenuGroup>
             <button class="example-menu-item" cdkMenuItemCheckbox cdkMenuItemChecked>Bold</button>
             <button class="example-menu-item" cdkMenuItemCheckbox>Italic</button>
@@ -103,137 +103,23 @@ import {
       </ng-template>
 
       <ng-template #new_doc>
-        <div class="example-menu" cdkMenu>
-          <button class="example-menu-item" cdkMenuItem>Document</button>
-          <button class="example-menu-item" cdkMenuItem>From template</button>
+        <div sc-menu>
+          <button sc-menu-item>Document</button>
+          <button sc-menu-item>From template</button>
           <hr />
-          <button class="example-menu-item" cdkMenuItem>Spreadsheet</button>
-          <button class="example-menu-item" cdkMenuItem>Presentation</button>
-          <button class="example-menu-item" cdkMenuItem>Form</button>
+          <button sc-menu-item>Spreadsheet</button>
+          <button sc-menu-item>Presentation</button>
+          <button sc-menu-item>Form</button>
         </div>
       </ng-template>
 
       <ng-template #download>
-        <div class="example-menu" cdkMenu>
-          <button class="example-menu-item" cdkMenuItem>Microsoft Word</button>
-          <button class="example-menu-item" cdkMenuItem>PDF</button>
-          <button class="example-menu-item" cdkMenuItem>Plain text</button>
+        <div sc-menu>
+          <button sc-menu-item>Microsoft Word</button>
+          <button sc-menu-item>PDF</button>
+          <button sc-menu-item>Plain text</button>
         </div>
       </ng-template>
-
-      <br />
-      <br />
-      <br />
-      <br />
-      <div sc-menu-bar>
-        <button sc-menubar-item>
-          <sc-menubar-trigger [scMenubarTriggerFor]="file2">File</sc-menubar-trigger>
-
-          <ng-template #file2>
-            <sc-menu>
-              <sc-menu-item>
-                New Tab
-                <span sc-menu-shortcut>⌘T</span>
-              </sc-menu-item>
-              <sc-menu-item>
-                New Window
-                <span sc-menu-shortcut>⌘N</span>
-              </sc-menu-item>
-              <sc-menu-item disabled>New Incognito Window</sc-menu-item>
-              <sc-menu-separator />
-              <sc-menu-item>
-                <sc-menu-sub-trigger [scMenuSubTriggerFor]="share">Share</sc-menu-sub-trigger>
-                <ng-template #share>
-                  <sc-menu-sub>
-                    <sc-menu-item>Email link</sc-menu-item>
-                    <sc-menu-item>Messages</sc-menu-item>
-                    <sc-menu-item>Notes</sc-menu-item>
-                  </sc-menu-sub>
-                </ng-template>
-              </sc-menu-item>
-
-              <sc-menu-separator />
-              <sc-menu-item>
-                Print...
-                <span sc-menu-shortcut>⌘P</span>
-              </sc-menu-item>
-            </sc-menu>
-          </ng-template>
-        </button>
-
-        <button sc-menubar-item>
-          <sc-menubar-trigger [scMenubarTriggerFor]="edit2">Edit</sc-menubar-trigger>
-          <ng-template #edit2>
-            <sc-menu>
-              <sc-menu-item>
-                Undo
-                <span sc-menu-shortcut>⌘Z</span>
-              </sc-menu-item>
-              <sc-menu-item>
-                Redo
-                <span sc-menu-shortcut>⇧⌘Z</span>
-              </sc-menu-item>
-              <sc-menu-separator />
-              <sc-menu-item>
-                <sc-menu-sub-trigger [scMenuSubTriggerFor]="find2">Find</sc-menu-sub-trigger>
-                <ng-template #find2>
-                  <sc-menu-sub>
-                    <sc-menu-item>Search the web</sc-menu-item>
-                    <sc-menu-separator />
-                    <sc-menu-item>Find...</sc-menu-item>
-                    <sc-menu-item>Find Next</sc-menu-item>
-                    <sc-menu-item>Find Previous</sc-menu-item>
-                  </sc-menu-sub>
-                </ng-template>
-              </sc-menu-item>
-              <sc-menu-separator />
-              <sc-menu-item>Cut</sc-menu-item>
-              <sc-menu-item>Copy</sc-menu-item>
-              <sc-menu-item>Paste</sc-menu-item>
-            </sc-menu>
-          </ng-template>
-        </button>
-
-        <button sc-menubar-item>
-          <sc-menubar-trigger [scMenubarTriggerFor]="view2">View</sc-menubar-trigger>
-          <ng-template #view2>
-            <sc-menu>
-              <sc-menu-checkbox-item>Always Show Bookmarks Bar</sc-menu-checkbox-item>
-              <sc-menu-checkbox-item checked>Always Show Full URLs</sc-menu-checkbox-item>
-              <sc-menu-separator />
-              <sc-menu-item inset>
-                Reload
-                <span sc-menu-shortcut>⌘R</span>
-              </sc-menu-item>
-              <sc-menu-item disabled inset>
-                Force Reload
-                <span sc-menu-shortcut>⇧⌘R</span>
-              </sc-menu-item>
-              <sc-menu-separator />
-              <sc-menu-item inset>Toggle Fullscreen</sc-menu-item>
-              <sc-menu-separator />
-              <sc-menu-item inset>Hide Sidebar</sc-menu-item>
-            </sc-menu>
-          </ng-template>
-        </button>
-
-        <button sc-menubar-item>
-          <sc-menubar-trigger [scMenubarTriggerFor]="profiles2">Profiles</sc-menubar-trigger>
-          <ng-template #profiles2>
-            <sc-menu>
-              <sc-menu-radio-group value="benoit">
-                <sc-menu-radio-item value="andy">Andy</sc-menu-radio-item>
-                <sc-menu-radio-item value="benoit">Benoit</sc-menu-radio-item>
-                <sc-menu-radio-item value="Luis">Luis</sc-menu-radio-item>
-              </sc-menu-radio-group>
-              <sc-menu-separator />
-              <sc-menu-item inset>Edit...</sc-menu-item>
-              <sc-menu-separator />
-              <sc-menu-item inset>Add Profile...</sc-menu-item>
-            </sc-menu>
-          </ng-template>
-        </button>
-      </div>
     </div>
   `,
   styles: ``,
