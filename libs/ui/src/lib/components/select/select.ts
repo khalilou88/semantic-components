@@ -105,7 +105,7 @@ export class ScSelect implements ControlValueAccessor {
     });
   }
 
-  _value = signal('');
+  _value = signal<unknown>('');
 
   isDisabled = signal(false);
 
@@ -113,18 +113,18 @@ export class ScSelect implements ControlValueAccessor {
     this._value.set(value);
   }
 
-  setValue(value: string) {
+  setValue(value: unknown) {
     this._value.set(value);
     this._onChange(value);
     this._cdr.markForCheck();
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  _onChange: (value: string) => void = () => {};
+  _onChange: (value: unknown) => void = () => {};
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   _onTouched: () => void = () => {};
 
-  registerOnChange(fn: (value: string) => void): void {
+  registerOnChange(fn: (value: unknown) => void): void {
     this._onChange = fn;
   }
 

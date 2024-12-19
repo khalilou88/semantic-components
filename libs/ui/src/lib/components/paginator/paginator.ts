@@ -19,6 +19,7 @@ import {
 
 import { cn } from '../../utils';
 import { ScButton } from '../button';
+import { ScOption, ScSelect } from '../select';
 import { ScPageEvent } from './page-event';
 import { ScPageItem } from './page-item';
 import { ScPagination } from './pagination';
@@ -37,20 +38,22 @@ const DEFAULT_PAGE_SIZE = 10;
     SvgChevronsLeftIcon,
     SvgChevronRightIcon,
     SvgChevronsRightIcon,
+    ScSelect,
+    ScOption,
   ],
   template: `
     @if (!hidePageSize()) {
-      <div>
-        <label class="" for="items-per-page">Items per page:</label>
-        <select class="" id="items-per-page" [formControl]="pageSizeFormControl">
+      <div class="flex items-center space-x-2">
+        <label class="text-sm font-medium" for="items-per-page">Items per page:</label>
+        <sc-select class="w-20" id="items-per-page" [formControl]="pageSizeFormControl">
           @for (pageSizeOption of pageSizeOptions(); track $index) {
-            <option [value]="pageSizeOption">{{ pageSizeOption }}</option>
+            <sc-option [value]="pageSizeOption">{{ pageSizeOption }}</sc-option>
           }
-        </select>
+        </sc-select>
       </div>
     }
 
-    <div class="">
+    <div class="flex w-[100px] items-center justify-center text-sm font-medium">
       Showing
       <span>{{ firstItemPage() }}-{{ lastItemPage() }}</span>
       of
@@ -139,7 +142,7 @@ const DEFAULT_PAGE_SIZE = 10;
 export class ScPaginator implements OnInit {
   class = input<string>('');
 
-  classes = computed(() => cn('flex', this.class()));
+  classes = computed(() => cn('flex items-center space-x-6 lg:space-x-8', this.class()));
 
   /** The one-based page index of the displayed list of items. Defaulted to 1. */
   currentPage = input<number>(1);
