@@ -12,6 +12,8 @@ import { cn } from '../../utils';
   selector: 'sc-command-group',
   imports: [],
   template: `
+    <!-- TODO remove use of cmdk-group-heading -->
+    <div cmdk-group-heading>{{ heading() }}</div>
     <ng-content />
   `,
   host: {
