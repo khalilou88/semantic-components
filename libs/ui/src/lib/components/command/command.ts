@@ -24,5 +24,10 @@ import { cn } from '../../utils';
 export class ScCommand {
   class = input<string>('');
 
-  classes = computed(() => cn('', this.class()));
+  classes = computed(() =>
+    cn(
+      'flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground',
+      this.class(),
+    ),
+  );
 }
