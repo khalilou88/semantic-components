@@ -1,11 +1,14 @@
-import { CdkMenuModule } from '@angular/cdk/menu';
+import { CdkMenuGroup, CdkMenuModule } from '@angular/cdk/menu';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import {
   ScMenu,
   ScMenuBar,
   ScMenuBarItem,
+  ScMenuCheckboxItem,
   ScMenuItem,
+  ScMenuRadioGroup,
+  ScMenuRadioItem,
   ScMenuSeparator,
   ScMenuTriggerFor,
 } from '@semantic-components/ui';
@@ -14,6 +17,7 @@ import { SvgChevronRightIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-menu-bar-page',
   imports: [
+    CdkMenuGroup,
     CdkMenuModule,
     ScMenuBar,
     ScMenuItem,
@@ -22,6 +26,9 @@ import { SvgChevronRightIcon } from '@semantic-icons/lucide-icons';
     SvgChevronRightIcon,
     ScMenuSeparator,
     ScMenuTriggerFor,
+    ScMenuCheckboxItem,
+    ScMenuRadioGroup,
+    ScMenuRadioItem,
   ],
   template: `
     <div class="m-10">
@@ -41,7 +48,7 @@ import { SvgChevronRightIcon } from '@semantic-icons/lucide-icons';
           </button>
           <button sc-menu-item>Open</button>
           <button sc-menu-item>Make a Copy</button>
-          <hr />
+          <hr sc-menu-separator />
           <button [scMenuTriggerFor]="download" sc-menu-item>
             Download
             <svg-chevron-right-icon class="ml-auto" />
@@ -53,7 +60,7 @@ import { SvgChevronRightIcon } from '@semantic-icons/lucide-icons';
         <div sc-menu>
           <button sc-menu-item>Undo</button>
           <button sc-menu-item>Redo</button>
-          <hr />
+          <hr sc-menu-separator />
           <button sc-menu-item>Cut</button>
           <button sc-menu-item>Copy</button>
           <button sc-menu-item>Paste</button>
@@ -62,15 +69,15 @@ import { SvgChevronRightIcon } from '@semantic-icons/lucide-icons';
 
       <ng-template #format>
         <div sc-menu>
-          <div class="example-menu-group" cdkMenuGroup>
-            <button class="example-menu-item" cdkMenuItemCheckbox cdkMenuItemChecked>Bold</button>
-            <button class="example-menu-item" cdkMenuItemCheckbox>Italic</button>
+          <div cdkMenuGroup>
+            <button sc-menu-checkbox-item>Bold</button>
+            <button sc-menu-checkbox-item>Italic</button>
           </div>
-          <hr />
-          <div class="example-menu-group" cdkMenuGroup>
-            <button class="example-menu-item" cdkMenuItemRadio>Small</button>
-            <button class="example-menu-item" cdkMenuItemRadio cdkMenuItemChecked>Normal</button>
-            <button class="example-menu-item" cdkMenuItemRadio>Big</button>
+          <hr sc-menu-separator />
+          <div sc-menu-radio-group>
+            <button sc-menu-radio-item>Small</button>
+            <button sc-menu-radio-item>Normal</button>
+            <button sc-menu-radio-item>Big</button>
           </div>
         </div>
       </ng-template>
@@ -79,7 +86,7 @@ import { SvgChevronRightIcon } from '@semantic-icons/lucide-icons';
         <div sc-menu>
           <button sc-menu-item>Document</button>
           <button sc-menu-item>From template</button>
-          <hr />
+          <hr sc-menu-separator />
           <button sc-menu-item>Spreadsheet</button>
           <button sc-menu-item>Presentation</button>
           <button sc-menu-item>Form</button>

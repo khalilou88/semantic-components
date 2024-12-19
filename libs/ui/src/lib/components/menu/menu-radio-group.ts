@@ -1,3 +1,4 @@
+import { CdkMenuGroup } from '@angular/cdk/menu';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -9,7 +10,7 @@ import {
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'sc-menu-radio-group',
+  selector: 'div[sc-menu-radio-group]',
   imports: [],
   template: `
     <ng-content />
@@ -20,6 +21,7 @@ import { cn } from '../../utils';
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  hostDirectives: [CdkMenuGroup],
 })
 export class ScMenuRadioGroup {
   class = input<string>('');
