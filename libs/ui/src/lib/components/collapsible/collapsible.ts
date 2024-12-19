@@ -40,7 +40,7 @@ export class ScCollapsible {
 
   class = input<string>('');
 
-  classes = computed(() => cn('', this.class()));
+  classes = computed(() => cn('block', this.class()));
 
   accordionItem = viewChild.required<CdkAccordionItem>('accordionItem');
 

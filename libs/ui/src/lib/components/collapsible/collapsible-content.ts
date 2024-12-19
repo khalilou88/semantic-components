@@ -24,5 +24,5 @@ import { cn } from '../../utils';
 export class ScCollapsibleContent {
   class = input<string>('');
 
-  classes = computed(() => cn('', this.class()));
+  classes = computed(() => cn('block mt-2', this.class()));
 }

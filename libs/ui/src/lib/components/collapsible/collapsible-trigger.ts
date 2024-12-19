@@ -29,7 +29,7 @@ export class ScCollapsibleTrigger {
 
   class = input<string>('');
 
-  classes = computed(() => cn('', this.class()));
+  classes = computed(() => cn('block', this.class()));
 
   toggle() {
     this.state.isToggled.next();
