@@ -10,21 +10,29 @@ import {
 } from '@angular/core';
 
 import { ScButton } from '../button';
-import { ScCard, ScCardHeader } from '../card';
+import { ScCard, ScCardContent, ScCardFooter, ScCardHeader } from '../card';
 import { ScMonthDays } from './month-days';
 import { ScMonthYearHeader } from './month-year-header';
 import { WeekDayName } from './util';
 
 @Component({
   selector: 'sc-inline-date-picker',
-  imports: [ScMonthYearHeader, ScMonthDays, ScCard, ScCardHeader, ScButton],
+  imports: [
+    ScMonthYearHeader,
+    ScMonthDays,
+    ScCard,
+    ScCardHeader,
+    ScButton,
+    ScCardFooter,
+    ScCardContent,
+  ],
   template: `
     <div sc-card>
       <div sc-card-header>
         <sc-month-year-header [monthYear]="monthYear()" (monthYearChange)="setMonthYear($event)" />
       </div>
 
-      <div class="p-6 pt-0">
+      <div sc-card-content>
         <sc-month-days
           [weekDaysNames]="weekDaysNames()"
           [days]="monthDays()"
@@ -34,7 +42,7 @@ import { WeekDayName } from './util';
         />
       </div>
 
-      <div class="flex justify-between p-6 pt-0">
+      <div class="justify-between" sc-card-footer>
         <button sc-button variant="outline" type="button">Cancel</button>
         <button sc-button type="button">Done</button>
       </div>
