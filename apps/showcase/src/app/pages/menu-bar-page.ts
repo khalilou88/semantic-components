@@ -5,6 +5,7 @@ import {
   ScMenu,
   ScMenuBar,
   ScMenuBarItem,
+  ScMenuCheckboxGroup,
   ScMenuCheckboxItem,
   ScMenuItem,
   ScMenuRadioGroup,
@@ -29,6 +30,7 @@ import { SvgChevronRightIcon } from '@semantic-icons/lucide-icons';
     ScMenuCheckboxItem,
     ScMenuRadioGroup,
     ScMenuRadioItem,
+    ScMenuCheckboxGroup,
   ],
   template: `
     <div class="m-10">
@@ -69,7 +71,7 @@ import { SvgChevronRightIcon } from '@semantic-icons/lucide-icons';
 
       <ng-template #format>
         <div sc-menu>
-          <div cdkMenuGroup>
+          <div sc-menu-checkbox-group>
             <button sc-menu-checkbox-item>Bold</button>
             <button sc-menu-checkbox-item>Italic</button>
           </div>
