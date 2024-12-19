@@ -1,3 +1,4 @@
+import { CdkMenuItem } from '@angular/cdk/menu';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -21,6 +22,7 @@ import { cn } from '../../utils';
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  hostDirectives: [CdkMenuItem],
 })
 export class ScMenuItem {
   class = input<string>('');

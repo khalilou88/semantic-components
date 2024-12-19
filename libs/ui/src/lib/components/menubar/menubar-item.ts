@@ -1,8 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ContentChild,
-  TemplateRef,
   ViewEncapsulation,
   computed,
   input,
@@ -28,5 +26,5 @@ export class ScMenubarItem {
 
   classes = computed(() => cn('block', this.class()));
 
-  @ContentChild(TemplateRef) templateRef: TemplateRef<unknown> | undefined;
+  // @ContentChild(TemplateRef) templateRef: TemplateRef<unknown> | undefined;
 }
