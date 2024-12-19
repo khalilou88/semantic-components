@@ -1,7 +1,8 @@
-import { CdkMenuBar } from '@angular/cdk/menu';
 import {
   ChangeDetectionStrategy,
   Component,
+  ContentChild,
+  TemplateRef,
   ViewEncapsulation,
   computed,
   input,
@@ -10,7 +11,7 @@ import {
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'sc-menubar',
+  selector: 'sc-menubar-item',
   imports: [],
   template: `
     <ng-content />
@@ -21,12 +22,11 @@ import { cn } from '../../utils';
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  hostDirectives: [CdkMenuBar],
 })
-export class ScMenubar {
+export class ScMenubarItem {
   class = input<string>('');
 
-  classes = computed(() =>
-    cn('flex h-10 items-center space-x-1 rounded-md border bg-background p-1', this.class()),
-  );
+  classes = computed(() => cn('', this.class()));
+
+  @ContentChild(TemplateRef) templateRef: TemplateRef<unknown> | undefined;
 }

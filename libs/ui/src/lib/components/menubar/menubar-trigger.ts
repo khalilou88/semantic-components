@@ -1,6 +1,9 @@
+import { CdkMenuItem, CdkMenuTrigger } from '@angular/cdk/menu';
 import {
   ChangeDetectionStrategy,
   Component,
+  ContentChild,
+  TemplateRef,
   ViewEncapsulation,
   computed,
   input,
@@ -20,6 +23,13 @@ import { cn } from '../../utils';
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  hostDirectives: [
+    CdkMenuItem,
+    {
+      directive: CdkMenuTrigger,
+      inputs: ['cdkMenuTriggerFor: templateRef'],
+    },
+  ],
 })
 export class ScMenubarTrigger {
   class = input<string>('');
@@ -30,4 +40,6 @@ export class ScMenubarTrigger {
       this.class(),
     ),
   );
+
+  @ContentChild(TemplateRef) templateRef: TemplateRef<unknown> | undefined;
 }
