@@ -2,6 +2,7 @@ import { CdkMenuModule } from '@angular/cdk/menu';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import {
+  ScMenu,
   ScMenuCheckboxItem,
   ScMenuGroup,
   ScMenuItem,
@@ -13,6 +14,7 @@ import {
   ScMenuTriggerFor,
 } from '@semantic-components/ui';
 import {
+  SvgChevronRightIcon,
   SvgCirclePlusIcon,
   SvgCloudIcon,
   SvgCreditCardIcon,
@@ -56,6 +58,8 @@ import {
     ScMenuRadioGroup,
     ScMenuTriggerFor,
     CdkMenuModule,
+    ScMenu,
+    SvgChevronRightIcon,
   ],
   template: `
     <div class="m-10">
@@ -95,6 +99,7 @@ import {
           <button [scMenuTriggerFor]="sub_menu_1" sc-menu-item>
             <svg-user-plus-icon />
             <span>Invite users</span>
+            <svg-chevron-right-icon class="ml-auto" />
           </button>
 
           <ng-template #sub_menu_1>
