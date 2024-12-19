@@ -29,6 +29,11 @@ export const appRoutes: Route[] = [
                 title: 'Home Page',
               },
               {
+                path: 'collapsible',
+                loadComponent: () => import('./pages/collapsible-page'),
+                title: 'Collapsible Page',
+              },
+              {
                 path: 'command',
                 loadComponent: () => import('./pages/command-page'),
                 title: 'Command Page',

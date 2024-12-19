@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'sc-collapsible',
+  selector: 'app-collapsible-page',
   imports: [],
   template: `
-    <p>collapsible works!</p>
+    <p>collapsible-page works!</p>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCollapsible {}
+export default class CollapsiblePage {}
