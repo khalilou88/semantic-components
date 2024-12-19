@@ -14,7 +14,7 @@ import { cn } from '../../utils';
   selector: 'sc-command-input',
   imports: [SvgSearchIcon],
   template: `
-    <svg-search-icon class="mr-2 h-4 w-4 shrink-0 opacity-50" />
+    <svg-search-icon class="mr-2 size-4 shrink-0 opacity-50" />
     <input
       class="flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
       [placeholder]="placeholder()"
