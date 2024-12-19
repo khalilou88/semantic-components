@@ -1,4 +1,4 @@
-import { CdkMenuBar } from '@angular/cdk/menu';
+import { CdkMenuItem } from '@angular/cdk/menu';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -10,7 +10,7 @@ import {
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'sc-menubar',
+  selector: 'button[sc-menu-bar-item]',
   imports: [],
   template: `
     <ng-content />
@@ -21,12 +21,15 @@ import { cn } from '../../utils';
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  hostDirectives: [CdkMenuBar],
+  hostDirectives: [CdkMenuItem],
 })
-export class ScMenubar {
+export class ScMenuBarItem {
   class = input<string>('');
 
   classes = computed(() =>
-    cn('flex h-10 items-center space-x-1 rounded-md border bg-background p-1', this.class()),
+    cn(
+      'flex cursor-default select-none items-center rounded-sm px-3 py-1.5 text-sm font-medium outline-none focus:bg-accent focus:text-accent-foreground data-[state=open]:bg-accent data-[state=open]:text-accent-foreground',
+      this.class(),
+    ),
   );
 }

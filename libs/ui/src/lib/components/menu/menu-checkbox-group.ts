@@ -10,7 +10,7 @@ import {
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'div[sc-menu-radio-group]',
+  selector: 'div[sc-menu-checkbox-group]',
   imports: [],
   template: `
     <ng-content />
@@ -23,7 +23,7 @@ import { cn } from '../../utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
   hostDirectives: [CdkMenuGroup],
 })
-export class ScMenuRadioGroup {
+export class ScMenuCheckboxGroup {
   class = input<string>('');
 
   classes = computed(() => cn('', this.class()));

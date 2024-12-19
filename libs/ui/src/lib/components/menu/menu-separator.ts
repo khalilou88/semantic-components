@@ -9,7 +9,7 @@ import {
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'sc-menu-separator',
+  selector: 'hr[sc-menu-separator]',
   imports: [],
   template: `
     <ng-content />
@@ -24,5 +24,5 @@ import { cn } from '../../utils';
 export class ScMenuSeparator {
   class = input<string>('');
 
-  classes = computed(() => cn('block -mx-1 my-1 h-px bg-muted', this.class()));
+  classes = computed(() => cn('-mx-1 my-1 h-px bg-muted', this.class()));
 }
