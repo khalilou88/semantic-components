@@ -24,7 +24,7 @@ import { SvgChevronsUpDownIcon } from '@semantic-icons/lucide-icons';
           <h4 class="text-sm font-semibold">&#64;peduarte starred 3 repositories</h4>
           <sc-collapsible-trigger>
             <button class="w-9 p-0" sc-button variant="ghost" size="sm">
-              <svg-chevrons-up-down-icon class="h-4 w-4" />
+              <svg-chevrons-up-down-icon class="size-4" />
               <span class="sr-only">Toggle</span>
             </button>
           </sc-collapsible-trigger>
