@@ -9,7 +9,7 @@ import {
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'sc-command-list',
+  selector: 'sc-command-group-heading',
   imports: [],
   template: `
     <ng-content />
@@ -21,10 +21,10 @@ import { cn } from '../../utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCommandList {
+export class ScCommandGroupHeading {
   class = input<string>('');
 
   classes = computed(() =>
-    cn('block max-h-[300px] overflow-y-auto overflow-x-hidden', this.class()),
+    cn('block px-2 font-medium text-muted-foreground py-1.5 text-xs', this.class()),
   );
 }
