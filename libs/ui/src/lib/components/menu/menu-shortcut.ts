@@ -24,5 +24,7 @@ import { cn } from '../../utils';
 export class ScMenuShortcut {
   class = input<string>('');
 
-  classes = computed(() => cn('ml-auto text-xs tracking-widest opacity-60', this.class()));
+  classes = computed(() =>
+    cn('ml-auto text-xs tracking-widest text-muted-foreground', this.class()),
+  );
 }

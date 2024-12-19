@@ -29,6 +29,11 @@ export const appRoutes: Route[] = [
                 title: 'Home Page',
               },
               {
+                path: 'menubar',
+                loadComponent: () => import('./pages/menubar-page'),
+                title: 'Menubar Page',
+              },
+              {
                 path: 'collapsible',
                 loadComponent: () => import('./pages/collapsible-page'),
                 title: 'Collapsible Page',

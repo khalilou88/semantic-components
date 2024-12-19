@@ -25,8 +25,8 @@ import { ScMenuContainer } from './menu-container';
   `,
   host: {
     '[class]': 'classes()',
-    '(click)': 'open()',
-    '(mouseover)': 'open()',
+    // '(click)': 'open()',
+    // '(mouseover)': 'open()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,

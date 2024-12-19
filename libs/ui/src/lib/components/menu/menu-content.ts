@@ -8,6 +8,8 @@ import {
 
 import { cn } from '../../utils';
 
+//TODO maybe remove this and keep only scMenu
+
 @Component({
   selector: 'sc-menu-content',
   imports: [],
