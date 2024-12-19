@@ -9,7 +9,7 @@ import {
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'sc-command',
+  selector: 'sc-command-shortcut',
   imports: [],
   template: `
     <ng-content />
@@ -21,13 +21,10 @@ import { cn } from '../../utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCommand {
+export class ScCommandShortcut {
   class = input<string>('');
 
   classes = computed(() =>
-    cn(
-      'flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground',
-      this.class(),
-    ),
+    cn('ml-auto text-xs tracking-widest text-muted-foreground', this.class()),
   );
 }

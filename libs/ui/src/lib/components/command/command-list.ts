@@ -9,7 +9,7 @@ import {
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'sc-command',
+  selector: 'sc-command-list',
   imports: [],
   template: `
     <ng-content />
@@ -21,13 +21,8 @@ import { cn } from '../../utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCommand {
+export class ScCommandList {
   class = input<string>('');
 
-  classes = computed(() =>
-    cn(
-      'flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground',
-      this.class(),
-    ),
-  );
+  classes = computed(() => cn('max-h-[300px] overflow-y-auto overflow-x-hidden', this.class()));
 }

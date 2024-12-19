@@ -29,6 +29,11 @@ export const appRoutes: Route[] = [
                 title: 'Home Page',
               },
               {
+                path: 'command',
+                loadComponent: () => import('./pages/command-page'),
+                title: 'Command Page',
+              },
+              {
                 path: 'context-menu',
                 loadComponent: () => import('./pages/context-menu-page'),
                 title: 'Context Menu Page',
