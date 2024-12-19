@@ -1,9 +1,0 @@
-{
-  "generators": {
-    "ui-library": {
-      "factory": "./src/generators/ui-library/generator",
-      "schema": "./src/generators/ui-library/schema.json",
-      "description": "ui-library generator"
-    }
-  }
-}
