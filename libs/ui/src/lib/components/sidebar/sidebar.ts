@@ -25,7 +25,7 @@ import { ScSidebarState } from './sidebar-state';
         <div sc-sheet>
           <div
             class="w-[--sidebar-width] bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
-            [style]="myStyle()"
+            [style]="styles()"
             [attr.side]="side()"
             data-sidebar="sidebar"
             data-mobile="true"
@@ -46,8 +46,8 @@ import { ScSidebarState } from './sidebar-state';
         [attr.data-side]="side()"
       >
         <!-- This is what handles the sidebar gap on desktop -->
-        <div [class]="css1()"></div>
-        <div [class]="css2()">
+        <div [class]="classes1()"></div>
+        <div [class]="classes2()">
           <div
             class="flex h-full w-full flex-col bg-sidebar group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow"
             data-sidebar="sidebar"
@@ -58,11 +58,18 @@ import { ScSidebarState } from './sidebar-state';
       </div>
     }
   `,
+  host: {
+    '[class]': 'classes()',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSidebar {
+  class = input<string>('');
+
+  classes = computed(() => cn('block w-[--sidebar-width]', this.class()));
+
   side = input<'left' | 'right'>('left');
   variant = input<'sidebar' | 'floating' | 'inset'>('sidebar');
   collapsible = input<'offcanvas' | 'icon' | 'none'>('offcanvas');
@@ -73,9 +80,9 @@ export class ScSidebar {
 
   state = computed(() => this.sidebarState.state());
 
-  myStyle = signal(`--sidebar-width: ${SIDEBAR_WIDTH_MOBILE}`);
+  styles = signal(`--sidebar-width: ${SIDEBAR_WIDTH_MOBILE};`);
 
-  css1 = signal(
+  classes1 = signal(
     cn(
       'duration-200 relative h-svh w-[--sidebar-width] bg-transparent transition-[width] ease-linear',
       'group-data-[collapsible=offcanvas]:w-0',
@@ -86,7 +93,7 @@ export class ScSidebar {
     ),
   );
 
-  css2 = signal(
+  classes2 = signal(
     cn(
       'duration-200 fixed inset-y-0 z-10 hidden h-svh w-[--sidebar-width] transition-[left,right,width] ease-linear md:flex',
       this.side() === 'left'
