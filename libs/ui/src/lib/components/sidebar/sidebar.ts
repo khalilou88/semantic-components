@@ -4,12 +4,14 @@ import {
   Component,
   ViewEncapsulation,
   computed,
+  effect,
   inject,
   input,
   signal,
 } from '@angular/core';
 
 import { cn } from '../../utils';
+import { ScSheetTrigger } from '../sheet';
 import { SIDEBAR_WIDTH_MOBILE } from './constants';
 import { ScSidebarState } from './sidebar-state';
 
@@ -78,6 +80,7 @@ export class ScSidebar {
   sidebarState = inject(ScSidebarState);
 
   isMobile = computed(() => this.sidebarState.isMobile());
+  openMobile = computed(() => this.sidebarState.openMobile());
 
   state = computed(() => this.sidebarState.state());
 
@@ -107,9 +110,15 @@ export class ScSidebar {
     ),
   );
 
+  scSheetTrigger = inject(ScSheetTrigger);
+
   constructor(private observer: BreakpointObserver) {
     this.observer.observe('(max-width: 640px)').subscribe((result) => {
       this.sidebarState.isMobile.set(result.matches);
+    });
+
+    effect(() => {
+      if (this.isMobile() && this.openMobile()) this.scSheetTrigger.open();
     });
   }
 }

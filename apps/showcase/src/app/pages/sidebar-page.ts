@@ -16,8 +16,12 @@ import { ScSidebarState } from 'libs/ui/src/lib/components/sidebar/sidebar-state
         <sc-sidebar-trigger />
 
         <br />
-
+        <br />
         open : {{ sidebarState.open() }}
+        <br />
+        openMobile : {{ sidebarState.openMobile() }}
+        <br />
+        isMobile : {{ sidebarState.isMobile() }}
 
         <ng-content />
       </main>
