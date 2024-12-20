@@ -68,7 +68,7 @@ import { ScSidebarState } from './sidebar-state';
 export class ScSidebar {
   class = input<string>('');
 
-  classes = computed(() => cn('block w-[--sidebar-width]', this.class()));
+  classes = computed(() => cn('', this.class()));
 
   side = input<'left' | 'right'>('left');
   variant = input<'sidebar' | 'floating' | 'inset'>('sidebar');
