@@ -6,7 +6,7 @@ import {
   PositionStrategy,
 } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { ComponentRef, Injectable, inject, signal } from '@angular/core';
+import { ComponentRef, Injectable, TemplateRef, inject, signal } from '@angular/core';
 
 import { ScSheet, SheetVariants } from './sheet';
 
@@ -21,7 +21,7 @@ export class ScSheetTrigger {
 
   open = signal<boolean>(false);
 
-  openSheet() {
+  openSheet(templateRef: TemplateRef<unknown>, customValue?: number | string) {
     const side: SheetVariants['side'] = 'left';
 
     this._overlayContainer.getContainerElement().classList.add('sc-overlay-container');
@@ -29,11 +29,13 @@ export class ScSheetTrigger {
     const positionStrategy = this.getPositionStrategy(side);
     this.overlayRef = this.overlay.create({ positionStrategy });
 
-    this.updateSize(side);
+    this.updateSize(side, customValue);
 
     const tooltipPortal = new ComponentPortal(ScSheet);
 
     const tooltipRef: ComponentRef<ScSheet> = this.overlayRef.attach(tooltipPortal);
+
+    tooltipRef.instance.templateRef.set(templateRef);
 
     tooltipRef.instance.side.set(side);
   }
@@ -44,7 +46,7 @@ export class ScSheetTrigger {
       this.open.set(false);
       this._overlayContainer.getContainerElement().classList.remove('sc-overlay-container');
     } else {
-      this.openSheet();
+      // this.openSheet(); //TODO
       this.open.set(true);
     }
   }
@@ -105,22 +107,26 @@ export class ScSheetTrigger {
     }
   }
 
-  updateSize(side: SheetVariants['side']): void {
+  updateSize(side: SheetVariants['side'], customValue?: number | string): void {
     switch (side) {
       case 'top': {
-        this.overlayRef.updateSize({ height: 300, width: '100%' });
+        const v = customValue ? customValue : 300;
+        this.overlayRef.updateSize({ height: v, width: '100%' });
         return;
       }
       case 'bottom': {
-        this.overlayRef.updateSize({ height: 300, width: '100%' });
+        const v = customValue ? customValue : 300;
+        this.overlayRef.updateSize({ height: v, width: '100%' });
         return;
       }
       case 'left': {
-        this.overlayRef.updateSize({ width: 620 });
+        const v = customValue ? customValue : 620;
+        this.overlayRef.updateSize({ height: '100%', width: v });
         return;
       }
       case 'right': {
-        this.overlayRef.updateSize({ width: 620 });
+        const v = customValue ? customValue : 620;
+        this.overlayRef.updateSize({ height: '100%', width: v });
         return;
       }
 
