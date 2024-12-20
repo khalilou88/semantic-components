@@ -2,12 +2,14 @@ import { BreakpointObserver, LayoutModule } from '@angular/cdk/layout';
 import {
   ChangeDetectionStrategy,
   Component,
+  TemplateRef,
   ViewEncapsulation,
   computed,
   effect,
   inject,
   input,
   signal,
+  viewChild,
 } from '@angular/core';
 
 import { cn } from '../../utils';
@@ -25,18 +27,15 @@ import { ScSidebarState } from './sidebar-state';
       </div>
     } @else if (isMobile()) {
       <ng-template #mobile_sidebar>
-        <div sc-sheet>
-          <div
-            class="w-[--sidebar-width] bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
-            [style]="styles()"
-            [attr.side]="side()"
-            data-sidebar="sidebar"
-            data-mobile="true"
-            sc-sheet-content
-          >
-            <div class="flex h-full w-full flex-col">
-              <ng-content />
-            </div>
+        <div
+          class="h-full w-full bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
+          [style]="styles()"
+          [attr.side]="side()"
+          data-sidebar="sidebar"
+          data-mobile="true"
+        >
+          <div class="flex h-full w-full flex-col">
+            <ng-content />
           </div>
         </div>
       </ng-template>
@@ -111,6 +110,7 @@ export class ScSidebar {
   );
 
   scSheetTrigger = inject(ScSheetTrigger);
+  mobileSidebarRef = viewChild.required<TemplateRef<unknown>>('mobile_sidebar');
 
   constructor(private observer: BreakpointObserver) {
     this.observer.observe('(max-width: 640px)').subscribe((result) => {
@@ -118,7 +118,8 @@ export class ScSidebar {
     });
 
     effect(() => {
-      if (this.isMobile() && this.openMobile()) this.scSheetTrigger.openSheet();
+      if (this.isMobile() && this.openMobile())
+        this.scSheetTrigger.openSheet(this.mobileSidebarRef(), SIDEBAR_WIDTH_MOBILE);
     });
   }
 }

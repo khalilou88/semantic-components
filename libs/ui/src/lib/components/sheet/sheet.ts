@@ -1,6 +1,8 @@
+import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  TemplateRef,
   ViewEncapsulation,
   computed,
   inject,
@@ -11,9 +13,7 @@ import {
 import { VariantProps, cva } from 'class-variance-authority';
 
 import { cn } from '../../utils';
-import { ScSheetToggler } from './sheet-toggler';
 import { ScSheetTrigger } from './sheet-trigger';
-import { SidebarContent } from './sidebar-content';
 
 const sheetVariants = cva(
   'relative z-50 gap-4 bg-background p-6 shadow-lg transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-500 data-[state=open]:animate-in data-[state=closed]:animate-out',
@@ -38,11 +38,11 @@ export type SheetVariants = VariantProps<typeof sheetVariants>;
 
 @Component({
   selector: 'sc-sheet',
-  imports: [ScSheetToggler, SidebarContent],
+  imports: [NgTemplateOutlet],
   template: `
-    <sc-sheet-toggler class="absolute right-1 top-1" />
-
-    <app-sidebar-content />
+    @if (templateRef()) {
+      <ng-container *ngTemplateOutlet="templateRef()"></ng-container>
+    }
   `,
   host: {
     '[class]': 'classes()',
@@ -64,4 +64,6 @@ export class ScSheet {
   class = input<string>('');
 
   classes = computed(() => cn(sheetVariants({ side: this.side() }), this.class()));
+
+  templateRef = signal<TemplateRef<unknown> | null>(null);
 }
