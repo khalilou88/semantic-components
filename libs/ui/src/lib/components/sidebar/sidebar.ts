@@ -1,3 +1,4 @@
+import { BreakpointObserver, LayoutModule } from '@angular/cdk/layout';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -14,7 +15,7 @@ import { ScSidebarState } from './sidebar-state';
 
 @Component({
   selector: 'sc-sidebar',
-  imports: [],
+  imports: [LayoutModule],
   template: `
     @if (collapsible() === 'none') {
       <div class="flex h-full w-[--sidebar-width] flex-col bg-sidebar text-sidebar-foreground">
@@ -105,4 +106,10 @@ export class ScSidebar {
         : 'group-data-[collapsible=icon]:w-[--sidebar-width-icon] group-data-[side=left]:border-r group-data-[side=right]:border-l',
     ),
   );
+
+  constructor(private observer: BreakpointObserver) {
+    this.observer.observe('(max-width: 640px)').subscribe((result) => {
+      this.sidebarState.isMobile.set(result.matches);
+    });
+  }
 }
