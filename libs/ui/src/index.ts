@@ -42,3 +42,4 @@ export * from './lib/components/menu';
 export * from './lib/components/menubar';
 export * from './lib/components/command';
 export * from './lib/components/collapsible';
+export * from './lib/components/sidebar';
