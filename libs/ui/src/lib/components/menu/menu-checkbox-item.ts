@@ -5,8 +5,9 @@ import {
   ViewEncapsulation,
   booleanAttribute,
   computed,
+  effect,
+  inject,
   input,
-  model,
   output,
 } from '@angular/core';
 
@@ -27,7 +28,6 @@ import { cn } from '../../utils';
   `,
   host: {
     '[class]': 'classes()',
-    '(click)': 'toggle()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -41,6 +41,8 @@ import { cn } from '../../utils';
   ],
 })
 export class ScMenuCheckboxItem {
+  private _cdkMenuItemCheckbox = inject(CdkMenuItemCheckbox, { host: true });
+
   class = input<string>('');
 
   classes = computed(() =>
@@ -54,11 +56,15 @@ export class ScMenuCheckboxItem {
     transform: booleanAttribute,
   });
 
-  readonly scChecked = model<boolean>();
+  constructor() {
+    effect(() => {
+      this._cdkMenuItemCheckbox.disabled = this.disabled();
+    });
+  }
+
+  readonly scChecked = input<boolean, unknown>(false, {
+    transform: booleanAttribute,
+  });
 
   readonly scTriggered = output<void>();
-
-  toggle() {
-    this.scChecked.update((v) => !v);
-  }
 }
