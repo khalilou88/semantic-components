@@ -6,6 +6,7 @@ import {
   booleanAttribute,
   computed,
   input,
+  model,
   output,
 } from '@angular/core';
 
@@ -26,6 +27,7 @@ import { cn } from '../../utils';
   `,
   host: {
     '[class]': 'classes()',
+    '(click)': 'toggle()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -48,9 +50,15 @@ export class ScMenuCheckboxItem {
     ),
   );
 
-  readonly scChecked = input<boolean, unknown>(false, {
+  readonly disabled = input<boolean, unknown>(false, {
     transform: booleanAttribute,
   });
 
+  readonly scChecked = model<boolean>();
+
   readonly scTriggered = output<void>();
+
+  toggle() {
+    this.scChecked.update((v) => !v);
+  }
 }
