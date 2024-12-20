@@ -3,8 +3,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  booleanAttribute,
   computed,
   input,
+  output,
 } from '@angular/core';
 
 import { SvgCheckIcon } from '@semantic-icons/lucide-icons';
@@ -15,10 +17,11 @@ import { cn } from '../../utils';
   selector: 'button[sc-menu-checkbox-item]',
   imports: [SvgCheckIcon],
   template: `
-    <span class="absolute left-2 flex size-3.5 items-center justify-center">
-      <svg-check-icon class="size-4" />
-    </span>
-
+    @if (scChecked()) {
+      <span class="absolute left-2 flex size-3.5 items-center justify-center">
+        <svg-check-icon class="size-4" />
+      </span>
+    }
     <ng-content />
   `,
   host: {
@@ -27,7 +30,13 @@ import { cn } from '../../utils';
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  hostDirectives: [CdkMenuItemCheckbox],
+  hostDirectives: [
+    {
+      directive: CdkMenuItemCheckbox,
+      inputs: ['cdkMenuItemChecked: scChecked'],
+      outputs: ['cdkMenuItemTriggered: scTriggered'],
+    },
+  ],
 })
 export class ScMenuCheckboxItem {
   class = input<string>('');
@@ -38,4 +47,10 @@ export class ScMenuCheckboxItem {
       this.class(),
     ),
   );
+
+  readonly scChecked = input<boolean, unknown>(false, {
+    transform: booleanAttribute,
+  });
+
+  readonly scTriggered = output<void>();
 }
