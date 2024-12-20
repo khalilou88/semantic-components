@@ -22,6 +22,7 @@ module.exports = [
   {
     files: ['**/*.ts'],
     rules: {
+      '@angular-eslint/no-output-native': ['warn'],
       '@angular-eslint/no-input-rename': ['warn'],
       '@angular-eslint/component-class-suffix': 'off',
       '@angular-eslint/directive-class-suffix': 'off',
