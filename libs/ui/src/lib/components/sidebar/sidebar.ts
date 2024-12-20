@@ -26,9 +26,9 @@ import { ScSidebarState } from './sidebar-state';
           <div
             class="w-[--sidebar-width] bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
             [style]="myStyle()"
-            [attr.data-sidebar]="'sidebar'"
-            [attr.data-mobile]="'true'"
             [attr.side]="side()"
+            data-sidebar="sidebar"
+            data-mobile="true"
             sc-sheet-content
           >
             <div class="flex h-full w-full flex-col">
@@ -46,8 +46,8 @@ import { ScSidebarState } from './sidebar-state';
         [attr.data-side]="side()"
       >
         <!-- This is what handles the sidebar gap on desktop -->
-        <div class="css1()"></div>
-        <div class="css2()">
+        <div [class]="css1()"></div>
+        <div [class]="css2()">
           <div
             class="flex h-full w-full flex-col bg-sidebar group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow"
             data-sidebar="sidebar"
