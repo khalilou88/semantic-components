@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ElementRef,
   ViewEncapsulation,
   computed,
   effect,
@@ -10,25 +11,31 @@ import {
   inject,
   input,
   model,
+  output,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { SvgCheckIcon } from '@semantic-icons/lucide-icons';
+import { SvgCheckIcon, SvgMinusIcon } from '@semantic-icons/lucide-icons';
 
 import { cn } from '../../utils';
 
 @Component({
   selector: 'sc-checkbox',
-  imports: [SvgCheckIcon],
+  imports: [SvgCheckIcon, SvgMinusIcon],
   template: `
     <input
+      [attr.aria-label]="ariaLabel()"
       [class]="checkboxClasses()"
       [disabled]="disabled()"
+      [checked]="checked()"
       [attr.data-state]="state()"
+      (change)="_onInteractionEvent($event)"
       type="checkbox"
     />
 
-    @if (checked() === true) {
+    @if (this.indeterminate() === true) {
+      <svg-minus-icon [class]="svgClasses()" />
+    } @else if (checked() === true) {
       <svg-check-icon [class]="svgClasses()" />
     }
   `,
@@ -72,13 +79,21 @@ export class ScCheckbox implements ControlValueAccessor {
     ),
   );
 
+  readonly indeterminate = model<boolean>(false);
+
+  ariaLabel = input<string | null>(null, { alias: 'aria-label' });
+
   checked = model<BooleanInput>(false);
 
   disabled = model<BooleanInput>(false);
 
+  change = output<boolean>();
+
   state = computed(() => {
     return this.checked() ? 'checked' : 'unchecked';
   });
+
+  private host = inject(ElementRef);
 
   constructor() {
     effect(() => {
@@ -89,6 +104,8 @@ export class ScCheckbox implements ControlValueAccessor {
       if (this.disabled() !== true && this.disabled() !== false) {
         this.disabled.update((v) => coerceBooleanProperty(v));
       }
+
+      this.host.nativeElement.indeterminate = this.indeterminate();
     });
   }
 
@@ -99,6 +116,11 @@ export class ScCheckbox implements ControlValueAccessor {
 
     const v = !this.checked();
     this.checked.set(v);
+    this.change.emit(v);
+
+    if (this.indeterminate() === true) {
+      this.indeterminate.set(false);
+    }
 
     this.onChange(v);
     this._cdr.markForCheck();
@@ -123,5 +145,12 @@ export class ScCheckbox implements ControlValueAccessor {
 
   setDisabledState?(isDisabled: boolean): void {
     this.disabled.set(isDisabled);
+  }
+
+  _onInteractionEvent(event: Event) {
+    // We always have to stop propagation on the change event.
+    // Otherwise the change event, from the input element, will bubble up and
+    // emit its event object to the `change` output.
+    event.stopPropagation();
   }
 }
