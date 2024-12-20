@@ -41,7 +41,7 @@ import { ScSidebarState } from './sidebar-state';
       <div
         class="group peer hidden md:block text-sidebar-foreground"
         [attr.data-state]="state()"
-        [attr.data-collapsible]="state() === 'collapsed' ? 'collapsible' : ''"
+        [attr.data-collapsible]="state() === 'collapsed' ? collapsible() : ''"
         [attr.data-variant]="variant()"
         [attr.data-side]="side()"
       >
