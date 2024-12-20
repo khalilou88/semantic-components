@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 
 import { cn } from '../../utils';
-import { SIDEBAR_WIDTH_MOBILE } from './sidebar-provider';
+import { SIDEBAR_WIDTH_MOBILE } from './constants';
 import { ScSidebarState } from './sidebar-state';
 
 @Component({

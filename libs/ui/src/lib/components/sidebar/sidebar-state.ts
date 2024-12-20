@@ -1,8 +1,6 @@
 import { Injectable, computed, signal } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ScSidebarState {
   open = signal(true);
   openMobile = signal(false);
