@@ -118,7 +118,7 @@ export class ScSidebar {
     });
 
     effect(() => {
-      if (this.isMobile() && this.openMobile()) this.scSheetTrigger.open();
+      if (this.isMobile() && this.openMobile()) this.scSheetTrigger.openSheet();
     });
   }
 }
