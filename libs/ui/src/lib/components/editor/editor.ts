@@ -123,6 +123,9 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
       </div>
     </div>
   `,
+  host: {
+    '[class]': 'classes()',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -144,7 +147,7 @@ export class ScEditor implements ControlValueAccessor {
   _isEditable = signal(true);
 
   class = input<string>('');
-  classes = computed(() => cn(scArticleClasses(), this.class()));
+  classes = computed(() => cn('', this.class()));
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   _onChange: (value: string) => void = () => {};
@@ -293,7 +296,7 @@ export class ScEditor implements ControlValueAccessor {
       editable: this._isEditable(),
       editorProps: {
         attributes: {
-          class: this.classes(),
+          class: scArticleClasses(),
         },
       },
     });
