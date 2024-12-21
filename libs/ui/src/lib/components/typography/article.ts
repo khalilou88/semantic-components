@@ -9,7 +9,7 @@ import {
 
 import { cn } from '../../utils';
 
-export const scArticleClasses = signal('prose lg:prose-xl');
+export const scArticleClasses = signal('prose prose-sm sm:prose lg:prose-lg xl:prose-2xl');
 
 @Component({
   selector: 'sc-article',
