@@ -8,10 +8,7 @@ import { ScEditor } from '@semantic-components/ui';
   imports: [ScEditor, ReactiveFormsModule],
   template: `
     <form [formGroup]="editorForm">
-      <sc-editor
-        class="prose max-w-none lg:prose-lg dark:prose-invert focus:outline-none"
-        formControlName="content"
-      />
+      <sc-editor formControlName="content" />
     </form>
   `,
   styles: ``,
