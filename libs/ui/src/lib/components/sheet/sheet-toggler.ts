@@ -49,6 +49,6 @@ export class ScSheetToggler {
   classes = computed(() => cn('', this.class()));
 
   toggle() {
-    this.sidebarState.toggle();
+    // this.sidebarState.toggle();
   }
 }

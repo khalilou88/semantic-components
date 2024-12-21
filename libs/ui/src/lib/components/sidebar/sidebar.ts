@@ -113,8 +113,13 @@ export class ScSidebar {
   mobileSidebarRef = viewChild.required<TemplateRef<unknown>>('mobile_sidebar');
 
   constructor(private observer: BreakpointObserver) {
-    this.observer.observe('(max-width: 640px)').subscribe((result) => {
+    this.observer.observe('(max-width: 768px)').subscribe((result) => {
       this.sidebarState.isMobile.set(result.matches);
+
+      if (!result.matches && this.openMobile()) {
+        this.scSheetTrigger.closeSheet();
+        this.sidebarState.openMobile.set(false);
+      }
     });
 
     effect(() => {

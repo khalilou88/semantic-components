@@ -38,16 +38,15 @@ export class ScSheetTrigger {
     tooltipRef.instance.templateRef.set(templateRef);
 
     tooltipRef.instance.side.set(side);
+
+    this.open.set(true);
   }
 
-  toggle() {
+  closeSheet() {
     if (this.overlayRef?.hasAttached() === true) {
       this.overlayRef?.detach();
       this.open.set(false);
       this._overlayContainer.getContainerElement().classList.remove('sc-overlay-container');
-    } else {
-      // this.openSheet(); //TODO
-      this.open.set(true);
     }
   }
 
