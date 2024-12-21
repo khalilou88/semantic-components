@@ -28,20 +28,20 @@ import { ScSidebarState } from './sidebar-state';
     } @else if (isMobile()) {
       <ng-template #mobile_sidebar>
         <div
-          class="h-full w-full bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
+          class="size-full bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
           [side]="side()"
           sc-sheet
           data-sidebar="sidebar"
           data-mobile="true"
         >
-          <div class="flex h-full w-full flex-col">
+          <div class="flex size-full flex-col">
             <ng-content />
           </div>
         </div>
       </ng-template>
     } @else {
       <div
-        class="group peer hidden md:block text-sidebar-foreground"
+        class="group peer hidden text-sidebar-foreground md:block"
         [attr.data-state]="state()"
         [attr.data-collapsible]="state() === 'collapsed' ? collapsible() : ''"
         [attr.data-variant]="variant()"
@@ -51,7 +51,7 @@ import { ScSidebarState } from './sidebar-state';
         <div [class]="classes1()"></div>
         <div [class]="classes2()">
           <div
-            class="flex h-full w-full flex-col bg-sidebar group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow"
+            class="flex size-full flex-col bg-sidebar group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow"
             data-sidebar="sidebar"
           >
             <ng-content />

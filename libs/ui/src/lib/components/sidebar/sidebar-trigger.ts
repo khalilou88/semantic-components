@@ -10,7 +10,7 @@ import { ScSidebarState } from './sidebar-state';
   imports: [ScButton, SvgPanelLeftIcon],
   template: `
     <button
-      class="h-7 w-7"
+      class="size-7"
       (click)="toggleSidebar()"
       sc-button
       data-sidebar="trigger"
