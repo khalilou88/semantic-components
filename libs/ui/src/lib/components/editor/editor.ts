@@ -149,6 +149,11 @@ export class ScEditor implements ControlValueAccessor {
   class = input<string>('');
   classes = computed(() => cn('', this.class()));
 
+  editorClass = input<string>('');
+  editorClasses = computed(() =>
+    cn('mx-auto focus:outline-none', scArticleClasses(), this.editorClass()),
+  );
+
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   _onChange: (value: string) => void = () => {};
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -296,7 +301,7 @@ export class ScEditor implements ControlValueAccessor {
       editable: this._isEditable(),
       editorProps: {
         attributes: {
-          class: scArticleClasses(),
+          class: this.editorClasses(),
         },
       },
     });
