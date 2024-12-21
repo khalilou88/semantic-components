@@ -5,7 +5,6 @@ import {
   computed,
   inject,
   input,
-  signal,
 } from '@angular/core';
 
 import { VariantProps, cva } from 'class-variance-authority';
@@ -21,9 +20,9 @@ const sheetVariants = cva(
         top: 'size-full border-b data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top',
         bottom:
           'size-full border-t data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom',
-        left: 'size-full border-r  data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left sm:max-w-sm',
+        left: 'size-full border-r data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left sm:max-w-sm',
         right:
-          'size-full border-l  data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-sm',
+          'size-full border-l data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-sm',
       },
     },
     defaultVariants: {
@@ -52,10 +51,10 @@ export class ScSheet {
   sidebarState = inject(ScSheetTrigger);
 
   state = computed<'open' | 'closed'>(() => {
-    return this.sidebarState.open() ? 'open' : 'closed';
+    return this.sidebarState.state();
   });
 
-  side = signal<SheetVariants['side']>('right');
+  side = input<SheetVariants['side']>('right');
 
   class = input<string>('');
 

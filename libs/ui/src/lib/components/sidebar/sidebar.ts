@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 
 import { cn } from '../../utils';
-import { ScSheet, ScSheetTrigger } from '../sheet';
+import { ScSheet, ScSheetConfig, ScSheetTrigger } from '../sheet';
 import { SIDEBAR_WIDTH_MOBILE } from './constants';
 import { ScSidebarState } from './sidebar-state';
 
@@ -29,7 +29,7 @@ import { ScSidebarState } from './sidebar-state';
       <ng-template #mobile_sidebar>
         <div
           class="h-full w-full bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
-          [attr.side]="side()"
+          [side]="side()"
           sc-sheet
           data-sidebar="sidebar"
           data-mobile="true"
@@ -115,14 +115,18 @@ export class ScSidebar {
       this.sidebarState.isMobile.set(result.matches);
 
       if (!result.matches && this.openMobile()) {
-        this.scSheetTrigger.closeSheet();
+        this.scSheetTrigger.close();
         this.sidebarState.openMobile.set(false);
       }
     });
 
     effect(() => {
-      if (this.isMobile() && this.openMobile())
-        this.scSheetTrigger.openSheet(this.mobileSidebarRef(), SIDEBAR_WIDTH_MOBILE);
+      if (this.isMobile() && this.openMobile()) {
+        const config = new ScSheetConfig();
+        config.side = this.side();
+        config.width = SIDEBAR_WIDTH_MOBILE;
+        this.scSheetTrigger.open(this.mobileSidebarRef(), config);
+      }
     });
   }
 }

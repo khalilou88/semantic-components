@@ -9,6 +9,7 @@ import { ComponentPortal } from '@angular/cdk/portal';
 import { ComponentRef, Injectable, TemplateRef, inject, signal } from '@angular/core';
 
 import { SheetVariants } from './sheet';
+import { ScSheetConfig } from './sheet-config';
 import { ScSheetContainer } from './sheet-container';
 
 @Injectable({
@@ -20,32 +21,30 @@ export class ScSheetTrigger {
   private readonly overlay = inject(Overlay);
   private overlayRef!: OverlayRef;
 
-  open = signal<boolean>(false);
+  state = signal<'open' | 'closed'>('closed');
 
-  openSheet(templateRef: TemplateRef<unknown>, customValue?: number | string) {
-    const side: SheetVariants['side'] = 'left';
-
+  open(templateRef: TemplateRef<unknown>, config: ScSheetConfig) {
     this._overlayContainer.getContainerElement().classList.add('sc-overlay-container');
 
-    const positionStrategy = this.getPositionStrategy(side);
+    const positionStrategy = this.getPositionStrategy(config.side);
     this.overlayRef = this.overlay.create({ positionStrategy });
 
-    this.updateSize(side, customValue);
+    this.overlayRef.updateSize({ height: config.height, width: config.width });
 
-    const tooltipPortal = new ComponentPortal(ScSheetContainer);
+    const scSheetPortal = new ComponentPortal(ScSheetContainer);
 
-    const tooltipRef: ComponentRef<ScSheetContainer> = this.overlayRef.attach(tooltipPortal);
+    const scSheetRef: ComponentRef<ScSheetContainer> = this.overlayRef.attach(scSheetPortal);
 
-    tooltipRef.instance.templateRef.set(templateRef);
+    scSheetRef.instance.templateRef.set(templateRef);
 
-    this.open.set(true);
+    this.state.set('open');
   }
 
-  closeSheet() {
+  close() {
     if (this.overlayRef?.hasAttached() === true) {
       this.overlayRef?.detach();
-      this.open.set(false);
       this._overlayContainer.getContainerElement().classList.remove('sc-overlay-container');
+      this.state.set('closed');
     }
   }
 
@@ -97,35 +96,6 @@ export class ScSheetTrigger {
             overlayY: 'top',
           },
         ];
-      }
-
-      default: {
-        throw new Error('Error in switch case');
-      }
-    }
-  }
-
-  updateSize(side: SheetVariants['side'], customValue?: number | string): void {
-    switch (side) {
-      case 'top': {
-        const v = customValue ? customValue : 300;
-        this.overlayRef.updateSize({ height: v, width: '100%' });
-        return;
-      }
-      case 'bottom': {
-        const v = customValue ? customValue : 300;
-        this.overlayRef.updateSize({ height: v, width: '100%' });
-        return;
-      }
-      case 'left': {
-        const v = customValue ? customValue : 620;
-        this.overlayRef.updateSize({ height: '100%', width: v });
-        return;
-      }
-      case 'right': {
-        const v = customValue ? customValue : 620;
-        this.overlayRef.updateSize({ height: '100%', width: v });
-        return;
       }
 
       default: {

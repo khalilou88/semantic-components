@@ -8,6 +8,7 @@ import {
   computed,
   inject,
   input,
+  signal,
   viewChild,
 } from '@angular/core';
 
@@ -33,11 +34,11 @@ import { LayoutState } from '../services/layout-state';
               size="icon"
               type="button"
             >
-              @if (sidebarState.open()) {
+              @if (open()) {
                 <svg-x-icon />
               }
 
-              @if (!sidebarState.open()) {
+              @if (!open()) {
                 <svg-menu-icon />
               }
 
@@ -177,6 +178,8 @@ export class Header implements AfterViewChecked {
     const height = this.headerContentRef().nativeElement.offsetHeight;
     this.layoutState.headerHeight.set(height);
   }
+
+  open = signal(false);
 
   toggle() {
     // this.sidebarState.toggle();
