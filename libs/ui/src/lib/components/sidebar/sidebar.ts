@@ -29,7 +29,6 @@ import { ScSidebarState } from './sidebar-state';
       <ng-template #mobile_sidebar>
         <div
           class="h-full w-full bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
-          [style]="styles()"
           [attr.side]="side()"
           sc-sheet
           data-sidebar="sidebar"
@@ -83,8 +82,6 @@ export class ScSidebar {
   openMobile = computed(() => this.sidebarState.openMobile());
 
   state = computed(() => this.sidebarState.state());
-
-  styles = signal(`--sidebar-width: ${SIDEBAR_WIDTH_MOBILE};`);
 
   classes1 = signal(
     cn(

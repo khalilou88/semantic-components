@@ -29,7 +29,7 @@ import { cn } from '../../utils';
 export class ScSheetContainer {
   class = input<string>('');
 
-  classes = computed(() => cn('', this.class()));
+  classes = computed(() => cn('block size-full', this.class()));
 
   templateRef = signal<TemplateRef<unknown> | null>(null);
 }
