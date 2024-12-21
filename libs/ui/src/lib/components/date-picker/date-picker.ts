@@ -11,7 +11,9 @@ import {
   OnInit,
   OutputEmitterRef,
   ViewEncapsulation,
+  computed,
   inject,
+  input,
   output,
   signal,
   viewChild,
@@ -19,26 +21,34 @@ import {
 
 import { SvgCalendarIcon } from '@semantic-icons/lucide-icons';
 
+import { cn } from '../../utils';
+import { ScButton } from '../button';
 import { ScInput } from '../input';
 import { ScInlineDatePicker } from './inline-date-picker';
 
 @Component({
   selector: 'sc-date-picker',
-  imports: [ScInput, SvgCalendarIcon],
+  imports: [ScInput, SvgCalendarIcon, ScButton],
   template: `
-    {{ dateFormatPattern() }}
-    <div class="relative" #overlayOrigin>
-      <button class="absolute inset-y-0 end-0  pe-2" (click)="open()">
-        <svg-calendar-icon />
-      </button>
-      <input #input sc-input type="text" placeholder="Select date" />
-    </div>
+    <button class="absolute inset-y-0 end-0 pe-4" (click)="open()" sc-button variant="ghost">
+      <svg-calendar-icon />
+    </button>
+    <input #input sc-input type="text" placeholder="Select date" />
   `,
+  host: {
+    '[class]': 'classes()',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScDatePicker implements OnInit {
+  class = input<string>('');
+
+  classes = computed(() => cn('relative', this.class()));
+
+  private host = inject(ElementRef);
+
   private readonly localeId = inject(LOCALE_ID);
 
   dateFormatPattern = signal<string>('');
@@ -76,7 +86,7 @@ export class ScDatePicker implements OnInit {
 
   private readonly _isOpen = signal(false);
   private readonly _input = viewChild<ElementRef<HTMLInputElement>>('input');
-  private readonly _overlayOrigin = viewChild<ElementRef<HTMLDivElement>>('overlayOrigin');
+  // private readonly _overlayOrigin = viewChild<ElementRef<HTMLDivElement>>('overlayOrigin');
   private _overlayRef: OverlayRef | null = null;
   private _portal: ComponentPortal<unknown> | null = null;
 
@@ -134,7 +144,7 @@ export class ScDatePicker implements OnInit {
       return this._overlayRef;
     }
 
-    const _overlayOrigin = this._overlayOrigin();
+    const _overlayOrigin = this.host;
     if (_overlayOrigin === undefined) {
       throw new Error('_overlayOrigin is undefined');
     }
@@ -174,7 +184,7 @@ export class ScDatePicker implements OnInit {
 
     this._overlayRef.outsidePointerEvents().subscribe((event) => {
       const target = _getEventTarget(event) as HTMLElement;
-      const origin = this._overlayOrigin()?.nativeElement;
+      const origin = this.host?.nativeElement;
 
       if (target && target !== origin && !origin?.contains(target)) {
         this.close();
