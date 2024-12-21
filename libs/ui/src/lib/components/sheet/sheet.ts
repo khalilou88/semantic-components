@@ -1,8 +1,6 @@
-import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  TemplateRef,
   ViewEncapsulation,
   computed,
   inject,
@@ -38,11 +36,9 @@ export type SheetVariants = VariantProps<typeof sheetVariants>;
 
 @Component({
   selector: 'sc-sheet',
-  imports: [NgTemplateOutlet],
+  imports: [],
   template: `
-    @if (templateRef()) {
-      <ng-container *ngTemplateOutlet="templateRef()"></ng-container>
-    }
+    <ng-content />
   `,
   host: {
     '[class]': 'classes()',
@@ -64,6 +60,4 @@ export class ScSheet {
   class = input<string>('');
 
   classes = computed(() => cn(sheetVariants({ side: this.side() }), this.class()));
-
-  templateRef = signal<TemplateRef<unknown> | null>(null);
 }

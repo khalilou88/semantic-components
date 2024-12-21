@@ -8,7 +8,8 @@ import {
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ComponentRef, Injectable, TemplateRef, inject, signal } from '@angular/core';
 
-import { ScSheet, SheetVariants } from './sheet';
+import { SheetVariants } from './sheet';
+import { ScSheetContainer } from './sheet-container';
 
 @Injectable({
   providedIn: 'root',
@@ -31,13 +32,11 @@ export class ScSheetTrigger {
 
     this.updateSize(side, customValue);
 
-    const tooltipPortal = new ComponentPortal(ScSheet);
+    const tooltipPortal = new ComponentPortal(ScSheetContainer);
 
-    const tooltipRef: ComponentRef<ScSheet> = this.overlayRef.attach(tooltipPortal);
+    const tooltipRef: ComponentRef<ScSheetContainer> = this.overlayRef.attach(tooltipPortal);
 
     tooltipRef.instance.templateRef.set(templateRef);
-
-    tooltipRef.instance.side.set(side);
 
     this.open.set(true);
   }
