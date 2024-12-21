@@ -1,10 +1,14 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { ScFullCalendar } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-full-calendar-page',
-  imports: [],
+  imports: [ScFullCalendar],
   template: `
-    <p>full-calendar-page works!</p>
+    <div class="m-10">
+      <sc-full-calendar />
+    </div>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
