@@ -1,7 +1,11 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { ScSidebar, ScSidebarProvider, ScSidebarTrigger } from '@semantic-components/ui';
-import { ScSidebarState } from 'libs/ui/src/lib/components/sidebar/sidebar-state';
+import {
+  ScSidebar,
+  ScSidebarProvider,
+  ScSidebarState,
+  ScSidebarTrigger,
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-sidebar-page',
