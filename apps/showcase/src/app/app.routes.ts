@@ -2,6 +2,11 @@ import { Route } from '@angular/router';
 
 export const appRoutes: Route[] = [
   {
+    path: 'sidebar',
+    loadComponent: () => import('./pages/sidebar-page'),
+    title: 'Sidebar Page',
+  },
+  {
     path: '',
     loadComponent: () => import('./layouts/stacked-layout'),
     children: [

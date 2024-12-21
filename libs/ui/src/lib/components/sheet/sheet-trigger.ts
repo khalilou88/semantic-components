@@ -6,9 +6,11 @@ import {
   PositionStrategy,
 } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { ComponentRef, Injectable, inject, signal } from '@angular/core';
+import { ComponentRef, Injectable, TemplateRef, inject, signal } from '@angular/core';
 
-import { ScSheet, SheetVariants } from './sheet';
+import { SheetVariants } from './sheet';
+import { ScSheetConfig } from './sheet-config';
+import { ScSheetContainer } from './sheet-container';
 
 @Injectable({
   providedIn: 'root',
@@ -19,33 +21,30 @@ export class ScSheetTrigger {
   private readonly overlay = inject(Overlay);
   private overlayRef!: OverlayRef;
 
-  open = signal<boolean>(false);
+  state = signal<'open' | 'closed'>('closed');
 
-  openSheet() {
-    const side: SheetVariants['side'] = 'left';
-
+  open(templateRef: TemplateRef<unknown>, config: ScSheetConfig) {
     this._overlayContainer.getContainerElement().classList.add('sc-overlay-container');
 
-    const positionStrategy = this.getPositionStrategy(side);
+    const positionStrategy = this.getPositionStrategy(config.side);
     this.overlayRef = this.overlay.create({ positionStrategy });
 
-    this.updateSize(side);
+    this.overlayRef.updateSize({ height: config.height, width: config.width });
 
-    const tooltipPortal = new ComponentPortal(ScSheet);
+    const scSheetPortal = new ComponentPortal(ScSheetContainer);
 
-    const tooltipRef: ComponentRef<ScSheet> = this.overlayRef.attach(tooltipPortal);
+    const scSheetRef: ComponentRef<ScSheetContainer> = this.overlayRef.attach(scSheetPortal);
 
-    tooltipRef.instance.side.set(side);
+    scSheetRef.instance.templateRef.set(templateRef);
+
+    this.state.set('open');
   }
 
-  toggle() {
+  close() {
     if (this.overlayRef?.hasAttached() === true) {
       this.overlayRef?.detach();
-      this.open.set(false);
       this._overlayContainer.getContainerElement().classList.remove('sc-overlay-container');
-    } else {
-      this.openSheet();
-      this.open.set(true);
+      this.state.set('closed');
     }
   }
 
@@ -97,31 +96,6 @@ export class ScSheetTrigger {
             overlayY: 'top',
           },
         ];
-      }
-
-      default: {
-        throw new Error('Error in switch case');
-      }
-    }
-  }
-
-  updateSize(side: SheetVariants['side']): void {
-    switch (side) {
-      case 'top': {
-        this.overlayRef.updateSize({ height: 300, width: '100%' });
-        return;
-      }
-      case 'bottom': {
-        this.overlayRef.updateSize({ height: 300, width: '100%' });
-        return;
-      }
-      case 'left': {
-        this.overlayRef.updateSize({ width: 620 });
-        return;
-      }
-      case 'right': {
-        this.overlayRef.updateSize({ width: 620 });
-        return;
       }
 
       default: {

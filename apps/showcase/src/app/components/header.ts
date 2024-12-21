@@ -8,23 +8,42 @@ import {
   computed,
   inject,
   input,
+  signal,
   viewChild,
 } from '@angular/core';
 
-import { ScButton, ScSheetToggler, ScThemeToggler, cn } from '@semantic-components/ui';
-import { SvgGithubIcon } from '@semantic-icons/lucide-icons';
+import { ScButton, ScSheetTrigger, ScThemeToggler, cn } from '@semantic-components/ui';
+import { SvgGithubIcon, SvgMenuIcon, SvgXIcon } from '@semantic-icons/lucide-icons';
 
 import { LayoutState } from '../services/layout-state';
 
 @Component({
   selector: 'app-header',
-  imports: [ScThemeToggler, SvgGithubIcon, ScButton, ScSheetToggler],
+  imports: [ScThemeToggler, SvgGithubIcon, ScButton, SvgMenuIcon, SvgXIcon],
   template: `
     <div class="z-50 border-b border-border/40 bg-background" #headerContent>
       <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div class="relative flex h-16 items-center justify-between">
           <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-            <sc-sheet-toggler />
+            <button
+              [class]="classes()"
+              (click)="toggle()"
+              sc-button
+              data-sidebar="trigger"
+              variant="ghost"
+              size="icon"
+              type="button"
+            >
+              @if (open()) {
+                <svg-x-icon />
+              }
+
+              @if (!open()) {
+                <svg-menu-icon />
+              }
+
+              <span class="sr-only">Open Sidebar</span>
+            </button>
           </div>
           <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div class="flex shrink-0 items-center">
@@ -115,8 +134,6 @@ import { LayoutState } from '../services/layout-state';
           <div
             class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
           >
-            <sc-sheet-toggler />
-
             <button sc-button variant="ghost" size="icon" type="button">
               <span class="sr-only">View notifications</span>
 
@@ -138,6 +155,8 @@ import { LayoutState } from '../services/layout-state';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Header implements AfterViewChecked {
+  sidebarState = inject(ScSheetTrigger);
+
   class = input<string>('');
 
   classes = computed(() => cn('fixed top-0 left-0 right-0', this.class()));
@@ -158,5 +177,11 @@ export class Header implements AfterViewChecked {
   setHeaderHeight() {
     const height = this.headerContentRef().nativeElement.offsetHeight;
     this.layoutState.headerHeight.set(height);
+  }
+
+  open = signal(false);
+
+  toggle() {
+    // this.sidebarState.toggle();
   }
 }
