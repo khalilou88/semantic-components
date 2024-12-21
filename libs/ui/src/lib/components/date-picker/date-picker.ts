@@ -23,8 +23,8 @@ import { SvgCalendarIcon } from '@semantic-icons/lucide-icons';
 
 import { cn } from '../../utils';
 import { ScButton } from '../button';
+import { ScCalendar } from '../calendar';
 import { ScInput } from '../input';
-import { ScInlineDatePicker } from './inline-date-picker';
 
 @Component({
   selector: 'sc-date-picker',
@@ -45,7 +45,7 @@ import { ScInlineDatePicker } from './inline-date-picker';
 export class ScDatePicker implements OnInit {
   class = input<string>('');
 
-  classes = computed(() => cn('relative', this.class()));
+  classes = computed(() => cn('flex relative', this.class()));
 
   private host = inject(ElementRef);
 
@@ -122,7 +122,7 @@ export class ScDatePicker implements OnInit {
 
     overlayRef.updateSize({ width: 400 });
 
-    this._portal ??= new ComponentPortal(ScInlineDatePicker);
+    this._portal ??= new ComponentPortal(ScCalendar);
 
     overlayRef.attach(this._portal);
 

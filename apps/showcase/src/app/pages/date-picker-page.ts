@@ -1,20 +1,47 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { ScDatePicker, ScInlineDatePicker } from '@semantic-components/ui';
+import { ScDatePicker } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-date-picker-page',
-  imports: [ScDatePicker, ScInlineDatePicker],
+  imports: [ScDatePicker],
   template: `
     <div class="m-10">
-      <sc-inline-date-picker />
-
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       <br />
       <br />
       <br />
       <br />
 
       <sc-date-picker />
+
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   `,
   styles: ``,
