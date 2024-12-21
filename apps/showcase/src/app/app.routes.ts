@@ -200,6 +200,16 @@ export const appRoutes: Route[] = [
                 title: 'Progress Page',
               },
               {
+                path: 'calendar',
+                loadComponent: () => import('./pages/calendar-page'),
+                title: 'Calendar Page',
+              },
+              {
+                path: 'full-calendar',
+                loadComponent: () => import('./pages/full-calendar-page'),
+                title: 'Full Calendar Page',
+              },
+              {
                 path: 'date-picker',
                 loadComponent: () => import('./pages/date-picker-page'),
                 title: 'DatePicker Page',
