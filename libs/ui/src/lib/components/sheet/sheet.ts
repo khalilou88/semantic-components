@@ -35,7 +35,7 @@ const sheetVariants = cva(
 export type SheetVariants = VariantProps<typeof sheetVariants>;
 
 @Component({
-  selector: 'sc-sheet',
+  selector: 'div[sc-sheet]',
   imports: [],
   template: `
     <ng-content />

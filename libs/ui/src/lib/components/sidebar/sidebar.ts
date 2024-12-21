@@ -13,13 +13,13 @@ import {
 } from '@angular/core';
 
 import { cn } from '../../utils';
-import { ScSheetTrigger } from '../sheet';
+import { ScSheet, ScSheetTrigger } from '../sheet';
 import { SIDEBAR_WIDTH_MOBILE } from './constants';
 import { ScSidebarState } from './sidebar-state';
 
 @Component({
   selector: 'sc-sidebar',
-  imports: [LayoutModule],
+  imports: [LayoutModule, ScSheet],
   template: `
     @if (collapsible() === 'none') {
       <div class="flex h-full w-[--sidebar-width] flex-col bg-sidebar text-sidebar-foreground">
@@ -31,6 +31,7 @@ import { ScSidebarState } from './sidebar-state';
           class="h-full w-full bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
           [style]="styles()"
           [attr.side]="side()"
+          sc-sheet
           data-sidebar="sidebar"
           data-mobile="true"
         >
