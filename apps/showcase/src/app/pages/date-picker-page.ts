@@ -6,8 +6,14 @@ import { ScDatePicker, ScInlineDatePicker } from '@semantic-components/ui';
   selector: 'app-date-picker-page',
   imports: [ScDatePicker, ScInlineDatePicker],
   template: `
-    <div class="flex justify-between">
+    <div class="m-10">
       <sc-inline-date-picker />
+
+      <br />
+      <br />
+      <br />
+      <br />
+
       <sc-date-picker />
     </div>
   `,
