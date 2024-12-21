@@ -5,6 +5,7 @@ import {
   ElementRef,
   ViewEncapsulation,
   afterNextRender,
+  computed,
   forwardRef,
   inject,
   input,
@@ -19,6 +20,8 @@ import Heading from '@tiptap/extension-heading';
 import Paragraph from '@tiptap/extension-paragraph';
 import Text from '@tiptap/extension-text';
 
+import { cn } from '../../utils';
+import { scArticleClasses } from '../typography';
 import { ScExtensionBlockquote } from './extensions/extension-blockquote';
 import { ScExtensionBold } from './extensions/extension-bold';
 import { ScExtensionBulletList } from './extensions/extension-bullet-list';
@@ -141,6 +144,7 @@ export class ScEditor implements ControlValueAccessor {
   _isEditable = signal(true);
 
   class = input<string>('');
+  classes = computed(() => cn(scArticleClasses(), this.class()));
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   _onChange: (value: string) => void = () => {};
@@ -289,7 +293,7 @@ export class ScEditor implements ControlValueAccessor {
       editable: this._isEditable(),
       editorProps: {
         attributes: {
-          class: this.class(),
+          class: this.classes(),
         },
       },
     });
