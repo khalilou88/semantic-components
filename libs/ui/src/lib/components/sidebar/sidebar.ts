@@ -15,11 +15,11 @@ import { cn } from '../../utils';
 import { ScSheet } from '../sheet';
 import { SIDEBAR_WIDTH_MOBILE } from './constants';
 import { ScSidebarState } from './sidebar-state';
-import { ScSidebarTrigger } from './sidebar-trigger';
+import { ScSidebarToggler } from './sidebar-toggler';
 
 @Component({
   selector: 'sc-sidebar',
-  imports: [LayoutModule, ScSheet, NgClass, NgTemplateOutlet, ScSidebarTrigger],
+  imports: [LayoutModule, ScSheet, NgClass, NgTemplateOutlet, ScSidebarToggler],
   template: `
     <ng-template #sc_sidebar_content>
       <ng-content />
@@ -41,7 +41,7 @@ import { ScSidebarTrigger } from './sidebar-trigger';
         data-mobile="true"
       >
         <div class="flex size-full flex-col">
-          <sc-sidebar-trigger />
+          <sc-sidebar-toggler />
           <ng-container *ngTemplateOutlet="sc_sidebar_content" />
         </div>
       </div>

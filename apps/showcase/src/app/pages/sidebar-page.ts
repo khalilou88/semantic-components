@@ -4,12 +4,12 @@ import {
   ScSidebar,
   ScSidebarProvider,
   ScSidebarState,
-  ScSidebarTrigger,
+  ScSidebarToggler,
 } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-sidebar-page',
-  imports: [ScSidebarProvider, ScSidebar, ScSidebarTrigger],
+  imports: [ScSidebarProvider, ScSidebar, ScSidebarToggler],
   template: `
     <sc-sidebar-provider>
       <sc-sidebar>
@@ -17,7 +17,7 @@ import {
       </sc-sidebar>
 
       <main>
-        <sc-sidebar-trigger />
+        <sc-sidebar-toggler />
 
         <br />
         <br />

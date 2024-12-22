@@ -6,7 +6,7 @@ import { ScButton } from '../button';
 import { ScSidebarState } from './sidebar-state';
 
 @Component({
-  selector: 'sc-sidebar-trigger',
+  selector: 'sc-sidebar-toggler',
   imports: [ScButton, SvgPanelLeftIcon, SvgXIcon],
   template: `
     <button
@@ -30,7 +30,7 @@ import { ScSidebarState } from './sidebar-state';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSidebarTrigger {
+export class ScSidebarToggler {
   sidebarState = inject(ScSidebarState);
   toggleSidebar() {
     this.sidebarState.toggleSidebar();

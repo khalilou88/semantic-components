@@ -1,4 +1,4 @@
 export * from './sidebar';
 export * from './sidebar-state';
 export * from './sidebar-provider';
-export * from './sidebar-trigger';
+export * from './sidebar-toggler';
