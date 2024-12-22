@@ -28,21 +28,30 @@ import { ScSelectState } from './select-state';
         </span>
       }
 
-      {{ option().label }}
+      <ng-content />
     </button>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  hostDirectives: [CdkOption],
+  hostDirectives: [
+    {
+      directive: CdkOption,
+      inputs: ['cdkOption: optionValue'],
+    },
+  ],
 })
 export class ScOption {
   state = inject(ScSelectState);
 
   option = input.required<ScOptionModel>();
 
+  optionValue = computed(() => {
+    return this.option().value;
+  });
+
   isSelected = computed(() => {
-    return this.state.selectedOption()?.value === this.option().value;
+    return this.state.selectedOption()?.value === this.optionValue();
   });
 
   select() {
