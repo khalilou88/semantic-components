@@ -7,12 +7,13 @@ import {
 } from '@angular/core';
 
 import { cn } from '../../utils';
+import { ScAutocompleteInput } from './autocomplete-input';
 
 @Component({
-  selector: 'sc-command',
-  imports: [],
+  selector: 'sc-autocomplete',
+  imports: [ScAutocompleteInput],
   template: `
-    <ng-content />
+    <sc-autocomplete-input />
   `,
   host: {
     '[class]': 'classes()',
@@ -21,7 +22,7 @@ import { cn } from '../../utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCommand {
+export class ScAutocomplete {
   class = input<string>('');
 
   classes = computed(() =>

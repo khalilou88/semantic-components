@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 
 import { cn } from '../../utils';
-import { ScCommand } from './command';
+import { ScCommand } from '../command';
 
 @Component({
   selector: 'sc-command-dialog',

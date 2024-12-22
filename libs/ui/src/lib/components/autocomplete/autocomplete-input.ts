@@ -11,7 +11,7 @@ import { SvgSearchIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'sc-command-input',
+  selector: 'sc-autocomplete-input',
   imports: [SvgSearchIcon],
   template: `
     <svg-search-icon class="mr-2 size-4 shrink-0 opacity-50" />
@@ -27,7 +27,7 @@ import { cn } from '../../utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCommandInput {
+export class ScAutocompleteInput {
   class = input<string>('');
 
   classes = computed(() => cn('flex items-center border-b px-3', this.class()));
