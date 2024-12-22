@@ -1,4 +1,4 @@
-import { Highlightable, ListKeyManagerOption } from '@angular/cdk/a11y';
+import { Highlightable } from '@angular/cdk/a11y';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -27,7 +27,7 @@ import { ScAutocompleteModel } from './autocomplete-model';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScAutocompleteItem implements Highlightable, ListKeyManagerOption {
+export class ScAutocompleteItem implements Highlightable {
   class = input<string>('');
 
   classes = computed(() =>
