@@ -1,5 +1,5 @@
 import { BreakpointObserver, LayoutModule } from '@angular/cdk/layout';
-import { NgClass, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -10,16 +10,13 @@ import {
   signal,
 } from '@angular/core';
 
-import { SvgXIcon } from '@semantic-icons/lucide-icons';
-
 import { cn } from '../../utils';
-import { SIDEBAR_WIDTH_MOBILE } from './constants';
+import { ScSidebarMobile } from './sidebar-mobile';
 import { ScSidebarState } from './sidebar-state';
-import { ScSidebarToggler } from './sidebar-toggler';
 
 @Component({
   selector: 'sc-sidebar',
-  imports: [LayoutModule, NgClass, NgTemplateOutlet, ScSidebarToggler, SvgXIcon],
+  imports: [LayoutModule, NgTemplateOutlet, ScSidebarMobile],
   template: `
     <ng-template #sc_sidebar_content>
       <ng-content />
@@ -30,29 +27,9 @@ import { ScSidebarToggler } from './sidebar-toggler';
         <ng-container *ngTemplateOutlet="sc_sidebar_content" />
       </div>
     } @else if (isMobile()) {
-      <div
-        class="absolute top-0 left-0 h-full bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
-        [ngClass]="openMobile() ? 'w-[--sidebar-width]' : 'w-0 overflow-hidden'"
-        [style]="styles()"
-        data-sidebar="sidebar"
-        data-mobile="true"
-      >
-        <div class="flex size-full flex-col">
-          <sc-sidebar-toggler class="absolute right-1 top-1">
-            <svg-x-icon />
-          </sc-sidebar-toggler>
-
-          <br />
-          <br />
-          open : {{ sidebarState.open() }}
-          <br />
-          openMobile : {{ sidebarState.openMobile() }}
-          <br />
-          isMobile : {{ sidebarState.isMobile() }}
-
-          <ng-container *ngTemplateOutlet="sc_sidebar_content" />
-        </div>
-      </div>
+      <sc-sidebar-mobile [side]="side()">
+        <ng-container *ngTemplateOutlet="sc_sidebar_content" />
+      </sc-sidebar-mobile>
     } @else {
       <div
         class="group peer hidden text-sidebar-foreground md:block"
@@ -82,6 +59,8 @@ import { ScSidebarToggler } from './sidebar-toggler';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSidebar {
+  sidebarState = inject(ScSidebarState);
+
   class = input<string>('');
 
   classes = computed(() => cn('block relative', this.class()));
@@ -90,16 +69,12 @@ export class ScSidebar {
   variant = input<'sidebar' | 'floating' | 'inset'>('sidebar');
   collapsible = input<'offcanvas' | 'icon' | 'none'>('offcanvas');
 
-  sidebarState = inject(ScSidebarState);
-
   isMobile = computed(() => this.sidebarState.isMobile());
   openMobile = computed(() => this.sidebarState.openMobile());
 
   // We add a state so that we can do data-state="expanded" or "collapsed".
   // This makes it easier to style the sidebar with Tailwind classes.
   state = computed(() => (this.sidebarState.open() ? 'expanded' : 'collapsed'));
-
-  styles = signal(`--sidebar-width: ${SIDEBAR_WIDTH_MOBILE};`);
 
   classes1 = signal(
     cn(
