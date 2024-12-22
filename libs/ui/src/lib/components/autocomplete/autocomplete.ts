@@ -27,7 +27,7 @@ import { ScAutocompleteModel } from './autocomplete-model';
 
     @for (item of itemsArray(); track $index) {
       <sc-autocomplete-item [item]="item">
-        {{ item.name }}
+        {{ item.label }}
       </sc-autocomplete-item>
     }
 
@@ -55,13 +55,13 @@ export class ScAutocomplete implements AfterViewInit {
     ),
   );
 
-  itemsArray = signal<ScAutocompleteModel[]>([{ name: 'name' }]);
+  itemsArray = signal<ScAutocompleteModel[]>([{ label: 'label 1' }]);
 
   model = signal('');
 
   @ViewChildren(ScAutocompleteItem) items!: QueryList<ScAutocompleteItem>;
 
-  private keyManager: ActiveDescendantKeyManager<ScAutocompleteItem>;
+  private keyManager!: ActiveDescendantKeyManager<ScAutocompleteItem>;
 
   ngAfterViewInit() {
     this.keyManager = new ActiveDescendantKeyManager(this.items).withWrap();
@@ -69,7 +69,7 @@ export class ScAutocomplete implements AfterViewInit {
 
   onKeydown(event: any) {
     if (event.keyCode === ENTER) {
-      this.model.set(this.keyManager.activeItem.item.name);
+      this.model.set(this.keyManager.activeItem ? this.keyManager.activeItem.item().label : '');
     } else {
       this.keyManager.onKeydown(event);
     }
