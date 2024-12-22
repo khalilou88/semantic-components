@@ -33,7 +33,7 @@ import { ScSidebarToggler } from './sidebar-toggler';
       </div>
     } @else if (isMobile()) {
       <div
-        class="absolute top-0 left-0 bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
+        class="absolute left-0 top-0 bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
         [ngClass]="openMobile() ? 'w-[--sidebar-width]' : 'w-0 overflow-hidden'"
         [style]="styles()"
         [side]="side()"

@@ -5,7 +5,7 @@ import {
   computed,
   input,
 } from '@angular/core';
-import { LOCALE_ID, inject, signal } from '@angular/core';
+import { LOCALE_ID, OnInit, inject, signal } from '@angular/core';
 
 import { cn } from '../../utils';
 import { ScButton } from '../button';
@@ -54,7 +54,7 @@ import { WeekDayName } from './util';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCalendar {
+export class ScCalendar implements OnInit {
   class = input<string>('');
 
   classes = computed(() => cn('', this.class()));
