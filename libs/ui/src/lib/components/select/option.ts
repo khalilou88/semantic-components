@@ -1,15 +1,16 @@
+import { CdkOption } from '@angular/cdk/listbox';
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   ViewEncapsulation,
+  computed,
   inject,
   input,
-  viewChild,
 } from '@angular/core';
 
 import { SvgCheckIcon } from '@semantic-icons/lucide-icons';
 
+import { ScSelectModel } from './select-model';
 import { ScSelectState } from './select-state';
 
 @Component({
@@ -21,31 +22,31 @@ import { ScSelectState } from './select-state';
       (click)="select()"
       type="button"
     >
-      @if (state.selectedValue() === value()) {
+      @if (isSelected()) {
         <span class="absolute left-2 flex size-3.5 items-center justify-center">
           <svg-check-icon class="size-4" />
         </span>
       }
 
-      <span #label>
-        <ng-content />
-      </span>
+      {{ option().label }}
     </button>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  hostDirectives: [CdkOption],
 })
 export class ScOption {
   state = inject(ScSelectState);
 
-  value = input.required<string>();
+  option = input.required<ScSelectModel>();
 
-  label = viewChild.required<ElementRef<HTMLSpanElement>>('label');
+  isSelected = computed(() => {
+    return this.state.selectedOption()?.value === this.option().value;
+  });
 
   select() {
-    this.state.selectedValue.set(this.value());
-    this.state.selectedLabel.set(this.label().nativeElement.textContent ?? '');
+    this.state.selectedOption.set(this.option());
     this.state.closeOverlay.set(true);
   }
 }

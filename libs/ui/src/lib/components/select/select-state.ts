@@ -1,9 +1,10 @@
 import { Injectable, signal } from '@angular/core';
 
+import { ScSelectModel } from './select-model';
+
 @Injectable()
 export class ScSelectState {
-  selectedValue = signal<string>('');
-  selectedLabel = signal<string>('');
+  selectedOption = signal<ScSelectModel | undefined>(undefined);
   isOpen = signal<boolean>(false);
   closeOverlay = signal<boolean>(false);
 }
