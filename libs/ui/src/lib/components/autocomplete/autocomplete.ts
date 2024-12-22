@@ -4,13 +4,20 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
+  OnInit,
   QueryList,
   ViewChildren,
   ViewEncapsulation,
   computed,
+  inject,
   input,
   signal,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+
+import { debounceTime } from 'rxjs';
 
 import { cn } from '../../utils';
 import { ScInput } from '../input';
@@ -19,13 +26,18 @@ import { ScAutocompleteModel } from './autocomplete-model';
 
 @Component({
   selector: 'sc-autocomplete',
-  imports: [ScInput, ScAutocompleteItem],
+  imports: [ScInput, ScAutocompleteItem, ReactiveFormsModule],
   template: `
     <!--sc-autocomplete-input /-->
 
-    <input (keyup)="onKeydown($event)" sc-input placeholder="Search..." />
+    <input
+      [formControl]="searchControl"
+      (keyup)="onKeydown($event)"
+      sc-input
+      placeholder="Search..."
+    />
 
-    @for (item of itemsArray(); track $index) {
+    @for (item of filteredItems(); track $index) {
       <sc-autocomplete-item [item]="item">
         {{ item.name }}
       </sc-autocomplete-item>
@@ -45,7 +57,9 @@ import { ScAutocompleteModel } from './autocomplete-model';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScAutocomplete implements AfterViewInit {
+export class ScAutocomplete implements AfterViewInit, OnInit {
+  destroyRef = inject(DestroyRef);
+
   class = input<string>('');
 
   classes = computed(() =>
@@ -97,6 +111,24 @@ export class ScAutocomplete implements AfterViewInit {
       name: 'June Eaton',
     },
   ]);
+
+  input = signal('');
+
+  searchControl = new FormControl();
+  ngOnInit() {
+    this.searchControl.valueChanges
+      .pipe(debounceTime(300), takeUntilDestroyed(this.destroyRef))
+      .subscribe((term) => this.input.set(term));
+  }
+
+  filteredItems = computed(() => {
+    if (!this.input()) {
+      return this.itemsArray();
+    }
+    return this.itemsArray().filter(
+      (item) => item.name.toLowerCase().indexOf(this.input().toLowerCase()) !== -1,
+    );
+  });
 
   model = signal('');
 
