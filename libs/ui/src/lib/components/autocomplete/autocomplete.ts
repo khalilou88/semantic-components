@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
   computed,
   input,
+  signal,
 } from '@angular/core';
 
 import { cn } from '../../utils';
@@ -31,4 +32,6 @@ export class ScAutocomplete {
       this.class(),
     ),
   );
+
+  options = signal([]);
 }
