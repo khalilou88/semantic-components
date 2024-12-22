@@ -1,5 +1,6 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { ESCAPE, TAB, hasModifierKey } from '@angular/cdk/keycodes';
+import { CdkListbox } from '@angular/cdk/listbox';
 import { Overlay, OverlayModule, OverlayRef } from '@angular/cdk/overlay';
 import { _getEventTarget } from '@angular/cdk/platform';
 import { TemplatePortal } from '@angular/cdk/portal';
@@ -23,11 +24,13 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { SvgChevronDownIcon } from '@semantic-icons/lucide-icons';
 
+import { ScOption } from './option';
+import { ScSelectModel } from './select-model';
 import { ScSelectState } from './select-state';
 
 @Component({
   selector: 'sc-select',
-  imports: [SvgChevronDownIcon, OverlayModule],
+  imports: [SvgChevronDownIcon, OverlayModule, CdkListbox, ScOption],
   template: `
     <button
       class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
@@ -47,8 +50,12 @@ import { ScSelectState } from './select-state';
       <div
         class="relative z-50 max-h-96 w-full min-w-32 overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2"
         [id]="_getPanelId()"
+        cdkListbox
+        cdkListboxUseActiveDescendant
       >
-        <ng-content />
+        @for (option of options(); track $index) {
+          <sc-option [option]="option">{{ option.label }}</sc-option>
+        }
       </div>
     </ng-template>
   `,
@@ -88,11 +95,13 @@ export class ScSelect implements ControlValueAccessor {
 
   placeholder = input<string>('');
 
+  options = input<ScSelectModel[]>([]);
+
   constructor() {
     this.id = ++ScSelect.nextId;
 
     effect(() => {
-      const selectedValue = this.state.selectedValue();
+      const selectedValue = this.state.selectedOption();
       this.setValue(selectedValue);
 
       const closeOverlay = this.state.closeOverlay();
@@ -105,26 +114,26 @@ export class ScSelect implements ControlValueAccessor {
     });
   }
 
-  _value = signal('');
+  _value = signal<ScSelectModel | undefined>(undefined);
 
   isDisabled = signal(false);
 
-  writeValue(value: string): void {
+  writeValue(value: ScSelectModel): void {
     this._value.set(value);
   }
 
-  setValue(value: string) {
+  setValue(value: ScSelectModel | undefined) {
     this._value.set(value);
     this._onChange(value);
     this._cdr.markForCheck();
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  _onChange: (value: string) => void = () => {};
+  _onChange: (value: ScSelectModel | undefined) => void = () => {};
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   _onTouched: () => void = () => {};
 
-  registerOnChange(fn: (value: string) => void): void {
+  registerOnChange(fn: (value: ScSelectModel | undefined) => void): void {
     this._onChange = fn;
   }
 
@@ -137,8 +146,8 @@ export class ScSelect implements ControlValueAccessor {
   }
 
   label = computed(() => {
-    if (this.state.selectedLabel()) {
-      return this.state.selectedLabel();
+    if (this.state.selectedOption()) {
+      return this.state.selectedOption()?.label;
     }
 
     return this.placeholder();

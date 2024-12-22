@@ -2,22 +2,17 @@ import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
-import { ScLabel, ScOption, ScSelect } from '@semantic-components/ui';
+import { ScLabel, ScSelect } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-select-page',
-  imports: [ScLabel, ScSelect, ScOption, ReactiveFormsModule, JsonPipe],
+  imports: [ScLabel, ScSelect, ReactiveFormsModule, JsonPipe],
   template: `
     <form [formGroup]="selectForm">
       <label sc-label for="car">Choose a car:</label>
 
       <div class="w-[180px]">
-        <sc-select id="car" formControlName="car" placeholder="Select a car">
-          <sc-option value="volvo">Volvo</sc-option>
-          <sc-option value="saab">Saab</sc-option>
-          <sc-option value="mercedes">Mercedes</sc-option>
-          <sc-option value="audi">Audi</sc-option>
-        </sc-select>
+        <sc-select id="car" [options]="options" formControlName="car" placeholder="Select a car" />
 
         <div>
           {{ this.selectForm.value | json }}
@@ -30,6 +25,13 @@ import { ScLabel, ScOption, ScSelect } from '@semantic-components/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class SelectPage {
+  options = [
+    { value: 'volvo', label: 'Volvo' },
+    { value: 'saab', label: 'Saab' },
+    { value: 'mercedes', label: 'Mercedes' },
+    { value: 'audi', label: 'Audi' },
+  ];
+
   selectForm = new FormGroup({
     car: new FormControl(''),
   });
