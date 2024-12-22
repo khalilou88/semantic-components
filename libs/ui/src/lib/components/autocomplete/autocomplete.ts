@@ -6,15 +6,14 @@ import {
   Component,
   DestroyRef,
   OnInit,
-  QueryList,
-  ViewChildren,
   ViewEncapsulation,
   computed,
   inject,
   input,
   signal,
+  viewChildren,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { debounceTime } from 'rxjs';
@@ -57,7 +56,7 @@ import { ScAutocompleteModel } from './autocomplete-model';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScAutocomplete implements AfterViewInit, OnInit {
+export class ScAutocomplete implements AfterViewInit {
   destroyRef = inject(DestroyRef);
 
   class = input<string>('');
@@ -112,14 +111,9 @@ export class ScAutocomplete implements AfterViewInit, OnInit {
     },
   ]);
 
-  input = signal('');
-
   searchControl = new FormControl();
-  ngOnInit() {
-    this.searchControl.valueChanges
-      .pipe(debounceTime(300), takeUntilDestroyed(this.destroyRef))
-      .subscribe((term) => this.input.set(term));
-  }
+
+  input = toSignal(this.searchControl.valueChanges.pipe(debounceTime(300)));
 
   filteredItems = computed(() => {
     if (!this.input()) {
@@ -132,12 +126,12 @@ export class ScAutocomplete implements AfterViewInit, OnInit {
 
   model = signal('');
 
-  @ViewChildren(ScAutocompleteItem) items!: QueryList<ScAutocompleteItem>;
+  readonly items = viewChildren(ScAutocompleteItem);
 
   private keyManager!: ActiveDescendantKeyManager<ScAutocompleteItem>;
 
   ngAfterViewInit() {
-    this.keyManager = new ActiveDescendantKeyManager(this.items).withWrap().withTypeAhead();
+    this.keyManager = new ActiveDescendantKeyManager(this.items()).withWrap().withTypeAhead();
   }
 
   onKeydown(event: KeyboardEvent) {
