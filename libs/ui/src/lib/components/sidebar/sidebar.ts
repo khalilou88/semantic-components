@@ -5,7 +5,6 @@ import {
   Component,
   ViewEncapsulation,
   computed,
-  effect,
   inject,
   input,
   signal,
@@ -14,14 +13,13 @@ import {
 import { SvgXIcon } from '@semantic-icons/lucide-icons';
 
 import { cn } from '../../utils';
-import { ScSheet } from '../sheet';
 import { SIDEBAR_WIDTH_MOBILE } from './constants';
 import { ScSidebarState } from './sidebar-state';
 import { ScSidebarToggler } from './sidebar-toggler';
 
 @Component({
   selector: 'sc-sidebar',
-  imports: [LayoutModule, ScSheet, NgClass, NgTemplateOutlet, ScSidebarToggler, SvgXIcon],
+  imports: [LayoutModule, NgClass, NgTemplateOutlet, ScSidebarToggler, SvgXIcon],
   template: `
     <ng-template #sc_sidebar_content>
       <ng-content />
@@ -33,12 +31,9 @@ import { ScSidebarToggler } from './sidebar-toggler';
       </div>
     } @else if (isMobile()) {
       <div
-        class="absolute left-0 top-0 bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
+        class="absolute top-0 left-0 h-full bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
         [ngClass]="openMobile() ? 'w-[--sidebar-width]' : 'w-0 overflow-hidden'"
         [style]="styles()"
-        [side]="side()"
-        [open]="openMobile()"
-        sc-sheet
         data-sidebar="sidebar"
         data-mobile="true"
       >
@@ -46,6 +41,15 @@ import { ScSidebarToggler } from './sidebar-toggler';
           <sc-sidebar-toggler class="absolute right-1 top-1">
             <svg-x-icon />
           </sc-sidebar-toggler>
+
+          <br />
+          <br />
+          open : {{ sidebarState.open() }}
+          <br />
+          openMobile : {{ sidebarState.openMobile() }}
+          <br />
+          isMobile : {{ sidebarState.isMobile() }}
+
           <ng-container *ngTemplateOutlet="sc_sidebar_content" />
         </div>
       </div>
@@ -91,7 +95,9 @@ export class ScSidebar {
   isMobile = computed(() => this.sidebarState.isMobile());
   openMobile = computed(() => this.sidebarState.openMobile());
 
-  state = computed(() => this.sidebarState.state());
+  // We add a state so that we can do data-state="expanded" or "collapsed".
+  // This makes it easier to style the sidebar with Tailwind classes.
+  state = computed(() => (this.sidebarState.open() ? 'expanded' : 'collapsed'));
 
   styles = signal(`--sidebar-width: ${SIDEBAR_WIDTH_MOBILE};`);
 
