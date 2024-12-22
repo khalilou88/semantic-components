@@ -9,14 +9,20 @@ import {
   signal,
 } from '@angular/core';
 
+import { SvgCheckIcon } from '@semantic-icons/lucide-icons';
+
 import { cn } from '../../utils';
 import { ScAutocompleteModel } from './autocomplete-model';
 
 @Component({
   selector: 'sc-autocomplete-item',
-  imports: [],
+  imports: [SvgCheckIcon],
   template: `
     <ng-content />
+
+    @if (isSelected()) {
+      <svg-check-icon class="ml-auto" />
+    }
   `,
   host: {
     '[class]': 'classes()',
@@ -42,6 +48,12 @@ export class ScAutocompleteItem implements Highlightable {
   });
 
   item = input.required<ScAutocompleteModel>();
+
+  selectedItem = input<ScAutocompleteModel | undefined>(undefined);
+
+  isSelected = computed(() => {
+    return this.item().id === this.selectedItem()?.id;
+  });
 
   private _isActive = signal(false);
 
