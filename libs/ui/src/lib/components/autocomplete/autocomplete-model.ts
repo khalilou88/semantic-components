@@ -1,3 +1,4 @@
 export interface ScAutocompleteModel {
-  label: string;
+  id: string;
+  name: string;
 }
