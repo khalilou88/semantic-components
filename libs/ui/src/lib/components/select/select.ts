@@ -25,7 +25,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { SvgChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 import { ScOption } from './option';
-import { ScSelectModel } from './select-model';
+import { ScOptionModel } from './option-model';
 import { ScSelectState } from './select-state';
 
 @Component({
@@ -95,7 +95,7 @@ export class ScSelect implements ControlValueAccessor {
 
   placeholder = input<string>('');
 
-  options = input<ScSelectModel[]>([]);
+  options = input<ScOptionModel[]>([]);
 
   constructor() {
     this.id = ++ScSelect.nextId;
@@ -114,26 +114,26 @@ export class ScSelect implements ControlValueAccessor {
     });
   }
 
-  _value = signal<ScSelectModel | undefined>(undefined);
+  _value = signal<ScOptionModel | undefined>(undefined);
 
   isDisabled = signal(false);
 
-  writeValue(value: ScSelectModel): void {
+  writeValue(value: ScOptionModel): void {
     this._value.set(value);
   }
 
-  setValue(value: ScSelectModel | undefined) {
+  setValue(value: ScOptionModel | undefined) {
     this._value.set(value);
     this._onChange(value);
     this._cdr.markForCheck();
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  _onChange: (value: ScSelectModel | undefined) => void = () => {};
+  _onChange: (value: ScOptionModel | undefined) => void = () => {};
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   _onTouched: () => void = () => {};
 
-  registerOnChange(fn: (value: ScSelectModel | undefined) => void): void {
+  registerOnChange(fn: (value: ScOptionModel | undefined) => void): void {
     this._onChange = fn;
   }
 
