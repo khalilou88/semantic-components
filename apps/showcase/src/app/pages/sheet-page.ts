@@ -16,9 +16,11 @@ import {
   ScInput,
   ScLabel,
   ScSheet,
+  ScSheetClose,
   ScSheetConfig,
   ScSheetTrigger,
 } from '@semantic-components/ui';
+import { SvgXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-sheet-page',
@@ -31,10 +33,17 @@ import {
     ScLabel,
     ScCardTitle,
     ScCardDescription,
+    ScSheetClose,
+    SvgXIcon,
   ],
   template: `
     <ng-template #sheet>
       <div sc-sheet>
+        <button sc-sheet-close>
+          <svg-x-icon class="size-4" />
+          <span class="sr-only">Close</span>
+        </button>
+
         <div sc-card-header>
           <h2 sc-card-title>Edit profile</h2>
           <p sc-card-description>Make changes to your profile here. Click save when you're done.</p>
@@ -80,12 +89,12 @@ export default class SheetPage {
 
     if (side === 'left' || side === 'right') {
       config.width = '300';
-      this.scSheetTrigger.toogle(this.sheetRef(), config);
     }
 
     if (side === 'top' || side === 'bottom') {
       config.height = '300';
-      this.scSheetTrigger.toogle(this.sheetRef(), config);
     }
+
+    this.scSheetTrigger.open(this.sheetRef(), config);
   }
 }
