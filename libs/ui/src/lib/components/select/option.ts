@@ -29,6 +29,8 @@ import { ScSelectState } from './select-state';
         </span>
       }
 
+      {{ _isActive() }}
+
       <ng-content />
     </button>
   `,
@@ -54,7 +56,7 @@ export class ScOption implements Highlightable {
     this.state.closeOverlay.set(true);
   }
 
-  private _isActive = signal(false);
+  _isActive = signal(false);
 
   setActiveStyles(): void {
     this._isActive.set(true);
