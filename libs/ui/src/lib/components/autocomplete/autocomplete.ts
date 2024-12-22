@@ -1,19 +1,17 @@
 import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { ENTER } from '@angular/cdk/keycodes';
+import { JsonPipe } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  DestroyRef,
-  OnInit,
   ViewEncapsulation,
   computed,
-  inject,
   input,
   signal,
   viewChildren,
 } from '@angular/core';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { debounceTime } from 'rxjs';
@@ -25,7 +23,7 @@ import { ScAutocompleteModel } from './autocomplete-model';
 
 @Component({
   selector: 'sc-autocomplete',
-  imports: [ScInput, ScAutocompleteItem, ReactiveFormsModule],
+  imports: [ScInput, ScAutocompleteItem, ReactiveFormsModule, JsonPipe],
   template: `
     <!--sc-autocomplete-input /-->
 
@@ -37,8 +35,8 @@ import { ScAutocompleteModel } from './autocomplete-model';
     />
 
     @for (item of filteredItems(); track $index) {
-      <sc-autocomplete-item [item]="item">
-        {{ item.name }}
+      <sc-autocomplete-item [item]="item" [selectedItem]="selectedItem()">
+        {{ item.label }}
       </sc-autocomplete-item>
     }
 
@@ -47,7 +45,7 @@ import { ScAutocompleteModel } from './autocomplete-model';
     <br />
     <br />
 
-    selected : {{ model() }}
+    selectedItem : {{ selectedItem() | json }}
   `,
   host: {
     '[class]': 'classes()',
@@ -57,8 +55,6 @@ import { ScAutocompleteModel } from './autocomplete-model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScAutocomplete implements AfterViewInit {
-  destroyRef = inject(DestroyRef);
-
   class = input<string>('');
 
   classes = computed(() =>
@@ -68,46 +64,46 @@ export class ScAutocomplete implements AfterViewInit {
     ),
   );
 
-  itemsArray = signal<ScAutocompleteModel[]>([
+  items = signal<ScAutocompleteModel[]>([
     {
       id: '5b902934d965e7501f4e1c6f',
-      name: 'Caroline Hodges',
+      label: 'Caroline Hodges',
     },
     {
       id: '5b9029348f7eed8b6f5f02db',
-      name: 'Delores Rivas',
+      label: 'Delores Rivas',
     },
     {
       id: '5b9029346f48c8407c64d0d5',
-      name: 'Darlene Franklin',
+      label: 'Darlene Franklin',
     },
     {
       id: '5b9029341eff315fa87f9e21',
-      name: 'Alfreda Love',
+      label: 'Alfreda Love',
     },
     {
       id: '5b9029342e8917c6ccdb9865',
-      name: 'Marcy Ratliff',
+      label: 'Marcy Ratliff',
     },
     {
       id: '5b9029349dbb48013460e01f',
-      name: 'Beulah Nielsen',
+      label: 'Beulah Nielsen',
     },
     {
       id: '5b902934f4f1586e5e72d74a',
-      name: 'Morton Kerr',
+      label: 'Morton Kerr',
     },
     {
       id: '5b9029347918bb204bf7014e',
-      name: 'Autumn Tillman',
+      label: 'Autumn Tillman',
     },
     {
       id: '5b902934b86f80e1fc60c626',
-      name: 'Diane Bennett',
+      label: 'Diane Bennett',
     },
     {
       id: '5b9029348999f59215020349',
-      name: 'June Eaton',
+      label: 'June Eaton',
     },
   ]);
 
@@ -117,26 +113,28 @@ export class ScAutocomplete implements AfterViewInit {
 
   filteredItems = computed(() => {
     if (!this.input()) {
-      return this.itemsArray();
+      return this.items();
     }
-    return this.itemsArray().filter(
-      (item) => item.name.toLowerCase().indexOf(this.input().toLowerCase()) !== -1,
+    return this.items().filter(
+      (item) => item.label.toLowerCase().indexOf(this.input().toLowerCase()) !== -1,
     );
   });
 
-  model = signal('');
+  selectedItem = signal<ScAutocompleteModel | undefined>(undefined);
 
-  readonly items = viewChildren(ScAutocompleteItem);
+  readonly viewItems = viewChildren(ScAutocompleteItem);
 
   private keyManager!: ActiveDescendantKeyManager<ScAutocompleteItem>;
 
   ngAfterViewInit() {
-    this.keyManager = new ActiveDescendantKeyManager(this.items()).withWrap().withTypeAhead();
+    this.keyManager = new ActiveDescendantKeyManager(this.viewItems()).withWrap().withTypeAhead();
   }
 
   onKeydown(event: KeyboardEvent) {
     if (event.keyCode === ENTER) {
-      this.model.set(this.keyManager.activeItem ? this.keyManager.activeItem.item().name : '');
+      this.selectedItem.set(
+        this.keyManager.activeItem ? this.keyManager.activeItem.item() : undefined,
+      );
     } else {
       this.keyManager.onKeydown(event);
     }
