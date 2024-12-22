@@ -38,7 +38,7 @@ export class ScSheetTrigger {
   open(templateRef: TemplateRef<unknown>, config: ScSheetConfig) {
     this.state.set('open');
     this.side.set(config.side);
-    this._overlayContainer.getContainerElement().classList.add(scPanelClasses().join(','));
+    this._overlayContainer.getContainerElement().classList.add(...scPanelClasses());
     this._overlayContainer.getContainerElement().setAttribute('data-state', 'open');
 
     const positionStrategy = this.getPositionStrategy(config.side);
@@ -57,7 +57,7 @@ export class ScSheetTrigger {
     if (this.overlayRef?.hasAttached() === true) {
       this.overlayRef?.detach();
       this.state.set('closed');
-      this._overlayContainer.getContainerElement().classList.remove(scPanelClasses().join(','));
+      this._overlayContainer.getContainerElement().classList.remove(...scPanelClasses());
       this._overlayContainer.getContainerElement().setAttribute('data-state', 'closed');
     }
   }
