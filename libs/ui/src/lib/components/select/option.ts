@@ -1,4 +1,4 @@
-import { CdkOption } from '@angular/cdk/listbox';
+import { Highlightable } from '@angular/cdk/a11y';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,6 +6,7 @@ import {
   computed,
   inject,
   input,
+  signal,
 } from '@angular/core';
 
 import { SvgCheckIcon } from '@semantic-icons/lucide-icons';
@@ -34,14 +35,8 @@ import { ScSelectState } from './select-state';
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  hostDirectives: [
-    {
-      directive: CdkOption,
-      inputs: ['cdkOption: optionValue'],
-    },
-  ],
 })
-export class ScOption {
+export class ScOption implements Highlightable {
   state = inject(ScSelectState);
 
   option = input.required<ScOptionModel>();
@@ -57,5 +52,18 @@ export class ScOption {
   select() {
     this.state.selectedOption.set(this.option());
     this.state.closeOverlay.set(true);
+  }
+
+  private _isActive = signal(false);
+
+  setActiveStyles(): void {
+    this._isActive.set(true);
+  }
+  setInactiveStyles(): void {
+    this._isActive.set(false);
+  }
+  disabled?: boolean | undefined;
+  getLabel?(): string {
+    return this.option().label;
   }
 }
