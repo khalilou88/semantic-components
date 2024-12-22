@@ -1,4 +1,4 @@
-import { Highlightable } from '@angular/cdk/a11y';
+import { Highlightable, ListKeyManagerOption } from '@angular/cdk/a11y';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -26,12 +26,13 @@ import { ScAutocompleteModel } from './autocomplete-model';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScAutocompleteItem implements Highlightable {
+export class ScAutocompleteItem implements Highlightable, ListKeyManagerOption {
   class = input<string>('');
 
   classes = computed(() =>
     cn(
       "relative flex cursor-default gap-2 select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none data-[disabled=true]:pointer-events-none data-[selected='true']:bg-accent data-[selected=true]:text-accent-foreground data-[disabled=true]:opacity-50 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0",
+      this._isActive() && 'bg-red-500',
       this.class(),
     ),
   );

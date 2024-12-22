@@ -105,10 +105,10 @@ export class ScAutocomplete implements AfterViewInit {
   private keyManager!: ActiveDescendantKeyManager<ScAutocompleteItem>;
 
   ngAfterViewInit() {
-    this.keyManager = new ActiveDescendantKeyManager(this.items).withWrap();
+    this.keyManager = new ActiveDescendantKeyManager(this.items).withWrap().withTypeAhead();
   }
 
-  onKeydown(event: any) {
+  onKeydown(event: KeyboardEvent) {
     if (event.keyCode === ENTER) {
       this.model.set(this.keyManager.activeItem ? this.keyManager.activeItem.item().name : '');
     } else {
