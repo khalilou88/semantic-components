@@ -1,44 +1,48 @@
 import { BreakpointObserver, LayoutModule } from '@angular/cdk/layout';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  TemplateRef,
   ViewEncapsulation,
   computed,
   effect,
   inject,
   input,
   signal,
-  viewChild,
 } from '@angular/core';
 
 import { cn } from '../../utils';
-import { ScSheet, ScSheetConfig, ScSheetTrigger } from '../sheet';
+import { ScSheet } from '../sheet';
 import { SIDEBAR_WIDTH_MOBILE } from './constants';
 import { ScSidebarState } from './sidebar-state';
 
 @Component({
   selector: 'sc-sidebar',
-  imports: [LayoutModule, ScSheet],
+  imports: [LayoutModule, ScSheet, NgClass, NgTemplateOutlet],
   template: `
+    <ng-template #sc_sidebar_content>
+      <ng-content />
+    </ng-template>
+
     @if (collapsible() === 'none') {
       <div class="flex h-full w-[--sidebar-width] flex-col bg-sidebar text-sidebar-foreground">
-        <ng-content />
+        <ng-container *ngTemplateOutlet="sc_sidebar_content" />
       </div>
     } @else if (isMobile()) {
-      <ng-template #mobile_sidebar>
-        <div
-          class="size-full bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
-          [side]="side()"
-          sc-sheet
-          data-sidebar="sidebar"
-          data-mobile="true"
-        >
-          <div class="flex size-full flex-col">
-            <ng-content />
-          </div>
+      <div
+        class="absolute top-0 left-0 bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
+        [ngClass]="openMobile() ? 'w-[--sidebar-width]' : 'w-0 overflow-hidden'"
+        [style]="styles()"
+        [side]="side()"
+        [open]="openMobile()"
+        sc-sheet
+        data-sidebar="sidebar"
+        data-mobile="true"
+      >
+        <div class="flex size-full flex-col">
+          <ng-container *ngTemplateOutlet="sc_sidebar_content" />
         </div>
-      </ng-template>
+      </div>
     } @else {
       <div
         class="group peer hidden text-sidebar-foreground md:block"
@@ -54,7 +58,7 @@ import { ScSidebarState } from './sidebar-state';
             class="flex size-full flex-col bg-sidebar group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow"
             data-sidebar="sidebar"
           >
-            <ng-content />
+            <ng-container *ngTemplateOutlet="sc_sidebar_content" />
           </div>
         </div>
       </div>
@@ -70,7 +74,7 @@ import { ScSidebarState } from './sidebar-state';
 export class ScSidebar {
   class = input<string>('');
 
-  classes = computed(() => cn('', this.class()));
+  classes = computed(() => cn('block relative', this.class()));
 
   side = input<'left' | 'right'>('left');
   variant = input<'sidebar' | 'floating' | 'inset'>('sidebar');
@@ -82,6 +86,8 @@ export class ScSidebar {
   openMobile = computed(() => this.sidebarState.openMobile());
 
   state = computed(() => this.sidebarState.state());
+
+  styles = signal(`--sidebar-width: ${SIDEBAR_WIDTH_MOBILE};`);
 
   classes1 = signal(
     cn(
@@ -107,26 +113,15 @@ export class ScSidebar {
     ),
   );
 
-  scSheetTrigger = inject(ScSheetTrigger);
-  mobileSidebarRef = viewChild.required<TemplateRef<unknown>>('mobile_sidebar');
-
   constructor(private observer: BreakpointObserver) {
     this.observer.observe('(max-width: 768px)').subscribe((result) => {
       this.sidebarState.isMobile.set(result.matches);
 
       if (!result.matches && this.openMobile()) {
-        this.scSheetTrigger.close();
         this.sidebarState.openMobile.set(false);
       }
     });
 
-    effect(() => {
-      if (this.isMobile() && this.openMobile()) {
-        const config = new ScSheetConfig();
-        config.side = this.side();
-        config.width = SIDEBAR_WIDTH_MOBILE;
-        this.scSheetTrigger.open(this.mobileSidebarRef(), config);
-      }
-    });
+    effect(() => {});
   }
 }
