@@ -21,6 +21,7 @@ import { ScAutocompleteModel } from './autocomplete-model';
   host: {
     '[class]': 'classes()',
     '[attr.data-disabled]': '_disabled()',
+    '[attr.data-selected]': '_isActive()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -31,8 +32,7 @@ export class ScAutocompleteItem implements Highlightable, ListKeyManagerOption {
 
   classes = computed(() =>
     cn(
-      "relative flex cursor-default gap-2 select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none data-[disabled=true]:pointer-events-none data-[selected='true']:bg-accent data-[selected=true]:text-accent-foreground data-[disabled=true]:opacity-50 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0",
-      this._isActive() && 'bg-red-500',
+      'relative flex cursor-default gap-2 select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none data-[disabled=true]:pointer-events-none hover:bg-accent hover:text-accent-foreground data-[selected=true]:bg-accent data-[selected=true]:text-accent-foreground data-[disabled=true]:opacity-50 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0',
       this.class(),
     ),
   );
