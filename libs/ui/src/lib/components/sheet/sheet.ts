@@ -50,7 +50,13 @@ export type SheetVariants = VariantProps<typeof sheetVariants>;
 export class ScSheet {
   sidebarState = inject(ScSheetTrigger);
 
+  open = input<boolean>(false);
+
   state = computed<'open' | 'closed'>(() => {
+    if (this.open()) {
+      return 'open';
+    }
+
     return this.sidebarState.state();
   });
 
