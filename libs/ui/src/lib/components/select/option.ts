@@ -10,7 +10,7 @@ import {
 
 import { SvgCheckIcon } from '@semantic-icons/lucide-icons';
 
-import { ScSelectModel } from './select-model';
+import { ScOptionModel } from './option-model';
 import { ScSelectState } from './select-state';
 
 @Component({
@@ -39,7 +39,7 @@ import { ScSelectState } from './select-state';
 export class ScOption {
   state = inject(ScSelectState);
 
-  option = input.required<ScSelectModel>();
+  option = input.required<ScOptionModel>();
 
   isSelected = computed(() => {
     return this.state.selectedOption()?.value === this.option().value;
