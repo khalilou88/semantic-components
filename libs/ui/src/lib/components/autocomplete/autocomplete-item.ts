@@ -1,3 +1,4 @@
+import { Highlightable } from '@angular/cdk/a11y';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -5,25 +6,27 @@ import {
   booleanAttribute,
   computed,
   input,
+  signal,
 } from '@angular/core';
 
 import { cn } from '../../utils';
+import { ScAutocompleteModel } from './autocomplete-model';
 
 @Component({
-  selector: 'sc-command-item',
+  selector: 'sc-autocomplete-item',
   imports: [],
   template: `
     <ng-content />
   `,
   host: {
     '[class]': 'classes()',
-    '[attr.data-disabled]': 'disabled()',
+    '[attr.data-disabled]': '_disabled()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCommandItem {
+export class ScAutocompleteItem implements Highlightable {
   class = input<string>('');
 
   classes = computed(() =>
@@ -33,7 +36,25 @@ export class ScCommandItem {
     ),
   );
 
-  readonly disabled = input<boolean, unknown>(false, {
+  readonly _disabled = input<boolean, unknown>(false, {
     transform: booleanAttribute,
   });
+
+  item = input.required<ScAutocompleteModel>();
+
+  private _isActive = signal(false);
+
+  disabled?: boolean | undefined;
+
+  getLabel?(): string {
+    return this.item.name;
+  }
+
+  setActiveStyles(): void {
+    this._isActive.set(true);
+  }
+
+  setInactiveStyles(): void {
+    this._isActive.set(false);
+  }
 }
