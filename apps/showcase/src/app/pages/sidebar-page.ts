@@ -6,10 +6,11 @@ import {
   ScSidebarState,
   ScSidebarToggler,
 } from '@semantic-components/ui';
+import { SvgPanelLeftIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-sidebar-page',
-  imports: [ScSidebarProvider, ScSidebar, ScSidebarToggler],
+  imports: [ScSidebarProvider, ScSidebar, ScSidebarToggler, SvgPanelLeftIcon],
   template: `
     <sc-sidebar-provider>
       <sc-sidebar>
@@ -17,7 +18,9 @@ import {
       </sc-sidebar>
 
       <main>
-        <sc-sidebar-toggler />
+        <sc-sidebar-toggler>
+          <svg-panel-left-icon />
+        </sc-sidebar-toggler>
 
         <br />
         <br />

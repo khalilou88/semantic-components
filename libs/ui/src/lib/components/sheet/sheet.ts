@@ -3,14 +3,12 @@ import {
   Component,
   ViewEncapsulation,
   computed,
-  inject,
   input,
 } from '@angular/core';
 
 import { VariantProps, cva } from 'class-variance-authority';
 
 import { cn } from '../../utils';
-import { ScSheetTrigger } from './sheet-trigger';
 
 const sheetVariants = cva(
   'relative z-50 gap-4 bg-background p-6 shadow-lg transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-500 data-[state=open]:animate-in data-[state=closed]:animate-out',
@@ -48,16 +46,10 @@ export type SheetVariants = VariantProps<typeof sheetVariants>;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSheet {
-  sidebarState = inject(ScSheetTrigger);
-
   open = input<boolean>(false);
 
   state = computed<'open' | 'closed'>(() => {
-    if (this.open()) {
-      return 'open';
-    }
-
-    return this.sidebarState.state();
+    return this.open() ? 'open' : 'closed';
   });
 
   side = input<SheetVariants['side']>('right');
