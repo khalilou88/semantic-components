@@ -12,6 +12,11 @@ export const appRoutes: Route[] = [
     title: 'Sheet Page',
   },
   {
+    path: 'autocomplete',
+    loadComponent: () => import('./pages/autocomplete-page'),
+    title: 'Autocomplete Page',
+  },
+  {
     path: '',
     loadComponent: () => import('./layouts/stacked-layout'),
     children: [
