@@ -127,7 +127,5 @@ export class ScSidebar {
         this.sidebarState.openMobile.set(false);
       }
     });
-
-    effect(() => {});
   }
 }
