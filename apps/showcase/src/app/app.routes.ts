@@ -34,6 +34,11 @@ export const appRoutes: Route[] = [
                 title: 'Home Page',
               },
               {
+                path: 'sheet',
+                loadComponent: () => import('./pages/sheet-page'),
+                title: 'Sheet Page',
+              },
+              {
                 path: 'menu-bar',
                 loadComponent: () => import('./pages/menu-bar-page'),
                 title: 'Menu Bar Page',
