@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { SvgPanelLeftIcon } from '@semantic-icons/lucide-icons';
+import { SvgPanelLeftIcon, SvgXIcon } from '@semantic-icons/lucide-icons';
 
 import { ScButton } from '../button';
 import { ScSidebarState } from './sidebar-state';
 
 @Component({
   selector: 'sc-sidebar-trigger',
-  imports: [ScButton, SvgPanelLeftIcon],
+  imports: [ScButton, SvgPanelLeftIcon, SvgXIcon],
   template: `
     <button
       class="size-7"
@@ -17,7 +17,12 @@ import { ScSidebarState } from './sidebar-state';
       variant="ghost"
       size="icon"
     >
-      <svg-panel-left-icon />
+      @if (sidebarState.isMobile() && sidebarState.openMobile()) {
+        <svg-x-icon />
+      } @else {
+        <svg-panel-left-icon />
+      }
+
       <span class="sr-only">Toggle Sidebar</span>
     </button>
   `,
