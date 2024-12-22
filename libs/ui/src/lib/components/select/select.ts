@@ -53,7 +53,7 @@ import { ScSelectState } from './select-state';
         cdkListbox
         cdkListboxUseActiveDescendant
       >
-        @for (option of options(); track $index) {
+        @for (option of options(); track option.value) {
           <sc-option [option]="option">{{ option.label }}</sc-option>
         }
       </div>
