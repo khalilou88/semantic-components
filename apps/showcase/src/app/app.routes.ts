@@ -7,6 +7,11 @@ export const appRoutes: Route[] = [
     title: 'Sidebar Page',
   },
   {
+    path: 'sheet',
+    loadComponent: () => import('./pages/sheet-page'),
+    title: 'Sheet Page',
+  },
+  {
     path: '',
     loadComponent: () => import('./layouts/stacked-layout'),
     children: [
@@ -32,11 +37,6 @@ export const appRoutes: Route[] = [
                 path: 'home',
                 loadComponent: () => import('./pages/home-page'),
                 title: 'Home Page',
-              },
-              {
-                path: 'sheet',
-                loadComponent: () => import('./pages/sheet-page'),
-                title: 'Sheet Page',
               },
               {
                 path: 'menu-bar',

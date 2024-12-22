@@ -8,6 +8,7 @@ import {
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ComponentRef, Injectable, TemplateRef, inject, signal } from '@angular/core';
 
+import { scPanelClasses } from '../sidebar';
 import { SheetVariants } from './sheet';
 import { ScSheetConfig } from './sheet-config';
 import { ScSheetContainer } from './sheet-container';
@@ -22,9 +23,23 @@ export class ScSheetTrigger {
   private overlayRef!: OverlayRef;
 
   state = signal<'open' | 'closed'>('closed');
+  side = signal<'top' | 'bottom' | 'left' | 'right'>('right');
+
+  toogle(templateRef: TemplateRef<unknown>, config: ScSheetConfig) {
+    if (this.state() === 'open') {
+      this.close();
+    }
+
+    if (this.state() === 'closed') {
+      this.open(templateRef, config);
+    }
+  }
 
   open(templateRef: TemplateRef<unknown>, config: ScSheetConfig) {
-    this._overlayContainer.getContainerElement().classList.add('sc-overlay-container');
+    this.state.set('open');
+    this.side.set(config.side);
+    this._overlayContainer.getContainerElement().classList.add(scPanelClasses().join(','));
+    this._overlayContainer.getContainerElement().setAttribute('data-state', 'open');
 
     const positionStrategy = this.getPositionStrategy(config.side);
     this.overlayRef = this.overlay.create({ positionStrategy });
@@ -36,15 +51,14 @@ export class ScSheetTrigger {
     const scSheetRef: ComponentRef<ScSheetContainer> = this.overlayRef.attach(scSheetPortal);
 
     scSheetRef.instance.templateRef.set(templateRef);
-
-    this.state.set('open');
   }
 
   close() {
     if (this.overlayRef?.hasAttached() === true) {
       this.overlayRef?.detach();
-      this._overlayContainer.getContainerElement().classList.remove('sc-overlay-container');
       this.state.set('closed');
+      this._overlayContainer.getContainerElement().classList.remove(scPanelClasses().join(','));
+      this._overlayContainer.getContainerElement().setAttribute('data-state', 'closed');
     }
   }
 

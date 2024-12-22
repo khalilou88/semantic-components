@@ -80,12 +80,12 @@ export default class SheetPage {
 
     if (side === 'left' || side === 'right') {
       config.width = '300';
-      this.scSheetTrigger.open(this.sheetRef(), config);
+      this.scSheetTrigger.toogle(this.sheetRef(), config);
     }
 
     if (side === 'top' || side === 'bottom') {
       config.height = '300';
-      this.scSheetTrigger.open(this.sheetRef(), config);
+      this.scSheetTrigger.toogle(this.sheetRef(), config);
     }
   }
 }
