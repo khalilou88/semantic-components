@@ -1,6 +1,5 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { ESCAPE, TAB, hasModifierKey } from '@angular/cdk/keycodes';
-import { CdkListbox } from '@angular/cdk/listbox';
 import { Overlay, OverlayModule, OverlayRef } from '@angular/cdk/overlay';
 import { _getEventTarget } from '@angular/cdk/platform';
 import { TemplatePortal } from '@angular/cdk/portal';
@@ -24,13 +23,13 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { SvgChevronDownIcon } from '@semantic-icons/lucide-icons';
 
-import { ScOption } from './option';
 import { ScOptionModel } from './option-model';
+import { ScSelect2 } from './select2';
 import { ScSelectState } from './select-state';
 
 @Component({
   selector: 'sc-select',
-  imports: [SvgChevronDownIcon, OverlayModule, CdkListbox, ScOption],
+  imports: [SvgChevronDownIcon, OverlayModule, ScSelect2],
   template: `
     <button
       class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
@@ -47,16 +46,7 @@ import { ScSelectState } from './select-state';
     </button>
 
     <ng-template #panelTemplate>
-      <div
-        class="relative z-50 max-h-96 w-full min-w-32 overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2"
-        [id]="_getPanelId()"
-        cdkListbox
-        cdkListboxUseActiveDescendant
-      >
-        @for (option of options(); track option.value) {
-          <sc-option [option]="option">{{ option.label }}</sc-option>
-        }
-      </div>
+      <sc-select2 [options]="options()" />
     </ng-template>
   `,
   styles: ``,
