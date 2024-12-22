@@ -7,12 +7,15 @@ import {
 } from '@angular/core';
 
 import { cn } from '../../utils';
+import { ScCommand } from '../command';
 
 @Component({
-  selector: 'sc-command',
-  imports: [],
+  selector: 'sc-command-dialog',
+  imports: [ScCommand],
   template: `
-    <ng-content />
+    <sc-command class="">
+      <ng-content />
+    </sc-command>
   `,
   host: {
     '[class]': 'classes()',
@@ -21,13 +24,8 @@ import { cn } from '../../utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCommand {
+export class ScCommandDialog {
   class = input<string>('');
 
-  classes = computed(() =>
-    cn(
-      'flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground',
-      this.class(),
-    ),
-  );
+  classes = computed(() => cn('block overflow-hidden p-0 shadow-lg', this.class()));
 }
