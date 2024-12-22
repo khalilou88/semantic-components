@@ -25,16 +25,6 @@ export class ScSheetTrigger {
   state = signal<'open' | 'closed'>('closed');
   side = signal<'top' | 'bottom' | 'left' | 'right'>('right');
 
-  toogle(templateRef: TemplateRef<unknown>, config: ScSheetConfig) {
-    if (this.state() === 'open') {
-      this.close();
-    }
-
-    if (this.state() === 'closed') {
-      this.open(templateRef, config);
-    }
-  }
-
   open(templateRef: TemplateRef<unknown>, config: ScSheetConfig) {
     this.state.set('open');
     this.side.set(config.side);
