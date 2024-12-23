@@ -4,7 +4,6 @@ import {
   ViewEncapsulation,
   computed,
   input,
-  signal,
 } from '@angular/core';
 
 import { SvgCheckIcon } from '@semantic-icons/lucide-icons';
@@ -15,11 +14,9 @@ import { cn } from '../../utils';
   selector: 'li[sc-listbox-option]',
   imports: [SvgCheckIcon],
   template: `
-    @if (isSelected()) {
-      <span class="absolute left-2 flex size-3.5 items-center justify-center">
-        <svg-check-icon class="size-4" />
-      </span>
-    }
+    <span class="absolute left-2 flex size-3.5 items-center justify-center">
+      <svg-check-icon class="size-4" />
+    </span>
 
     <ng-content />
   `,
@@ -39,6 +36,4 @@ export class ScListboxOption {
       this.class(),
     ),
   );
-
-  isSelected = signal(false);
 }

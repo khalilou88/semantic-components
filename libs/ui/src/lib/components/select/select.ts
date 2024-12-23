@@ -1,10 +1,12 @@
+import { A11yModule } from '@angular/cdk/a11y';
 import { Directionality } from '@angular/cdk/bidi';
 import { ENTER, ESCAPE, TAB, hasModifierKey } from '@angular/cdk/keycodes';
+import { CdkListbox, CdkOption } from '@angular/cdk/listbox';
 import { Overlay, OverlayModule, OverlayRef } from '@angular/cdk/overlay';
 import { _getEventTarget } from '@angular/cdk/platform';
 import { TemplatePortal } from '@angular/cdk/portal';
-import { JsonPipe } from '@angular/common';
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -28,12 +30,18 @@ import { SvgChevronDownIcon } from '@semantic-icons/lucide-icons';
 import { ScListbox } from './listbox';
 import { ScListboxOption } from './listbox-option';
 import { ScOption } from './option';
-import { ScOptionModel } from './option-model';
-import { ScSelectState } from './select-state';
 
 @Component({
   selector: 'sc-select',
-  imports: [SvgChevronDownIcon, OverlayModule, ScListbox, ScListboxOption],
+  imports: [
+    SvgChevronDownIcon,
+    OverlayModule,
+    ScListbox,
+    ScListboxOption,
+    CdkOption,
+    CdkListbox,
+    A11yModule,
+  ],
   template: `
     <button
       class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
@@ -50,9 +58,15 @@ import { ScSelectState } from './select-state';
     </button>
 
     <ng-template #panelTemplate>
-      <ul sc-listbox>
+      <ul
+        [cdkTrapFocusAutoCapture]="true"
+        (cdkListboxValueChange)="handleOptionChange($event.value)"
+        sc-listbox
+        cdkListbox
+        cdkTrapFocus
+      >
         @for (item of viewoptions(); track $index) {
-          <li sc-listbox-option>{{ item.value() }}</li>
+          <li [cdkOption]="item.value()" sc-listbox-option>{{ item.label() }}</li>
         }
       </ul>
     </ng-template>
@@ -66,11 +80,14 @@ import { ScSelectState } from './select-state';
       useExisting: forwardRef(() => ScSelect),
       multi: true,
     },
-    ScSelectState,
   ],
 })
-export class ScSelect implements ControlValueAccessor {
+export class ScSelect implements ControlValueAccessor, AfterViewInit {
   viewoptions = contentChildren(ScOption);
+
+  ngAfterViewInit() {
+    console.log(this.viewoptions());
+  }
 
   static nextId = 0;
 
@@ -80,8 +97,6 @@ export class ScSelect implements ControlValueAccessor {
     return `panel-${this.id}`;
   }
   private readonly _cdr = inject(ChangeDetectorRef);
-
-  state = inject(ScSelectState);
 
   _overlay = inject(Overlay);
   _dir = inject(Directionality, { optional: true });
@@ -95,39 +110,37 @@ export class ScSelect implements ControlValueAccessor {
 
   placeholder = input<string>('');
 
-  options = input<ScOptionModel[]>([]);
-
   isOpen = signal<boolean>(false);
 
   constructor() {
     this.id = ++ScSelect.nextId;
-
-    effect(() => {
-      const selectedValue = this.state.selectedOption();
-      this.setValue(selectedValue);
-    });
   }
 
-  _value = signal<ScOptionModel | undefined>(undefined);
+  _value = signal<unknown>(undefined);
 
   isDisabled = signal(false);
 
-  writeValue(value: ScOptionModel): void {
+  writeValue(value: unknown): void {
     this._value.set(value);
   }
 
-  setValue(value: ScOptionModel | undefined) {
+  handleOptionChange(v: readonly unknown[]) {
+    this.setValue(v[0]);
+    this.close();
+  }
+
+  setValue(value: unknown) {
     this._value.set(value);
     this._onChange(value);
     this._cdr.markForCheck();
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  _onChange: (value: ScOptionModel | undefined) => void = () => {};
+  _onChange: (value: unknown) => void = () => {};
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   _onTouched: () => void = () => {};
 
-  registerOnChange(fn: (value: ScOptionModel | undefined) => void): void {
+  registerOnChange(fn: (value: unknown) => void): void {
     this._onChange = fn;
   }
 
@@ -140,8 +153,10 @@ export class ScSelect implements ControlValueAccessor {
   }
 
   label = computed(() => {
-    if (this.state.selectedOption()) {
-      return this.state.selectedOption()?.label;
+    if (this._value()) {
+      return this.viewoptions()
+        .find((element) => element.value() === this._value())
+        ?.label();
     }
 
     return this.placeholder();
