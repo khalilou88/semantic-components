@@ -3,18 +3,16 @@ import {
   Component,
   ViewEncapsulation,
   computed,
-  inject,
   input,
+  signal,
 } from '@angular/core';
 
 import { SvgCheckIcon } from '@semantic-icons/lucide-icons';
 
 import { cn } from '../../utils';
-import { ScOptionModel } from './option-model';
-import { ScSelectState } from './select-state';
 
 @Component({
-  selector: 'sc-option',
+  selector: 'li[sc-listbox-option]',
   imports: [SvgCheckIcon],
   template: `
     @if (isSelected()) {
@@ -32,7 +30,7 @@ import { ScSelectState } from './select-state';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScOption {
+export class ScListboxOption {
   class = input<string>('');
 
   classes = computed(() =>
@@ -42,17 +40,5 @@ export class ScOption {
     ),
   );
 
-  value = input.required<unknown>();
-
-  state = inject(ScSelectState);
-
-  option = input<ScOptionModel>();
-
-  optionValue = computed(() => {
-    return this.option()?.value;
-  });
-
-  isSelected = computed(() => {
-    return this.state.selectedOption()?.value === this.optionValue();
-  });
+  isSelected = signal(false);
 }

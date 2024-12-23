@@ -3,6 +3,7 @@ import { ENTER, ESCAPE, TAB, hasModifierKey } from '@angular/cdk/keycodes';
 import { Overlay, OverlayModule, OverlayRef } from '@angular/cdk/overlay';
 import { _getEventTarget } from '@angular/cdk/platform';
 import { TemplatePortal } from '@angular/cdk/portal';
+import { JsonPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -12,6 +13,7 @@ import {
   ViewContainerRef,
   ViewEncapsulation,
   computed,
+  contentChildren,
   effect,
   forwardRef,
   inject,
@@ -23,13 +25,15 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { SvgChevronDownIcon } from '@semantic-icons/lucide-icons';
 
+import { ScListbox } from './listbox';
+import { ScListboxOption } from './listbox-option';
+import { ScOption } from './option';
 import { ScOptionModel } from './option-model';
-import { ScSelectListbox } from './select-listbox';
 import { ScSelectState } from './select-state';
 
 @Component({
   selector: 'sc-select',
-  imports: [SvgChevronDownIcon, OverlayModule, ScSelectListbox],
+  imports: [SvgChevronDownIcon, OverlayModule, ScListbox, ScListboxOption],
   template: `
     <button
       class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
@@ -46,7 +50,11 @@ import { ScSelectState } from './select-state';
     </button>
 
     <ng-template #panelTemplate>
-      <sc-select-listbox [options]="options()" (optionSelected)="close()" />
+      <ul sc-listbox>
+        @for (item of viewoptions(); track $index) {
+          <li sc-listbox-option>{{ item.value() }}</li>
+        }
+      </ul>
     </ng-template>
   `,
   styles: ``,
@@ -62,6 +70,8 @@ import { ScSelectState } from './select-state';
   ],
 })
 export class ScSelect implements ControlValueAccessor {
+  viewoptions = contentChildren(ScOption);
+
   static nextId = 0;
 
   id = 0;
