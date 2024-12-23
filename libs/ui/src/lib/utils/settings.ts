@@ -3,7 +3,7 @@ import { Injectable, LOCALE_ID, inject, signal } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class Settings {
+export class ScSettings {
   dateFormatPattern = signal<string>('');
 
   private readonly localeId = inject(LOCALE_ID);
