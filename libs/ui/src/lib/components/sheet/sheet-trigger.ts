@@ -1,6 +1,6 @@
 import { Overlay, OverlayConfig, OverlayContainer, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { ComponentRef, Injectable, TemplateRef, inject, signal } from '@angular/core';
+import { ComponentRef, Injectable, TemplateRef, effect, inject, signal } from '@angular/core';
 
 import { scOverlayClasses } from '../overlay';
 import { ScSheetConfig } from './sheet-config';
@@ -17,11 +17,23 @@ export class ScSheetTrigger {
   state = signal<'open' | 'closed'>('closed');
   side = signal<'top' | 'bottom' | 'left' | 'right'>('right');
 
+  constructor() {
+    effect(() => {
+      if (this.state() === 'open') {
+        this._overlayContainer.getContainerElement().classList.add(...scOverlayClasses());
+      }
+
+      if (this.state() === 'closed') {
+        this._overlayContainer.getContainerElement().classList.remove(...scOverlayClasses());
+      }
+
+      this._overlayContainer.getContainerElement().setAttribute('data-state', this.state());
+    });
+  }
+
   open(templateRef: TemplateRef<unknown>, config: ScSheetConfig) {
     this.state.set('open');
     this.side.set(config.side);
-    this._overlayContainer.getContainerElement().classList.add(...scOverlayClasses());
-    this._overlayContainer.getContainerElement().setAttribute('data-state', 'open');
 
     const overlayConfig = this.getOverlayConfig(config);
     this._overlayRef = this._overlay.create(overlayConfig);
@@ -38,8 +50,6 @@ export class ScSheetTrigger {
     if (this._overlayRef?.hasAttached()) {
       this._overlayRef?.detach();
       this.state.set('closed');
-      this._overlayContainer.getContainerElement().classList.remove(...scOverlayClasses());
-      this._overlayContainer.getContainerElement().setAttribute('data-state', 'closed');
     }
   }
 
