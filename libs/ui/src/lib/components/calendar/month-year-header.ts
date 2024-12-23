@@ -2,13 +2,14 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  computed,
   input,
   output,
-  signal,
 } from '@angular/core';
 
 import { SvgChevronLeftIcon, SvgChevronRightIcon } from '@semantic-icons/lucide-icons';
 
+import { cn } from '../../utils';
 import { ScButton } from '../button';
 
 @Component({
@@ -16,8 +17,8 @@ import { ScButton } from '../button';
   imports: [SvgChevronRightIcon, SvgChevronLeftIcon, ScButton],
   template: `
     <button
-      [attr.aria-label]="'Previous month'"
       (click)="monthYearChange.emit(-1)"
+      aria-label="Previous month"
       sc-button
       variant="outline"
       type="button"
@@ -31,8 +32,8 @@ import { ScButton } from '../button';
     </button>
 
     <button
-      [attr.aria-label]="'Next month'"
       (click)="monthYearChange.emit(1)"
+      aria-label="Next month"
       sc-button
       variant="outline"
       type="button"
@@ -50,7 +51,9 @@ import { ScButton } from '../button';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScMonthYearHeader {
-  classes = signal<string>('flex justify-between');
+  class = input<string>('');
+
+  classes = computed(() => cn('flex justify-between', this.class()));
 
   monthYear = input.required<string>();
 
