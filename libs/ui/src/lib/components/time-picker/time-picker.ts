@@ -64,15 +64,13 @@ export interface MatTimepickerSelected<D> {
 
     <ng-template #panelTemplate>
       <div
-        class="mat-timepicker-panel"
+        class="mat-timepicker-panel border-2 border-blue-500 w-full"
         @panel
         [attr.aria-label]="ariaLabel() || null"
         [attr.aria-labelledby]="_getAriaLabelledby()"
         [id]="panelId"
         role="listbox"
       >
-        <div>Hello</div>
-
         @for (option of _timeOptions; track option.value) {
           <sc-time-option [value]="option.value" (valueChange)="_selectValue(option.value)">
             {{ option.label }}
@@ -231,9 +229,8 @@ export class ScTimePicker implements AfterViewInit {
     this._isOpen.set(true);
     this._generateOptions();
     const overlayRef = this._getOverlayRef();
-    //  overlayRef.updateSize({ width: input.nativeElement.offsetWidth });
+    overlayRef.updateSize({ width: input.nativeElement.offsetWidth });
 
-    overlayRef.updateSize({ width: 300 });
     this._portal ??= new TemplatePortal(this._panelTemplate(), this._viewContainerRef);
     overlayRef.attach(this._portal);
     this._onOpenRender?.destroy();
@@ -345,24 +342,15 @@ export class ScTimePicker implements AfterViewInit {
   /** Generates the list of options from which the user can select.. */
   private _generateOptions(): void {
     // Default the interval to 30 minutes.
-    //   const interval = this.interval() ?? 30 * 60;
-    //   const options = this.options();
-    //   if (options !== null) {
-    //     this._timeOptions = options;
-    //   } else {
-    //     const input = this._input();
-    //     const adapter = this._dateAdapter;
-    //     const timeFormat = this._dateFormats.display.timeInput;
-    //     const min = input?.min() || adapter.setTime(adapter.today(), 0, 0, 0);
-    //     const max = input?.max() || adapter.setTime(adapter.today(), 23, 59, 0);
-    //     const cacheKey =
-    //       interval + '/' + adapter.format(min, timeFormat) + '/' + adapter.format(max, timeFormat);
-    //     // Don't re-generate the options if the inputs haven't changed.
-    //     if (cacheKey !== this._optionsCacheKey) {
-    //       this._optionsCacheKey = cacheKey;
-    //       this._timeOptions = generateOptions(adapter, this._dateFormats, min, max, interval);
-    //     }
-    //   }
+
+    this._timeOptions = [
+      { value: '1', label: '1' },
+      { value: '2', label: '2' },
+      { value: '3', label: '3' },
+      { value: '4', label: '4' },
+      { value: '5', label: '5' },
+      { value: '6', label: '6' },
+    ];
   }
 
   /**

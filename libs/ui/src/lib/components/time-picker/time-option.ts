@@ -6,6 +6,7 @@ import {
   ViewEncapsulation,
   inject,
   model,
+  signal,
 } from '@angular/core';
 
 @Component({
@@ -19,15 +20,18 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScTimeOption implements Highlightable {
+  _active = signal(false);
+
   setActiveStyles(): void {
-    throw new Error('Method not implemented.');
+    this._active.set(true);
   }
   setInactiveStyles(): void {
-    throw new Error('Method not implemented.');
+    this._active.set(false);
   }
   disabled?: boolean | undefined;
+
   getLabel?(): string {
-    throw new Error('Method not implemented.');
+    return this.value() ?? '';
   }
 
   private _element = inject<ElementRef<HTMLElement>>(ElementRef);
