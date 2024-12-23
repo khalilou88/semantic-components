@@ -367,14 +367,14 @@ export class ScTimePicker implements AfterViewInit {
     let hasSelected = false;
 
     for (const option of options) {
-      // if (value && this._dateAdapter.sameTime(option.value, value)) {
-      //    option.select(false);
-      //   scrollOptionIntoView(option, 'center');
-      //   untracked(() => this._keyManager.setActiveItem(option));
-      //   hasSelected = true;
-      // } else {
-      //    option.deselect(false);
-      // }
+      if (value && option.value() === value) {
+        option.select(false);
+        scrollOptionIntoView(option, 'center');
+        untracked(() => this._keyManager.setActiveItem(option));
+        hasSelected = true;
+      } else {
+        option.deselect(false);
+      }
       console.log('');
     }
 
