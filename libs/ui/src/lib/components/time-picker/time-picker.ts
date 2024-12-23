@@ -72,6 +72,8 @@ export interface MatTimepickerSelected<D> {
         [id]="panelId"
         role="listbox"
       >
+        <div>Hello</div>
+
         @for (option of _timeOptions; track option.value) {
           <sc-time-option [value]="option.value" (valueChange)="_selectValue(option.value)">
             {{ option.label }}
@@ -216,7 +218,9 @@ export class ScTimePicker {
     // Focus should already be on the input, but this call is in case the timepicker is opened
     // programmatically. We need to call this even if the timepicker is already open, because
     // the user might be clicking the toggle.
-    input.nativeElement.focus();
+
+    //TODO
+    // input.nativeElement.focus();
 
     if (this._isOpen()) {
       return;
@@ -225,14 +229,16 @@ export class ScTimePicker {
     this._isOpen.set(true);
     this._generateOptions();
     const overlayRef = this._getOverlayRef();
-    overlayRef.updateSize({ width: input.nativeElement.offsetWidth });
+    //  overlayRef.updateSize({ width: input.nativeElement.offsetWidth });
+
+    overlayRef.updateSize({ width: 300 });
     this._portal ??= new TemplatePortal(this._panelTemplate(), this._viewContainerRef);
     overlayRef.attach(this._portal);
     this._onOpenRender?.destroy();
     this._onOpenRender = afterNextRender(
       () => {
         const options = this._options();
-        this._syncSelectedState(input.nativeElement.value, options, options[0]);
+        this._syncSelectedState(input.nativeElement?.value, options, options[0]);
         this._onOpenRender = null;
       },
       { injector: this._injector },
@@ -442,7 +448,7 @@ export class ScTimePicker {
       const options = this._options();
 
       if (this._isOpen() && input) {
-        this._syncSelectedState(input.nativeElement.value, options, null);
+        this._syncSelectedState(input.nativeElement?.value, options, null);
       }
     });
   }
