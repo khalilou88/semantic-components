@@ -12,24 +12,32 @@ export class ScDateInput {
   value = signal('');
 
   private dateFormatRegExp = computed(() => {
-    const v = this.value();
-    const length = v.length;
-
-    if (length < 2) {
-      return new RegExp(/^[0-9]{1,1}$/g);
+    switch (this.value().length) {
+      case 0: {
+        return new RegExp(/^[0-9]{1,1}$/g);
+      }
+      case 1: {
+        return new RegExp(/^[0-9]{1,2}\/{0,1}$/g);
+      }
+      case 2: {
+        return new RegExp(/^[0-9]{1,2}\/[0-9]{0,1}$/g);
+      }
+      case 3: {
+        return new RegExp(/^[0-9]{1,2}\/[0-9]{1,2}\/{0,1}$/g);
+      }
+      case 4: {
+        return new RegExp(/^[0-9]{1,2}\/[0-9]{1,2}\/{0,1}[0-9]{0,1}$/g);
+      }
+      case 5: {
+        return new RegExp(/^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{0,2}$/g);
+      }
+      case 6: {
+        return new RegExp(/^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{2,3}$/g);
+      }
+      default: {
+        return new RegExp(/^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{4,4}$/g);
+      }
     }
-
-    // if (length >= 1 && length < 2) {
-    return new RegExp(/^[0-9]{1,2}\/$/g);
-    // }
-
-    // if (length >= 4 && length < 5) {
-    //   return new RegExp(/^[0-9]{1,2}\/[0-9]{1,2}$/g);
-    // }
-
-    //return new RegExp(/^[0-9]{1,2}$/g);
-
-    //return new RegExp(/^[0-9]{1,2}\/{0,1}[0-9]{0,2}\/{0,1}[0-9]{0,4}$/g);
   });
 
   // Allow key codes for special events. Reflect :
@@ -52,16 +60,10 @@ export class ScDateInput {
     // is not yet updated with the value from this event
     let next: string = current.concat(event.key);
 
-    console.log(this.value());
-
     if (!String(next).match(this.dateFormatRegExp())) {
-      console.log('next f');
-      console.log(this.dateFormatRegExp());
       event.preventDefault();
     } else {
       this.value.set(next);
-
-      console.log(next.length);
     }
   }
 }
