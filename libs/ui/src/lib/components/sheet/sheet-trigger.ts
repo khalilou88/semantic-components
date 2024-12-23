@@ -1,10 +1,4 @@
-import {
-  ConnectedPosition,
-  Overlay,
-  OverlayContainer,
-  OverlayRef,
-  PositionStrategy,
-} from '@angular/cdk/overlay';
+import { Overlay, OverlayContainer, OverlayRef, PositionStrategy } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ComponentRef, Injectable, TemplateRef, inject, signal } from '@angular/core';
 
@@ -53,53 +47,18 @@ export class ScSheetTrigger {
   }
 
   private getPositionStrategy(side: SheetVariants['side']): PositionStrategy {
-    return this.overlay
-      .position()
-      .flexibleConnectedTo(this._overlayContainer.getContainerElement())
-      .withPositions(this.getPositions(side));
-  }
-
-  getPositions(side: SheetVariants['side']): ConnectedPosition[] {
     switch (side) {
       case 'top': {
-        return [
-          {
-            originX: 'start',
-            originY: 'top',
-            overlayX: 'start',
-            overlayY: 'top',
-          },
-        ];
+        return this.overlay.position().global().top();
       }
       case 'bottom': {
-        return [
-          {
-            originX: 'end',
-            originY: 'bottom',
-            overlayX: 'end',
-            overlayY: 'bottom',
-          },
-        ];
+        return this.overlay.position().global().bottom();
       }
       case 'left': {
-        return [
-          {
-            originX: 'start',
-            originY: 'top',
-            overlayX: 'start',
-            overlayY: 'top',
-          },
-        ];
+        return this.overlay.position().global().left();
       }
       case 'right': {
-        return [
-          {
-            originX: 'end',
-            originY: 'top',
-            overlayX: 'end',
-            overlayY: 'top',
-          },
-        ];
+        return this.overlay.position().global().right();
       }
 
       default: {
