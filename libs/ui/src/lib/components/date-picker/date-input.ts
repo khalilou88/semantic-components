@@ -32,10 +32,10 @@ export class ScDateInput {
         return new RegExp(/^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{0,2}$/g);
       }
       case 6: {
-        return new RegExp(/^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{2,3}$/g);
+        return new RegExp(/^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{0,3}$/g);
       }
       default: {
-        return new RegExp(/^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{4,4}$/g);
+        return new RegExp(/^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{1,4}$/g);
       }
     }
   });
@@ -61,6 +61,8 @@ export class ScDateInput {
     let next: string = current.concat(event.key);
 
     if (!String(next).match(this.dateFormatRegExp())) {
+      console.log(this.value().length);
+      console.log(next);
       event.preventDefault();
     } else {
       this.value.set(next);
