@@ -25,15 +25,16 @@ import { cn } from '../../utils';
 import { ScButton } from '../button';
 import { ScCalendar } from '../calendar';
 import { ScInput } from '../input';
+import { ScDateInput } from './date-input';
 
 @Component({
   selector: 'sc-date-picker',
-  imports: [ScInput, SvgCalendarIcon, ScButton],
+  imports: [ScInput, SvgCalendarIcon, ScButton, ScDateInput],
   template: `
     <button class="absolute inset-y-0 end-0 pe-4" (click)="open()" sc-button variant="ghost">
       <svg-calendar-icon />
     </button>
-    <input #input sc-input type="text" placeholder="Select date" />
+    <input #input sc-input scDateInput type="text" placeholder="Select date" />
   `,
   host: {
     '[class]': 'classes()',
