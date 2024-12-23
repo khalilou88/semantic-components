@@ -1,9 +1,8 @@
-import { Overlay, OverlayContainer, OverlayRef, PositionStrategy } from '@angular/cdk/overlay';
+import { Overlay, OverlayConfig, OverlayContainer, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ComponentRef, Injectable, TemplateRef, inject, signal } from '@angular/core';
 
 import { scOverlayClasses } from '../overlay';
-import { SheetVariants } from './sheet';
 import { ScSheetConfig } from './sheet-config';
 import { ScSheetContainer } from './sheet-container';
 
@@ -24,16 +23,15 @@ export class ScSheetTrigger {
     this._overlayContainer.getContainerElement().classList.add(...scOverlayClasses());
     this._overlayContainer.getContainerElement().setAttribute('data-state', 'open');
 
-    const positionStrategy = this.getPositionStrategy(config.side);
-    this._overlayRef = this._overlay.create({ positionStrategy });
-
-    this._overlayRef.updateSize({ height: config.height, width: config.width });
+    const overlayConfig = this.getOverlayConfig(config);
+    this._overlayRef = this._overlay.create(overlayConfig);
 
     const scSheetPortal = new ComponentPortal(ScSheetContainer);
-
     const scSheetRef: ComponentRef<ScSheetContainer> = this._overlayRef.attach(scSheetPortal);
 
     scSheetRef.instance.templateRef.set(templateRef);
+
+    this._overlayRef.backdropClick().subscribe(() => this.close());
   }
 
   close() {
@@ -45,19 +43,39 @@ export class ScSheetTrigger {
     }
   }
 
-  private getPositionStrategy(side: SheetVariants['side']): PositionStrategy {
-    switch (side) {
+  private getOverlayConfig(config: ScSheetConfig): OverlayConfig {
+    switch (config.side) {
       case 'top': {
-        return this._overlay.position().global().top();
+        return new OverlayConfig({
+          positionStrategy: this._overlay.position().global().top(),
+          width: config.width,
+          height: config.height,
+          hasBackdrop: true,
+        });
       }
       case 'bottom': {
-        return this._overlay.position().global().bottom();
+        return new OverlayConfig({
+          positionStrategy: this._overlay.position().global().bottom(),
+          width: config.width,
+          height: config.height,
+          hasBackdrop: true,
+        });
       }
       case 'left': {
-        return this._overlay.position().global().left();
+        return new OverlayConfig({
+          positionStrategy: this._overlay.position().global().left(),
+          width: config.width,
+          height: config.height,
+          hasBackdrop: true,
+        });
       }
       case 'right': {
-        return this._overlay.position().global().right();
+        return new OverlayConfig({
+          positionStrategy: this._overlay.position().global().right(),
+          width: config.width,
+          height: config.height,
+          hasBackdrop: true,
+        });
       }
 
       default: {
