@@ -14,9 +14,9 @@ import { cn } from '../../utils';
   selector: 'li[sc-listbox-option]',
   imports: [SvgCheckIcon],
   template: `
-    <span class="absolute left-2 flex size-3.5 items-center justify-center">
-      <svg-check-icon class="size-4" />
-    </span>
+    @if (isSelected()) {
+      <svg-check-icon class="absolute left-2 flex size-4 items-center justify-center" />
+    }
 
     <ng-content />
   `,
@@ -32,8 +32,10 @@ export class ScListboxOption {
 
   classes = computed(() =>
     cn(
-      'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
       this.class(),
     ),
   );
+
+  isSelected = input.required<boolean>();
 }

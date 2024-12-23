@@ -16,7 +16,6 @@ import {
   ViewEncapsulation,
   computed,
   contentChildren,
-  effect,
   forwardRef,
   inject,
   input,
@@ -66,7 +65,13 @@ import { ScOption } from './option';
         cdkTrapFocus
       >
         @for (item of viewoptions(); track $index) {
-          <li [cdkOption]="item.value()" sc-listbox-option>{{ item.label() }}</li>
+          <li
+            [isSelected]="item.value() === this._value()"
+            [cdkOption]="item.value()"
+            sc-listbox-option
+          >
+            {{ item.label() }}
+          </li>
         }
       </ul>
     </ng-template>
