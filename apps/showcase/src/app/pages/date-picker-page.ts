@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { ScDatePicker, Settings } from '@semantic-components/ui';
+import { ScDatePicker, ScSettings } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-date-picker-page',
@@ -50,5 +50,5 @@ import { ScDatePicker, Settings } from '@semantic-components/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class DatePickerPage {
-  settings = inject(Settings);
+  settings = inject(ScSettings);
 }
