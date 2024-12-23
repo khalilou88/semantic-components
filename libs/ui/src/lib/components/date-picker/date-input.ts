@@ -1,3 +1,4 @@
+import { BACKSPACE } from '@angular/cdk/keycodes';
 import { Directive, ElementRef, booleanAttribute, computed, input, signal } from '@angular/core';
 
 @Directive({
@@ -12,6 +13,7 @@ export class ScDateInput {
   value = signal('');
 
   private dateFormatRegExp = computed(() => {
+    console.log(this.value().length);
     switch (this.value().length) {
       case 0: {
         return new RegExp(/^[0-9]{1,1}$/g);
@@ -47,10 +49,10 @@ export class ScDateInput {
   constructor(private el: ElementRef) {}
 
   onKeyDown(event: KeyboardEvent) {
-    // Allow Backspace, tab, end, and home keys
-    if (this.specialKeys.indexOf(event.key) !== -1) {
-      return;
-    }
+    // // Allow Backspace, tab, end, and home keys
+    // if (this.specialKeys.indexOf(event.key) !== -1) {
+    //   return;
+    // }
 
     // Do not use event.keycode this is deprecated.
     // See: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
@@ -60,12 +62,17 @@ export class ScDateInput {
     // is not yet updated with the value from this event
     let next: string = current.concat(event.key);
 
-    if (!String(next).match(this.dateFormatRegExp())) {
-      console.log(this.value().length);
-      console.log(next);
-      event.preventDefault();
+    if (event.keyCode === BACKSPACE) {
+      console.log('BACKSPACE');
+      this.value.update((v) => v.substring(0, v.length - 1));
     } else {
-      this.value.set(next);
+      if (!String(next).match(this.dateFormatRegExp())) {
+        console.log(this.value().length);
+        console.log(next);
+        event.preventDefault();
+      } else {
+        this.value.set(next);
+      }
     }
   }
 }
