@@ -6,7 +6,6 @@ import { Overlay, OverlayModule, OverlayRef } from '@angular/cdk/overlay';
 import { _getEventTarget } from '@angular/cdk/platform';
 import { TemplatePortal } from '@angular/cdk/portal';
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -19,6 +18,7 @@ import {
   forwardRef,
   inject,
   input,
+  model,
   signal,
   viewChild,
 } from '@angular/core';
@@ -58,19 +58,20 @@ import { ScOption } from './option';
 
     <ng-template #panelTemplate>
       <ul
+        [id]="_getPanelId()"
         [cdkTrapFocusAutoCapture]="true"
-        (cdkListboxValueChange)="handleOptionChange($event.value)"
+        (cdkListboxValueChange)="handleValueChange($event.value)"
         sc-listbox
         cdkListbox
         cdkTrapFocus
       >
-        @for (item of viewoptions(); track $index) {
+        @for (option of options(); track $index) {
           <li
-            [isSelected]="item.value() === this._value()"
-            [cdkOption]="item.value()"
+            [isSelected]="option.value() === this.value()"
+            [cdkOption]="option.value()"
             sc-listbox-option
           >
-            {{ item.label() }}
+            {{ option.label() }}
           </li>
         }
       </ul>
@@ -87,13 +88,7 @@ import { ScOption } from './option';
     },
   ],
 })
-export class ScSelect implements ControlValueAccessor, AfterViewInit {
-  viewoptions = contentChildren(ScOption);
-
-  ngAfterViewInit() {
-    console.log(this.viewoptions());
-  }
-
+export class ScSelect implements ControlValueAccessor {
   static nextId = 0;
 
   id = 0;
@@ -121,21 +116,23 @@ export class ScSelect implements ControlValueAccessor, AfterViewInit {
     this.id = ++ScSelect.nextId;
   }
 
-  _value = signal<unknown>(undefined);
+  options = contentChildren(ScOption);
+
+  value = model<unknown>(undefined);
 
   isDisabled = signal(false);
 
   writeValue(value: unknown): void {
-    this._value.set(value);
+    this.value.set(value);
   }
 
-  handleOptionChange(v: readonly unknown[]) {
+  handleValueChange(v: readonly unknown[]) {
     this.setValue(v[0]);
     this.close();
   }
 
   setValue(value: unknown) {
-    this._value.set(value);
+    this.value.set(value);
     this._onChange(value);
     this._cdr.markForCheck();
   }
@@ -158,9 +155,9 @@ export class ScSelect implements ControlValueAccessor, AfterViewInit {
   }
 
   label = computed(() => {
-    if (this._value()) {
-      return this.viewoptions()
-        .find((element) => element.value() === this._value())
+    if (this.value()) {
+      return this.options()
+        .find((element) => element.value() === this.value())
         ?.label();
     }
 
