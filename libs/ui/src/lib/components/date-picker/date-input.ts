@@ -9,10 +9,7 @@ import { Directive, ElementRef, booleanAttribute, input } from '@angular/core';
 export class ScDateInput {
   scDateInput = input<boolean, unknown>(false, { transform: booleanAttribute });
 
-  //private regex: RegExp = new RegExp(/^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{4}$/g);
-
-  // Allow decimal numbers. The \. is only allowed once to occur
-  private regex: RegExp = new RegExp(/^[0-9]+(\.[0-9]*){0,1}$/g);
+  private regex: RegExp = new RegExp(/^[0-9]{0,2}\/{0,1}[0-9]{0,2}\/{0,1}[0-9]{0,4}$/g);
 
   // Allow key codes for special events. Reflect :
   // Backspace, tab, end, home
@@ -29,6 +26,11 @@ export class ScDateInput {
     // Do not use event.keycode this is deprecated.
     // See: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
     let current: string = this.el.nativeElement.value;
+
+    if ([...current].length === 6) {
+      console.log('TODO date is only 6 caracter max');
+    }
+
     // We need this because the current value on the DOM element
     // is not yet updated with the value from this event
     let next: string = current.concat(event.key);
