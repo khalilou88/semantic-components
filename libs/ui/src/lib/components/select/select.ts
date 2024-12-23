@@ -46,7 +46,7 @@ import { ScSelectState } from './select-state';
     </button>
 
     <ng-template #panelTemplate>
-      <sc-select-listbox [options]="options()" />
+      <sc-select-listbox [options]="options()" (optionSelected)="close()" />
     </ng-template>
   `,
   styles: ``,

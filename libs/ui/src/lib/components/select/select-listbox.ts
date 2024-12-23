@@ -6,6 +6,7 @@ import {
   ViewEncapsulation,
   inject,
   input,
+  output,
 } from '@angular/core';
 
 import { ScOption } from './option';
@@ -39,5 +40,8 @@ export class ScSelectListbox {
 
   handleOptionChange(v: readonly unknown[]) {
     this.state.selectedOption.set(v[0] as ScOptionModel);
+    this.optionSelected.emit();
   }
+
+  optionSelected = output();
 }
