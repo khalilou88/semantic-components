@@ -11,14 +11,12 @@ import {
   ElementRef,
   Injector,
   InputSignal,
-  InputSignalWithTransform,
   OutputEmitterRef,
   Signal,
   TemplateRef,
   ViewContainerRef,
   ViewEncapsulation,
   afterNextRender,
-  booleanAttribute,
   computed,
   effect,
   inject,
@@ -30,7 +28,7 @@ import {
   viewChildren,
 } from '@angular/core';
 
-import { SvgCalendarIcon } from '@semantic-icons/lucide-icons';
+import { SvgClockIcon } from '@semantic-icons/lucide-icons';
 import { Subscription } from 'rxjs';
 
 import { cn } from '../../utils';
@@ -56,10 +54,10 @@ export interface MatTimepickerSelected<D> {
 
 @Component({
   selector: 'sc-time-picker',
-  imports: [ScInput, SvgCalendarIcon, ScButton, ScTimeOption],
+  imports: [ScInput, SvgClockIcon, ScButton, ScTimeOption],
   template: `
     <button class="absolute inset-y-0 end-0 pe-4" (click)="open()" sc-button variant="ghost">
-      <svg-calendar-icon />
+      <svg-clock-icon />
     </button>
     <input #input sc-input type="text" placeholder="Select time" />
 
