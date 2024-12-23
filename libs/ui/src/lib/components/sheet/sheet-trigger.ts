@@ -11,10 +11,9 @@ import { ScSheetContainer } from './sheet-container';
   providedIn: 'root',
 })
 export class ScSheetTrigger {
-  private _overlayContainer = inject(OverlayContainer);
-
-  private readonly overlay = inject(Overlay);
-  private overlayRef!: OverlayRef;
+  private readonly _overlayContainer = inject(OverlayContainer);
+  private readonly _overlay = inject(Overlay);
+  private _overlayRef!: OverlayRef;
 
   state = signal<'open' | 'closed'>('closed');
   side = signal<'top' | 'bottom' | 'left' | 'right'>('right');
@@ -26,20 +25,20 @@ export class ScSheetTrigger {
     this._overlayContainer.getContainerElement().setAttribute('data-state', 'open');
 
     const positionStrategy = this.getPositionStrategy(config.side);
-    this.overlayRef = this.overlay.create({ positionStrategy });
+    this._overlayRef = this._overlay.create({ positionStrategy });
 
-    this.overlayRef.updateSize({ height: config.height, width: config.width });
+    this._overlayRef.updateSize({ height: config.height, width: config.width });
 
     const scSheetPortal = new ComponentPortal(ScSheetContainer);
 
-    const scSheetRef: ComponentRef<ScSheetContainer> = this.overlayRef.attach(scSheetPortal);
+    const scSheetRef: ComponentRef<ScSheetContainer> = this._overlayRef.attach(scSheetPortal);
 
     scSheetRef.instance.templateRef.set(templateRef);
   }
 
   close() {
-    if (this.overlayRef?.hasAttached() === true) {
-      this.overlayRef?.detach();
+    if (this._overlayRef?.hasAttached()) {
+      this._overlayRef?.detach();
       this.state.set('closed');
       this._overlayContainer.getContainerElement().classList.remove(...scOverlayClasses());
       this._overlayContainer.getContainerElement().setAttribute('data-state', 'closed');
@@ -49,16 +48,16 @@ export class ScSheetTrigger {
   private getPositionStrategy(side: SheetVariants['side']): PositionStrategy {
     switch (side) {
       case 'top': {
-        return this.overlay.position().global().top();
+        return this._overlay.position().global().top();
       }
       case 'bottom': {
-        return this.overlay.position().global().bottom();
+        return this._overlay.position().global().bottom();
       }
       case 'left': {
-        return this.overlay.position().global().left();
+        return this._overlay.position().global().left();
       }
       case 'right': {
-        return this.overlay.position().global().right();
+        return this._overlay.position().global().right();
       }
 
       default: {
