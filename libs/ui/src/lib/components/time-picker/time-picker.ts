@@ -6,6 +6,7 @@ import { _getEventTarget } from '@angular/cdk/platform';
 import { TemplatePortal } from '@angular/cdk/portal';
 import {
   AfterRenderRef,
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
@@ -33,7 +34,7 @@ import { Subscription } from 'rxjs';
 
 import { cn } from '../../utils';
 import { ScButton } from '../button';
-import { ScInput } from '../input';
+import { scInputStyles } from '../input';
 import { ScTimeOption } from './time-option';
 
 /**
@@ -54,12 +55,12 @@ export interface MatTimepickerSelected<D> {
 
 @Component({
   selector: 'sc-time-picker',
-  imports: [ScInput, SvgClockIcon, ScButton, ScTimeOption],
+  imports: [SvgClockIcon, ScButton, ScTimeOption],
   template: `
     <button class="absolute inset-y-0 end-0 pe-4" (click)="open()" sc-button variant="ghost">
       <svg-clock-icon />
     </button>
-    <input #input sc-input type="text" placeholder="Select time" />
+    <input #input [class]="scInputStyles()" type="text" placeholder="Select time" />
 
     <ng-template #panelTemplate>
       <div
@@ -87,10 +88,15 @@ export interface MatTimepickerSelected<D> {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScTimePicker {
-  class = input<string>('');
+export class ScTimePicker implements AfterViewInit {
+  ngAfterViewInit() {
+    console.log(this._input().nativeElement);
+  }
 
+  class = input<string>('');
   classes = computed(() => cn('flex relative', this.class()));
+
+  scInputStyles = computed(() => scInputStyles());
 
   private _overlay = inject(Overlay);
   private _dir = inject(Directionality, { optional: true });
@@ -216,9 +222,7 @@ export class ScTimePicker {
     // Focus should already be on the input, but this call is in case the timepicker is opened
     // programmatically. We need to call this even if the timepicker is already open, because
     // the user might be clicking the toggle.
-
-    //TODO
-    // input.nativeElement.focus();
+    input.nativeElement.focus();
 
     if (this._isOpen()) {
       return;
