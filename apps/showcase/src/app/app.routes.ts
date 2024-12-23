@@ -17,6 +17,11 @@ export const appRoutes: Route[] = [
     title: 'Autocomplete Page',
   },
   {
+    path: 'time-picker',
+    loadComponent: () => import('./pages/time-picker-page'),
+    title: 'Time Picker Page',
+  },
+  {
     path: '',
     loadComponent: () => import('./layouts/stacked-layout'),
     children: [
