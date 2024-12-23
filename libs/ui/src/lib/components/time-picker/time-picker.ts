@@ -30,8 +30,12 @@ import {
   viewChildren,
 } from '@angular/core';
 
+import { SvgCalendarIcon } from '@semantic-icons/lucide-icons';
 import { Subscription } from 'rxjs';
 
+import { cn } from '../../utils';
+import { ScButton } from '../button';
+import { ScInput } from '../input';
 import { ScTimeOption } from './time-option';
 
 /**
@@ -52,15 +56,25 @@ export interface MatTimepickerSelected<D> {
 
 @Component({
   selector: 'sc-time-picker',
-  imports: [],
+  imports: [ScInput, SvgCalendarIcon, ScButton],
   template: `
-    <p>time-picker works!</p>
+    <button class="absolute inset-y-0 end-0 pe-4" (click)="open()" sc-button variant="ghost">
+      <svg-calendar-icon />
+    </button>
+    <input #input sc-input type="text" placeholder="Select time" />
   `,
+  host: {
+    '[class]': 'classes()',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScTimePicker {
+  class = input<string>('');
+
+  classes = computed(() => cn('flex relative', this.class()));
+
   private _overlay = inject(Overlay);
   private _dir = inject(Directionality, { optional: true });
   private _viewContainerRef = inject(ViewContainerRef);
