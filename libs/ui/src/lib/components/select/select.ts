@@ -1,5 +1,5 @@
 import { Directionality } from '@angular/cdk/bidi';
-import { ESCAPE, TAB, hasModifierKey } from '@angular/cdk/keycodes';
+import { ENTER, ESCAPE, TAB, hasModifierKey } from '@angular/cdk/keycodes';
 import { Overlay, OverlayModule, OverlayRef } from '@angular/cdk/overlay';
 import { _getEventTarget } from '@angular/cdk/platform';
 import { TemplatePortal } from '@angular/cdk/portal';
@@ -24,12 +24,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { SvgChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 import { ScOptionModel } from './option-model';
-import { ScSelect2 } from './select2';
+import { ScSelectListbox } from './select-listbox';
 import { ScSelectState } from './select-state';
 
 @Component({
   selector: 'sc-select',
-  imports: [SvgChevronDownIcon, OverlayModule, ScSelect2],
+  imports: [SvgChevronDownIcon, OverlayModule, ScSelectListbox],
   template: `
     <button
       class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
@@ -46,7 +46,7 @@ import { ScSelectState } from './select-state';
     </button>
 
     <ng-template #panelTemplate>
-      <sc-select2 [options]="options()" />
+      <sc-select-listbox [options]="options()" (optionSelected)="close()" />
     </ng-template>
   `,
   styles: ``,
@@ -87,20 +87,14 @@ export class ScSelect implements ControlValueAccessor {
 
   options = input<ScOptionModel[]>([]);
 
+  isOpen = signal<boolean>(false);
+
   constructor() {
     this.id = ++ScSelect.nextId;
 
     effect(() => {
       const selectedValue = this.state.selectedOption();
       this.setValue(selectedValue);
-
-      const closeOverlay = this.state.closeOverlay();
-
-      if (closeOverlay) {
-        this.close();
-
-        this.state.closeOverlay.set(false);
-      }
     });
   }
 
@@ -144,7 +138,7 @@ export class ScSelect implements ControlValueAccessor {
   });
 
   _isExpanded = computed(() => {
-    return this.state.isOpen();
+    return this.isOpen();
   });
 
   private _overlayRef: OverlayRef | null = null;
@@ -200,11 +194,11 @@ export class ScSelect implements ControlValueAccessor {
   }
 
   open(): void {
-    if (this.state.isOpen()) {
+    if (this.isOpen()) {
       return;
     }
 
-    this.state.isOpen.set(true);
+    this.isOpen.set(true);
 
     const overlayRef = this._getOverlayRef();
 
@@ -214,8 +208,8 @@ export class ScSelect implements ControlValueAccessor {
   }
 
   close(): void {
-    if (this.state.isOpen()) {
-      this.state.isOpen.set(false);
+    if (this.isOpen()) {
+      this.isOpen.set(false);
       this._overlayRef?.detach();
     }
   }
@@ -229,8 +223,9 @@ export class ScSelect implements ControlValueAccessor {
     } else if (keyCode === ESCAPE && !hasModifierKey(event)) {
       event.preventDefault();
       this.close();
+    } else if (keyCode === ENTER) {
+      //TODO for me it's mean it's was selected
+      this.close();
     }
-
-    //TODO handle keyCode === ENTER and other cases
   }
 }
