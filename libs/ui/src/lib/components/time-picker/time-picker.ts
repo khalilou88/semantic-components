@@ -56,12 +56,29 @@ export interface MatTimepickerSelected<D> {
 
 @Component({
   selector: 'sc-time-picker',
-  imports: [ScInput, SvgCalendarIcon, ScButton],
+  imports: [ScInput, SvgCalendarIcon, ScButton, ScTimeOption],
   template: `
     <button class="absolute inset-y-0 end-0 pe-4" (click)="open()" sc-button variant="ghost">
       <svg-calendar-icon />
     </button>
     <input #input sc-input type="text" placeholder="Select time" />
+
+    <ng-template #panelTemplate>
+      <div
+        class="mat-timepicker-panel"
+        @panel
+        [attr.aria-label]="ariaLabel() || null"
+        [attr.aria-labelledby]="_getAriaLabelledby()"
+        [id]="panelId"
+        role="listbox"
+      >
+        @for (option of _timeOptions; track option.value) {
+          <sc-time-option [value]="option.value" (valueChange)="_selectValue(option.value)">
+            {{ option.label }}
+          </sc-time-option>
+        }
+      </div>
+    </ng-template>
   `,
   host: {
     '[class]': 'classes()',
@@ -390,7 +407,7 @@ export class ScTimePicker {
       event.preventDefault();
 
       if (this._keyManager.activeItem) {
-        this._selectValue(this._keyManager.activeItem.value);
+        this._selectValue(this._keyManager.activeItem.value() ?? '');
       } else {
         this.close();
       }

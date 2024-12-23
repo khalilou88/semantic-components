@@ -5,6 +5,7 @@ import {
   ElementRef,
   ViewEncapsulation,
   inject,
+  model,
 } from '@angular/core';
 
 @Component({
@@ -38,5 +39,5 @@ export class ScTimeOption implements Highlightable {
 
   id = '';
 
-  value = '';
+  value = model<string>();
 }
