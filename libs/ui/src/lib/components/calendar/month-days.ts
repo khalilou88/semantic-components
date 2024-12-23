@@ -57,7 +57,7 @@ import { WeekDayName } from './util';
 export class ScMonthDays {
   class = input<string>('');
 
-  classes = computed(() => cn('grid grid-cols-7', this.class()));
+  classes = computed(() => cn('grid grid-cols-7 place-items-center', this.class()));
 
   weekDaysNames = input.required<WeekDayName[]>();
 
