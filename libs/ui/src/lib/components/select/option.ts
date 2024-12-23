@@ -25,19 +25,16 @@ import { ScSelectState } from './select-state';
       </span>
     }
 
-    {{ _isActive() }}
-
     <ng-content />
   `,
   host: {
     '[class]': 'classes()',
-    '(click)': 'select()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScOption implements Highlightable {
+export class ScOption {
   class = input<string>('');
 
   classes = computed(() =>
@@ -60,20 +57,9 @@ export class ScOption implements Highlightable {
   });
 
   select() {
+    console.log('click');
+    console.log(this.option());
     this.state.selectedOption.set(this.option());
     this.state.closeOverlay.set(true);
-  }
-
-  _isActive = signal(false);
-
-  setActiveStyles(): void {
-    this._isActive.set(true);
-  }
-  setInactiveStyles(): void {
-    this._isActive.set(false);
-  }
-  disabled?: boolean | undefined;
-  getLabel?(): string {
-    return this.option().label;
   }
 }
