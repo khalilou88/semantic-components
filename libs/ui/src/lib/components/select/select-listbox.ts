@@ -1,14 +1,11 @@
-import { A11yModule, ActiveDescendantKeyManager } from '@angular/cdk/a11y';
-import { ENTER } from '@angular/cdk/keycodes';
+import { A11yModule } from '@angular/cdk/a11y';
 import { CdkListbox, CdkOption } from '@angular/cdk/listbox';
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   inject,
   input,
-  viewChildren,
 } from '@angular/core';
 
 import { ScOption } from './option';
@@ -16,14 +13,13 @@ import { ScOptionModel } from './option-model';
 import { ScSelectState } from './select-state';
 
 @Component({
-  selector: 'sc-select2',
+  selector: 'sc-select-listbox',
   imports: [ScOption, A11yModule, CdkListbox, CdkOption],
   template: `
     <div
       class="relative z-50 max-h-96 w-full min-w-32 overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2"
       [cdkTrapFocusAutoCapture]="true"
-      [id]="_getPanelId()"
-      (cdkListboxValueChange)="t($event.value)"
+      (cdkListboxValueChange)="handleOptionChange($event.value)"
       cdkTrapFocus
       cdkListbox
     >
@@ -36,18 +32,12 @@ import { ScSelectState } from './select-state';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSelect2 {
-  //TODO change this
-  _getPanelId() {
-    return `panel-12584`;
-  }
-
+export class ScSelectListbox {
   state = inject(ScSelectState);
 
   options = input<ScOptionModel[]>([]);
 
-  t(v: any) {
-    console.log(v);
-    this.state.selectedOption.set(v[0]);
+  handleOptionChange(v: readonly unknown[]) {
+    this.state.selectedOption.set(v[0] as ScOptionModel);
   }
 }

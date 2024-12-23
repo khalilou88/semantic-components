@@ -1,4 +1,3 @@
-import { Highlightable } from '@angular/cdk/a11y';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,7 +5,6 @@ import {
   computed,
   inject,
   input,
-  signal,
 } from '@angular/core';
 
 import { SvgCheckIcon } from '@semantic-icons/lucide-icons';
@@ -55,11 +53,4 @@ export class ScOption {
   isSelected = computed(() => {
     return this.state.selectedOption()?.value === this.optionValue();
   });
-
-  select() {
-    console.log('click');
-    console.log(this.option());
-    this.state.selectedOption.set(this.option());
-    this.state.closeOverlay.set(true);
-  }
 }
