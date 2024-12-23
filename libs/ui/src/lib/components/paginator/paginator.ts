@@ -19,6 +19,7 @@ import {
 
 import { cn } from '../../utils';
 import { ScButton } from '../button';
+import { ScOption, ScSelect } from '../select';
 import { ScPageEvent } from './page-event';
 import { ScPageItem } from './page-item';
 import { ScPagination } from './pagination';
@@ -37,16 +38,18 @@ const DEFAULT_PAGE_SIZE = 10;
     SvgChevronsLeftIcon,
     SvgChevronRightIcon,
     SvgChevronsRightIcon,
+    ScSelect,
+    ScOption,
   ],
   template: `
     @if (!hidePageSize()) {
       <div>
         <label class="" for="items-per-page">Items per page:</label>
-        <select class="" id="items-per-page" [formControl]="pageSizeFormControl">
+        <sc-select class="" id="items-per-page" [formControl]="pageSizeFormControl">
           @for (pageSizeOption of pageSizeOptions(); track $index) {
-            <option [value]="pageSizeOption">{{ pageSizeOption }}</option>
+            <sc-option [value]="pageSizeOption">{{ pageSizeOption }}</sc-option>
           }
-        </select>
+        </sc-select>
       </div>
     }
 
