@@ -28,7 +28,7 @@ import { ScLabel, ScOption, ScSelect } from '@semantic-components/ui';
     <br />
     <br />
 
-    <sc-select id="numbers" value="3" placeholder="Select a number">
+    <sc-select id="numbers" (valueChange)="f($event)" value="3" placeholder="Select a number">
       <sc-option value="1">1</sc-option>
       <sc-option value="2">2</sc-option>
       <sc-option value="3">3</sc-option>
@@ -43,4 +43,8 @@ export default class SelectPage {
   selectForm = new FormGroup({
     car: new FormControl('audi'),
   });
+
+  f(event: any) {
+    console.log(event);
+  }
 }
