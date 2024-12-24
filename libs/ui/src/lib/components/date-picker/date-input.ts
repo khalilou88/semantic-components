@@ -1,4 +1,4 @@
-import { Directive, ElementRef, booleanAttribute, computed, input, signal } from '@angular/core';
+import { Directive, ElementRef, computed, signal } from '@angular/core';
 
 @Directive({
   selector: '[scDateInput]',
@@ -7,8 +7,6 @@ import { Directive, ElementRef, booleanAttribute, computed, input, signal } from
   },
 })
 export class ScDateInput {
-  scDateInput = input<boolean, unknown>(false, { transform: booleanAttribute });
-
   value = signal('');
 
   private readonly dateFormatRegExp = computed(() => {
