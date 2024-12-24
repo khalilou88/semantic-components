@@ -71,7 +71,7 @@ export interface MatTimepickerSelected<D> {
         role="listbox"
       >
         @for (option of _timeOptions; track option.value) {
-          <sc-time-option [value]="option.value" (valueChange)="_selectValue(option.value)">
+          <sc-time-option [value]="option.value" (selected)="_selectValue(option.value)">
             {{ option.label }}
           </sc-time-option>
         }
