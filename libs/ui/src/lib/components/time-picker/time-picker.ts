@@ -294,7 +294,7 @@ export class ScTimePicker {
       .flexibleConnectedTo(this._input())
       .withFlexibleDimensions(false)
       .withPush(false)
-      .withTransformOriginOn('.mat-timepicker-panel')
+      // .withTransformOriginOn('.mat-timepicker-panel')
       .withPositions([
         {
           originX: 'start',
@@ -307,7 +307,7 @@ export class ScTimePicker {
           originY: 'top',
           overlayX: 'start',
           overlayY: 'bottom',
-          panelClass: 'mat-timepicker-above',
+          // panelClass: 'mat-timepicker-above',
         },
       ]);
 
