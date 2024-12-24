@@ -9,20 +9,21 @@ import {
 import { cn } from '@semantic-components/utils';
 
 @Component({
-  selector: 'sc-extensions-separator',
+  selector: 'sc-editor-group',
   imports: [],
   template: `
-    <span class="inline-block h-4 w-px bg-gray-300 dark:bg-gray-600"></span>
+    <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': '_class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScExtensionsSeparator {
+export class ScEditorGroup {
   class = input<string>('');
 
-  classes = computed(() => cn('px-1', this.class()));
+  //TODO change styles
+  _class = computed(() => cn('flex flex-wrap items-center gap-1 py-1', this.class()));
 }

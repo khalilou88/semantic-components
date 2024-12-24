@@ -21,9 +21,11 @@ import Heading from '@tiptap/extension-heading';
 import Paragraph from '@tiptap/extension-paragraph';
 import Text from '@tiptap/extension-text';
 
+import { ScSeparator } from '../separator';
 import { scArticleClasses } from '../typography';
 import { ScEditorRedo } from './actions/editor-redo';
 import { ScEditorUndo } from './actions/editor-undo';
+import { ScEditorGroup } from './editor-group';
 import { ScEditorToolbar } from './editor-toolbar';
 import { ScExtensionBlockquote } from './extensions/extension-blockquote';
 import { ScExtensionBold } from './extensions/extension-bold';
@@ -46,8 +48,6 @@ import { ScExtensionTextStyle } from './extensions/extension-text-style';
 import { ScExtensionUnderline } from './extensions/extension-underline';
 import { ScExtensionYoutube } from './extensions/extension-youtube';
 import { ScExtensions } from './extensions/extensions';
-import { ScExtensionsGroup } from './toolbar/extensions-group';
-import { ScExtensionsSeparator } from './toolbar/extensions-separator';
 
 @Component({
   selector: 'sc-editor',
@@ -69,8 +69,8 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
     ScExtensionTextAlignAction,
     ScExtensionTextStyle,
     ScExtensionParagraph,
-    ScExtensionsSeparator,
-    ScExtensionsGroup,
+    ScSeparator,
+    ScEditorGroup,
     ScExtensionStrike,
     ScExtensionHorizontalRule,
     ScExtensionCode,
@@ -80,10 +80,10 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
   ],
   template: `
     <sc-editor-toolbar>
-      <sc-extensions-group>
+      <sc-editor-group>
         <sc-editor-undo />
         <sc-editor-redo />
-        <sc-extensions-separator />
+        <sc-separator class="h-5" orientation="vertical" />
         <sc-extension-bold />
         <sc-extension-italic />
         <sc-extension-underline />
@@ -92,28 +92,28 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
         <sc-extension-text-style />
         <sc-extension-color />
         <sc-extension-font-family />
-        <sc-extensions-separator />
+        <sc-separator class="h-5" orientation="vertical" />
         <sc-extension-text-align />
-      </sc-extensions-group>
+      </sc-editor-group>
 
-      <sc-extensions-group>
+      <sc-editor-group>
         <sc-extension-heading />
         <sc-extension-paragraph />
-        <sc-extensions-separator />
+        <sc-separator class="h-5" orientation="vertical" />
         <sc-extension-image />
         <sc-extension-youtube />
         <sc-extension-bullet-list />
         <sc-extension-ordered-list />
         <sc-extension-blockquote />
-        <sc-extensions-separator />
+        <sc-separator class="h-5" orientation="vertical" />
         <sc-extension-strike />
         <sc-extension-horizontal-rule />
         <sc-extension-code />
-      </sc-extensions-group>
+      </sc-editor-group>
 
-      <sc-extensions-group>
+      <sc-editor-group>
         <sc-extension-table />
-      </sc-extensions-group>
+      </sc-editor-group>
     </sc-editor-toolbar>
 
     <div class="rounded-b-lg bg-white px-4 py-2 dark:bg-gray-800">
