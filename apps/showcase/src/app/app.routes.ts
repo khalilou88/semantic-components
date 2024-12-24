@@ -227,7 +227,7 @@ export const appRoutes: Route[] = [
               {
                 path: 'date-picker',
                 loadComponent: () => import('./pages/date-picker-page'),
-                title: 'DatePicker Page',
+                title: 'Date Picker Page',
               },
               {
                 path: 'colors',
