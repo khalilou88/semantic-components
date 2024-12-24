@@ -1,15 +1,15 @@
 import { Dialog } from '@angular/cdk/dialog';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
+import { ScSeparator } from '../../separator';
 import { ScTooltip } from '../../tooltip';
 import { ScEditor } from '../editor';
 import { AttributeData, ScAddCellAttributeDialog } from '../toolbar/add-cell-attribute-dialog';
-import { ScExtensionsSeparator } from '../toolbar/extensions-separator';
 import { ScExtensions } from './extensions';
 
 @Component({
   selector: 'sc-extension-table',
-  imports: [ScTooltip, ScExtensionsSeparator],
+  imports: [ScTooltip, ScSeparator],
   template: `
     <button
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
@@ -62,7 +62,7 @@ import { ScExtensions } from './extensions';
       <span class="sr-only">Delete table</span>
     </button>
 
-    <sc-extensions-separator />
+    <sc-separator class="h5" orientation="vertical" />
 
     <button
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
@@ -142,7 +142,7 @@ import { ScExtensions } from './extensions';
       <span class="sr-only">Remove column</span>
     </button>
 
-    <sc-extensions-separator />
+    <sc-separator class="h5" orientation="vertical" />
 
     <button
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
@@ -300,7 +300,7 @@ import { ScExtensions } from './extensions';
       <span class="sr-only">Merge or split</span>
     </button>
 
-    <sc-extensions-separator />
+    <sc-separator class="h5" orientation="vertical" />
 
     <button
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
@@ -405,7 +405,7 @@ import { ScExtensions } from './extensions';
       <span class="sr-only">Add cell attribute</span>
     </button>
 
-    <sc-extensions-separator />
+    <sc-separator class="h5" orientation="vertical" />
 
     <button
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
