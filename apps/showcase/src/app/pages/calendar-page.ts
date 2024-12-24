@@ -26,6 +26,6 @@ import { ScCalendar } from '@semantic-components/ui';
 })
 export default class CalendarPage {
   calendarForm = new FormGroup({
-    date: new FormControl('1988/06/25'),
+    date: new FormControl('1988-06-25'),
   });
 }
