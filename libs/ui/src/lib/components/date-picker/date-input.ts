@@ -38,10 +38,17 @@ export class ScDateInput {
     }
   };
 
+  previousKey = '';
+
   onKeyDown(event: KeyboardEvent) {
-    if (event.key === 'Backspace') {
+    console.log(event);
+
+    if (event.key === 'Backspace' || (this.previousKey === 'Control' && event.key === 'c')) {
+      this.previousKey = event.key;
       return;
     }
+
+    this.previousKey = event.key;
 
     const current: string = this.el.nativeElement.value;
 
