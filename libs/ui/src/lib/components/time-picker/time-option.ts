@@ -8,7 +8,7 @@ import {
   computed,
   inject,
   input,
-  model,
+  output,
   signal,
 } from '@angular/core';
 
@@ -63,7 +63,7 @@ export class ScTimeOption implements Highlightable {
 
   readonly _disabled = computed(() => this._disabledByInput() || booleanAttribute(this.disabled));
 
-  value = model<string>();
+  value = input<string>();
 
   setActiveStyles(): void {
     this._active.set(true);
@@ -101,6 +101,13 @@ export class ScTimeOption implements Highlightable {
   }
 
   onClick() {
-    console.log('aaaaaa');
+    if (this._selected()) {
+      this._selected.set(false);
+    } else {
+      this.selected.emit(this.value());
+      this._selected.set(true);
+    }
   }
+
+  selected = output<string | undefined>();
 }
