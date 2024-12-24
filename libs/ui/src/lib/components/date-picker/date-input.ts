@@ -41,10 +41,9 @@ export class ScDateInput {
   previousKey = '';
 
   onKeyDown(event: KeyboardEvent) {
-    console.log(event);
-
     if (
       event.key === 'Backspace' ||
+      event.key === 'Delete' ||
       event.key === 'ArrowLeft' ||
       event.key === 'ArrowRight' ||
       (this.previousKey === 'Control' && event.key === 'c') ||
