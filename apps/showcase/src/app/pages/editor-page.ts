@@ -7,9 +7,11 @@ import { ScEditor } from '@semantic-components/ui';
   selector: 'app-editor-page',
   imports: [ScEditor, ReactiveFormsModule],
   template: `
-    <form [formGroup]="editorForm">
-      <sc-editor formControlName="content" />
-    </form>
+    <div class="m-10">
+      <form [formGroup]="editorForm">
+        <sc-editor formControlName="content" />
+      </form>
+    </div>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
