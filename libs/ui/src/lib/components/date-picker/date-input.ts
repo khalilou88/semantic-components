@@ -45,7 +45,9 @@ export class ScDateInput {
 
     const current: string = this.el.nativeElement.value;
 
-    const next: string = current.concat(event.key);
+    const v = this.el.nativeElement.selectionStart;
+
+    const next = current.slice(0, v) + event.key + current.slice(v);
 
     if (this.dateFormatRegExp(current).exec(next) === null) {
       event.preventDefault();
