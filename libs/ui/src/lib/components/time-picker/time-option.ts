@@ -1,7 +1,6 @@
 import { Highlightable, _IdGenerator } from '@angular/cdk/a11y';
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   ElementRef,
   ViewEncapsulation,
@@ -13,27 +12,42 @@ import {
   signal,
 } from '@angular/core';
 
+import { SvgCheckIcon } from '@semantic-icons/lucide-icons';
+
 import { cn } from '../../utils';
 
 @Component({
   selector: 'sc-time-option',
-  imports: [],
+  imports: [SvgCheckIcon],
   template: `
+    @if (_selected()) {
+      <svg-check-icon class="absolute left-2 flex size-4 items-center justify-center" />
+    }
+
     <ng-content />
   `,
   host: {
     '[id]': 'id()',
-    '[class]': 'classes()',
+    '[class]': '_class()',
+    '[attr.data-disabled]': '_disabled()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScTimeOption implements Highlightable {
+  /** The unique ID of the option. */
+  id = signal<string>(inject(_IdGenerator).getId('sc-time-option-'));
+
   class = input<string>('');
 
-  classes = computed(() =>
-    cn('block', this._active() && 'bg-red-500', this._selected() && 'bg-green-500', this.class()),
+  _class = computed(() =>
+    cn(
+      'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      this._active() && 'bg-accent text-accent-foreground',
+
+      this.class(),
+    ),
   );
 
   _active = signal(false);
@@ -43,6 +57,7 @@ export class ScTimeOption implements Highlightable {
     alias: 'disabled',
     transform: booleanAttribute,
   });
+
   readonly _disabled = computed(() => this._disabledByInput() || booleanAttribute(this.disabled));
 
   value = model<string>();
@@ -50,26 +65,23 @@ export class ScTimeOption implements Highlightable {
   setActiveStyles(): void {
     this._active.set(true);
   }
+
   setInactiveStyles(): void {
     this._active.set(false);
   }
-  disabled?: boolean | undefined;
+
+  disabled: boolean | undefined;
 
   getLabel?(): string {
     return this.value() ?? '';
   }
 
-  private _element = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly _element = inject<ElementRef<HTMLElement>>(ElementRef);
 
   /** Gets the host DOM element. */
   _getHostElement(): HTMLElement {
     return this._element.nativeElement;
   }
-
-  /** The unique ID of the option. */
-  id = signal<string>(inject(_IdGenerator).getId('sc-time-option-'));
-
-  _changeDetectorRef = inject(ChangeDetectorRef);
 
   /** Selects the option. */
   select(): void {
