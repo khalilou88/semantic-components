@@ -5,6 +5,7 @@ import {
   Component,
   ElementRef,
   ViewEncapsulation,
+  booleanAttribute,
   computed,
   inject,
   input,
@@ -21,6 +22,7 @@ import { cn } from '../../utils';
     <ng-content />
   `,
   host: {
+    '[id]': 'id()',
     '[class]': 'classes()',
   },
   styles: ``,
@@ -30,9 +32,20 @@ import { cn } from '../../utils';
 export class ScTimeOption implements Highlightable {
   class = input<string>('');
 
-  classes = computed(() => cn('block', this._active() && 'bg-red-500', this.class()));
+  classes = computed(() =>
+    cn('block', this._active() && 'bg-red-500', this._selected() && 'bg-green-500', this.class()),
+  );
 
   _active = signal(false);
+  _selected = signal(false);
+
+  readonly _disabledByInput = input<boolean, unknown>(false, {
+    alias: 'disabled',
+    transform: booleanAttribute,
+  });
+  readonly _disabled = computed(() => this._disabledByInput() || booleanAttribute(this.disabled));
+
+  value = model<string>();
 
   setActiveStyles(): void {
     this._active.set(true);
@@ -56,29 +69,19 @@ export class ScTimeOption implements Highlightable {
   /** The unique ID of the option. */
   id = signal<string>(inject(_IdGenerator).getId('sc-time-option-'));
 
-  value = model<string>();
-
-  _selected = false;
-
   _changeDetectorRef = inject(ChangeDetectorRef);
 
   /** Selects the option. */
-  select(emitEvent = true): void {
-    if (!this._selected) {
-      this._selected = true;
-      this._changeDetectorRef.markForCheck();
+  select(): void {
+    if (!this._selected()) {
+      this._selected.set(true);
     }
   }
 
   /** Deselects the option. */
-  deselect(emitEvent = true): void {
-    if (this._selected) {
-      this._selected = false;
-      this._changeDetectorRef.markForCheck();
-
-      // if (emitEvent) {
-      //   this._emitSelectionChangeEvent();
-      // }
+  deselect(): void {
+    if (this._selected()) {
+      this._selected.set(false);
     }
   }
 }

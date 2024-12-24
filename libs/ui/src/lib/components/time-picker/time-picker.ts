@@ -369,15 +369,16 @@ export class ScTimePicker implements AfterViewInit {
     let hasSelected = false;
 
     for (const option of options) {
+      console.log('tttt');
+      console.log(value);
       if (value && option.value() === value) {
-        option.select(false);
+        option.select();
         scrollOptionIntoView(option, 'center');
         untracked(() => this._keyManager.setActiveItem(option));
         hasSelected = true;
       } else {
-        option.deselect(false);
+        option.deselect();
       }
-      console.log('');
     }
 
     // If no option was selected, we need to reset the key manager since
