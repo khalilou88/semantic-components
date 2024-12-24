@@ -275,7 +275,8 @@ export class ScTimePicker implements AfterViewInit {
 
   /** Selects a specific time value. */
   protected _selectValue(value: string) {
-    console.log(value);
+    //TODO
+    this._input().nativeElement.value = value;
 
     this.close();
     this.selected.emit({ value });
@@ -369,8 +370,6 @@ export class ScTimePicker implements AfterViewInit {
     let hasSelected = false;
 
     for (const option of options) {
-      console.log('tttt');
-      console.log(value);
       if (value && option.value() === value) {
         option.select();
         scrollOptionIntoView(option, 'center');
