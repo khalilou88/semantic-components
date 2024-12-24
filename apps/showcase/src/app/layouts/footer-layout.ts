@@ -7,7 +7,7 @@ import { Footer } from '../components/footer';
   selector: 'app-footer-layout',
   imports: [RouterModule, Footer],
   template: `
-    <router-outlet></router-outlet>
+    <router-outlet />
     <app-footer />
   `,
   styles: ``,

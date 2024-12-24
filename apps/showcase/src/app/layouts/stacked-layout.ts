@@ -16,7 +16,7 @@ import { LayoutState } from '../services/layout-state';
   imports: [RouterModule, Header],
   template: `
     <app-header />
-    <router-outlet></router-outlet>
+    <router-outlet />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
