@@ -43,7 +43,13 @@ export class ScDateInput {
   onKeyDown(event: KeyboardEvent) {
     console.log(event);
 
-    if (event.key === 'Backspace' || (this.previousKey === 'Control' && event.key === 'c')) {
+    if (
+      event.key === 'Backspace' ||
+      event.key === 'ArrowLeft' ||
+      event.key === 'ArrowRight' ||
+      (this.previousKey === 'Control' && event.key === 'c') ||
+      (this.previousKey === 'Control' && event.key === 'x')
+    ) {
       this.previousKey = event.key;
       return;
     }
@@ -52,9 +58,10 @@ export class ScDateInput {
 
     const current: string = this.el.nativeElement.value;
 
-    const v = this.el.nativeElement.selectionStart;
+    const start = this.el.nativeElement.selectionStart;
+    const end = this.el.nativeElement.selectionEnd;
 
-    const next = current.slice(0, v) + event.key + current.slice(v);
+    const next = current.slice(0, start) + event.key + current.slice(end);
 
     if (this.dateFormatRegExp(current).exec(next) === null) {
       event.preventDefault();
