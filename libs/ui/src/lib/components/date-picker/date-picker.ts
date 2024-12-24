@@ -19,9 +19,9 @@ import {
   viewChild,
 } from '@angular/core';
 
+import { cn } from '@semantic-components/utils';
 import { SvgCalendarIcon } from '@semantic-icons/lucide-icons';
 
-import { cn } from '../../utils';
 import { ScButton } from '../button';
 import { ScCalendar } from '../calendar';
 import { ScInput } from '../input';

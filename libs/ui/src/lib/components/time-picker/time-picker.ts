@@ -29,10 +29,11 @@ import {
   viewChildren,
 } from '@angular/core';
 
+import { cn } from '@semantic-components/utils';
 import { SvgClockIcon } from '@semantic-icons/lucide-icons';
 import { Subscription } from 'rxjs';
 
-import { ScSettings, cn } from '../../utils';
+import { ScSettings } from '../../utils';
 import { ScButton } from '../button';
 import { ScTimeOption } from './time-option';
 import { ScTimePickerInput } from './time-picker-input';

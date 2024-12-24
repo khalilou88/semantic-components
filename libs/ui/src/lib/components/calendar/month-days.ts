@@ -8,7 +8,8 @@ import {
   output,
 } from '@angular/core';
 
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/utils';
+
 import { ScButton } from '../button';
 import { WeekDayName } from './util';
 

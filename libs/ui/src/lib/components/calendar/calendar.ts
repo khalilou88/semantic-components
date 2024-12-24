@@ -15,7 +15,8 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/utils';
+
 import { ScButton } from '../button';
 import { ScCard, ScCardContent, ScCardFooter, ScCardHeader } from '../card';
 import { ScMonthDays } from './month-days';

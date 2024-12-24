@@ -9,9 +9,9 @@ import {
   signal,
 } from '@angular/core';
 
+import { cn } from '@semantic-components/utils';
 import { SvgCheckIcon } from '@semantic-icons/lucide-icons';
 
-import { cn } from '../../utils';
 import { ScAutocompleteModel } from './autocomplete-model';
 
 @Component({

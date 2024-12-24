@@ -6,9 +6,8 @@ import {
   input,
 } from '@angular/core';
 
+import { cn } from '@semantic-components/utils';
 import { SvgEllipsisIcon } from '@semantic-icons/lucide-icons';
-
-import { cn } from '../../utils';
 
 @Component({
   selector: 'span[sc-breadcrumb-ellipsis]',

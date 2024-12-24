@@ -7,7 +7,8 @@ import {
   input,
 } from '@angular/core';
 
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/utils';
+
 import { ScSheetTrigger } from './sheet-trigger';
 
 @Component({

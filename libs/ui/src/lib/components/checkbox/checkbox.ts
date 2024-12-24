@@ -15,9 +15,8 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+import { cn } from '@semantic-components/utils';
 import { SvgCheckIcon, SvgMinusIcon } from '@semantic-icons/lucide-icons';
-
-import { cn } from '../../utils';
 
 @Component({
   selector: 'sc-checkbox',

@@ -6,7 +6,8 @@ import {
   input,
 } from '@angular/core';
 
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/utils';
+
 import { ScAvatarFallback } from './avatar-fallback';
 import { ScAvatarImage } from './avatar-image';
 

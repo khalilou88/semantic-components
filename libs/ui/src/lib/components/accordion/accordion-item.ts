@@ -7,9 +7,9 @@ import {
   input,
 } from '@angular/core';
 
+import { cn } from '@semantic-components/utils';
 import { SvgChevronDownIcon, SvgChevronUpIcon } from '@semantic-icons/lucide-icons';
 
-import { cn } from '../../utils';
 import { ScAccordionHeader } from './accordion-header';
 import { ScAccordionTrigger } from './accordion-trigger';
 

@@ -13,7 +13,8 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/utils';
+
 import { ScLabel } from '../label';
 
 @Component({

@@ -9,9 +9,8 @@ import {
   input,
 } from '@angular/core';
 
+import { cn } from '@semantic-components/utils';
 import { NgScrollbarModule, ScrollbarVisibility } from 'ngx-scrollbar';
-
-import { cn } from '../../utils';
 
 @Component({
   selector: 'div[sc-scroll-area]',

@@ -8,7 +8,8 @@ import {
   signal,
 } from '@angular/core';
 
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/utils';
+
 import { scOverlayClasses } from '../overlay';
 import { SIDEBAR_WIDTH, SIDEBAR_WIDTH_ICON } from './constants';
 import { ScSidebarState } from './sidebar-state';

@@ -11,10 +11,9 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
+import { cn } from '@semantic-components/utils';
 import { SvgSearchIcon } from '@semantic-icons/lucide-icons';
 import { debounceTime } from 'rxjs';
-
-import { cn } from '../../utils';
 
 @Component({
   selector: 'sc-autocomplete-input',

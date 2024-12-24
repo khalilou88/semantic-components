@@ -14,9 +14,9 @@ import {
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
+import { cn } from '@semantic-components/utils';
 import { debounceTime } from 'rxjs';
 
-import { cn } from '../../utils';
 import { ScInput } from '../input';
 import { ScAutocompleteItem } from './autocomplete-item';
 import { ScAutocompleteModel } from './autocomplete-model';

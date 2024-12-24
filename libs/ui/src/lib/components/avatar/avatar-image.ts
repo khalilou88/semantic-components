@@ -7,7 +7,7 @@ import {
   signal,
 } from '@angular/core';
 
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/utils';
 
 @Component({
   selector: 'img[sc-avatar-image]',
