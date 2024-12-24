@@ -46,7 +46,7 @@ export class ScTimeOption implements Highlightable {
 
   _class = computed(() =>
     cn(
-      'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50',
       this._active() && 'bg-accent text-accent-foreground',
 
       this.class(),
