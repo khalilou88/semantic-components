@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@semantic-components/ui": ["libs/ui/src/index.ts"]
+      "@semantic-components/ui": ["libs/ui/src/index.ts"],
+      "@semantic-components/utils": ["libs/utils/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

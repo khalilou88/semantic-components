@@ -1,0 +1,9 @@
+{
+  "name": "@semantic-components/utils",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.6.0"
+  },
+  "sideEffects": false
+}
