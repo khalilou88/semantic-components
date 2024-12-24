@@ -12,7 +12,7 @@ import { LayoutState } from '../services/layout-state';
       <div class="flex min-h-screen">
         <app-sidebar />
         <div class="flex-1" [style.marginTop.px]="layoutState.headerHeight()">
-          <router-outlet></router-outlet>
+          <router-outlet />
         </div>
       </div>
     </div>

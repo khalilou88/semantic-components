@@ -4,7 +4,6 @@ import {
   ComponentRef,
   Directive,
   ElementRef,
-  HostListener,
   OnDestroy,
   TemplateRef,
   ViewContainerRef,
@@ -16,19 +15,23 @@ import { ScHoverCard } from './hover-card';
 
 @Directive({
   selector: '[scHoverCardTriggerFor]',
+  host: {
+    '(mouseover)': 'showCard()',
+    '(focus)': 'showCard()',
+    '(mouseleave)': 'hideCard()',
+    '(blur)': 'hideCard()',
+  },
 })
 export class ScHoverCardTriggerFor implements OnDestroy {
-  private element = inject<ElementRef<HTMLElement>>(ElementRef);
-  private overlay = inject(Overlay);
-  private viewContainer = inject(ViewContainerRef);
+  private readonly element = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly overlay = inject(Overlay);
+  private readonly viewContainer = inject(ViewContainerRef);
 
   readonly scHoverCardTriggerFor = input.required<TemplateRef<unknown>>();
 
   private overlayRef: OverlayRef | null = null;
 
-  @HostListener('mouseover')
-  @HostListener('focus')
-  showTooltip(): void {
+  showCard(): void {
     if (this.overlayRef?.hasAttached() === true) {
       return;
     }
@@ -36,9 +39,7 @@ export class ScHoverCardTriggerFor implements OnDestroy {
     this.attachTooltip();
   }
 
-  @HostListener('mouseleave')
-  @HostListener('blur')
-  hideTooltip(): void {
+  hideCard(): void {
     if (this.overlayRef?.hasAttached() === true) {
       this.overlayRef?.detach();
     }
@@ -54,14 +55,6 @@ export class ScHoverCardTriggerFor implements OnDestroy {
       this.overlayRef = this.overlay.create({ positionStrategy });
     }
 
-    // const injector = Injector.create({
-    //   providers: [
-    //     {
-    //       provide: TOOLTIP_DATA,
-    //       useValue: this.appTooltip,
-    //     },
-    //   ],
-    // });
     const componentPortal = new ComponentPortal(ScHoverCard, this.viewContainer);
 
     // Attach tooltip portal to overlay

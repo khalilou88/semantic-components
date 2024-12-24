@@ -48,7 +48,7 @@ export class ScDatePicker {
 
   classes = computed(() => cn('flex relative', this.class()));
 
-  private host = inject(ElementRef);
+  private readonly host = inject(ElementRef);
 
   private readonly _injector = inject(Injector);
 
