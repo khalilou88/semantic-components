@@ -30,6 +30,8 @@ import { cn } from '../../utils';
     '[id]': 'id()',
     '[class]': '_class()',
     '[attr.data-disabled]': '_disabled()',
+    '(mouseover)': 'setActiveStyles()',
+    '(mouseleave)': 'setInactiveStyles()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
