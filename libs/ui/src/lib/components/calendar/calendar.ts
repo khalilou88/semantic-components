@@ -1,11 +1,19 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
+  LOCALE_ID,
+  OnInit,
   ViewEncapsulation,
   computed,
+  forwardRef,
+  inject,
   input,
+  linkedSignal,
+  model,
+  signal,
 } from '@angular/core';
-import { LOCALE_ID, OnInit, inject, signal } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { cn } from '../../utils';
 import { ScButton } from '../button';
@@ -36,7 +44,7 @@ import { WeekDayName } from './util';
           [weekDaysNames]="weekDaysNames()"
           [days]="monthDays()"
           [firstDayMonth]="firstDayMonth()"
-          [selectedDay]="selectedDay()"
+          [selectedDay]="value()"
           (selectedDayChange)="setSelectedDay($event)"
         />
       </div>
@@ -53,16 +61,36 @@ import { WeekDayName } from './util';
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => ScCalendar),
+      multi: true,
+    },
+  ],
 })
-export class ScCalendar implements OnInit {
+export class ScCalendar implements OnInit, ControlValueAccessor {
+  private readonly _cdr = inject(ChangeDetectorRef);
+
   class = input<string>('');
 
   classes = computed(() => cn('', this.class()));
 
   private readonly localeId = inject(LOCALE_ID);
 
-  year = signal<number>(0);
-  month = signal<number>(0);
+  date = computed(() => {
+    console.log(this.value());
+
+    if (this.value()) {
+      return new Date(this.value());
+    }
+    return new Date();
+  });
+
+  year = linkedSignal(() => this.date().getFullYear());
+
+  month = linkedSignal(() => this.date().getMonth());
+
   weekDaysNames = signal<WeekDayName[]>([]);
 
   monthYear = computed(() => {
@@ -109,21 +137,39 @@ export class ScCalendar implements OnInit {
       .indexOf(dayName);
   });
 
-  selectedDay = signal<string>('');
-
-  ngOnInit() {
-    this.init();
-    this.setLocaleDayNames();
-  }
-
-  init() {
-    const today = new Date();
-    this.year.set(today.getFullYear());
-    this.month.set(today.getMonth());
-  }
+  value = model<string>('');
 
   setSelectedDay(day: string) {
-    this.selectedDay.set(day);
+    this.value.set(day);
+
+    this._onChange(day);
+    this._cdr.markForCheck();
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  _onChange: (value: string) => void = () => {};
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  _onTouched: () => void = () => {};
+
+  writeValue(value: string): void {
+    this.value.set(value);
+  }
+
+  registerOnChange(fn: (value: string) => void): void {
+    this._onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this._onTouched = fn;
+  }
+
+  private readonly _disabledByCva = signal(false);
+  setDisabledState?(isDisabled: boolean): void {
+    this._disabledByCva.set(isDisabled);
+  }
+
+  ngOnInit() {
+    this.setLocaleDayNames();
   }
 
   //https://github.com/angular/angular/issues/57193
