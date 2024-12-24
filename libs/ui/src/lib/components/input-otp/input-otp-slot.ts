@@ -10,7 +10,8 @@ import {
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/utils';
+
 import { InputOtpHandler } from './input-otp-handler';
 
 @Component({

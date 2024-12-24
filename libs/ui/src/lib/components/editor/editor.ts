@@ -14,13 +14,13 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+import { cn } from '@semantic-components/utils';
 import { Editor } from '@tiptap/core';
 import Document from '@tiptap/extension-document';
 import Heading from '@tiptap/extension-heading';
 import Paragraph from '@tiptap/extension-paragraph';
 import Text from '@tiptap/extension-text';
 
-import { cn } from '../../utils';
 import { scArticleClasses } from '../typography';
 import { ScExtensionBlockquote } from './extensions/extension-blockquote';
 import { ScExtensionBold } from './extensions/extension-bold';

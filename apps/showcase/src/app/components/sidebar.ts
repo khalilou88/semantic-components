@@ -7,7 +7,7 @@ import {
   input,
 } from '@angular/core';
 
-import { cn } from '@semantic-components/ui';
+import { cn } from '@semantic-components/utils';
 
 import { LayoutState } from '../services/layout-state';
 

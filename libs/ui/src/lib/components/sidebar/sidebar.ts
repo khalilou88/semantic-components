@@ -10,7 +10,8 @@ import {
   signal,
 } from '@angular/core';
 
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/utils';
+
 import { ScSidebarMobile } from './sidebar-mobile';
 import { ScSidebarState } from './sidebar-state';
 

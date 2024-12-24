@@ -8,9 +8,9 @@ import {
   signal,
 } from '@angular/core';
 
+import { cn } from '@semantic-components/utils';
 import { SvgXIcon } from '@semantic-icons/lucide-icons';
 
-import { cn } from '../../utils';
 import { SIDEBAR_WIDTH_MOBILE } from './constants';
 import { ScSidebarState } from './sidebar-state';
 import { ScSidebarToggler } from './sidebar-toggler';

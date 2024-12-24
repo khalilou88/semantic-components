@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
+import { cn } from '@semantic-components/utils';
 import {
   SvgChevronLeftIcon,
   SvgChevronRightIcon,
@@ -17,7 +18,6 @@ import {
   SvgChevronsRightIcon,
 } from '@semantic-icons/lucide-icons';
 
-import { cn } from '../../utils';
 import { ScButton } from '../button';
 import { ScOption, ScSelect } from '../select';
 import { ScPageEvent } from './page-event';

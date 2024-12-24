@@ -6,7 +6,7 @@ import {
   input,
 } from '@angular/core';
 
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/utils';
 
 @Component({
   selector: 'h2[sc-dialog-title]',

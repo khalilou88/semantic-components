@@ -6,9 +6,8 @@ import {
   input,
 } from '@angular/core';
 
+import { cn } from '@semantic-components/utils';
 import { VariantProps, cva } from 'class-variance-authority';
-
-import { cn } from '../../utils';
 
 const scHeadingVariants = cva('', {
   variants: {

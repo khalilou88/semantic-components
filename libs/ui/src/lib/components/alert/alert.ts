@@ -6,9 +6,8 @@ import {
   input,
 } from '@angular/core';
 
+import { cn } from '@semantic-components/utils';
 import { VariantProps, cva } from 'class-variance-authority';
-
-import { cn } from '../../utils';
 
 const alertVariants = cva(
   'relative w-full rounded-lg border p-4 [&>.svg+div]:translate-y-[-3px] [&>.svg]:absolute [&>.svg]:left-4 [&>.svg]:top-4 [&>.svg]:text-foreground [&>.svg~*]:pl-7',

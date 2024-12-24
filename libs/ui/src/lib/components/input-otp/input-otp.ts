@@ -28,9 +28,9 @@ import {
   Validators,
 } from '@angular/forms';
 
+import { cn } from '@semantic-components/utils';
 import { Subject } from 'rxjs';
 
-import { cn } from '../../utils';
 import { InputOtpHandler } from './input-otp-handler';
 import { ScInputOTPSlot } from './input-otp-slot';
 

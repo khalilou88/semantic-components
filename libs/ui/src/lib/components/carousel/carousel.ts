@@ -10,13 +10,12 @@ import {
   signal,
 } from '@angular/core';
 
+import { cn } from '@semantic-components/utils';
 import EmblaCarousel, {
   EmblaCarouselType,
   EmblaOptionsType,
   EmblaPluginType,
 } from 'embla-carousel';
-
-import { cn } from '../../utils';
 
 @Component({
   selector: 'div[sc-carousel]',

@@ -12,7 +12,8 @@ import {
   viewChild,
 } from '@angular/core';
 
-import { ScButton, ScSheetTrigger, ScThemeToggler, cn } from '@semantic-components/ui';
+import { ScButton, ScSheetTrigger, ScThemeToggler } from '@semantic-components/ui';
+import { cn } from '@semantic-components/utils';
 import { SvgGithubIcon, SvgMenuIcon, SvgXIcon } from '@semantic-icons/lucide-icons';
 
 import { LayoutState } from '../services/layout-state';

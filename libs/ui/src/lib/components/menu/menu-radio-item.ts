@@ -7,9 +7,8 @@ import {
   input,
 } from '@angular/core';
 
+import { cn } from '@semantic-components/utils';
 import { SvgCircleIcon } from '@semantic-icons/lucide-icons';
-
-import { cn } from '../../utils';
 
 @Component({
   selector: 'button[sc-menu-radio-item]',
