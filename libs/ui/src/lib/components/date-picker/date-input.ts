@@ -1,4 +1,4 @@
-import { Directive, ElementRef, computed, signal } from '@angular/core';
+import { Directive, ElementRef, computed, inject, signal } from '@angular/core';
 
 @Directive({
   selector: '[scDateInput]',
@@ -7,6 +7,8 @@ import { Directive, ElementRef, computed, signal } from '@angular/core';
   },
 })
 export class ScDateInput {
+  private readonly el = inject(ElementRef);
+
   value = signal('');
 
   private readonly dateFormatRegExp = computed(() => {
@@ -37,8 +39,6 @@ export class ScDateInput {
       }
     }
   });
-
-  constructor(private readonly el: ElementRef) {}
 
   onKeyDown(event: KeyboardEvent) {
     if (event.key === 'Backspace') {
