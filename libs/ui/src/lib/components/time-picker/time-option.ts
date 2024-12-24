@@ -32,6 +32,7 @@ import { cn } from '../../utils';
     '[attr.data-disabled]': '_disabled()',
     '(mouseover)': 'setActiveStyles()',
     '(mouseleave)': 'setInactiveStyles()',
+    '(click)': 'onClick()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -97,5 +98,9 @@ export class ScTimeOption implements Highlightable {
     if (this._selected()) {
       this._selected.set(false);
     }
+  }
+
+  onClick() {
+    console.log('aaaaaa');
   }
 }
