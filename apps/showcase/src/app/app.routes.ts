@@ -7,6 +7,11 @@ export const appRoutes: Route[] = [
     title: 'Sidebar Page',
   },
   {
+    path: 'separator',
+    loadComponent: () => import('./pages/separator-page'),
+    title: 'Separator Page',
+  },
+  {
     path: 'sheet',
     loadComponent: () => import('./pages/sheet-page'),
     title: 'Sheet Page',

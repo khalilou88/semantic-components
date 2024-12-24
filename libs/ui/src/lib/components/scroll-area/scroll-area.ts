@@ -37,7 +37,7 @@ import { NgScrollbarModule, ScrollbarVisibility } from 'ngx-scrollbar';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScScrollArea implements AfterViewInit {
-  private host = inject(ElementRef);
+  private readonly host = inject(ElementRef);
 
   class = input<string>('');
 

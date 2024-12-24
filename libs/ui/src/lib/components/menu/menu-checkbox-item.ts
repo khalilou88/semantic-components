@@ -40,7 +40,7 @@ import { SvgCheckIcon } from '@semantic-icons/lucide-icons';
   ],
 })
 export class ScMenuCheckboxItem {
-  private _cdkMenuItemCheckbox = inject(CdkMenuItemCheckbox, { host: true });
+  private readonly _cdkMenuItemCheckbox = inject(CdkMenuItemCheckbox, { host: true });
 
   class = input<string>('');
 
