@@ -22,6 +22,8 @@ import Paragraph from '@tiptap/extension-paragraph';
 import Text from '@tiptap/extension-text';
 
 import { scArticleClasses } from '../typography';
+import { ScEditorRedo } from './actions/editor-redo';
+import { ScEditorUndo } from './actions/editor-undo';
 import { ScExtensionBlockquote } from './extensions/extension-blockquote';
 import { ScExtensionBold } from './extensions/extension-bold';
 import { ScExtensionBulletList } from './extensions/extension-bullet-list';
@@ -30,7 +32,6 @@ import { ScExtensionColor } from './extensions/extension-color';
 import { ScExtensionFontFamily } from './extensions/extension-font-family';
 import { ScExtensionHeading } from './extensions/extension-heading';
 import { ScExtensionHighlight } from './extensions/extension-highlight';
-import { ScExtensionHistory } from './extensions/extension-history';
 import { ScExtensionHorizontalRule } from './extensions/extension-horizontal-rule';
 import { ScExtensionImage } from './extensions/extension-image';
 import { ScExtensionItalic } from './extensions/extension-italic';
@@ -50,6 +51,8 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
 @Component({
   selector: 'sc-editor',
   imports: [
+    ScEditorUndo,
+    ScEditorRedo,
     ScExtensionHighlight,
     ScExtensionColor,
     ScExtensionBold,
@@ -65,7 +68,6 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
     ScExtensionTextAlignAction,
     ScExtensionTextStyle,
     ScExtensionParagraph,
-    ScExtensionHistory,
     ScExtensionsSeparator,
     ScExtensionsGroup,
     ScExtensionStrike,
@@ -80,7 +82,8 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
     >
       <div class="border-b px-3 py-1 dark:border-gray-600">
         <sc-extensions-group>
-          <sc-extension-history />
+          <sc-editor-undo />
+          <sc-editor-redo />
           <sc-extensions-separator />
           <sc-extension-bold />
           <sc-extension-italic />

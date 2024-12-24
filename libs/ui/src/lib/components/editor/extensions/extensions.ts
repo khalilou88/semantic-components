@@ -1,9 +1,15 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, computed, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ScExtensions {
+  //history extension
+  undo = signal<boolean>(false);
+  redo = signal<boolean>(false);
+  history = computed(() => this.undo() || this.redo());
+
+  //
   highlight = signal<boolean>(false);
   color = signal<boolean>(false);
   underline = signal<boolean>(false);
@@ -21,7 +27,5 @@ export class ScExtensions {
   orderedList = signal<boolean>(false);
   horizontalRule = signal<boolean>(false);
   textStyle = signal<boolean>(false);
-  history = signal<boolean>(false);
-
   table = signal<boolean>(false);
 }
