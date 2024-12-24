@@ -4,6 +4,8 @@ import { Injectable, LOCALE_ID, inject, signal } from '@angular/core';
   providedIn: 'root',
 })
 export class ScSettings {
+  clock = signal<'am-pm' | '24-hour'>('am-pm');
+
   dateFormatPattern = signal<string>('');
 
   private readonly localeId = inject(LOCALE_ID);

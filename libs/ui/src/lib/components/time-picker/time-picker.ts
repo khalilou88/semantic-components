@@ -32,7 +32,7 @@ import {
 import { SvgClockIcon } from '@semantic-icons/lucide-icons';
 import { Subscription } from 'rxjs';
 
-import { cn } from '../../utils';
+import { ScSettings, cn } from '../../utils';
 import { ScButton } from '../button';
 import { ScTimeOption } from './time-option';
 import { ScTimePickerInput } from './time-picker-input';
@@ -60,7 +60,7 @@ export interface MatTimepickerSelected<D> {
     <button class="absolute inset-y-0 end-0 pe-4" (click)="open()" sc-button variant="ghost">
       <svg-clock-icon />
     </button>
-    <input #input scTimePickerInput type="text" placeholder="Select time" />
+    <input #input scTimePickerInput type="text" placeholder="hh:mm" />
 
     <ng-template #panelTemplate>
       <div
@@ -86,6 +86,18 @@ export interface MatTimepickerSelected<D> {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScTimePicker implements OnDestroy {
+  settings = inject(ScSettings);
+
+  clock = input<'am-pm' | '24-hour' | undefined>(undefined);
+
+  _clock = computed(() => {
+    if (this.clock() !== undefined) {
+      return this.clock();
+    }
+
+    return this.settings.clock();
+  });
+
   class = input<string>('');
   classes = computed(() => cn('flex relative', this.class()));
 
