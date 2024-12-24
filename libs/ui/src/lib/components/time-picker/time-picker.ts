@@ -34,8 +34,8 @@ import { Subscription } from 'rxjs';
 
 import { cn } from '../../utils';
 import { ScButton } from '../button';
-import { scInputStyles } from '../input';
 import { ScTimeOption } from './time-option';
+import { ScTimePickerInput } from './time-picker-input';
 
 /**
  * Time selection option that can be displayed within a `mat-timepicker`.
@@ -55,12 +55,12 @@ export interface MatTimepickerSelected<D> {
 
 @Component({
   selector: 'sc-time-picker',
-  imports: [SvgClockIcon, ScButton, ScTimeOption],
+  imports: [SvgClockIcon, ScButton, ScTimeOption, ScTimePickerInput],
   template: `
     <button class="absolute inset-y-0 end-0 pe-4" (click)="open()" sc-button variant="ghost">
       <svg-clock-icon />
     </button>
-    <input #input [class]="scInputStyles()" type="text" placeholder="Select time" />
+    <input #input scTimePickerInput type="text" placeholder="Select time" />
 
     <ng-template #panelTemplate>
       <div
@@ -93,8 +93,6 @@ export class ScTimePicker implements AfterViewInit {
 
   class = input<string>('');
   classes = computed(() => cn('flex relative', this.class()));
-
-  scInputStyles = computed(() => scInputStyles());
 
   private _overlay = inject(Overlay);
   private _dir = inject(Directionality, { optional: true });
