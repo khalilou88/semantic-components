@@ -6,7 +6,6 @@ import { _getEventTarget } from '@angular/cdk/platform';
 import { TemplatePortal } from '@angular/cdk/portal';
 import {
   AfterRenderRef,
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
@@ -64,7 +63,7 @@ export interface MatTimepickerSelected<D> {
 
     <ng-template #panelTemplate>
       <div
-        class="mat-timepicker-panel border-2 border-blue-500 w-full"
+        class="relative z-50 max-h-96 w-full min-w-32 overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2"
         @panel
         [attr.aria-label]="ariaLabel() || null"
         [attr.aria-labelledby]="_getAriaLabelledby()"
@@ -86,38 +85,34 @@ export interface MatTimepickerSelected<D> {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScTimePicker implements AfterViewInit {
-  ngAfterViewInit() {
-    // console.log(this._input().nativeElement);
-  }
-
+export class ScTimePicker {
   class = input<string>('');
   classes = computed(() => cn('flex relative', this.class()));
 
-  private _overlay = inject(Overlay);
-  private _dir = inject(Directionality, { optional: true });
-  private _viewContainerRef = inject(ViewContainerRef);
-  private _injector = inject(Injector);
+  private readonly _overlay = inject(Overlay);
+  private readonly _dir = inject(Directionality, { optional: true });
+  private readonly _viewContainerRef = inject(ViewContainerRef);
+  private readonly _injector = inject(Injector);
   // private _defaultConfig = inject(MAT_TIMEPICKER_CONFIG, { optional: true });
   // private _dateAdapter = inject<DateAdapter<D>>(DateAdapter, { optional: true })!;
   // private _dateFormats = inject(MAT_DATE_FORMATS, { optional: true })!;
 
-  private _isOpen = signal(false);
-  private _activeDescendant = signal<string | null>(null);
+  private readonly _isOpen = signal(false);
+  private readonly _activeDescendant = signal<string | null>(null);
 
-  private _input = viewChild.required<ElementRef<HTMLInputElement>>('input');
+  private readonly _input = viewChild.required<ElementRef<HTMLInputElement>>('input');
 
   private _overlayRef: OverlayRef | null = null;
   private _portal: TemplatePortal<unknown> | null = null;
-  private _optionsCacheKey: string | null = null;
-  private _localeChanges!: Subscription;
+  private readonly _optionsCacheKey: string | null = null;
+  private readonly _localeChanges!: Subscription;
   private _onOpenRender: AfterRenderRef | null = null;
 
   protected _panelTemplate = viewChild.required<TemplateRef<unknown>>('panelTemplate');
   protected _timeOptions: readonly MatTimepickerOption<string>[] = [];
   protected _options = viewChildren(ScTimeOption);
 
-  private _keyManager = new ActiveDescendantKeyManager(this._options, this._injector)
+  private readonly _keyManager = new ActiveDescendantKeyManager(this._options, this._injector)
     .withHomeAndEnd(true)
     .withPageUpDown(true)
     .withVerticalOrientation(true);
