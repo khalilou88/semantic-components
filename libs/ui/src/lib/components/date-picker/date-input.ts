@@ -48,6 +48,7 @@ export class ScDateInput {
       event.key === 'ArrowLeft' ||
       event.key === 'ArrowRight' ||
       (this.previousKey === 'Control' && event.key === 'c') ||
+      (this.previousKey === 'Control' && event.key === 'v') ||
       (this.previousKey === 'Control' && event.key === 'x')
     ) {
       this.previousKey = event.key;
