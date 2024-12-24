@@ -29,7 +29,7 @@ import { cn } from '@semantic-components/utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSlider {
-  private host = inject(ElementRef);
+  private readonly host = inject(ElementRef);
 
   class = input<string>('');
 
