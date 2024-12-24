@@ -1,12 +1,19 @@
-import { AfterContentInit, Directive, ElementRef, booleanAttribute, input } from '@angular/core';
+import {
+  AfterContentInit,
+  Directive,
+  ElementRef,
+  booleanAttribute,
+  inject,
+  input,
+} from '@angular/core';
 
 @Directive({
   selector: '[scAutoFocus]',
 })
 export class ScAutoFocus implements AfterContentInit {
-  scAutoFocus = input<boolean, unknown>(false, { transform: booleanAttribute });
+  private readonly el = inject(ElementRef);
 
-  public constructor(private el: ElementRef) {}
+  scAutoFocus = input<boolean, unknown>(false, { transform: booleanAttribute });
 
   public ngAfterContentInit() {
     setTimeout(() => {

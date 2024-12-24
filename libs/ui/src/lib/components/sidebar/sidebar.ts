@@ -59,6 +59,8 @@ import { ScSidebarState } from './sidebar-state';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSidebar {
+  private readonly observer = inject(BreakpointObserver);
+
   sidebarState = inject(ScSidebarState);
 
   class = input<string>('');
@@ -100,7 +102,7 @@ export class ScSidebar {
     ),
   );
 
-  constructor(private observer: BreakpointObserver) {
+  constructor() {
     this.observer.observe('(max-width: 768px)').subscribe((result) => {
       this.sidebarState.isMobile.set(result.matches);
 
