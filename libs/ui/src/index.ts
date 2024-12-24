@@ -46,3 +46,4 @@ export * from './lib/components/command';
 export * from './lib/components/collapsible';
 export * from './lib/components/sidebar';
 export * from './lib/components/autocomplete';
+export * from './lib/components/time-picker';

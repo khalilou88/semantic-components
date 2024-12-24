@@ -1,5 +1,4 @@
-import { BACKSPACE } from '@angular/cdk/keycodes';
-import { Directive, ElementRef, booleanAttribute, computed, input, signal } from '@angular/core';
+import { Directive, ElementRef, computed, signal } from '@angular/core';
 
 @Directive({
   selector: '[scDateInput]',
@@ -8,51 +7,44 @@ import { Directive, ElementRef, booleanAttribute, computed, input, signal } from
   },
 })
 export class ScDateInput {
-  scDateInput = input<boolean, unknown>(false, { transform: booleanAttribute });
-
   value = signal('');
 
-  private dateFormatRegExp = computed(() => {
-    console.log(this.value().length);
+  private readonly dateFormatRegExp = computed(() => {
     switch (this.value().length) {
       case 0: {
-        return new RegExp(/^[0-9]{1,1}$/g);
+        return new RegExp(/^\d$/g);
       }
       case 1: {
-        return new RegExp(/^[0-9]{1,2}\/{0,1}$/g);
+        return new RegExp(/^\d{1,2}\/?$/g);
       }
       case 2: {
-        return new RegExp(/^[0-9]{1,2}\/[0-9]{0,1}$/g);
+        return new RegExp(/^\d{1,2}\/\d?$/g);
       }
       case 3: {
-        return new RegExp(/^[0-9]{1,2}\/[0-9]{1,2}\/{0,1}$/g);
+        return new RegExp(/^\d{1,2}\/\d{1,2}\/?$/g);
       }
       case 4: {
-        return new RegExp(/^[0-9]{1,2}\/[0-9]{1,2}\/{0,1}[0-9]{0,1}$/g);
+        return new RegExp(/^\d{1,2}\/\d{1,2}\/?\d?$/g);
       }
       case 5: {
-        return new RegExp(/^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{0,2}$/g);
+        return new RegExp(/^\d{1,2}\/\d{1,2}\/\d{0,2}$/g);
       }
       case 6: {
-        return new RegExp(/^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{0,3}$/g);
+        return new RegExp(/^\d{1,2}\/\d{1,2}\/\d{0,3}$/g);
       }
       default: {
-        return new RegExp(/^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{1,4}$/g);
+        return new RegExp(/^\d{1,2}\/\d{1,2}\/\d{1,4}$/g);
       }
     }
   });
 
-  // Allow key codes for special events. Reflect :
-  // Backspace, tab, end, home
-  private specialKeys: Array<string> = ['Backspace', 'Tab', 'End', 'Home'];
-
-  constructor(private el: ElementRef) {}
+  constructor(private readonly el: ElementRef) {}
 
   onKeyDown(event: KeyboardEvent) {
-    // // Allow Backspace, tab, end, and home keys
-    // if (this.specialKeys.indexOf(event.key) !== -1) {
-    //   return;
-    // }
+    if (event.key === 'Backspace') {
+      this.value.update((v) => v.substring(0, v.length - 1));
+      return;
+    }
 
     // Do not use event.keycode this is deprecated.
     // See: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
@@ -62,17 +54,10 @@ export class ScDateInput {
     // is not yet updated with the value from this event
     const next: string = current.concat(event.key);
 
-    if (event.keyCode === BACKSPACE) {
-      console.log('BACKSPACE');
-      this.value.update((v) => v.substring(0, v.length - 1));
+    if (this.dateFormatRegExp().exec(next) === null) {
+      event.preventDefault();
     } else {
-      if (!String(next).match(this.dateFormatRegExp())) {
-        console.log(this.value().length);
-        console.log(next);
-        event.preventDefault();
-      } else {
-        this.value.set(next);
-      }
+      this.value.set(next);
     }
   }
 }

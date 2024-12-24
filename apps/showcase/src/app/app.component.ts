@@ -12,7 +12,7 @@ import { RouterModule } from '@angular/router';
   imports: [RouterModule],
   selector: 'app-root',
   template: `
-    <router-outlet></router-outlet>
+    <router-outlet />
   `,
 
   styles: ``,
