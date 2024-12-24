@@ -24,6 +24,7 @@ import Text from '@tiptap/extension-text';
 import { scArticleClasses } from '../typography';
 import { ScEditorRedo } from './actions/editor-redo';
 import { ScEditorUndo } from './actions/editor-undo';
+import { ScEditorToolbar } from './editor-toolbar';
 import { ScExtensionBlockquote } from './extensions/extension-blockquote';
 import { ScExtensionBold } from './extensions/extension-bold';
 import { ScExtensionBulletList } from './extensions/extension-bullet-list';
@@ -75,55 +76,52 @@ import { ScExtensionsSeparator } from './toolbar/extensions-separator';
     ScExtensionCode,
     ScExtensionHeading,
     ScExtensionTable,
+    ScEditorToolbar,
   ],
   template: `
-    <div
-      class="w-full rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-600 dark:bg-gray-700"
-    >
-      <div class="border-b px-3 py-1 dark:border-gray-600">
-        <sc-extensions-group>
-          <sc-editor-undo />
-          <sc-editor-redo />
-          <sc-extensions-separator />
-          <sc-extension-bold />
-          <sc-extension-italic />
-          <sc-extension-underline />
-          <sc-extension-highlight />
-          <sc-extension-link />
-          <sc-extension-text-style />
-          <sc-extension-color />
-          <sc-extension-font-family />
-          <sc-extensions-separator />
-          <sc-extension-text-align />
-        </sc-extensions-group>
+    <sc-editor-toolbar>
+      <sc-extensions-group>
+        <sc-editor-undo />
+        <sc-editor-redo />
+        <sc-extensions-separator />
+        <sc-extension-bold />
+        <sc-extension-italic />
+        <sc-extension-underline />
+        <sc-extension-highlight />
+        <sc-extension-link />
+        <sc-extension-text-style />
+        <sc-extension-color />
+        <sc-extension-font-family />
+        <sc-extensions-separator />
+        <sc-extension-text-align />
+      </sc-extensions-group>
 
-        <sc-extensions-group>
-          <sc-extension-heading />
-          <sc-extension-paragraph />
-          <sc-extensions-separator />
-          <sc-extension-image />
-          <sc-extension-youtube />
-          <sc-extension-bullet-list />
-          <sc-extension-ordered-list />
-          <sc-extension-blockquote />
-          <sc-extensions-separator />
-          <sc-extension-strike />
-          <sc-extension-horizontal-rule />
-          <sc-extension-code />
-        </sc-extensions-group>
+      <sc-extensions-group>
+        <sc-extension-heading />
+        <sc-extension-paragraph />
+        <sc-extensions-separator />
+        <sc-extension-image />
+        <sc-extension-youtube />
+        <sc-extension-bullet-list />
+        <sc-extension-ordered-list />
+        <sc-extension-blockquote />
+        <sc-extensions-separator />
+        <sc-extension-strike />
+        <sc-extension-horizontal-rule />
+        <sc-extension-code />
+      </sc-extensions-group>
 
-        <sc-extensions-group>
-          <sc-extension-table />
-        </sc-extensions-group>
-      </div>
+      <sc-extensions-group>
+        <sc-extension-table />
+      </sc-extensions-group>
+    </sc-editor-toolbar>
 
-      <div class="rounded-b-lg bg-white px-4 py-2 dark:bg-gray-800">
-        <label class="sr-only" for="wysiwyg-example">Publish post</label>
-        <div
-          class="block w-full border-0 bg-white px-0 text-sm text-gray-800 focus:ring-0 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-400"
-          #editorDiv
-        ></div>
-      </div>
+    <div class="rounded-b-lg bg-white px-4 py-2 dark:bg-gray-800">
+      <label class="sr-only" for="wysiwyg-example">Publish post</label>
+      <div
+        class="block w-full border-0 bg-white px-0 text-sm text-gray-800 focus:ring-0 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-400"
+        #editorDiv
+      ></div>
     </div>
   `,
   host: {
@@ -150,7 +148,14 @@ export class ScEditor implements ControlValueAccessor {
   _isEditable = signal(true);
 
   class = input<string>('');
-  classes = computed(() => cn('', this.class()));
+
+  //TODO change styles
+  classes = computed(() =>
+    cn(
+      'block w-full rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-600 dark:bg-gray-700',
+      this.class(),
+    ),
+  );
 
   editorClass = input<string>('');
   editorClasses = computed(() =>
