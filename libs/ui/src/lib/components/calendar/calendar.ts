@@ -79,8 +79,6 @@ export class ScCalendar implements OnInit, ControlValueAccessor {
   private readonly localeId = inject(LOCALE_ID);
 
   date = computed(() => {
-    console.log(this.value());
-
     if (this.value()) {
       return new Date(this.value());
     }
