@@ -1,4 +1,4 @@
-import { Highlightable } from '@angular/cdk/a11y';
+import { Highlightable, _IdGenerator } from '@angular/cdk/a11y';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -53,7 +53,8 @@ export class ScTimeOption implements Highlightable {
     return this._element.nativeElement;
   }
 
-  id = '';
+  /** The unique ID of the option. */
+  id = signal<string>(inject(_IdGenerator).getId('sc-time-option-'));
 
   value = model<string>();
 

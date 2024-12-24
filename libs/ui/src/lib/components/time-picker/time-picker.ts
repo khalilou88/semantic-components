@@ -88,7 +88,7 @@ export interface MatTimepickerSelected<D> {
 })
 export class ScTimePicker implements AfterViewInit {
   ngAfterViewInit() {
-    console.log(this._input().nativeElement);
+    // console.log(this._input().nativeElement);
   }
 
   class = input<string>('');
@@ -158,7 +158,7 @@ export class ScTimePicker implements AfterViewInit {
   readonly activeDescendant: Signal<string | null> = this._activeDescendant.asReadonly();
 
   /** Unique ID of the timepicker's panel */
-  readonly panelId: string = inject(_IdGenerator).getId('mat-timepicker-panel-');
+  readonly panelId: string = inject(_IdGenerator).getId('sc-time-picker-panel-');
 
   /** Whether ripples within the timepicker should be disabled. */
   // readonly disableRipple: InputSignalWithTransform<boolean, unknown> = input(
@@ -201,11 +201,11 @@ export class ScTimePicker implements AfterViewInit {
 
     // Since the panel ID is static, we can set it once without having to maintain a host binding.
     const element = inject<ElementRef<HTMLElement>>(ElementRef);
-    element.nativeElement.setAttribute('mat-timepicker-panel-id', this.panelId);
+    element.nativeElement.setAttribute('sc-time-picker-panel-id', this.panelId);
     this._handleLocaleChanges();
     this._handleInputStateChanges();
     this._keyManager.change.subscribe(() =>
-      this._activeDescendant.set(this._keyManager.activeItem?.id || null),
+      this._activeDescendant.set(this._keyManager.activeItem?.id() || null),
     );
   }
 
@@ -275,6 +275,8 @@ export class ScTimePicker implements AfterViewInit {
 
   /** Selects a specific time value. */
   protected _selectValue(value: string) {
+    console.log(value);
+
     this.close();
     this.selected.emit({ value });
     this._input().nativeElement?.focus();
@@ -438,7 +440,7 @@ export class ScTimePicker implements AfterViewInit {
       const options = this._options();
 
       if (this._isOpen() && input) {
-        this._syncSelectedState(input.nativeElement?.value, options, null);
+        this._syncSelectedState(input.nativeElement.value, options, null);
       }
     });
   }
