@@ -1,4 +1,4 @@
-import { Directive, ElementRef, computed, inject, signal } from '@angular/core';
+import { Directive, ElementRef, inject } from '@angular/core';
 
 @Directive({
   selector: '[scDateInput]',
@@ -9,10 +9,8 @@ import { Directive, ElementRef, computed, inject, signal } from '@angular/core';
 export class ScDateInput {
   private readonly el = inject(ElementRef);
 
-  value = signal('');
-
-  private readonly dateFormatRegExp = computed(() => {
-    switch (this.value().length) {
+  private readonly dateFormatRegExp = (current: string) => {
+    switch (current.length) {
       case 0: {
         return new RegExp(/^\d$/g);
       }
@@ -38,26 +36,19 @@ export class ScDateInput {
         return new RegExp(/^\d{1,2}\/\d{1,2}\/\d{1,4}$/g);
       }
     }
-  });
+  };
 
   onKeyDown(event: KeyboardEvent) {
     if (event.key === 'Backspace') {
-      this.value.update((v) => v.substring(0, v.length - 1));
       return;
     }
 
-    // Do not use event.keycode this is deprecated.
-    // See: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
     const current: string = this.el.nativeElement.value;
 
-    // We need this because the current value on the DOM element
-    // is not yet updated with the value from this event
     const next: string = current.concat(event.key);
 
-    if (this.dateFormatRegExp().exec(next) === null) {
+    if (this.dateFormatRegExp(current).exec(next) === null) {
       event.preventDefault();
-    } else {
-      this.value.set(next);
     }
   }
 }
