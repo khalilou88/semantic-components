@@ -11,6 +11,7 @@ import {
   ElementRef,
   Injector,
   InputSignal,
+  OnDestroy,
   OutputEmitterRef,
   Signal,
   TemplateRef,
@@ -84,7 +85,7 @@ export interface MatTimepickerSelected<D> {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScTimePicker {
+export class ScTimePicker implements OnDestroy {
   class = input<string>('');
   classes = computed(() => cn('flex relative', this.class()));
 
