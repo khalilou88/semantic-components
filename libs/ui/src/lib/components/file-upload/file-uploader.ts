@@ -54,7 +54,7 @@ import { ScFileCard } from './file-card';
             <sc-file-card
               [file]="file"
               [index]="idx"
-              [preview]="true"
+              [preview]="''"
               [progress]="30"
               (removed)="onRemove($event)"
             />

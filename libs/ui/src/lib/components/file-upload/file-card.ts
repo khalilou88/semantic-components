@@ -19,7 +19,7 @@ import { ScFilePreview } from './file-preview';
     <div class="relative flex items-center gap-2.5">
       <div class="flex flex-1 gap-2.5">
         @if (preview()) {
-          <sc-file-preview file="file" />
+          <sc-file-preview [file]="file()" [preview]="preview()" />
         }
 
         <div class="flex w-full flex-col gap-2">
@@ -60,7 +60,7 @@ export class ScFileCard {
   index = input.required<number>();
   file = input.required<File>();
   progress = input.required<number>();
-  preview = input.required<boolean>();
+  preview = input.required<string>();
   removed = output<number>();
   remove() {
     this.removed.emit(this.index());
