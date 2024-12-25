@@ -4,7 +4,6 @@ import {
   ViewEncapsulation,
   computed,
   input,
-  signal,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
@@ -16,7 +15,7 @@ import { SvgUploadIcon } from '@semantic-icons/lucide-icons';
   template: `
     <div class="relative flex flex-col gap-6 overflow-hidden">
       <!-- Dropzone -->
-      <div class="_class()">
+      <div [class]="_class()">
         <input />
 
         @if (isDragActive()) {
@@ -24,7 +23,9 @@ import { SvgUploadIcon } from '@semantic-icons/lucide-icons';
             <div class="rounded-full border border-dashed p-3">
               <svg-upload-icon class="size-7 text-muted-foreground" aria-hidden="true" />
             </div>
-            <p class="font-medium text-muted-foreground">Drop the files here</p>
+            <p class="font-medium text-muted-foreground">
+              Drag 'n' drop your files here, or click to select files
+            </p>
           </div>
         } @else {
           <div class="flex flex-col items-center justify-center gap-4 sm:px-5">
@@ -56,10 +57,12 @@ import { SvgUploadIcon } from '@semantic-icons/lucide-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScFileUploader {
-  files = [];
+  isDragActive = input(true);
+  isDisabled = input(false);
 
-  isDragActive = signal(false);
-  isDisabled = signal(false);
+  acceptedFiles = '';
+
+  files = [];
 
   readonly class = input<string>('');
 
