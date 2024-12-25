@@ -161,7 +161,7 @@ export class ScSimpleDndUploadFiles {
 
   uploadFile2(file: File): void {
     const formData = new FormData();
-    formData.append('key', file);
+    formData.append('file', file);
 
     this.dataService.uploadFile(formData).subscribe(
       (event) => {
