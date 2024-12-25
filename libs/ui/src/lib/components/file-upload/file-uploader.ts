@@ -106,16 +106,12 @@ export class ScFileUploader {
     acceptedFiles.forEach((file) => {
       const reader = new FileReader();
 
-      reader.onabort = () => console.log('file reading was aborted');
-      reader.onerror = () => console.log('file reading has failed');
-      reader.onload = () => {
-        const binaryStr = reader.result;
-
-        const scFile: ScFile = { file: file, progress: 33, preview: binaryStr };
+      reader.onloadend = () => {
+        const scFile: ScFile = { file: file, progress: 33, preview: reader.result };
 
         this.files.update((files) => [...files, scFile]);
       };
-      reader.readAsArrayBuffer(file);
+      reader.readAsDataURL(file);
     });
   }
 }
