@@ -15,6 +15,7 @@ import { cn } from '@semantic-components/utils';
 import { SvgUploadIcon } from '@semantic-icons/lucide-icons';
 import { catchError, throwError } from 'rxjs';
 
+import { ScButton } from '../button';
 import { ScProgress } from '../progress';
 import { DataService } from './data-service';
 import { ScDropZone } from './drop-zone';
@@ -22,7 +23,7 @@ import { formatBytes } from './utils';
 
 @Component({
   selector: 'sc-single-file-uploader',
-  imports: [ScProgress, SvgUploadIcon, ScDropZone],
+  imports: [ScProgress, SvgUploadIcon, ScDropZone, ScButton],
   template: `
     @if (!fileUrl()) {
       <!-- Dropzone -->
@@ -69,9 +70,10 @@ import { formatBytes } from './utils';
 
       <div class="flex gap-3 justify-start">
         <button
-          class="text-sm font-medium w-[50%] border border-red-500 px-4 py-3 rounded-lg text-red-500 hover:bg-red-500 hover:text-white ease-in-out"
           [disabled]="status() === 'uploading'"
           (click)="removeFile()"
+          sc-button
+          variant="destructive"
           type="button"
         >
           Remove
@@ -79,9 +81,10 @@ import { formatBytes } from './utils';
 
         @if (status() === 'init' || status() === 'error') {
           <button
-            class="text-sm font-medium w-[50%] border border-blue-500 px-4 py-3 bg-blue-500 text-blue-50 rounded-lg hover:bg-blue-600 ease-in-out disabled:bg-gray-300 disabled:border-gray-300"
             [disabled]="status() === 'uploading'"
             (click)="uploadFile()"
+            sc-button
+            variant="primary"
             type="button"
           >
             Upload
@@ -89,12 +92,7 @@ import { formatBytes } from './utils';
         }
 
         @if (status() === 'uploading') {
-          <button
-            class="text-sm font-medium w-[50%] border border-red-500 px-4 py-3 rounded-lg text-red-500 hover:bg-red-500 hover:text-white ease-in-out"
-            type="button"
-          >
-            Cancel
-          </button>
+          <button sc-button variant="secondary" type="button">Cancel</button>
         }
       </div>
     }
