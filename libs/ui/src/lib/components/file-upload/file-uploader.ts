@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
   computed,
   input,
+  signal,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
@@ -49,8 +50,13 @@ import { ScFileCard } from './file-card';
 
       <div class="h-fit w-full px-3">
         <div class="flex max-h-48 flex-col gap-4">
-          @for (file of files; track $index) {
-            <sc-file-card (onRemove)="onRemove($event)" file="file" />
+          @for (file of files(); track $index; let idx = $index) {
+            <sc-file-card
+              [file]="file"
+              [index]="idx"
+              [progress]="30"
+              (removed)="onRemove($event)"
+            />
           }
         </div>
       </div>
@@ -66,7 +72,7 @@ export class ScFileUploader {
 
   acceptedFiles = '';
 
-  files = [];
+  files = signal<File[]>([]);
 
   readonly class = input<string>('');
 
@@ -100,6 +106,9 @@ export class ScFileUploader {
 
     const acceptedFiles = Array.from(files);
 
+    //TODO
+    this.files.set(acceptedFiles);
+
     acceptedFiles.forEach((file) => {
       const reader = new FileReader();
 
@@ -114,10 +123,8 @@ export class ScFileUploader {
     });
   }
 
-  onRemove(index: Event) {
+  onRemove(index: number) {
     if (!this.files) return;
-    // const newFiles = this.files.filter((_, i) => i !== index);
-    // setFiles(newFiles);
-    // onValueChange?.(newFiles);
+    this.files.update((files) => files.filter((_, i) => i !== index));
   }
 }

@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  input,
+  output,
+} from '@angular/core';
 
 import { SvgXIcon } from '@semantic-icons/lucide-icons';
 
@@ -19,15 +25,15 @@ import { ScFilePreview } from './file-preview';
         <div class="flex w-full flex-col gap-2">
           <div class="flex flex-col gap-px">
             <p class="line-clamp-1 text-sm font-medium text-foreground/80">
-              {{ file.name }}
+              {{ file().name }}
             </p>
             <p class="text-xs text-muted-foreground">
-              {{ formatBytes(file.size) }}
+              {{ formatBytes(file().size) }}
             </p>
           </div>
 
-          @if (progress) {
-            <sc-progress [value]="progress" />
+          @if (progress()) {
+            <sc-progress [value]="progress()" />
           }
         </div>
       </div>
@@ -40,7 +46,7 @@ import { ScFilePreview } from './file-preview';
           variant="outline"
           size="icon"
         >
-          <svg-x-icon class="size-4" aria-hidden="true" />
+          <svg-x-icon class="size-4" (click)="remove()" aria-hidden="true" />
           <span class="sr-only">Remove file</span>
         </button>
       </div>
@@ -51,9 +57,15 @@ import { ScFilePreview } from './file-preview';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScFileCard {
-  progress = 30;
+  index = input.required<number>();
+  file = input.required<File>();
+  progress = input.required<number>();
+  removed = output<number>();
+  remove() {
+    this.removed.emit(0);
+  }
 
-  file = { name: 'a name', size: 55 };
+  //TODO
 
   isFileWithPreview(file: any) {
     return true;
