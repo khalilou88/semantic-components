@@ -19,7 +19,7 @@ import { ScImage } from './image';
   template: `
     <div class="grid w-full max-w-sm items-center gap-1.5">
       <label sc-label for="picture">Picture</label>
-      <input id="picture" sc-input type="file" onChange="handleFileChange()" />
+      <input id="picture" (change)="handleFileChange($event)" sc-input type="file" />
       @if (selectedFile()) {
         <div class="mt-2">
           <img
@@ -48,8 +48,12 @@ export class ScFileUpload {
 
   selectedFile = signal<unknown>(undefined);
 
-  handleFileChange = (e: { target: { files: any[] } }) => {
-    const file = e.target.files[0];
+  handleFileChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    const files = target.files as FileList;
+    console.log(files);
+
+    const file = files[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -57,5 +61,5 @@ export class ScFileUpload {
       };
       reader.readAsDataURL(file);
     }
-  };
+  }
 }
