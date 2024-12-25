@@ -9,9 +9,11 @@ import {
 import { cn } from '@semantic-components/utils';
 import { SvgUploadIcon } from '@semantic-icons/lucide-icons';
 
+import { ScFileCard } from './file-card';
+
 @Component({
   selector: 'sc-file-uploader',
-  imports: [SvgUploadIcon],
+  imports: [SvgUploadIcon, ScFileCard],
   template: `
     <div class="relative flex flex-col gap-6 overflow-hidden">
       <!-- Dropzone -->
@@ -43,8 +45,8 @@ import { SvgUploadIcon } from '@semantic-icons/lucide-icons';
 
       <div class="h-fit w-full px-3">
         <div class="flex max-h-48 flex-col gap-4">
-          @for (item of files; track $index) {
-            <div>File</div>
+          @for (file of files; track $index) {
+            <sc-file-card file="file" />
           }
         </div>
       </div>
