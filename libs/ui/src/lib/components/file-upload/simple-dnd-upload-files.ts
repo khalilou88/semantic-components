@@ -114,6 +114,13 @@ export class ScSimpleDndUploadFiles {
 
   handleChange(event: any) {
     const file = event.target.files[0] as File;
+
+    if (this.allowedFileTypes.indexOf(file?.type) === -1) {
+      alert('File type is not allowed.');
+      this.handleRemovesFile();
+      return;
+    }
+
     this.fileUrl = URL.createObjectURL(file);
     this.uploadFile = file;
   }
@@ -128,6 +135,8 @@ export class ScSimpleDndUploadFiles {
   }
 
   handleUploadFile() {
-    // logic to upload file
+    this.isUploading = true;
+
+    // your API service logic to upload file
   }
 }
