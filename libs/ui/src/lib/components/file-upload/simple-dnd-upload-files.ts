@@ -1,12 +1,13 @@
-import { NgStyle } from '@angular/common';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  ViewChild,
   ViewEncapsulation,
+  computed,
   inject,
+  signal,
+  viewChild,
 } from '@angular/core';
 
 import { DataService } from './data-service';
@@ -15,7 +16,7 @@ const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/png', 'image/svg+xml'];
 
 @Component({
   selector: 'sc-simple-dnd-upload-files',
-  imports: [NgStyle],
+  imports: [],
   template: `
     <div class="flex flex-col items-center px-6 pt-[100px] bg-gray-50 h-lvh w-lvw">
       <h1 class="leading-none text-4xl font-bold mb-[50px]">Drag and Drop Files Upload</h1>
@@ -30,7 +31,6 @@ const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/png', 'image/svg+xml'];
             #fileInput
             [accept]="allowedFileTypes"
             (change)="handleChange($event)"
-            (drop)="handleDrop($event)"
             type="file"
           />
 
@@ -70,31 +70,43 @@ const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/png', 'image/svg+xml'];
         <!-- End Drop Zone -->
 
         <!-- Start Preview Image -->
-        @if (fileUrl && uploadFile) {
+        @if (fileUrl()) {
           <div
             class="flex flex-col justify-end border w-[350px] h-[350px] rounded-2xl items-center relative bg-cover bg-center overflow-hidden bg-gray-300"
-            [ngStyle]="{ 'background-image': 'url(' + fileUrl + ')' }"
           >
+            <img [src]="fileUrl()" />
             <div class="flex flex-col w-full p-4 bg-white">
-              <p class="mb-6">{{ uploadFile.name }}</p>
+              <p class="mb-6">{{ file()?.name }}</p>
 
               <div class="flex gap-3 justify-start">
-                <button
-                  class="text-sm font-medium w-[50%] border border-blue-500 px-4 py-3 bg-blue-500 text-blue-50 rounded-lg hover:bg-blue-600 ease-in-out disabled:bg-gray-300 disabled:border-gray-300"
-                  [disabled]="isUploading"
-                  (click)="handleUploadFile()"
-                  type="button"
-                >
-                  {{ !isUploading ? 'UPLOAD' : 'UPLOADING...' }}
-                </button>
+                @if (status() === 'success') {
+                  <button
+                    class="text-sm font-medium w-[50%] border border-blue-500 px-4 py-3 bg-blue-500 text-blue-50 rounded-lg hover:bg-blue-600 ease-in-out disabled:bg-gray-300 disabled:border-gray-300"
+                    [disabled]="status() === 'uploading'"
+                    (click)="uploadFile()"
+                    type="button"
+                  >
+                    {{ status() === 'uploading' ? 'UPLOADING...' : 'UPLOAD' }}
+                  </button>
+                }
+
                 <button
                   class="text-sm font-medium w-[50%] border border-red-500 px-4 py-3 rounded-lg text-red-500 hover:bg-red-500 hover:text-white ease-in-out"
-                  [disabled]="isUploading"
-                  (click)="handleRemovesFile()"
+                  [disabled]="status() === 'uploading'"
+                  (click)="removeFile()"
                   type="button"
                 >
                   REMOVE
                 </button>
+
+                @if (status() === 'uploading') {
+                  <button
+                    class="text-sm font-medium w-[50%] border border-red-500 px-4 py-3 rounded-lg text-red-500 hover:bg-red-500 hover:text-white ease-in-out"
+                    type="button"
+                  >
+                    Cancel
+                  </button>
+                }
               </div>
             </div>
           </div>
@@ -109,78 +121,67 @@ const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/png', 'image/svg+xml'];
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSimpleDndUploadFiles {
-  @ViewChild('fileInput', { static: false }) fileInput!: ElementRef;
+  file = signal<File | null | undefined>(undefined);
+  fileUrl = computed<string | null | undefined>(() => {
+    const file = this.file();
+    if (file) {
+      return URL.createObjectURL(file);
+    }
+
+    // return null or undefined
+    return file;
+  });
+
+  fileInput = viewChild.required<ElementRef<HTMLInputElement>>('fileInput');
 
   allowedFileTypes = ALLOWED_FILE_TYPES;
 
-  isUploading = false;
-  fileUrl!: string | null;
-  uploadFile!: File | null;
+  status = signal<'init' | 'uploading' | 'success' | 'error'>('init');
+  uploadProgress = signal(0);
 
   handleChange(event: any) {
-    console.log('handleChange');
-    console.log(event);
-
     const file = event.target.files[0] as File;
 
     if (this.allowedFileTypes.indexOf(file?.type) === -1) {
       alert('File type is not allowed.');
-      this.handleRemovesFile();
+      this.removeFile();
       return;
     }
 
-    this.fileUrl = URL.createObjectURL(file);
-    this.uploadFile = file;
+    this.file.set(file);
   }
 
-  handleDrop(event: any) {
-    console.log('handleDrop');
-    console.log(event);
-  }
-
-  handleRemovesFile() {
-    if (this.fileInput.nativeElement) {
-      this.fileInput.nativeElement.value = null;
-    }
-
-    this.uploadFile = null;
-    this.fileUrl = null;
-  }
-
-  handleUploadFile() {
-    this.isUploading = true;
-
-    // your API service logic to upload file
+  removeFile() {
+    this.fileInput().nativeElement.value = '';
+    this.file.set(null);
   }
 
   dataService = inject(DataService);
-  fileProgress = 0;
-  fileInProgress = false;
-  uploadSuccess = false;
-  uploadFail = false;
 
-  uploadFile2(file: File): void {
+  uploadFile(): void {
+    const file = this.file();
+
+    if (!file) {
+      //TODO add message error
+      return;
+    }
+
+    this.status.set('uploading');
+
     const formData = new FormData();
     formData.append('file', file);
 
-    this.dataService.uploadFile(formData).subscribe(
-      (event) => {
-        if (event.type === HttpEventType.UploadProgress) {
-          if (event.total) {
-            this.fileProgress = Math.round((100 * event.loaded) / event.total);
-          } else {
-            console.warn('event.total is undefined');
-          }
-        } else if (event instanceof HttpResponse) {
-          this.fileProgress = 100;
-          this.fileInProgress = false;
-          this.uploadSuccess = true;
+    this.dataService.uploadFile(formData).subscribe((event) => {
+      if (event.type === HttpEventType.UploadProgress) {
+        if (event.total) {
+          this.uploadProgress.set(Math.round((100 * event.loaded) / event.total));
+        } else {
+          console.warn('event.total is undefined');
         }
-      },
-      // (err) => {
-      //   console.log('Could not upload the file!');
-      //   this.uploadFail = true;
-      // },
-    );
+      } else if (event instanceof HttpResponse) {
+        this.uploadProgress.set(100);
+        this.status.set('success');
+      }
+    });
   }
 }
