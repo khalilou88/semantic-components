@@ -23,6 +23,7 @@ import { formatBytes } from './utils';
       <div [class]="_class()">
         <input
           class="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
+          [multiple]="multiple()"
           (change)="handleFileChange($event)"
           accept="image/*"
           tabindex="-1"
@@ -69,6 +70,8 @@ export class ScFileUploader {
   maxSize = input<number>(1024 * 1024 * 2);
   maxFiles = input<number>(1);
   files = signal<ScFile[]>([]);
+
+  multiple = computed(() => this.maxFiles() > 1);
 
   readonly class = input<string>('');
 
