@@ -1,13 +1,22 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { ScFileUpload } from '@semantic-components/ui';
+import { ScFileUpload, ScFileUploader } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-file-upload-page',
-  imports: [ScFileUpload],
+  imports: [ScFileUpload, ScFileUploader],
   template: `
     <div class="m-10">
       <sc-file-upload />
+
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+
+      <sc-file-uploader />
     </div>
   `,
   styles: ``,
