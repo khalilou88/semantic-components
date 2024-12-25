@@ -18,7 +18,7 @@ import { ScFileCard } from './file-card';
     <div class="relative flex flex-col gap-6 overflow-hidden">
       <!-- Dropzone -->
       <div [class]="_class()">
-        <input (change)="handleFileChange($event)" />
+        <input (change)="handleFileChange($event)" type="file" />
 
         @if (isDragActive()) {
           <div class="flex flex-col items-center justify-center gap-4 sm:px-5">
