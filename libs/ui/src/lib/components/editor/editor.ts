@@ -25,6 +25,7 @@ import { ScSeparator } from '../separator';
 import { scArticleClasses } from '../typography';
 import { ScEditorRedo } from './actions/editor-redo';
 import { ScEditorUndo } from './actions/editor-undo';
+import { ScEditorUnsetLink } from './actions/editor-unset-link';
 import { ScEditorGroup } from './editor-group';
 import { ScEditorToolbar } from './editor-toolbar';
 import { ScExtensionBlockquote } from './extensions/extension-blockquote';
@@ -77,6 +78,7 @@ import { ScExtensions } from './extensions/extensions';
     ScExtensionHeading,
     ScExtensionTable,
     ScEditorToolbar,
+    ScEditorUnsetLink,
   ],
   template: `
     <sc-editor-toolbar>
@@ -89,6 +91,7 @@ import { ScExtensions } from './extensions/extensions';
         <sc-extension-underline />
         <sc-extension-highlight />
         <sc-extension-link />
+        <sc-editor-unset-link />
         <sc-extension-text-style />
         <sc-extension-color />
         <sc-extension-font-family />
