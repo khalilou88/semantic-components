@@ -7,8 +7,8 @@ import { cn } from '@semantic-components/utils';
   exportAs: 'scDropZone',
   host: {
     '[class]': '_class()',
-    '(dragover)': 'handleDragOver()',
-    '(dragleave)': 'handleDragLeave()',
+    '(dragover)': 'handleDragOver($event)',
+    '(dragleave)': 'handleDragLeave($event)',
   },
 })
 export class ScDropZone {
@@ -28,11 +28,21 @@ export class ScDropZone {
     ),
   );
 
-  handleDragOver() {
-    this.isDragActive.set(true);
+  handleDragOver(event: DragEvent) {
+    if (this.isDisabled()) {
+      event.preventDefault();
+      event.stopPropagation();
+    } else {
+      this.isDragActive.set(true);
+    }
   }
 
-  handleDragLeave() {
-    this.isDragActive.set(false);
+  handleDragLeave(event: DragEvent) {
+    if (this.isDisabled()) {
+      event.preventDefault();
+      event.stopPropagation();
+    } else {
+      this.isDragActive.set(false);
+    }
   }
 }
