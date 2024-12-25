@@ -15,6 +15,7 @@ import { cn } from '@semantic-components/utils';
 import { SvgUploadIcon } from '@semantic-icons/lucide-icons';
 import { catchError, throwError } from 'rxjs';
 
+import { ScAspectRatio } from '../aspect-ratio';
 import { ScButton } from '../button';
 import { ScProgress } from '../progress';
 import { DataService } from './data-service';
@@ -23,7 +24,7 @@ import { formatBytes } from './utils';
 
 @Component({
   selector: 'sc-single-file-uploader',
-  imports: [ScProgress, SvgUploadIcon, ScDropZone, ScButton],
+  imports: [ScProgress, SvgUploadIcon, ScDropZone, ScButton, ScAspectRatio],
   template: `
     @if (!fileUrl()) {
       <!-- Dropzone -->
@@ -62,7 +63,7 @@ import { formatBytes } from './utils';
 
     <!-- Start Preview Image -->
     @if (fileUrl()) {
-      <img [src]="fileUrl()" />
+      <sc-aspect-ratio [src]="fileUrl() ?? ''" ratio="16 / 9" alt="" />
 
       <p>{{ file()?.name }}</p>
 

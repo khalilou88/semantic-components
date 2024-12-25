@@ -25,7 +25,13 @@ import { ScFileUpload, ScFileUploader, ScSingleFileUploader } from '@semantic-co
       <br />
       <br />
 
-      <sc-single-file-uploader />
+      <sc-single-file-uploader class="w-[400px] h-[400px]" />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   `,
   styles: ``,
