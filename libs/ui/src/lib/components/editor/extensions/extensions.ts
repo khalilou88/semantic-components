@@ -14,11 +14,18 @@ export class ScExtensions {
   unsetLink = signal<boolean>(false);
   link = computed(() => this.setLink() || this.unsetLink());
 
+  //text align extenstion
+  textAlignRight = signal<boolean>(false);
+  textAlignLeft = signal<boolean>(false);
+  textAlignCenter = signal<boolean>(false);
+  textAlign = computed(
+    () => this.textAlignRight() || this.textAlignLeft() || this.textAlignCenter(),
+  );
+
   //
   highlight = signal<boolean>(false);
   color = signal<boolean>(false);
   underline = signal<boolean>(false);
-  textAlign = signal<boolean>(false);
   fontFamily = signal<boolean>(false);
   bold = signal<boolean>(false);
   youtube = signal<boolean>(false);
