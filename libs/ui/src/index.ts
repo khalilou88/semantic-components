@@ -49,3 +49,4 @@ export * from './lib/components/sidebar';
 export * from './lib/components/autocomplete';
 export * from './lib/components/time-picker';
 export * from './lib/components/separator';
+export * from './lib/components/file-upload';

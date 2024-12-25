@@ -1,4 +1,3 @@
-import { NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -13,20 +12,22 @@ import { cn } from '@semantic-components/utils';
 
 @Component({
   selector: 'sc-aspect-ratio',
-  imports: [NgOptimizedImage],
+  //TODO don't work with preview image
+  // imports: [NgOptimizedImage],
+  imports: [],
   template: `
     <div [class]="wrapperClass()" [style]="wrapperStyle()">
       @if (priority()) {
         <img
           [class]="imageClasses()"
-          [ngSrc]="src()"
+          [src]="src()"
           [alt]="alt()"
           [style]="imageStyle()"
           fill
           priority
         />
       } @else {
-        <img [class]="imageClasses()" [ngSrc]="src()" [alt]="alt()" [style]="imageStyle()" fill />
+        <img [class]="imageClasses()" [src]="src()" [alt]="alt()" [style]="imageStyle()" fill />
       }
     </div>
   `,
