@@ -172,6 +172,7 @@ export class ScSimpleDndUploadFiles {
             console.warn('event.total is undefined');
           }
         } else if (event instanceof HttpResponse) {
+          this.fileProgress = 100;
           this.fileInProgress = false;
           this.uploadSuccess = true;
         }
