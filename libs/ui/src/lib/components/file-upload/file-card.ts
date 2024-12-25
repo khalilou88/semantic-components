@@ -40,13 +40,13 @@ import { ScFilePreview } from './file-preview';
       <div class="flex items-center gap-2">
         <button
           class="size-7"
-          (click)="onRemove()"
+          (click)="remove()"
           sc-button
           type="button"
           variant="outline"
           size="icon"
         >
-          <svg-x-icon class="size-4" (click)="remove()" aria-hidden="true" />
+          <svg-x-icon class="size-4" aria-hidden="true" />
           <span class="sr-only">Remove file</span>
         </button>
       </div>
@@ -62,17 +62,13 @@ export class ScFileCard {
   progress = input.required<number>();
   removed = output<number>();
   remove() {
-    this.removed.emit(0);
+    this.removed.emit(this.index());
   }
 
   //TODO
-
   isFileWithPreview(file: any) {
     return true;
   }
-
-  onRemove() {}
-
   formatBytes(a: any) {
     return a;
   }
