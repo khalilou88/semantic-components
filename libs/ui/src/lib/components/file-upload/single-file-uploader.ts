@@ -12,7 +12,7 @@ import {
 
 import { catchError, throwError } from 'rxjs';
 
-import { ScProgress } from '../progress/progress';
+import { ScProgress } from '../progress';
 import { DataService } from './data-service';
 
 const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/png', 'image/svg+xml'];
