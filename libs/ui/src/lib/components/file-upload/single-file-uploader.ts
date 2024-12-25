@@ -160,6 +160,10 @@ export class ScSingleFileUploader {
   }
 
   removeFile() {
+    if (this.fileInput()) {
+      this.fileInput().nativeElement.value = '';
+    }
+
     this.file.set(null);
     this.status.set('init');
   }
@@ -191,7 +195,6 @@ export class ScSingleFileUploader {
           return throwError(() => new Error('Oops! Something went wrong. Please try again later.'));
         }),
       )
-
       .subscribe((event) => {
         if (event.type === HttpEventType.UploadProgress) {
           if (event.total) {
