@@ -25,7 +25,7 @@ import { ScFileUpload, ScFileUploader, ScSingleFileUploader } from '@semantic-co
       <br />
       <br />
 
-      <sc-single-file-uploader class="w-[400px] h-[400px]" />
+      <sc-single-file-uploader class="size-[400px]" />
       <br />
       <br />
       <br />
