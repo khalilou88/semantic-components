@@ -61,43 +61,41 @@ import { formatBytes } from './utils';
 
     <!-- Start Preview Image -->
     @if (fileUrl()) {
-      <div class="flex flex-col w-full p-4 bg-white">
-        <img class="mb-6" [src]="fileUrl()" />
+      <img [src]="fileUrl()" />
 
-        <p class="mb-6">{{ file()?.name }}</p>
+      <p>{{ file()?.name }}</p>
 
-        <sc-progress class="mb-6" [value]="uploadProgress()" />
+      <sc-progress [value]="uploadProgress()" />
 
-        <div class="flex gap-3 justify-start">
+      <div class="flex gap-3 justify-start">
+        <button
+          class="text-sm font-medium w-[50%] border border-red-500 px-4 py-3 rounded-lg text-red-500 hover:bg-red-500 hover:text-white ease-in-out"
+          [disabled]="status() === 'uploading'"
+          (click)="removeFile()"
+          type="button"
+        >
+          Remove
+        </button>
+
+        @if (status() === 'init' || status() === 'error') {
           <button
-            class="text-sm font-medium w-[50%] border border-red-500 px-4 py-3 rounded-lg text-red-500 hover:bg-red-500 hover:text-white ease-in-out"
+            class="text-sm font-medium w-[50%] border border-blue-500 px-4 py-3 bg-blue-500 text-blue-50 rounded-lg hover:bg-blue-600 ease-in-out disabled:bg-gray-300 disabled:border-gray-300"
             [disabled]="status() === 'uploading'"
-            (click)="removeFile()"
+            (click)="uploadFile()"
             type="button"
           >
-            Remove
+            Upload
           </button>
+        }
 
-          @if (status() === 'init' || status() === 'error') {
-            <button
-              class="text-sm font-medium w-[50%] border border-blue-500 px-4 py-3 bg-blue-500 text-blue-50 rounded-lg hover:bg-blue-600 ease-in-out disabled:bg-gray-300 disabled:border-gray-300"
-              [disabled]="status() === 'uploading'"
-              (click)="uploadFile()"
-              type="button"
-            >
-              Upload
-            </button>
-          }
-
-          @if (status() === 'uploading') {
-            <button
-              class="text-sm font-medium w-[50%] border border-red-500 px-4 py-3 rounded-lg text-red-500 hover:bg-red-500 hover:text-white ease-in-out"
-              type="button"
-            >
-              Cancel
-            </button>
-          }
-        </div>
+        @if (status() === 'uploading') {
+          <button
+            class="text-sm font-medium w-[50%] border border-red-500 px-4 py-3 rounded-lg text-red-500 hover:bg-red-500 hover:text-white ease-in-out"
+            type="button"
+          >
+            Cancel
+          </button>
+        }
       </div>
     }
     <!-- End Preview Image -->
