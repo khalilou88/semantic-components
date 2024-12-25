@@ -16,6 +16,7 @@ export * from './lib/components/progress';
 export * from './lib/components/sheet';
 export * from './lib/components/breadcrumb';
 export * from './lib/components/toggle';
+export * from './lib/components/toggle-group';
 export * from './lib/components/dialog';
 export * from './lib/components/alert';
 export * from './lib/components/alert-dialog';
