@@ -1,11 +1,15 @@
 import { NgStyle } from '@angular/common';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
   ViewChild,
   ViewEncapsulation,
+  inject,
 } from '@angular/core';
+
+import { DataService } from './data-service';
 
 const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/png', 'image/svg+xml'];
 
@@ -147,5 +151,35 @@ export class ScSimpleDndUploadFiles {
     this.isUploading = true;
 
     // your API service logic to upload file
+  }
+
+  dataService = inject(DataService);
+  fileProgress = 0;
+  fileInProgress = false;
+  uploadSuccess = false;
+  uploadFail = false;
+
+  uploadFile2(file: File): void {
+    const formData = new FormData();
+    formData.append('key', file);
+
+    this.dataService.uploadFile(formData).subscribe(
+      (event) => {
+        if (event.type === HttpEventType.UploadProgress) {
+          if (event.total) {
+            this.fileProgress = Math.round((100 * event.loaded) / event.total);
+          } else {
+            console.warn('event.total is undefined');
+          }
+        } else if (event instanceof HttpResponse) {
+          this.fileInProgress = false;
+          this.uploadSuccess = true;
+        }
+      },
+      // (err) => {
+      //   console.log('Could not upload the file!');
+      //   this.uploadFail = true;
+      // },
+    );
   }
 }
