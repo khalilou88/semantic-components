@@ -1,6 +1,5 @@
 export interface ScFile {
-  type: string;
-  name: string;
-  size: string;
+  file: File;
+  progress: number;
   preview: string;
 }

@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  computed,
   input,
   output,
 } from '@angular/core';
@@ -11,6 +12,7 @@ import { SvgXIcon } from '@semantic-icons/lucide-icons';
 import { ScButton } from '../button';
 import { ScProgress } from '../progress';
 import { ScFilePreview } from './file-preview';
+import { formatBytes } from './utils';
 
 @Component({
   selector: 'sc-file-card',
@@ -28,7 +30,7 @@ import { ScFilePreview } from './file-preview';
               {{ file().name }}
             </p>
             <p class="text-xs text-muted-foreground">
-              {{ formatBytes(file().size) }}
+              {{ formatedSize() }}
             </p>
           </div>
 
@@ -62,12 +64,9 @@ export class ScFileCard {
   progress = input.required<number>();
   preview = input.required<string>();
   removed = output<number>();
+  formatedSize = computed(() => formatBytes(this.file().size));
+
   remove() {
     this.removed.emit(this.index());
-  }
-
-  //TODO
-  formatBytes(a: any) {
-    return a;
   }
 }

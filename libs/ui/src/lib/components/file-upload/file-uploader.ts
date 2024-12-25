@@ -11,6 +11,7 @@ import { cn } from '@semantic-components/utils';
 import { SvgUploadIcon } from '@semantic-icons/lucide-icons';
 
 import { ScFileCard } from './file-card';
+import { formatBytes } from './utils';
 
 @Component({
   selector: 'sc-file-uploader',
@@ -22,6 +23,8 @@ import { ScFileCard } from './file-card';
         <input
           class="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
           (change)="handleFileChange($event)"
+          accept="image/*"
+          tabindex="-1"
           type="file"
         />
 
@@ -41,7 +44,7 @@ import { ScFileCard } from './file-card';
               <p class="font-medium text-muted-foreground">
                 Drag 'n' drop your files here, or click to select files
               </p>
-              <p class="text-sm text-muted-foreground/70">You can upload {{ f() }}</p>
+              <p class="text-sm text-muted-foreground/70">You can upload {{ uploadInfo() }}</p>
             </div>
           </div>
         }
@@ -68,14 +71,15 @@ import { ScFileCard } from './file-card';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScFileUploader {
-  isDragActive = input(false);
-  isDisabled = input(false);
-
-  acceptedFiles = '';
-
+  maxSize = input<number>(1024 * 1024 * 2);
+  maxFiles = input<number>(1);
   files = signal<File[]>([]);
 
   readonly class = input<string>('');
+
+  //TODO
+  isDragActive = input(false);
+  isDisabled = input(false);
 
   protected readonly _class = computed(() =>
     cn(
@@ -87,17 +91,15 @@ export class ScFileUploader {
     ),
   );
 
-  maxFileCount = 4;
-  maxSize = 5;
-
-  f() {
-    return this.maxFileCount > 1
-      ? ` ${this.maxFileCount} files (up to ${this.formatBytes(this.maxSize)} each)`
-      : ` a file with ${this.formatBytes(this.maxSize)}`;
+  uploadInfo() {
+    return this.maxFiles() > 1
+      ? ` ${this.maxFiles()} files (up to ${formatBytes(this.maxSize())} each)`
+      : ` a file with ${formatBytes(this.maxSize())}`;
   }
 
-  formatBytes(a: any) {
-    return `${a} MB`;
+  onRemove(index: number) {
+    if (!this.files) return;
+    this.files.update((files) => files.filter((_, i) => i !== index));
   }
 
   handleFileChange(event: Event) {
@@ -122,10 +124,5 @@ export class ScFileUploader {
       };
       reader.readAsArrayBuffer(file);
     });
-  }
-
-  onRemove(index: number) {
-    if (!this.files) return;
-    this.files.update((files) => files.filter((_, i) => i !== index));
   }
 }
