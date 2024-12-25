@@ -62,12 +62,11 @@ import { formatBytes } from './utils';
     <!-- Start Preview Image -->
     @if (fileUrl()) {
       <div class="flex flex-col w-full p-4 bg-white">
-        <img [src]="fileUrl()" />
+        <img class="mb-6" [src]="fileUrl()" />
 
         <p class="mb-6">{{ file()?.name }}</p>
 
-        <sc-progress [value]="uploadProgress()" />
-        <br />
+        <sc-progress class="mb-6" [value]="uploadProgress()" />
 
         <div class="flex gap-3 justify-start">
           <button
