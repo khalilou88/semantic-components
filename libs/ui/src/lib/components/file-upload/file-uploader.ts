@@ -15,6 +15,7 @@ import { SvgUploadIcon } from '@semantic-icons/lucide-icons';
   imports: [SvgUploadIcon],
   template: `
     <div class="relative flex flex-col gap-6 overflow-hidden">
+      <!-- Dropzone -->
       <div class="_class()">
         <input />
 
@@ -39,6 +40,15 @@ import { SvgUploadIcon } from '@semantic-icons/lucide-icons';
           </div>
         }
       </div>
+      <!-- fin Dropzone -->
+
+      <div class="h-fit w-full px-3">
+        <div class="flex max-h-48 flex-col gap-4">
+          @for (item of files; track $index) {
+            <div>File</div>
+          }
+        </div>
+      </div>
     </div>
   `,
   styles: ``,
@@ -46,6 +56,8 @@ import { SvgUploadIcon } from '@semantic-icons/lucide-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScFileUploader {
+  files = [];
+
   isDragActive = signal(false);
   isDisabled = signal(false);
 
