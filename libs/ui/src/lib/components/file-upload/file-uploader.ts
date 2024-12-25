@@ -23,9 +23,7 @@ import { SvgUploadIcon } from '@semantic-icons/lucide-icons';
             <div class="rounded-full border border-dashed p-3">
               <svg-upload-icon class="size-7 text-muted-foreground" aria-hidden="true" />
             </div>
-            <p class="font-medium text-muted-foreground">
-              Drag 'n' drop your files here, or click to select files
-            </p>
+            <p class="font-medium text-muted-foreground">Drop the files here</p>
           </div>
         } @else {
           <div class="flex flex-col items-center justify-center gap-4 sm:px-5">
@@ -34,9 +32,9 @@ import { SvgUploadIcon } from '@semantic-icons/lucide-icons';
             </div>
             <div class="flex flex-col gap-px">
               <p class="font-medium text-muted-foreground">
-                drop files here, or click to select files
+                Drag 'n' drop your files here, or click to select files
               </p>
-              <p class="text-sm text-muted-foreground/70">You can upload rrrrrrrr</p>
+              <p class="text-sm text-muted-foreground/70">You can upload {{ f() }}</p>
             </div>
           </div>
         }
@@ -57,7 +55,7 @@ import { SvgUploadIcon } from '@semantic-icons/lucide-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScFileUploader {
-  isDragActive = input(true);
+  isDragActive = input(false);
   isDisabled = input(false);
 
   acceptedFiles = '';
@@ -75,4 +73,17 @@ export class ScFileUploader {
       this.class(),
     ),
   );
+
+  maxFileCount = 4;
+  maxSize = 5;
+
+  f() {
+    return this.maxFileCount > 1
+      ? ` ${this.maxFileCount} files (up to ${this.formatBytes(this.maxSize)} each)`
+      : ` a file with ${this.formatBytes(this.maxSize)}`;
+  }
+
+  formatBytes(a: any) {
+    return `${a} MB`;
+  }
 }
