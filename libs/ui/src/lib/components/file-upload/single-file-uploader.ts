@@ -30,7 +30,7 @@ import { formatBytes } from './utils';
       <!-- Dropzone -->
       <div #scDropZone="scDropZone" scDropZone>
         <input
-          class="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
+          class="absolute left-0 top-0 size-full cursor-pointer opacity-0"
           (change)="handleFileChange($event)"
           accept="image/*"
           tabindex="-1"
@@ -69,7 +69,7 @@ import { formatBytes } from './utils';
 
       <sc-progress [value]="uploadProgress()" />
 
-      <div class="flex gap-3 justify-start">
+      <div class="flex justify-start gap-3">
         <button
           [disabled]="status() === 'uploading'"
           (click)="removeFile()"
