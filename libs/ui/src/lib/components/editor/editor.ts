@@ -94,11 +94,11 @@ import { ScExtensions } from './extensions/extensions';
         <sc-extension-italic />
         <sc-extension-underline />
         <sc-extension-highlight />
-        <sc-extension-link />
-        <sc-editor-unset-link />
         <sc-extension-text-style />
         <sc-extension-color />
         <sc-extension-font-family />
+        <sc-extension-link />
+        <sc-editor-unset-link />
         <sc-separator class="h-5" orientation="vertical" />
         <sc-editor-text-align-left />
         <sc-editor-text-align-center />

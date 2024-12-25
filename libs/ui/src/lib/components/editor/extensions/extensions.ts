@@ -14,7 +14,7 @@ export class ScExtensions {
   unsetLink = signal<boolean>(false);
   link = computed(() => this.setLink() || this.unsetLink());
 
-  //text align extenstion
+  //text align extension
   textAlignRight = signal<boolean>(false);
   textAlignLeft = signal<boolean>(false);
   textAlignCenter = signal<boolean>(false);
