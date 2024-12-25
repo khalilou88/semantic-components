@@ -26,6 +26,7 @@ const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/png', 'image/svg+xml'];
             #fileInput
             [accept]="allowedFileTypes"
             (change)="handleChange($event)"
+            (drop)="handleDrop($event)"
             type="file"
           />
 
@@ -113,6 +114,9 @@ export class ScSimpleDndUploadFiles {
   uploadFile!: File | null;
 
   handleChange(event: any) {
+    console.log('handleChange');
+    console.log(event);
+
     const file = event.target.files[0] as File;
 
     if (this.allowedFileTypes.indexOf(file?.type) === -1) {
@@ -123,6 +127,11 @@ export class ScSimpleDndUploadFiles {
 
     this.fileUrl = URL.createObjectURL(file);
     this.uploadFile = file;
+  }
+
+  handleDrop(event: any) {
+    console.log('handleDrop');
+    console.log(event);
   }
 
   handleRemovesFile() {
