@@ -24,6 +24,9 @@ import Text from '@tiptap/extension-text';
 import { ScSeparator } from '../separator';
 import { scArticleClasses } from '../typography';
 import { ScEditorRedo } from './actions/editor-redo';
+import { ScEditorTextAlignCenter } from './actions/editor-text-align-center';
+import { ScEditorTextAlignLeft } from './actions/editor-text-align-left';
+import { ScEditorTextAlignRight } from './actions/editor-text-align-right';
 import { ScEditorUndo } from './actions/editor-undo';
 import { ScEditorUnsetLink } from './actions/editor-unset-link';
 import { ScEditorGroup } from './editor-group';
@@ -44,7 +47,6 @@ import { ScExtensionOrderedList } from './extensions/extension-ordered-list';
 import { ScExtensionParagraph } from './extensions/extension-paragraph';
 import { ScExtensionStrike } from './extensions/extension-strike';
 import { ScExtensionTable } from './extensions/extension-table';
-import { ScExtensionTextAlignAction } from './extensions/extension-text-align';
 import { ScExtensionTextStyle } from './extensions/extension-text-style';
 import { ScExtensionUnderline } from './extensions/extension-underline';
 import { ScExtensionYoutube } from './extensions/extension-youtube';
@@ -67,7 +69,6 @@ import { ScExtensions } from './extensions/extensions';
     ScExtensionBlockquote,
     ScExtensionBulletList,
     ScExtensionOrderedList,
-    ScExtensionTextAlignAction,
     ScExtensionTextStyle,
     ScExtensionParagraph,
     ScSeparator,
@@ -79,6 +80,9 @@ import { ScExtensions } from './extensions/extensions';
     ScExtensionTable,
     ScEditorToolbar,
     ScEditorUnsetLink,
+    ScEditorTextAlignRight,
+    ScEditorTextAlignLeft,
+    ScEditorTextAlignCenter,
   ],
   template: `
     <sc-editor-toolbar>
@@ -96,7 +100,9 @@ import { ScExtensions } from './extensions/extensions';
         <sc-extension-color />
         <sc-extension-font-family />
         <sc-separator class="h-5" orientation="vertical" />
-        <sc-extension-text-align />
+        <sc-editor-text-align-left />
+        <sc-editor-text-align-center />
+        <sc-editor-text-align-right />
       </sc-editor-group>
 
       <sc-editor-group>
