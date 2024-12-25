@@ -7,6 +7,7 @@ import {
   signal,
 } from '@angular/core';
 
+import { cn } from '@semantic-components/utils';
 import { SvgUploadIcon } from '@semantic-icons/lucide-icons';
 
 import { ScDropZone } from './drop-zone';
@@ -18,55 +19,62 @@ import { formatBytes } from './utils';
   selector: 'sc-file-uploader',
   imports: [SvgUploadIcon, ScFileCard, ScDropZone],
   template: `
-    <div class="relative flex flex-col gap-6 overflow-hidden">
-      <!-- Dropzone -->
-      <div #scDropZone="scDropZone" scDropZone>
-        <input
-          class="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
-          [multiple]="multiple()"
-          (change)="handleFileChange($event)"
-          accept="image/*"
-          tabindex="-1"
-          type="file"
-        />
+    <!-- Dropzone -->
+    <div #scDropZone="scDropZone" scDropZone>
+      <input
+        class="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
+        [multiple]="multiple()"
+        (change)="handleFileChange($event)"
+        accept="image/*"
+        tabindex="-1"
+        type="file"
+      />
 
-        @if (scDropZone.isDragActive()) {
-          <div class="flex flex-col items-center justify-center gap-4 sm:px-5">
-            <div class="rounded-full border border-dashed p-3">
-              <svg-upload-icon class="size-7 text-muted-foreground" aria-hidden="true" />
-            </div>
-            <p class="font-medium text-muted-foreground">Drop the files here</p>
+      @if (scDropZone.isDragActive()) {
+        <div class="flex flex-col items-center justify-center gap-4 sm:px-5">
+          <div class="rounded-full border border-dashed p-3">
+            <svg-upload-icon class="size-7 text-muted-foreground" aria-hidden="true" />
           </div>
-        } @else {
-          <div class="flex flex-col items-center justify-center gap-4 sm:px-5">
-            <div class="rounded-full border border-dashed p-3">
-              <svg-upload-icon class="size-7 text-muted-foreground" aria-hidden="true" />
-            </div>
-            <div class="flex flex-col gap-px">
-              <p class="font-medium text-muted-foreground">
-                Drag 'n' drop your files here, or click to select files
-              </p>
-              <p class="text-sm text-muted-foreground/70">You can upload {{ uploadInfo() }}</p>
-            </div>
-          </div>
-        }
-      </div>
-      <!-- fin Dropzone -->
-
-      <div class="h-fit w-full px-3">
-        <div class="flex max-h-48 flex-col gap-4">
-          @for (file of files(); track $index; let index = $index) {
-            <sc-file-card [file]="file" [index]="index" (removed)="onRemove($event)" />
-          }
+          <p class="font-medium text-muted-foreground">Drop the files here</p>
         </div>
+      } @else {
+        <div class="flex flex-col items-center justify-center gap-4 sm:px-5">
+          <div class="rounded-full border border-dashed p-3">
+            <svg-upload-icon class="size-7 text-muted-foreground" aria-hidden="true" />
+          </div>
+          <div class="flex flex-col gap-px">
+            <p class="font-medium text-muted-foreground">
+              Drag 'n' drop your files here, or click to select files
+            </p>
+            <p class="text-sm text-muted-foreground/70">You can upload {{ uploadInfo() }}</p>
+          </div>
+        </div>
+      }
+    </div>
+    <!-- fin Dropzone -->
+
+    <div class="h-fit w-full px-3">
+      <div class="flex max-h-48 flex-col gap-4">
+        @for (file of files(); track $index; let index = $index) {
+          <sc-file-card [file]="file" [index]="index" (removed)="onRemove($event)" />
+        }
       </div>
     </div>
   `,
+  host: {
+    '[class]': '_class()',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScFileUploader {
+  readonly class = input<string>('');
+
+  protected readonly _class = computed(() =>
+    cn('relative flex flex-col gap-6 overflow-hidden', this.class()),
+  );
+
   maxSize = input<number>(1024 * 1024 * 2);
   maxFiles = input<number>(1);
   files = signal<ScFile[]>([]);
