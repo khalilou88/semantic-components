@@ -7,6 +7,11 @@ export const appRoutes: Route[] = [
     title: 'Sidebar Page',
   },
   {
+    path: 'file-upload',
+    loadComponent: () => import('./pages/file-upload-page'),
+    title: 'File Upload Page',
+  },
+  {
     path: 'separator',
     loadComponent: () => import('./pages/separator-page'),
     title: 'Separator Page',
