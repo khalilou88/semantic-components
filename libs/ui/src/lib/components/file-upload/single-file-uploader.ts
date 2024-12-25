@@ -18,7 +18,7 @@ import { DataService } from './data-service';
 const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/png', 'image/svg+xml'];
 
 @Component({
-  selector: 'sc-simple-dnd-upload-files',
+  selector: 'sc-single-file-uploader',
   imports: [ScProgress],
   template: `
     <div class="flex flex-col items-center px-6 pt-[100px] bg-gray-50 h-lvh w-lvw">
@@ -128,7 +128,7 @@ const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/png', 'image/svg+xml'];
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSimpleDndUploadFiles {
+export class ScSingleFileUploader {
   file = signal<File | null | undefined>(undefined);
   fileUrl = computed<string | null | undefined>(() => {
     const file = this.file();
