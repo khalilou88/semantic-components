@@ -10,13 +10,16 @@ import {
   viewChild,
 } from '@angular/core';
 
+import { catchError, throwError } from 'rxjs';
+
+import { ScProgress } from '../progress/progress';
 import { DataService } from './data-service';
 
 const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/png', 'image/svg+xml'];
 
 @Component({
   selector: 'sc-simple-dnd-upload-files',
-  imports: [],
+  imports: [ScProgress],
   template: `
     <div class="flex flex-col items-center px-6 pt-[100px] bg-gray-50 h-lvh w-lvw">
       <h1 class="leading-none text-4xl font-bold mb-[50px]">Drag and Drop Files Upload</h1>
@@ -79,6 +82,9 @@ const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/png', 'image/svg+xml'];
             <img [src]="fileUrl()" />
             <div class="flex flex-col w-full p-4 bg-white">
               <p class="mb-6">{{ file()?.name }}</p>
+
+              <sc-progress [value]="uploadProgress()" />
+              <br />
 
               <div class="flex gap-3 justify-start">
                 <button
@@ -173,17 +179,30 @@ export class ScSimpleDndUploadFiles {
     const formData = new FormData();
     formData.append('file', file);
 
-    this.dataService.uploadFile(formData).subscribe((event) => {
-      if (event.type === HttpEventType.UploadProgress) {
-        if (event.total) {
-          this.uploadProgress.set(Math.round((100 * event.loaded) / event.total));
-        } else {
-          console.warn('event.total is undefined');
+    this.dataService
+      .uploadFile(formData)
+
+      .pipe(
+        catchError((error) => {
+          this.status.set('error');
+          // Quality control catches the problem
+          console.error('Delivery problem:', error);
+          // Send an apology note or fix the issue
+          return throwError(() => new Error('Oops! Something went wrong. Please try again later.'));
+        }),
+      )
+
+      .subscribe((event) => {
+        if (event.type === HttpEventType.UploadProgress) {
+          if (event.total) {
+            this.uploadProgress.set(Math.round((100 * event.loaded) / event.total));
+          } else {
+            console.warn('event.total is undefined');
+          }
+        } else if (event instanceof HttpResponse) {
+          this.uploadProgress.set(100);
+          this.status.set('success');
         }
-      } else if (event instanceof HttpResponse) {
-        this.uploadProgress.set(100);
-        this.status.set('success');
-      }
-    });
+      });
   }
 }
