@@ -125,7 +125,9 @@ export class ScSingleFileUploader {
 
   fileInput = viewChild.required<ElementRef<HTMLInputElement>>('fileInput');
 
+  //TODO make status a linked signal with file
   status = signal<'init' | 'uploading' | 'success' | 'error'>('init');
+
   uploadProgress = signal(0);
 
   maxSize = input<number>(1024 * 1024 * 2);
