@@ -11,6 +11,7 @@ import { SvgXIcon } from '@semantic-icons/lucide-icons';
 
 import { ScButton } from '../button';
 import { ScProgress } from '../progress';
+import { ScFile } from './file';
 import { ScFilePreview } from './file-preview';
 import { formatBytes } from './utils';
 
@@ -20,22 +21,22 @@ import { formatBytes } from './utils';
   template: `
     <div class="relative flex items-center gap-2.5">
       <div class="flex flex-1 gap-2.5">
-        @if (preview()) {
-          <sc-file-preview [file]="file()" [preview]="preview()" />
+        @if (file().preview) {
+          <sc-file-preview [file]="file()" />
         }
 
         <div class="flex w-full flex-col gap-2">
           <div class="flex flex-col gap-px">
             <p class="line-clamp-1 text-sm font-medium text-foreground/80">
-              {{ file().name }}
+              {{ file().file.name }}
             </p>
             <p class="text-xs text-muted-foreground">
               {{ formatedSize() }}
             </p>
           </div>
 
-          @if (progress()) {
-            <sc-progress [value]="progress()" />
+          @if (file().progress) {
+            <sc-progress [value]="file().progress" />
           }
         </div>
       </div>
@@ -60,11 +61,9 @@ import { formatBytes } from './utils';
 })
 export class ScFileCard {
   index = input.required<number>();
-  file = input.required<File>();
-  progress = input.required<number>();
-  preview = input.required<string>();
+  file = input.required<ScFile>();
   removed = output<number>();
-  formatedSize = computed(() => formatBytes(this.file().size));
+  formatedSize = computed(() => formatBytes(this.file().file.size));
 
   remove() {
     this.removed.emit(this.index());

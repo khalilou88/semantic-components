@@ -2,15 +2,17 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@a
 
 import { SvgFileTextIcon } from '@semantic-icons/lucide-icons';
 
+import { ScFile } from './file';
+
 @Component({
   selector: 'sc-file-preview',
   imports: [SvgFileTextIcon],
   template: `
-    @if (file().type.startsWith('image/')) {
+    @if (file().file.type.startsWith('image/')) {
       <img
         class="aspect-square shrink-0 rounded-md object-cover"
-        [src]="preview()"
-        [alt]="file().name"
+        [src]="file().preview"
+        [alt]="file().file.name"
         width="48"
         height="48"
         loading="lazy"
@@ -24,6 +26,5 @@ import { SvgFileTextIcon } from '@semantic-icons/lucide-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScFilePreview {
-  file = input.required<File>();
-  preview = input.required<string>();
+  file = input.required<ScFile>();
 }

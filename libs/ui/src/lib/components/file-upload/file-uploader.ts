@@ -10,6 +10,7 @@ import {
 import { cn } from '@semantic-components/utils';
 import { SvgUploadIcon } from '@semantic-icons/lucide-icons';
 
+import { ScFile } from './file';
 import { ScFileCard } from './file-card';
 import { formatBytes } from './utils';
 
@@ -53,14 +54,8 @@ import { formatBytes } from './utils';
 
       <div class="h-fit w-full px-3">
         <div class="flex max-h-48 flex-col gap-4">
-          @for (file of files(); track $index; let idx = $index) {
-            <sc-file-card
-              [file]="file"
-              [index]="idx"
-              [preview]="''"
-              [progress]="30"
-              (removed)="onRemove($event)"
-            />
+          @for (file of files(); track $index; let index = $index) {
+            <sc-file-card [file]="file" [index]="index" (removed)="onRemove($event)" />
           }
         </div>
       </div>
@@ -73,7 +68,7 @@ import { formatBytes } from './utils';
 export class ScFileUploader {
   maxSize = input<number>(1024 * 1024 * 2);
   maxFiles = input<number>(1);
-  files = signal<File[]>([]);
+  files = signal<ScFile[]>([]);
 
   readonly class = input<string>('');
 
@@ -105,12 +100,8 @@ export class ScFileUploader {
   handleFileChange(event: Event) {
     const target = event.target as HTMLInputElement;
     const files = target.files as FileList;
-    console.log(files);
 
     const acceptedFiles = Array.from(files);
-
-    //TODO
-    this.files.set(acceptedFiles);
 
     acceptedFiles.forEach((file) => {
       const reader = new FileReader();
@@ -118,9 +109,11 @@ export class ScFileUploader {
       reader.onabort = () => console.log('file reading was aborted');
       reader.onerror = () => console.log('file reading has failed');
       reader.onload = () => {
-        // Do whatever you want with the file contents
         const binaryStr = reader.result;
-        console.log(binaryStr);
+
+        const scFile: ScFile = { file: file, progress: 33, preview: binaryStr };
+
+        this.files.update((files) => [...files, scFile]);
       };
       reader.readAsArrayBuffer(file);
     });
