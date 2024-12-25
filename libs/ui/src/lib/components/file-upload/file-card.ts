@@ -18,7 +18,7 @@ import { ScFilePreview } from './file-preview';
   template: `
     <div class="relative flex items-center gap-2.5">
       <div class="flex flex-1 gap-2.5">
-        @if (isFileWithPreview(file)) {
+        @if (preview()) {
           <sc-file-preview file="file" />
         }
 
@@ -60,15 +60,13 @@ export class ScFileCard {
   index = input.required<number>();
   file = input.required<File>();
   progress = input.required<number>();
+  preview = input.required<boolean>();
   removed = output<number>();
   remove() {
     this.removed.emit(this.index());
   }
 
   //TODO
-  isFileWithPreview(file: any) {
-    return true;
-  }
   formatBytes(a: any) {
     return a;
   }
