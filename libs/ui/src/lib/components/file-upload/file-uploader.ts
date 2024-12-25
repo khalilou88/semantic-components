@@ -46,7 +46,7 @@ import { ScFileCard } from './file-card';
       <div class="h-fit w-full px-3">
         <div class="flex max-h-48 flex-col gap-4">
           @for (file of files; track $index) {
-            <sc-file-card file="file" />
+            <sc-file-card (onRemove)="onRemove($event)" file="file" />
           }
         </div>
       </div>
@@ -108,5 +108,12 @@ export class ScFileUploader {
       };
       reader.readAsArrayBuffer(file);
     });
+  }
+
+  onRemove(index: Event) {
+    if (!this.files) return;
+    // const newFiles = this.files.filter((_, i) => i !== index);
+    // setFiles(newFiles);
+    // onValueChange?.(newFiles);
   }
 }
