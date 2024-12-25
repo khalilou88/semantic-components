@@ -18,7 +18,7 @@ import { ScFileCard } from './file-card';
     <div class="relative flex flex-col gap-6 overflow-hidden">
       <!-- Dropzone -->
       <div [class]="_class()">
-        <input />
+        <input (change)="handleFileChange($event)" />
 
         @if (isDragActive()) {
           <div class="flex flex-col items-center justify-center gap-4 sm:px-5">
@@ -87,5 +87,26 @@ export class ScFileUploader {
 
   formatBytes(a: any) {
     return `${a} MB`;
+  }
+
+  handleFileChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    const files = target.files as FileList;
+    console.log(files);
+
+    const acceptedFiles = Array.from(files);
+
+    acceptedFiles.forEach((file) => {
+      const reader = new FileReader();
+
+      reader.onabort = () => console.log('file reading was aborted');
+      reader.onerror = () => console.log('file reading has failed');
+      reader.onload = () => {
+        // Do whatever you want with the file contents
+        const binaryStr = reader.result;
+        console.log(binaryStr);
+      };
+      reader.readAsArrayBuffer(file);
+    });
   }
 }
