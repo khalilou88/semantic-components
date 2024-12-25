@@ -9,7 +9,7 @@ import {
 import { cn } from '@semantic-components/utils';
 
 @Component({
-  selector: 'sc-menu-group',
+  selector: 'img[sc-image]',
   imports: [],
   template: `
     <ng-content />
@@ -21,7 +21,7 @@ import { cn } from '@semantic-components/utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScMenuGroup {
+export class ScImage {
   readonly class = input<string>('');
 
   protected readonly _class = computed(() => cn('', this.class()));
