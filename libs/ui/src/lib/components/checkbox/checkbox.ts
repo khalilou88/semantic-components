@@ -92,7 +92,7 @@ export class ScCheckbox implements ControlValueAccessor {
     return this.checked() ? 'checked' : 'unchecked';
   });
 
-  private host = inject(ElementRef);
+  private readonly host = inject(ElementRef);
 
   constructor() {
     effect(() => {
