@@ -9,11 +9,15 @@ export class ScExtensions {
   redo = signal<boolean>(false);
   history = computed(() => this.undo() || this.redo());
 
+  //link extension
+  setLink = signal<boolean>(false);
+  unsetLink = signal<boolean>(false);
+  link = computed(() => this.setLink() || this.unsetLink());
+
   //
   highlight = signal<boolean>(false);
   color = signal<boolean>(false);
   underline = signal<boolean>(false);
-  link = signal<boolean>(false);
   textAlign = signal<boolean>(false);
   fontFamily = signal<boolean>(false);
   bold = signal<boolean>(false);
