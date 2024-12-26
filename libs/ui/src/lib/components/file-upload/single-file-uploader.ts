@@ -162,11 +162,8 @@ export class ScSingleFileUploader {
 
     this.status.set('uploading');
 
-    const formData = new FormData();
-    formData.append('file', file);
-
     this.dataService
-      .uploadFile(formData)
+      .uploadFile(file)
 
       .pipe(
         catchError((error) => {
