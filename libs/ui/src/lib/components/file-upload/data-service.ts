@@ -34,7 +34,7 @@ export class DataService {
 
     const headers = new HttpHeaders({
       'Content-Type': 'multipart/form-data',
-      ...this.supabase['headers'],
+      ...this.supabase.auth['headers'],
     });
 
     return this.http.post(
