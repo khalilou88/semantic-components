@@ -12,9 +12,9 @@ import { cn } from '@semantic-components/utils';
   },
 })
 export class ScDropZone {
-  isDragActive = signal(false);
+  readonly isDragActive = signal(false);
 
-  isDisabled = input(false);
+  readonly isDisabled = input(false);
 
   readonly class = input<string>('');
 
