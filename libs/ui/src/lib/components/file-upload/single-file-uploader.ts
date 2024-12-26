@@ -2,13 +2,12 @@ import { HttpEventType, HttpResponse } from '@angular/common/http';
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   ViewEncapsulation,
   computed,
   inject,
   input,
+  linkedSignal,
   signal,
-  viewChild,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
@@ -124,10 +123,12 @@ export class ScSingleFileUploader {
     return file;
   });
 
-  fileInput = viewChild.required<ElementRef<HTMLInputElement>>('fileInput');
-
-  //TODO make status a linked signal with file
-  status = signal<'init' | 'uploading' | 'success' | 'error'>('init');
+  status = linkedSignal<File | null | undefined, 'init' | 'uploading' | 'success' | 'error'>({
+    source: this.file,
+    computation: () => {
+      return 'init';
+    },
+  });
 
   uploadProgress = signal(0);
 
@@ -146,12 +147,7 @@ export class ScSingleFileUploader {
   }
 
   removeFile() {
-    if (this.fileInput()) {
-      this.fileInput().nativeElement.value = '';
-    }
-
     this.file.set(null);
-    this.status.set('init');
   }
 
   dataService = inject(DataService);
