@@ -35,8 +35,9 @@ import { formatBytes } from './utils';
             </p>
           </div>
 
-          @if (file().progress) {
-            <sc-progress [value]="file().progress" />
+          @let p = progress();
+          @if (p) {
+            <sc-progress [value]="p" />
           }
         </div>
       </div>
@@ -62,6 +63,7 @@ import { formatBytes } from './utils';
 export class ScFileCard {
   index = input.required<number>();
   file = input.required<ScFile>();
+  progress = input<number | undefined>(undefined);
   removed = output<number>();
   formatedSize = computed(() => formatBytes(this.file().file.size));
 
