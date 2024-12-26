@@ -10,6 +10,7 @@ import {
   signal,
 } from '@angular/core';
 
+import { DataService } from '@semantic-components/supabase';
 import { cn } from '@semantic-components/utils';
 import { SvgUploadIcon } from '@semantic-icons/lucide-icons';
 import { catchError, throwError } from 'rxjs';
@@ -17,7 +18,6 @@ import { catchError, throwError } from 'rxjs';
 import { ScAspectRatio } from '../aspect-ratio';
 import { ScButton } from '../button';
 import { ScProgress } from '../progress';
-import { DataService } from './data-service';
 import { ScDropZone } from './drop-zone';
 import { formatBytes } from './utils';
 
@@ -106,6 +106,8 @@ import { formatBytes } from './utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSingleFileUploader {
+  dataService = inject(DataService);
+
   readonly class = input<string>('');
 
   protected readonly _class = computed(() =>
@@ -149,8 +151,6 @@ export class ScSingleFileUploader {
   removeFile() {
     this.file.set(null);
   }
-
-  dataService = inject(DataService);
 
   uploadFile(): void {
     const file = this.file();
