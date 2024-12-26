@@ -56,7 +56,12 @@ import { formatBytes } from './utils';
     <div class="h-fit w-full px-3">
       <div class="flex max-h-48 flex-col gap-4">
         @for (file of files(); track $index; let index = $index) {
-          <sc-file-card [file]="file" [index]="index" (removed)="onRemove($event)" />
+          <sc-file-card
+            [file]="file"
+            [index]="index"
+            [progress]="progresses()?.[file.file.name]"
+            (removed)="onRemove($event)"
+          />
         }
       </div>
     </div>
@@ -81,6 +86,8 @@ export class ScFileUploader {
 
   multiple = computed(() => this.maxFiles() > 1);
 
+  progresses = input<Record<string, number>>();
+
   uploadInfo() {
     return this.maxFiles() > 1
       ? ` ${this.maxFiles()} files (up to ${formatBytes(this.maxSize())} each)`
@@ -102,7 +109,7 @@ export class ScFileUploader {
       const reader = new FileReader();
 
       reader.onloadend = () => {
-        const scFile: ScFile = { file: file, progress: 33, preview: reader.result };
+        const scFile: ScFile = { file: file, preview: reader.result };
 
         this.files.update((files) => [...files, scFile]);
       };
