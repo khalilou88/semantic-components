@@ -1,12 +1,13 @@
-import { BooleanInput } from '@angular/cdk/coercion';
+import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  booleanAttribute,
   computed,
   inject,
   input,
-  output,
+  signal,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
@@ -45,21 +46,28 @@ import { ScRadioGroupState } from './radio-group-state';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScRadioItem {
-  state = inject(ScRadioGroupState);
+  private readonly state = inject(ScRadioGroupState);
 
-  id = input.required<string>();
+  protected readonly id = signal<string>(inject(_IdGenerator).getId('sc-radio-item-'));
 
-  value = input.required<string>();
-
-  checked = computed(() => {
-    return this.value() === this.state.selectedValue();
-  });
-
-  name = computed(() => {
+  protected readonly name = computed(() => {
     return this.state.name();
   });
 
-  disabled = input<BooleanInput>(false);
+  readonly value = input.required<string>();
+
+  protected readonly checked = computed(() => {
+    return this.value() === this.state.selectedValue();
+  });
+
+  readonly disabledByInput = input<boolean, unknown>(false, {
+    alias: 'disabled',
+    transform: booleanAttribute,
+  });
+  readonly disabled = computed(() => this.disabledByInput() || this.state.disabled());
+
+  readonly class = input<string>('');
+  protected readonly _class = computed(() => cn('flex items-center space-x-2', this.class()));
 
   readonly inputClass = input<string>('');
   protected readonly _inputClass = computed(() =>
@@ -70,9 +78,6 @@ export class ScRadioItem {
     ),
   );
 
-  readonly class = input<string>('');
-  protected readonly _class = computed(() => cn('flex items-center space-x-2', this.class()));
-
   protected readonly svgWrapperClass = input<string>(
     'row-start-1 col-start-1 h-4 w-4 flex items-center justify-center',
   );
@@ -81,8 +86,6 @@ export class ScRadioItem {
   protected readonly _svgClass = computed(() =>
     cn('h-2.5 w-2.5 fill-primary text-primary', this.svgClass()),
   );
-
-  radioChecked = output<void>();
 
   toggle() {
     if (this.disabled()) {
