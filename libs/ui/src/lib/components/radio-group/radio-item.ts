@@ -4,15 +4,12 @@ import {
   Component,
   ViewEncapsulation,
   computed,
-  inject,
   input,
   output,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
 import { SvgCircleIcon } from '@semantic-icons/lucide-icons';
-
-import { ScRadioGroupState } from './radio-group-state';
 
 @Component({
   selector: 'sc-radio-item',
@@ -27,7 +24,7 @@ import { ScRadioGroupState } from './radio-group-state';
         type="radio"
       />
 
-      @if (checked() === true) {
+      @if (isChecked() === true) {
         <span [class]="svgWrapperClass()">
           <svg-circle-icon [class]="_svgClass()" />
         </span>
@@ -45,19 +42,17 @@ import { ScRadioGroupState } from './radio-group-state';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScRadioItem {
-  state = inject(ScRadioGroupState);
-
   id = input.required<string>();
 
   value = input.required<string>();
 
-  checked = computed(() => {
-    return this.value() === this.state.selectedValue();
+  protected readonly isChecked = computed(() => {
+    return this.value() === this.selectedValue();
   });
 
-  name = computed(() => {
-    return this.state.name();
-  });
+  selectedValue = input('');
+
+  name = input('');
 
   disabled = input<BooleanInput>(false);
 
@@ -82,13 +77,13 @@ export class ScRadioItem {
     cn('h-2.5 w-2.5 fill-primary text-primary', this.svgClass()),
   );
 
-  radioChecked = output<void>();
+  checked = output<string>();
 
   toggle() {
     if (this.disabled()) {
       return;
     }
 
-    this.state.selectedValue.set(this.value());
+    this.checked.emit(this.value());
   }
 }

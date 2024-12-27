@@ -11,12 +11,11 @@ import {
   inject,
   input,
   model,
+  signal,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { cn } from '@semantic-components/utils';
-
-import { ScRadioGroupState } from './radio-group-state';
 
 @Component({
   selector: 'sc-radio-group',
@@ -25,7 +24,7 @@ import { ScRadioGroupState } from './radio-group-state';
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': '_class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -36,18 +35,22 @@ import { ScRadioGroupState } from './radio-group-state';
       useExisting: forwardRef(() => ScRadioGroup),
       multi: true,
     },
-    ScRadioGroupState,
   ],
 })
 export class ScRadioGroup implements ControlValueAccessor {
-  state = inject(ScRadioGroupState);
   private readonly _cdr = inject(ChangeDetectorRef);
 
-  class = input<string>('');
+  readonly class = input<string>('');
 
-  classes = computed(() => cn('grid gap-2', this.class()));
+  protected readonly _class = computed(() => cn('grid gap-2', this.class()));
 
-  disabled = input(false, { transform: booleanAttribute });
+  private readonly disabledByCva = signal(false);
+  readonly disabledByInput = input<boolean, unknown>(false, {
+    alias: 'disabled',
+    transform: booleanAttribute,
+  });
+
+  disabled = computed(() => this.disabledByInput() || this.disabledByCva());
 
   name = input<string>('');
 
@@ -56,24 +59,11 @@ export class ScRadioGroup implements ControlValueAccessor {
   constructor() {
     afterNextRender(() => {
       if (this.value !== undefined) {
-        this.state.selectedValue.set(this.value());
+        this.value.set(this.value());
       }
     });
 
-    effect(() => {
-      if (this.disabled() === true || this.disabled() === false) {
-        this.state.disabled.set(this.disabled());
-      }
-
-      if (this.name()) {
-        this.state.name.set(this.name());
-      }
-
-      const v = this.state.selectedValue();
-      if (v !== undefined) {
-        this.setValue(v);
-      }
-    });
+    effect(() => {});
   }
 
   setValue(newValue: string) {
@@ -83,7 +73,7 @@ export class ScRadioGroup implements ControlValueAccessor {
   }
 
   writeValue(value: string): void {
-    this.state.selectedValue.set(value);
+    this.value.set(value);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -100,6 +90,6 @@ export class ScRadioGroup implements ControlValueAccessor {
   }
 
   setDisabledState?(isDisabled: boolean): void {
-    this.state.disabled.set(isDisabled);
+    this.disabledByCva.set(isDisabled);
   }
 }
