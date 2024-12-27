@@ -44,20 +44,22 @@ export type ButtonVariants = VariantProps<typeof buttonVariants>;
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScButton {
-  variant = input<ButtonVariants['variant']>('primary');
+  readonly variant = input<ButtonVariants['variant']>('primary');
 
-  size = input<ButtonVariants['size']>('default');
+  readonly size = input<ButtonVariants['size']>('default');
 
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() =>
-    cn(buttonVariants({ variant: this.variant(), size: this.size() }), this.class()),
+  protected readonly class = computed(() =>
+    cn(buttonVariants({ variant: this.variant(), size: this.size() }), this.classInput()),
   );
 }

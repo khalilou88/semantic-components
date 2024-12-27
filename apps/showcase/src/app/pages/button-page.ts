@@ -42,6 +42,14 @@ import {
     <button sc-button variant="ghost" type="button" disabled>Ghost</button>
     <button sc-button variant="link" type="button" disabled>Link</button>
 
+    <h1>Disabled Links</h1>
+    <a sc-button type="button" disabled>Primary</a>
+    <a sc-button variant="secondary" type="button" disabled>Secondary</a>
+    <a sc-button variant="destructive" type="button" disabled>Destructive</a>
+    <a sc-button variant="outline" type="button" disabled>Outline</a>
+    <a sc-button variant="ghost" type="button" disabled>Ghost</a>
+    <a sc-button variant="link" type="button" disabled>Link</a>
+
     <h1>Icon</h1>
     <button sc-button type="button" size="icon">
       <svg-chevron-right-icon />
