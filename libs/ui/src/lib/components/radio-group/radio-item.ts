@@ -19,17 +19,25 @@ import { ScRadioGroupState } from './radio-group-state';
   imports: [SvgCircleIcon],
   template: `
     <div class="grid grid-cols-[1fr]">
-      <input [id]="id()" [class]="classes()" [disabled]="disabled()" [name]="name()" type="radio" />
+      <input
+        [id]="id()"
+        [class]="_inputClass()"
+        [disabled]="disabled()"
+        [name]="name()"
+        type="radio"
+      />
 
       @if (checked() === true) {
-        <svg-circle-icon [class]="circleHostClass()" [svgClass]="circleClasses()" />
+        <span [class]="svgWrapperClass()">
+          <svg-circle-icon [class]="_svgClass()" />
+        </span>
       }
     </div>
 
     <label [for]="id()" sc-label><ng-content /></label>
   `,
   host: {
-    '[class]': 'hostClasses()',
+    '[class]': '_class()',
     '(click)': 'toggle()',
   },
   styles: ``,
@@ -53,26 +61,26 @@ export class ScRadioItem {
 
   disabled = input<BooleanInput>(false);
 
-  class = input<string>('row-start-1 col-start-1');
-
-  classes = computed(() =>
+  readonly inputClass = input<string>('');
+  protected readonly _inputClass = computed(() =>
     cn(
+      'row-start-1 col-start-1',
       'appearance-none aspect-square h-4 w-4 rounded-full border border-primary text-primary ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
-      this.class(),
+      this.inputClass(),
     ),
   );
 
-  hostClass = input<string>('');
+  readonly class = input<string>('');
+  protected readonly _class = computed(() => cn('flex items-center space-x-2', this.class()));
 
-  hostClasses = computed(() => cn('flex items-center space-x-2', this.hostClass()));
-
-  circleHostClass = input<string>(
+  protected readonly svgWrapperClass = input<string>(
     'row-start-1 col-start-1 h-4 w-4 flex items-center justify-center',
   );
 
-  circleClass = input<string>('');
-
-  circleClasses = computed(() => cn('h-2.5 w-2.5 fill-primary text-primary', this.circleClass()));
+  readonly svgClass = input<string>('');
+  protected readonly _svgClass = computed(() =>
+    cn('h-2.5 w-2.5 fill-primary text-primary', this.svgClass()),
+  );
 
   radioChecked = output<void>();
 
