@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  booleanAttribute,
   computed,
   input,
 } from '@angular/core';
@@ -10,7 +11,7 @@ import { cn } from '@semantic-components/utils';
 import { VariantProps, cva } from 'class-variance-authority';
 
 export const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0',
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0',
   {
     variants: {
       variant: {
@@ -45,6 +46,7 @@ export type ButtonVariants = VariantProps<typeof buttonVariants>;
   `,
   host: {
     '[class]': 'class()',
+    '[attr.data-disabled]': 'disabled()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -62,4 +64,8 @@ export class ScButton {
   protected readonly class = computed(() =>
     cn(buttonVariants({ variant: this.variant(), size: this.size() }), this.classInput()),
   );
+
+  readonly disabled = input<boolean, unknown>(false, {
+    transform: booleanAttribute,
+  });
 }
