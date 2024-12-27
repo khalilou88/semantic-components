@@ -1,11 +1,14 @@
-import { BooleanInput } from '@angular/cdk/coercion';
+import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  booleanAttribute,
   computed,
+  inject,
   input,
   output,
+  signal,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
@@ -42,19 +45,22 @@ import { SvgCircleIcon } from '@semantic-icons/lucide-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScRadioItem {
-  id = input.required<string>();
+  protected id = signal<string>(inject(_IdGenerator).getId('sc-radio-item-'));
+  name = signal('');
+  value = input.required<string | undefined>();
+  selectedValue = signal<string | undefined>(undefined);
+  checked = output<string | undefined>();
 
-  value = input.required<string>();
+  readonly radioGroupDisabled = signal(false);
+  readonly disabledByInput = input<boolean, unknown>(false, {
+    alias: 'disabled',
+    transform: booleanAttribute,
+  });
+  readonly disabled = computed(() => this.disabledByInput() || this.radioGroupDisabled());
 
   protected readonly isChecked = computed(() => {
     return this.value() === this.selectedValue();
   });
-
-  selectedValue = input('');
-
-  name = input('');
-
-  disabled = input<BooleanInput>(false);
 
   readonly inputClass = input<string>('');
   protected readonly _inputClass = computed(() =>
@@ -76,8 +82,6 @@ export class ScRadioItem {
   protected readonly _svgClass = computed(() =>
     cn('h-2.5 w-2.5 fill-primary text-primary', this.svgClass()),
   );
-
-  checked = output<string>();
 
   toggle() {
     if (this.disabled()) {

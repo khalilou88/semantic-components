@@ -6,7 +6,7 @@ import {
   afterNextRender,
   booleanAttribute,
   computed,
-  effect,
+  contentChildren,
   forwardRef,
   inject,
   input,
@@ -16,6 +16,8 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { cn } from '@semantic-components/utils';
+
+import { ScRadioItem } from './radio-item';
 
 @Component({
   selector: 'sc-radio-group',
@@ -56,17 +58,23 @@ export class ScRadioGroup implements ControlValueAccessor {
 
   value = model<string | undefined>(undefined);
 
+  items = contentChildren(ScRadioItem, { descendants: true });
+
   constructor() {
     afterNextRender(() => {
-      if (this.value !== undefined) {
-        this.value.set(this.value());
+      for (const item of this.items()) {
+        item.name.set(this.name());
+        item.selectedValue.set(this.value());
+        item.radioGroupDisabled.set(this.disabled());
+
+        item.checked.subscribe((value) => {
+          this.setValue(value);
+        });
       }
     });
-
-    effect(() => {});
   }
 
-  setValue(newValue: string) {
+  setValue(newValue: string | undefined) {
     this.value.set(newValue);
     this.onChange(newValue);
     this._cdr.markForCheck();
