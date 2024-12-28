@@ -255,7 +255,6 @@ export class ScSelect implements ControlValueAccessor {
   }
 
   /** Handles keyboard events while the overlay is open. */
-  /** Handles keyboard events while the overlay is open. */
   private _handleKeydown(event: KeyboardEvent): void {
     const key = event.key;
 
