@@ -109,6 +109,12 @@ export class ScSelect implements ControlValueAccessor {
         this.setValue(this.selectedValue());
       }
     });
+
+    effect(() => {
+      this.keyManager.setActiveItem(
+        this.options().find((element) => element.value() === this.value())!,
+      );
+    });
   }
 
   private readonly injector = inject(Injector);
