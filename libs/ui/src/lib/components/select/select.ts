@@ -71,8 +71,6 @@ import { ScSelectState } from './select-state';
   ],
 })
 export class ScSelect implements ControlValueAccessor {
-  protected readonly id = signal<string>(inject(_IdGenerator).getId('sc-select-'));
-
   protected readonly panelId: string = inject(_IdGenerator).getId('sc-select-panel-');
 
   private readonly _cdr = inject(ChangeDetectorRef);
