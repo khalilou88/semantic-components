@@ -26,14 +26,25 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { SvgChevronDownIcon } from '@semantic-icons/lucide-icons';
+import { SvgChevronDownIcon, SvgChevronUpIcon } from '@semantic-icons/lucide-icons';
 
 import { ScOption } from './option';
+import { ScSelectContent } from './select-content';
+import { ScSelectScrollDown } from './select-scroll-down';
+import { ScSelectScrollUp } from './select-scroll-up';
 import { ScSelectState } from './select-state';
+import { ScSelectViewport } from './select-viewport';
 
 @Component({
   selector: 'sc-select',
-  imports: [SvgChevronDownIcon],
+  imports: [
+    SvgChevronDownIcon,
+    ScSelectContent,
+    ScSelectViewport,
+    ScSelectScrollUp,
+    ScSelectScrollDown,
+    SvgChevronUpIcon,
+  ],
   template: `
     <button
       class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
@@ -50,13 +61,17 @@ import { ScSelectState } from './select-state';
     </button>
 
     <ng-template #panelTemplate>
-      <ul
-        class="relative z-50 max-h-96 w-full min-w-32 overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2"
-        [id]="panelId"
-        role="listbox"
-      >
-        <ng-content />
-      </ul>
+      <div [id]="panelId" sc-select-content role="listbox">
+        <button sc-select-scroll-up type="button">
+          <svg-chevron-up-icon class="h-4 w-4" />
+        </button>
+        <div sc-select-viewport>
+          <ng-content />
+        </div>
+        <button sc-select-scroll-down type="button">
+          <svg-chevron-down-icon class="h-4 w-4" />
+        </button>
+      </div>
     </ng-template>
   `,
   styles: ``,
@@ -241,7 +256,10 @@ export class ScSelect implements ControlValueAccessor {
 
     const overlayRef = this._getOverlayRef();
 
-    overlayRef.updateSize({ width: this.scSelectTrigger().nativeElement.offsetWidth });
+    overlayRef.updateSize({
+      width: this.scSelectTrigger().nativeElement.offsetWidth,
+      minHeight: '384px',
+    });
     this._portal ??= new TemplatePortal(this._panelTemplate(), this._viewContainerRef);
     overlayRef.attach(this._portal);
   }
