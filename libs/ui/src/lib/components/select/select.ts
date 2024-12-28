@@ -250,9 +250,14 @@ export class ScSelect implements ControlValueAccessor {
 
   close(): void {
     if (this.isOpen()) {
+      this.focusOnTrigger();
       this.isOpen.set(false);
       this._overlayRef?.detach();
     }
+  }
+
+  focusOnTrigger() {
+    this.scSelectTrigger().nativeElement.focus();
   }
 
   /** Handles keyboard events while the overlay is open. */
