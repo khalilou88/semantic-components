@@ -1,7 +1,7 @@
-import { A11yModule, ActiveDescendantKeyManager, _IdGenerator } from '@angular/cdk/a11y';
+import { ActiveDescendantKeyManager, _IdGenerator } from '@angular/cdk/a11y';
 import { Directionality } from '@angular/cdk/bidi';
 import { hasModifierKey } from '@angular/cdk/keycodes';
-import { Overlay, OverlayModule, OverlayRef } from '@angular/cdk/overlay';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { _getEventTarget } from '@angular/cdk/platform';
 import { TemplatePortal } from '@angular/cdk/portal';
 import {
@@ -32,7 +32,7 @@ import { ScSelectState } from './select-state';
 
 @Component({
   selector: 'sc-select',
-  imports: [SvgChevronDownIcon, OverlayModule, A11yModule],
+  imports: [SvgChevronDownIcon],
   template: `
     <button
       class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
