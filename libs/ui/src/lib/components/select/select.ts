@@ -1,6 +1,6 @@
 import { A11yModule, ActiveDescendantKeyManager, _IdGenerator } from '@angular/cdk/a11y';
 import { Directionality } from '@angular/cdk/bidi';
-import { ENTER, ESCAPE, TAB, hasModifierKey } from '@angular/cdk/keycodes';
+import { hasModifierKey } from '@angular/cdk/keycodes';
 import { Overlay, OverlayModule, OverlayRef } from '@angular/cdk/overlay';
 import { _getEventTarget } from '@angular/cdk/platform';
 import { TemplatePortal } from '@angular/cdk/portal';
@@ -116,6 +116,9 @@ export class ScSelect implements ControlValueAccessor {
       if (option) {
         this.keyManager.setActiveItem(option);
         this.scrollOptionIntoView(option, 'center');
+      } else if (this.options().length > 0) {
+        this.keyManager.setActiveItem(this.options()[0]);
+        this.scrollOptionIntoView(this.options()[0], 'center');
       }
     });
   }
