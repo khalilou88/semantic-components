@@ -33,6 +33,8 @@ import { ScSelectState } from './select-state';
     '[class]': 'class()',
     '[attr.data-disabled]': '_disabled()',
     '[attr.data-active]': 'active()',
+    '(mouseover)': 'setActiveStyles()',
+    '(mouseleave)': 'setInactiveStyles()',
     '(click)': 'select()',
   },
   styles: ``,
@@ -48,7 +50,7 @@ export class ScOption implements Highlightable {
 
   protected readonly class = computed(() =>
     cn(
-      'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[active=true]:bg-accent data-[active=true]:text-accent-foreground data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50',
+      'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none data-[active=true]:bg-accent data-[active=true]:text-accent-foreground data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50',
       this.classInput(),
     ),
   );

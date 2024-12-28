@@ -49,6 +49,16 @@ import { ScLabel, ScOption, ScSelect } from '@semantic-components/ui';
       <sc-option value="3">3</sc-option>
       <sc-option value="4">4</sc-option>
     </sc-select>
+
+    <br />
+    <br />
+
+    <sc-select id="ids" placeholder="Select an id">
+      <sc-option value="1">1</sc-option>
+      <sc-option value="2">2</sc-option>
+      <sc-option value="3">3</sc-option>
+      <sc-option value="4">4</sc-option>
+    </sc-select>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
