@@ -1,7 +1,6 @@
-import { A11yModule } from '@angular/cdk/a11y';
+import { A11yModule, ActiveDescendantKeyManager, _IdGenerator } from '@angular/cdk/a11y';
 import { Directionality } from '@angular/cdk/bidi';
 import { ENTER, ESCAPE, TAB, hasModifierKey } from '@angular/cdk/keycodes';
-import { CdkListbox, CdkOption } from '@angular/cdk/listbox';
 import { Overlay, OverlayModule, OverlayRef } from '@angular/cdk/overlay';
 import { _getEventTarget } from '@angular/cdk/platform';
 import { TemplatePortal } from '@angular/cdk/portal';
@@ -10,11 +9,13 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  Injector,
   TemplateRef,
   ViewContainerRef,
   ViewEncapsulation,
   computed,
   contentChildren,
+  effect,
   forwardRef,
   inject,
   input,
@@ -26,21 +27,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { SvgChevronDownIcon } from '@semantic-icons/lucide-icons';
 
-import { ScListbox } from './listbox';
-import { ScListboxOption } from './listbox-option';
 import { ScOption } from './option';
+import { ScSelectState } from './select-state';
 
 @Component({
   selector: 'sc-select',
-  imports: [
-    SvgChevronDownIcon,
-    OverlayModule,
-    ScListbox,
-    ScListboxOption,
-    CdkOption,
-    CdkListbox,
-    A11yModule,
-  ],
+  imports: [SvgChevronDownIcon, OverlayModule, A11yModule],
   template: `
     <button
       class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
@@ -58,22 +50,10 @@ import { ScOption } from './option';
 
     <ng-template #panelTemplate>
       <ul
+        class="relative z-50 max-h-96 w-full min-w-32 overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2"
         [id]="_getPanelId()"
-        [cdkTrapFocusAutoCapture]="true"
-        (cdkListboxValueChange)="handleValueChange($event.value)"
-        sc-listbox
-        cdkListbox
-        cdkTrapFocus
       >
-        @for (option of options(); track $index) {
-          <li
-            [isSelected]="option.value() === this.value()"
-            [cdkOption]="option.value()"
-            sc-listbox-option
-          >
-            {{ option.label() }}
-          </li>
-        }
+        <ng-content />
       </ul>
     </ng-template>
   `,
@@ -86,12 +66,11 @@ import { ScOption } from './option';
       useExisting: forwardRef(() => ScSelect),
       multi: true,
     },
+    ScSelectState,
   ],
 })
 export class ScSelect implements ControlValueAccessor {
-  static nextId = 0;
-
-  id = 0;
+  protected readonly id = signal<string>(inject(_IdGenerator).getId('sc-select-'));
 
   _getPanelId() {
     return `panel-${this.id}`;
@@ -112,13 +91,33 @@ export class ScSelect implements ControlValueAccessor {
 
   isOpen = signal<boolean>(false);
 
-  constructor() {
-    this.id = ++ScSelect.nextId;
-  }
-
   options = contentChildren(ScOption);
 
-  value = model<unknown>(undefined);
+  private readonly state = inject(ScSelectState);
+
+  selectedValue = computed(() => this.state.selectedValue());
+
+  constructor() {
+    effect(() => {
+      if (this.state.selectedValue() === undefined) {
+        this.state.selectedValue.set(this.value());
+      }
+    });
+
+    effect(() => {
+      if (this.state.selectedValue() && this.value() !== this.state.selectedValue()) {
+        this.setValue(this.selectedValue());
+      }
+    });
+  }
+
+  private readonly injector = inject(Injector);
+  private readonly keyManager = new ActiveDescendantKeyManager(this.options, this.injector)
+    .withHomeAndEnd(true)
+    .withPageUpDown(true)
+    .withVerticalOrientation(true);
+
+  readonly value = model<unknown>(undefined);
 
   isDisabled = signal(false);
 
@@ -126,15 +125,11 @@ export class ScSelect implements ControlValueAccessor {
     this.value.set(value);
   }
 
-  handleValueChange(v: readonly unknown[]) {
-    this.setValue(v[0]);
-    this.close();
-  }
-
   setValue(value: unknown) {
     this.value.set(value);
     this._onChange(value);
     this._cdr.markForCheck();
+    this.close();
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
