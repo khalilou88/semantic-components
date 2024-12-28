@@ -59,7 +59,7 @@ export class ScOption implements Highlightable {
     ),
   );
 
-  isSelected = computed(() => this.value() === this.state.selectedValue());
+  isSelected = computed(() => this.value() === this.state.value());
 
   value = input.required<unknown>();
 
@@ -101,7 +101,7 @@ export class ScOption implements Highlightable {
     () => this.disabledByInput() || this.disabled || this.state.disabled(),
   );
 
-  toggle() {
+  protected toggle() {
     if (this.isSelected()) {
       this.deselect();
     } else {
@@ -109,19 +109,19 @@ export class ScOption implements Highlightable {
     }
   }
 
-  select() {
+  private select() {
     if (this._disabled()) {
       return;
     }
 
-    this.state.selectedValue.set(this.value());
+    this.state.value.set(this.value());
   }
 
-  deselect() {
+  private deselect() {
     if (this._disabled()) {
       return;
     }
 
-    this.state.selectedValue.set('');
+    this.state.value.set(null);
   }
 }

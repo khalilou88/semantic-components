@@ -94,24 +94,24 @@ export class ScSelect implements ControlValueAccessor {
 
   options = contentChildren(ScOption);
 
-  selectedValue = computed(() => this.state.selectedValue());
-
   private readonly activeDescendant = signal<string | null>(null);
 
   constructor() {
     effect(() => {
-      if (this.state.selectedValue() === undefined) {
-        this.state.selectedValue.set(this.value());
-
-        this.syncSelectedState(this.value(), this.options(), this.options()[0]);
+      //init
+      if (this.state.value() === undefined) {
+        this.state.value.set(this.value());
       }
     });
 
     effect(() => {
-      if (this.state.selectedValue() && this.value() !== this.state.selectedValue()) {
-        this.setValue(this.selectedValue());
-        this.syncSelectedState(this.value(), this.options(), null);
+      if (this.value() !== this.state.value()) {
+        this.setValue(this.state.value());
       }
+    });
+
+    effect(() => {
+      this.syncSelectedState(this.value(), this.options(), this.options()[0]);
     });
 
     this.keyManager.change.subscribe(() =>
@@ -273,12 +273,9 @@ export class ScSelect implements ControlValueAccessor {
 
     for (const option of options) {
       if (value && option.value() === value) {
-        option.select();
         this.scrollOptionIntoView(option, 'center');
         untracked(() => this.keyManager.setActiveItem(option));
         hasSelected = true;
-      } else {
-        option.deselect();
       }
     }
 
