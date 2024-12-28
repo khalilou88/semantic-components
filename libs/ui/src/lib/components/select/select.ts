@@ -111,10 +111,22 @@ export class ScSelect implements ControlValueAccessor {
     });
 
     effect(() => {
-      this.keyManager.setActiveItem(
-        this.options().find((element) => element.value() === this.value())!,
-      );
+      const option = this.options().find((element) => element.value() === this.value());
+
+      if (option) {
+        this.keyManager.setActiveItem(option);
+        this.scrollOptionIntoView(option, 'center');
+      }
     });
+  }
+
+  /**
+   * Scrolls an option into view.
+   * @param option Option to be scrolled into view.
+   * @param position Position to which to align the option relative to the scrollable container.
+   */
+  scrollOptionIntoView(option: ScOption, position: ScrollLogicalPosition) {
+    option.getHostElement().scrollIntoView({ block: position, inline: position });
   }
 
   private readonly injector = inject(Injector);

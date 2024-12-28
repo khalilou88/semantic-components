@@ -63,6 +63,13 @@ export class ScOption implements Highlightable {
     return this.labelEl().nativeElement.textContent?.trim() ?? '';
   });
 
+  private readonly element = inject<ElementRef<HTMLElement>>(ElementRef);
+
+  /** Gets the host DOM element. */
+  getHostElement(): HTMLElement {
+    return this.element.nativeElement;
+  }
+
   readonly active = signal(false);
 
   setActiveStyles(): void {
