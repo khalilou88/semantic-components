@@ -21,6 +21,7 @@ import {
   input,
   model,
   signal,
+  untracked,
   viewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -101,24 +102,15 @@ export class ScSelect implements ControlValueAccessor {
     effect(() => {
       if (this.state.selectedValue() === undefined) {
         this.state.selectedValue.set(this.value());
+
+        this.syncSelectedState(this.value(), this.options(), this.options()[0]);
       }
     });
 
     effect(() => {
       if (this.state.selectedValue() && this.value() !== this.state.selectedValue()) {
         this.setValue(this.selectedValue());
-      }
-    });
-
-    effect(() => {
-      const option = this.options().find((element) => element.value() === this.value());
-
-      if (option) {
-        this.keyManager.setActiveItem(option);
-        this.scrollOptionIntoView(option, 'center');
-      } else if (this.options().length > 0) {
-        this.keyManager.setActiveItem(this.options()[0]);
-        this.scrollOptionIntoView(this.options()[0], 'center');
+        this.syncSelectedState(this.value(), this.options(), null);
       }
     });
 
@@ -264,6 +256,42 @@ export class ScSelect implements ControlValueAccessor {
 
   focusOnTrigger() {
     this.scSelectTrigger().nativeElement.focus();
+  }
+
+  /**
+   * Synchronizes the internal state of the component based on a specific selected date.
+   * @param value Currently selected date.
+   * @param options Options rendered out in the timepicker.
+   * @param fallback Option to set as active if no option is selected.
+   */
+  private syncSelectedState(
+    value: unknown,
+    options: readonly ScOption[],
+    fallback: ScOption | null,
+  ): void {
+    let hasSelected = false;
+
+    for (const option of options) {
+      if (value && option.value() === value) {
+        option.select();
+        this.scrollOptionIntoView(option, 'center');
+        untracked(() => this.keyManager.setActiveItem(option));
+        hasSelected = true;
+      } else {
+        option.deselect();
+      }
+    }
+
+    // If no option was selected, we need to reset the key manager since
+    // it might be holding onto an option that no longer exists.
+    if (!hasSelected) {
+      if (fallback) {
+        untracked(() => this.keyManager.setActiveItem(fallback));
+        this.scrollOptionIntoView(fallback, 'center');
+      } else {
+        untracked(() => this.keyManager.setActiveItem(-1));
+      }
+    }
   }
 
   /** Handles keyboard events while the overlay is open. */

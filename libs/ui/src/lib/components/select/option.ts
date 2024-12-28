@@ -36,7 +36,7 @@ import { ScSelectState } from './select-state';
     '[attr.data-active]': 'active()',
     '(mouseover)': 'setActiveStyles()',
     '(mouseleave)': 'setInactiveStyles()',
-    '(click)': 'select()',
+    '(click)': 'toggle()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -101,11 +101,27 @@ export class ScOption implements Highlightable {
     () => this.disabledByInput() || this.disabled || this.state.disabled(),
   );
 
+  toggle() {
+    if (this.isSelected()) {
+      this.deselect();
+    } else {
+      this.select();
+    }
+  }
+
   select() {
     if (this._disabled()) {
       return;
     }
 
     this.state.selectedValue.set(this.value());
+  }
+
+  deselect() {
+    if (this._disabled()) {
+      return;
+    }
+
+    this.state.selectedValue.set('');
   }
 }
