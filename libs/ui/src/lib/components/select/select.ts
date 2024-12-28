@@ -255,17 +255,31 @@ export class ScSelect implements ControlValueAccessor {
   }
 
   /** Handles keyboard events while the overlay is open. */
+  /** Handles keyboard events while the overlay is open. */
   private _handleKeydown(event: KeyboardEvent): void {
-    const keyCode = event.keyCode;
+    const key = event.key;
 
-    if (keyCode === TAB) {
+    if (key === 'Tab') {
       this.close();
-    } else if (keyCode === ESCAPE && !hasModifierKey(event)) {
+    } else if (key === 'Escape' && !hasModifierKey(event)) {
       event.preventDefault();
       this.close();
-    } else if (keyCode === ENTER) {
-      //TODO for me it's mean it's was selected
-      this.close();
+    } else if (key === 'Enter') {
+      event.preventDefault();
+
+      if (this.keyManager.activeItem) {
+        this.setValue(this.keyManager.activeItem.value() ?? '');
+      } else {
+        this.close();
+      }
+    } else {
+      const previousActive = this.keyManager.activeItem;
+      this.keyManager.onKeydown(event);
+      const currentActive = this.keyManager.activeItem;
+
+      if (currentActive && currentActive !== previousActive) {
+        this.scrollOptionIntoView(currentActive, 'nearest');
+      }
     }
   }
 }
