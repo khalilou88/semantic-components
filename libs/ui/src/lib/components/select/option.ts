@@ -1,4 +1,4 @@
-import { Highlightable } from '@angular/cdk/a11y';
+import { Highlightable, _IdGenerator } from '@angular/cdk/a11y';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -30,6 +30,7 @@ import { ScSelectState } from './select-state';
     </span>
   `,
   host: {
+    '[id]': 'id()',
     '[class]': 'class()',
     '[attr.data-disabled]': '_disabled()',
     '[attr.data-active]': 'active()',
@@ -43,6 +44,9 @@ import { ScSelectState } from './select-state';
 })
 export class ScOption implements Highlightable {
   private readonly state = inject(ScSelectState);
+
+  /** The unique ID of the option. */
+  readonly id = signal<string>(inject(_IdGenerator).getId('sc-option-'));
 
   readonly classInput = input<string>('', {
     alias: 'class',

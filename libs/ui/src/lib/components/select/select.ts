@@ -71,6 +71,8 @@ import { ScSelectState } from './select-state';
   ],
 })
 export class ScSelect implements ControlValueAccessor {
+  private readonly state = inject(ScSelectState);
+
   protected readonly panelId: string = inject(_IdGenerator).getId('sc-select-panel-');
 
   private readonly _cdr = inject(ChangeDetectorRef);
@@ -91,9 +93,9 @@ export class ScSelect implements ControlValueAccessor {
 
   options = contentChildren(ScOption);
 
-  private readonly state = inject(ScSelectState);
-
   selectedValue = computed(() => this.state.selectedValue());
+
+  private readonly activeDescendant = signal<string | null>(null);
 
   constructor() {
     effect(() => {
@@ -119,6 +121,10 @@ export class ScSelect implements ControlValueAccessor {
         this.scrollOptionIntoView(this.options()[0], 'center');
       }
     });
+
+    this.keyManager.change.subscribe(() =>
+      this.activeDescendant.set(this.keyManager.activeItem?.id() ?? null),
+    );
   }
 
   /**
