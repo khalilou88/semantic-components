@@ -258,7 +258,7 @@ export class ScSelect implements ControlValueAccessor {
 
     overlayRef.updateSize({
       width: this.scSelectTrigger().nativeElement.offsetWidth,
-      minHeight: '384px',
+      maxHeight: '384px',
     });
     this._portal ??= new TemplatePortal(this._panelTemplate(), this._viewContainerRef);
     overlayRef.attach(this._portal);

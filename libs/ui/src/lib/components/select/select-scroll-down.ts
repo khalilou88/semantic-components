@@ -27,6 +27,6 @@ export class ScSelectScrollDown {
   });
 
   protected readonly class = computed(() =>
-    cn('flex cursor-default items-center justify-center py-1', this.classInput()),
+    cn('flex w-full cursor-default items-center justify-center py-1', this.classInput()),
   );
 }
