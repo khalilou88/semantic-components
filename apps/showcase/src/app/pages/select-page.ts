@@ -13,6 +13,11 @@ import { ScLabel, ScOption, ScSelect } from '@semantic-components/ui';
 
       <div class="w-[180px]">
         <sc-select id="car" formControlName="car" placeholder="Select a car">
+          <sc-option value="volvo1">Volvo1</sc-option>
+          <sc-option value="saab1">Saab1</sc-option>
+          <sc-option value="mercedes1">Mercedes1</sc-option>
+          <sc-option value="audi1">Audi1</sc-option>
+
           <sc-option value="volvo2">Volvo2</sc-option>
           <sc-option value="saab2">Saab2</sc-option>
           <sc-option value="mercedes2">Mercedes2</sc-option>
