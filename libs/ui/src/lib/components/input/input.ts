@@ -20,14 +20,16 @@ export const scInputStyles = signal(
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScInput {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn(scInputStyles(), this.class()));
+  protected readonly class = computed(() => cn(scInputStyles(), this.classInput()));
 }
