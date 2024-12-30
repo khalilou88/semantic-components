@@ -83,33 +83,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   data-state="active"
                   data-orientation="horizontal"
                 >
-                  <div class="flex items-center justify-between p-4">
-                    <button
-                      class="flex h-7 w-[145px] items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-xs shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 [&_.svg]:size-4"
-                      dir="ltr"
-                      type="button"
-                      data-state="closed"
-                    >
-                      <span class="text-muted-foreground">Style:</span>
-                      <span style="pointer-events: none;">Default</span>
-                    </button>
-                    <div class="flex items-center gap-2">
-                      <form
-                        action="javascript:throw new Error('A React form was unexpectedly submitted. If you called form.submit() manually, consider using form.requestSubmit() instead. If you're trying to use event.stopPropagation() in a submit event handler, consider also calling event.preventDefault().')"
-                      >
-                        <button
-                          class="z-50 inline-flex h-[calc(theme(spacing.7)_-_1px)] items-center justify-center gap-1 whitespace-nowrap rounded-[6px] bg-black px-3 py-2 text-xs font-medium text-white shadow transition-colors hover:bg-black hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 dark:bg-white dark:text-black [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
-                        >
-                          Open in
-                        </button>
-                      </form>
-                      <button
-                        class="relative z-10 inline-flex size-7 items-center justify-center gap-2 whitespace-nowrap rounded-md border border-input bg-background text-sm font-medium text-foreground opacity-100 shadow-sm transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
-                      >
-                        <span class="sr-only">Copy</span>
-                      </button>
-                    </div>
-                  </div>
                   <div class="theme-zinc w-full" style="--radius: 0.5rem;">
                     <div class="preview flex min-h-[350px] w-full items-center justify-center p-10">
                       <div
