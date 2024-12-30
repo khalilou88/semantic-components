@@ -5,6 +5,7 @@ import {
   OnInit,
   ViewEncapsulation,
   inject,
+  signal,
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -22,7 +23,14 @@ import { RouterModule } from '@angular/router';
 export class AppComponent implements OnInit {
   private readonly document = inject<Document>(DOCUMENT);
 
+  private readonly classList = signal([
+    'min-h-screen',
+    'bg-background',
+    'font-sans',
+    'antialiased',
+  ]);
+
   ngOnInit() {
-    this.document.body.classList.add('sc-body');
+    this.document.body.classList.add(...this.classList());
   }
 }

@@ -69,10 +69,6 @@
   }
 }
 
-.sc-body {
-  @apply min-h-screen bg-background font-sans antialiased;
-}
-
 ::-webkit-scrollbar {
   @apply w-2.5 h-2.5;
 }
