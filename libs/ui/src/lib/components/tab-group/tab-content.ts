@@ -1,13 +1,23 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  TemplateRef,
+  ViewEncapsulation,
+  viewChild,
+} from '@angular/core';
 
 @Component({
-  selector: 'sc-tab-content',
+  selector: 'sc-tab-content2',
   imports: [],
   template: `
-    <ng-content />
+    <ng-template #template>
+      <ng-content />
+    </ng-template>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScTabContent2 {}
+export class ScTabContent2 {
+  readonly template = viewChild.required<TemplateRef<unknown>>('template');
+}

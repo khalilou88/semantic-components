@@ -10,7 +10,7 @@ import {
   selector: 'sc-tab-label2',
   imports: [],
   template: `
-    <ng-template #t>
+    <ng-template #template>
       <ng-content />
     </ng-template>
   `,
@@ -20,5 +20,5 @@ import {
   hostDirectives: [],
 })
 export class ScTabLabel2 {
-  readonly template = viewChild.required<TemplateRef<unknown>>('t');
+  readonly template = viewChild.required<TemplateRef<unknown>>('template');
 }
