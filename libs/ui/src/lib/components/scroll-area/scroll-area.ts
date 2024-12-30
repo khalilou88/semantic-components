@@ -10,27 +10,15 @@ import {
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
-import { NgScrollbarModule, ScrollbarVisibility } from 'ngx-scrollbar';
 
 @Component({
   selector: 'div[sc-scroll-area]',
-  imports: [NgScrollbarModule],
+  imports: [],
   template: `
-    <ng-scrollbar
-      [visibility]="visibility()"
-      [style]="{
-        '--scrollbar-border-radius': '100px',
-        '--scrollbar-padding': '1px',
-        '--scrollbar-thumb-color': 'hsl(var(--border))',
-        '--scrollbar-thumb-hover-color': 'hsl(var(--border))',
-        '--scrollbar-size': '7px',
-      }"
-    >
-      <ng-content />
-    </ng-scrollbar>
+    <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -39,13 +27,12 @@ import { NgScrollbarModule, ScrollbarVisibility } from 'ngx-scrollbar';
 export class ScScrollArea implements AfterViewInit {
   private readonly host = inject(ElementRef);
 
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn('', this.class()));
+  protected readonly class = computed(() => cn('', this.classInput()));
 
-  visibility = input<ScrollbarVisibility>('native');
-
-  //TODO remove use of ngAfterViewInit
   ngAfterViewInit() {
     const height = this.host.nativeElement.scrollHeight;
 

@@ -58,7 +58,6 @@
     "embla-carousel": "^8.5.1",
     "embla-carousel-autoplay": "^8.5.1",
     "express": "~4.21.2",
-    "ngx-scrollbar": "^16.1.1",
     "rxjs": "~7.8.1",
     "tailwind-merge": "^2.6.0",
     "zone.js": "0.15.0"
