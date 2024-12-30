@@ -40,7 +40,6 @@
     "@tiptap/extension-table-cell": "^2.10.3",
     "@tiptap/extension-table": "^2.10.3",
     "class-variance-authority": "^0.7.1",
-    "ngx-scrollbar": "^16.1.1",
     "embla-carousel": "^8.5.1",
     "rxjs": "~7.8.1",
     "@semantic-components/utils": "0.1.0",
