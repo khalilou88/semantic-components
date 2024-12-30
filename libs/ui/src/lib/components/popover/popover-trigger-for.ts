@@ -20,9 +20,9 @@ import { ScPopover } from './popover';
   },
 })
 export class ScPopoverTriggerFor implements OnDestroy {
-  private element = inject<ElementRef<HTMLElement>>(ElementRef);
-  private overlay = inject(Overlay);
-  private viewContainer = inject(ViewContainerRef);
+  private readonly element = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly overlay = inject(Overlay);
+  private readonly viewContainer = inject(ViewContainerRef);
 
   readonly scPopoverTriggerFor = input.required<TemplateRef<unknown>>();
 

@@ -23,6 +23,7 @@ export * from './lib/components/alert-dialog';
 export * from './lib/components/badge';
 export * from './lib/components/scroll-area';
 export * from './lib/components/tabs';
+export * from './lib/components/tab-group';
 export * from './lib/components/card';
 export * from './lib/components/toast';
 export * from './lib/components/slider';
