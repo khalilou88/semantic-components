@@ -8,7 +8,7 @@ import { SvgCircleAlertIcon, SvgTerminalIcon } from '@semantic-icons/lucide-icon
   imports: [ScAlert, ScAlertTitle, ScAlertDescription, SvgTerminalIcon, SvgCircleAlertIcon],
   template: `
     <div sc-alert>
-      <svg-terminal-icon class="size-4" />
+      <svg-terminal-icon />
       <h5 sc-alert-title>Heads up!</h5>
       <p sc-alert-description>You can add components to your app using the cli.</p>
     </div>
@@ -17,7 +17,7 @@ import { SvgCircleAlertIcon, SvgTerminalIcon } from '@semantic-icons/lucide-icon
     <br />
     <br />
     <div sc-alert variant="destructive">
-      <svg-circle-alert-icon class="size-4" />
+      <svg-circle-alert-icon />
       <h5 sc-alert-title>Error</h5>
       <p sc-alert-description>Your session has expired. Please log in again.</p>
     </div>
