@@ -1,16 +1,42 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { ScButton } from '@semantic-components/ui';
 import {
-  SvgChevronRightIcon,
-  SvgLoaderCircleIcon,
-  SvgLoaderIcon,
-} from '@semantic-icons/lucide-icons';
+  ScBreadcrumb,
+  ScBreadcrumbItem,
+  ScBreadcrumbLink,
+  ScBreadcrumbList,
+  ScBreadcrumbPage,
+  ScBreadcrumbSeparator,
+  ScButton,
+} from '@semantic-components/ui';
+import { SvgChevronRightIcon, SvgLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-buttons-page',
-  imports: [ScButton, SvgChevronRightIcon, SvgLoaderCircleIcon],
+  imports: [
+    ScButton,
+    SvgChevronRightIcon,
+    SvgLoaderCircleIcon,
+    ScBreadcrumb,
+    ScBreadcrumbList,
+    ScBreadcrumbItem,
+    ScBreadcrumbLink,
+    ScBreadcrumbPage,
+    ScBreadcrumbSeparator,
+    SvgChevronRightIcon,
+  ],
   template: `
+    <nav sc-breadcrumb>
+      <ol sc-breadcrumb-list>
+        <li sc-breadcrumb-item><a sc-breadcrumb-link>Components</a></li>
+
+        <li sc-breadcrumb-separator><svg-chevron-right-icon /></li>
+        <li sc-breadcrumb-item>
+          <span sc-breadcrumb-page>Button</span>
+        </li>
+      </ol>
+    </nav>
+
     <button sc-button type="button">Primary</button>
     <button sc-button variant="secondary" type="button">Secondary</button>
     <button sc-button variant="destructive" type="button">Destructive</button>

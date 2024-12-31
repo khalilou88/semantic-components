@@ -27,6 +27,11 @@ export const appRoutes: Route[] = [
         loadComponent: () => import('./layouts/footer-layout'),
         children: [
           {
+            path: '',
+            loadComponent: () => import('./pages/components-page'),
+            title: 'Components Page',
+          },
+          {
             path: 'alert-dialog',
             loadComponent: () => import('./pages/alert-dialog-page'),
             title: 'Alert Dialog Page',

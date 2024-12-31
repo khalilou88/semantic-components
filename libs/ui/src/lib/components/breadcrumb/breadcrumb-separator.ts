@@ -26,5 +26,5 @@ import { cn } from '@semantic-components/utils';
 export class ScBreadcrumbSeparator {
   class = input<string>('');
 
-  classes = computed(() => cn('[&>svg]:w-3.5 [&>svg]:h-3.5', this.class()));
+  classes = computed(() => cn('[&_svg]:w-3.5 [&_svg]:h-3.5', this.class()));
 }
