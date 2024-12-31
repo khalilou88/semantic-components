@@ -33,16 +33,6 @@ import { LayoutState } from '../services/layout-state';
         <sc-sidebar-toggler>
           <svg-panel-left-icon />
         </sc-sidebar-toggler>
-
-        <br />
-        <br />
-        open : {{ sidebarState.open() }}
-        <br />
-        openMobile : {{ sidebarState.openMobile() }}
-        <br />
-        isMobile : {{ sidebarState.isMobile() }}
-        <br />
-
         <router-outlet />
       </main>
     </sc-sidebar-provider>
