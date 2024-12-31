@@ -5,6 +5,8 @@ updates:
     directory: '/'
     schedule:
       interval: 'daily'
+      time: '03:00'
+      timezone: 'Europe/Paris'
     ignore:
       # Ignore updates to packages that start with '@nx'
       # Wildcards match zero or more arbitrary characters
