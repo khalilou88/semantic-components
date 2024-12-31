@@ -18,7 +18,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
             </div>
             <div class="flex items-center space-x-1">
               <button
-                class="rdp-button_reset rdp-button absolute left-1 inline-flex size-7 items-center justify-center gap-2 whitespace-nowrap rounded-md border border-input bg-transparent p-0 text-sm font-medium opacity-50 ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                class="rdp-button_reset rdp-button absolute left-1 inline-flex size-7 items-center justify-center gap-2 whitespace-nowrap rounded-md border border-input bg-transparent p-0 text-sm font-medium opacity-50 ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                 name="previous-month"
                 aria-label="Go to previous month"
                 type="button"
@@ -39,7 +39,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                 </svg>
               </button>
               <button
-                class="rdp-button_reset rdp-button absolute right-1 inline-flex size-7 items-center justify-center gap-2 whitespace-nowrap rounded-md border border-input bg-transparent p-0 text-sm font-medium opacity-50 ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                class="rdp-button_reset rdp-button absolute right-1 inline-flex size-7 items-center justify-center gap-2 whitespace-nowrap rounded-md border border-input bg-transparent p-0 text-sm font-medium opacity-50 ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                 name="next-month"
                 aria-label="Go to next month"
                 type="button"
@@ -126,7 +126,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="-1"
@@ -140,7 +140,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="-1"
@@ -154,7 +154,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="-1"
@@ -168,7 +168,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="-1"
@@ -182,7 +182,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="-1"
@@ -196,7 +196,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="-1"
@@ -210,7 +210,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="-1"
@@ -226,7 +226,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="-1"
@@ -240,7 +240,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md bg-accent  p-0 text-sm font-normal text-accent-foreground  ring-offset-background transition-colors hover:bg-accent  hover:text-accent-foreground focus:bg-primary focus:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md bg-accent  p-0 text-sm font-normal text-accent-foreground  ring-offset-background transition-colors hover:bg-accent  hover:text-accent-foreground focus:bg-primary focus:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     aria-selected="true"
@@ -255,7 +255,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="-1"
@@ -269,7 +269,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="0"
@@ -283,7 +283,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="-1"
@@ -297,7 +297,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="-1"
@@ -311,7 +311,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="-1"
@@ -327,7 +327,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="-1"
@@ -341,7 +341,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="-1"
@@ -355,7 +355,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="-1"
@@ -369,7 +369,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="-1"
@@ -383,7 +383,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="-1"
@@ -397,7 +397,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="-1"
@@ -411,7 +411,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="-1"
@@ -427,7 +427,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="-1"
@@ -441,7 +441,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="-1"
@@ -455,7 +455,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="-1"
@@ -469,7 +469,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="-1"
@@ -483,7 +483,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="-1"
@@ -497,7 +497,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="-1"
@@ -511,7 +511,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="-1"
@@ -527,7 +527,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="-1"
@@ -541,7 +541,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="-1"
@@ -555,7 +555,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="-1"
@@ -569,7 +569,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button day-outside inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal text-muted-foreground ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button day-outside inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal text-muted-foreground ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="-1"
@@ -583,7 +583,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button day-outside inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal text-muted-foreground ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button day-outside inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal text-muted-foreground ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="-1"
@@ -597,7 +597,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button day-outside inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal text-muted-foreground ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button day-outside inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal text-muted-foreground ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="-1"
@@ -611,7 +611,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   role="presentation"
                 >
                   <button
-                    class="rdp-button_reset rdp-button day-outside inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal text-muted-foreground ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-100 [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0"
+                    class="rdp-button_reset rdp-button day-outside inline-flex size-9 items-center justify-center gap-2 whitespace-nowrap rounded-md p-0 text-sm font-normal text-muted-foreground ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                     name="day"
                     role="gridcell"
                     tabindex="-1"

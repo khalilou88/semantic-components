@@ -29,7 +29,7 @@ export class ScMenuItem {
 
   classes = computed(() =>
     cn(
-      'w-full flex cursor-default gap-2 select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent data-[state=open]:bg-accent [&_.svg]:pointer-events-none [&_.svg]:size-4 [&_.svg]:shrink-0',
+      'w-full flex cursor-default gap-2 select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent data-[state=open]:bg-accent [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
       this._inset() && 'pl-8',
       this.class(),
     ),
