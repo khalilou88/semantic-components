@@ -1,13 +1,32 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
+
+import { cn } from '@semantic-components/utils';
 
 @Component({
-  selector: 'sc-page-description',
+  selector: 'p[sc-page-description]',
   imports: [],
   template: `
-    <p>page-description works!</p>
+    <ng-content />
   `,
+  host: {
+    '[class]': 'class()',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PageDescription {}
+export class ScPageDescription {
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
+
+  protected readonly class = computed(() =>
+    cn('text-base text-muted-foreground', this.classInput()),
+  );
+}
