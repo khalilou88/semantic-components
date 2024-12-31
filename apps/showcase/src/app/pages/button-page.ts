@@ -9,6 +9,7 @@ import {
   ScBreadcrumbSeparator,
   ScButton,
   ScCard,
+  ScHeading,
   ScPageDescription,
   ScPageSubtitle,
   ScPageTitle,
@@ -39,6 +40,7 @@ import { SvgChevronRightIcon, SvgLoaderCircleIcon } from '@semantic-icons/lucide
     ScTabLabel,
     ScTabContent,
     ScCard,
+    ScHeading,
   ],
   template: `
     <div class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
@@ -61,6 +63,8 @@ import { SvgChevronRightIcon, SvgLoaderCircleIcon } from '@semantic-icons/lucide
         <h2 sc-page-subtitle>Usage</h2>
 
         <h2 class="mb-5" sc-page-subtitle>Examples</h2>
+
+        <h3 class="mb-2" sc-heading level="3">Variants</h3>
 
         <sc-tabs class="w-[400px]" labelsHostClass="grid w-full grid-cols-2">
           <sc-tab>
