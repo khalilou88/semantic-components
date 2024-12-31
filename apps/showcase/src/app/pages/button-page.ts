@@ -10,6 +10,7 @@ import {
   ScButton,
 } from '@semantic-components/ui';
 import { SvgChevronRightIcon, SvgLoaderCircleIcon } from '@semantic-icons/lucide-icons';
+import { ScHeading } from 'libs/ui/src/lib/components/typography';
 
 @Component({
   selector: 'app-buttons-page',
@@ -24,6 +25,7 @@ import { SvgChevronRightIcon, SvgLoaderCircleIcon } from '@semantic-icons/lucide
     ScBreadcrumbPage,
     ScBreadcrumbSeparator,
     SvgChevronRightIcon,
+    ScHeading,
   ],
   template: `
     <nav sc-breadcrumb>
@@ -36,6 +38,8 @@ import { SvgChevronRightIcon, SvgLoaderCircleIcon } from '@semantic-icons/lucide
         </li>
       </ol>
     </nav>
+
+    <h1 sc-heading level="2">Button</h1>
 
     <button sc-button type="button">Primary</button>
     <button sc-button variant="secondary" type="button">Secondary</button>

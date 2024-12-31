@@ -12,16 +12,16 @@ import { VariantProps, cva } from 'class-variance-authority';
 const scHeadingVariants = cva('', {
   variants: {
     level: {
-      1: 'text-4xl font-extrabold tracking-tight lg:text-5xl',
-      2: 'text-3xl font-semibold tracking-tight',
-      3: 'text-2xl font-semibold tracking-tight',
-      4: 'text-xl font-semibold tracking-tight',
-      5: '',
-      6: '',
+      '1': 'scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl',
+      '2': 'scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0',
+      '3': 'scroll-m-20 text-2xl font-semibold tracking-tight',
+      '4': 'scroll-m-20 text-xl font-semibold tracking-tight',
+      '5': '',
+      '6': '',
     },
   },
   defaultVariants: {
-    level: 1,
+    level: '1',
   },
 });
 
@@ -35,16 +35,20 @@ type ScHeadingVariants = VariantProps<typeof scHeadingVariants>;
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScHeading {
-  level = input<ScHeadingVariants['level']>(1);
+  readonly level = input<ScHeadingVariants['level']>('1');
 
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn(scHeadingVariants({ level: this.level() }), this.class()));
+  protected readonly class = computed(() =>
+    cn(scHeadingVariants({ level: this.level() }), this.classInput()),
+  );
 }
