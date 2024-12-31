@@ -30,9 +30,11 @@ import { LayoutState } from '../services/layout-state';
       </sc-sidebar>
 
       <main class="w-full">
-        <sc-sidebar-toggler>
-          <svg-panel-left-icon />
-        </sc-sidebar-toggler>
+        <div class="sticky top-0 z-50">
+          <sc-sidebar-toggler>
+            <svg-panel-left-icon />
+          </sc-sidebar-toggler>
+        </div>
         <router-outlet />
       </main>
     </sc-sidebar-provider>
