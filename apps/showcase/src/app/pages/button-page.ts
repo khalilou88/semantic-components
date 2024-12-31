@@ -31,7 +31,6 @@ import { SvgChevronRightIcon, SvgLoaderCircleIcon } from '@semantic-icons/lucide
     ScBreadcrumbLink,
     ScBreadcrumbPage,
     ScBreadcrumbSeparator,
-    SvgChevronRightIcon,
     ScPageTitle,
     ScPageSubtitle,
     ScPageDescription,
