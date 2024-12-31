@@ -29,7 +29,7 @@ import { LayoutState } from '../services/layout-state';
         <div class="border-2 border-red-600">Sidebar</div>
       </sc-sidebar>
 
-      <main>
+      <main class="w-full">
         <sc-sidebar-toggler>
           <svg-panel-left-icon />
         </sc-sidebar-toggler>

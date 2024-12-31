@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { Footer } from '../components/footer';
@@ -10,8 +10,13 @@ import { Footer } from '../components/footer';
     <router-outlet />
     <app-footer />
   `,
+  host: {
+    '[class]': 'class()',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class FooterLayout {}
+export default class FooterLayout {
+  class = signal<string>('block w-full');
+}

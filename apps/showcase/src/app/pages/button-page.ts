@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
 
 import {
   ScBreadcrumb,
@@ -45,7 +45,7 @@ import { SvgChevronRightIcon, SvgLoaderCircleIcon } from '@semantic-icons/lucide
 
         <h1 sc-page-title>Button</h1>
 
-        <p sc-page-description>Displays a button or a component that looks like a button.</p>
+        <p sc-page-description>Displays a button or a link that looks like a button.</p>
 
         <button sc-button type="button">Primary</button>
         <button sc-button variant="secondary" type="button">Secondary</button>
@@ -115,10 +115,61 @@ import { SvgChevronRightIcon, SvgLoaderCircleIcon } from '@semantic-icons/lucide
           Please wait
         </button>
       </div>
+
+      <div class="hidden text-sm xl:block">
+        <div class="sticky top-20 -mt-6 h-[calc(100vh-3.5rem)] pt-4">
+          <div class="no-scrollbar h-full overflow-auto pb-10">
+            <div class="space-y-2">
+              <p class="font-medium">On This Page</p>
+              <ul class="m-0 list-none">
+                <li class="mt-0 pt-2">
+                  <a
+                    class="inline-block font-medium text-foreground no-underline transition-colors hover:text-foreground"
+                    href="#installation"
+                  >
+                    Installation
+                  </a>
+                </li>
+                <li class="mt-0 pt-2">
+                  <a
+                    class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
+                    href="#usage"
+                  >
+                    Usage
+                  </a>
+                </li>
+                <li class="mt-0 pt-2">
+                  <a
+                    class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
+                    href="#examples"
+                  >
+                    Examples
+                  </a>
+                  <ul class="m-0 list-none pl-4">
+                    <li class="mt-0 pt-2">
+                      <a
+                        class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
+                        href="#horizontal-scrolling"
+                      >
+                        Horizontal Scrolling
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   `,
+  host: {
+    '[class]': 'class()',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ButtonPage {}
+export default class ButtonPage {
+  class = signal<string>('block w-full');
+}
