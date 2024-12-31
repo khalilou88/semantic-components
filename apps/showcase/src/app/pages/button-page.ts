@@ -8,8 +8,14 @@ import {
   ScBreadcrumbPage,
   ScBreadcrumbSeparator,
   ScButton,
+  ScCard,
   ScPageDescription,
+  ScPageSubtitle,
   ScPageTitle,
+  ScTab,
+  ScTabContent,
+  ScTabLabel,
+  ScTabs,
 } from '@semantic-components/ui';
 import { SvgChevronRightIcon, SvgLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 
@@ -27,7 +33,13 @@ import { SvgChevronRightIcon, SvgLoaderCircleIcon } from '@semantic-icons/lucide
     ScBreadcrumbSeparator,
     SvgChevronRightIcon,
     ScPageTitle,
+    ScPageSubtitle,
     ScPageDescription,
+    ScTabs,
+    ScTab,
+    ScTabLabel,
+    ScTabContent,
+    ScCard,
   ],
   template: `
     <div class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
@@ -47,12 +59,38 @@ import { SvgChevronRightIcon, SvgLoaderCircleIcon } from '@semantic-icons/lucide
 
         <p sc-page-description>Displays a button or a link that looks like a button.</p>
 
-        <button sc-button type="button">Primary</button>
-        <button sc-button variant="secondary" type="button">Secondary</button>
-        <button sc-button variant="destructive" type="button">Destructive</button>
-        <button sc-button variant="outline" type="button">Outline</button>
-        <button sc-button variant="ghost" type="button">Ghost</button>
-        <button sc-button variant="link" type="button">Link</button>
+        <h2 sc-page-subtitle>Usage</h2>
+
+        <h2 class="mb-5" sc-page-subtitle>Examples</h2>
+
+        <sc-tabs class="w-[400px]" labelsHostClass="grid w-full grid-cols-2">
+          <sc-tab>
+            <sc-tab-label>Preview</sc-tab-label>
+            <sc-tab-content>
+              <div sc-card>
+                <div class="m-10 flex gap-2" sc-card-content>
+                  <button sc-button type="button">Primary</button>
+                  <button sc-button variant="secondary" type="button">Secondary</button>
+                  <button sc-button variant="destructive" type="button">Destructive</button>
+                  <button sc-button variant="outline" type="button">Outline</button>
+                  <button sc-button variant="ghost" type="button">Ghost</button>
+                  <button sc-button variant="link" type="button">Link</button>
+                </div>
+              </div>
+            </sc-tab-content>
+          </sc-tab>
+
+          <sc-tab>
+            <sc-tab-label>Code</sc-tab-label>
+            <sc-tab-content>
+              <div sc-card>
+                <div class="m-10 flex gap-2" sc-card-content>
+                  <p>Coming soon</p>
+                </div>
+              </div>
+            </sc-tab-content>
+          </sc-tab>
+        </sc-tabs>
 
         <h1>Sm</h1>
         <button sc-button type="button" size="sm">Primary</button>
