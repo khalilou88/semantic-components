@@ -30,7 +30,7 @@ import { ScRadioGroupState } from './radio-group-state';
 
       @if (checked() === true) {
         <span [class]="svgWrapperClass()">
-          <svg-circle-icon [class]="_svgClass()" svgClass="fill-current text-current" />
+          <svg-circle-icon [class]="_svgClass()" />
         </span>
       }
     </div>
