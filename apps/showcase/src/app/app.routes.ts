@@ -32,6 +32,11 @@ export const appRoutes: Route[] = [
             title: 'Components Page',
           },
           {
+            path: 'cookie-consent',
+            loadComponent: () => import('./pages/cookie-consent-page'),
+            title: 'Cookie Consent Page',
+          },
+          {
             path: 'alert-dialog',
             loadComponent: () => import('./pages/alert-dialog-page'),
             title: 'Alert Dialog Page',
