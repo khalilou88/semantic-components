@@ -49,7 +49,11 @@ export class ScCookieConsent {
     ),
   );
 
-  accept() {}
+  accept() {
+    console.log('accept');
+  }
 
-  decline() {}
+  decline() {
+    console.log('decline');
+  }
 }
