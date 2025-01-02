@@ -7,7 +7,7 @@ import {
   output,
 } from '@angular/core';
 
-import { SvgXIcon } from '@semantic-icons/lucide-icons';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 import { ScButton } from '../button';
 import { ScProgress } from '../progress';
@@ -17,7 +17,7 @@ import { formatBytes } from './utils';
 
 @Component({
   selector: 'sc-file-card',
-  imports: [SvgXIcon, ScButton, ScFilePreview, ScProgress],
+  imports: [SiXIcon, ScButton, ScFilePreview, ScProgress],
   template: `
     <div class="relative flex items-center gap-2.5">
       <div class="flex flex-1 gap-2.5">
@@ -50,7 +50,7 @@ import { formatBytes } from './utils';
           variant="outline"
           size="icon"
         >
-          <svg-x-icon class="size-4" aria-hidden="true" />
+          <svg class="size-4" si-x-icon aria-hidden="true"></svg>
           <span class="sr-only">Remove file</span>
         </button>
       </div>

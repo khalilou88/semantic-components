@@ -7,13 +7,13 @@ import {
   ScSidebarState,
   ScSidebarToggler,
 } from '@semantic-components/ui';
-import { SvgPanelLeftIcon } from '@semantic-icons/lucide-icons';
+import { SiPanelLeftIcon } from '@semantic-icons/lucide-icons';
 
 import { LayoutState } from '../services/layout-state';
 
 @Component({
   selector: 'app-sidebar-layout',
-  imports: [RouterModule, ScSidebarProvider, ScSidebar, ScSidebarToggler, SvgPanelLeftIcon],
+  imports: [RouterModule, ScSidebarProvider, ScSidebar, ScSidebarToggler, SiPanelLeftIcon],
   template: `
     <!--div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
       <div class="flex min-h-screen">
@@ -32,7 +32,7 @@ import { LayoutState } from '../services/layout-state';
       <main class="w-full">
         <div class="sticky top-0 z-50">
           <sc-sidebar-toggler>
-            <svg-panel-left-icon />
+            <svg si-panel-left-icon></svg>
           </sc-sidebar-toggler>
         </div>
         <router-outlet />

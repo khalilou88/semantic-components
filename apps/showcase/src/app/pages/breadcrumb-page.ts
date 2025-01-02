@@ -9,7 +9,7 @@ import {
   ScBreadcrumbPage,
   ScBreadcrumbSeparator,
 } from '@semantic-components/ui';
-import { SvgChevronRightIcon } from '@semantic-icons/lucide-icons';
+import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-breadcrumb-page',
@@ -20,7 +20,7 @@ import { SvgChevronRightIcon } from '@semantic-icons/lucide-icons';
     ScBreadcrumbLink,
     ScBreadcrumbPage,
     ScBreadcrumbSeparator,
-    SvgChevronRightIcon,
+    SiChevronRightIcon,
     ScBreadcrumbEllipsis,
   ],
   template: `
@@ -29,7 +29,7 @@ import { SvgChevronRightIcon } from '@semantic-icons/lucide-icons';
         <ol sc-breadcrumb-list>
           <li sc-breadcrumb-item><a sc-breadcrumb-link>Components</a></li>
 
-          <li sc-breadcrumb-separator><svg-chevron-right-icon /></li>
+          <li sc-breadcrumb-separator><svg si-chevron-right-icon></svg></li>
           <li sc-breadcrumb-item>
             <span sc-breadcrumb-page>Breadcrumb</span>
           </li>
@@ -47,15 +47,15 @@ import { SvgChevronRightIcon } from '@semantic-icons/lucide-icons';
       <ol sc-breadcrumb-list>
         <li sc-breadcrumb-item><a sc-breadcrumb-link href="#">Home</a></li>
 
-        <li sc-breadcrumb-separator><svg-chevron-right-icon /></li>
+        <li sc-breadcrumb-separator><svg si-chevron-right-icon></svg></li>
 
         <li sc-breadcrumb-item><span sc-breadcrumb-ellipsis></span></li>
 
-        <li sc-breadcrumb-separator><svg-chevron-right-icon /></li>
+        <li sc-breadcrumb-separator><svg si-chevron-right-icon></svg></li>
 
         <li sc-breadcrumb-item><a sc-breadcrumb-link href="#">Library</a></li>
 
-        <li sc-breadcrumb-separator><svg-chevron-right-icon /></li>
+        <li sc-breadcrumb-separator><svg si-chevron-right-icon></svg></li>
         <li sc-breadcrumb-item>
           <span sc-breadcrumb-page>Data</span>
         </li>

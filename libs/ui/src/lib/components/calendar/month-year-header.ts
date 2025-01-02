@@ -8,13 +8,13 @@ import {
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
-import { SvgChevronLeftIcon, SvgChevronRightIcon } from '@semantic-icons/lucide-icons';
+import { SiChevronLeftIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 
 import { ScButton } from '../button';
 
 @Component({
   selector: 'sc-month-year-header',
-  imports: [SvgChevronRightIcon, SvgChevronLeftIcon, ScButton],
+  imports: [SiChevronRightIcon, SiChevronLeftIcon, ScButton],
   template: `
     <button
       (click)="monthYearChange.emit(-1)"
@@ -24,7 +24,7 @@ import { ScButton } from '../button';
       type="button"
       size="icon"
     >
-      <svg-chevron-left-icon />
+      <svg si-chevron-left-icon></svg>
     </button>
 
     <button sc-button variant="ghost" type="button">
@@ -40,7 +40,7 @@ import { ScButton } from '../button';
       size="icon"
       type="button"
     >
-      <svg-chevron-right-icon />
+      <svg si-chevron-right-icon></svg>
     </button>
   `,
   host: {

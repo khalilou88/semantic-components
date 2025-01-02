@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  afterNextRender,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import {
   ScCard,
@@ -15,7 +10,7 @@ import {
   ScCarouselNext,
   ScCarouselPrevious,
 } from '@semantic-components/ui';
-import { SvgArrowLeftIcon, SvgArrowRightIcon } from '@semantic-icons/lucide-icons';
+import { SiArrowLeftIcon, SiArrowRightIcon } from '@semantic-icons/lucide-icons';
 import { EmblaOptionsType, EmblaPluginType } from 'embla-carousel';
 import Autoplay from 'embla-carousel-autoplay';
 
@@ -27,8 +22,8 @@ import Autoplay from 'embla-carousel-autoplay';
     ScCarouselItem,
     ScCarouselPrevious,
     ScCarouselNext,
-    SvgArrowLeftIcon,
-    SvgArrowRightIcon,
+    SiArrowLeftIcon,
+    SiArrowRightIcon,
     ScCard,
     ScCardContent,
     ScCarouselContainer,
@@ -51,10 +46,10 @@ import Autoplay from 'embla-carousel-autoplay';
         </div>
 
         <button sc-carousel-previous variant="secondary" size="icon">
-          <svg-arrow-left-icon class="size-4" />
+          <svg class="size-4" si-arrow-left-icon></svg>
         </button>
         <button sc-carousel-next variant="secondary" size="icon">
-          <svg-arrow-right-icon class="size-4" />
+          <svg class="size-4" si-arrow-right-icon></svg>
         </button>
       </div>
     </div>

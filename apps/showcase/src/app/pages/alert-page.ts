@@ -1,14 +1,14 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import { ScAlert, ScAlertDescription, ScAlertTitle } from '@semantic-components/ui';
-import { SvgCircleAlertIcon, SvgTerminalIcon } from '@semantic-icons/lucide-icons';
+import { SiCircleAlertIcon, SiTerminalIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-alert-page',
-  imports: [ScAlert, ScAlertTitle, ScAlertDescription, SvgTerminalIcon, SvgCircleAlertIcon],
+  imports: [ScAlert, ScAlertTitle, ScAlertDescription, SiTerminalIcon, SiCircleAlertIcon],
   template: `
     <div sc-alert>
-      <svg-terminal-icon />
+      <svg si-terminal-icon></svg>
       <h5 sc-alert-title>Heads up!</h5>
       <p sc-alert-description>You can add components to your app using the cli.</p>
     </div>
@@ -17,7 +17,7 @@ import { SvgCircleAlertIcon, SvgTerminalIcon } from '@semantic-icons/lucide-icon
     <br />
     <br />
     <div sc-alert variant="destructive">
-      <svg-circle-alert-icon />
+      <svg si-circle-alert-icon></svg>
       <h5 sc-alert-title>Error</h5>
       <p sc-alert-description>Your session has expired. Please log in again.</p>
     </div>

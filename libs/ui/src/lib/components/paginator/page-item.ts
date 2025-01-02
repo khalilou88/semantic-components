@@ -7,18 +7,18 @@ import {
   output,
 } from '@angular/core';
 
-import { SvgEllipsisIcon } from '@semantic-icons/lucide-icons';
+import { SiEllipsisIcon } from '@semantic-icons/lucide-icons';
 
 import { ScButton } from '../button';
 
 @Component({
   selector: 'sc-page-item',
-  imports: [ScButton, SvgEllipsisIcon],
+  imports: [ScButton, SiEllipsisIcon],
   template: `
     <li>
       @if (page() === '...') {
         <span class="flex size-9 items-center justify-center" [attr.aria-hidden]="true">
-          <svg-ellipsis-icon class="size-4" />
+          <svg class="size-4" si-ellipsis-icon></svg>
           <span class="sr-only">More pages</span>
         </span>
       } @else {

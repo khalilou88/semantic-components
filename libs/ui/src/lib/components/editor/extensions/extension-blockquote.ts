@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { SvgQuoteIcon } from '@semantic-icons/lucide-icons';
+import { SiQuoteIcon } from '@semantic-icons/lucide-icons';
 
 import { ScToggle } from '../../toggle';
 import { ScTooltip } from '../../tooltip';
@@ -9,7 +9,7 @@ import { ScExtensions } from './extensions';
 
 @Component({
   selector: 'sc-extension-blockquote',
-  imports: [ScTooltip, ScToggle, SvgQuoteIcon],
+  imports: [ScTooltip, ScToggle, SiQuoteIcon],
   template: `
     <button
       [attr.aria-label]="ariaLabel"
@@ -19,7 +19,7 @@ import { ScExtensions } from './extensions';
       variant="outline"
       type="button"
     >
-      <svg-quote-icon />
+      <svg si-quote-icon></svg>
       <span class="sr-only">{{ ariaLabel }}</span>
     </button>
   `,

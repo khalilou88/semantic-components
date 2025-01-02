@@ -30,7 +30,7 @@ import {
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
-import { SvgClockIcon } from '@semantic-icons/lucide-icons';
+import { SiClockIcon } from '@semantic-icons/lucide-icons';
 import { Subscription } from 'rxjs';
 
 import { ScSettings } from '../../utils';
@@ -56,10 +56,10 @@ export interface MatTimepickerSelected<D> {
 
 @Component({
   selector: 'sc-time-picker',
-  imports: [SvgClockIcon, ScButton, ScTimeOption, ScTimePickerInput],
+  imports: [SiClockIcon, ScButton, ScTimeOption, ScTimePickerInput],
   template: `
     <button class="absolute inset-y-0 end-0 pe-4" (click)="open()" sc-button variant="ghost">
-      <svg-clock-icon />
+      <svg si-clock-icon></svg>
     </button>
     <input #input scTimePickerInput type="text" placeholder="hh:mm" />
 

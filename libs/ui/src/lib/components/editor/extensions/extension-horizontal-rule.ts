@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { SvgMinusIcon } from '@semantic-icons/lucide-icons';
+import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 
 import { ScToggle } from '../../toggle';
 import { ScTooltip } from '../../tooltip';
@@ -9,7 +9,7 @@ import { ScExtensions } from './extensions';
 
 @Component({
   selector: 'sc-extension-horizontal-rule',
-  imports: [ScTooltip, ScToggle, SvgMinusIcon],
+  imports: [ScTooltip, ScToggle, SiMinusIcon],
   template: `
     <button
       [attr.aria-label]="ariaLabel"
@@ -19,7 +19,7 @@ import { ScExtensions } from './extensions';
       variant="outline"
       type="button"
     >
-      <svg-minus-icon />
+      <svg si-minus-icon></svg>
       <span class="sr-only">{{ ariaLabel }}</span>
     </button>
   `,

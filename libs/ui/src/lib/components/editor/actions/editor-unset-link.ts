@@ -1,7 +1,7 @@
 import { Dialog } from '@angular/cdk/dialog';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { SvgUnlinkIcon } from '@semantic-icons/lucide-icons';
+import { SiUnlinkIcon } from '@semantic-icons/lucide-icons';
 
 import { ScToggle } from '../../toggle';
 import { ScTooltip } from '../../tooltip';
@@ -10,7 +10,7 @@ import { ScExtensions } from '../extensions/extensions';
 
 @Component({
   selector: 'sc-editor-unset-link',
-  imports: [ScTooltip, ScToggle, SvgUnlinkIcon],
+  imports: [ScTooltip, ScToggle, SiUnlinkIcon],
   template: `
     <button
       [attr.aria-label]="ariaLabel"
@@ -20,7 +20,7 @@ import { ScExtensions } from '../extensions/extensions';
       variant="outline"
       type="button"
     >
-      <svg-unlink-icon />
+      <svg si-unlink-icon></svg>
       <span class="sr-only">{{ ariaLabel }}</span>
     </button>
   `,

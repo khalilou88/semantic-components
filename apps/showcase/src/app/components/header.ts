@@ -14,13 +14,13 @@ import {
 
 import { ScButton, ScSheetTrigger, ScThemeToggler } from '@semantic-components/ui';
 import { cn } from '@semantic-components/utils';
-import { SvgGithubIcon, SvgMenuIcon, SvgXIcon } from '@semantic-icons/lucide-icons';
+import { SiGithubIcon, SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 
 import { LayoutState } from '../services/layout-state';
 
 @Component({
   selector: 'app-header',
-  imports: [ScThemeToggler, SvgGithubIcon, ScButton, SvgMenuIcon, SvgXIcon],
+  imports: [ScThemeToggler, SiGithubIcon, ScButton, SiMenuIcon, SiXIcon],
   template: `
     <div class="z-50 border-b border-border/40 bg-background" #headerContent>
       <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -36,11 +36,11 @@ import { LayoutState } from '../services/layout-state';
               type="button"
             >
               @if (open()) {
-                <svg-x-icon />
+                <svg si-x-icon></svg>
               }
 
               @if (!open()) {
-                <svg-menu-icon />
+                <svg si-menu-icon></svg>
               }
 
               <span class="sr-only">Open Sidebar</span>
@@ -138,7 +138,7 @@ import { LayoutState } from '../services/layout-state';
             <button sc-button variant="ghost" size="icon" type="button">
               <span class="sr-only">View notifications</span>
 
-              <svg-github-icon />
+              <svg si-github-icon></svg>
             </button>
 
             <sc-theme-toggler />

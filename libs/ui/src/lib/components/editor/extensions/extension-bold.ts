@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { SvgBoldIcon } from '@semantic-icons/lucide-icons';
+import { SiBoldIcon } from '@semantic-icons/lucide-icons';
 
 import { ScToggle } from '../../toggle';
 import { ScTooltip } from '../../tooltip';
@@ -9,7 +9,7 @@ import { ScExtensions } from './extensions';
 
 @Component({
   selector: 'sc-extension-bold',
-  imports: [ScTooltip, ScToggle, SvgBoldIcon],
+  imports: [ScTooltip, ScToggle, SiBoldIcon],
   template: `
     <button
       [attr.aria-label]="ariaLabel"
@@ -19,7 +19,7 @@ import { ScExtensions } from './extensions';
       variant="outline"
       type="button"
     >
-      <svg-bold-icon />
+      <svg si-bold-icon></svg>
       <span class="sr-only">{{ ariaLabel }}</span>
     </button>
   `,

@@ -13,16 +13,16 @@ import {
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
-import { SvgCheckIcon } from '@semantic-icons/lucide-icons';
+import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 
 import { ScSelectState } from './select-state';
 
 @Component({
   selector: 'sc-option',
-  imports: [SvgCheckIcon],
+  imports: [SiCheckIcon],
   template: `
     @if (isSelected()) {
-      <svg-check-icon class="absolute left-2 flex size-4 items-center justify-center" />
+      <svg class="absolute left-2 flex size-4 items-center justify-center" si-check-icon></svg>
     }
 
     <span #label>

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { SvgListIcon } from '@semantic-icons/lucide-icons';
+import { SiListIcon } from '@semantic-icons/lucide-icons';
 
 import { ScToggle } from '../../toggle';
 import { ScTooltip } from '../../tooltip';
@@ -9,7 +9,7 @@ import { ScExtensions } from './extensions';
 
 @Component({
   selector: 'sc-extension-bullet-list',
-  imports: [ScTooltip, ScToggle, SvgListIcon],
+  imports: [ScTooltip, ScToggle, SiListIcon],
   template: `
     <button
       [attr.aria-label]="ariaLabel"
@@ -19,7 +19,7 @@ import { ScExtensions } from './extensions';
       variant="outline"
       type="button"
     >
-      <svg-list-icon />
+      <svg si-list-icon></svg>
       <span class="sr-only">{{ ariaLabel }}</span>
     </button>
   `,

@@ -1,19 +1,19 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
-import { SvgCookieIcon } from '@semantic-icons/lucide-icons';
+import { SiCookieIcon } from '@semantic-icons/lucide-icons';
 
 import { ScButton } from '../button';
 
 @Component({
   selector: 'sc-cookie-consent',
-  imports: [SvgCookieIcon, ScButton],
+  imports: [SiCookieIcon, ScButton],
   template: `
     <div [class]="class()">
       <div class="m-3 dark:bg-card bg-background border border-border rounded-lg">
         <div class="flex items-center justify-between p-3">
           <h1 class="text-lg font-medium">We use cookies</h1>
-          <svg-cookie-icon class="h-[1.2rem] w-[1.2rem]" />
+          <svg class="h-[1.2rem] w-[1.2rem]" si-cookie-icon></svg>
         </div>
         <div class="p-3 -mt-2">
           <p class="text-sm text-left text-muted-foreground">

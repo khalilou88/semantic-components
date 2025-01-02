@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { SvgUndoIcon } from '@semantic-icons/lucide-icons';
+import { SiUndoIcon } from '@semantic-icons/lucide-icons';
 
 import { ScToggle } from '../../toggle';
 import { ScTooltip } from '../../tooltip';
@@ -9,7 +9,7 @@ import { ScExtensions } from '../extensions/extensions';
 
 @Component({
   selector: 'sc-editor-undo',
-  imports: [ScTooltip, ScToggle, SvgUndoIcon],
+  imports: [ScTooltip, ScToggle, SiUndoIcon],
   template: `
     <button
       [attr.aria-label]="ariaLabel"
@@ -19,7 +19,7 @@ import { ScExtensions } from '../extensions/extensions';
       variant="outline"
       type="button"
     >
-      <svg-undo-icon />
+      <svg si-undo-icon></svg>
       <span class="sr-only">{{ ariaLabel }}</span>
     </button>
   `,

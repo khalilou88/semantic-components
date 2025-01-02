@@ -6,11 +6,11 @@ import {
   ScSidebarState,
   ScSidebarToggler,
 } from '@semantic-components/ui';
-import { SvgPanelLeftIcon } from '@semantic-icons/lucide-icons';
+import { SiPanelLeftIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-sidebar-page',
-  imports: [ScSidebarProvider, ScSidebar, ScSidebarToggler, SvgPanelLeftIcon],
+  imports: [ScSidebarProvider, ScSidebar, ScSidebarToggler, SiPanelLeftIcon],
   template: `
     <sc-sidebar-provider>
       <sc-sidebar>
@@ -19,7 +19,7 @@ import { SvgPanelLeftIcon } from '@semantic-icons/lucide-icons';
 
       <main>
         <sc-sidebar-toggler>
-          <svg-panel-left-icon />
+          <svg si-panel-left-icon></svg>
         </sc-sidebar-toggler>
 
         <br />

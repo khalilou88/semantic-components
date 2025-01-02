@@ -1,7 +1,7 @@
 import { DialogRef } from '@angular/cdk/dialog';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { SvgXIcon } from '@semantic-icons/lucide-icons';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 import { ScButton } from '../button';
 import { ScDialogClose } from './dialog-close';
@@ -19,14 +19,14 @@ import { ScDialogTitle } from './dialog-title';
     ScDialogDescription,
     ScDialogFooter,
     ScDialogClose,
-    SvgXIcon,
+    SiXIcon,
     ScDialogContent,
     ScButton,
   ],
   template: `
     <div sc-dialog-content>
       <button (click)="dialogRef.close()" sc-dialog-close>
-        <svg-x-icon class="size-4" />
+        <svg class="size-4" si-x-icon></svg>
         <span class="sr-only">Close</span>
       </button>
 

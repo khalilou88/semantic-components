@@ -10,18 +10,18 @@ import {
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
-import { SvgCheckIcon } from '@semantic-icons/lucide-icons';
+import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 
 import { ScAutocompleteModel } from './autocomplete-model';
 
 @Component({
   selector: 'sc-autocomplete-item',
-  imports: [SvgCheckIcon],
+  imports: [SiCheckIcon],
   template: `
     <ng-content />
 
     @if (isSelected()) {
-      <svg-check-icon class="ml-auto" />
+      <svg class="ml-auto" si-check-icon></svg>
     }
   `,
   host: {

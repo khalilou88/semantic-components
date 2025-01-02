@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
-import { SvgChevronDownIcon, SvgChevronUpIcon } from '@semantic-icons/lucide-icons';
+import { SiChevronDownIcon, SiChevronUpIcon } from '@semantic-icons/lucide-icons';
 
 import { ScAccordionHeader } from './accordion-header';
 import { ScAccordionTrigger } from './accordion-trigger';
@@ -17,8 +17,8 @@ import { ScAccordionTrigger } from './accordion-trigger';
   selector: 'sc-accordion-item',
   imports: [
     CdkAccordionModule,
-    SvgChevronDownIcon,
-    SvgChevronUpIcon,
+    SiChevronDownIcon,
+    SiChevronUpIcon,
     ScAccordionHeader,
     ScAccordionTrigger,
   ],
@@ -29,9 +29,12 @@ import { ScAccordionTrigger } from './accordion-trigger';
           <ng-content select="sc-accordion-item-description" />
 
           @if (accordionItem.expanded) {
-            <svg-chevron-up-icon class="size-4 shrink-0 transition-transform duration-200" />
+            <svg class="size-4 shrink-0 transition-transform duration-200" si-chevron-up-icon></svg>
           } @else {
-            <svg-chevron-down-icon class="size-4 shrink-0 transition-transform duration-200" />
+            <svg
+              class="size-4 shrink-0 transition-transform duration-200"
+              si-chevron-down-icon
+            ></svg>
           }
         </button>
       </h3>

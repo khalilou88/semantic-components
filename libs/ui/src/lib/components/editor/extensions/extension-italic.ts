@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { SvgItalicIcon } from '@semantic-icons/lucide-icons';
+import { SiItalicIcon } from '@semantic-icons/lucide-icons';
 
 import { ScToggle } from '../../toggle';
 import { ScTooltip } from '../../tooltip';
@@ -9,7 +9,7 @@ import { ScExtensions } from './extensions';
 
 @Component({
   selector: 'sc-extension-italic',
-  imports: [ScTooltip, ScToggle, SvgItalicIcon],
+  imports: [ScTooltip, ScToggle, SiItalicIcon],
   template: `
     <button
       [attr.aria-label]="ariaLabel"
@@ -19,7 +19,7 @@ import { ScExtensions } from './extensions';
       sc-toggle
       variant="outline"
     >
-      <svg-italic-icon />
+      <svg si-italic-icon></svg>
       <span class="sr-only">{{ ariaLabel }}</span>
     </button>
   `,

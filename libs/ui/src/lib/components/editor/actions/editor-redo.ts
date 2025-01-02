@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { SvgRedoIcon } from '@semantic-icons/lucide-icons';
+import { SiRedoIcon } from '@semantic-icons/lucide-icons';
 
 import { ScToggle } from '../../toggle';
 import { ScTooltip } from '../../tooltip';
@@ -9,7 +9,7 @@ import { ScExtensions } from '../extensions/extensions';
 
 @Component({
   selector: 'sc-editor-redo',
-  imports: [ScTooltip, ScToggle, SvgRedoIcon],
+  imports: [ScTooltip, ScToggle, SiRedoIcon],
   template: `
     <button
       [attr.aria-label]="ariaLabel"
@@ -19,7 +19,7 @@ import { ScExtensions } from '../extensions/extensions';
       variant="outline"
       type="button"
     >
-      <svg-redo-icon />
+      <svg si-redo-icon></svg>
       <span class="sr-only">{{ ariaLabel }}</span>
     </button>
   `,

@@ -7,8 +7,6 @@ import {
   Component,
   ElementRef,
   Injector,
-  LOCALE_ID,
-  OnInit,
   OutputEmitterRef,
   ViewEncapsulation,
   computed,
@@ -20,7 +18,7 @@ import {
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
-import { SvgCalendarIcon } from '@semantic-icons/lucide-icons';
+import { SiCalendarIcon } from '@semantic-icons/lucide-icons';
 
 import { ScButton } from '../button';
 import { ScCalendar } from '../calendar';
@@ -29,10 +27,10 @@ import { ScDateInput } from './date-input';
 
 @Component({
   selector: 'sc-date-picker',
-  imports: [ScInput, SvgCalendarIcon, ScButton, ScDateInput],
+  imports: [ScInput, SiCalendarIcon, ScButton, ScDateInput],
   template: `
     <button class="absolute inset-y-0 end-0 pe-4" (click)="open()" sc-button variant="ghost">
-      <svg-calendar-icon />
+      <svg si-calendar-icon></svg>
     </button>
     <input #input sc-input scDateInput type="text" placeholder="Select date" />
   `,

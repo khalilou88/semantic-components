@@ -12,7 +12,7 @@ import {
 
 import { DataService } from '@semantic-components/supabase';
 import { cn } from '@semantic-components/utils';
-import { SvgUploadIcon } from '@semantic-icons/lucide-icons';
+import { SiUploadIcon } from '@semantic-icons/lucide-icons';
 import { catchError, throwError } from 'rxjs';
 
 import { ScAspectRatio } from '../aspect-ratio';
@@ -23,7 +23,7 @@ import { formatBytes } from './utils';
 
 @Component({
   selector: 'sc-single-file-uploader',
-  imports: [ScProgress, SvgUploadIcon, ScDropZone, ScButton, ScAspectRatio],
+  imports: [ScProgress, SiUploadIcon, ScDropZone, ScButton, ScAspectRatio],
   template: `
     @if (!fileUrl()) {
       <!-- Dropzone -->
@@ -39,14 +39,14 @@ import { formatBytes } from './utils';
         @if (scDropZone.isDragActive()) {
           <div class="flex flex-col items-center justify-center gap-4 sm:px-5">
             <div class="rounded-full border border-dashed p-3">
-              <svg-upload-icon class="size-7 text-muted-foreground" aria-hidden="true" />
+              <svg class="size-7 text-muted-foreground" si-upload-icon aria-hidden="true"></svg>
             </div>
             <p class="font-medium text-muted-foreground">Drop the files here</p>
           </div>
         } @else {
           <div class="flex flex-col items-center justify-center gap-4 sm:px-5">
             <div class="rounded-full border border-dashed p-3">
-              <svg-upload-icon class="size-7 text-muted-foreground" aria-hidden="true" />
+              <svg class="size-7 text-muted-foreground" si-upload-icon aria-hidden="true"></svg>
             </div>
             <div class="flex flex-col gap-px">
               <p class="font-medium text-muted-foreground">

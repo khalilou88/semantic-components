@@ -16,11 +16,11 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { cn } from '@semantic-components/utils';
-import { SvgCheckIcon, SvgMinusIcon } from '@semantic-icons/lucide-icons';
+import { SiCheckIcon, SiMinusIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'sc-checkbox',
-  imports: [SvgCheckIcon, SvgMinusIcon],
+  imports: [SiCheckIcon, SiMinusIcon],
   template: `
     <input
       [attr.aria-label]="ariaLabel()"
@@ -33,9 +33,9 @@ import { SvgCheckIcon, SvgMinusIcon } from '@semantic-icons/lucide-icons';
     />
 
     @if (this.indeterminate() === true) {
-      <svg-minus-icon [class]="svgClasses()" />
+      <svg [class]="svgClasses()" si-minus-icon></svg>
     } @else if (checked() === true) {
-      <svg-check-icon [class]="svgClasses()" />
+      <svg [class]="svgClasses()" si-check-icon></svg>
     }
   `,
   host: {

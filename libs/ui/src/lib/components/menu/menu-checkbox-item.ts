@@ -12,15 +12,15 @@ import {
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
-import { SvgCheckIcon } from '@semantic-icons/lucide-icons';
+import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'button[sc-menu-checkbox-item]',
-  imports: [SvgCheckIcon],
+  imports: [SiCheckIcon],
   template: `
     @if (scChecked()) {
       <span class="absolute left-2 flex size-3.5 items-center justify-center">
-        <svg-check-icon class="size-4" />
+        <svg class="size-4" si-check-icon></svg>
       </span>
     }
     <ng-content />

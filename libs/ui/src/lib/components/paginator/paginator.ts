@@ -12,10 +12,10 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { cn } from '@semantic-components/utils';
 import {
-  SvgChevronLeftIcon,
-  SvgChevronRightIcon,
-  SvgChevronsLeftIcon,
-  SvgChevronsRightIcon,
+  SiChevronLeftIcon,
+  SiChevronRightIcon,
+  SiChevronsLeftIcon,
+  SiChevronsRightIcon,
 } from '@semantic-icons/lucide-icons';
 
 import { ScButton } from '../button';
@@ -34,10 +34,10 @@ const DEFAULT_PAGE_SIZE = 10;
     ReactiveFormsModule,
     ScPagination,
     ScButton,
-    SvgChevronLeftIcon,
-    SvgChevronsLeftIcon,
-    SvgChevronRightIcon,
-    SvgChevronsRightIcon,
+    SiChevronLeftIcon,
+    SiChevronsLeftIcon,
+    SiChevronRightIcon,
+    SiChevronsRightIcon,
     ScSelect,
     ScOption,
   ],
@@ -72,7 +72,7 @@ const DEFAULT_PAGE_SIZE = 10;
               variant="outline"
               size="icon"
             >
-              <svg-chevrons-left-icon />
+              <svg si-chevrons-left-icon></svg>
               <span class="sr-only">First page</span>
             </button>
           </li>
@@ -87,7 +87,7 @@ const DEFAULT_PAGE_SIZE = 10;
             variant="outline"
             size="icon"
           >
-            <svg-chevron-left-icon />
+            <svg si-chevron-left-icon></svg>
             <span class="sr-only">Previous page</span>
           </button>
         </li>
@@ -109,7 +109,7 @@ const DEFAULT_PAGE_SIZE = 10;
             variant="outline"
             size="icon"
           >
-            <svg-chevron-right-icon />
+            <svg si-chevron-right-icon></svg>
             <span class="sr-only">Next page</span>
           </button>
         </li>
@@ -124,7 +124,7 @@ const DEFAULT_PAGE_SIZE = 10;
               variant="outline"
               size="icon"
             >
-              <svg-chevrons-right-icon />
+              <svg si-chevrons-right-icon></svg>
               <span class="sr-only">Last page</span>
             </button>
           </li>

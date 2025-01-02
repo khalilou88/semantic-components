@@ -8,14 +8,14 @@ import {
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
-import { SvgCircleIcon } from '@semantic-icons/lucide-icons';
+import { SiCircleIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'button[sc-menu-radio-item]',
-  imports: [SvgCircleIcon],
+  imports: [SiCircleIcon],
   template: `
     <span class="absolute left-2 flex size-3.5 items-center justify-center">
-      <svg-circle-icon class="size-2 fill-current" />
+      <svg class="size-2 fill-current" si-circle-icon></svg>
     </span>
 
     <ng-content />

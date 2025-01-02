@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { SvgAlignCenterIcon } from '@semantic-icons/lucide-icons';
+import { SiAlignCenterIcon } from '@semantic-icons/lucide-icons';
 
 import { ScToggle } from '../../toggle';
 import { ScTooltip } from '../../tooltip';
@@ -9,7 +9,7 @@ import { ScExtensions } from '../extensions/extensions';
 
 @Component({
   selector: 'sc-editor-text-align-center',
-  imports: [ScTooltip, SvgAlignCenterIcon, ScToggle],
+  imports: [ScTooltip, SiAlignCenterIcon, ScToggle],
   template: `
     <button
       [attr.aria-label]="ariaLabel"
@@ -19,7 +19,7 @@ import { ScExtensions } from '../extensions/extensions';
       sc-toggle
       variant="outline"
     >
-      <svg-align-center-icon />
+      <svg si-align-center-icon></svg>
       <span class="sr-only">{{ ariaLabel }}</span>
     </button>
   `,

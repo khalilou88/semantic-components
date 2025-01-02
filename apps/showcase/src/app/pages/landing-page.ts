@@ -2,11 +2,11 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { RouterLink } from '@angular/router';
 
 import { ScBadge, ScButton } from '@semantic-components/ui';
-import { SvgArrowRightIcon, SvgGithubIcon } from '@semantic-icons/lucide-icons';
+import { SiArrowRightIcon, SiGithubIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-landing-page',
-  imports: [SvgArrowRightIcon, SvgGithubIcon, ScButton, ScBadge, RouterLink],
+  imports: [SiArrowRightIcon, SiGithubIcon, ScButton, ScBadge, RouterLink],
   template: `
     <section class="fade-bottom overflow-hidden pb-0 sm:pb-0 md:pb-0">
       <div class="max-w-container mx-auto flex flex-col gap-12 pt-16 sm:gap-24">
@@ -15,7 +15,7 @@ import { SvgArrowRightIcon, SvgGithubIcon } from '@semantic-icons/lucide-icons';
             <span class="text-muted-foreground">New version of Semantic Components is out!</span>
             <a class="flex items-center gap-1" href="/">
               Get started
-              <svg-arrow-right-icon class="size-3" />
+              <svg class="size-3" si-arrow-right-icon></svg>
             </a>
           </div>
           <h1
@@ -33,7 +33,7 @@ import { SvgArrowRightIcon, SvgGithubIcon } from '@semantic-icons/lucide-icons';
               <a variant="primary" size="lg" sc-button routerLink="/get-started">Get started</a>
 
               <a variant="secondary" size="lg" sc-button>
-                <svg-github-icon class="mr-2 size-4" />
+                <svg class="mr-2 size-4" si-github-icon></svg>
                 Github
               </a>
             </div>

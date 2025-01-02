@@ -6,7 +6,7 @@ import {
   inject,
 } from '@angular/core';
 
-import { SvgMoonIcon, SvgSunIcon } from '@semantic-icons/lucide-icons';
+import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
 
 import { ScButton } from '../button';
 import { ScTooltip } from '../tooltip';
@@ -14,7 +14,7 @@ import { ScTheme } from './theme';
 
 @Component({
   selector: 'sc-theme-toggler',
-  imports: [SvgMoonIcon, SvgSunIcon, ScTooltip, ScButton],
+  imports: [SiMoonIcon, SiSunIcon, ScTooltip, ScButton],
   template: `
     <button
       [scTooltip]="message()"
@@ -25,11 +25,11 @@ import { ScTheme } from './theme';
       type="button"
     >
       @if (theme.value() === 'light') {
-        <svg-moon-icon />
+        <svg si-moon-icon></svg>
       }
 
       @if (theme.value() === 'dark') {
-        <svg-sun-icon />
+        <svg si-sun-icon></svg>
       }
     </button>
   `,

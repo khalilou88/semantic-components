@@ -18,14 +18,14 @@ import {
   ScTabLabel,
   ScTabs,
 } from '@semantic-components/ui';
-import { SvgChevronRightIcon, SvgLoaderCircleIcon } from '@semantic-icons/lucide-icons';
+import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-buttons-page',
   imports: [
     ScButton,
-    SvgChevronRightIcon,
-    SvgLoaderCircleIcon,
+    SiChevronRightIcon,
+    SiLoaderCircleIcon,
     ScBreadcrumb,
     ScBreadcrumbList,
     ScBreadcrumbItem,
@@ -49,7 +49,7 @@ import { SvgChevronRightIcon, SvgLoaderCircleIcon } from '@semantic-icons/lucide
           <ol sc-breadcrumb-list>
             <li sc-breadcrumb-item><a sc-breadcrumb-link>Components</a></li>
 
-            <li sc-breadcrumb-separator><svg-chevron-right-icon /></li>
+            <li sc-breadcrumb-separator><svg si-chevron-right-icon></svg></li>
             <li sc-breadcrumb-item>
               <span sc-breadcrumb-page>Button</span>
             </li>
@@ -129,22 +129,22 @@ import { SvgChevronRightIcon, SvgLoaderCircleIcon } from '@semantic-icons/lucide
 
         <h1>Icon</h1>
         <button sc-button type="button" size="icon">
-          <svg-chevron-right-icon />
+          <svg si-chevron-right-icon></svg>
         </button>
         <button sc-button variant="secondary" type="button" size="icon">
-          <svg-chevron-right-icon />
+          <svg si-chevron-right-icon></svg>
         </button>
         <button sc-button variant="destructive" type="button" size="icon">
-          <svg-chevron-right-icon />
+          <svg si-chevron-right-icon></svg>
         </button>
         <button class="size-20" sc-button variant="outline" type="button" size="icon">
-          <svg-chevron-right-icon />
+          <svg si-chevron-right-icon></svg>
         </button>
         <button sc-button variant="ghost" type="button" size="icon">
-          <svg-chevron-right-icon />
+          <svg si-chevron-right-icon></svg>
         </button>
         <button sc-button variant="link" type="button" size="icon">
-          <svg-chevron-right-icon />
+          <svg si-chevron-right-icon></svg>
         </button>
 
         <br />
@@ -152,7 +152,7 @@ import { SvgChevronRightIcon, SvgLoaderCircleIcon } from '@semantic-icons/lucide
         <br />
 
         <button sc-button disabled>
-          <svg-loader-circle-icon class="animate-spin" />
+          <svg class="animate-spin" si-loader-circle-icon></svg>
           Please wait
         </button>
       </div>

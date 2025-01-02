@@ -7,13 +7,13 @@ import {
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
-import { SvgEllipsisIcon } from '@semantic-icons/lucide-icons';
+import { SiEllipsisIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'span[sc-breadcrumb-ellipsis]',
-  imports: [SvgEllipsisIcon],
+  imports: [SiEllipsisIcon],
   template: `
-    <svg-ellipsis-icon class="size-4" />
+    <svg class="size-4" si-ellipsis-icon></svg>
     <span class="sr-only">More</span>
   `,
   host: {

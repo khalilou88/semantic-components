@@ -15,21 +15,21 @@ import {
   ScMenuTriggerFor,
 } from '@semantic-components/ui';
 import {
-  SvgChevronRightIcon,
-  SvgCirclePlusIcon,
-  SvgCloudIcon,
-  SvgCreditCardIcon,
-  SvgGithubIcon,
-  SvgKeyboardIcon,
-  SvgLifeBuoyIcon,
-  SvgLogOutIcon,
-  SvgMailIcon,
-  SvgMessageSquareIcon,
-  SvgPlusIcon,
-  SvgSettingsIcon,
-  SvgUserIcon,
-  SvgUserPlusIcon,
-  SvgUsersIcon,
+  SiChevronRightIcon,
+  SiCirclePlusIcon,
+  SiCloudIcon,
+  SiCreditCardIcon,
+  SiGithubIcon,
+  SiKeyboardIcon,
+  SiLifeBuoyIcon,
+  SiLogOutIcon,
+  SiMailIcon,
+  SiMessageSquareIcon,
+  SiPlusIcon,
+  SiSettingsIcon,
+  SiUserIcon,
+  SiUserPlusIcon,
+  SiUsersIcon,
 } from '@semantic-icons/lucide-icons';
 
 @Component({
@@ -38,20 +38,20 @@ import {
     ScMenuShortcut,
     ScMenuLabel,
     ScMenuSeparator,
-    SvgCreditCardIcon,
-    SvgUserIcon,
-    SvgSettingsIcon,
-    SvgKeyboardIcon,
-    SvgUsersIcon,
-    SvgUserPlusIcon,
-    SvgMailIcon,
-    SvgMessageSquareIcon,
-    SvgCirclePlusIcon,
-    SvgGithubIcon,
-    SvgLogOutIcon,
-    SvgCloudIcon,
-    SvgLifeBuoyIcon,
-    SvgPlusIcon,
+    SiCreditCardIcon,
+    SiUserIcon,
+    SiSettingsIcon,
+    SiKeyboardIcon,
+    SiUsersIcon,
+    SiUserPlusIcon,
+    SiMailIcon,
+    SiMessageSquareIcon,
+    SiCirclePlusIcon,
+    SiGithubIcon,
+    SiLogOutIcon,
+    SiCloudIcon,
+    SiLifeBuoyIcon,
+    SiPlusIcon,
     ScMenuGroup,
     ScMenuItem,
     ScMenuCheckboxItem,
@@ -60,7 +60,7 @@ import {
     ScMenuTriggerFor,
     CdkMenuModule,
     ScMenu,
-    SvgChevronRightIcon,
+    SiChevronRightIcon,
     ScButton,
   ],
   template: `
@@ -74,22 +74,22 @@ import {
 
           <sc-menu-group>
             <button sc-menu-item>
-              <svg-user-icon />
+              <svg si-user-icon></svg>
               <span>Profile</span>
               <span sc-menu-shortcut>⇧⌘P</span>
             </button>
             <button sc-menu-item>
-              <svg-credit-card-icon />
+              <svg si-credit-card-icon></svg>
               <span>Billing</span>
               <span sc-menu-shortcut>⌘B</span>
             </button>
             <button sc-menu-item>
-              <svg-settings-icon />
+              <svg si-settings-icon></svg>
               <span>Settings</span>
               <span sc-menu-shortcut>⌘S</span>
             </button>
             <button sc-menu-item>
-              <svg-keyboard-icon />
+              <svg si-keyboard-icon></svg>
               <span>Keyboard shortcuts</span>
               <span sc-menu-shortcut>⌘K</span>
             </button>
@@ -97,56 +97,56 @@ import {
           <hr sc-menu-separator />
           <sc-menu-group>
             <button sc-menu-item>
-              <svg-users-icon />
+              <svg si-users-icon></svg>
               <span>Team</span>
             </button>
 
             <button [scMenuTriggerFor]="sub_menu_1" sc-menu-item>
-              <svg-user-plus-icon />
+              <svg si-user-plus-icon></svg>
               <span>Invite users</span>
-              <svg-chevron-right-icon class="ml-auto" />
+              <svg class="ml-auto" si-chevron-right-icon></svg>
             </button>
 
             <ng-template #sub_menu_1>
               <div sc-menu>
                 <button sc-menu-item>
-                  <svg-mail-icon />
+                  <svg si-mail-icon></svg>
                   <span>Email</span>
                 </button>
                 <button sc-menu-item>
-                  <svg-message-square-icon />
+                  <svg si-message-square-icon></svg>
                   <span>Message</span>
                 </button>
                 <hr sc-menu-separator />
                 <button sc-menu-item>
-                  <svg-circle-plus-icon />
+                  <svg si-circle-plus-icon></svg>
                   <span>More...</span>
                 </button>
               </div>
             </ng-template>
 
             <button sc-menu-item>
-              <svg-plus-icon />
+              <svg si-plus-icon></svg>
               <span>New Team</span>
               <span sc-menu-shortcut>⌘+T</span>
             </button>
           </sc-menu-group>
           <hr sc-menu-separator />
           <button sc-menu-item>
-            <svg-github-icon />
+            <svg si-github-icon></svg>
             <span>GitHub</span>
           </button>
           <button sc-menu-item>
-            <svg-life-buoy-icon />
+            <svg si-life-buoy-icon></svg>
             <span>Support</span>
           </button>
           <button sc-menu-item disabled>
-            <svg-cloud-icon />
+            <svg si-cloud-icon></svg>
             <span>API</span>
           </button>
           <hr sc-menu-separator />
           <button sc-menu-item>
-            <svg-log-out-icon />
+            <svg si-log-out-icon></svg>
             <span>Log out</span>
             <span sc-menu-shortcut>⇧⌘Q</span>
           </button>

@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
-import { SvgXIcon } from '@semantic-icons/lucide-icons';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 import { SIDEBAR_WIDTH_MOBILE } from './constants';
 import { ScSidebarState } from './sidebar-state';
@@ -17,11 +17,11 @@ import { ScSidebarToggler } from './sidebar-toggler';
 
 @Component({
   selector: 'sc-sidebar-mobile',
-  imports: [ScSidebarToggler, SvgXIcon],
+  imports: [ScSidebarToggler, SiXIcon],
   template: `
     <div class="flex size-full flex-col">
       <sc-sidebar-toggler class="absolute right-1 top-1">
-        <svg-x-icon />
+        <svg si-x-icon></svg>
       </sc-sidebar-toggler>
 
       <br />

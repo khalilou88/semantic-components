@@ -1,7 +1,7 @@
 import { CdkMenu, CdkMenuItem, CdkMenuTrigger } from '@angular/cdk/menu';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { SvgPaletteIcon } from '@semantic-icons/lucide-icons';
+import { SiPaletteIcon } from '@semantic-icons/lucide-icons';
 
 import { ScTooltip } from '../../tooltip';
 import { colors } from '../colors';
@@ -10,7 +10,7 @@ import { ScExtensions } from './extensions';
 
 @Component({
   selector: 'sc-extension-color',
-  imports: [CdkMenuTrigger, CdkMenu, CdkMenuItem, ScTooltip, SvgPaletteIcon],
+  imports: [CdkMenuTrigger, CdkMenu, CdkMenuItem, ScTooltip, SiPaletteIcon],
   template: `
     <button
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
@@ -18,7 +18,7 @@ import { ScExtensions } from './extensions';
       type="button"
       scTooltip="Text color"
     >
-      <svg-palette-icon />
+      <svg si-palette-icon></svg>
       <span class="sr-only">Text color</span>
     </button>
 

@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import { ScAvatar, ScButton, ScHoverCardTriggerFor } from '@semantic-components/ui';
-import { SvgCalendarDaysIcon } from '@semantic-icons/lucide-icons';
+import { SiCalendarDaysIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-hover-card-page',
-  imports: [ScButton, ScHoverCardTriggerFor, SvgCalendarDaysIcon, ScAvatar],
+  imports: [ScButton, ScHoverCardTriggerFor, SiCalendarDaysIcon, ScAvatar],
   template: `
     <div class="m-10">
       <button [scHoverCardTriggerFor]="templateForHoverCardTrigger" sc-button variant="link">
@@ -19,7 +19,7 @@ import { SvgCalendarDaysIcon } from '@semantic-icons/lucide-icons';
             <h4 class="text-sm font-semibold">&#64;nextjs</h4>
             <p class="text-sm">The React Framework – created and maintained by &#64;vercel.</p>
             <div class="flex items-center pt-2">
-              <svg-calendar-days-icon class="mr-2 size-4 opacity-70" />
+              <svg class="mr-2 size-4 opacity-70" si-calendar-days-icon></svg>
               <span class="text-xs text-muted-foreground">Joined December 2021</span>
             </div>
           </div>

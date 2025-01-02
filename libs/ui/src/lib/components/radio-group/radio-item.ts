@@ -11,13 +11,13 @@ import {
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
-import { SvgCircleIcon } from '@semantic-icons/lucide-icons';
+import { SiCircleIcon } from '@semantic-icons/lucide-icons';
 
 import { ScRadioGroupState } from './radio-group-state';
 
 @Component({
   selector: 'sc-radio-item',
-  imports: [SvgCircleIcon],
+  imports: [SiCircleIcon],
   template: `
     <div class="grid grid-cols-[1fr]">
       <input
@@ -30,7 +30,7 @@ import { ScRadioGroupState } from './radio-group-state';
 
       @if (checked() === true) {
         <span [class]="svgWrapperClass()">
-          <svg-circle-icon [class]="_svgClass()" />
+          <svg [class]="_svgClass()" si-circle-icon></svg>
         </span>
       }
     </div>

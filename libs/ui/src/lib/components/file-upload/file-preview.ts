@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
 
-import { SvgFileTextIcon } from '@semantic-icons/lucide-icons';
+import { SiFileTextIcon } from '@semantic-icons/lucide-icons';
 
 import { ScFile } from './file';
 
 @Component({
   selector: 'sc-file-preview',
-  imports: [SvgFileTextIcon],
+  imports: [SiFileTextIcon],
   template: `
     @if (file().file.type.startsWith('image/')) {
       <img
@@ -18,7 +18,7 @@ import { ScFile } from './file';
         loading="lazy"
       />
     } @else {
-      <svg-file-text-icon class="size-10 text-muted-foreground" aria-hidden="true" />
+      <svg class="size-10 text-muted-foreground" si-file-text-icon aria-hidden="true"></svg>
     }
   `,
   styles: ``,

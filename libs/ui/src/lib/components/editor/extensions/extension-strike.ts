@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { SvgStrikethroughIcon } from '@semantic-icons/lucide-icons';
+import { SiStrikethroughIcon } from '@semantic-icons/lucide-icons';
 
 import { ScToggle } from '../../toggle';
 import { ScTooltip } from '../../tooltip';
@@ -9,7 +9,7 @@ import { ScExtensions } from './extensions';
 
 @Component({
   selector: 'sc-extension-strike',
-  imports: [ScTooltip, SvgStrikethroughIcon, ScToggle],
+  imports: [ScTooltip, SiStrikethroughIcon, ScToggle],
   template: `
     <button
       [attr.aria-label]="ariaLabel"
@@ -19,7 +19,7 @@ import { ScExtensions } from './extensions';
       variant="outline"
       type="button"
     >
-      <svg-strikethrough-icon />
+      <svg si-strikethrough-icon></svg>
       <span class="sr-only">{{ ariaLabel }}</span>
     </button>
   `,

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { SvgAlignRightIcon } from '@semantic-icons/lucide-icons';
+import { SiAlignRightIcon } from '@semantic-icons/lucide-icons';
 
 import { ScToggle } from '../../toggle';
 import { ScTooltip } from '../../tooltip';
@@ -9,7 +9,7 @@ import { ScExtensions } from '../extensions/extensions';
 
 @Component({
   selector: 'sc-editor-text-align-right',
-  imports: [ScTooltip, SvgAlignRightIcon, ScToggle],
+  imports: [ScTooltip, SiAlignRightIcon, ScToggle],
   template: `
     <button
       [attr.aria-label]="ariaLabel"
@@ -19,7 +19,7 @@ import { ScExtensions } from '../extensions/extensions';
       sc-toggle
       variant="outline"
     >
-      <svg-align-right-icon />
+      <svg si-align-right-icon></svg>
       <span class="sr-only">{{ ariaLabel }}</span>
     </button>
   `,

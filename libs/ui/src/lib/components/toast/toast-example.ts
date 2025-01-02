@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { SvgXIcon } from '@semantic-icons/lucide-icons';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 import { ScToast } from './toast';
 import { ScToastAction } from './toast-action';
@@ -13,7 +13,7 @@ import { ScToastTitle } from './toast-title';
   selector: 'sc-toast-example',
   imports: [
     ScToastClose,
-    SvgXIcon,
+    SiXIcon,
     ScToastAction,
     ScToastDescription,
     ScToastTitle,
@@ -45,7 +45,7 @@ import { ScToastTitle } from './toast-title';
       </div>
       <button sc-toast-action type="button">Undo</button>
       <button type="button" sc-toast-close>
-        <svg-x-icon class="size-4" />
+        <svg class="size-4" si-x-icon></svg>
         <span class="sr-only">Close</span>
       </button>
     </li>

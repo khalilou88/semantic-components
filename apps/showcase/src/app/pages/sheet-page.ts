@@ -20,7 +20,7 @@ import {
   ScSheetConfig,
   ScSheetTrigger,
 } from '@semantic-components/ui';
-import { SvgXIcon } from '@semantic-icons/lucide-icons';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-sheet-page',
@@ -34,13 +34,13 @@ import { SvgXIcon } from '@semantic-icons/lucide-icons';
     ScCardTitle,
     ScCardDescription,
     ScSheetClose,
-    SvgXIcon,
+    SiXIcon,
   ],
   template: `
     <ng-template #sheet>
       <div sc-sheet>
         <button sc-sheet-close>
-          <svg-x-icon class="size-4" />
+          <svg class="size-4" si-x-icon></svg>
           <span class="sr-only">Close</span>
         </button>
 

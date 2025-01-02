@@ -13,7 +13,7 @@ import {
   ScMenuSeparator,
   ScMenuTriggerFor,
 } from '@semantic-components/ui';
-import { SvgChevronRightIcon } from '@semantic-icons/lucide-icons';
+import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-menu-bar-page',
@@ -23,7 +23,7 @@ import { SvgChevronRightIcon } from '@semantic-icons/lucide-icons';
     ScMenuItem,
     ScMenuBarItem,
     ScMenu,
-    SvgChevronRightIcon,
+    SiChevronRightIcon,
     ScMenuSeparator,
     ScMenuTriggerFor,
     ScMenuCheckboxItem,
@@ -45,14 +45,14 @@ import { SvgChevronRightIcon } from '@semantic-icons/lucide-icons';
           <hr sc-menu-separator />
           <button [scMenuTriggerFor]="new_doc" sc-menu-item>
             New
-            <svg-chevron-right-icon class="ml-auto" />
+            <svg class="ml-auto" si-chevron-right-icon></svg>
           </button>
           <button sc-menu-item>Open</button>
           <button sc-menu-item>Make a Copy</button>
           <hr sc-menu-separator />
           <button [scMenuTriggerFor]="download" sc-menu-item>
             Download
-            <svg-chevron-right-icon class="ml-auto" />
+            <svg class="ml-auto" si-chevron-right-icon></svg>
           </button>
         </div>
       </ng-template>
@@ -125,7 +125,7 @@ import { SvgChevronRightIcon } from '@semantic-icons/lucide-icons';
             <button sc-menu-item>
               <button [scMenuTriggerFor]="share" sc-menu-item>
                 Share
-                <svg-chevron-right-icon class="ml-auto" />
+                <svg class="ml-auto" si-chevron-right-icon></svg>
               </button>
               <ng-template #share>
                 <div sc-menu>
@@ -159,7 +159,7 @@ import { SvgChevronRightIcon } from '@semantic-icons/lucide-icons';
             <button sc-menu-item>
               <button [scMenuTriggerFor]="find" sc-menu-item>
                 Find
-                <svg-chevron-right-icon class="ml-auto" />
+                <svg class="ml-auto" si-chevron-right-icon></svg>
               </button>
               <ng-template #find>
                 <div sc-menu>

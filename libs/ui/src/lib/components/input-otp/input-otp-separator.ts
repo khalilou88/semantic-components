@@ -7,13 +7,13 @@ import {
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
-import { SvgDotIcon } from '@semantic-icons/lucide-icons';
+import { SiDotIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'sc-input-otp-separator',
-  imports: [SvgDotIcon],
+  imports: [SiDotIcon],
   template: `
-    <svg-dot-icon />
+    <svg si-dot-icon></svg>
   `,
   host: {
     '[class]': 'classes()',

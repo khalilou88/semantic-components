@@ -26,14 +26,14 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { SvgChevronDownIcon } from '@semantic-icons/lucide-icons';
+import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 import { ScOption } from './option';
 import { ScSelectState } from './select-state';
 
 @Component({
   selector: 'sc-select',
-  imports: [SvgChevronDownIcon],
+  imports: [SiChevronDownIcon],
   template: `
     <button
       class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
@@ -46,7 +46,7 @@ import { ScSelectState } from './select-state';
       role="combobox"
     >
       {{ label() }}
-      <svg-chevron-down-icon class="size-4 opacity-50" />
+      <svg class="size-4 opacity-50" si-chevron-down-icon></svg>
     </button>
 
     <ng-template #panelTemplate>

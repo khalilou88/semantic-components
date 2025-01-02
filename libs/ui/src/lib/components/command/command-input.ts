@@ -7,13 +7,13 @@ import {
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
-import { SvgSearchIcon } from '@semantic-icons/lucide-icons';
+import { SiSearchIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'sc-command-input',
-  imports: [SvgSearchIcon],
+  imports: [SiSearchIcon],
   template: `
-    <svg-search-icon class="mr-2 size-4 shrink-0 opacity-50" />
+    <svg class="mr-2 size-4 shrink-0 opacity-50" si-search-icon></svg>
     <input
       class="flex h-12 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
       [placeholder]="placeholder()"

@@ -13,12 +13,12 @@ import {
   ScCommandShortcut,
 } from '@semantic-components/ui';
 import {
-  SvgCalculatorIcon,
-  SvgCalendarIcon,
-  SvgCreditCardIcon,
-  SvgSettingsIcon,
-  SvgSmileIcon,
-  SvgUserIcon,
+  SiCalculatorIcon,
+  SiCalendarIcon,
+  SiCreditCardIcon,
+  SiSettingsIcon,
+  SiSmileIcon,
+  SiUserIcon,
 } from '@semantic-icons/lucide-icons';
 
 @Component({
@@ -32,12 +32,12 @@ import {
     ScCommandItem,
     ScCommandSeparator,
     ScCommandShortcut,
-    SvgCalendarIcon,
-    SvgSmileIcon,
-    SvgCalculatorIcon,
-    SvgUserIcon,
-    SvgCreditCardIcon,
-    SvgSettingsIcon,
+    SiCalendarIcon,
+    SiSmileIcon,
+    SiCalculatorIcon,
+    SiUserIcon,
+    SiCreditCardIcon,
+    SiSettingsIcon,
     ScCommandError,
     ScCommandLoading,
   ],
@@ -51,32 +51,32 @@ import {
           <sc-command-empty>No results found.</sc-command-empty>
           <sc-command-group heading="Suggestions">
             <sc-command-item>
-              <svg-calendar-icon />
+              <svg si-calendar-icon></svg>
               <span>Calendar</span>
             </sc-command-item>
             <sc-command-item>
-              <svg-smile-icon />
+              <svg si-smile-icon></svg>
               <span>Search Emoji</span>
             </sc-command-item>
             <sc-command-item disabled>
-              <svg-calculator-icon />
+              <svg si-calculator-icon></svg>
               <span>Calculator</span>
             </sc-command-item>
           </sc-command-group>
           <sc-command-separator />
           <sc-command-group heading="Settings">
             <sc-command-item>
-              <svg-user-icon />
+              <svg si-user-icon></svg>
               <span>Profile</span>
               <sc-command-shortcut>⌘P</sc-command-shortcut>
             </sc-command-item>
             <sc-command-item>
-              <svg-credit-card-icon />
+              <svg si-credit-card-icon></svg>
               <span>Billing</span>
               <sc-command-shortcut>⌘B</sc-command-shortcut>
             </sc-command-item>
             <sc-command-item>
-              <svg-settings-icon />
+              <svg si-settings-icon></svg>
               <span>Settings</span>
               <sc-command-shortcut>⌘S</sc-command-shortcut>
             </sc-command-item>

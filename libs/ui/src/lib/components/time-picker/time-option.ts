@@ -13,14 +13,14 @@ import {
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
-import { SvgCheckIcon } from '@semantic-icons/lucide-icons';
+import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'sc-time-option',
-  imports: [SvgCheckIcon],
+  imports: [SiCheckIcon],
   template: `
     @if (_selected()) {
-      <svg-check-icon class="absolute left-2 flex size-4 items-center justify-center" />
+      <svg class="absolute left-2 flex size-4 items-center justify-center" si-check-icon></svg>
     }
 
     <ng-content />

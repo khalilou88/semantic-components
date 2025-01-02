@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { SvgUnderlineIcon } from '@semantic-icons/lucide-icons';
+import { SiUnderlineIcon } from '@semantic-icons/lucide-icons';
 
 import { ScToggle } from '../../toggle';
 import { ScTooltip } from '../../tooltip';
@@ -9,7 +9,7 @@ import { ScExtensions } from './extensions';
 
 @Component({
   selector: 'sc-extension-underline',
-  imports: [ScTooltip, SvgUnderlineIcon, ScToggle],
+  imports: [ScTooltip, SiUnderlineIcon, ScToggle],
   template: `
     <button
       [attr.aria-label]="ariaLabel"
@@ -19,7 +19,7 @@ import { ScExtensions } from './extensions';
       variant="outline"
       type="button"
     >
-      <svg-underline-icon />
+      <svg si-underline-icon></svg>
       <span class="sr-only">{{ ariaLabel }}</span>
     </button>
   `,
