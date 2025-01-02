@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/utils';
 import { VariantProps, cva } from 'class-variance-authority';
 
 const alertVariants = cva(
-  'relative w-full rounded-lg border p-4 [&_svg]:size-4 [&>.svg-host+p]:translate-y-[-3px] [&_svg]:absolute [&_svg]:left-4 [&_svg]:top-4 [&_svg]:text-foreground [&>.svg-host~*]:pl-7',
+  'relative w-full rounded-lg border p-4 [&>.svg-host+p]:translate-y-[-3px] [&>.svg-host~*]:pl-7 [&_svg]:absolute [&_svg]:left-4 [&_svg]:top-4 [&_svg]:size-4 [&_svg]:text-foreground',
   {
     variants: {
       variant: {

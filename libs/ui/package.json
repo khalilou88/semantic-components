@@ -42,7 +42,7 @@
     "class-variance-authority": "^0.7.1",
     "embla-carousel": "^8.5.1",
     "rxjs": "~7.8.1",
-    "@semantic-components/utils": "0.1.0",
+    "@semantic-components/utils": "0.2.0",
     "@semantic-components/supabase": ">=0.0.1"
   },
   "sideEffects": false,

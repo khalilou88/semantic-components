@@ -10,20 +10,20 @@ import { ScButton } from '../button';
   imports: [SiCookieIcon, ScButton],
   template: `
     <div [class]="class()">
-      <div class="m-3 dark:bg-card bg-background border border-border rounded-lg">
+      <div class="m-3 rounded-lg border border-border bg-background dark:bg-card">
         <div class="flex items-center justify-between p-3">
           <h1 class="text-lg font-medium">We use cookies</h1>
-          <svg class="h-[1.2rem] w-[1.2rem]" si-cookie-icon></svg>
+          <svg class="size-[1.2rem]" si-cookie-icon></svg>
         </div>
-        <div class="p-3 -mt-2">
-          <p class="text-sm text-left text-muted-foreground">
+        <div class="-mt-2 p-3">
+          <p class="text-left text-sm text-muted-foreground">
             We use cookies to ensure you get the best experience on our website. For more
             information on how we use cookies, please see our cookie policy.
           </p>
         </div>
-        <div class="p-3 flex items-center gap-2 mt-2 border-t">
-          <button class="w-full h-9 rounded-full" (click)="accept()" sc-button>accept</button>
-          <button class="w-full h-9 rounded-full" (click)="decline()" sc-button variant="outline">
+        <div class="mt-2 flex items-center gap-2 border-t p-3">
+          <button class="h-9 w-full rounded-full" (click)="accept()" sc-button>accept</button>
+          <button class="h-9 w-full rounded-full" (click)="decline()" sc-button variant="outline">
             decline
           </button>
         </div>
