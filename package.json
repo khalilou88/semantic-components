@@ -93,7 +93,7 @@
     "@trivago/prettier-plugin-sort-imports": "^5.2.0",
     "@types/express": "5.0.0",
     "@types/jest": "^29.5.14",
-    "@types/node": "22.10.3",
+    "@types/node": "22.10.4",
     "@typescript-eslint/utils": "^8.18.2",
     "angular-eslint": "19.0.2",
     "autoprefixer": "^10.4.20",
