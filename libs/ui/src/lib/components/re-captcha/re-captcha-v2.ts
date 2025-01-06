@@ -45,7 +45,7 @@ export class ScReCaptchaV2 implements OnInit, ControlValueAccessor {
   readonly theme = input<'dark' | 'light'>('light');
   readonly size = input<'normal' | 'compact'>('normal');
   readonly tabindex = input<string>('0');
-  readonly hl = input<string>('');
+  readonly languageCode = input<string>('');
   private readonly value = signal<string | null>(null);
   private readonly disabledByCva = signal(false);
 
@@ -56,7 +56,7 @@ export class ScReCaptchaV2 implements OnInit, ControlValueAccessor {
 
   private addScript() {
     const script = this.document.createElement('script');
-    const hl = this.hl() ? `hl=${this.hl()}` : '';
+    const hl = this.languageCode() ? `hl=${this.languageCode()}` : '';
     script.src = `https://www.google.com/recaptcha/api.js?${hl}`;
     script.async = true;
     script.defer = true;
