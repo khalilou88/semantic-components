@@ -15,19 +15,18 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 @Component({
   selector: 'sc-re-captcha-v2',
   imports: [],
-  template: `
-    <div
-      class="g-recaptcha"
-      [attr.data-sitekey]="siteKey()"
-      [attr.data-theme]="theme()"
-      [attr.data-size]="size()"
-      [attr.data-tabindex]="tabindex()"
-      data-callback="gReCaptchaCallback"
-      data-expired-callback="gReCaptchaExpiredCallback"
-      data-error-callback="gReCaptchaErrorCallback"
-    ></div>
-  `,
+  template: ``,
   styles: ``,
+  host: {
+    '[class.g-recaptcha]': 'true',
+    '[attr.data-sitekey]': 'siteKey()',
+    '[attr.data-theme]': 'theme()',
+    '[attr.data-size]': 'size()',
+    '[attr.data-tabindex]': 'tabindex()',
+    'data-callback': 'gReCaptchaCallback',
+    'data-expired-callback': 'gReCaptchaExpiredCallback',
+    'data-error-callback': 'gReCaptchaErrorCallback',
+  },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
