@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -33,6 +34,7 @@ declare let grecaptcha: any;
   ],
 })
 export class ScReCaptchaV3 implements OnInit, ControlValueAccessor {
+  private readonly document = inject<Document>(DOCUMENT);
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
 
   readonly siteKey = input.required<string>();
@@ -46,11 +48,11 @@ export class ScReCaptchaV3 implements OnInit, ControlValueAccessor {
   }
 
   private addScript() {
-    const script = document.createElement('script');
+    const script = this.document.createElement('script');
     script.src = `https://www.google.com/recaptcha/api.js?render=${this.siteKey()}`;
     script.async = true;
     script.defer = true;
-    document.body.appendChild(script);
+    this.document.body.appendChild(script);
   }
 
   executeCaptcha(): void {
