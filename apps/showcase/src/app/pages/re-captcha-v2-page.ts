@@ -9,7 +9,7 @@ import { ScReCaptchaV2 } from '@semantic-components/ui';
   template: `
     <div class="m-10">
       <form [formGroup]="reCaptchaV2Form">
-        <sc-re-captcha-v2 formControlName="captcha" siteKey="siteKey" languageCode="" />
+        <sc-re-captcha-v2 [siteKey]="siteKey" formControlName="captcha" languageCode="" />
       </form>
     </div>
   `,

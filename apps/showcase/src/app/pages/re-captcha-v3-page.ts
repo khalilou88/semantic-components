@@ -9,7 +9,7 @@ import { ScReCaptchaV3 } from '@semantic-components/ui';
   template: `
     <div class="m-10">
       <form [formGroup]="reCaptchaV3Form">
-        <sc-re-captcha-v3 formControlName="captcha" siteKey="" />
+        <sc-re-captcha-v3 [siteKey]="siteKey" formControlName="captcha" />
       </form>
     </div>
   `,
@@ -18,6 +18,8 @@ import { ScReCaptchaV3 } from '@semantic-components/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ReCaptchaV3Page {
+  siteKey = '';
+
   reCaptchaV3Form = new FormGroup({
     captcha: new FormControl(''),
   });
