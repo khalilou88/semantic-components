@@ -56,8 +56,9 @@ export class ScReCaptchaV2 implements OnInit, ControlValueAccessor {
 
   private addScript() {
     const script = this.document.createElement('script');
-    const hl = this.languageCode() ? `hl=${this.languageCode()}` : '';
-    script.src = `https://www.google.com/recaptcha/api.js?${hl}`;
+    script.src = this.languageCode()
+      ? `https://www.google.com/recaptcha/api.js?hl=${this.languageCode()}`
+      : 'https://www.google.com/recaptcha/api.js';
     script.async = true;
     script.defer = true;
     this.document.body.appendChild(script);
