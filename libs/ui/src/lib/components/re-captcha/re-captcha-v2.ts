@@ -20,6 +20,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
       class="g-recaptcha"
       [attr.data-sitekey]="siteKey()"
       data-callback="gReCaptchaCallback"
+      data-expired-callback="gReCaptchaExpiredCallback"
     ></div>
   `,
   styles: ``,
@@ -36,16 +37,13 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class ScReCaptchaV2 implements OnInit, ControlValueAccessor {
   private readonly document = inject<Document>(DOCUMENT);
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
-
   readonly siteKey = input.required<string>();
-
   readonly hl = input<string>('');
-
   private readonly value = signal<string | null>(null);
   private readonly disabledByCva = signal(false);
 
   ngOnInit() {
-    this.registerReCaptchaCallback();
+    this.registerReCaptchaCallbacks();
     this.addScript();
   }
 
@@ -58,18 +56,17 @@ export class ScReCaptchaV2 implements OnInit, ControlValueAccessor {
     this.document.body.appendChild(script);
   }
 
-  registerReCaptchaCallback() {
+  registerReCaptchaCallbacks() {
     (window as any).gReCaptchaCallback = (token: string) => {
       this.setValue(token);
     };
+
+    (window as any).gReCaptchaExpiredCallback = () => {
+      this.setValue(null);
+    };
   }
 
-  onCaptchaChange(response: any): void {
-    console.group(response);
-    this.setValue(response);
-  }
-
-  setValue(newValue: string) {
+  setValue(newValue: string | null) {
     this.value.set(newValue);
     this.onChange(newValue);
     this.changeDetectorRef.markForCheck();
