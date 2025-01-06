@@ -162,9 +162,9 @@ export class ScCalendar implements OnInit, ControlValueAccessor {
     this._onTouched = fn;
   }
 
-  private readonly _disabledByCva = signal(false);
+  private readonly disabledByCva = signal(false);
   setDisabledState?(isDisabled: boolean): void {
-    this._disabledByCva.set(isDisabled);
+    this.disabledByCva.set(isDisabled);
   }
 
   ngOnInit() {

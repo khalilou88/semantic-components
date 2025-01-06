@@ -42,7 +42,7 @@ export class ScReCaptchaV2 implements OnInit, ControlValueAccessor {
   readonly languageCode = input.required<string>();
 
   private readonly value = signal<string | null>(null);
-  private readonly _disabledByCva = signal(false);
+  private readonly disabledByCva = signal(false);
 
   ngOnInit() {
     const script = this.document.createElement('script');
@@ -80,6 +80,6 @@ export class ScReCaptchaV2 implements OnInit, ControlValueAccessor {
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this._disabledByCva.set(isDisabled);
+    this.disabledByCva.set(isDisabled);
   }
 }

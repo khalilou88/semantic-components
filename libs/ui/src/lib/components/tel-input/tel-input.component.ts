@@ -135,8 +135,8 @@ export class TelInputComponent implements ControlValueAccessor, DoCheck, OnDestr
   }
 
   private readonly _focused = signal(false);
-  private readonly _disabledByCva = signal(false);
-  private readonly _disabled = computed(() => this._disabledByInput() || this._disabledByCva());
+  private readonly disabledByCva = signal(false);
+  private readonly _disabled = computed(() => this._disabledByInput() || this.disabledByCva());
   private readonly _focusMonitor = inject(FocusMonitor);
   private readonly _elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
@@ -301,7 +301,7 @@ export class TelInputComponent implements ControlValueAccessor, DoCheck, OnDestr
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this._disabledByCva.set(isDisabled);
+    this.disabledByCva.set(isDisabled);
   }
 
   _handleInput(control: AbstractControl, nextElement?: HTMLInputElement): void {

@@ -143,8 +143,8 @@ export class ScInputOtp implements ControlValueAccessor, OnDestroy {
     transform: booleanAttribute,
   });
 
-  private readonly _disabledByCva = signal(false);
-  private readonly _disabled = computed(() => this._disabledByInput() || this._disabledByCva());
+  private readonly disabledByCva = signal(false);
+  private readonly _disabled = computed(() => this._disabledByInput() || this.disabledByCva());
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
   onChange = (_: any) => {};
@@ -166,7 +166,7 @@ export class ScInputOtp implements ControlValueAccessor, OnDestroy {
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this._disabledByCva.set(isDisabled);
+    this.disabledByCva.set(isDisabled);
   }
 
   private readonly _elementRef = inject(ElementRef);
