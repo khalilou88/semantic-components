@@ -1,10 +1,14 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   OnInit,
   ViewEncapsulation,
+  inject,
   input,
+  signal,
 } from '@angular/core';
+import { ControlValueAccessor } from '@angular/forms';
 
 declare let grecaptcha: any;
 
@@ -16,8 +20,13 @@ declare let grecaptcha: any;
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScReCaptchaV3 implements OnInit {
+export class ScReCaptchaV3 implements OnInit, ControlValueAccessor {
+  private readonly changeDetectorRef = inject(ChangeDetectorRef);
+
   readonly siteKey = input.required<string>();
+
+  private readonly value = signal<string | null>(null);
+  private readonly _disabledByCva = signal(false);
 
   ngOnInit() {
     const script = document.createElement('script');
@@ -32,9 +41,35 @@ export class ScReCaptchaV3 implements OnInit {
   executeCaptcha(): void {
     grecaptcha.ready(() => {
       grecaptcha.execute(this.siteKey, { action: 'submit' }).then((token: string) => {
-        console.log('Generated token:', token);
-        // Send the token to your backend for verification
+        this.setValue(token);
       });
     });
+  }
+
+  setValue(newValue: string) {
+    this.value.set(newValue);
+    this.onChange(newValue);
+    this.changeDetectorRef.markForCheck();
+  }
+
+  writeValue(obj: any): void {
+    this.value.set(obj);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onChange: any = () => {};
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onTouch: any = () => {};
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouch = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this._disabledByCva.set(isDisabled);
   }
 }
