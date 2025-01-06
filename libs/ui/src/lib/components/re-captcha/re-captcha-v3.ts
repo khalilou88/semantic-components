@@ -1,41 +1,40 @@
-import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  ViewEncapsulation,
+  input,
+} from '@angular/core';
 
 declare let grecaptcha: any;
 
-//https://ben-5.azurewebsites.net/2024/9/5/google-recaptcha-v3-with-angular/
-
-@Injectable({
-  providedIn: 'root',
+@Component({
+  selector: 'sc-re-captcha-v3',
+  imports: [],
+  template: ``,
+  styles: ``,
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScReCaptchaV3 {
-  private siteKey: string | null = null;
-  private loaded: boolean = false;
+export class ScReCaptchaV3 implements OnInit {
+  readonly siteKey = input.required<string>();
 
-  constructor(@Inject(DOCUMENT) private readonly document: Document) {}
-
-  load(siteKey: string): void {
-    if (this.loaded) {
-      return;
-    }
-
-    this.siteKey = siteKey;
-
+  ngOnInit() {
     const script = document.createElement('script');
-    script.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`;
+    script.src = `https://www.google.com/recaptcha/api.js?render=${this.siteKey()}`;
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
 
-    this.document.head.appendChild(script);
-
-    this.loaded = true;
+    this.executeCaptcha();
   }
 
-  execute(action: string, callback: (token: string) => void): void {
-    if (!this.siteKey) {
-      throw new Error('Recaptcha site key is not set.');
-    }
-
+  executeCaptcha(): void {
     grecaptcha.ready(() => {
-      grecaptcha.execute(this.siteKey!, { action }).then(callback);
+      grecaptcha.execute(this.siteKey, { action: 'submit' }).then((token: string) => {
+        console.log('Generated token:', token);
+        // Send the token to your backend for verification
+      });
     });
   }
 }
