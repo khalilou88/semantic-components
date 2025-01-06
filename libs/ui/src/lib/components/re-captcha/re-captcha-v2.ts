@@ -19,8 +19,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     <div
       class="g-recaptcha"
       [attr.data-sitekey]="siteKey()"
+      [attr.data-theme]="theme()"
+      [attr.data-size]="size()"
+      [attr.data-tabindex]="tabindex()"
       data-callback="gReCaptchaCallback"
       data-expired-callback="gReCaptchaExpiredCallback"
+      data-error-callback="gReCaptchaErrorCallback"
     ></div>
   `,
   styles: ``,
@@ -38,6 +42,9 @@ export class ScReCaptchaV2 implements OnInit, ControlValueAccessor {
   private readonly document = inject<Document>(DOCUMENT);
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
   readonly siteKey = input.required<string>();
+  readonly theme = input<'dark' | 'light'>('light');
+  readonly size = input<'normal' | 'compact'>('normal');
+  readonly tabindex = input<string>('0');
   readonly hl = input<string>('');
   private readonly value = signal<string | null>(null);
   private readonly disabledByCva = signal(false);
@@ -63,6 +70,11 @@ export class ScReCaptchaV2 implements OnInit, ControlValueAccessor {
 
     (window as any).gReCaptchaExpiredCallback = () => {
       this.setValue(null);
+    };
+
+    (window as any).gReCaptchaErrorCallback = () => {
+      this.setValue(null);
+      console.error('error');
     };
   }
 
