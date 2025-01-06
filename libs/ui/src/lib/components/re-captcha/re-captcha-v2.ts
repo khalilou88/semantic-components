@@ -64,7 +64,7 @@ export class ScReCaptchaV2 implements OnInit, ControlValueAccessor {
     this.document.body.appendChild(script);
   }
 
-  registerReCaptchaCallbacks() {
+  private registerReCaptchaCallbacks() {
     (window as any).gReCaptchaCallback = (token: string) => {
       this.setValue(token);
     };
