@@ -11,12 +11,16 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+import { ScButton } from '../button';
+
 declare let grecaptcha: any;
 
 @Component({
   selector: 'sc-re-captcha-v3',
-  imports: [],
-  template: ``,
+  imports: [ScButton],
+  template: `
+    <button (click)="executeCaptcha()" sc-button>Test captcha</button>
+  `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -37,13 +41,16 @@ export class ScReCaptchaV3 implements OnInit, ControlValueAccessor {
   private readonly disabledByCva = signal(false);
 
   ngOnInit() {
+    this.addScript();
+    //this.executeCaptcha();
+  }
+
+  private addScript() {
     const script = document.createElement('script');
     script.src = `https://www.google.com/recaptcha/api.js?render=${this.siteKey()}`;
     script.async = true;
     script.defer = true;
     document.body.appendChild(script);
-
-    this.executeCaptcha();
   }
 
   executeCaptcha(): void {

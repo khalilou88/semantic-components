@@ -25,7 +25,7 @@ import { ScReCaptchaV3 } from '@semantic-components/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ReCaptchaV3Page {
-  siteKey = '';
+  siteKey = '6LczIrAqAAAAANk0sH07W5kW6hPNwfWAJbnaoEat';
 
   reCaptchaV3Form = new FormGroup({
     captcha: new FormControl(''),
