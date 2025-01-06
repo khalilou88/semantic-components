@@ -1,14 +1,16 @@
+import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   OnInit,
   ViewEncapsulation,
+  forwardRef,
   inject,
   input,
   signal,
 } from '@angular/core';
-import { ControlValueAccessor } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'sc-re-captcha-v2',
@@ -23,8 +25,16 @@ import { ControlValueAccessor } from '@angular/forms';
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => ScReCaptchaV2),
+      multi: true,
+    },
+  ],
 })
 export class ScReCaptchaV2 implements OnInit, ControlValueAccessor {
+  private readonly document = inject<Document>(DOCUMENT);
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
 
   readonly siteKey = input.required<string>();
@@ -35,11 +45,11 @@ export class ScReCaptchaV2 implements OnInit, ControlValueAccessor {
   private readonly _disabledByCva = signal(false);
 
   ngOnInit() {
-    const script = document.createElement('script');
+    const script = this.document.createElement('script');
     script.src = 'https://www.google.com/recaptcha/api.js';
     script.async = true;
     script.defer = true;
-    document.body.appendChild(script);
+    this.document.body.appendChild(script);
   }
 
   onCaptchaChange(response: any): void {

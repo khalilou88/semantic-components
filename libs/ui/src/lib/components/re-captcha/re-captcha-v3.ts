@@ -4,11 +4,12 @@ import {
   Component,
   OnInit,
   ViewEncapsulation,
+  forwardRef,
   inject,
   input,
   signal,
 } from '@angular/core';
-import { ControlValueAccessor } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 declare let grecaptcha: any;
 
@@ -19,6 +20,13 @@ declare let grecaptcha: any;
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => ScReCaptchaV3),
+      multi: true,
+    },
+  ],
 })
 export class ScReCaptchaV3 implements OnInit, ControlValueAccessor {
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
