@@ -19,7 +19,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     <div
       class="g-recaptcha"
       [attr.data-sitekey]="siteKey()"
-      (ngModelChange)="onCaptchaChange($event)"
+      data-callback="gReCaptchaCallback"
     ></div>
   `,
   styles: ``,
@@ -39,20 +39,33 @@ export class ScReCaptchaV2 implements OnInit, ControlValueAccessor {
 
   readonly siteKey = input.required<string>();
 
-  readonly languageCode = input.required<string>();
+  readonly hl = input<string>('');
 
   private readonly value = signal<string | null>(null);
   private readonly disabledByCva = signal(false);
 
   ngOnInit() {
+    this.registerReCaptchaCallback();
+    this.addScript();
+  }
+
+  private addScript() {
     const script = this.document.createElement('script');
-    script.src = 'https://www.google.com/recaptcha/api.js';
+    const hl = this.hl() ? `hl=${this.hl()}` : '';
+    script.src = `https://www.google.com/recaptcha/api.js?${hl}`;
     script.async = true;
     script.defer = true;
     this.document.body.appendChild(script);
   }
 
+  registerReCaptchaCallback() {
+    (window as any).gReCaptchaCallback = (token: string) => {
+      this.setValue(token);
+    };
+  }
+
   onCaptchaChange(response: any): void {
+    console.group(response);
     this.setValue(response);
   }
 
