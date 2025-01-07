@@ -5,10 +5,10 @@ import { SiStrikethroughIcon } from '@semantic-icons/lucide-icons';
 import { ScToggle } from '../../toggle';
 import { ScTooltip } from '../../tooltip';
 import { ScEditor } from '../editor';
-import { ScExtensions } from './extensions';
+import { ScExtensions } from '../extensions/extensions';
 
 @Component({
-  selector: 'sc-extension-strike',
+  selector: 'sc-editor-strike',
   imports: [ScTooltip, SiStrikethroughIcon, ScToggle],
   template: `
     <button
@@ -27,7 +27,7 @@ import { ScExtensions } from './extensions';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScExtensionStrike {
+export class ScEditorStrike {
   ariaLabel = 'Toggle Strike';
 
   private readonly parent = inject(ScEditor, { host: true });

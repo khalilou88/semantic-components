@@ -30,6 +30,7 @@ import { ScEditorCode } from './actions/editor-code';
 import { ScEditorHighlight } from './actions/editor-highlight';
 import { ScEditorItalic } from './actions/editor-italic';
 import { ScEditorRedo } from './actions/editor-redo';
+import { ScEditorStrike } from './actions/editor-strike';
 import { ScEditorTextAlignCenter } from './actions/editor-text-align-center';
 import { ScEditorTextAlignLeft } from './actions/editor-text-align-left';
 import { ScEditorTextAlignRight } from './actions/editor-text-align-right';
@@ -46,7 +47,6 @@ import { ScExtensionImage } from './extensions/extension-image';
 import { ScExtensionLink } from './extensions/extension-link';
 import { ScExtensionOrderedList } from './extensions/extension-ordered-list';
 import { ScExtensionParagraph } from './extensions/extension-paragraph';
-import { ScExtensionStrike } from './extensions/extension-strike';
 import { ScExtensionTable } from './extensions/extension-table';
 import { ScExtensionTextStyle } from './extensions/extension-text-style';
 import { ScExtensionYoutube } from './extensions/extension-youtube';
@@ -73,7 +73,7 @@ import { ScExtensions } from './extensions/extensions';
     ScExtensionParagraph,
     ScSeparator,
     ScEditorGroup,
-    ScExtensionStrike,
+    ScEditorStrike,
     ScExtensionHorizontalRule,
     ScEditorCode,
     ScExtensionHeading,
@@ -115,7 +115,7 @@ import { ScExtensions } from './extensions/extensions';
         <sc-extension-ordered-list />
         <sc-editor-blockquote />
         <sc-separator class="h-5" orientation="vertical" />
-        <sc-extension-strike />
+        <sc-editor-strike />
         <sc-extension-horizontal-rule />
         <sc-editor-code />
       </sc-editor-group>
