@@ -23,6 +23,7 @@ import Text from '@tiptap/extension-text';
 
 import { ScSeparator } from '../separator';
 import { scArticleClasses } from '../typography';
+import { ScEditorBlockquote } from './actions/editor-blockquote';
 import { ScEditorRedo } from './actions/editor-redo';
 import { ScEditorTextAlignCenter } from './actions/editor-text-align-center';
 import { ScEditorTextAlignLeft } from './actions/editor-text-align-left';
@@ -31,7 +32,6 @@ import { ScEditorUndo } from './actions/editor-undo';
 import { ScEditorUnsetLink } from './actions/editor-unset-link';
 import { ScEditorGroup } from './editor-group';
 import { ScEditorToolbar } from './editor-toolbar';
-import { ScExtensionBlockquote } from './extensions/extension-blockquote';
 import { ScExtensionBold } from './extensions/extension-bold';
 import { ScExtensionBulletList } from './extensions/extension-bullet-list';
 import { ScExtensionCode } from './extensions/extension-code';
@@ -66,7 +66,7 @@ import { ScExtensions } from './extensions/extensions';
     ScExtensionFontFamily,
     ScExtensionLink,
     ScExtensionItalic,
-    ScExtensionBlockquote,
+    ScEditorBlockquote,
     ScExtensionBulletList,
     ScExtensionOrderedList,
     ScExtensionTextStyle,
@@ -113,7 +113,7 @@ import { ScExtensions } from './extensions/extensions';
         <sc-extension-youtube />
         <sc-extension-bullet-list />
         <sc-extension-ordered-list />
-        <sc-extension-blockquote />
+        <sc-editor-blockquote />
         <sc-separator class="h-5" orientation="vertical" />
         <sc-extension-strike />
         <sc-extension-horizontal-rule />
