@@ -31,6 +31,7 @@ import { ScEditorHighlight } from './actions/editor-highlight';
 import { ScEditorHorizontalRule } from './actions/editor-horizontal-rule';
 import { ScEditorItalic } from './actions/editor-italic';
 import { ScEditorOrderedList } from './actions/editor-ordered-list';
+import { ScEditorParagraph } from './actions/editor-paragraph';
 import { ScEditorRedo } from './actions/editor-redo';
 import { ScEditorStrike } from './actions/editor-strike';
 import { ScEditorTextAlignCenter } from './actions/editor-text-align-center';
@@ -46,7 +47,6 @@ import { ScExtensionFontFamily } from './extensions/extension-font-family';
 import { ScExtensionHeading } from './extensions/extension-heading';
 import { ScExtensionImage } from './extensions/extension-image';
 import { ScExtensionLink } from './extensions/extension-link';
-import { ScExtensionParagraph } from './extensions/extension-paragraph';
 import { ScExtensionTable } from './extensions/extension-table';
 import { ScExtensionTextStyle } from './extensions/extension-text-style';
 import { ScExtensionYoutube } from './extensions/extension-youtube';
@@ -70,7 +70,7 @@ import { ScExtensions } from './extensions/extensions';
     ScEditorBulletList,
     ScEditorOrderedList,
     ScExtensionTextStyle,
-    ScExtensionParagraph,
+    ScEditorParagraph,
     ScSeparator,
     ScEditorGroup,
     ScEditorStrike,
@@ -107,7 +107,7 @@ import { ScExtensions } from './extensions/extensions';
 
       <sc-editor-group>
         <sc-extension-heading />
-        <sc-extension-paragraph />
+        <sc-editor-paragraph />
         <sc-separator class="h-5" orientation="vertical" />
         <sc-extension-image />
         <sc-extension-youtube />
