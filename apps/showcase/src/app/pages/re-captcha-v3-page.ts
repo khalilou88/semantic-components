@@ -18,6 +18,8 @@ export default class ReCaptchaV3Page {
   private readonly scReCaptchaV3 = inject(ScReCaptchaV3);
 
   executeReCaptcha() {
-    this.scReCaptchaV3.execute('submit');
+    this.scReCaptchaV3.execute('submit').subscribe((token) => {
+      console.log('Token:', token);
+    });
   }
 }
