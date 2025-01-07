@@ -1,6 +1,13 @@
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
+import { SiImagePlusIcon } from '@semantic-icons/lucide-icons';
+
+import { ScButton } from '../../button';
+import { ScInput } from '../../input';
+import { ScLabel } from '../../label';
+import { ScPopoverTriggerFor } from '../../popover';
+import { ScToggle } from '../../toggle';
 import { ScTooltip } from '../../tooltip';
 import { ScEditor } from '../editor';
 import { ImageData, ScAddImageDialog } from '../toolbar/add-image-dialog';
@@ -8,7 +15,16 @@ import { ScExtensions } from './extensions';
 
 @Component({
   selector: 'sc-extension-image',
-  imports: [ScTooltip, DialogModule],
+  imports: [
+    ScTooltip,
+    DialogModule,
+    ScButton,
+    ScToggle,
+    ScLabel,
+    ScInput,
+    ScPopoverTriggerFor,
+    SiImagePlusIcon,
+  ],
   template: `
     <button
       class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
@@ -38,12 +54,53 @@ import { ScExtensions } from './extensions';
       </svg>
       <span class="sr-only">Add image</span>
     </button>
+
+    <button
+      [scPopoverTriggerFor]="popover"
+      [attr.aria-label]="ariaLabel"
+      [scTooltip]="ariaLabel"
+      type="button"
+      sc-toggle
+      variant="outline"
+    >
+      <svg si-image-plus-icon></svg>
+      <span class="sr-only">{{ ariaLabel }}</span>
+    </button>
+
+    <ng-template #popover>
+      <div class="grid gap-4">
+        <div class="space-y-2">
+          <h4 class="font-medium leading-none">Dimensions</h4>
+          <p class="text-sm text-muted-foreground">Set the dimensions for the layer.</p>
+        </div>
+        <div class="grid gap-2">
+          <div class="grid grid-cols-3 items-center gap-4">
+            <label sc-label for="width">Url</label>
+            <input class="col-span-2 h-8" id="width" sc-input defaultValue="100%" />
+          </div>
+          <div class="grid grid-cols-3 items-center gap-4">
+            <label sc-label for="maxWidth">Alt</label>
+            <input class="col-span-2 h-8" id="maxWidth" sc-input defaultValue="300px" />
+          </div>
+          <div class="grid grid-cols-3 items-center gap-4">
+            <label sc-label for="height">Title</label>
+            <input class="col-span-2 h-8" id="height" sc-input defaultValue="25px" />
+          </div>
+          <div class="grid grid-cols-3 items-center gap-4">
+            <button sc-button variant="outline" type="button">Cancel</button>
+            <button sc-button type="button">Done</button>
+          </div>
+        </div>
+      </div>
+    </ng-template>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScExtensionImage {
+  ariaLabel = 'Add image';
+
   private readonly parent = inject(ScEditor, { host: true });
   dialog = inject(Dialog);
 
