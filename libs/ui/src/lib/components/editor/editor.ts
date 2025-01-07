@@ -27,11 +27,13 @@ import { ScEditorBlockquote } from './actions/editor-blockquote';
 import { ScEditorBold } from './actions/editor-bold';
 import { ScEditorBulletList } from './actions/editor-bullet-list';
 import { ScEditorCode } from './actions/editor-code';
+import { ScEditorHighlight } from './actions/editor-highlight';
 import { ScEditorItalic } from './actions/editor-italic';
 import { ScEditorRedo } from './actions/editor-redo';
 import { ScEditorTextAlignCenter } from './actions/editor-text-align-center';
 import { ScEditorTextAlignLeft } from './actions/editor-text-align-left';
 import { ScEditorTextAlignRight } from './actions/editor-text-align-right';
+import { ScEditorUnderline } from './actions/editor-underline';
 import { ScEditorUndo } from './actions/editor-undo';
 import { ScEditorUnsetLink } from './actions/editor-unset-link';
 import { ScEditorGroup } from './editor-group';
@@ -39,7 +41,6 @@ import { ScEditorToolbar } from './editor-toolbar';
 import { ScExtensionColor } from './extensions/extension-color';
 import { ScExtensionFontFamily } from './extensions/extension-font-family';
 import { ScExtensionHeading } from './extensions/extension-heading';
-import { ScExtensionHighlight } from './extensions/extension-highlight';
 import { ScExtensionHorizontalRule } from './extensions/extension-horizontal-rule';
 import { ScExtensionImage } from './extensions/extension-image';
 import { ScExtensionLink } from './extensions/extension-link';
@@ -48,7 +49,6 @@ import { ScExtensionParagraph } from './extensions/extension-paragraph';
 import { ScExtensionStrike } from './extensions/extension-strike';
 import { ScExtensionTable } from './extensions/extension-table';
 import { ScExtensionTextStyle } from './extensions/extension-text-style';
-import { ScExtensionUnderline } from './extensions/extension-underline';
 import { ScExtensionYoutube } from './extensions/extension-youtube';
 import { ScExtensions } from './extensions/extensions';
 
@@ -57,10 +57,10 @@ import { ScExtensions } from './extensions/extensions';
   imports: [
     ScEditorUndo,
     ScEditorRedo,
-    ScExtensionHighlight,
+    ScEditorHighlight,
     ScExtensionColor,
     ScEditorBold,
-    ScExtensionUnderline,
+    ScEditorUnderline,
     ScExtensionYoutube,
     ScExtensionImage,
     ScExtensionFontFamily,
@@ -92,8 +92,8 @@ import { ScExtensions } from './extensions/extensions';
         <sc-separator class="h-5" orientation="vertical" />
         <sc-editor-bold />
         <sc-editor-italic />
-        <sc-extension-underline />
-        <sc-extension-highlight />
+        <sc-editor-underline />
+        <sc-editor-highlight />
         <sc-extension-text-style />
         <sc-extension-color />
         <sc-extension-font-family />

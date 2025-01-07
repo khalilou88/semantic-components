@@ -5,10 +5,10 @@ import { SiHighlighterIcon } from '@semantic-icons/lucide-icons';
 import { ScToggle } from '../../toggle';
 import { ScTooltip } from '../../tooltip';
 import { ScEditor } from '../editor';
-import { ScExtensions } from './extensions';
+import { ScExtensions } from '../extensions/extensions';
 
 @Component({
-  selector: 'sc-extension-highlight',
+  selector: 'sc-editor-highlight',
   imports: [ScTooltip, ScToggle, SiHighlighterIcon],
   template: `
     <button
@@ -27,7 +27,7 @@ import { ScExtensions } from './extensions';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScExtensionHighlight {
+export class ScEditorHighlight {
   ariaLabel = 'Toggle Highlight';
 
   private readonly parent = inject(ScEditor, { host: true });
