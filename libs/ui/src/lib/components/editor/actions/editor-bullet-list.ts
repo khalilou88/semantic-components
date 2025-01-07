@@ -5,10 +5,10 @@ import { SiListIcon } from '@semantic-icons/lucide-icons';
 import { ScToggle } from '../../toggle';
 import { ScTooltip } from '../../tooltip';
 import { ScEditor } from '../editor';
-import { ScExtensions } from './extensions';
+import { ScExtensions } from '../extensions/extensions';
 
 @Component({
-  selector: 'sc-extension-bullet-list',
+  selector: 'sc-editor-bullet-list',
   imports: [ScTooltip, ScToggle, SiListIcon],
   template: `
     <button
@@ -27,7 +27,7 @@ import { ScExtensions } from './extensions';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScExtensionBulletList {
+export class ScEditorBulletList {
   ariaLabel = 'Toggle List';
 
   private readonly parent = inject(ScEditor, { host: true });

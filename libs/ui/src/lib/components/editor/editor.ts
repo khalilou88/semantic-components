@@ -25,6 +25,7 @@ import { ScSeparator } from '../separator';
 import { scArticleClasses } from '../typography';
 import { ScEditorBlockquote } from './actions/editor-blockquote';
 import { ScEditorBold } from './actions/editor-bold';
+import { ScEditorBulletList } from './actions/editor-bullet-list';
 import { ScEditorCode } from './actions/editor-code';
 import { ScEditorItalic } from './actions/editor-italic';
 import { ScEditorRedo } from './actions/editor-redo';
@@ -35,7 +36,6 @@ import { ScEditorUndo } from './actions/editor-undo';
 import { ScEditorUnsetLink } from './actions/editor-unset-link';
 import { ScEditorGroup } from './editor-group';
 import { ScEditorToolbar } from './editor-toolbar';
-import { ScExtensionBulletList } from './extensions/extension-bullet-list';
 import { ScExtensionColor } from './extensions/extension-color';
 import { ScExtensionFontFamily } from './extensions/extension-font-family';
 import { ScExtensionHeading } from './extensions/extension-heading';
@@ -67,7 +67,7 @@ import { ScExtensions } from './extensions/extensions';
     ScExtensionLink,
     ScEditorItalic,
     ScEditorBlockquote,
-    ScExtensionBulletList,
+    ScEditorBulletList,
     ScExtensionOrderedList,
     ScExtensionTextStyle,
     ScExtensionParagraph,
@@ -111,7 +111,7 @@ import { ScExtensions } from './extensions/extensions';
         <sc-separator class="h-5" orientation="vertical" />
         <sc-extension-image />
         <sc-extension-youtube />
-        <sc-extension-bullet-list />
+        <sc-editor-bullet-list />
         <sc-extension-ordered-list />
         <sc-editor-blockquote />
         <sc-separator class="h-5" orientation="vertical" />
