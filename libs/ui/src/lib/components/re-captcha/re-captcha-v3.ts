@@ -11,7 +11,7 @@ export const RE_CAPTCHA_V3_SITE_KEY = new InjectionToken<string>('RE_CAPTCHA_V3_
 export class ScReCaptchaV3 {
   private readonly document = inject<Document>(DOCUMENT);
 
-  constructor(@Inject('RE_CAPTCHA_V3_SITE_KEY') private readonly siteKey: string) {
+  constructor(@Inject(RE_CAPTCHA_V3_SITE_KEY) private readonly siteKey: string) {
     this.addScript();
   }
 

@@ -7,7 +7,7 @@ import { ScButton, ScReCaptchaV3 } from '@semantic-components/ui';
   imports: [ScButton],
   template: `
     <div class="m-10">
-      <button (click)="executeReCaptcha()" sc-button></button>
+      <button (click)="executeReCaptcha()" sc-button>Test captcha</button>
     </div>
   `,
   styles: ``,
