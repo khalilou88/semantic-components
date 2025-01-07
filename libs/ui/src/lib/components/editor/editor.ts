@@ -28,6 +28,7 @@ import { ScEditorBold } from './actions/editor-bold';
 import { ScEditorBulletList } from './actions/editor-bullet-list';
 import { ScEditorCode } from './actions/editor-code';
 import { ScEditorHighlight } from './actions/editor-highlight';
+import { ScEditorHorizontalRule } from './actions/editor-horizontal-rule';
 import { ScEditorItalic } from './actions/editor-italic';
 import { ScEditorRedo } from './actions/editor-redo';
 import { ScEditorStrike } from './actions/editor-strike';
@@ -42,7 +43,6 @@ import { ScEditorToolbar } from './editor-toolbar';
 import { ScExtensionColor } from './extensions/extension-color';
 import { ScExtensionFontFamily } from './extensions/extension-font-family';
 import { ScExtensionHeading } from './extensions/extension-heading';
-import { ScExtensionHorizontalRule } from './extensions/extension-horizontal-rule';
 import { ScExtensionImage } from './extensions/extension-image';
 import { ScExtensionLink } from './extensions/extension-link';
 import { ScExtensionOrderedList } from './extensions/extension-ordered-list';
@@ -74,7 +74,7 @@ import { ScExtensions } from './extensions/extensions';
     ScSeparator,
     ScEditorGroup,
     ScEditorStrike,
-    ScExtensionHorizontalRule,
+    ScEditorHorizontalRule,
     ScEditorCode,
     ScExtensionHeading,
     ScExtensionTable,
@@ -116,7 +116,7 @@ import { ScExtensions } from './extensions/extensions';
         <sc-editor-blockquote />
         <sc-separator class="h-5" orientation="vertical" />
         <sc-editor-strike />
-        <sc-extension-horizontal-rule />
+        <sc-editor-horizontal-rule />
         <sc-editor-code />
       </sc-editor-group>
 

@@ -5,10 +5,10 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 import { ScToggle } from '../../toggle';
 import { ScTooltip } from '../../tooltip';
 import { ScEditor } from '../editor';
-import { ScExtensions } from './extensions';
+import { ScExtensions } from '../extensions/extensions';
 
 @Component({
-  selector: 'sc-extension-horizontal-rule',
+  selector: 'sc-editor-horizontal-rule',
   imports: [ScTooltip, ScToggle, SiMinusIcon],
   template: `
     <button
@@ -27,7 +27,7 @@ import { ScExtensions } from './extensions';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScExtensionHorizontalRule {
+export class ScEditorHorizontalRule {
   ariaLabel = 'Toggle Horizontal Rule';
 
   private readonly parent = inject(ScEditor, { host: true });
