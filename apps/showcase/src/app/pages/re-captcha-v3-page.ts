@@ -1,13 +1,13 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { ScReCaptchaV3 } from '@semantic-components/ui';
+import { ScButton, ScReCaptchaV3 } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-re-captcha-v3-page',
-  imports: [ScReCaptchaV3],
+  imports: [ScButton],
   template: `
     <div class="m-10">
-      <sc-re-captcha-v3 [siteKey]="siteKey" />
+      <button (click)="executeReCaptcha()" sc-button></button>
     </div>
   `,
   styles: ``,
@@ -15,5 +15,9 @@ import { ScReCaptchaV3 } from '@semantic-components/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ReCaptchaV3Page {
-  siteKey = '6LczIrAqAAAAANk0sH07W5kW6hPNwfWAJbnaoEat';
+  private readonly scReCaptchaV3 = inject(ScReCaptchaV3);
+
+  executeReCaptcha() {
+    this.scReCaptchaV3.execute('submit');
+  }
 }

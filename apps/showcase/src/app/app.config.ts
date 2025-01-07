@@ -8,7 +8,7 @@ import {
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter } from '@angular/router';
 
-import { scThemeProvider } from '@semantic-components/ui';
+import { RE_CAPTCHA_V3_SITE_KEY, scThemeProvider } from '@semantic-components/ui';
 
 import { appRoutes } from './app.routes';
 
@@ -20,5 +20,6 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideAppInitializer(scThemeProvider()),
     { provide: LOCALE_ID, useValue: 'fr' },
+    { provide: RE_CAPTCHA_V3_SITE_KEY, useValue: '6LczIrAqAAAAANk0sH07W5kW6hPNwfWAJbnaoEat' },
   ],
 };

@@ -1,48 +1,31 @@
 import { DOCUMENT } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  ViewEncapsulation,
-  inject,
-  input,
-} from '@angular/core';
-
-import { ScButton } from '../button';
+import { Inject, Injectable, InjectionToken, inject } from '@angular/core';
 
 declare let grecaptcha: any;
 
-@Component({
-  selector: 'sc-re-captcha-v3',
-  exportAs: 'scReCaptchaV3',
-  imports: [ScButton],
-  template: `
-    <button (click)="execute()" sc-button>Test captcha</button>
-  `,
-  styles: ``,
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+export const RE_CAPTCHA_V3_SITE_KEY = new InjectionToken<string>('RE_CAPTCHA_V3_SITE_KEY');
+
+@Injectable({
+  providedIn: 'root',
 })
-export class ScReCaptchaV3 implements OnInit {
+export class ScReCaptchaV3 {
   private readonly document = inject<Document>(DOCUMENT);
 
-  readonly siteKey = input.required<string>();
-
-  ngOnInit() {
+  constructor(@Inject('RE_CAPTCHA_V3_SITE_KEY') private readonly siteKey: string) {
     this.addScript();
   }
 
   private addScript() {
     const script = this.document.createElement('script');
-    script.src = `https://www.google.com/recaptcha/api.js?render=${this.siteKey()}`;
+    script.src = `https://www.google.com/recaptcha/api.js?render=${this.siteKey}`;
     script.async = true;
     script.defer = true;
     this.document.body.appendChild(script);
   }
 
-  execute(): void {
+  execute(actionName: string): void {
     grecaptcha.ready(() => {
-      grecaptcha.execute(this.siteKey(), { action: 'submit' }).then((token: string) => {
+      grecaptcha.execute(this.siteKey, { action: actionName }).then((token: string) => {
         console.log(token);
       });
     });
