@@ -5,10 +5,10 @@ import { SiCodeIcon } from '@semantic-icons/lucide-icons';
 import { ScToggle } from '../../toggle';
 import { ScTooltip } from '../../tooltip';
 import { ScEditor } from '../editor';
-import { ScExtensions } from './extensions';
+import { ScExtensions } from '../extensions/extensions';
 
 @Component({
-  selector: 'sc-extension-code',
+  selector: 'sc-editor-code',
   imports: [ScTooltip, SiCodeIcon, ScToggle],
   template: `
     <button
@@ -27,7 +27,7 @@ import { ScExtensions } from './extensions';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScExtensionCode {
+export class ScEditorCode {
   ariaLabel = 'Format code';
 
   private readonly parent = inject(ScEditor, { host: true });

@@ -5,10 +5,10 @@ import { SiItalicIcon } from '@semantic-icons/lucide-icons';
 import { ScToggle } from '../../toggle';
 import { ScTooltip } from '../../tooltip';
 import { ScEditor } from '../editor';
-import { ScExtensions } from './extensions';
+import { ScExtensions } from '../extensions/extensions';
 
 @Component({
-  selector: 'sc-extension-italic',
+  selector: 'sc-editor-italic',
   imports: [ScTooltip, ScToggle, SiItalicIcon],
   template: `
     <button
@@ -27,7 +27,7 @@ import { ScExtensions } from './extensions';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScExtensionItalic {
+export class ScEditorItalic {
   ariaLabel = 'Toggle Italic';
 
   private readonly parent = inject(ScEditor, { host: true });
