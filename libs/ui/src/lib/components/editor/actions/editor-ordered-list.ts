@@ -5,10 +5,10 @@ import { SiListOrderedIcon } from '@semantic-icons/lucide-icons';
 import { ScToggle } from '../../toggle';
 import { ScTooltip } from '../../tooltip';
 import { ScEditor } from '../editor';
-import { ScExtensions } from './extensions';
+import { ScExtensions } from '../extensions/extensions';
 
 @Component({
-  selector: 'sc-extension-ordered-list',
+  selector: 'sc-editor-ordered-list',
   imports: [ScTooltip, ScToggle, SiListOrderedIcon],
   template: `
     <button
@@ -27,7 +27,7 @@ import { ScExtensions } from './extensions';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScExtensionOrderedList {
+export class ScEditorOrderedList {
   ariaLabel = 'Toggle ordered list';
 
   private readonly parent = inject(ScEditor, { host: true });
