@@ -24,6 +24,7 @@ import Text from '@tiptap/extension-text';
 import { ScSeparator } from '../separator';
 import { scArticleClasses } from '../typography';
 import { ScEditorBlockquote } from './actions/editor-blockquote';
+import { ScEditorBold } from './actions/editor-bold';
 import { ScEditorRedo } from './actions/editor-redo';
 import { ScEditorTextAlignCenter } from './actions/editor-text-align-center';
 import { ScEditorTextAlignLeft } from './actions/editor-text-align-left';
@@ -32,7 +33,6 @@ import { ScEditorUndo } from './actions/editor-undo';
 import { ScEditorUnsetLink } from './actions/editor-unset-link';
 import { ScEditorGroup } from './editor-group';
 import { ScEditorToolbar } from './editor-toolbar';
-import { ScExtensionBold } from './extensions/extension-bold';
 import { ScExtensionBulletList } from './extensions/extension-bullet-list';
 import { ScExtensionCode } from './extensions/extension-code';
 import { ScExtensionColor } from './extensions/extension-color';
@@ -59,7 +59,7 @@ import { ScExtensions } from './extensions/extensions';
     ScEditorRedo,
     ScExtensionHighlight,
     ScExtensionColor,
-    ScExtensionBold,
+    ScEditorBold,
     ScExtensionUnderline,
     ScExtensionYoutube,
     ScExtensionImage,
@@ -90,7 +90,7 @@ import { ScExtensions } from './extensions/extensions';
         <sc-editor-undo />
         <sc-editor-redo />
         <sc-separator class="h-5" orientation="vertical" />
-        <sc-extension-bold />
+        <sc-editor-bold />
         <sc-extension-italic />
         <sc-extension-underline />
         <sc-extension-highlight />
