@@ -1,6 +1,8 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable, InjectionToken, inject } from '@angular/core';
 
+import { Observable, Subject } from 'rxjs';
+
 declare let grecaptcha: any;
 
 export const RE_CAPTCHA_V3_SITE_KEY = new InjectionToken<string>('RE_CAPTCHA_V3_SITE_KEY');
@@ -23,11 +25,15 @@ export class ScReCaptchaV3 {
     this.document.body.appendChild(script);
   }
 
-  execute(actionName: string): void {
+  execute(actionName: string): Observable<string> {
+    const subject = new Subject<string>();
     grecaptcha.ready(() => {
       grecaptcha.execute(this.siteKey, { action: actionName }).then((token: string) => {
-        console.log(token);
+        subject.next(token);
+        subject.complete();
       });
     });
+
+    return subject.asObservable();
   }
 }
