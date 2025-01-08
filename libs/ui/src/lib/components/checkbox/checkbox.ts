@@ -1,3 +1,4 @@
+import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -12,6 +13,7 @@ import {
   input,
   linkedSignal,
   output,
+  signal,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -22,21 +24,28 @@ import { SiCheckIcon, SiMinusIcon } from '@semantic-icons/lucide-icons';
   selector: 'sc-checkbox',
   imports: [SiCheckIcon, SiMinusIcon],
   template: `
-    <input
-      [attr.aria-label]="ariaLabel()"
-      [class]="checkboxClass()"
-      [disabled]="disabled()"
-      [checked]="checked()"
-      [attr.data-state]="state()"
-      (change)="onInteractionEvent($event)"
-      type="checkbox"
-    />
+    <div class="relative size-4">
+      <input
+        [id]="id()"
+        [attr.aria-label]="ariaLabel()"
+        [class]="checkboxClass()"
+        [disabled]="disabled()"
+        [checked]="checked()"
+        [attr.data-state]="state()"
+        (change)="onInteractionEvent($event)"
+        type="checkbox"
+      />
 
-    @if (indeterminate()) {
-      <svg [class]="svgClass()" si-minus-icon></svg>
-    } @else if (checked()) {
-      <svg [class]="svgClass()" si-check-icon></svg>
-    }
+      @if (indeterminate()) {
+        <svg [class]="svgClass()" si-minus-icon></svg>
+      } @else if (checked()) {
+        <svg [class]="svgClass()" si-check-icon></svg>
+      }
+    </div>
+
+    <label [class]="labelClass()" [for]="id()">
+      <ng-content />
+    </label>
   `,
   host: {
     '[class]': 'class()',
@@ -54,6 +63,8 @@ import { SiCheckIcon, SiMinusIcon } from '@semantic-icons/lucide-icons';
   ],
 })
 export class ScCheckbox implements ControlValueAccessor {
+  protected readonly id = signal<string>(inject(_IdGenerator).getId('sc-checkbox-'));
+
   private readonly hostRef = inject(ElementRef);
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
 
@@ -61,7 +72,7 @@ export class ScCheckbox implements ControlValueAccessor {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('flex relative', this.classInput()));
+  protected readonly class = computed(() => cn('flex items-center space-x-2', this.classInput()));
 
   readonly checkboxClassInput = input<string>('', {
     alias: 'checkboxClass',
@@ -69,7 +80,7 @@ export class ScCheckbox implements ControlValueAccessor {
 
   protected readonly checkboxClass = computed(() =>
     cn(
-      'peer appearance-none h-4 w-4 shrink-0 cursor-pointer rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground data-[state=indeterminate]:bg-primary data-[state=indeterminate]:text-primary-foreground',
+      'peer appearance-none absolute top-0 left-0 size-full shrink-0 cursor-pointer rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground data-[state=indeterminate]:bg-primary data-[state=indeterminate]:text-primary-foreground',
       this.checkboxClassInput(),
     ),
   );
@@ -80,8 +91,19 @@ export class ScCheckbox implements ControlValueAccessor {
 
   protected readonly svgClass = computed(() =>
     cn(
-      'absolute top-0 left-0 w-4 h-4 outline-none cursor-pointer text-primary-foreground',
+      'absolute top-0 left-0 size-full outline-none cursor-pointer text-primary-foreground',
       this.svgClassInput(),
+    ),
+  );
+
+  readonly labelClassInput = input<string>('', {
+    alias: 'labelClass',
+  });
+
+  protected readonly labelClass = computed(() =>
+    cn(
+      'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
+      this.labelClassInput(),
     ),
   );
 
