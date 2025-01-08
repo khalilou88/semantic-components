@@ -8,6 +8,14 @@ import { ScCheckbox } from '@semantic-components/ui';
   selector: 'app-checkbox-page',
   imports: [ScCheckbox, ReactiveFormsModule, JsonPipe],
   template: `
+    <div class="flex items-center space-x-2">
+      <sc-checkbox>Accept terms and conditions</sc-checkbox>
+    </div>
+
+    <br />
+    <br />
+    <br />
+
     <form [formGroup]="checkForm">
       <sc-checkbox formControlName="check" />
     </form>
