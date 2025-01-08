@@ -87,23 +87,23 @@ export class ScCheckbox implements ControlValueAccessor {
 
   readonly ariaLabel = input<string | null>(null, { alias: 'aria-label' });
 
-  readonly indeterminateByInput = input<boolean, unknown>(false, {
+  readonly indeterminateInput = input<boolean, unknown>(false, {
     alias: 'indeterminate',
     transform: booleanAttribute,
   });
-  protected readonly indeterminate = linkedSignal(() => this.indeterminateByInput());
+  protected readonly indeterminate = linkedSignal(() => this.indeterminateInput());
 
-  readonly checkedByInput = input<boolean, unknown>(false, {
+  readonly checkedInput = input<boolean, unknown>(false, {
     alias: 'checked',
     transform: booleanAttribute,
   });
-  protected readonly checked = linkedSignal(() => this.checkedByInput());
+  protected readonly checked = linkedSignal(() => this.checkedInput());
 
-  readonly disabledByInput = input<boolean, unknown>(false, {
+  readonly disabledInput = input<boolean, unknown>(false, {
     alias: 'disabled',
     transform: booleanAttribute,
   });
-  protected readonly disabled = linkedSignal(() => this.disabledByInput());
+  protected readonly disabled = linkedSignal(() => this.disabledInput());
 
   readonly change = output<boolean>();
 
