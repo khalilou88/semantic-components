@@ -12,7 +12,6 @@ import {
   input,
   linkedSignal,
   output,
-  signal,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -33,9 +32,9 @@ import { SiCheckIcon, SiMinusIcon } from '@semantic-icons/lucide-icons';
       type="checkbox"
     />
 
-    @if (this.indeterminate() === true) {
+    @if (indeterminate()) {
       <svg [class]="svgClass()" si-minus-icon></svg>
-    } @else if (checked() === true) {
+    } @else if (checked()) {
       <svg [class]="svgClass()" si-check-icon></svg>
     }
   `,
@@ -104,13 +103,20 @@ export class ScCheckbox implements ControlValueAccessor {
     alias: 'disabled',
     transform: booleanAttribute,
   });
-  private readonly disabledByCva = signal(false);
-  protected readonly disabled = computed(() => this.disabledByInput() || this.disabledByCva());
+  protected readonly disabled = linkedSignal(() => this.disabledByInput());
 
   readonly change = output<boolean>();
 
-  protected readonly state = computed(() => {
-    return this.checked() ? 'checked' : 'unchecked';
+  protected readonly state = computed<'indeterminate' | 'checked' | 'unchecked'>(() => {
+    if (this.indeterminate()) {
+      return 'indeterminate';
+    }
+
+    if (this.checked()) {
+      return 'checked';
+    }
+
+    return 'unchecked';
   });
 
   constructor() {
@@ -128,7 +134,7 @@ export class ScCheckbox implements ControlValueAccessor {
     this.checked.set(v);
     this.change.emit(v);
 
-    if (this.indeterminate() === true) {
+    if (this.indeterminate()) {
       this.indeterminate.set(false);
     }
 
@@ -154,7 +160,7 @@ export class ScCheckbox implements ControlValueAccessor {
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.disabledByCva.set(isDisabled);
+    this.disabled.set(isDisabled);
   }
 
   protected onInteractionEvent(event: Event) {

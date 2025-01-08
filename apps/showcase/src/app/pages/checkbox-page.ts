@@ -28,6 +28,14 @@ import { ScCheckbox } from '@semantic-components/ui';
     <br />
     <br />
     <br />
+    indeterminate
+    <sc-checkbox indeterminate />
+    <sc-checkbox indeterminate="true" />
+    <sc-checkbox [indeterminate]="true" />
+
+    <br />
+    <br />
+    <br />
     <br />
     checked
 
