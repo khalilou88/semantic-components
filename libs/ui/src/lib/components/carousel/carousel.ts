@@ -72,11 +72,17 @@ export class ScCarousel {
   }
 
   togglePrevNextBtnsState = (): void => {
-    if (this.emblaApi.canScrollPrev()) this.canScrollPrev.set(true);
-    else this.canScrollPrev.set(false);
+    if (this.emblaApi.canScrollPrev()) {
+      this.canScrollPrev.set(true);
+    } else {
+      this.canScrollPrev.set(false);
+    }
 
-    if (this.emblaApi.canScrollNext()) this.canScrollNext.set(true);
-    else this.canScrollNext.set(false);
+    if (this.emblaApi.canScrollNext()) {
+      this.canScrollNext.set(true);
+    } else {
+      this.canScrollNext.set(false);
+    }
   };
 
   handleKeyDown(event: KeyboardEvent) {
