@@ -11,7 +11,6 @@
     "@angular/cdk": ">=19.0.0",
     "@angular/forms": ">=19.0.0",
     "@tiptap/core": "^2.10.3",
-    "@semantic-icons/lucide-icons": ">=0.10.0",
     "@tiptap/extension-blockquote": "^2.10.3",
     "@tiptap/extension-bold": "^2.10.3",
     "@tiptap/extension-bullet-list": "^2.10.3",
@@ -42,7 +41,8 @@
     "class-variance-authority": "^0.7.1",
     "embla-carousel": "^8.5.1",
     "rxjs": "~7.8.1",
-    "@semantic-components/utils": "0.2.0",
+    "@semantic-icons/lucide-icons": ">=0.0.1",
+    "@semantic-components/utils": ">=0.0.1",
     "@semantic-components/supabase": ">=0.0.1"
   },
   "sideEffects": false,
