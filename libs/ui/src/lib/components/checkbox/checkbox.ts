@@ -1,17 +1,18 @@
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ElementRef,
   ViewEncapsulation,
+  booleanAttribute,
   computed,
   effect,
   forwardRef,
   inject,
   input,
-  model,
+  linkedSignal,
   output,
+  signal,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -24,22 +25,22 @@ import { SiCheckIcon, SiMinusIcon } from '@semantic-icons/lucide-icons';
   template: `
     <input
       [attr.aria-label]="ariaLabel()"
-      [class]="checkboxClasses()"
+      [class]="checkboxClass()"
       [disabled]="disabled()"
       [checked]="checked()"
       [attr.data-state]="state()"
-      (change)="_onInteractionEvent($event)"
+      (change)="onInteractionEvent($event)"
       type="checkbox"
     />
 
     @if (this.indeterminate() === true) {
-      <svg [class]="svgClasses()" si-minus-icon></svg>
+      <svg [class]="svgClassInput()" si-minus-icon></svg>
     } @else if (checked() === true) {
-      <svg [class]="svgClasses()" si-check-icon></svg>
+      <svg [class]="svgClassInput()" si-check-icon></svg>
     }
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
     '(click)': 'toggle()',
   },
   styles: ``,
@@ -54,61 +55,71 @@ import { SiCheckIcon, SiMinusIcon } from '@semantic-icons/lucide-icons';
   ],
 })
 export class ScCheckbox implements ControlValueAccessor {
-  private readonly _cdr = inject(ChangeDetectorRef);
+  private readonly hostRef = inject(ElementRef);
+  private readonly changeDetectorRef = inject(ChangeDetectorRef);
 
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn('flex relative', this.class()));
+  protected readonly class = computed(() => cn('flex relative', this.classInput()));
 
-  checkboxClass = input<string>('');
+  readonly checkboxClassInput = input<string>('', {
+    alias: 'checkboxClass',
+  });
 
-  checkboxClasses = computed(() =>
+  protected readonly checkboxClass = computed(() =>
     cn(
       'peer appearance-none h-4 w-4 shrink-0 cursor-pointer rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground',
-      this.checkboxClass(),
+      this.checkboxClassInput(),
     ),
   );
 
-  svgClass = input<string>('');
+  readonly svgClassInput = input<string>('', {
+    alias: 'svgClass',
+  });
 
-  svgClasses = computed(() =>
+  protected readonly svgClass = computed(() =>
     cn(
       'absolute top-0 left-0 w-4 h-4 outline-none cursor-pointer text-primary-foreground',
-      this.svgClass(),
+      this.svgClassInput(),
     ),
   );
 
-  readonly indeterminate = model<boolean>(false);
+  readonly ariaLabel = input<string | null>(null, { alias: 'aria-label' });
 
-  ariaLabel = input<string | null>(null, { alias: 'aria-label' });
+  readonly indeterminateByInput = input<boolean, unknown>(false, {
+    alias: 'indeterminate',
+    transform: booleanAttribute,
+  });
+  protected readonly indeterminate = linkedSignal(() => this.indeterminateByInput());
 
-  checked = model<BooleanInput>(false);
+  readonly checkedByInput = input<boolean, unknown>(false, {
+    alias: 'checked',
+    transform: booleanAttribute,
+  });
+  protected readonly checked = linkedSignal(() => this.checkedByInput());
 
-  disabled = model<BooleanInput>(false);
+  readonly disabledByInput = input<boolean, unknown>(false, {
+    alias: 'disabled',
+    transform: booleanAttribute,
+  });
+  private readonly disabledByCva = signal(false);
+  protected readonly disabled = computed(() => this.disabledByInput() || this.disabledByCva());
 
-  change = output<boolean>();
+  readonly change = output<boolean>();
 
-  state = computed(() => {
+  protected readonly state = computed(() => {
     return this.checked() ? 'checked' : 'unchecked';
   });
 
-  private readonly host = inject(ElementRef);
-
   constructor() {
     effect(() => {
-      if (this.checked() !== true && this.checked() !== false) {
-        this.checked.update((v) => coerceBooleanProperty(v));
-      }
-
-      if (this.disabled() !== true && this.disabled() !== false) {
-        this.disabled.update((v) => coerceBooleanProperty(v));
-      }
-
-      this.host.nativeElement.indeterminate = this.indeterminate();
+      this.hostRef.nativeElement.indeterminate = this.indeterminate();
     });
   }
 
-  toggle() {
+  protected toggle() {
     if (this.disabled()) {
       return;
     }
@@ -122,11 +133,11 @@ export class ScCheckbox implements ControlValueAccessor {
     }
 
     this.onChange(v);
-    this._cdr.markForCheck();
+    this.changeDetectorRef.markForCheck();
   }
 
-  writeValue(value: boolean): void {
-    this.checked.set(value);
+  writeValue(checked: boolean): void {
+    this.checked.set(checked);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -142,11 +153,11 @@ export class ScCheckbox implements ControlValueAccessor {
     this.onTouch = fn;
   }
 
-  setDisabledState?(isDisabled: boolean): void {
-    this.disabled.set(isDisabled);
+  setDisabledState(isDisabled: boolean): void {
+    this.disabledByCva.set(isDisabled);
   }
 
-  _onInteractionEvent(event: Event) {
+  protected onInteractionEvent(event: Event) {
     // We always have to stop propagation on the change event.
     // Otherwise the change event, from the input element, will bubble up and
     // emit its event object to the `change` output.
