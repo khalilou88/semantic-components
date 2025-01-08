@@ -34,9 +34,9 @@ import { SiCheckIcon, SiMinusIcon } from '@semantic-icons/lucide-icons';
     />
 
     @if (this.indeterminate() === true) {
-      <svg [class]="svgClassInput()" si-minus-icon></svg>
+      <svg [class]="svgClass()" si-minus-icon></svg>
     } @else if (checked() === true) {
-      <svg [class]="svgClassInput()" si-check-icon></svg>
+      <svg [class]="svgClass()" si-check-icon></svg>
     }
   `,
   host: {
