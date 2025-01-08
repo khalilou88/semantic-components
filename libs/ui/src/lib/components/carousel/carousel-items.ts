@@ -18,22 +18,24 @@ import { ScCarousel } from './carousel';
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCarouselItems {
-  scCarousel = inject(ScCarousel);
+  private readonly scCarousel = inject(ScCarousel);
 
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() =>
+  protected readonly class = computed(() =>
     cn(
       'flex',
       this.scCarousel.orientation() === 'horizontal' ? '-ml-4' : '-mt-4 flex-col',
-      this.class(),
+      this.classInput(),
     ),
   );
 }

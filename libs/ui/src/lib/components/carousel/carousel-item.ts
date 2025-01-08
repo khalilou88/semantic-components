@@ -19,23 +19,25 @@ import { ScCarousel } from './carousel';
   `,
   host: {
     role: 'group',
-    '[attr.aria-roledescription]': '"slide"',
-    '[class]': 'classes()',
+    'aria-roledescription': 'slide',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCarouselItem {
-  scCarousel = inject(ScCarousel);
+  private readonly scCarousel = inject(ScCarousel);
 
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() =>
+  protected readonly class = computed(() =>
     cn(
       'min-w-0 shrink-0 grow-0 basis-full',
       this.scCarousel.orientation() === 'horizontal' ? 'pl-4' : 'pt-4',
-      this.class(),
+      this.classInput(),
     ),
   );
 }

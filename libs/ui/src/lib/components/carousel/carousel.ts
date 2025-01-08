@@ -25,8 +25,8 @@ import EmblaCarousel, {
   `,
   host: {
     role: 'region',
-    '[attr.aria-roledescription]': '"carousel"',
-    '[class]': 'classes()',
+    'aria-roledescription': 'carousel',
+    '[class]': 'class()',
     '(keydown)': 'handleKeydown($event)',
   },
   styles: ``,
@@ -34,19 +34,21 @@ import EmblaCarousel, {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCarousel {
-  emblaNode = inject(ElementRef);
+  private readonly emblaNode = inject(ElementRef);
 
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn('overflow-hidden', this.class()));
+  protected readonly class = computed(() => cn('overflow-hidden', this.classInput()));
 
-  options = input<EmblaOptionsType>({ loop: false });
+  readonly options = input<EmblaOptionsType>({ loop: false });
 
-  plugins = input<EmblaPluginType[]>([]);
+  readonly plugins = input<EmblaPluginType[]>([]);
 
-  canScrollPrev = signal(false);
+  readonly canScrollPrev = signal(false);
 
-  canScrollNext = signal(false);
+  readonly canScrollNext = signal(false);
 
   private emblaApi!: EmblaCarouselType;
 
@@ -54,7 +56,7 @@ export class ScCarousel {
     return this.emblaApi;
   }
 
-  orientation = computed<'horizontal' | 'vertical'>(() => {
+  readonly orientation = computed<'horizontal' | 'vertical'>(() => {
     return this.options()?.axis === 'y' ? 'vertical' : 'horizontal';
   });
 
@@ -96,6 +98,4 @@ export class ScCarousel {
     console.log('scrollNext');
     this.emblaApi.scrollNext();
   }
-
-  //TODO buttons not showing and handleKeyDown not working
 }
