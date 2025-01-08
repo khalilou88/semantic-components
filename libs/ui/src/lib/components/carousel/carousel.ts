@@ -27,7 +27,7 @@ import EmblaCarousel, {
     role: 'region',
     'aria-roledescription': 'carousel',
     '[class]': 'class()',
-    '(keydown)': 'handleKeydown($event)',
+    '(keydown)': 'handleKeyDown($event)',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -89,13 +89,11 @@ export class ScCarousel {
     }
   }
 
-  scrollPrev() {
-    console.log('scrollPrev');
+  private scrollPrev() {
     this.emblaApi.scrollPrev();
   }
 
-  scrollNext() {
-    console.log('scrollNext');
+  private scrollNext() {
     this.emblaApi.scrollNext();
   }
 }
