@@ -15,14 +15,18 @@ import { cn } from '@semantic-components/utils';
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScAlertTitle {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn('mb-1 font-medium leading-none tracking-tight', this.class()));
+  protected readonly class = computed(() =>
+    cn('mb-1 font-medium leading-none tracking-tight', this.classInput()),
+  );
 }

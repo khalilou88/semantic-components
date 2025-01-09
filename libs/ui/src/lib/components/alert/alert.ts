@@ -10,13 +10,13 @@ import { cn } from '@semantic-components/utils';
 import { VariantProps, cva } from 'class-variance-authority';
 
 const alertVariants = cva(
-  'relative w-full rounded-lg border p-4 [&>.svg-host+p]:translate-y-[-3px] [&>.svg-host~*]:pl-7 [&_svg]:absolute [&_svg]:left-4 [&_svg]:top-4 [&_svg]:size-4 [&_svg]:text-foreground',
+  'relative w-full rounded-lg border p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4  [&_svg]:size-4 [&>svg]:text-foreground',
   {
     variants: {
       variant: {
         default: 'bg-background text-foreground',
         destructive:
-          'border-destructive/50 text-destructive dark:border-destructive [&_svg]:text-destructive',
+          'border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive',
       },
     },
     defaultVariants: {
@@ -35,16 +35,20 @@ type AlertVariants = VariantProps<typeof alertVariants>;
   `,
   host: {
     role: 'alert',
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScAlert {
-  variant = input<AlertVariants['variant']>('default');
+  readonly variant = input<AlertVariants['variant']>('default');
 
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn(alertVariants({ variant: this.variant() }), this.class()));
+  protected readonly class = computed(() =>
+    cn(alertVariants({ variant: this.variant() }), this.classInput()),
+  );
 }
