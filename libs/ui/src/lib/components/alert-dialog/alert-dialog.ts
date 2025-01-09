@@ -16,6 +16,7 @@ import { ScAlertDialogDescription } from './alert-dialog-description';
 import { ScAlertDialogFooter } from './alert-dialog-footer';
 import { ScAlertDialogHeader } from './alert-dialog-header';
 import { ScAlertDialogTitle } from './alert-dialog-title';
+import { ScAlertDialogTrigger } from './alert-dialog-trigger';
 
 @Component({
   selector: 'sc-alert-dialog',
@@ -39,7 +40,7 @@ import { ScAlertDialogTitle } from './alert-dialog-title';
       <button class="mt-2 sm:mt-0" (click)="dialogRef.close()" variant="outline" sc-button>
         Cancel
       </button>
-      <button sc-button>{{ action() }}</button>
+      <button (click)="confirmAction()" sc-button>{{ action() }}</button>
     </div>
   `,
   host: {
@@ -51,6 +52,8 @@ import { ScAlertDialogTitle } from './alert-dialog-title';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScAlertDialog {
+  private readonly scAlertDialogTrigger = inject(ScAlertDialogTrigger);
+
   readonly classInput = input<string>('', {
     alias: 'class',
   });
@@ -71,5 +74,10 @@ export class ScAlertDialog {
 
   constructor() {
     this.dialogRef.disableClose = true;
+  }
+
+  confirmAction() {
+    this.scAlertDialogTrigger.actionConfirmed.set(true);
+    this.dialogRef.close();
   }
 }

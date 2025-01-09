@@ -1,5 +1,5 @@
 import { Dialog } from '@angular/cdk/dialog';
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 
 import { ScAlertDialog } from './alert-dialog';
 
@@ -8,6 +8,8 @@ import { ScAlertDialog } from './alert-dialog';
 })
 export class ScAlertDialogTrigger {
   readonly dialog = inject(Dialog);
+
+  readonly actionConfirmed = signal<boolean>(false);
 
   open(title: string, description: string, action: string) {
     const dialogRef = this.dialog.open(ScAlertDialog, {

@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  effect,
+  inject,
+} from '@angular/core';
 
 import { ScAlertDialogTrigger, ScButton } from '@semantic-components/ui';
 
@@ -14,6 +20,16 @@ import { ScAlertDialogTrigger, ScButton } from '@semantic-components/ui';
 })
 export default class AlertDialogPage {
   scAlertDialogTrigger = inject(ScAlertDialogTrigger);
+
+  actionConfirmed = this.scAlertDialogTrigger.actionConfirmed;
+
+  constructor() {
+    effect(() => {
+      if (this.actionConfirmed()) {
+        console.log('Delete the account');
+      }
+    });
+  }
 
   openDialog() {
     this.scAlertDialogTrigger.open(
