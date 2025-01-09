@@ -15,19 +15,21 @@ import { cn } from '@semantic-components/utils';
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScTableHead {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() =>
+  protected readonly class = computed(() =>
     cn(
       'h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0',
-      this.class(),
+      this.classInput(),
     ),
   );
 }

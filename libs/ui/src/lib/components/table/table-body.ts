@@ -15,14 +15,16 @@ import { cn } from '@semantic-components/utils';
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScTableBody {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn('[&_tr:last-child]:border-0', this.class()));
+  protected readonly class = computed(() => cn('[&_tr:last-child]:border-0', this.classInput()));
 }

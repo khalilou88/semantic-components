@@ -15,14 +15,18 @@ import { cn } from '@semantic-components/utils';
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScTableCell {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn('p-4 align-middle [&:has([role=checkbox])]:pr-0', this.class()));
+  protected readonly class = computed(() =>
+    cn('p-4 align-middle [&:has([role=checkbox])]:pr-0', this.classInput()),
+  );
 }

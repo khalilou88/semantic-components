@@ -15,16 +15,21 @@ import { cn } from '@semantic-components/utils';
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScTableRow {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() =>
-    cn('border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted', this.class()),
+  protected readonly class = computed(() =>
+    cn(
+      'border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted',
+      this.classInput(),
+    ),
   );
 }

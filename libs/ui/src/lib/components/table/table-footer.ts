@@ -15,16 +15,18 @@ import { cn } from '@semantic-components/utils';
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScTableFooter {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() =>
-    cn('border-t bg-muted/50 font-medium [&>tr]:last:border-b-0', this.class()),
+  protected readonly class = computed(() =>
+    cn('border-t bg-muted/50 font-medium [&>tr]:last:border-b-0', this.classInput()),
   );
 }

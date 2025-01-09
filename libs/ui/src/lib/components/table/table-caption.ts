@@ -15,14 +15,18 @@ import { cn } from '@semantic-components/utils';
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScTableCaption {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn('mt-4 text-sm text-muted-foreground', this.class()));
+  protected readonly class = computed(() =>
+    cn('mt-4 text-sm text-muted-foreground', this.classInput()),
+  );
 }
