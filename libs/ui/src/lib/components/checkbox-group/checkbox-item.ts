@@ -73,6 +73,8 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 export class ScCheckboxItem {
   protected readonly id = signal<string>(inject(_IdGenerator).getId('sc-checkbox-item-'));
 
+  private readonly cdkOption = inject(CdkOption);
+
   readonly classInput = input<string>('', {
     alias: 'class',
   });
@@ -88,11 +90,9 @@ export class ScCheckboxItem {
   });
   protected readonly disabled = linkedSignal(() => this.disabledInput());
 
-  readonly checkedInput = input<boolean, unknown>(false, {
-    alias: 'checked',
-    transform: booleanAttribute,
-  });
-  protected readonly checked = linkedSignal(() => this.checkedInput());
+  protected checked() {
+    return this.cdkOption.isSelected();
+  }
 
   protected readonly state = computed<'checked' | 'unchecked'>(() => {
     if (this.checked()) {
