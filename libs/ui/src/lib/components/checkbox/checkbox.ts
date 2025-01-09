@@ -24,7 +24,7 @@ import { SiCheckIcon, SiMinusIcon } from '@semantic-icons/lucide-icons';
   selector: 'sc-checkbox',
   imports: [SiCheckIcon, SiMinusIcon],
   template: `
-    <div class="relative size-4">
+    <div [class]="wrapperClass()">
       <input
         [id]="id()"
         [attr.aria-label]="ariaLabel()"
@@ -73,6 +73,12 @@ export class ScCheckbox implements ControlValueAccessor {
   });
 
   protected readonly class = computed(() => cn('flex items-center space-x-2', this.classInput()));
+
+  readonly wrapperClassInput = input<string>('', {
+    alias: 'wrapperClass',
+  });
+
+  protected readonly wrapperClass = computed(() => cn('relative size-4', this.classInput()));
 
   readonly checkboxClassInput = input<string>('', {
     alias: 'checkboxClass',
