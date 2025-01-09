@@ -1,4 +1,5 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
+import { CdkOption } from '@angular/cdk/listbox';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -60,7 +61,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  hostDirectives: [],
+  hostDirectives: [CdkOption],
 })
 export class ScCheckboxItem {
   protected readonly id = signal<string>(inject(_IdGenerator).getId('sc-checkbox-item-'));

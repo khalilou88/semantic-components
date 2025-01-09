@@ -1,9 +1,12 @@
+import { CdkListbox } from '@angular/cdk/listbox';
 import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  booleanAttribute,
   computed,
   input,
+  signal,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
@@ -20,7 +23,17 @@ import { cn } from '@semantic-components/utils';
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  hostDirectives: [],
+  hostDirectives: [
+    {
+      directive: CdkListbox,
+      inputs: [
+        'cdkListboxDisabled: disabled',
+        'cdkListboxMultiple: multiple',
+        // 'cdkListboxValue: value',
+      ],
+      // outputs: ['cdkListboxValueChange: valueChange'],
+    },
+  ],
 })
 export class ScCheckboxGroup {
   readonly classInput = input<string>('', {
@@ -28,4 +41,13 @@ export class ScCheckboxGroup {
   });
 
   protected readonly class = computed(() => cn('', this.classInput()));
+
+  readonly disabled = input<boolean, unknown>(false, {
+    alias: 'disabled',
+    transform: booleanAttribute,
+  });
+
+  protected readonly multiple = signal(true);
+
+  // readonly value = model<unknown>(undefined);
 }

@@ -29,6 +29,6 @@ export default class CheckboxGroupPage {
   toppingsArray = ['Extra Cheese', 'Mushrooms', 'Pepperoni', 'Sausage'];
 
   toppingsForm = new FormGroup({
-    toppings: new FormControl(),
+    toppings: new FormControl([]),
   });
 }
