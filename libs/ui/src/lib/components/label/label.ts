@@ -15,19 +15,21 @@ import { cn } from '@semantic-components/utils';
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScLabel {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() =>
+  protected readonly class = computed(() =>
     cn(
       'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
-      this.class(),
+      this.classInput(),
     ),
   );
 }
