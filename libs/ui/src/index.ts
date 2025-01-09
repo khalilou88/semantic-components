@@ -29,6 +29,7 @@ export * from './lib/components/toast';
 export * from './lib/components/slider';
 export * from './lib/components/carousel';
 export * from './lib/components/checkbox';
+export * from './lib/components/checkbox-group';
 export * from './lib/components/accordion';
 export * from './lib/components/switch';
 export * from './lib/components/radio-group';
