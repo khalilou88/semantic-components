@@ -38,12 +38,14 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
         aria-describedby=":rce:-form-item-description"
         aria-invalid="false"
       >
-        <span
-          class="flex items-center justify-center text-current pointer-events-none"
-          [attr.data-state]="state()"
-        >
-          <svg class="h-4 w-4" si-check-icon></svg>
-        </span>
+        @if (checked()) {
+          <span
+            class="flex items-center justify-center text-current pointer-events-none"
+            [attr.data-state]="state()"
+          >
+            <svg class="h-4 w-4" si-check-icon></svg>
+          </span>
+        }
       </button>
       <input
         [checked]="checked()"
