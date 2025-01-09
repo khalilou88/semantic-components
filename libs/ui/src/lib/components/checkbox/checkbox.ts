@@ -33,13 +33,14 @@ import { SiCheckIcon, SiMinusIcon } from '@semantic-icons/lucide-icons';
         [checked]="checked()"
         [attr.data-state]="state()"
         (change)="onInteractionEvent($event)"
+        (click)="toggle()"
         type="checkbox"
       />
 
       @if (indeterminate()) {
-        <svg [class]="svgClass()" si-minus-icon></svg>
+        <svg [class]="svgClass()" (click)="toggle()" si-minus-icon></svg>
       } @else if (checked()) {
-        <svg [class]="svgClass()" si-check-icon></svg>
+        <svg [class]="svgClass()" (click)="toggle()" si-check-icon></svg>
       }
     </div>
 
@@ -49,7 +50,6 @@ import { SiCheckIcon, SiMinusIcon } from '@semantic-icons/lucide-icons';
   `,
   host: {
     '[class]': 'class()',
-    '(click)': 'toggle()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
