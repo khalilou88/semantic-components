@@ -1,7 +1,6 @@
-import { Dialog } from '@angular/cdk/dialog';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { ScAlertDialog, ScButton } from '@semantic-components/ui';
+import { ScAlertDialogTrigger, ScButton } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-alert-dialog-page',
@@ -14,11 +13,9 @@ import { ScAlertDialog, ScButton } from '@semantic-components/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class AlertDialogPage {
-  dialog = inject(Dialog);
+  scAlertDialogTrigger = inject(ScAlertDialogTrigger);
 
   openDialog() {
-    this.dialog.open(ScAlertDialog, {
-      minWidth: '300px',
-    });
+    this.scAlertDialogTrigger.open();
   }
 }

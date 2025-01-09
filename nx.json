@@ -107,15 +107,6 @@
       "linter": "eslint",
       "unitTestRunner": "jest"
     },
-    "@nx/angular:component": {
-      "style": "css",
-      "skipTests": true,
-      "inlineStyle": true,
-      "inlineTemplate": true,
-      "viewEncapsulation": "None",
-      "changeDetection": "OnPush",
-      "path": "libs/ui/src/components"
-    },
     "@schematics/angular:component": {
       "name": "components/",
       "project": "ui",
@@ -127,6 +118,12 @@
       "flat": true,
       "viewEncapsulation": "None",
       "changeDetection": "OnPush"
+    },
+    "@schematics/angular:service": {
+      "name": "components/",
+      "project": "ui",
+      "skipTests": true,
+      "flat": true
     }
   }
 }
