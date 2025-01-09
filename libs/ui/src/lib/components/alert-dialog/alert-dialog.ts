@@ -1,9 +1,15 @@
 import { DialogRef } from '@angular/cdk/dialog';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  inject,
+  signal,
+} from '@angular/core';
 
 import { ScButton } from '../button';
 import { ScAlertDialogContent } from './alert-dialog-content';
-import { scAlertDialogDescription } from './alert-dialog-description';
+import { ScAlertDialogDescription } from './alert-dialog-description';
 import { ScAlertDialogFooter } from './alert-dialog-footer';
 import { ScAlertDialogHeader } from './alert-dialog-header';
 import { ScAlertDialogTitle } from './alert-dialog-title';
@@ -14,12 +20,12 @@ import { ScAlertDialogTitle } from './alert-dialog-title';
     ScButton,
     ScAlertDialogFooter,
     ScAlertDialogHeader,
-    scAlertDialogDescription,
+    ScAlertDialogDescription,
     ScAlertDialogTitle,
     ScAlertDialogContent,
   ],
   template: `
-    <div sc-alert-dialog-content>
+    <div [state]="state()" sc-alert-dialog-content>
       <div sc-alert-dialog-header>
         <h2 sc-alert-dialog-title>Are you absolutely sure?</h2>
 
@@ -42,7 +48,9 @@ import { ScAlertDialogTitle } from './alert-dialog-title';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScAlertDialog {
-  dialogRef = inject(DialogRef);
+  readonly state = signal<'open' | 'closed'>('open');
+
+  readonly dialogRef = inject(DialogRef);
 
   constructor() {
     this.dialogRef.disableClose = true;

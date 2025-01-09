@@ -15,14 +15,16 @@ import { cn } from '@semantic-components/utils';
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class scAlertDialogDescription {
-  class = input<string>('');
+export class ScAlertDialogDescription {
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn('text-sm text-muted-foreground', this.class()));
+  protected readonly class = computed(() => cn('text-sm text-muted-foreground', this.classInput()));
 }

@@ -15,16 +15,18 @@ import { cn } from '@semantic-components/utils';
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScAlertDialogFooter {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() =>
-    cn('flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2', this.class()),
+  protected readonly class = computed(() =>
+    cn('flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2', this.classInput()),
   );
 }
