@@ -13,12 +13,14 @@ import {
   TemplateRef,
   ViewContainerRef,
   ViewEncapsulation,
+  booleanAttribute,
   computed,
   contentChildren,
   effect,
   forwardRef,
   inject,
   input,
+  linkedSignal,
   model,
   signal,
   untracked,
@@ -29,7 +31,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 import { ScOption } from './option';
-import { ScSelectState } from './select-state';
 
 @Component({
   selector: 'sc-select',
@@ -38,8 +39,8 @@ import { ScSelectState } from './select-state';
     <button
       class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
       #scSelectTrigger
-      [disabled]="isDisabled()"
-      [attr.aria-expanded]="_isExpanded()"
+      [disabled]="disabled()"
+      [attr.aria-expanded]="isExpanded()"
       [attr.aria-controls]="panelId"
       (click)="open()"
       type="button"
@@ -68,48 +69,34 @@ import { ScSelectState } from './select-state';
       useExisting: forwardRef(() => ScSelect),
       multi: true,
     },
-    ScSelectState,
   ],
 })
 export class ScSelect implements ControlValueAccessor {
-  private readonly state = inject(ScSelectState);
+  private readonly changeDetectorRef = inject(ChangeDetectorRef);
+  private readonly overlay = inject(Overlay);
+  private readonly directionality = inject(Directionality, { optional: true });
+  private readonly viewContainerRef = inject(ViewContainerRef);
+  private portal: TemplatePortal<unknown> | null = null;
+  readonly scSelectTrigger = viewChild.required<ElementRef<HTMLButtonElement>>('scSelectTrigger');
 
   protected readonly panelId: string = inject(_IdGenerator).getId('sc-select-panel-');
+  readonly panelTemplate = viewChild.required<TemplateRef<unknown>>('panelTemplate');
 
-  private readonly _cdr = inject(ChangeDetectorRef);
+  readonly placeholder = input<string>('');
 
-  _overlay = inject(Overlay);
-  _dir = inject(Directionality, { optional: true });
-  _viewContainerRef = inject(ViewContainerRef);
+  readonly isOpen = signal<boolean>(false);
 
-  private _portal: TemplatePortal<unknown> | null = null;
-
-  scSelectTrigger = viewChild.required<ElementRef<HTMLButtonElement>>('scSelectTrigger');
-
-  _panelTemplate = viewChild.required<TemplateRef<unknown>>('panelTemplate');
-
-  placeholder = input<string>('');
-
-  isOpen = signal<boolean>(false);
-
-  options = contentChildren(ScOption);
+  readonly options = contentChildren(ScOption);
 
   private readonly activeDescendant = signal<string | null>(null);
 
+  readonly disabledInput = input<boolean, unknown>(false, {
+    alias: 'disabled',
+    transform: booleanAttribute,
+  });
+  readonly disabled = linkedSignal(() => this.disabledInput());
+
   constructor() {
-    effect(() => {
-      //init
-      if (this.state.value() === undefined) {
-        this.state.value.set(this.value());
-      }
-    });
-
-    effect(() => {
-      if (this.value() !== this.state.value()) {
-        this.setValue(this.state.value());
-      }
-    });
-
     effect(() => {
       this.syncSelectedState(this.value(), this.options(), this.options()[0]);
     });
@@ -136,34 +123,32 @@ export class ScSelect implements ControlValueAccessor {
 
   readonly value = model<unknown>(undefined);
 
-  isDisabled = signal(false);
-
   writeValue(value: unknown): void {
     this.value.set(value);
   }
 
   setValue(value: unknown) {
     this.value.set(value);
-    this._onChange(value);
-    this._cdr.markForCheck();
+    this.onChange(value);
+    this.changeDetectorRef.markForCheck();
     this.close();
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  _onChange: (value: unknown) => void = () => {};
+  onChange: (value: unknown) => void = () => {};
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  _onTouched: () => void = () => {};
+  onTouched: () => void = () => {};
 
   registerOnChange(fn: (value: unknown) => void): void {
-    this._onChange = fn;
+    this.onChange = fn;
   }
 
   registerOnTouched(fn: () => void): void {
-    this._onTouched = fn;
+    this.onTouched = fn;
   }
 
-  setDisabledState?(isDisabled: boolean): void {
-    this.isDisabled.set(isDisabled);
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled.set(isDisabled);
   }
 
   label = computed(() => {
@@ -176,7 +161,7 @@ export class ScSelect implements ControlValueAccessor {
     return this.placeholder();
   });
 
-  _isExpanded = computed(() => {
+  isExpanded = computed(() => {
     return this.isOpen();
   });
 
@@ -187,7 +172,7 @@ export class ScSelect implements ControlValueAccessor {
       return this._overlayRef;
     }
 
-    const positionStrategy = this._overlay
+    const positionStrategy = this.overlay
       .position()
       .flexibleConnectedTo(this.scSelectTrigger())
       .withFlexibleDimensions(false)
@@ -209,10 +194,10 @@ export class ScSelect implements ControlValueAccessor {
         },
       ]);
 
-    this._overlayRef = this._overlay.create({
+    this._overlayRef = this.overlay.create({
       positionStrategy,
-      scrollStrategy: this._overlay.scrollStrategies.reposition(),
-      direction: this._dir || 'ltr',
+      scrollStrategy: this.overlay.scrollStrategies.reposition(),
+      direction: this.directionality || 'ltr',
       hasBackdrop: false,
     });
 
@@ -242,8 +227,8 @@ export class ScSelect implements ControlValueAccessor {
     const overlayRef = this._getOverlayRef();
 
     overlayRef.updateSize({ width: this.scSelectTrigger().nativeElement.offsetWidth });
-    this._portal ??= new TemplatePortal(this._panelTemplate(), this._viewContainerRef);
-    overlayRef.attach(this._portal);
+    this.portal ??= new TemplatePortal(this.panelTemplate(), this.viewContainerRef);
+    overlayRef.attach(this.portal);
   }
 
   close(): void {

@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  Host,
   ViewEncapsulation,
   booleanAttribute,
   computed,
@@ -15,7 +16,7 @@ import {
 import { cn } from '@semantic-components/utils';
 import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 
-import { ScSelectState } from './select-state';
+import { ScSelect } from './select';
 
 @Component({
   selector: 'sc-option',
@@ -43,9 +44,6 @@ import { ScSelectState } from './select-state';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScOption implements Highlightable {
-  private readonly state = inject(ScSelectState);
-
-  /** The unique ID of the option. */
   readonly id = signal<string>(inject(_IdGenerator).getId('sc-option-'));
 
   readonly classInput = input<string>('', {
@@ -59,13 +57,15 @@ export class ScOption implements Highlightable {
     ),
   );
 
-  isSelected = computed(() => this.value() === this.state.value());
+  constructor(@Host() private readonly scSelect: ScSelect) {}
 
-  value = input.required<unknown>();
+  protected isSelected = computed(() => this.value() === this.scSelect.value());
 
-  labelEl = viewChild.required<ElementRef<HTMLSpanElement>>('label');
+  readonly value = input.required<unknown>();
 
-  label = computed(() => {
+  private readonly labelEl = viewChild.required<ElementRef<HTMLSpanElement>>('label');
+
+  readonly label = computed(() => {
     return this.labelEl().nativeElement.textContent?.trim() ?? '';
   });
 
@@ -92,13 +92,13 @@ export class ScOption implements Highlightable {
     return this.label();
   }
 
-  readonly disabledByInput = input<boolean, unknown>(false, {
+  readonly disabledInput = input<boolean, unknown>(false, {
     alias: 'disabled',
     transform: booleanAttribute,
   });
 
-  readonly _disabled = computed(
-    () => this.disabledByInput() || this.disabled || this.state.disabled(),
+  protected readonly _disabled = computed(
+    () => this.disabledInput() || this.disabled || this.scSelect.disabled(),
   );
 
   protected toggle() {
@@ -114,7 +114,7 @@ export class ScOption implements Highlightable {
       return;
     }
 
-    this.state.value.set(this.value());
+    this.scSelect.value.set(this.value());
   }
 
   private deselect() {
@@ -122,6 +122,6 @@ export class ScOption implements Highlightable {
       return;
     }
 
-    this.state.value.set(null);
+    this.scSelect.value.set(null);
   }
 }
