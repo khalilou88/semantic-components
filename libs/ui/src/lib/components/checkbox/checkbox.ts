@@ -38,9 +38,9 @@ import { SiCheckIcon, SiMinusIcon } from '@semantic-icons/lucide-icons';
       />
 
       @if (indeterminate()) {
-        <svg [class]="svgClass()" (click)="toggle()" si-minus-icon></svg>
+        <svg [class]="svgClass()" si-minus-icon></svg>
       } @else if (checked()) {
-        <svg [class]="svgClass()" (click)="toggle()" si-check-icon></svg>
+        <svg [class]="svgClass()" si-check-icon></svg>
       }
     </div>
 
