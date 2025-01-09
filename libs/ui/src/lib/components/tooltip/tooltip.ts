@@ -25,6 +25,7 @@ export class ScTooltip implements OnInit, OnDestroy {
   private readonly elementRef = inject(ElementRef);
   private readonly overlay = inject(Overlay);
   private overlayRef!: OverlayRef;
+  private tooltipRef!: ComponentRef<ScTooltipContainer>;
 
   readonly message = input('', { alias: 'scTooltip' });
   readonly position = input<'left' | 'right' | 'above' | 'below'>('below');
@@ -48,6 +49,7 @@ export class ScTooltip implements OnInit, OnDestroy {
 
   protected hideTooltip() {
     if (this.overlayRef?.hasAttached() === true) {
+      this.tooltipRef.setInput('state', 'closed');
       this.overlayRef?.detach();
     }
   }
@@ -57,10 +59,13 @@ export class ScTooltip implements OnInit, OnDestroy {
     const tooltipPortal = new ComponentPortal(ScTooltipContainer);
 
     // Attach tooltip portal to overlay
-    const tooltipRef: ComponentRef<ScTooltipContainer> = this.overlayRef.attach(tooltipPortal);
+    this.tooltipRef = this.overlayRef.attach(tooltipPortal);
 
     // Pass content to tooltip component instance
-    tooltipRef.instance.message = this.message;
+
+    this.tooltipRef.setInput('message', this.message());
+    this.tooltipRef.setInput('position', this.position());
+    this.tooltipRef.setInput('state', 'open');
   }
 
   private getPositionStrategy(): PositionStrategy {
