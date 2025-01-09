@@ -12,7 +12,7 @@ import { ScAlertDialogTrigger, ScButton } from '@semantic-components/ui';
   selector: 'app-alert-dialog-page',
   imports: [ScButton],
   template: `
-    <button (click)="openDialog()" sc-button variant="secondary">Open alert dialog</button>
+    <button (click)="openAlertDialog()" sc-button variant="secondary">Open alert dialog</button>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -31,7 +31,7 @@ export default class AlertDialogPage {
     });
   }
 
-  openDialog() {
+  openAlertDialog() {
     this.scAlertDialogTrigger.open(
       'Are you absolutely sure?',
       'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
