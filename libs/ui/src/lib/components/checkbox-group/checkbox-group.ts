@@ -43,7 +43,6 @@ export class ScCheckboxGroup {
   protected readonly class = computed(() => cn('', this.classInput()));
 
   readonly disabled = input<boolean, unknown>(false, {
-    alias: 'disabled',
     transform: booleanAttribute,
   });
 

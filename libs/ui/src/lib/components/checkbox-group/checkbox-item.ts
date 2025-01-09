@@ -21,14 +21,14 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
   template: `
     <div class="flex flex-row items-start space-x-3 space-y-0">
       <label
-        class="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-normal"
+        class="text-sm font-normal leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
         [for]="id()"
       >
         {{ label() }}
       </label>
 
       <button
-        class="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
+        class="peer size-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
         [id]="id()"
         [attr.data-state]="state()"
         [attr.aria-checked]="state() === 'checked' ? 'true' : 'false'"
@@ -40,10 +40,10 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
       >
         @if (checked()) {
           <span
-            class="flex items-center justify-center text-current pointer-events-none"
+            class="pointer-events-none flex items-center justify-center text-current"
             [attr.data-state]="state()"
           >
-            <svg class="h-4 w-4" si-check-icon></svg>
+            <svg class="size-4" si-check-icon></svg>
           </span>
         }
       </button>
