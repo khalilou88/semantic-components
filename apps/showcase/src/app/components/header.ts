@@ -3,7 +3,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  HostListener,
   ViewEncapsulation,
   computed,
   inject,
@@ -150,6 +149,7 @@ import { LayoutState } from '../services/layout-state';
   host: {
     '[class]': 'classes()',
     '[style.bottom.px]': 'layoutState.sidebarHeight()',
+    '(window:resize)': 'onResize($event)',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -170,8 +170,7 @@ export class Header implements AfterViewChecked {
     this.setHeaderHeight();
   }
 
-  @HostListener('window:resize', ['$event'])
-  public onResize(): void {
+  public onResize(_: any): void {
     this.setHeaderHeight();
   }
 

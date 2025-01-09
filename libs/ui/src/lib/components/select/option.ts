@@ -3,7 +3,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  Host,
   ViewEncapsulation,
   booleanAttribute,
   computed,
@@ -57,7 +56,7 @@ export class ScOption implements Highlightable {
     ),
   );
 
-  constructor(@Host() private readonly scSelect: ScSelect) {}
+  private readonly scSelect = inject(ScSelect, { host: true });
 
   protected isSelected = computed(() => this.value() === this.scSelect.value());
 

@@ -2,7 +2,6 @@ import {
   AfterViewChecked,
   ChangeDetectionStrategy,
   Component,
-  HostListener,
   ViewEncapsulation,
   inject,
 } from '@angular/core';
@@ -18,6 +17,9 @@ import { LayoutState } from '../services/layout-state';
     <app-header />
     <router-outlet />
   `,
+  host: {
+    '(window:resize)': 'onResize($event)',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -29,8 +31,7 @@ export default class StackedLayout implements AfterViewChecked {
     this.setScreenHeight();
   }
 
-  @HostListener('window:resize', ['$event'])
-  public onResize(): void {
+  public onResize(_: any): void {
     this.setScreenHeight();
   }
 

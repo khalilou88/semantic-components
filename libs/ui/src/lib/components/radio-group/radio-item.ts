@@ -2,7 +2,6 @@ import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   ChangeDetectionStrategy,
   Component,
-  Host,
   ViewEncapsulation,
   booleanAttribute,
   computed,
@@ -49,7 +48,7 @@ import { ScRadioGroup } from './radio-group';
 export class ScRadioItem {
   protected readonly id = signal<string>(inject(_IdGenerator).getId('sc-radio-item-'));
 
-  constructor(@Host() private readonly scRadioGroup: ScRadioGroup) {}
+  private readonly scRadioGroup = inject(ScRadioGroup, { host: true });
 
   protected readonly name = computed(() => {
     return this.scRadioGroup.name();

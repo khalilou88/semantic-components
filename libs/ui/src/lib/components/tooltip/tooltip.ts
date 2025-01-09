@@ -4,7 +4,6 @@ import {
   ComponentRef,
   Directive,
   ElementRef,
-  HostListener,
   OnDestroy,
   OnInit,
   inject,
@@ -15,14 +14,20 @@ import { ScTooltipContainer } from './tooltip-container';
 
 @Directive({
   selector: '[scTooltip]',
+  host: {
+    '(mouseover)': 'showTooltip()',
+    '(focus)': 'showTooltip()',
+    '(mouseleave)': 'hideTooltip()',
+    '(blur)': 'hideTooltip()',
+  },
 })
 export class ScTooltip implements OnInit, OnDestroy {
   private readonly elementRef = inject(ElementRef);
   private readonly overlay = inject(Overlay);
   private overlayRef!: OverlayRef;
 
-  message = input('', { alias: 'scTooltip' });
-  position = input<'left' | 'right' | 'above' | 'below'>('below');
+  readonly message = input('', { alias: 'scTooltip' });
+  readonly position = input<'left' | 'right' | 'above' | 'below'>('below');
 
   ngOnInit() {
     const positionStrategy = this.getPositionStrategy();
@@ -33,9 +38,7 @@ export class ScTooltip implements OnInit, OnDestroy {
     this.overlayRef?.dispose();
   }
 
-  @HostListener('mouseover')
-  @HostListener('focus')
-  showTooltip() {
+  protected showTooltip() {
     if (this.overlayRef?.hasAttached() === true) {
       return;
     }
@@ -43,9 +46,7 @@ export class ScTooltip implements OnInit, OnDestroy {
     this.attachTooltip();
   }
 
-  @HostListener('mouseleave')
-  @HostListener('blur')
-  hideTooltip() {
+  protected hideTooltip() {
     if (this.overlayRef?.hasAttached() === true) {
       this.overlayRef?.detach();
     }
