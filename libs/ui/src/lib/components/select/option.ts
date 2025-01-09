@@ -114,7 +114,7 @@ export class ScOption implements Highlightable {
       return;
     }
 
-    this.scSelect.value.set(this.value());
+    this.scSelect.setValue(this.value());
   }
 
   private deselect() {
@@ -122,6 +122,6 @@ export class ScOption implements Highlightable {
       return;
     }
 
-    this.scSelect.value.set(null);
+    this.scSelect.setValue(null);
   }
 }

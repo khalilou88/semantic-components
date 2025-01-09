@@ -3,20 +3,17 @@ import {
   ChangeDetectorRef,
   Component,
   ViewEncapsulation,
-  afterNextRender,
   booleanAttribute,
   computed,
-  effect,
   forwardRef,
   inject,
   input,
+  linkedSignal,
   model,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { cn } from '@semantic-components/utils';
-
-import { ScRadioGroupState } from './radio-group-state';
 
 @Component({
   selector: 'sc-radio-group',
@@ -25,7 +22,7 @@ import { ScRadioGroupState } from './radio-group-state';
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -36,54 +33,35 @@ import { ScRadioGroupState } from './radio-group-state';
       useExisting: forwardRef(() => ScRadioGroup),
       multi: true,
     },
-    ScRadioGroupState,
   ],
 })
 export class ScRadioGroup implements ControlValueAccessor {
-  state = inject(ScRadioGroupState);
-  private readonly _cdr = inject(ChangeDetectorRef);
+  private readonly changeDetectorRef = inject(ChangeDetectorRef);
 
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn('grid gap-2', this.class()));
+  protected readonly class = computed(() => cn('grid gap-2', this.classInput()));
 
-  disabled = input(false, { transform: booleanAttribute });
+  readonly disabledInput = input<boolean, unknown>(false, {
+    alias: 'disabled',
+    transform: booleanAttribute,
+  });
+  readonly disabled = linkedSignal(() => this.disabledInput());
 
-  name = input<string>('');
+  readonly name = input<string>('');
 
-  value = model<string | undefined>(undefined);
-
-  constructor() {
-    afterNextRender(() => {
-      if (this.value !== undefined) {
-        this.state.selectedValue.set(this.value());
-      }
-    });
-
-    effect(() => {
-      if (this.disabled() === true || this.disabled() === false) {
-        this.state.disabled.set(this.disabled());
-      }
-
-      if (this.name()) {
-        this.state.name.set(this.name());
-      }
-
-      const v = this.state.selectedValue();
-      if (v !== undefined) {
-        this.setValue(v);
-      }
-    });
-  }
+  readonly value = model<string | undefined>(undefined);
 
   setValue(newValue: string) {
     this.value.set(newValue);
     this.onChange(newValue);
-    this._cdr.markForCheck();
+    this.changeDetectorRef.markForCheck();
   }
 
   writeValue(value: string): void {
-    this.state.selectedValue.set(value);
+    this.value.set(value);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -99,7 +77,7 @@ export class ScRadioGroup implements ControlValueAccessor {
     this.onTouch = fn;
   }
 
-  setDisabledState?(isDisabled: boolean): void {
-    this.state.disabled.set(isDisabled);
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled.set(isDisabled);
   }
 }
