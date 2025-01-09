@@ -78,7 +78,7 @@ export class ScCheckbox implements ControlValueAccessor {
     alias: 'wrapperClass',
   });
 
-  protected readonly wrapperClass = computed(() => cn('relative size-4', this.classInput()));
+  protected readonly wrapperClass = computed(() => cn('relative size-4', this.wrapperClassInput()));
 
   readonly checkboxClassInput = input<string>('', {
     alias: 'checkboxClass',
