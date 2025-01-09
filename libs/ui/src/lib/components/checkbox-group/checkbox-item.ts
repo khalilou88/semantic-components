@@ -2,7 +2,9 @@ import { _IdGenerator } from '@angular/cdk/a11y';
 import { CdkOption } from '@angular/cdk/listbox';
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
+  OnInit,
   ViewEncapsulation,
   booleanAttribute,
   computed,
@@ -67,7 +69,8 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
     },
   ],
 })
-export class ScCheckboxItem {
+export class ScCheckboxItem implements OnInit {
+  private readonly changeDetectorRef = inject(ChangeDetectorRef);
   protected readonly id = signal<string>(inject(_IdGenerator).getId('sc-checkbox-item-'));
 
   private readonly cdkOption = inject(CdkOption);
@@ -89,9 +92,7 @@ export class ScCheckboxItem {
   });
   protected readonly disabled = linkedSignal(() => this.disabledInput());
 
-  protected checked() {
-    return this.cdkOption.isSelected();
-  }
+  protected readonly checked = linkedSignal(() => this.cdkOption.isSelected());
 
   protected readonly state = computed<'checked' | 'unchecked'>(() => {
     if (this.checked()) {
@@ -100,4 +101,11 @@ export class ScCheckboxItem {
 
     return 'unchecked';
   });
+
+  ngOnInit() {
+    this.cdkOption._clicked.subscribe(() => {
+      this.changeDetectorRef.markForCheck();
+      this.checked.set(this.cdkOption.isSelected());
+    });
+  }
 }
