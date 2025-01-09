@@ -77,18 +77,18 @@ export class ScRadioItem {
   protected readonly inputClass = computed(() =>
     cn(
       'row-start-1 col-start-1',
-      'appearance-none aspect-square h-4 w-4 rounded-full border border-primary text-primary ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+      'appearance-none aspect-square h-4 w-4 rounded-full cursor-pointer border border-primary text-primary ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
       this.inputClassInput(),
     ),
   );
 
   protected readonly svgWrapperClass = input<string>(
-    'row-start-1 col-start-1 h-4 w-4 flex items-center justify-center',
+    'row-start-1 col-start-1 h-4 w-4 flex items-center justify-center pointer-events-none',
   );
 
   readonly svgClassInput = input<string>('');
   protected readonly svgClass = computed(() =>
-    cn('h-2.5 w-2.5 fill-primary text-primary', this.svgClassInput()),
+    cn('h-2.5 w-2.5 fill-primary text-primary pointer-events-none', this.svgClassInput()),
   );
 
   protected select() {
