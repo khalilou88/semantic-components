@@ -28,11 +28,10 @@ import { ScAlertDialogTitle } from './alert-dialog-title';
   ],
   template: `
     <div sc-alert-dialog-header>
-      <h2 sc-alert-dialog-title>Are you absolutely sure?</h2>
+      <h2 sc-alert-dialog-title>{{ title() }}</h2>
 
       <p sc-alert-dialog-description>
-        This action cannot be undone. This will permanently delete your account and remove your data
-        from our servers.
+        {{ description() }}
       </p>
     </div>
 
@@ -40,7 +39,7 @@ import { ScAlertDialogTitle } from './alert-dialog-title';
       <button class="mt-2 sm:mt-0" (click)="dialogRef.close()" variant="outline" sc-button>
         Cancel
       </button>
-      <button sc-button>Continue</button>
+      <button sc-button>{{ action() }}</button>
     </div>
   `,
   host: {
@@ -63,6 +62,9 @@ export class ScAlertDialog {
     ),
   );
 
+  readonly title = signal<string>('');
+  readonly description = signal<string>('');
+  readonly action = signal<string>('');
   readonly state = signal<'open' | 'closed'>('open');
 
   readonly dialogRef = inject(DialogRef);

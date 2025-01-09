@@ -16,6 +16,10 @@ export default class AlertDialogPage {
   scAlertDialogTrigger = inject(ScAlertDialogTrigger);
 
   openDialog() {
-    this.scAlertDialogTrigger.open();
+    this.scAlertDialogTrigger.open(
+      'Are you absolutely sure?',
+      'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+      'Continue',
+    );
   }
 }
