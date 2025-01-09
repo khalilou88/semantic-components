@@ -97,7 +97,7 @@ export class ScCheckbox implements ControlValueAccessor {
 
   protected readonly svgClass = computed(() =>
     cn(
-      'absolute top-0 left-0 size-full outline-none cursor-pointer text-primary-foreground',
+      'absolute top-0 left-0 size-full outline-none cursor-pointer pointer-events-none text-primary-foreground',
       this.svgClassInput(),
     ),
   );
