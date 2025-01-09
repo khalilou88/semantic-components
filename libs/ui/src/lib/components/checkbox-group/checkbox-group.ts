@@ -40,7 +40,7 @@ export class ScCheckboxGroup {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('', this.classInput()));
+  protected readonly class = computed(() => cn('space-y-2', this.classInput()));
 
   readonly disabled = input<boolean, unknown>(false, {
     transform: booleanAttribute,
