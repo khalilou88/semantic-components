@@ -66,7 +66,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
 
         <h3 class="mb-2" sc-heading level="3">Variants</h3>
 
-        <sc-tabs class="w-[400px]" labelsHostClass="grid w-full grid-cols-2">
+        <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
           <sc-tab>
             <sc-tab-label>Preview</sc-tab-label>
             <sc-tab-content>

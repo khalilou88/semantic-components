@@ -9,29 +9,27 @@ import {
 import { cn } from '@semantic-components/utils';
 
 @Component({
-  selector: 'sc-separator',
+  selector: 'div[sc-tabs-header]',
   imports: [],
   template: `
     <ng-content />
   `,
   host: {
+    role: 'tablist',
     '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSeparator {
-  readonly orientation = input<'horizontal' | 'vertical'>('horizontal');
-
+export class ScTabsHeader {
   readonly classInput = input<string>('', {
     alias: 'class',
   });
 
   protected readonly class = computed(() =>
     cn(
-      'block shrink-0 bg-border',
-      this.orientation() === 'horizontal' ? 'h-[1px] w-full' : 'h-full w-[1px]',
+      'inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground',
       this.classInput(),
     ),
   );

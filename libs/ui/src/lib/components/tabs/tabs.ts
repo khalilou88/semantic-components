@@ -12,12 +12,13 @@ import {
 import { cn } from '@semantic-components/utils';
 
 import { ScTab } from './tab';
+import { ScTabsHeader } from './tabs-header';
 
 @Component({
   selector: 'sc-tabs',
-  imports: [CommonModule],
+  imports: [CommonModule, ScTabsHeader],
   template: `
-    <div [class]="labelsHostClasses()" role="tablist">
+    <div [class]="tabsHeaderClass()" sc-tabs-header>
       @for (tab of tabs(); track tab) {
         <button
           class="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm"
@@ -34,25 +35,20 @@ import { ScTab } from './tab';
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScTabs {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn('', this.class()));
+  protected readonly class = computed(() => cn('', this.classInput()));
 
-  labelsHostClass = input<string>('');
-
-  labelsHostClasses = computed(() =>
-    cn(
-      'inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground',
-      this.labelsHostClass(),
-    ),
-  );
+  readonly tabsHeaderClass = input<string>('');
 
   readonly tabs = contentChildren(ScTab, { descendants: true });
 
