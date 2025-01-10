@@ -8,6 +8,7 @@ import {
   forwardRef,
   inject,
   input,
+  model,
   signal,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -45,8 +46,11 @@ export class ScReCaptchaV2 implements OnInit, ControlValueAccessor {
   readonly size = input<'normal' | 'compact'>('normal');
   readonly tabindex = input<string>('0');
   readonly languageCode = input<string>('');
-  private readonly value = signal<string | null>(null);
   private readonly disabledByCva = signal(false);
+
+  //TODO: maybe change the name to token or response
+  //this is useful to use ScReCaptchaV2 without form, and listen to the value changes with (valueChange)="doSomething($event)"
+  readonly value = model<string | null>(null);
 
   ngOnInit() {
     this.registerReCaptchaCallbacks();

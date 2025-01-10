@@ -19,6 +19,12 @@ import { ScReCaptchaV2 } from '@semantic-components/ui';
     <br />
 
     {{ reCaptchaV2Form.value | json }}
+
+    <br />
+    <br />
+    <br />
+
+    <sc-re-captcha-v2 [siteKey]="siteKey" (valueChange)="doSomething($event)" />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -30,4 +36,9 @@ export default class ReCaptchaV2Page {
   reCaptchaV2Form = new FormGroup({
     captcha: new FormControl(''),
   });
+
+  doSomething(event: any) {
+    console.log('valueChange');
+    console.log(event);
+  }
 }
