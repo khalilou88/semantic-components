@@ -16,13 +16,12 @@ export default class ConfirmationDialogPage {
   private readonly scConfirmationDialog = inject(ScConfirmationDialog);
 
   async deleteAccount() {
-    const response = await this.scConfirmationDialog.confirm(
+    const userResponse = await this.scConfirmationDialog.confirm(
       'Are you absolutely sure?',
       'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
-      'Continue',
     );
 
-    if (response) {
+    if (userResponse) {
       console.log('Delete the account');
     } else {
       console.log('Action canceled');
