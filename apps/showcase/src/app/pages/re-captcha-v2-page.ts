@@ -24,7 +24,7 @@ import { ScReCaptchaV2 } from '@semantic-components/ui';
     <br />
     <br />
 
-    <sc-re-captcha-v2 [siteKey]="siteKey" (valueChange)="doSomething($event)" />
+    <sc-re-captcha-v2 [siteKey]="siteKey" (valueChange)="doSomething($event)" theme="dark" />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
