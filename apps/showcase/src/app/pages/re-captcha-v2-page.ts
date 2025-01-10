@@ -2,7 +2,7 @@ import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
-import { ScReCaptchaV2 } from '@semantic-components/ui';
+import { ScReCaptchaV2 } from '@semantic-components/re-captcha';
 
 @Component({
   selector: 'app-re-captcha-v2-page',

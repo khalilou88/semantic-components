@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { ScButton, ScReCaptchaV3 } from '@semantic-components/ui';
+import { ScReCaptchaV3 } from '@semantic-components/re-captcha';
+import { ScButton } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-re-captcha-v3-page',

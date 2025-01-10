@@ -11,8 +11,8 @@ import { provideRouter } from '@angular/router';
 import {
   SC_RE_CAPTCHA_V2_LANGUAGE_CODE,
   SC_RE_CAPTCHA_V3_SITE_KEY,
-  scThemeProvider,
-} from '@semantic-components/ui';
+} from '@semantic-components/re-captcha';
+import { scThemeProvider } from '@semantic-components/ui';
 
 import { appRoutes } from './app.routes';
 

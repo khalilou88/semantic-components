@@ -56,4 +56,3 @@ export * from './lib/components/file-upload';
 export * from './lib/components/page';
 export * from './lib/components/typography';
 export * from './lib/components/cookie-consent';
-export * from './lib/components/re-captcha';
