@@ -50,9 +50,7 @@ export class ScReCaptchaV2 implements OnInit, ControlValueAccessor {
   readonly tabindex = input<string>('0');
   private readonly disabledByCva = signal(false);
 
-  //TODO use this variable
-  private widgetId = '';
-
+  static scReCaptchaV2s: any[] = [];
   static loadded = false;
 
   //TODO: maybe change the name to token or response
@@ -62,55 +60,60 @@ export class ScReCaptchaV2 implements OnInit, ControlValueAccessor {
   constructor(@Inject(SC_RE_CAPTCHA_V2_LANGUAGE_CODE) private readonly languageCode: string) {}
 
   ngOnInit() {
-    this.registerReCaptchaCallbacks();
-    this.addScript();
-  }
-
-  //languageCode should be global
-  private addScript() {
+    ScReCaptchaV2.scReCaptchaV2s.push(this);
     if (ScReCaptchaV2.loadded === false) {
-      let scriptSrc =
-        'https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit';
-
-      if (this.languageCode) {
-        scriptSrc += `&hl=${this.languageCode}`;
-      }
-
-      const script = this.document.createElement('script');
-      script.src = scriptSrc;
-      script.async = true;
-      script.defer = true;
-      this.document.body.appendChild(script);
+      this.registerOnloadCallback();
+      this.addScript();
     }
 
     ScReCaptchaV2.loadded = true;
   }
 
-  private registerReCaptchaCallbacks() {
+  private addScript() {
+    let scriptSrc = 'https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit';
+
+    if (this.languageCode) {
+      scriptSrc += `&hl=${this.languageCode}`;
+    }
+
+    const script = this.document.createElement('script');
+    script.src = scriptSrc;
+    script.async = true;
+    script.defer = true;
+    this.document.body.appendChild(script);
+  }
+
+  private registerOnloadCallback() {
     (window as any).onloadCallback = () => {
-      this.widgetId = grecaptcha.render(this.id(), {
-        sitekey: this.siteKey(),
-        theme: this.theme(),
-        size: this.size(),
-        tabindex: this.tabindex(),
-        callback: 'gReCaptchaCallback',
-        'expired-callback': 'gReCaptchaExpiredCallback',
-        'error-callback': 'gReCaptchaErrorCallback',
-      });
+      for (const scReCaptchaV2 of ScReCaptchaV2.scReCaptchaV2s) {
+        scReCaptchaV2.renderWidget();
+      }
     };
+  }
 
-    (window as any).gReCaptchaCallback = (token: string) => {
-      this.setValue(token);
-    };
+  renderWidget() {
+    grecaptcha.render(this.id(), {
+      sitekey: this.siteKey(),
+      theme: this.theme(),
+      size: this.size(),
+      tabindex: this.tabindex(),
+      callback: this.callback.bind(this),
+      'expired-callback': this.expiredCallback.bind(this),
+      'error-callback': this.errorCallback.bind(this),
+    });
+  }
 
-    (window as any).gReCaptchaExpiredCallback = () => {
-      this.setValue(null);
-    };
+  callback(token: string) {
+    this.setValue(token);
+  }
 
-    (window as any).gReCaptchaErrorCallback = () => {
-      this.setValue(null);
-      console.error('error');
-    };
+  expiredCallback(token: string) {
+    this.setValue(null);
+  }
+
+  errorCallback(token: string) {
+    console.error('error');
+    this.setValue(null);
   }
 
   setValue(newValue: string | null) {
