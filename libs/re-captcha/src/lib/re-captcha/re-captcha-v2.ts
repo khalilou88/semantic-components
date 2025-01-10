@@ -107,11 +107,11 @@ export class ScReCaptchaV2 implements OnInit, ControlValueAccessor {
     this.setValue(token);
   }
 
-  expiredCallback(token: string) {
+  expiredCallback() {
     this.setValue(null);
   }
 
-  errorCallback(token: string) {
+  errorCallback() {
     console.error('error');
     this.setValue(null);
   }
