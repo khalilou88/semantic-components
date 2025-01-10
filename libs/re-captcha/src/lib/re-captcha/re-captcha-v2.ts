@@ -50,6 +50,7 @@ export class ScReCaptchaV2 implements OnInit, ControlValueAccessor {
   readonly tabindex = input<string>('0');
   private readonly disabledByCva = signal(false);
 
+  private widgetId = '';
   static scReCaptchaV2s: ScReCaptchaV2[] = [];
   static loadded = false;
 
@@ -92,7 +93,7 @@ export class ScReCaptchaV2 implements OnInit, ControlValueAccessor {
   }
 
   renderWidget() {
-    grecaptcha.render(this.id(), {
+    this.widgetId = grecaptcha.render(this.id(), {
       sitekey: this.siteKey(),
       theme: this.theme(),
       size: this.size(),
@@ -114,6 +115,16 @@ export class ScReCaptchaV2 implements OnInit, ControlValueAccessor {
   errorCallback() {
     console.error('error');
     this.setValue(null);
+  }
+
+  //TODO: maybe we need this function
+  getResponse() {
+    grecaptcha.getResponse(this.widgetId);
+  }
+
+  //TODO: maybe we need this function too
+  reset() {
+    grecaptcha.reset(this.widgetId);
   }
 
   setValue(newValue: string | null) {
