@@ -6,6 +6,15 @@ import { ScButton, ScConfirmationDialog } from '@semantic-components/ui';
   selector: 'app-confirmation-dialog-page',
   imports: [ScButton],
   template: `
+    Like window.confirm(), confirmation dialog instructs the browser to display a dialog with a
+    message, and to wait until the user either confirms or cancels the dialog.
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <h1>Example</h1>
+
     <button (click)="deleteAccount()" sc-button variant="secondary">Delete My account</button>
   `,
   styles: ``,
