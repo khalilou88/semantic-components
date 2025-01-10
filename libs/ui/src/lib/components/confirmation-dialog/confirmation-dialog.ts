@@ -14,8 +14,8 @@ export class ScConfirmationDialog {
   async confirm(
     title: string,
     message: string,
-    actionButtonText: string = 'Continue',
-    cancelButtonText: string = 'Cancel',
+    actionButtonText = 'Continue',
+    cancelButtonText = 'Cancel',
   ): Promise<boolean> {
     const dialogRef = this.dialog.open<boolean>(ScConfirmationDialogContent, {
       minWidth: '300px',
