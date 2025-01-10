@@ -15,3 +15,5 @@ npm i nx@latest
 
 npx npm-check-updates --filter "/@angular\*/" -u
 npx npm-check-updates --filter "/@schematics/angular/" -u
+
+npx npm-check-updates @tiptap\* -u
