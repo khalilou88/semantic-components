@@ -57,10 +57,9 @@ export class ScHoverCardTriggerFor implements OnDestroy {
 
     const componentPortal = new ComponentPortal(ScHoverCard, this.viewContainer);
 
-    // Attach tooltip portal to overlay
     const componentRef: ComponentRef<ScHoverCard> = this.overlayRef.attach(componentPortal);
 
-    componentRef.instance.templateRef.set(this.scHoverCardTriggerFor());
+    componentRef.setInput('templateRef', this.scHoverCardTriggerFor());
   }
 
   private getPositionStrategy(): PositionStrategy {
@@ -73,14 +72,12 @@ export class ScHoverCardTriggerFor implements OnDestroy {
           originY: 'top',
           overlayX: 'center',
           overlayY: 'bottom',
-          panelClass: 'top',
         },
         {
           originX: 'center',
           originY: 'bottom',
           overlayX: 'center',
           overlayY: 'top',
-          panelClass: 'bottom',
         },
       ]);
   }
