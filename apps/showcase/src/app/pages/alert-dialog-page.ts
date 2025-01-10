@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  effect,
-  inject,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
 import { ScAlertDialogTrigger, ScButton } from '@semantic-components/ui';
 
@@ -12,7 +6,7 @@ import { ScAlertDialogTrigger, ScButton } from '@semantic-components/ui';
   selector: 'app-alert-dialog-page',
   imports: [ScButton],
   template: `
-    <button (click)="openAlertDialog()" sc-button variant="secondary">Open alert dialog</button>
+    <button (click)="deleteAccount()" sc-button variant="secondary">Delete My account</button>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -21,21 +15,17 @@ import { ScAlertDialogTrigger, ScButton } from '@semantic-components/ui';
 export default class AlertDialogPage {
   scAlertDialogTrigger = inject(ScAlertDialogTrigger);
 
-  actionConfirmed = this.scAlertDialogTrigger.actionConfirmed;
-
-  constructor() {
-    effect(() => {
-      if (this.actionConfirmed()) {
-        console.log('Delete the account');
-      }
-    });
-  }
-
-  openAlertDialog() {
-    this.scAlertDialogTrigger.open(
+  async deleteAccount() {
+    const actionConfirmed = await this.scAlertDialogTrigger.open(
       'Are you absolutely sure?',
       'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
       'Continue',
     );
+
+    if (actionConfirmed) {
+      console.log('Delete the account');
+    } else {
+      console.log('Action canceled');
+    }
   }
 }

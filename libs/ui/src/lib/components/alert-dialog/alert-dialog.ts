@@ -1,4 +1,4 @@
-import { DialogRef } from '@angular/cdk/dialog';
+import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -16,7 +16,6 @@ import { ScAlertDialogDescription } from './alert-dialog-description';
 import { ScAlertDialogFooter } from './alert-dialog-footer';
 import { ScAlertDialogHeader } from './alert-dialog-header';
 import { ScAlertDialogTitle } from './alert-dialog-title';
-import { ScAlertDialogTrigger } from './alert-dialog-trigger';
 
 @Component({
   selector: 'sc-alert-dialog',
@@ -29,18 +28,18 @@ import { ScAlertDialogTrigger } from './alert-dialog-trigger';
   ],
   template: `
     <div sc-alert-dialog-header>
-      <h2 sc-alert-dialog-title>{{ title() }}</h2>
+      <h2 sc-alert-dialog-title>{{ data.title }}</h2>
 
       <p sc-alert-dialog-description>
-        {{ description() }}
+        {{ data.description }}
       </p>
     </div>
 
     <div sc-alert-dialog-footer>
-      <button class="mt-2 sm:mt-0" (click)="dialogRef.close()" variant="outline" sc-button>
+      <button class="mt-2 sm:mt-0" (click)="dialogRef.close(false)" variant="outline" sc-button>
         Cancel
       </button>
-      <button (click)="confirmAction()" sc-button>{{ action() }}</button>
+      <button (click)="dialogRef.close(true)" sc-button>{{ data.action }}</button>
     </div>
   `,
   host: {
@@ -52,8 +51,6 @@ import { ScAlertDialogTrigger } from './alert-dialog-trigger';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScAlertDialog {
-  private readonly scAlertDialogTrigger = inject(ScAlertDialogTrigger);
-
   readonly classInput = input<string>('', {
     alias: 'class',
   });
@@ -65,19 +62,13 @@ export class ScAlertDialog {
     ),
   );
 
-  readonly title = signal<string>('');
-  readonly description = signal<string>('');
-  readonly action = signal<string>('');
-  readonly state = signal<'open' | 'closed'>('open');
+  //TODO make this working
+  readonly state = signal<'open' | 'closed'>('closed');
 
   readonly dialogRef = inject(DialogRef);
+  readonly data = inject(DIALOG_DATA);
 
   constructor() {
     this.dialogRef.disableClose = true;
-  }
-
-  confirmAction() {
-    this.scAlertDialogTrigger.actionConfirmed.set(true);
-    this.dialogRef.close();
   }
 }
