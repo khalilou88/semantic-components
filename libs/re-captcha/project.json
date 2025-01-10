@@ -2,7 +2,7 @@
   "name": "re-captcha",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/re-captcha/src",
-  "prefix": "lib",
+  "prefix": "sc",
   "projectType": "library",
   "tags": [],
   "targets": {
