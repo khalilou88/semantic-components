@@ -1,1 +1,1 @@
-export * from './confirmation-dialog-trigger';
+export * from './confirmation-dialog';

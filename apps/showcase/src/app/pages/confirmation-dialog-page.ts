@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { ScButton, ScConfirmationDialogTrigger } from '@semantic-components/ui';
+import { ScButton, ScConfirmationDialog } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-confirmation-dialog-page',
@@ -13,16 +13,16 @@ import { ScButton, ScConfirmationDialogTrigger } from '@semantic-components/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ConfirmationDialogPage {
-  scConfirmationDialogTrigger = inject(ScConfirmationDialogTrigger);
+  private readonly scConfirmationDialog = inject(ScConfirmationDialog);
 
   async deleteAccount() {
-    const actionConfirmed = await this.scConfirmationDialogTrigger.open(
+    const response = await this.scConfirmationDialog.confirm(
       'Are you absolutely sure?',
       'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
       'Continue',
     );
 
-    if (actionConfirmed) {
+    if (response) {
       console.log('Delete the account');
     } else {
       console.log('Action canceled');
