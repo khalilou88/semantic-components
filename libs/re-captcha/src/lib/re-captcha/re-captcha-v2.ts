@@ -24,6 +24,7 @@ export const SC_RE_CAPTCHA_V2_LANGUAGE_CODE = new InjectionToken<string>(
 
 @Component({
   selector: 'sc-re-captcha-v2',
+  exportAs: 'scReCaptchaV2',
   imports: [],
   template: ``,
   styles: ``,
@@ -41,7 +42,7 @@ export const SC_RE_CAPTCHA_V2_LANGUAGE_CODE = new InjectionToken<string>(
   ],
 })
 export class ScReCaptchaV2 implements OnInit, ControlValueAccessor {
-  id = signal<string>(inject(_IdGenerator).getId('sc-re-captcha-v2-'));
+  protected id = signal<string>(inject(_IdGenerator).getId('sc-re-captcha-v2-'));
   private readonly document = inject<Document>(DOCUMENT);
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
   readonly siteKey = input.required<string>();
