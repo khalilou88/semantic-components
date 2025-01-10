@@ -17,9 +17,8 @@ import { ScButton, ScReCaptchaV3 } from '@semantic-components/ui';
 export default class ReCaptchaV3Page {
   private readonly scReCaptchaV3 = inject(ScReCaptchaV3);
 
-  executeReCaptcha() {
-    this.scReCaptchaV3.execute('submit').subscribe((token) => {
-      console.log('Token:', token);
-    });
+  async executeReCaptcha() {
+    const token = await this.scReCaptchaV3.execute('submit');
+    console.log('Token:', token);
   }
 }

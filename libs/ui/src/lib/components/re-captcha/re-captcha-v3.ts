@@ -1,11 +1,9 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable, InjectionToken, inject } from '@angular/core';
 
-import { Observable, Subject } from 'rxjs';
-
 declare let grecaptcha: any;
 
-export const RE_CAPTCHA_V3_SITE_KEY = new InjectionToken<string>('RE_CAPTCHA_V3_SITE_KEY');
+export const SC_RE_CAPTCHA_V3_SITE_KEY = new InjectionToken<string>('SC_RE_CAPTCHA_V3_SITE_KEY');
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +11,7 @@ export const RE_CAPTCHA_V3_SITE_KEY = new InjectionToken<string>('RE_CAPTCHA_V3_
 export class ScReCaptchaV3 {
   private readonly document = inject<Document>(DOCUMENT);
 
-  constructor(@Inject(RE_CAPTCHA_V3_SITE_KEY) private readonly siteKey: string) {
+  constructor(@Inject(SC_RE_CAPTCHA_V3_SITE_KEY) private readonly siteKey: string) {
     this.addScript();
   }
 
@@ -25,15 +23,13 @@ export class ScReCaptchaV3 {
     this.document.body.appendChild(script);
   }
 
-  execute(actionName: string): Observable<string> {
-    const subject = new Subject<string>();
-    grecaptcha.ready(() => {
-      grecaptcha.execute(this.siteKey, { action: actionName }).then((token: string) => {
-        subject.next(token);
-        subject.complete();
+  async execute(actionName: string): Promise<string> {
+    return new Promise((resolve) => {
+      grecaptcha.ready(() => {
+        grecaptcha.execute(this.siteKey, { action: actionName }).then((token: string) => {
+          resolve(token);
+        });
       });
     });
-
-    return subject.asObservable();
   }
 }
