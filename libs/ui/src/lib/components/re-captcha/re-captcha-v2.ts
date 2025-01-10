@@ -50,7 +50,7 @@ export class ScReCaptchaV2 implements OnInit, ControlValueAccessor {
   readonly tabindex = input<string>('0');
   private readonly disabledByCva = signal(false);
 
-  static scReCaptchaV2s: any[] = [];
+  static scReCaptchaV2s: ScReCaptchaV2[] = [];
   static loadded = false;
 
   //TODO: maybe change the name to token or response
