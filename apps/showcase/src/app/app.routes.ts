@@ -42,6 +42,11 @@ export const appRoutes: Route[] = [
             title: 'Alert Dialog Page',
           },
           {
+            path: 'confirmation-dialog',
+            loadComponent: () => import('./pages/confirmation-dialog-page'),
+            title: 'Confirmation Dialog Page',
+          },
+          {
             path: 'home',
             loadComponent: () => import('./pages/home-page'),
             title: 'Home Page',
