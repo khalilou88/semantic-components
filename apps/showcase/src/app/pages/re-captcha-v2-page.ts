@@ -2,12 +2,16 @@ import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
-import { ScReCaptchaV2, ScReCaptchaV3 } from '@semantic-components/re-captcha';
+import {
+  ScInvisibleReCaptchaV2,
+  ScReCaptchaV2,
+  ScReCaptchaV3,
+} from '@semantic-components/re-captcha';
 import { ScButton } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-re-captcha-v2-page',
-  imports: [ReactiveFormsModule, ScReCaptchaV2, JsonPipe, ScButton],
+  imports: [ReactiveFormsModule, ScReCaptchaV2, ScInvisibleReCaptchaV2, JsonPipe, ScButton],
   template: `
     <div class="m-10">
       <form [formGroup]="reCaptchaV2Form">
@@ -20,6 +24,15 @@ import { ScButton } from '@semantic-components/ui';
     <br />
 
     {{ reCaptchaV2Form.value | json }}
+
+    <br />
+    <br />
+    <br />
+    <div class="m-10">
+      <button [siteKey]="siteKey" [callback]="myCallback" sc-invisible-re-captcha-v2>
+        Invisible reCAPTCHA
+      </button>
+    </div>
 
     <br />
     <br />
@@ -61,4 +74,8 @@ export default class ReCaptchaV2Page {
     const token = await this.scReCaptchaV3.execute('submit');
     console.log('Token:', token);
   }
+
+  myCallback = (token: string) => {
+    console.log('Token:', token);
+  };
 }

@@ -6,8 +6,11 @@ import { ScReCaptchaService } from './sc-re-captcha.service';
 
 declare let grecaptcha: any;
 
+type CallbackFunction = (token: string) => void;
+type ExpiredCallbackFunction = () => void;
+type ErrorCallbackFunction = () => void;
+
 @Directive({
-  selector: 'sc-re-captcha-v2-base',
   host: {
     '[id]': 'id()',
   },
@@ -21,11 +24,11 @@ export class ScReCaptchaV2Base implements ControlValueAccessor {
   readonly tabindex = input<string>('0');
   private readonly disabledByCva = signal(false);
 
-  readonly callback = input<Function | undefined>(undefined);
-  readonly expiredCallback = input<Function | undefined>(undefined, {
+  readonly callback = input<CallbackFunction | undefined>(undefined);
+  readonly expiredCallback = input<ExpiredCallbackFunction | undefined>(undefined, {
     alias: 'expired-callback',
   });
-  readonly errorCallback = input<Function | undefined>(undefined, {
+  readonly errorCallback = input<ErrorCallbackFunction | undefined>(undefined, {
     alias: 'error-callback',
   });
 
