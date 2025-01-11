@@ -13,6 +13,7 @@ type ErrorCallbackFunction = () => void;
 @Directive({
   host: {
     '[id]': 'id()',
+    'class.g-recaptcha': 'true',
   },
 })
 export class ScReCaptchaV2Base implements ControlValueAccessor {
