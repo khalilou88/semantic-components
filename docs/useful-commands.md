@@ -13,6 +13,7 @@ npx npm-check-updates --filter "/@nx/\*/" --target greatest --upgrade
 npx npm-check-updates --filter "/@nx/\*/" -u
 npm i nx@latest
 
+npx npm-check-updates "@angular\*" -u
 npx npm-check-updates --filter "/@angular\*/" -u
 npx npm-check-updates --filter "/@schematics/angular/" -u
 

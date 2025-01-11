@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable, Injector, afterNextRender, inject } from '@angular/core';
+import { Inject, Injectable, afterNextRender, inject } from '@angular/core';
 
 import { SC_RE_CAPTCHA_LANGUAGE_CODE, SC_RE_CAPTCHA_SITE_KEY } from './re-captcha-config';
 import { ScReCaptchaV2Base } from './re-captcha-v2-base';
@@ -8,7 +8,6 @@ import { ScReCaptchaV2Base } from './re-captcha-v2-base';
   providedIn: 'root',
 })
 export class ScReCaptchaService {
-  private readonly injector = inject(Injector);
   private readonly document = inject<Document>(DOCUMENT);
 
   readonly scReCaptchaV2s: ScReCaptchaV2Base[] = [];
@@ -17,8 +16,10 @@ export class ScReCaptchaService {
     @Inject(SC_RE_CAPTCHA_SITE_KEY) private readonly siteKey: string,
     @Inject(SC_RE_CAPTCHA_LANGUAGE_CODE) private readonly languageCode: string,
   ) {
-    this.registerOnloadCallback();
-    this.addScript();
+    afterNextRender(() => {
+      this.registerOnloadCallback();
+      this.addScript();
+    });
   }
 
   private addScript() {
@@ -42,15 +43,10 @@ export class ScReCaptchaService {
   }
 
   private registerOnloadCallback() {
-    afterNextRender(
-      () => {
-        (window as any).onloadCallback = () => {
-          for (const scReCaptchaV2 of this.scReCaptchaV2s) {
-            scReCaptchaV2.render();
-          }
-        };
-      },
-      { injector: this.injector },
-    );
+    (window as any).onloadCallback = () => {
+      for (const scReCaptchaV2 of this.scReCaptchaV2s) {
+        scReCaptchaV2.render();
+      }
+    };
   }
 }
