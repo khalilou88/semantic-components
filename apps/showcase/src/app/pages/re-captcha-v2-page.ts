@@ -37,9 +37,25 @@ import { ScButton } from '@semantic-components/ui';
     <br />
     <br />
     <div class="m-10">
-      <button [siteKey]="siteKey" [callback]="myCallback" sc-invisible-re-captcha-v2>
+      <form id="demo-form" action="?" method="POST">
+        <button [siteKey]="siteKey" sc-invisible-re-captcha-v2>Invisible reCAPTCHA</button>
+      </form>
+    </div>
+
+    <br />
+    <br />
+    <br />
+    <div class="m-10">
+      Invisible reCAPTCHA DIV
+      <div
+        #invisibleReCaptchaV2="scInvisibleReCaptchaV2"
+        [siteKey]="siteKey"
+        sc-invisible-re-captcha-v2
+      >
         Invisible reCAPTCHA
-      </button>
+      </div>
+
+      <button (click)="invisibleReCaptchaV2.execute()" sc-button>Execute</button>
     </div>
 
     <br />

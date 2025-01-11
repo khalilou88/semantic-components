@@ -74,10 +74,6 @@ export class ScReCaptchaV2Base implements ControlValueAccessor {
     this.setValue(null);
   }
 
-  execute() {
-    grecaptcha.execute(this.widgetId);
-  }
-
   getResponse() {
     grecaptcha.getResponse(this.widgetId);
   }

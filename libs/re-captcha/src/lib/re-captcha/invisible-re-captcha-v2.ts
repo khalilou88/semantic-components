@@ -1,8 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   ViewEncapsulation,
   forwardRef,
+  inject,
   input,
   signal,
 } from '@angular/core';
@@ -20,7 +22,9 @@ declare let grecaptcha: any;
     <ng-content />
   `,
   styles: ``,
-  host: {},
+  host: {
+    '(click)': 'handleClick()',
+  },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
@@ -32,11 +36,23 @@ declare let grecaptcha: any;
   ],
 })
 export class ScInvisibleReCaptchaV2 extends ScReCaptchaV2Base implements ControlValueAccessor {
+  private readonly hostRef = inject(ElementRef);
+
   readonly badge = input<'bottomright' | 'bottomleft' | 'inline'>('bottomright');
 
   private readonly size = signal<'invisible'>('invisible');
 
   override renderWidget() {
     this.renderWidget2('badge', this.badge(), this.size());
+  }
+
+  execute() {
+    grecaptcha.execute(this.widgetId);
+  }
+
+  handleClick() {
+    if (this.hostRef.nativeElement.tagName === 'BUTTON') {
+      this.execute();
+    }
   }
 }
