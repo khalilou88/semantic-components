@@ -9,8 +9,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { ScReCaptchaV2Base } from './re-captcha-v2-base';
 
-declare let grecaptcha: any;
-
 @Component({
   selector: 'div[sc-re-captcha-v2]',
   exportAs: 'scReCaptchaV2',
