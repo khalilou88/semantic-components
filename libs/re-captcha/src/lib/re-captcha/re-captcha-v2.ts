@@ -21,7 +21,9 @@ declare let grecaptcha: any;
   selector: 'div[sc-re-captcha-v2], button[sc-re-captcha-v2]',
   exportAs: 'scReCaptchaV2',
   imports: [],
-  template: ``,
+  template: `
+    <ng-content />
+  `,
   styles: ``,
   host: {
     '[id]': 'id()',
@@ -56,8 +58,6 @@ export class ScReCaptchaV2 implements OnInit, ControlValueAccessor {
 
   private widgetId = '';
 
-  //TODO: maybe change the name to token or response
-  //this is useful to use ScReCaptchaV2 without form, and listen to the value changes with (valueChange)="doSomething($event)"
   readonly value = model<string | null>(null);
 
   private readonly scReCaptchaService = inject(ScReCaptchaService);
@@ -96,17 +96,14 @@ export class ScReCaptchaV2 implements OnInit, ControlValueAccessor {
     this.setValue(null);
   }
 
-  //TODO: maybe we need this function
   execute() {
     grecaptcha.execute(this.widgetId);
   }
 
-  //TODO: maybe we need this function
   getResponse() {
     grecaptcha.getResponse(this.widgetId);
   }
 
-  //TODO: maybe we need this function too
   reset() {
     grecaptcha.reset(this.widgetId);
   }
