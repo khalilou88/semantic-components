@@ -47,11 +47,13 @@ export class ScInvisibleReCaptchaV2 extends ScReCaptchaV2Base implements Control
   }
 
   execute() {
+    console.log('execute');
     grecaptcha.execute(this.widgetId);
   }
 
   handleClick() {
     if (this.hostRef.nativeElement.tagName === 'BUTTON') {
+      console.log('handleClick');
       this.execute();
     }
   }
