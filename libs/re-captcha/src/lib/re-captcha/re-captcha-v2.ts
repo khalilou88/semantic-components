@@ -33,7 +33,7 @@ export class ScReCaptchaV2 extends ScReCaptchaV2Base implements ControlValueAcce
 
   readonly size = input<'normal' | 'compact'>('normal');
 
-  override renderWidget() {
-    this.renderWidget2('theme', this.theme(), this.size());
+  override render() {
+    this.renderWidget('theme', this.theme(), this.size());
   }
 }

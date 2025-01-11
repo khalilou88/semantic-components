@@ -46,7 +46,7 @@ export class ScReCaptchaService {
       () => {
         (window as any).onloadCallback = () => {
           for (const scReCaptchaV2 of this.scReCaptchaV2s) {
-            scReCaptchaV2.renderWidget();
+            scReCaptchaV2.render();
           }
         };
       },

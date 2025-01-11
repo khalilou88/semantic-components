@@ -40,8 +40,8 @@ export class ScInvisibleReCaptchaV2 extends ScReCaptchaV2Base implements Control
 
   private readonly size = signal<'invisible'>('invisible');
 
-  override renderWidget() {
-    this.renderWidget2('badge', this.badge(), this.size());
+  override render() {
+    this.renderWidget('badge', this.badge(), this.size());
   }
 
   execute() {

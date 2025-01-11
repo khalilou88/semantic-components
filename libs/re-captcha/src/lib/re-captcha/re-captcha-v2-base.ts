@@ -44,9 +44,9 @@ export class ScReCaptchaV2Base implements ControlValueAccessor {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  renderWidget() {}
+  render() {}
 
-  renderWidget2(themeOrBadge: string, themeOrBadgeValue: string, size: string) {
+  protected renderWidget(themeOrBadge: string, themeOrBadgeValue: string, size: string) {
     this.widgetId = grecaptcha.render(
       this.id(),
       {
@@ -66,15 +66,15 @@ export class ScReCaptchaV2Base implements ControlValueAccessor {
     );
   }
 
-  defaultCallback(token: string) {
+  private defaultCallback(token: string) {
     this.setValue(token);
   }
 
-  defaultExpiredCallback() {
+  private defaultExpiredCallback() {
     this.setValue(null);
   }
 
-  defaultErrorCallback() {
+  private defaultErrorCallback() {
     console.error('error');
     this.setValue(null);
   }
@@ -87,7 +87,7 @@ export class ScReCaptchaV2Base implements ControlValueAccessor {
     grecaptcha.reset(this.widgetId);
   }
 
-  setValue(newValue: string | null) {
+  private setValue(newValue: string | null) {
     this.value.set(newValue);
     this.onChange(newValue);
     this.changeDetectorRef.markForCheck();
