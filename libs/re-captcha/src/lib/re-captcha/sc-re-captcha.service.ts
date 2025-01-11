@@ -17,6 +17,7 @@ export class ScReCaptchaService {
     @Inject(SC_RE_CAPTCHA_V3_SITE_KEY) private readonly siteKey: string,
     @Inject(SC_RE_CAPTCHA_V2_LANGUAGE_CODE) private readonly languageCode: string,
   ) {
+    console.log('ScReCaptchaService.constructor()');
     this.registerOnloadCallback();
     this.addScript();
   }

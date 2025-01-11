@@ -60,6 +60,7 @@ export class ScReCaptchaV2 implements OnInit, ControlValueAccessor {
   private readonly scReCaptchaService = inject(ScReCaptchaService);
 
   ngOnInit() {
+    console.log('ScReCaptchaV2.ngOnInit()');
     this.scReCaptchaService.scReCaptchaV2s.push(this);
   }
 

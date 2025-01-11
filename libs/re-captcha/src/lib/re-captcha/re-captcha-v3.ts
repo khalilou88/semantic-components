@@ -12,7 +12,9 @@ export const SC_RE_CAPTCHA_V3_SITE_KEY = new InjectionToken<string>('SC_RE_CAPTC
 export class ScReCaptchaV3 {
   private readonly scReCaptchaService = inject(ScReCaptchaService);
 
-  constructor(@Inject(SC_RE_CAPTCHA_V3_SITE_KEY) private readonly siteKey: string) {}
+  constructor(@Inject(SC_RE_CAPTCHA_V3_SITE_KEY) private readonly siteKey: string) {
+    console.log('ScReCaptchaV3.constructor()');
+  }
 
   async execute(actionName: string): Promise<string> {
     return new Promise((resolve) => {

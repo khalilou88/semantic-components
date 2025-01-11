@@ -1,8 +1,8 @@
 import { JsonPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
-import { ScReCaptchaV2 } from '@semantic-components/re-captcha';
+import { ScReCaptchaV2, ScReCaptchaV3 } from '@semantic-components/re-captcha';
 
 @Component({
   selector: 'app-re-captcha-v2-page',
@@ -25,6 +25,13 @@ import { ScReCaptchaV2 } from '@semantic-components/re-captcha';
     <br />
 
     <sc-re-captcha-v2 [siteKey]="siteKey" (valueChange)="doSomething($event)" theme="dark" />
+
+    <br />
+    <br />
+    <br />
+    <div class="m-10">
+      <button (click)="executeReCaptcha()" sc-button>Test captcha</button>
+    </div>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -33,6 +40,8 @@ import { ScReCaptchaV2 } from '@semantic-components/re-captcha';
 export default class ReCaptchaV2Page {
   siteKey = '6LcsDrAqAAAAAHzJ5RdR31XmRQhuPaFofY7jhIZZ';
 
+  private readonly scReCaptchaV3 = inject(ScReCaptchaV3);
+
   reCaptchaV2Form = new FormGroup({
     captcha: new FormControl(''),
   });
@@ -40,5 +49,10 @@ export default class ReCaptchaV2Page {
   doSomething(event: any) {
     console.log('valueChange');
     console.log(event);
+  }
+
+  async executeReCaptcha() {
+    const token = await this.scReCaptchaV3.execute('submit');
+    console.log('Token:', token);
   }
 }
