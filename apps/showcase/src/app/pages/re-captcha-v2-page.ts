@@ -10,7 +10,7 @@ import { ScReCaptchaV2, ScReCaptchaV3 } from '@semantic-components/re-captcha';
   template: `
     <div class="m-10">
       <form [formGroup]="reCaptchaV2Form">
-        <sc-re-captcha-v2 [siteKey]="siteKey" formControlName="captcha" />
+        <div [siteKey]="siteKey" sc-re-captcha-v2 formControlName="captcha"></div>
       </form>
     </div>
 
@@ -24,7 +24,12 @@ import { ScReCaptchaV2, ScReCaptchaV3 } from '@semantic-components/re-captcha';
     <br />
     <br />
 
-    <sc-re-captcha-v2 [siteKey]="siteKey" (valueChange)="doSomething($event)" theme="dark" />
+    <div
+      [siteKey]="siteKey"
+      (valueChange)="doSomething($event)"
+      sc-re-captcha-v2
+      theme="dark"
+    ></div>
 
     <br />
     <br />

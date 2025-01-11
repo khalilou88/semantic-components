@@ -23,7 +23,7 @@ export const SC_RE_CAPTCHA_V2_LANGUAGE_CODE = new InjectionToken<string>(
 );
 
 @Component({
-  selector: 'sc-re-captcha-v2',
+  selector: 'div[sc-re-captcha-v2], button[sc-re-captcha-v2]',
   exportAs: 'scReCaptchaV2',
   imports: [],
   template: ``,
