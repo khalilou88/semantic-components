@@ -51,6 +51,14 @@ export class ScReCaptchaV2 implements OnInit, ControlValueAccessor {
   readonly tabindex = input<string>('0');
   private readonly disabledByCva = signal(false);
 
+  readonly callback = input<Function | undefined>(undefined);
+  readonly expiredCallback = input<Function | undefined>(undefined, {
+    alias: 'expired-callback',
+  });
+  readonly errorCallback = input<Function | undefined>(undefined, {
+    alias: 'error-callback',
+  });
+
   private widgetId = '';
 
   //TODO: maybe change the name to token or response
@@ -70,9 +78,13 @@ export class ScReCaptchaV2 implements OnInit, ControlValueAccessor {
       theme: this.theme(),
       size: this.size(),
       tabindex: this.tabindex(),
-      callback: this.defaultCallback.bind(this),
-      'expired-callback': this.defaultExpiredCallback.bind(this),
-      'error-callback': this.defaultErrorCallback.bind(this),
+      callback: this.callback() ? this.callback() : this.defaultCallback.bind(this),
+      'expired-callback': this.expiredCallback()
+        ? this.expiredCallback()
+        : this.defaultExpiredCallback.bind(this),
+      'error-callback': this.errorCallback()
+        ? this.errorCallback()
+        : this.defaultErrorCallback.bind(this),
     });
   }
 

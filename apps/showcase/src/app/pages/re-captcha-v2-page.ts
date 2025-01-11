@@ -3,10 +3,11 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import { ScReCaptchaV2, ScReCaptchaV3 } from '@semantic-components/re-captcha';
+import { ScButton } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-re-captcha-v2-page',
-  imports: [ReactiveFormsModule, ScReCaptchaV2, JsonPipe],
+  imports: [ReactiveFormsModule, ScReCaptchaV2, JsonPipe, ScButton],
   template: `
     <div class="m-10">
       <form [formGroup]="reCaptchaV2Form">
