@@ -46,6 +46,22 @@ export class ScReCaptchaV2Base implements ControlValueAccessor {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   renderWidget() {}
 
+  renderWidget2(themeOrBadge: string, themeOrBadgeValue: string, size: string) {
+    this.widgetId = grecaptcha.render(this.id(), {
+      sitekey: this.siteKey(),
+      [themeOrBadge]: themeOrBadgeValue,
+      size: size,
+      tabindex: this.tabindex(),
+      callback: this.callback() ? this.callback() : this.defaultCallback.bind(this),
+      'expired-callback': this.expiredCallback()
+        ? this.expiredCallback()
+        : this.defaultExpiredCallback.bind(this),
+      'error-callback': this.errorCallback()
+        ? this.errorCallback()
+        : this.defaultErrorCallback.bind(this),
+    });
+  }
+
   defaultCallback(token: string) {
     this.setValue(token);
   }

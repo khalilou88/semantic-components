@@ -36,18 +36,6 @@ export class ScReCaptchaV2 extends ScReCaptchaV2Base implements ControlValueAcce
   readonly size = input<'normal' | 'compact'>('normal');
 
   override renderWidget() {
-    this.widgetId = grecaptcha.render(this.id(), {
-      sitekey: this.siteKey(),
-      theme: this.theme(),
-      size: this.size(),
-      tabindex: this.tabindex(),
-      callback: this.callback() ? this.callback() : this.defaultCallback.bind(this),
-      'expired-callback': this.expiredCallback()
-        ? this.expiredCallback()
-        : this.defaultExpiredCallback.bind(this),
-      'error-callback': this.errorCallback()
-        ? this.errorCallback()
-        : this.defaultErrorCallback.bind(this),
-    });
+    this.renderWidget2('theme', this.theme(), this.size());
   }
 }

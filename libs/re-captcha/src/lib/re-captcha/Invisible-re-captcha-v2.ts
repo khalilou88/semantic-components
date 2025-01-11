@@ -37,18 +37,6 @@ export class ScInvisibleReCaptchaV2 extends ScReCaptchaV2Base implements Control
   private readonly size = signal<'invisible'>('invisible');
 
   override renderWidget() {
-    this.widgetId = grecaptcha.render(this.id(), {
-      sitekey: this.siteKey(),
-      badge: this.badge(),
-      size: this.size(),
-      tabindex: this.tabindex(),
-      callback: this.callback() ? this.callback() : this.defaultCallback.bind(this),
-      'expired-callback': this.expiredCallback()
-        ? this.expiredCallback()
-        : this.defaultExpiredCallback.bind(this),
-      'error-callback': this.errorCallback()
-        ? this.errorCallback()
-        : this.defaultErrorCallback.bind(this),
-    });
+    this.renderWidget2('badge', this.badge(), this.size());
   }
 }
