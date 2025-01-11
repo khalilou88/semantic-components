@@ -39,7 +39,6 @@ export class ScReCaptchaV2Base implements ControlValueAccessor {
   private readonly scReCaptchaService = inject(ScReCaptchaService);
 
   ngOnInit() {
-    console.log('ScReCaptchaV2Base.ngOnInit()');
     this.scReCaptchaService.scReCaptchaV2s.push(this);
   }
 

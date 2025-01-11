@@ -11,9 +11,7 @@ declare let grecaptcha: any;
 export class ScReCaptchaV3 {
   private readonly scReCaptchaService = inject(ScReCaptchaService);
 
-  constructor(@Inject(SC_RE_CAPTCHA_SITE_KEY) private readonly siteKey: string) {
-    console.log('ScReCaptchaV3.constructor()');
-  }
+  constructor(@Inject(SC_RE_CAPTCHA_SITE_KEY) private readonly siteKey: string) {}
 
   async execute(actionName: string): Promise<string> {
     return new Promise((resolve) => {
