@@ -28,6 +28,14 @@ import { ScButton } from '@semantic-components/ui';
     <br />
     <br />
     <br />
+    callback function
+    <div class="m-10">
+      <div [siteKey]="siteKey" [callback]="myCallback" sc-re-captcha-v2></div>
+    </div>
+
+    <br />
+    <br />
+    <br />
     <div class="m-10">
       <button [siteKey]="siteKey" [callback]="myCallback" sc-invisible-re-captcha-v2>
         Invisible reCAPTCHA
@@ -76,6 +84,6 @@ export default class ReCaptchaV2Page {
   }
 
   myCallback = (token: string) => {
-    console.log('Token:', token);
+    console.log('Callback function:', token);
   };
 }
