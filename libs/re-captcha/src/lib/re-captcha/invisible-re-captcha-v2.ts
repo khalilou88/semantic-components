@@ -22,9 +22,7 @@ declare let grecaptcha: any;
     <ng-content />
   `,
   styles: ``,
-  host: {
-    '(click)': 'handleClick()',
-  },
+  host: {},
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
@@ -48,11 +46,5 @@ export class ScInvisibleReCaptchaV2 extends ScReCaptchaV2Base implements Control
 
   execute() {
     grecaptcha.execute(this.widgetId);
-  }
-
-  handleClick() {
-    if (this.hostRef.nativeElement.tagName === 'BUTTON') {
-      this.execute();
-    }
   }
 }
