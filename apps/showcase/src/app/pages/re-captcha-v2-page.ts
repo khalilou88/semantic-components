@@ -37,15 +37,14 @@ import { ScButton } from '@semantic-components/ui';
     <br />
     <br />
     <div class="m-10">
-      <form id="demo-form" action="?" method="POST">
-        <button
-          [siteKey]="invisibleReCaptchaV2SiteKey"
-          [callback]="myCallback"
-          sc-invisible-re-captcha-v2
-        >
-          Click me to execute Invisible reCAPTCHA
-        </button>
-      </form>
+      <button
+        [siteKey]="invisibleReCaptchaV2SiteKey"
+        [callback]="myCallback"
+        sc-invisible-re-captcha-v2
+        type="button"
+      >
+        Click me to execute Invisible reCAPTCHA
+      </button>
     </div>
 
     <br />
@@ -62,6 +61,11 @@ import { ScButton } from '@semantic-components/ui';
       ></div>
 
       <button (click)="invisibleReCaptchaV2.execute()" sc-button>Execute</button>
+
+      <br />
+      <br />
+
+      <button (click)="invisibleReCaptchaV2.reset()" sc-button>Reset</button>
     </div>
 
     <br />
