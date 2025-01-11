@@ -47,19 +47,23 @@ export class ScReCaptchaV2Base implements ControlValueAccessor {
   renderWidget() {}
 
   renderWidget2(themeOrBadge: string, themeOrBadgeValue: string, size: string) {
-    this.widgetId = grecaptcha.render(this.id(), {
-      sitekey: this.siteKey(),
-      [themeOrBadge]: themeOrBadgeValue,
-      size: size,
-      tabindex: this.tabindex(),
-      callback: this.callback() ? this.callback() : this.defaultCallback.bind(this),
-      'expired-callback': this.expiredCallback()
-        ? this.expiredCallback()
-        : this.defaultExpiredCallback.bind(this),
-      'error-callback': this.errorCallback()
-        ? this.errorCallback()
-        : this.defaultErrorCallback.bind(this),
-    });
+    this.widgetId = grecaptcha.render(
+      this.id(),
+      {
+        sitekey: this.siteKey(),
+        [themeOrBadge]: themeOrBadgeValue,
+        size: size,
+        tabindex: this.tabindex(),
+        callback: this.callback() ? this.callback() : this.defaultCallback.bind(this),
+        'expired-callback': this.expiredCallback()
+          ? this.expiredCallback()
+          : this.defaultExpiredCallback.bind(this),
+        'error-callback': this.errorCallback()
+          ? this.errorCallback()
+          : this.defaultErrorCallback.bind(this),
+      },
+      true,
+    );
   }
 
   defaultCallback(token: string) {

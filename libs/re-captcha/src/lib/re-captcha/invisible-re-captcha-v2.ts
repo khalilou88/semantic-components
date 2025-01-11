@@ -54,7 +54,10 @@ export class ScInvisibleReCaptchaV2 extends ScReCaptchaV2Base implements Control
   handleClick() {
     if (this.hostRef.nativeElement.tagName === 'BUTTON') {
       console.log('handleClick');
+      console.log(this);
+      console.log(this.getResponse());
       this.execute();
+      console.log(this.getResponse());
     }
   }
 }
