@@ -56,7 +56,6 @@ import { ScButton } from '@semantic-components/ui';
         #invisibleReCaptchaV2="scInvisibleReCaptchaV2"
         [siteKey]="invisibleReCaptchaV2SiteKey"
         [callback]="myCallback"
-        (valueChange)="doSomething($event)"
         sc-invisible-re-captcha-v2
       ></div>
 
@@ -72,12 +71,7 @@ import { ScButton } from '@semantic-components/ui';
     <br />
     <br />
 
-    <div
-      [siteKey]="siteKey"
-      (valueChange)="doSomething($event)"
-      sc-re-captcha-v2
-      theme="dark"
-    ></div>
+    <div [siteKey]="siteKey" [callback]="myCallback" sc-re-captcha-v2 theme="dark"></div>
 
     <br />
     <br />
@@ -100,11 +94,6 @@ export default class ReCaptchaV2Page {
   reCaptchaV2Form = new FormGroup({
     captcha: new FormControl(''),
   });
-
-  doSomething(event: any) {
-    console.log('valueChange');
-    console.log(event);
-  }
 
   async executeReCaptcha() {
     const token = await this.scReCaptchaV3.execute('submit');

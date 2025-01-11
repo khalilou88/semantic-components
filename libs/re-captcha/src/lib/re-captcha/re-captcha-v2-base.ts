@@ -1,5 +1,5 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
-import { ChangeDetectorRef, Directive, inject, input, model, signal } from '@angular/core';
+import { ChangeDetectorRef, Directive, inject, input, signal } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 
 import { ScReCaptchaService } from './sc-re-captcha.service';
@@ -35,7 +35,7 @@ export class ScReCaptchaV2Base implements ControlValueAccessor {
 
   protected widgetId = '';
 
-  readonly value = model<string | null>(null);
+  private readonly value = signal<string | null>(null);
 
   private readonly scReCaptchaService = inject(ScReCaptchaService);
 
