@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable, afterNextRender, inject } from '@angular/core';
+import { Injectable, afterNextRender, inject } from '@angular/core';
 
 import { SC_RE_CAPTCHA_LANGUAGE_CODE, SC_RE_CAPTCHA_SITE_KEY } from './re-captcha-config';
 import { ScReCaptchaV2Base } from './re-captcha-v2-base';
@@ -9,13 +9,12 @@ import { ScReCaptchaV2Base } from './re-captcha-v2-base';
 })
 export class ScReCaptchaService {
   private readonly document = inject<Document>(DOCUMENT);
+  private readonly siteKey = inject<string>(SC_RE_CAPTCHA_SITE_KEY);
+  private readonly languageCode = inject<string>(SC_RE_CAPTCHA_LANGUAGE_CODE);
 
   readonly scReCaptchaV2s: ScReCaptchaV2Base[] = [];
 
-  constructor(
-    @Inject(SC_RE_CAPTCHA_SITE_KEY) private readonly siteKey: string,
-    @Inject(SC_RE_CAPTCHA_LANGUAGE_CODE) private readonly languageCode: string,
-  ) {
+  constructor() {
     afterNextRender(() => {
       this.registerOnloadCallback();
       this.addScript();
