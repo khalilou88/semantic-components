@@ -9,8 +9,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideRouter } from '@angular/router';
 
 import {
-  SC_RE_CAPTCHA_V2_LANGUAGE_CODE,
-  SC_RE_CAPTCHA_V3_SITE_KEY,
+  SC_RE_CAPTCHA_LANGUAGE_CODE,
+  SC_RE_CAPTCHA_SITE_KEY,
 } from '@semantic-components/re-captcha';
 import { scThemeProvider } from '@semantic-components/ui';
 
@@ -24,7 +24,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideAppInitializer(scThemeProvider()),
     { provide: LOCALE_ID, useValue: 'fr' },
-    { provide: SC_RE_CAPTCHA_V2_LANGUAGE_CODE, useValue: 'en' },
-    { provide: SC_RE_CAPTCHA_V3_SITE_KEY, useValue: '6LczIrAqAAAAANk0sH07W5kW6hPNwfWAJbnaoEat' },
+    { provide: SC_RE_CAPTCHA_LANGUAGE_CODE, useValue: 'en' },
+    { provide: SC_RE_CAPTCHA_SITE_KEY, useValue: '6LczIrAqAAAAANk0sH07W5kW6hPNwfWAJbnaoEat' },
   ],
 };

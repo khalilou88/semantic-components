@@ -3,7 +3,6 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  InjectionToken,
   OnInit,
   ViewEncapsulation,
   forwardRef,
@@ -17,10 +16,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ScReCaptchaService } from './sc-re-captcha.service';
 
 declare let grecaptcha: any;
-
-export const SC_RE_CAPTCHA_V2_LANGUAGE_CODE = new InjectionToken<string>(
-  'SC_RE_CAPTCHA_V2_LANGUAGE_CODE',
-);
 
 @Component({
   selector: 'div[sc-re-captcha-v2], button[sc-re-captcha-v2]',

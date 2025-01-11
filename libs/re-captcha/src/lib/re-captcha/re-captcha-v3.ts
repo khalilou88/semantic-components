@@ -1,10 +1,9 @@
-import { Inject, Injectable, InjectionToken, inject } from '@angular/core';
+import { Inject, Injectable, inject } from '@angular/core';
 
+import { SC_RE_CAPTCHA_SITE_KEY } from './re-captcha-config';
 import { ScReCaptchaService } from './sc-re-captcha.service';
 
 declare let grecaptcha: any;
-
-export const SC_RE_CAPTCHA_V3_SITE_KEY = new InjectionToken<string>('SC_RE_CAPTCHA_V3_SITE_KEY');
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +11,7 @@ export const SC_RE_CAPTCHA_V3_SITE_KEY = new InjectionToken<string>('SC_RE_CAPTC
 export class ScReCaptchaV3 {
   private readonly scReCaptchaService = inject(ScReCaptchaService);
 
-  constructor(@Inject(SC_RE_CAPTCHA_V3_SITE_KEY) private readonly siteKey: string) {
+  constructor(@Inject(SC_RE_CAPTCHA_SITE_KEY) private readonly siteKey: string) {
     console.log('ScReCaptchaV3.constructor()');
   }
 
