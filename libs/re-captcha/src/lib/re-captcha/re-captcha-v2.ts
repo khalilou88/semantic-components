@@ -8,6 +8,7 @@ import {
   InjectionToken,
   OnInit,
   ViewEncapsulation,
+  afterNextRender,
   forwardRef,
   inject,
   input,
@@ -86,11 +87,13 @@ export class ScReCaptchaV2 implements OnInit, ControlValueAccessor {
   }
 
   private registerOnloadCallback() {
-    (window as any).onloadCallback = () => {
-      for (const scReCaptchaV2 of ScReCaptchaV2.scReCaptchaV2s) {
-        scReCaptchaV2.renderWidget();
-      }
-    };
+    afterNextRender(() => {
+      (window as any).onloadCallback = () => {
+        for (const scReCaptchaV2 of ScReCaptchaV2.scReCaptchaV2s) {
+          scReCaptchaV2.renderWidget();
+        }
+      };
+    });
   }
 
   renderWidget() {
