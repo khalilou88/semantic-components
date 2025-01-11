@@ -12,19 +12,19 @@ type ErrorCallbackFunction = () => void;
 
 @Directive({
   host: {
-    '[id]': 'id()',
+    '[id]': 'id',
     'class.g-recaptcha': 'true',
   },
 })
 export class ScReCaptchaV2Base implements ControlValueAccessor {
-  protected id = signal<string>(inject(_IdGenerator).getId('sc-re-captcha-v2-'));
+  private readonly id = inject(_IdGenerator).getId('sc-re-captcha-v2-');
+  protected widgetId = '';
 
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
+  private readonly scReCaptchaService = inject(ScReCaptchaService);
+
   readonly siteKey = input.required<string>();
-
   readonly tabindex = input<string>('0');
-  private readonly disabledByCva = signal(false);
-
   readonly callback = input<CallbackFunction | undefined>(undefined);
   readonly expiredCallback = input<ExpiredCallbackFunction | undefined>(undefined, {
     alias: 'expired-callback',
@@ -33,11 +33,8 @@ export class ScReCaptchaV2Base implements ControlValueAccessor {
     alias: 'error-callback',
   });
 
-  protected widgetId = '';
-
   private readonly value = signal<string | null>(null);
-
-  private readonly scReCaptchaService = inject(ScReCaptchaService);
+  private readonly disabledByCva = signal(false);
 
   ngOnInit() {
     this.scReCaptchaService.scReCaptchaV2s.push(this);
@@ -48,7 +45,7 @@ export class ScReCaptchaV2Base implements ControlValueAccessor {
 
   protected renderWidget(themeOrBadge: string, themeOrBadgeValue: string, size: string) {
     this.widgetId = grecaptcha.render(
-      this.id(),
+      this.id,
       {
         sitekey: this.siteKey(),
         [themeOrBadge]: themeOrBadgeValue,
