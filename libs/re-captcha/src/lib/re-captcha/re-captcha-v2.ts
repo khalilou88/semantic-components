@@ -1,15 +1,11 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
-import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  Inject,
   InjectionToken,
-  Injector,
   OnInit,
   ViewEncapsulation,
-  afterNextRender,
   forwardRef,
   inject,
   input,
@@ -17,6 +13,8 @@ import {
   signal,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+
+import { ScReCaptchaService } from './sc-re-captcha.service';
 
 declare let grecaptcha: any;
 
@@ -44,9 +42,8 @@ export const SC_RE_CAPTCHA_V2_LANGUAGE_CODE = new InjectionToken<string>(
   ],
 })
 export class ScReCaptchaV2 implements OnInit, ControlValueAccessor {
-  private readonly injector = inject(Injector);
   protected id = signal<string>(inject(_IdGenerator).getId('sc-re-captcha-v2-'));
-  private readonly document = inject<Document>(DOCUMENT);
+
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
   readonly siteKey = input.required<string>();
   readonly theme = input<'dark' | 'light'>('light');
@@ -55,50 +52,15 @@ export class ScReCaptchaV2 implements OnInit, ControlValueAccessor {
   private readonly disabledByCva = signal(false);
 
   private widgetId = '';
-  static scReCaptchaV2s: ScReCaptchaV2[] = [];
-  static loadded = false;
 
   //TODO: maybe change the name to token or response
   //this is useful to use ScReCaptchaV2 without form, and listen to the value changes with (valueChange)="doSomething($event)"
   readonly value = model<string | null>(null);
 
-  constructor(@Inject(SC_RE_CAPTCHA_V2_LANGUAGE_CODE) private readonly languageCode: string) {}
+  private readonly scReCaptchaService = inject(ScReCaptchaService);
 
   ngOnInit() {
-    ScReCaptchaV2.scReCaptchaV2s.push(this);
-    if (ScReCaptchaV2.loadded === false) {
-      this.registerOnloadCallback();
-      this.addScript();
-    }
-
-    ScReCaptchaV2.loadded = true;
-  }
-
-  private addScript() {
-    let scriptSrc = 'https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit';
-
-    if (this.languageCode) {
-      scriptSrc += `&hl=${this.languageCode}`;
-    }
-
-    const script = this.document.createElement('script');
-    script.src = scriptSrc;
-    script.async = true;
-    script.defer = true;
-    this.document.body.appendChild(script);
-  }
-
-  private registerOnloadCallback() {
-    afterNextRender(
-      () => {
-        (window as any).onloadCallback = () => {
-          for (const scReCaptchaV2 of ScReCaptchaV2.scReCaptchaV2s) {
-            scReCaptchaV2.renderWidget();
-          }
-        };
-      },
-      { injector: this.injector },
-    );
+    this.scReCaptchaService.scReCaptchaV2s.push(this);
   }
 
   renderWidget() {
@@ -107,23 +69,28 @@ export class ScReCaptchaV2 implements OnInit, ControlValueAccessor {
       theme: this.theme(),
       size: this.size(),
       tabindex: this.tabindex(),
-      callback: this.callback.bind(this),
-      'expired-callback': this.expiredCallback.bind(this),
-      'error-callback': this.errorCallback.bind(this),
+      callback: this.defaultCallback.bind(this),
+      'expired-callback': this.defaultExpiredCallback.bind(this),
+      'error-callback': this.defaultErrorCallback.bind(this),
     });
   }
 
-  callback(token: string) {
+  defaultCallback(token: string) {
     this.setValue(token);
   }
 
-  expiredCallback() {
+  defaultExpiredCallback() {
     this.setValue(null);
   }
 
-  errorCallback() {
+  defaultErrorCallback() {
     console.error('error');
     this.setValue(null);
+  }
+
+  //TODO: maybe we need this function
+  execute() {
+    grecaptcha.execute(this.widgetId);
   }
 
   //TODO: maybe we need this function
