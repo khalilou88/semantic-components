@@ -2,7 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable, Injector, afterNextRender, inject } from '@angular/core';
 
 import { SC_RE_CAPTCHA_LANGUAGE_CODE, SC_RE_CAPTCHA_SITE_KEY } from './re-captcha-config';
-import { ScReCaptchaV2 } from './re-captcha-v2';
+import { ScReCaptchaV2Base } from './re-captcha-v2-base';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +11,7 @@ export class ScReCaptchaService {
   private readonly injector = inject(Injector);
   private readonly document = inject<Document>(DOCUMENT);
 
-  readonly scReCaptchaV2s: ScReCaptchaV2[] = [];
+  readonly scReCaptchaV2s: ScReCaptchaV2Base[] = [];
 
   constructor(
     @Inject(SC_RE_CAPTCHA_SITE_KEY) private readonly siteKey: string,
