@@ -6,6 +6,7 @@ import {
   Component,
   Inject,
   InjectionToken,
+  Injector,
   OnInit,
   ViewEncapsulation,
   afterNextRender,
@@ -43,6 +44,7 @@ export const SC_RE_CAPTCHA_V2_LANGUAGE_CODE = new InjectionToken<string>(
   ],
 })
 export class ScReCaptchaV2 implements OnInit, ControlValueAccessor {
+  private readonly injector = inject(Injector);
   protected id = signal<string>(inject(_IdGenerator).getId('sc-re-captcha-v2-'));
   private readonly document = inject<Document>(DOCUMENT);
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
@@ -87,13 +89,16 @@ export class ScReCaptchaV2 implements OnInit, ControlValueAccessor {
   }
 
   private registerOnloadCallback() {
-    afterNextRender(() => {
-      (window as any).onloadCallback = () => {
-        for (const scReCaptchaV2 of ScReCaptchaV2.scReCaptchaV2s) {
-          scReCaptchaV2.renderWidget();
-        }
-      };
-    });
+    afterNextRender(
+      () => {
+        (window as any).onloadCallback = () => {
+          for (const scReCaptchaV2 of ScReCaptchaV2.scReCaptchaV2s) {
+            scReCaptchaV2.renderWidget();
+          }
+        };
+      },
+      { injector: this.injector },
+    );
   }
 
   renderWidget() {
