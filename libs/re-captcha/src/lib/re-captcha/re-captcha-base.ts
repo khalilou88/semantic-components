@@ -1,7 +1,8 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
-import { ChangeDetectorRef, Directive, inject, input, signal } from '@angular/core';
+import { ChangeDetectorRef, Directive, computed, inject, input, signal } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 
+import { SC_RE_CAPTCHA_V2_SITE_KEY } from './re-captcha-config';
 import { ScReCaptchaService } from './sc-re-captcha.service';
 
 declare let grecaptcha: any;
@@ -23,6 +24,21 @@ export class ScReCaptchaBase implements ControlValueAccessor {
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
   private readonly scReCaptchaService = inject(ScReCaptchaService);
 
+  private readonly v2SiteKey = inject<string>(SC_RE_CAPTCHA_V2_SITE_KEY, {
+    optional: true,
+  });
+  readonly siteKeyInput = input<string>('', {
+    alias: 'siteKey',
+  });
+
+  private readonly siteKey = computed(() => {
+    if (this.siteKeyInput()) {
+      return this.siteKeyInput();
+    }
+
+    return this.v2SiteKey ?? '';
+  });
+
   readonly tabindex = input<string>('0');
   readonly callback = input<CallbackFunction | undefined>(undefined);
   readonly expiredCallback = input<ExpiredCallbackFunction | undefined>(undefined, {
@@ -42,16 +58,11 @@ export class ScReCaptchaBase implements ControlValueAccessor {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   render() {}
 
-  protected renderWidget(
-    siteKey: string,
-    themeOrBadge: string,
-    themeOrBadgeValue: string,
-    size: string,
-  ) {
+  protected renderWidget(themeOrBadge: string, themeOrBadgeValue: string, size: string) {
     this.widgetId = grecaptcha.render(
       this.id,
       {
-        sitekey: siteKey,
+        sitekey: this.siteKey(),
         [themeOrBadge]: themeOrBadgeValue,
         size: size,
         tabindex: this.tabindex(),

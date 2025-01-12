@@ -5,7 +5,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import {
   ScCheckboxReCaptcha,
   ScInvisibleReCaptcha,
-  ScReCaptcha,
+  ScScoreReCaptcha,
 } from '@semantic-components/re-captcha';
 import { ScButton } from '@semantic-components/ui';
 
@@ -90,7 +90,7 @@ export default class ReCaptchaV2Page {
 
   invisibleReCaptchaV2SiteKey = '6Ldl1bQqAAAAANUJsycemVBh6pMXSYAQeOIZyfV2';
 
-  private readonly scReCaptcha = inject(ScReCaptcha);
+  private readonly scReCaptcha = inject(ScScoreReCaptcha);
 
   reCaptchaV2Form = new FormGroup({
     captcha: new FormControl(''),

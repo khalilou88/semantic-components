@@ -2,14 +2,14 @@ import { DOCUMENT } from '@angular/common';
 import { Injectable, afterNextRender, inject } from '@angular/core';
 
 import { ScReCaptchaBase } from './re-captcha-base';
-import { SC_RE_CAPTCHA_LANGUAGE_CODE, SC_RE_CAPTCHA_SITE_KEY } from './re-captcha-config';
+import { SC_RE_CAPTCHA_LANGUAGE_CODE, SC_RE_CAPTCHA_V3_SITE_KEY } from './re-captcha-config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ScReCaptchaService {
   private readonly document = inject<Document>(DOCUMENT);
-  private readonly siteKey = inject<string>(SC_RE_CAPTCHA_SITE_KEY, { optional: true });
+  private readonly v3SiteKey = inject<string>(SC_RE_CAPTCHA_V3_SITE_KEY, { optional: true });
   private readonly languageCode = inject<string>(SC_RE_CAPTCHA_LANGUAGE_CODE, { optional: true });
 
   readonly scReCaptchas: ScReCaptchaBase[] = [];
@@ -24,8 +24,8 @@ export class ScReCaptchaService {
   private addScript() {
     let scriptSrc = 'https://www.google.com/recaptcha/api.js?onload=onloadCallback';
 
-    if (this.siteKey) {
-      scriptSrc += `&render=${this.siteKey}`;
+    if (this.v3SiteKey) {
+      scriptSrc += `&render=${this.v3SiteKey}`;
     } else {
       scriptSrc += '&render=explicit';
     }

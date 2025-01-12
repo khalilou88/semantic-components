@@ -1,40 +1,31 @@
 import { EnvironmentProviders, makeEnvironmentProviders } from '@angular/core';
 
 import {
-  SC_CHECKBOX_RE_CAPTCHA_SITE_KEY,
-  SC_INVISIBLE_RE_CAPTCHA_SITE_KEY,
   SC_RE_CAPTCHA_LANGUAGE_CODE,
-  SC_RE_CAPTCHA_SITE_KEY,
+  SC_RE_CAPTCHA_V2_SITE_KEY,
+  SC_RE_CAPTCHA_V3_SITE_KEY,
 } from './re-captcha-config';
 
 interface ScReCaptchaSettings {
-  siteKey?: string;
-  checkboxReCaptchaSiteKey?: string;
-  invisibleReCaptchaSiteKey?: string;
+  v2SiteKey?: string;
+  v3SiteKey?: string;
   languageCode?: string;
 }
 
 export function provideScReCaptchaSettings(settings: ScReCaptchaSettings): EnvironmentProviders {
   const providers = [];
 
-  if (settings.siteKey) {
+  if (settings.v2SiteKey) {
     providers.push({
-      provide: SC_RE_CAPTCHA_SITE_KEY,
-      useValue: settings.siteKey,
+      provide: SC_RE_CAPTCHA_V2_SITE_KEY,
+      useValue: settings.v2SiteKey,
     });
   }
 
-  if (settings.checkboxReCaptchaSiteKey) {
+  if (settings.v3SiteKey) {
     providers.push({
-      provide: SC_CHECKBOX_RE_CAPTCHA_SITE_KEY,
-      useValue: settings.checkboxReCaptchaSiteKey,
-    });
-  }
-
-  if (settings.invisibleReCaptchaSiteKey) {
-    providers.push({
-      provide: SC_INVISIBLE_RE_CAPTCHA_SITE_KEY,
-      useValue: settings.invisibleReCaptchaSiteKey,
+      provide: SC_RE_CAPTCHA_V3_SITE_KEY,
+      useValue: settings.v3SiteKey,
     });
   }
 
