@@ -9,8 +9,8 @@ import { ScReCaptchaV2Base } from './re-captcha-v2-base';
 })
 export class ScReCaptchaService {
   private readonly document = inject<Document>(DOCUMENT);
-  private readonly siteKey = inject<string>(SC_RE_CAPTCHA_SITE_KEY);
-  private readonly languageCode = inject<string>(SC_RE_CAPTCHA_LANGUAGE_CODE);
+  private readonly siteKey = inject<string>(SC_RE_CAPTCHA_SITE_KEY, { optional: true });
+  private readonly languageCode = inject<string>(SC_RE_CAPTCHA_LANGUAGE_CODE, { optional: true });
 
   readonly scReCaptchaV2s: ScReCaptchaV2Base[] = [];
 
