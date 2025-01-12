@@ -7,9 +7,9 @@ import { ScReCaptchaService } from './re-captcha.service';
 
 declare let grecaptcha: any;
 
-type CallbackFunction = (token: string) => void;
-type ExpiredCallbackFunction = () => void;
-type ErrorCallbackFunction = () => void;
+type CallbackFn = (token: string) => void;
+type ExpiredCallbackFn = () => void;
+type ErrorCallbackFn = () => void;
 
 @Directive({
   host: {
@@ -40,11 +40,11 @@ export class ScReCaptchaBase implements ControlValueAccessor {
   });
 
   readonly tabindex = input<string>('0');
-  readonly callback = input<CallbackFunction | undefined>(undefined);
-  readonly expiredCallback = input<ExpiredCallbackFunction | undefined>(undefined, {
+  readonly callback = input<CallbackFn | undefined>(undefined);
+  readonly expiredCallback = input<ExpiredCallbackFn | undefined>(undefined, {
     alias: 'expired-callback',
   });
-  readonly errorCallback = input<ErrorCallbackFunction | undefined>(undefined, {
+  readonly errorCallback = input<ErrorCallbackFn | undefined>(undefined, {
     alias: 'error-callback',
   });
 
