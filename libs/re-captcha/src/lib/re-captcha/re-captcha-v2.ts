@@ -45,7 +45,7 @@ export class ScReCaptchaV2 extends ScReCaptchaV2Base implements ControlValueAcce
 
   private readonly siteKey = computed(() => {
     if (this.siteKeyInput()) {
-      this.siteKeyInput();
+      return this.siteKeyInput();
     }
 
     return this.checkboxReCaptchaSiteKey ?? '';

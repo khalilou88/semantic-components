@@ -51,7 +51,7 @@ export class ScInvisibleReCaptchaV2 extends ScReCaptchaV2Base implements Control
 
   private readonly siteKey = computed(() => {
     if (this.siteKeyInput()) {
-      this.siteKeyInput();
+      return this.siteKeyInput();
     }
 
     return this.invisibleReCaptchaSiteKey ?? '';
