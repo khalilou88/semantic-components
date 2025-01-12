@@ -5,7 +5,7 @@
 ## Features
 
 - Effortless integration of Google reCAPTCHA with Angular applications.
-- Supports reCAPTCHA v2 (checkbox and invisible) based on resolving a challenge and v3 based on score (invisible verification).
+- Supports reCAPTCHA v2 (checkbox and invisible based on resolving a challenge) and v3 (invisible verification based on score).
 - Supports displaying multiple reCAPTCHA instances on the same page.
 - Works seamlessly with both reactive and template-driven forms.
 - Leverages the latest Angular features, including **signal inputs** and **standalone components** for enhanced modularity and reactivity.
@@ -25,32 +25,41 @@ or
 yarn add @semantic-components/re-captcha
 ```
 
-## Setup
+## Usage
 
-### Step 1: Import the Module
+### Provide Settings
 
-For standalone component support, you can directly import the `ReCaptchaComponent` without needing to use an Angular module:
+To use reCAPTCHA v3 provide the `siteKey` using the `provideScReCaptchaSettings` function:
 
 ```typescript
-import { bootstrapApplication } from '@angular/platform-browser';
+import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import { provideRouter } from '@angular/router';
 
-import { ReCaptchaComponent, provideReCaptchaSettings } from '@semantic-components/re-captcha';
+import { provideScReCaptchaSettings } from '@semantic-components/re-captcha';
 
-import { AppComponent } from './app.component';
+import { routes } from './app.routes';
 
-bootstrapApplication(AppComponent, {
-  providers: [provideReCaptchaSettings({ siteKey: 'YOUR_GOOGLE_RECAPTCHA_SITE_KEY' })],
-  standaloneComponents: [ReCaptchaComponent],
-});
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(routes),
+    provideClientHydration(withEventReplay()),
+    provideScReCaptchaSettings({
+      siteKey: '6LczIrAqAAAAANk0sH07W5kW6hPNwfWAJbnaoEat',
+      languageCode: 'fr',
+    }),
+  ],
+};
 ```
 
-### Step 2: Add Your reCAPTCHA Component
+### ReCAPTCHA v2 Chechbox Component with Reactive Forms
 
-In your component template, add the reCAPTCHA directive:
+In your component template, add the reCAPTCHA v2 to a div:
 
 ```html
-<form (ngSubmit)="onSubmit()">
-  <re-captcha (resolved)="onCaptchaResolved($event)" [signal]="recaptchaSignal"></re-captcha>
+<form [formGroup]="reCaptchaV2Form" (ngSubmit)="onSubmit()">
+  <div sc-re-captcha-v2 [siteKey]="siteKey" formControlName="captcha"></div>
   <button type="submit">Submit</button>
 </form>
 ```
@@ -58,64 +67,23 @@ In your component template, add the reCAPTCHA directive:
 In your component class:
 
 ```typescript
-import { Component, Signal, signal } from '@angular/core';
-
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [ReCaptchaComponent],
-  templateUrl: './app.component.html',
-})
-export class AppComponent {
-  recaptchaSignal: Signal<string> = signal('');
-
-  onCaptchaResolved(captchaResponse: string) {
-    this.recaptchaSignal.set(captchaResponse);
-    console.log('Captcha resolved: ', captchaResponse);
-    // Send the captchaResponse to your server for validation.
-  }
-
-  onSubmit() {
-    console.log('Form submitted with captcha response: ', this.recaptchaSignal());
-  }
-}
-```
-
-## Usage
-
-The library provides flexibility for different scenarios:
-
-### Reactive Forms
-
-```html
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <re-captcha formControlName="recaptcha"></re-captcha>
-  <button type="submit">Submit</button>
-</form>
-```
-
-In your component:
-
-```typescript
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
-import { ReCaptchaComponent } from '@semantic-components/re-captcha';
+import { ScReCaptchaV2 } from '@semantic-components/re-captcha';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [ReCaptchaComponent],
+  imports: [ReactiveFormsModule, ScReCaptchaV2],
   templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
 })
-export class AppComponent {
-  form: FormGroup;
+export class ReCaptchaV2PageComponent {
+  siteKey = 'YOUR_SITE_KEY_V2';
 
-  constructor(private fb: FormBuilder) {
-    this.form = this.fb.group({
-      recaptcha: [''],
-    });
-  }
+  reCaptchaV2Form = new FormGroup({
+    captcha: new FormControl(''),
+  });
 
   onSubmit() {
     console.log(this.form.value);
@@ -123,20 +91,10 @@ export class AppComponent {
 }
 ```
 
-## Contributing
+### Invisible ReCAPTCHA v2 Component
 
-We welcome contributions! To contribute:
-
-1. Fork the repository.
-2. Create a feature branch: `git checkout -b feature-name`.
-3. Commit your changes: `git commit -m 'Add some feature'`.
-4. Push to the branch: `git push origin feature-name`.
-5. Submit a pull request.
+### ReCAPTCHA v3 Service
 
 ## License
 
-This library is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Contact
-
-For support or inquiries, please contact us at [support@semantic-components.dev](mailto:support@semantic-components.dev).
+This library is licensed under the MIT License. See the [LICENSE](../../LICENSE) file for details.
