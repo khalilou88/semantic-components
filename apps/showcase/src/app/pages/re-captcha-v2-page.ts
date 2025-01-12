@@ -30,7 +30,7 @@ import { ScButton } from '@semantic-components/ui';
     <br />
     callback function
     <div class="m-10">
-      <div [siteKey]="siteKey" [callback]="myCallback" sc-checkbox-re-captcha></div>
+      <div [callback]="myCallback" sc-checkbox-re-captcha></div>
     </div>
 
     <br />
@@ -38,11 +38,7 @@ import { ScButton } from '@semantic-components/ui';
     <br />
     <div class="m-10">
       <form id="demo-form" action="?" method="POST">
-        <button
-          [siteKey]="invisibleReCaptchaV2SiteKey"
-          [callback]="myCallback"
-          sc-invisible-re-captcha
-        >
+        <button [callback]="myCallback" sc-invisible-re-captcha>
           Click me to execute Invisible reCAPTCHA
         </button>
       </form>
@@ -55,7 +51,6 @@ import { ScButton } from '@semantic-components/ui';
       Invisible reCAPTCHA DIV
       <div
         #invisibleReCaptcha="scInvisibleReCaptcha"
-        [siteKey]="invisibleReCaptchaV2SiteKey"
         [callback]="myCallback"
         sc-invisible-re-captcha
       ></div>
@@ -72,7 +67,7 @@ import { ScButton } from '@semantic-components/ui';
     <br />
     <br />
 
-    <div [siteKey]="siteKey" [callback]="myCallback" sc-checkbox-re-captcha theme="dark"></div>
+    <div [callback]="myCallback" sc-checkbox-re-captcha theme="dark"></div>
 
     <br />
     <br />
@@ -87,9 +82,6 @@ import { ScButton } from '@semantic-components/ui';
 })
 export default class ReCaptchaV2Page {
   siteKey = '6LcsDrAqAAAAAHzJ5RdR31XmRQhuPaFofY7jhIZZ';
-
-  invisibleReCaptchaV2SiteKey = '6Ldl1bQqAAAAANUJsycemVBh6pMXSYAQeOIZyfV2';
-
   private readonly scReCaptcha = inject(ScScoreReCaptcha);
 
   reCaptchaV2Form = new FormGroup({
