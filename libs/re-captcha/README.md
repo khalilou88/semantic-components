@@ -5,11 +5,19 @@
 ## Features
 
 - Effortless integration of Google reCAPTCHA with Angular applications.
-- Supports reCAPTCHA v2 (checkbox and invisible based on resolving a challenge) and v3 (invisible verification based on score).
+- Supports reCAPTCHA v2 (checkbox and invisible based on resolving a challenge) and v3 (invisible verification based on a score).
 - Supports displaying multiple reCAPTCHA instances on the same page.
 - Works seamlessly with both reactive and template-driven forms.
 - Leverages the latest Angular features, including **signal inputs** and **standalone components** for enhanced modularity and reactivity.
 - Optimized for performance with a lightweight implementation.
+
+## Compatibility
+
+This library is **compatible only with Angular 19**.
+
+- Angular 19.x.x is required to use this library.
+
+If you are using a different version of Angular, please upgrade to Angular 19 before using this library.
 
 ## Installation
 
@@ -32,19 +40,13 @@ yarn add @semantic-components/re-captcha
 To use reCAPTCHA v3 provide the `siteKey` using the `provideScReCaptchaSettings` function:
 
 ```typescript
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
-import { provideRouter } from '@angular/router';
+...
 
 import { provideScReCaptchaSettings } from '@semantic-components/re-captcha';
 
-import { routes } from './app.routes';
-
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
-    provideClientHydration(withEventReplay()),
+    ...
     provideScReCaptchaSettings({
       siteKey: '6LczIrAqAAAAANk0sH07W5kW6hPNwfWAJbnaoEat',
       languageCode: 'fr',
