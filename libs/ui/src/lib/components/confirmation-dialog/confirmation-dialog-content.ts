@@ -1,5 +1,6 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
@@ -50,7 +51,7 @@ import { ScConfirmationDialogTitle } from './confirmation-dialog-title';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScConfirmationDialogContent {
+export class ScConfirmationDialogContent implements AfterViewInit {
   readonly classInput = input<string>('', {
     alias: 'class',
   });
@@ -69,6 +70,9 @@ export class ScConfirmationDialogContent {
 
   constructor() {
     this.dialogRef.disableClose = true;
+  }
+
+  ngAfterViewInit() {
     this.state.set('open');
   }
 
