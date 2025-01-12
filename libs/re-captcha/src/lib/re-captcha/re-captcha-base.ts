@@ -17,7 +17,7 @@ type ErrorCallbackFunction = () => void;
   },
 })
 export class ScReCaptchaBase implements ControlValueAccessor {
-  private readonly id = inject(_IdGenerator).getId('sc-re-captcha-v2-');
+  private readonly id = inject(_IdGenerator).getId('sc-re-captcha-');
   protected widgetId = '';
 
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
