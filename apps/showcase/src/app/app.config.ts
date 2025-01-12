@@ -8,10 +8,7 @@ import {
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter } from '@angular/router';
 
-import {
-  SC_RE_CAPTCHA_LANGUAGE_CODE,
-  SC_RE_CAPTCHA_SITE_KEY,
-} from '@semantic-components/re-captcha';
+import { provideScReCaptchaSettings } from '@semantic-components/re-captcha';
 import { scThemeProvider } from '@semantic-components/ui';
 
 import { appRoutes } from './app.routes';
@@ -23,8 +20,10 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
     provideAnimationsAsync(),
     provideAppInitializer(scThemeProvider()),
+    provideScReCaptchaSettings({
+      siteKey: '6LczIrAqAAAAANk0sH07W5kW6hPNwfWAJbnaoEat',
+      languageCode: 'en',
+    }),
     { provide: LOCALE_ID, useValue: 'fr' },
-    { provide: SC_RE_CAPTCHA_LANGUAGE_CODE, useValue: 'en' },
-    { provide: SC_RE_CAPTCHA_SITE_KEY, useValue: '6LczIrAqAAAAANk0sH07W5kW6hPNwfWAJbnaoEat' },
   ],
 };
