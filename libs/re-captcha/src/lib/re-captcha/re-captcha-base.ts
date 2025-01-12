@@ -1,5 +1,13 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
-import { ChangeDetectorRef, Directive, computed, inject, input, signal } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Directive,
+  OnInit,
+  computed,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 
 import { SC_RE_CAPTCHA_V2_SITE_KEY } from './re-captcha-config';
@@ -17,7 +25,7 @@ type ErrorCallbackFn = () => void;
     'class.g-recaptcha': 'true',
   },
 })
-export class ScReCaptchaBase implements ControlValueAccessor {
+export class ScReCaptchaBase implements OnInit, ControlValueAccessor {
   private readonly id = inject(_IdGenerator).getId('sc-re-captcha-');
   protected widgetId = '';
 
