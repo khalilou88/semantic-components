@@ -36,10 +36,10 @@ import { ScConfirmationDialogTitle } from './confirmation-dialog-title';
     </div>
 
     <div sc-confirmation-dialog-footer>
-      <button class="mt-2 sm:mt-0" (click)="dialogRef.close(false)" variant="outline" sc-button>
+      <button class="mt-2 sm:mt-0" (click)="close(false)" variant="outline" sc-button>
         {{ data.cancelButtonText }}
       </button>
-      <button (click)="dialogRef.close(true)" sc-button>{{ data.actionButtonText }}</button>
+      <button (click)="close(true)" sc-button>{{ data.actionButtonText }}</button>
     </div>
   `,
   host: {
@@ -57,18 +57,26 @@ export class ScConfirmationDialogContent {
 
   protected readonly class = computed(() =>
     cn(
-      'z-50 grid w-full max-w-lg gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg',
+      'grid w-full max-w-lg gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 sm:rounded-lg',
       this.classInput(),
     ),
   );
 
-  //TODO make this working
-  readonly state = signal<'open' | 'closed'>('closed');
+  private readonly state = signal<'open' | 'closed'>('closed');
 
   readonly dialogRef = inject(DialogRef);
   readonly data = inject(DIALOG_DATA);
 
   constructor() {
     this.dialogRef.disableClose = true;
+    this.state.set('open');
+  }
+
+  close(b: boolean) {
+    this.state.set('closed');
+
+    setTimeout(() => {
+      this.dialogRef.close(b);
+    }, 200);
   }
 }
