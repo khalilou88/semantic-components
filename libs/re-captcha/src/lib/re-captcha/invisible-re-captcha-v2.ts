@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   ViewEncapsulation,
+  computed,
   forwardRef,
   inject,
   input,
@@ -10,6 +11,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+import { SC_INVISIBLE_RE_CAPTCHA_SITE_KEY } from './re-captcha-config';
 import { ScReCaptchaV2Base } from './re-captcha-v2-base';
 
 declare let grecaptcha: any;
@@ -40,8 +42,23 @@ export class ScInvisibleReCaptchaV2 extends ScReCaptchaV2Base implements Control
 
   private readonly size = signal<'invisible'>('invisible');
 
+  private readonly invisibleReCaptchaSiteKey = inject<string>(SC_INVISIBLE_RE_CAPTCHA_SITE_KEY, {
+    optional: true,
+  });
+  readonly siteKeyInput = input<string>('', {
+    alias: 'siteKey',
+  });
+
+  private readonly siteKey = computed(() => {
+    if (this.siteKeyInput()) {
+      this.siteKeyInput();
+    }
+
+    return this.invisibleReCaptchaSiteKey ?? '';
+  });
+
   override render() {
-    this.renderWidget('badge', this.badge(), this.size());
+    this.renderWidget(this.siteKey(), 'badge', this.badge(), this.size());
   }
 
   execute() {

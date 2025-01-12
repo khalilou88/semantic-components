@@ -2,11 +2,14 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  computed,
   forwardRef,
+  inject,
   input,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+import { SC_CHECKBOX_RE_CAPTCHA_SITE_KEY } from './re-captcha-config';
 import { ScReCaptchaV2Base } from './re-captcha-v2-base';
 
 @Component({
@@ -33,7 +36,22 @@ export class ScReCaptchaV2 extends ScReCaptchaV2Base implements ControlValueAcce
 
   readonly size = input<'normal' | 'compact'>('normal');
 
+  private readonly checkboxReCaptchaSiteKey = inject<string>(SC_CHECKBOX_RE_CAPTCHA_SITE_KEY, {
+    optional: true,
+  });
+  readonly siteKeyInput = input<string>('', {
+    alias: 'siteKey',
+  });
+
+  private readonly siteKey = computed(() => {
+    if (this.siteKeyInput()) {
+      this.siteKeyInput();
+    }
+
+    return this.checkboxReCaptchaSiteKey ?? '';
+  });
+
   override render() {
-    this.renderWidget('theme', this.theme(), this.size());
+    this.renderWidget(this.siteKey(), 'theme', this.theme(), this.size());
   }
 }

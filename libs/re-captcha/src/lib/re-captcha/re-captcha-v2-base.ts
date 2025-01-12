@@ -23,7 +23,6 @@ export class ScReCaptchaV2Base implements ControlValueAccessor {
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
   private readonly scReCaptchaService = inject(ScReCaptchaService);
 
-  readonly siteKey = input.required<string>();
   readonly tabindex = input<string>('0');
   readonly callback = input<CallbackFunction | undefined>(undefined);
   readonly expiredCallback = input<ExpiredCallbackFunction | undefined>(undefined, {
@@ -43,11 +42,16 @@ export class ScReCaptchaV2Base implements ControlValueAccessor {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   render() {}
 
-  protected renderWidget(themeOrBadge: string, themeOrBadgeValue: string, size: string) {
+  protected renderWidget(
+    siteKey: string,
+    themeOrBadge: string,
+    themeOrBadgeValue: string,
+    size: string,
+  ) {
     this.widgetId = grecaptcha.render(
       this.id,
       {
-        sitekey: this.siteKey(),
+        sitekey: siteKey,
         [themeOrBadge]: themeOrBadgeValue,
         size: size,
         tabindex: this.tabindex(),
