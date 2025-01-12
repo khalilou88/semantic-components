@@ -56,7 +56,7 @@ export const appConfig: ApplicationConfig = {
 };
 ```
 
-### reCAPTCHA v2 Checkbox Component with Reactive Forms
+### Checkbox reCAPTCHA v2 Component with Reactive Forms
 
 In your component template, add the reCAPTCHA v2 to a div:
 
@@ -94,7 +94,7 @@ export class AppComponent {
 }
 ```
 
-### Invisible reCAPTCHA v2 Component
+### Invisible reCAPTCHA v2 Component with a Button
 
 In your component template, add the invisible reCAPTCHA v2 to a button (you can also add it to a div):
 
@@ -124,7 +124,11 @@ export class AppComponent {
 }
 ```
 
-### reCAPTCHA v3 Service
+### Invisible reCAPTCHA v2 Component with Reactive Forms
+
+Call the execute function programmatically before submitting the form
+
+### Score based reCAPTCHA v3 Service
 
 In your component template, add a button to execute reCAPTCHA v3 :
 
