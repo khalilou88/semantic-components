@@ -133,6 +133,7 @@ export class ScCheckbox implements ControlValueAccessor {
   });
   protected readonly disabled = linkedSignal(() => this.disabledInput());
 
+  //TODO: change name to changed, or toggled
   readonly change = output<boolean>();
 
   protected readonly state = computed<'indeterminate' | 'checked' | 'unchecked'>(() => {
