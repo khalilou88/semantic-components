@@ -16,7 +16,7 @@ type ErrorCallbackFunction = () => void;
     'class.g-recaptcha': 'true',
   },
 })
-export class ScReCaptchaV2Base implements ControlValueAccessor {
+export class ScReCaptchaBase implements ControlValueAccessor {
   private readonly id = inject(_IdGenerator).getId('sc-re-captcha-v2-');
   protected widgetId = '';
 
@@ -36,7 +36,7 @@ export class ScReCaptchaV2Base implements ControlValueAccessor {
   private readonly disabledByCva = signal(false);
 
   ngOnInit() {
-    this.scReCaptchaService.scReCaptchaV2s.push(this);
+    this.scReCaptchaService.scReCaptchas.push(this);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function

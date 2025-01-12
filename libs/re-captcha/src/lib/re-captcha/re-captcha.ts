@@ -8,7 +8,7 @@ declare let grecaptcha: any;
 @Injectable({
   providedIn: 'root',
 })
-export class ScReCaptchaV3 {
+export class ScReCaptcha {
   private readonly siteKey = inject<string>(SC_RE_CAPTCHA_SITE_KEY);
 
   private readonly scReCaptchaService = inject(ScReCaptchaService);

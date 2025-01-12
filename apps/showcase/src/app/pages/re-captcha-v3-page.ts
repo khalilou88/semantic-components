@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { ScReCaptchaV3 } from '@semantic-components/re-captcha';
+import { ScReCaptcha } from '@semantic-components/re-captcha';
 import { ScButton } from '@semantic-components/ui';
 
 @Component({
@@ -16,10 +16,10 @@ import { ScButton } from '@semantic-components/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ReCaptchaV3Page {
-  private readonly scReCaptchaV3 = inject(ScReCaptchaV3);
+  private readonly scReCaptcha = inject(ScReCaptcha);
 
   async executeReCaptcha() {
-    const token = await this.scReCaptchaV3.execute('submit');
+    const token = await this.scReCaptcha.execute('submit');
     console.log('Token:', token);
   }
 }

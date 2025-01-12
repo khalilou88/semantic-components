@@ -3,19 +3,19 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import {
-  ScInvisibleReCaptchaV2,
-  ScReCaptchaV2,
-  ScReCaptchaV3,
+  ScCheckboxReCaptcha,
+  ScInvisibleReCaptcha,
+  ScReCaptcha,
 } from '@semantic-components/re-captcha';
 import { ScButton } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-re-captcha-v2-page',
-  imports: [ReactiveFormsModule, ScReCaptchaV2, ScInvisibleReCaptchaV2, JsonPipe, ScButton],
+  imports: [ReactiveFormsModule, ScCheckboxReCaptcha, ScInvisibleReCaptcha, JsonPipe, ScButton],
   template: `
     <div class="m-10">
       <form [formGroup]="reCaptchaV2Form">
-        <div [siteKey]="siteKey" sc-re-captcha-v2 formControlName="captcha"></div>
+        <div [siteKey]="siteKey" sc-checkbox-re-captcha formControlName="captcha"></div>
       </form>
     </div>
 
@@ -30,7 +30,7 @@ import { ScButton } from '@semantic-components/ui';
     <br />
     callback function
     <div class="m-10">
-      <div [siteKey]="siteKey" [callback]="myCallback" sc-re-captcha-v2></div>
+      <div [siteKey]="siteKey" [callback]="myCallback" sc-checkbox-re-captcha></div>
     </div>
 
     <br />
@@ -41,7 +41,7 @@ import { ScButton } from '@semantic-components/ui';
         <button
           [siteKey]="invisibleReCaptchaV2SiteKey"
           [callback]="myCallback"
-          sc-invisible-re-captcha-v2
+          sc-invisible-re-captcha
         >
           Click me to execute Invisible reCAPTCHA
         </button>
@@ -54,25 +54,25 @@ import { ScButton } from '@semantic-components/ui';
     <div class="m-10">
       Invisible reCAPTCHA DIV
       <div
-        #invisibleReCaptchaV2="scInvisibleReCaptchaV2"
+        #invisibleReCaptcha="scInvisibleReCaptcha"
         [siteKey]="invisibleReCaptchaV2SiteKey"
         [callback]="myCallback"
-        sc-invisible-re-captcha-v2
+        sc-invisible-re-captcha
       ></div>
 
-      <button (click)="invisibleReCaptchaV2.execute()" sc-button>Execute</button>
+      <button (click)="invisibleReCaptcha.execute()" sc-button>Execute</button>
 
       <br />
       <br />
 
-      <button (click)="invisibleReCaptchaV2.reset()" sc-button>Reset</button>
+      <button (click)="invisibleReCaptcha.reset()" sc-button>Reset</button>
     </div>
 
     <br />
     <br />
     <br />
 
-    <div [siteKey]="siteKey" [callback]="myCallback" sc-re-captcha-v2 theme="dark"></div>
+    <div [siteKey]="siteKey" [callback]="myCallback" sc-checkbox-re-captcha theme="dark"></div>
 
     <br />
     <br />
@@ -90,14 +90,14 @@ export default class ReCaptchaV2Page {
 
   invisibleReCaptchaV2SiteKey = '6Ldl1bQqAAAAANUJsycemVBh6pMXSYAQeOIZyfV2';
 
-  private readonly scReCaptchaV3 = inject(ScReCaptchaV3);
+  private readonly scReCaptcha = inject(ScReCaptcha);
 
   reCaptchaV2Form = new FormGroup({
     captcha: new FormControl(''),
   });
 
   async executeReCaptcha() {
-    const token = await this.scReCaptchaV3.execute('submit');
+    const token = await this.scReCaptcha.execute('submit');
     console.log('Token:', token);
   }
 

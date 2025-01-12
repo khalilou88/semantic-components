@@ -9,12 +9,12 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+import { ScReCaptchaBase } from './re-captcha-base';
 import { SC_CHECKBOX_RE_CAPTCHA_SITE_KEY } from './re-captcha-config';
-import { ScReCaptchaV2Base } from './re-captcha-v2-base';
 
 @Component({
-  selector: 'div[sc-re-captcha-v2]',
-  exportAs: 'scReCaptchaV2',
+  selector: 'div[sc-checkbox-re-captcha]',
+  exportAs: 'scCheckboxReCaptcha',
   imports: [],
   template: `
     <ng-content />
@@ -26,12 +26,12 @@ import { ScReCaptchaV2Base } from './re-captcha-v2-base';
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ScReCaptchaV2),
+      useExisting: forwardRef(() => ScCheckboxReCaptcha),
       multi: true,
     },
   ],
 })
-export class ScReCaptchaV2 extends ScReCaptchaV2Base implements ControlValueAccessor {
+export class ScCheckboxReCaptcha extends ScReCaptchaBase implements ControlValueAccessor {
   readonly theme = input<'dark' | 'light'>('light');
 
   readonly size = input<'normal' | 'compact'>('normal');

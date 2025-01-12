@@ -11,14 +11,14 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+import { ScReCaptchaBase } from './re-captcha-base';
 import { SC_INVISIBLE_RE_CAPTCHA_SITE_KEY } from './re-captcha-config';
-import { ScReCaptchaV2Base } from './re-captcha-v2-base';
 
 declare let grecaptcha: any;
 
 @Component({
-  selector: 'div[sc-invisible-re-captcha-v2], button[sc-invisible-re-captcha-v2]',
-  exportAs: 'scInvisibleReCaptchaV2',
+  selector: 'div[sc-invisible-re-captcha], button[sc-invisible-re-captcha]',
+  exportAs: 'scInvisibleReCaptcha',
   imports: [],
   template: `
     <ng-content />
@@ -30,12 +30,12 @@ declare let grecaptcha: any;
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ScInvisibleReCaptchaV2),
+      useExisting: forwardRef(() => ScInvisibleReCaptcha),
       multi: true,
     },
   ],
 })
-export class ScInvisibleReCaptchaV2 extends ScReCaptchaV2Base implements ControlValueAccessor {
+export class ScInvisibleReCaptcha extends ScReCaptchaBase implements ControlValueAccessor {
   private readonly hostRef = inject(ElementRef);
 
   readonly badge = input<'bottomright' | 'bottomleft' | 'inline'>('bottomright');
