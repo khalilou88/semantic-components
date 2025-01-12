@@ -37,7 +37,7 @@ yarn add @semantic-components/re-captcha
 
 ### Provide Settings
 
-To use reCAPTCHA v3 provide the `siteKey` using the `provideScReCaptchaSettings` function:
+To use reCAPTCHA v2 provide the `v2SiteKey` and to use reCAPTCHA v3 provide the `v3SiteKey` using the `provideScReCaptchaSettings` function:
 
 ```typescript
 ...
@@ -48,7 +48,8 @@ export const appConfig: ApplicationConfig = {
   providers: [
     ...
     provideScReCaptchaSettings({
-      siteKey: '6LczIrAqAAAAANk0sH07W5kW6hPNwfWAJbnaoEat',
+      v2SiteKey: 'YOUR_V2_SITE_KEY',
+      v3SiteKey: 'YOUR_V3_SITE_KEY',
       languageCode: 'fr',
     }),
   ],
@@ -60,8 +61,8 @@ export const appConfig: ApplicationConfig = {
 In your component template, add the reCAPTCHA v2 to a div:
 
 ```html
-<form [formGroup]="reCaptchaV2Form" (ngSubmit)="onSubmit()">
-  <div sc-re-captcha-v2 [siteKey]="siteKey" formControlName="captcha"></div>
+<form [formGroup]="checkboxReCaptchaForm" (ngSubmit)="onSubmit()">
+  <div sc-checkbox-re-captcha [siteKey]="siteKey" formControlName="captcha"></div>
   <button type="submit">Submit</button>
 </form>
 ```
@@ -72,18 +73,18 @@ In your component class:
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
-import { ScReCaptchaV2 } from '@semantic-components/re-captcha';
+import { ScCheckboxReCaptcha } from '@semantic-components/re-captcha';
 
 @Component({
   selector: 'app-root',
-  imports: [ReactiveFormsModule, ScReCaptchaV2],
+  imports: [ReactiveFormsModule, ScCheckboxReCaptcha],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  siteKey = 'YOUR_SITE_KEY_V2';
+  siteKey = 'YOUR_V2_SITE_KEY'; //You can also provide it globally with provideScReCaptchaSettings
 
-  reCaptchaV2Form = new FormGroup({
+  checkboxReCaptchaForm = new FormGroup({
     captcha: new FormControl(''),
   });
 
@@ -98,7 +99,7 @@ export class AppComponent {
 In your component template, add the invisible reCAPTCHA v2 to a button (you can also add it to a div):
 
 ```html
-<button [siteKey]="invisibleReCaptchaV2SiteKey" [callback]="myCallback" sc-invisible-re-captcha-v2>
+<button [callback]="myCallback" sc-invisible-re-captcha>
   Click me to execute Invisible reCAPTCHA
 </button>
 ```
@@ -108,17 +109,15 @@ In your component class:
 ```typescript
 import { Component } from '@angular/core';
 
-import { ScInvisibleReCaptchaV2 } from '@semantic-components/re-captcha';
+import { ScInvisibleReCaptcha } from '@semantic-components/re-captcha';
 
 @Component({
   selector: 'app-root',
-  imports: [ScInvisibleReCaptchaV2],
+  imports: [ScInvisibleReCaptcha],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  invisibleReCaptchaV2SiteKey = 'YOUR_INVISIBLE_RE_CAPTCHA_V2_SITEKEY';
-
   myCallback = (token: string) => {
     console.log('Callback function:', token);
   };
@@ -138,7 +137,7 @@ In your component class:
 ```typescript
 import { Component, inject } from '@angular/core';
 
-import { ScReCaptchaV3 } from '@semantic-components/re-captcha';
+import { ScScoreReCaptcha } from '@semantic-components/re-captcha';
 
 @Component({
   selector: 'app-root',
@@ -147,10 +146,10 @@ import { ScReCaptchaV3 } from '@semantic-components/re-captcha';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  private readonly scReCaptchaV3 = inject(ScReCaptchaV3);
+  private readonly scScoreReCaptcha = inject(ScScoreReCaptcha);
 
   async executeReCaptcha() {
-    const token = await this.scReCaptchaV3.execute('action-name');
+    const token = await this.scScoreReCaptcha.execute('action-name');
     console.log('Token:', token);
   }
 }
