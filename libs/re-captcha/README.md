@@ -56,7 +56,7 @@ export const appConfig: ApplicationConfig = {
 };
 ```
 
-### reCAPTCHA v2 Chechbox Component with Reactive Forms
+### reCAPTCHA v2 Checkbox Component with Reactive Forms
 
 In your component template, add the reCAPTCHA v2 to a div:
 
