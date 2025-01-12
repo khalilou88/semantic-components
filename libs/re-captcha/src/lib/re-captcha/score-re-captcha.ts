@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 
 import { SC_RE_CAPTCHA_V3_SITE_KEY } from './re-captcha-config';
-import { ScReCaptchaService } from './sc-re-captcha.service';
+import { ScReCaptchaService } from './re-captcha.service';
 
 declare let grecaptcha: any;
 
