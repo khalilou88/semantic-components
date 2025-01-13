@@ -35,7 +35,7 @@ yarn add @semantic-components/re-captcha
 
 ## Usage
 
-### Provide Settings
+### reCAPTCHA Settings
 
 To use reCAPTCHA v2 provide the `v2SiteKey` and to use reCAPTCHA v3 provide the `v3SiteKey` using the `provideScReCaptchaSettings` function:
 
