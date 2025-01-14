@@ -5,6 +5,7 @@ import {
   Component,
   ViewEncapsulation,
   computed,
+  effect,
   inject,
   input,
   signal,
@@ -46,6 +47,7 @@ import { ScConfirmationDialogTitle } from './confirmation-dialog-title';
   host: {
     '[class]': 'class()',
     '[attr.data-state]': 'state()',
+    '(animationend)': 'animationend()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -63,13 +65,21 @@ export class ScConfirmationDialogContent implements AfterViewInit {
     ),
   );
 
-  private readonly state = signal<'open' | 'closed'>('closed');
+  private readonly state = signal<'open' | 'closed' | undefined>(undefined);
+  private readonly response = signal<boolean>(false);
+  private readonly animationEnd = signal<boolean>(false);
 
   readonly dialogRef = inject(DialogRef);
   readonly data = inject(DIALOG_DATA);
 
   constructor() {
     this.dialogRef.disableClose = true;
+
+    effect(() => {
+      if (this.animationEnd()) {
+        this.dialogRef.close(this.response());
+      }
+    });
   }
 
   ngAfterViewInit() {
@@ -78,9 +88,12 @@ export class ScConfirmationDialogContent implements AfterViewInit {
 
   close(b: boolean) {
     this.state.set('closed');
+    this.response.set(b);
+  }
 
-    setTimeout(() => {
-      this.dialogRef.close(b);
-    }, 200);
+  animationend() {
+    if (this.state() === 'closed') {
+      this.animationEnd.set(true);
+    }
   }
 }
