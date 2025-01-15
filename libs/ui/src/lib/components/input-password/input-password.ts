@@ -12,14 +12,25 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
+import { cn } from '@semantic-components/utils';
 import { SiCheckIcon, SiEyeIcon, SiEyeOffIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 
 import { ScInput } from '../input/input';
 import { ScLabel } from '../label';
+import { ScProgress } from '../progress';
 
 @Component({
   selector: 'sc-input-password',
-  imports: [SiCheckIcon, SiXIcon, SiEyeOffIcon, SiEyeIcon, ScLabel, ScInput, ReactiveFormsModule],
+  imports: [
+    SiCheckIcon,
+    SiXIcon,
+    SiEyeOffIcon,
+    SiEyeIcon,
+    ScLabel,
+    ScInput,
+    ReactiveFormsModule,
+    ScProgress,
+  ],
   template: `
     <div>
       <!--Password input field with toggle visibility button-->
@@ -52,6 +63,16 @@ import { ScLabel } from '../label';
           </button>
         </div>
       </div>
+
+      <!--Password strength indicator-->
+      <sc-progress
+        class="mb-4 mt-3 h-1 w-full overflow-hidden rounded-full bg-border"
+        [class2]="class2()"
+        [value]="strengthScore()"
+        min="0"
+        max="4"
+        aria-label="Password strength"
+      />
 
       <!--Password strength indicator-->
       <div
@@ -132,6 +153,10 @@ export class ScInputPassword implements OnInit {
   );
 
   strengthScore = computed(() => this.strength().filter((req) => req.met).length);
+
+  protected readonly class2 = computed(() =>
+    cn('h-full transition-all duration-500 ease-out', this.strengthColor()),
+  );
 
   strengthColor = computed(() => {
     const score = this.strengthScore();

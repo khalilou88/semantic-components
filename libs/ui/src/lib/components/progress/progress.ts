@@ -12,33 +12,48 @@ import { cn } from '@semantic-components/utils';
   selector: 'sc-progress',
   imports: [],
   template: `
-    <div class="size-full flex-1 bg-primary transition-all" [style.transform]="transform()"></div>
+    <div [class]="class2()" [style.transform]="transform()"></div>
   `,
   host: {
     // Sets the role for this component to "progressbar"
     role: 'progressbar',
     // Sets the minimum and maximum values for the progressbar role.
-    'aria-valuemin': '0',
-    'aria-valuemax': '100',
+    '[attr.aria-valuemin]': 'min()',
+    '[attr.aria-valuemax]': 'max()',
     // Binding that updates the current value of the progressbar.
     '[attr.aria-valuenow]': 'value()',
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScProgress {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() =>
-    cn('block relative h-4 w-full overflow-hidden rounded-full bg-secondary', this.class()),
+  protected readonly class = computed(() =>
+    cn('block relative h-4 w-full overflow-hidden rounded-full bg-secondary', this.classInput()),
+  );
+
+  readonly classInput2 = input<string>('', {
+    alias: 'class2',
+  });
+
+  protected readonly class2 = computed(() =>
+    cn('size-full flex-1 bg-primary transition-all', this.classInput2()),
   );
 
   /** Current value of the progressbar. */
-  value = input<number>(0);
+  readonly value = input<number>(0);
 
-  transform = computed(() => {
-    return `translateX(-${100 - this.value()}%)`;
+  //TODO maybe name shoould be aria-valuemin
+  readonly min = input<string | number>(0);
+  //TODO maybe name shoould be aria-valuemax
+  readonly max = input<string | number>(100);
+
+  protected readonly transform = computed(() => {
+    return `translateX(-${+this.max() - this.value()}%)`;
   });
 }
