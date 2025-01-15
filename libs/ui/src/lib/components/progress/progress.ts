@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
   computed,
   input,
+  numberAttribute,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
@@ -49,11 +50,16 @@ export class ScProgress {
   readonly value = input<number>(0);
 
   //TODO maybe name shoould be aria-valuemin
-  readonly min = input<string | number>(0);
+  readonly min = input<number, unknown>(0, {
+    transform: numberAttribute,
+  });
+
   //TODO maybe name shoould be aria-valuemax
-  readonly max = input<string | number>(100);
+  readonly max = input<number, unknown>(100, {
+    transform: numberAttribute,
+  });
 
   protected readonly transform = computed(() => {
-    return `translateX(-${+this.max() - this.value()}%)`;
+    return `translateX(${((this.value() - this.min()) / (this.max() - this.min())) * 100 - 100}%)`;
   });
 }
