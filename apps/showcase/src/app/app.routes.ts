@@ -122,6 +122,11 @@ export const appRoutes: Route[] = [
             title: 'Hover Card Page',
           },
           {
+            path: 'input-password',
+            loadComponent: () => import('./pages/input-password-page'),
+            title: 'Input Password Page',
+          },
+          {
             path: 'input-otp',
             loadComponent: () => import('./pages/input-otp-page'),
             title: 'Input OTP Page',
