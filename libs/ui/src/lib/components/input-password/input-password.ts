@@ -69,7 +69,6 @@ import { ScProgress } from '../progress';
         class="mb-4 mt-3 h-1 w-full overflow-hidden rounded-full bg-border"
         [class2]="class2()"
         [value]="strengthScore()"
-        min="0"
         max="4"
         aria-label="Password strength"
       />
