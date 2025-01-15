@@ -73,22 +73,6 @@ import { ScProgress } from '../progress';
         aria-label="Password strength"
       />
 
-      <!--Password strength indicator-->
-      <div
-        class="mb-4 mt-3 h-1 w-full overflow-hidden rounded-full bg-border"
-        [attr.aria-valuenow]="strengthScore()"
-        role="progressbar"
-        aria-valuemin="0"
-        aria-valuemax="4"
-        aria-label="Password strength"
-      >
-        <div
-          class="h-full transition-all duration-500 ease-out"
-          [class]="strengthColor()"
-          [style.width.%]="(strengthScore() / 4) * 100"
-        ></div>
-      </div>
-
       <!-- Password strength description -->
       <p class="mb-2 text-sm font-medium" id="password-description">
         {{ strengthText() }}. Must contain:
