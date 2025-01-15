@@ -7,6 +7,7 @@ import {
   ViewEncapsulation,
   computed,
   inject,
+  input,
   signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -32,81 +33,85 @@ import { ScProgress } from '../progress';
     ScProgress,
   ],
   template: `
-    <div>
-      <!--Password input field with toggle visibility button-->
-      <div class="space-y-2">
-        <label [for]="id" sc-label>Input with password strength indicator</label>
-        <div class="relative">
-          <input
-            class="pe-9"
-            [id]="id"
-            [value]="password()"
-            [type]="isVisible() ? 'text' : 'password'"
-            [attr.aria-invalid]="strengthScore() < 4"
-            [formControl]="control"
-            sc-input
-            placeholder="Password"
-            aria-describedby="input-51-description"
-          />
-          <button
-            class="absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center text-muted-foreground/80 outline-none transition hover:text-foreground"
-            [attr.aria-label]="isVisible() ? 'Hide password' : 'Show password'"
-            [attr.aria-pressed]="isVisible()"
-            (click)="toggleVisibility()"
-            type="button"
-          >
-            @if (isVisible()) {
-              <svg si-eye-off-icon size="16" strokeWidth="2" aria-hidden="true"></svg>
-            } @else {
-              <svg si-eye-icon size="16" strokeWidth="2" aria-hidden="true"></svg>
-            }
-          </button>
-        </div>
+    <!--Password input field with toggle visibility button-->
+    <div class="space-y-2">
+      <label [for]="id" sc-label>Input with password strength indicator</label>
+      <div class="relative">
+        <input
+          class="pe-9"
+          [id]="id"
+          [value]="password()"
+          [type]="isVisible() ? 'text' : 'password'"
+          [attr.aria-invalid]="strengthScore() < 4"
+          [formControl]="control"
+          sc-input
+          placeholder="Password"
+          aria-describedby="input-51-description"
+        />
+        <button
+          class="absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center text-muted-foreground/80 outline-none transition hover:text-foreground"
+          [attr.aria-label]="isVisible() ? 'Hide password' : 'Show password'"
+          [attr.aria-pressed]="isVisible()"
+          (click)="toggleVisibility()"
+          type="button"
+        >
+          @if (isVisible()) {
+            <svg si-eye-off-icon size="16" strokeWidth="2" aria-hidden="true"></svg>
+          } @else {
+            <svg si-eye-icon size="16" strokeWidth="2" aria-hidden="true"></svg>
+          }
+        </button>
       </div>
-
-      <!--Password strength indicator-->
-      <sc-progress
-        class="mb-4 mt-3 h-1 w-full overflow-hidden rounded-full bg-border"
-        [indicatorClass]="indicatorClass()"
-        [value]="strengthScore()"
-        max="4"
-        aria-label="Password strength"
-      />
-
-      <!-- Password strength description -->
-      <p class="mb-2 text-sm font-medium" id="password-description">
-        {{ strengthText() }}. Must contain:
-      </p>
-
-      <!-- Password requirements list -->
-      <ul class="space-y-1.5" aria-label="Password requirements">
-        @for (req of strength(); track $index) {
-          <li class="flex items-center gap-2">
-            @if (req.met) {
-              <svg class="text-emerald-500" si-check-icon size="16" aria-hidden="true"></svg>
-            } @else {
-              <svg class="text-emerald-500" si-x-icon size="16" aria-hidden="true"></svg>
-            }
-            <span
-              class="text-xs"
-              [class]="req.met ? 'text-emerald-500' : 'text-muted-foreground/80'"
-            >
-              {{ req.text }}
-            </span>
-            <span class="sr-only">
-              {{ req.met ? '- Requirement met' : '- Requirement not met' }}
-            </span>
-          </li>
-        }
-      </ul>
     </div>
+
+    <!--Password strength indicator-->
+    <sc-progress
+      class="mb-4 mt-3 h-1 w-full overflow-hidden rounded-full bg-border"
+      [indicatorClass]="indicatorClass()"
+      [value]="strengthScore()"
+      max="4"
+      aria-label="Password strength"
+    />
+
+    <!-- Password strength description -->
+    <p class="mb-2 text-sm font-medium" id="password-description">
+      {{ strengthText() }}. Must contain:
+    </p>
+
+    <!-- Password requirements list -->
+    <ul class="space-y-1.5" aria-label="Password requirements">
+      @for (req of strength(); track $index) {
+        <li class="flex items-center gap-2">
+          @if (req.met) {
+            <svg class="text-emerald-500" si-check-icon size="16" aria-hidden="true"></svg>
+          } @else {
+            <svg class="text-emerald-500" si-x-icon size="16" aria-hidden="true"></svg>
+          }
+          <span class="text-xs" [class]="req.met ? 'text-emerald-500' : 'text-muted-foreground/80'">
+            {{ req.text }}
+          </span>
+          <span class="sr-only">
+            {{ req.met ? '- Requirement met' : '- Requirement not met' }}
+          </span>
+        </li>
+      }
+    </ul>
   `,
+  host: {
+    '[class]': 'class()',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScInputPassword implements OnInit {
   protected readonly id = inject(_IdGenerator).getId('sc-input-password-');
+
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
+
+  protected readonly class = computed(() => cn('block', this.classInput()));
 
   protected control = new FormControl();
 
