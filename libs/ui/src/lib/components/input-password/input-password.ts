@@ -67,7 +67,7 @@ import { ScProgress } from '../progress';
       <!--Password strength indicator-->
       <sc-progress
         class="mb-4 mt-3 h-1 w-full overflow-hidden rounded-full bg-border"
-        [class2]="class2()"
+        [indicatorClass]="indicatorClass()"
         [value]="strengthScore()"
         max="4"
         aria-label="Password strength"
@@ -153,7 +153,7 @@ export class ScInputPassword implements OnInit {
 
   strengthScore = computed(() => this.strength().filter((req) => req.met).length);
 
-  protected readonly class2 = computed(() =>
+  protected readonly indicatorClass = computed(() =>
     cn('h-full transition-all duration-500 ease-out', this.strengthColor()),
   );
 
