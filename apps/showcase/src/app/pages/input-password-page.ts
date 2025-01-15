@@ -6,7 +6,9 @@ import { ScInputPassword } from '@semantic-components/ui';
   selector: 'app-input-password-page',
   imports: [ScInputPassword],
   template: `
-    <sc-input-password />
+    <div class="m-10">
+      <sc-input-password />
+    </div>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,

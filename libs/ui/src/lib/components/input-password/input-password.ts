@@ -38,7 +38,7 @@ import { ScLabel } from '../label';
             aria-describedby="input-51-description"
           />
           <button
-            class="text-muted-foreground/80 hover:text-foreground absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center outline-none transition"
+            class="absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center text-muted-foreground/80 outline-none transition hover:text-foreground"
             [attr.aria-label]="isVisible() ? 'Hide password' : 'Show password'"
             [attr.aria-pressed]="isVisible()"
             (click)="toggleVisibility()"
@@ -55,7 +55,7 @@ import { ScLabel } from '../label';
 
       <!--Password strength indicator-->
       <div
-        class="bg-border mb-4 mt-3 h-1 w-full overflow-hidden rounded-full"
+        class="mb-4 mt-3 h-1 w-full overflow-hidden rounded-full bg-border"
         [attr.aria-valuenow]="strengthScore()"
         role="progressbar"
         aria-valuemin="0"
