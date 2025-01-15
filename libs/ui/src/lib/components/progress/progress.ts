@@ -43,11 +43,18 @@ export class ScProgress {
   });
 
   protected readonly indicatorClass = computed(() =>
-    cn('size-full flex-1 bg-primary transition-all', this.indicatorClassInput()),
+    cn(
+      'size-full flex-1 bg-primary transition-all',
+      this.mode() === 'indeterminate' && 'animate-progress origin-left',
+      this.indicatorClassInput(),
+    ),
   );
 
   /** Current value of the progressbar. */
   readonly value = input<number>(0);
+
+  //https://github.com/shadcn-ui/ui/issues/700
+  readonly mode = input<'determinate' | 'indeterminate'>('determinate');
 
   //TODO maybe name shoould be aria-valuemin
   readonly min = input<number, unknown>(0, {

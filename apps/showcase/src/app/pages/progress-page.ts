@@ -12,7 +12,15 @@ import { ScProgress } from '@semantic-components/ui';
   selector: 'app-progress-page',
   imports: [ScProgress],
   template: `
-    <sc-progress [value]="progress()" />
+    <div class="m-10">
+      <sc-progress [value]="progress()" />
+
+      <br />
+      <br />
+      <br />
+
+      <sc-progress mode="indeterminate" />
+    </div>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
