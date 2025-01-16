@@ -36,6 +36,6 @@ export default class ProgressPage implements OnInit {
   progress = signal<number>(0);
 
   ngOnInit() {
-    setTimeout(() => this.progress.set(40), 3000);
+    setTimeout(() => this.progress.set(50), 3000);
   }
 }
