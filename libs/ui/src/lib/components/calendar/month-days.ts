@@ -2,10 +2,13 @@ import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   ViewEncapsulation,
   computed,
+  effect,
   input,
   output,
+  viewChildren,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
@@ -76,5 +79,19 @@ export class ScMonthDays {
     const target = event.target as HTMLElement;
     const selectedDay = target.dataset['scDay'] as string;
     this.selectedDayChange.emit(selectedDay);
+  }
+
+  focusedDate = input<string>('');
+  btns = viewChildren(ScButton, { read: ElementRef });
+
+  constructor() {
+    effect(() => {
+      if (this.focusedDate()) {
+        const b = this.btns().find(
+          (item) => item.nativeElement.getAttribute('data-sc-day') === this.selectedDay(),
+        );
+        b?.nativeElement.focus();
+      }
+    });
   }
 }

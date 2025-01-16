@@ -46,6 +46,7 @@ import { WeekDayName } from './util';
           [days]="monthDays()"
           [firstDayMonth]="firstDayMonth()"
           [selectedDay]="value()"
+          [focusedDate]="focusedDate()"
           (selectedDayChange)="setSelectedDay($event)"
         />
       </div>
@@ -138,6 +139,8 @@ export class ScCalendar implements OnInit, ControlValueAccessor {
   });
 
   readonly value = model<string>('');
+
+  readonly focusedDate = signal('');
 
   setSelectedDay(day: string) {
     this.value.set(day);
@@ -258,10 +261,9 @@ export class ScCalendar implements OnInit, ControlValueAccessor {
       return;
     }
     if (newDate) {
-      //this.setSelectedDay(newDate);
-      // Move focus to the new selected date
-      //const focusedCell = calendarBody.querySelector('[tabindex="0"]');
-      //if (focusedCell) focusedCell.focus();
+      //TODO we need to define active date and selected date
+      this.setSelectedDay(newDate);
+      this.focusedDate.set(newDate);
     }
   }
 
