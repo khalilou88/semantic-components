@@ -72,9 +72,9 @@ export class ScMonthDays {
     return day === this.selectedDay();
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  setSelectedDay(event: any) {
-    const selectedDay = event.target.dataset.scDay;
+  setSelectedDay(event: Event): void {
+    const target = event.target as HTMLElement;
+    const selectedDay = target.dataset['scDay'] as string;
     this.selectedDayChange.emit(selectedDay);
   }
 }

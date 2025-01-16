@@ -121,9 +121,7 @@ export class ScCalendar implements OnInit, ControlValueAccessor {
     for (let i = 1; i <= numOfDays; i++) {
       const date = new Date(this.year(), this.month(), i);
 
-      days.push(
-        `${date.getFullYear()}-${this.twoDigits(date.getMonth() + 1)}-${this.twoDigits(date.getDate())}`,
-      );
+      days.push(this.getDateString(date));
     }
 
     return days;
@@ -240,16 +238,15 @@ export class ScCalendar implements OnInit, ControlValueAccessor {
   handleKeydown(event: KeyboardEvent) {
     const key = event.key;
     let newDate;
-    // if (key === 'ArrowLeft') {
-    //   newDate = new Date(year, month, day - 1);
-    // } else if (key === 'ArrowRight') {
-    //   newDate = new Date(year, month, day + 1);
-    // } else if (key === 'ArrowUp') {
-    //   newDate = new Date(year, month, day - 7);
-    // } else if (key === 'ArrowDown') {
-    //   newDate = new Date(year, month, day + 7);
-    // } else
-    if (key === 'Enter') {
+    if (key === 'ArrowLeft') {
+      newDate = this.addDays(-1);
+    } else if (key === 'ArrowRight') {
+      newDate = this.addDays(+1);
+    } else if (key === 'ArrowUp') {
+      newDate = this.addDays(-7);
+    } else if (key === 'ArrowDown') {
+      newDate = this.addDays(+7);
+    } else if (key === 'Enter') {
       if (event.target) {
         newDate = (event.target as HTMLElement).dataset['scDay'];
       }
@@ -261,10 +258,21 @@ export class ScCalendar implements OnInit, ControlValueAccessor {
       return;
     }
     if (newDate) {
-      this.setSelectedDay(newDate);
+      //this.setSelectedDay(newDate);
       // Move focus to the new selected date
       //const focusedCell = calendarBody.querySelector('[tabindex="0"]');
       //if (focusedCell) focusedCell.focus();
     }
+  }
+
+  getDateString(date: Date) {
+    return `${date.getFullYear()}-${this.twoDigits(date.getMonth() + 1)}-${this.twoDigits(date.getDate())}`;
+  }
+
+  addDays(days: number) {
+    const date = new Date(this.value());
+    date.setDate(date.getDate() + days);
+
+    return this.getDateString(date);
   }
 }
