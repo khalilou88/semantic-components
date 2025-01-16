@@ -6,11 +6,11 @@ import {
   signal,
 } from '@angular/core';
 
-import { ScProgress } from '@semantic-components/ui';
+import { ScCircularProgress, ScProgress } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-progress-page',
-  imports: [ScProgress],
+  imports: [ScProgress, ScCircularProgress],
   template: `
     <div class="m-10">
       <sc-progress [value]="progress()" />
@@ -20,6 +20,12 @@ import { ScProgress } from '@semantic-components/ui';
       <br />
 
       <sc-progress mode="indeterminate" />
+
+      <br />
+      <br />
+      <br />
+
+      <sc-circular-progress [value]="progress()" />
     </div>
   `,
   styles: ``,
