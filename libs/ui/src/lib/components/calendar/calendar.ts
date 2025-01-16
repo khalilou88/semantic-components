@@ -238,8 +238,8 @@ export class ScCalendar implements OnInit, ControlValueAccessor {
   }
 
   handleKeydown(event: KeyboardEvent) {
-    // const key = event.key;
-    // let newDate;
+    const key = event.key;
+    let newDate;
     // if (key === 'ArrowLeft') {
     //   newDate = new Date(year, month, day - 1);
     // } else if (key === 'ArrowRight') {
@@ -248,16 +248,23 @@ export class ScCalendar implements OnInit, ControlValueAccessor {
     //   newDate = new Date(year, month, day - 7);
     // } else if (key === 'ArrowDown') {
     //   newDate = new Date(year, month, day + 7);
-    // } else if (key === 'Enter') {
-    //   selectDate(day, month, year);
-    //   return;
-    // }
-    // if (newDate) {
-    //   selectedDate = newDate;
-    //   generateCalendar(selectedDate);
-    //   // Move focus to the new selected date
-    //   const focusedCell = calendarBody.querySelector('[tabindex="0"]');
-    //   if (focusedCell) focusedCell.focus();
-    // }
+    // } else
+    if (key === 'Enter') {
+      if (event.target) {
+        newDate = (event.target as HTMLElement).dataset['scDay'];
+      }
+
+      if (newDate) {
+        this.setSelectedDay(newDate);
+      }
+
+      return;
+    }
+    if (newDate) {
+      this.setSelectedDay(newDate);
+      // Move focus to the new selected date
+      //const focusedCell = calendarBody.querySelector('[tabindex="0"]');
+      //if (focusedCell) focusedCell.focus();
+    }
   }
 }
