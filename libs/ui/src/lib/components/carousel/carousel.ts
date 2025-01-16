@@ -27,7 +27,7 @@ import EmblaCarousel, {
     role: 'region',
     'aria-roledescription': 'carousel',
     '[class]': 'class()',
-    '(keydown)': 'handleKeyDown($event)',
+    '(keydown)': 'handleKeydown($event)',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -85,7 +85,7 @@ export class ScCarousel {
     }
   };
 
-  handleKeyDown(event: KeyboardEvent) {
+  handleKeydown(event: KeyboardEvent) {
     if (event.key === 'ArrowLeft') {
       event.preventDefault();
       this.scrollPrev();

@@ -57,7 +57,8 @@ import { WeekDayName } from './util';
     </div>
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
+    '(keydown)': 'handleKeydown($event)',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -71,28 +72,30 @@ import { WeekDayName } from './util';
   ],
 })
 export class ScCalendar implements OnInit, ControlValueAccessor {
-  private readonly _cdr = inject(ChangeDetectorRef);
+  private readonly changeDetectorRef = inject(ChangeDetectorRef);
 
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn('', this.class()));
+  protected readonly class = computed(() => cn('', this.classInput()));
 
   private readonly localeId = inject(LOCALE_ID);
 
-  date = computed(() => {
+  readonly date = computed(() => {
     if (this.value()) {
       return new Date(this.value());
     }
     return new Date();
   });
 
-  year = linkedSignal(() => this.date().getFullYear());
+  readonly year = linkedSignal(() => this.date().getFullYear());
 
-  month = linkedSignal(() => this.date().getMonth());
+  readonly month = linkedSignal(() => this.date().getMonth());
 
-  weekDaysNames = signal<WeekDayName[]>([]);
+  readonly weekDaysNames = signal<WeekDayName[]>([]);
 
-  monthYear = computed(() => {
+  readonly monthYear = computed(() => {
     const options = {
       month: 'long',
       year: 'numeric',
@@ -106,7 +109,7 @@ export class ScCalendar implements OnInit, ControlValueAccessor {
     return s;
   });
 
-  monthDays = computed(() => {
+  readonly monthDays = computed(() => {
     // Month in JavaScript is 0-indexed (January is 0, February is 1, etc),
     // but by using 0 as the day it will give us the last day of the prior
     // month. So passing in 1 as the month number will return the last day
@@ -126,7 +129,7 @@ export class ScCalendar implements OnInit, ControlValueAccessor {
     return days;
   });
 
-  firstDayMonth = computed(() => {
+  readonly firstDayMonth = computed(() => {
     const date = new Date(this.year(), this.month(), 1);
     const intlLongFormatter = new Intl.DateTimeFormat(this.localeId, { weekday: 'long' });
 
@@ -136,30 +139,30 @@ export class ScCalendar implements OnInit, ControlValueAccessor {
       .indexOf(dayName);
   });
 
-  value = model<string>('');
+  readonly value = model<string>('');
 
   setSelectedDay(day: string) {
     this.value.set(day);
 
-    this._onChange(day);
-    this._cdr.markForCheck();
+    this.onChange(day);
+    this.changeDetectorRef.markForCheck();
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  _onChange: (value: string) => void = () => {};
+  onChange: (value: string) => void = () => {};
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  _onTouched: () => void = () => {};
+  onTouched: () => void = () => {};
 
   writeValue(value: string): void {
     this.value.set(value);
   }
 
   registerOnChange(fn: (value: string) => void): void {
-    this._onChange = fn;
+    this.onChange = fn;
   }
 
   registerOnTouched(fn: () => void): void {
-    this._onTouched = fn;
+    this.onTouched = fn;
   }
 
   private readonly disabledByCva = signal(false);
@@ -232,5 +235,29 @@ export class ScCalendar implements OnInit, ControlValueAccessor {
       minimumIntegerDigits: 2,
       useGrouping: false,
     });
+  }
+
+  handleKeydown(event: KeyboardEvent) {
+    // const key = event.key;
+    // let newDate;
+    // if (key === 'ArrowLeft') {
+    //   newDate = new Date(year, month, day - 1);
+    // } else if (key === 'ArrowRight') {
+    //   newDate = new Date(year, month, day + 1);
+    // } else if (key === 'ArrowUp') {
+    //   newDate = new Date(year, month, day - 7);
+    // } else if (key === 'ArrowDown') {
+    //   newDate = new Date(year, month, day + 7);
+    // } else if (key === 'Enter') {
+    //   selectDate(day, month, year);
+    //   return;
+    // }
+    // if (newDate) {
+    //   selectedDate = newDate;
+    //   generateCalendar(selectedDate);
+    //   // Move focus to the new selected date
+    //   const focusedCell = calendarBody.querySelector('[tabindex="0"]');
+    //   if (focusedCell) focusedCell.focus();
+    // }
   }
 }
