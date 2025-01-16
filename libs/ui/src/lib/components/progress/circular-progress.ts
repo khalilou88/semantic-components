@@ -14,40 +14,34 @@ import { cn } from '@semantic-components/utils';
   selector: 'sc-circular-progress',
   imports: [],
   template: `
-    <div class="flex justify-center items-center h-full">
-      <svg
-        class="relative transform -rotate-90"
-        [attr.height]="radius * 2"
-        [attr.width]="radius * 2"
-      >
-        <!-- Background Circle -->
-        <circle
-          class="text-gray-200 fill-transparent"
-          [attr.stroke-width]="stroke"
-          [attr.r]="normalizedRadius"
-          [attr.cx]="radius"
-          [attr.cy]="radius"
-          stroke="currentColor"
-        ></circle>
+    <svg class="relative transform -rotate-90" [attr.height]="radius * 2" [attr.width]="radius * 2">
+      <!-- Background Circle -->
+      <circle
+        class="text-gray-200 fill-transparent"
+        [attr.stroke-width]="stroke"
+        [attr.r]="normalizedRadius"
+        [attr.cx]="radius"
+        [attr.cy]="radius"
+        stroke="currentColor"
+      ></circle>
 
-        <!-- Progress Circle -->
-        <circle
-          class="text-primary fill-transparent transition-all duration-300"
-          [attr.stroke-width]="stroke"
-          [attr.r]="normalizedRadius"
-          [attr.cx]="radius"
-          [attr.cy]="radius"
-          [attr.stroke-dasharray]="circumference"
-          [attr.stroke-dashoffset]="strokeDashoffset"
-          stroke="currentColor"
-          stroke-linecap="round"
-        ></circle>
-      </svg>
+      <!-- Progress Circle -->
+      <circle
+        class="text-primary fill-transparent transition-all duration-300"
+        [attr.stroke-width]="stroke"
+        [attr.r]="normalizedRadius"
+        [attr.cx]="radius"
+        [attr.cy]="radius"
+        [attr.stroke-dasharray]="circumference"
+        [attr.stroke-dashoffset]="strokeDashoffset"
+        stroke="currentColor"
+        stroke-linecap="round"
+      ></circle>
+    </svg>
 
-      <!-- Progress Text -->
-      <div class="absolute flex items-center justify-center text-primary font-semibold text-xl">
-        {{ value() }}%
-      </div>
+    <!-- Progress Text -->
+    <div class="absolute flex items-center justify-center text-primary font-semibold text-xl">
+      {{ value() }}%
     </div>
   `,
   host: {
