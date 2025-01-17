@@ -1,7 +1,7 @@
 import { ActiveDescendantKeyManager, _IdGenerator } from '@angular/cdk/a11y';
 import { Directionality } from '@angular/cdk/bidi';
 import { hasModifierKey } from '@angular/cdk/keycodes';
-import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { CdkScrollable, Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { _getEventTarget } from '@angular/cdk/platform';
 import { TemplatePortal } from '@angular/cdk/portal';
 import {
@@ -34,7 +34,7 @@ import { ScOption } from './option';
 
 @Component({
   selector: 'sc-select',
-  imports: [SiChevronDownIcon],
+  imports: [SiChevronDownIcon, CdkScrollable],
   template: `
     <button
       class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
@@ -52,9 +52,10 @@ import { ScOption } from './option';
 
     <ng-template #panelTemplate>
       <ul
-        class="relative z-50 max-h-96 w-full min-w-32 overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2"
+        class="relative w-full rounded-md border bg-popover text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2"
         [id]="panelId"
         role="listbox"
+        cdk-scrollable
       >
         <ng-content />
       </ul>
@@ -226,7 +227,11 @@ export class ScSelect implements ControlValueAccessor {
 
     const overlayRef = this._getOverlayRef();
 
-    overlayRef.updateSize({ width: this.scSelectTrigger().nativeElement.offsetWidth });
+    overlayRef.updateSize({
+      width: this.scSelectTrigger().nativeElement.offsetWidth,
+      maxHeight: '384px',
+    });
+
     this.portal ??= new TemplatePortal(this.panelTemplate(), this.viewContainerRef);
     overlayRef.attach(this.portal);
   }
