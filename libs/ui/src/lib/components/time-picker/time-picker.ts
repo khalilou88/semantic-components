@@ -359,6 +359,28 @@ export class ScTimePicker implements OnDestroy {
       { value: '4', label: '4' },
       { value: '5', label: '5' },
       { value: '6', label: '6' },
+      { value: '7', label: '7' },
+      { value: '8', label: '8' },
+      { value: '9', label: '9' },
+
+      { value: '10', label: '10' },
+      { value: '20', label: '20' },
+      { value: '30', label: '30' },
+      { value: '40', label: '40' },
+      { value: '50', label: '50' },
+      { value: '60', label: '60' },
+      { value: '70', label: '70' },
+      { value: '80', label: '80' },
+      { value: '90', label: '90' },
+
+      { value: '21', label: '21' },
+      { value: '31', label: '31' },
+      { value: '41', label: '41' },
+      { value: '51', label: '51' },
+      { value: '61', label: '61' },
+      { value: '71', label: '71' },
+      { value: '81', label: '81' },
+      { value: '91', label: '91' },
     ];
   }
 
