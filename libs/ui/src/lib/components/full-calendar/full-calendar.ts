@@ -14,7 +14,20 @@ import { cn } from '@semantic-components/utils';
   selector: 'sc-full-calendar',
   imports: [NgClass, NgFor, NgIf],
   template: `
-    <div class="flex flex-col items-center w-full max-w-md mx-auto mt-8">
+    <div class="flex flex-col items-center w-full max-w-2xl mx-auto mt-8">
+      <!-- Calendar Controls -->
+      <div class="flex justify-around w-full mb-4">
+        <button class="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded" (click)="setView('month')">
+          Month
+        </button>
+        <button class="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded" (click)="setView('week')">
+          Week
+        </button>
+        <button class="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded" (click)="setView('day')">
+          Day
+        </button>
+      </div>
+
       <!-- Calendar Header -->
       <div class="flex justify-between items-center w-full mb-4">
         <button
@@ -40,19 +53,17 @@ import { cn } from '@semantic-components/utils';
       <div class="grid grid-cols-7 gap-2 w-full mt-2">
         <div
           class="flex flex-col items-center justify-start p-2 border rounded h-20"
-          *ngFor="let day of daysInMonth; let i = index"
+          *ngFor="let day of daysInMonth"
           [ngClass]="{ 'bg-gray-100': day === null, 'bg-green-200 border-green-500': isToday(day) }"
           (click)="day !== null && addEvent(formatDate(day))"
         >
-          <div *ngIf="day !== null">
-            <span class="font-medium">{{ day }}</span>
-            <div class="mt-1 w-full">
-              <div
-                class="text-sm bg-blue-500 text-white rounded px-1 py-0.5"
-                *ngFor="let event of getEventsForDate(day)"
-              >
-                {{ event.title }}
-              </div>
+          <span class="font-medium" *ngIf="day !== null">{{ day }}</span>
+          <div class="mt-1 w-full" *ngIf="day !== null">
+            <div
+              class="text-sm bg-blue-500 text-white rounded px-1 py-0.5"
+              *ngFor="let event of getEventsForDate(day)"
+            >
+              {{ event.title }}
             </div>
           </div>
         </div>
@@ -74,8 +85,9 @@ export class ScFullCalendar implements OnInit {
   protected readonly class = computed(() => cn('', this.classInput()));
 
   currentDate = new Date();
-  currentMonth: number = this.currentDate.getMonth();
-  currentYear: number = this.currentDate.getFullYear();
+  currentMonth = this.currentDate.getMonth();
+  currentYear = this.currentDate.getFullYear();
+  currentView: 'month' | 'week' | 'day' = 'month';
   daysInMonth: number[] = [];
   weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   events: { date: string; title: string }[] = [{ date: '2025-01-18', title: 'Sample Event' }];
@@ -84,17 +96,29 @@ export class ScFullCalendar implements OnInit {
     this.generateCalendar();
   }
 
-  // Generate days for the calendar
   generateCalendar() {
-    const firstDayOfMonth = new Date(this.currentYear, this.currentMonth, 1).getDay();
-    const totalDays = new Date(this.currentYear, this.currentMonth + 1, 0).getDate();
-
-    this.daysInMonth = Array(firstDayOfMonth)
-      .fill(null)
-      .concat(Array.from({ length: totalDays }, (_, i) => i + 1));
+    if (this.currentView === 'month') {
+      // Generate days for the entire month
+      const firstDayOfMonth = new Date(this.currentYear, this.currentMonth, 1).getDay();
+      const totalDays = new Date(this.currentYear, this.currentMonth + 1, 0).getDate();
+      this.daysInMonth = Array(firstDayOfMonth)
+        .fill(null)
+        .concat(Array.from({ length: totalDays }, (_, i) => i + 1));
+    } else if (this.currentView === 'week') {
+      // Generate dates for the current week
+      const today = new Date();
+      const startOfWeek = new Date(today.setDate(today.getDate() - today.getDay()));
+      this.daysInMonth = Array.from({ length: 7 }, (_, i) => {
+        const date = new Date(startOfWeek);
+        date.setDate(startOfWeek.getDate() + i);
+        return date.getDate();
+      });
+    } else if (this.currentView === 'day') {
+      // Show only today
+      this.daysInMonth = [this.currentDate.getDate()];
+    }
   }
 
-  // Go to the previous month
   goToPreviousMonth() {
     if (this.currentMonth === 0) {
       this.currentMonth = 11;
@@ -105,7 +129,6 @@ export class ScFullCalendar implements OnInit {
     this.generateCalendar();
   }
 
-  // Go to the next month
   goToNextMonth() {
     if (this.currentMonth === 11) {
       this.currentMonth = 0;
@@ -116,7 +139,11 @@ export class ScFullCalendar implements OnInit {
     this.generateCalendar();
   }
 
-  // Format the date to YYYY-MM-DD
+  setView(view: 'month' | 'week' | 'day') {
+    this.currentView = view;
+    this.generateCalendar();
+  }
+
   formatDate(day: number | null): string {
     if (day === null) return '';
     const month = String(this.currentMonth + 1).padStart(2, '0');
@@ -124,10 +151,11 @@ export class ScFullCalendar implements OnInit {
     return `${this.currentYear}-${month}-${dayStr}`;
   }
 
-  // Get events for a specific date
-  getEventsForDate(day: number | null): { date: string; title: string }[] {
-    const dateStr = this.formatDate(day);
-    return this.events.filter((event) => event.date === dateStr);
+  addEvent(date: string) {
+    const title = prompt('Enter the event title:');
+    if (title) {
+      this.events.push({ date, title });
+    }
   }
 
   isToday(day: number | null): boolean {
@@ -140,10 +168,8 @@ export class ScFullCalendar implements OnInit {
     );
   }
 
-  addEvent(date: string) {
-    const title = prompt('Enter the event title:');
-    if (title) {
-      this.events.push({ date, title });
-    }
+  getEventsForDate(day: number | null): { date: string; title: string }[] {
+    const dateStr = this.formatDate(day);
+    return this.events.filter((event) => event.date === dateStr);
   }
 }
