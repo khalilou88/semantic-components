@@ -9,7 +9,12 @@ import { ScDayView } from './day-view';
   template: `
     <div class="mb-4 flex items-center justify-between">
       <!-- Previous Week Button -->
-      <button class="rounded bg-gray-200 px-4 py-2 hover:bg-gray-300" (click)="goToPreviousWeek()">
+      <button
+        class="rounded bg-gray-200 px-4 py-2 hover:bg-gray-300"
+        (click)="goToPreviousWeek()"
+        (keydown)="onKeydown($event, 'previous')"
+        tabindex="0"
+      >
         &lt;
       </button>
 
@@ -18,7 +23,12 @@ import { ScDayView } from './day-view';
       </span>
 
       <!-- Next Week Button -->
-      <button class="rounded bg-gray-200 px-4 py-2 hover:bg-gray-300" (click)="goToNextWeek()">
+      <button
+        class="rounded bg-gray-200 px-4 py-2 hover:bg-gray-300"
+        (click)="goToNextWeek()"
+        (keydown)="onKeydown($event, 'next')"
+        tabindex="0"
+      >
         &gt;
       </button>
     </div>
@@ -72,5 +82,16 @@ export class ScWeekView implements OnInit {
   goToNextWeek(): void {
     this.currentDate.setDate(this.currentDate.getDate() + 7);
     this.weekDays = this.getWeekDays(this.currentDate);
+  }
+
+  // Handle keyboard events for week navigation
+  onKeydown(event: KeyboardEvent, direction: string): void {
+    if (event.key === 'Enter' || event.key === ' ') {
+      if (direction === 'previous') {
+        this.goToPreviousWeek();
+      } else if (direction === 'next') {
+        this.goToNextWeek();
+      }
+    }
   }
 }

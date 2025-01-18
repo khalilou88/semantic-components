@@ -21,6 +21,8 @@ import {
           class="rounded px-2 py-1 hover:bg-blue-400"
           [ngClass]="{ 'bg-blue-500 text-white': isNow(hour) }"
           (click)="addEvent(hour)"
+          (keydown)="onKeydown($event, hour)"
+          tabindex="0"
         >
           Add Event
         </button>
@@ -55,5 +57,12 @@ export class ScDayView implements OnInit {
   isNow(hour: number): boolean {
     const now = new Date();
     return now.getHours() === hour && now.getDate() === this.date.getDate();
+  }
+
+  // Handle keyboard events for accessibility
+  onKeydown(event: KeyboardEvent, hour: number): void {
+    if (event.key === 'Enter' || event.key === ' ') {
+      this.addEvent(hour);
+    }
   }
 }
