@@ -59,11 +59,22 @@ import { cn } from '@semantic-components/utils';
       </div>
 
       <!-- Days -->
-      <div class="grid grid-cols-7 sm:grid-cols-7 gap-2 w-full flex-grow">
+      <div
+        class="grid w-full gap-2 flex-grow"
+        [ngClass]="{
+          'grid-cols-7': currentView === 'month',
+          'grid-cols-1 sm:grid-cols-7': currentView === 'week',
+          'grid-cols-1': currentView === 'day',
+        }"
+      >
         <div
-          class="flex flex-col items-center justify-start p-2 border rounded h-28 sm:h-32 md:h-40"
+          class="flex flex-col items-center justify-start p-2 border rounded"
           *ngFor="let day of daysInMonth"
-          [ngClass]="{ 'bg-gray-100': day === null, 'bg-green-200 border-green-500': isToday(day) }"
+          [ngClass]="{
+            'h-20 sm:h-32': currentView === 'month',
+            'h-full': currentView === 'week',
+            'h-full': currentView === 'day',
+          }"
           (click)="day !== null && addEvent(formatDate(day))"
         >
           <span class="font-medium" *ngIf="day !== null">{{ day }}</span>
