@@ -5,12 +5,12 @@ import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@
   selector: 'sc-mobile-calendar',
   imports: [NgClass, NgFor, DatePipe],
   template: `
-    <div class="flex flex-col items-center w-full h-full max-w-full mx-auto px-4">
+    <div class="mx-auto flex size-full max-w-full flex-col items-center px-4">
       <!-- Calendar Header: Date Navigation -->
-      <div class="flex justify-between items-center w-full mb-4">
+      <div class="mb-4 flex w-full items-center justify-between">
         <!-- Previous Day Button -->
         <button
-          class="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded"
+          class="rounded bg-gray-200 px-4 py-2 hover:bg-gray-300"
           (click)="goToPreviousDay()"
           (keydown)="onKeydown($event, 'previous')"
           tabindex="0"
@@ -18,13 +18,13 @@ import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@
           &lt;
         </button>
 
-        <span class="text-lg font-semibold text-center flex-grow text-center">
+        <span class="grow text-center text-lg font-semibold">
           {{ currentDate | date: 'fullDate' }}
         </span>
 
         <!-- Next Day Button -->
         <button
-          class="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded"
+          class="rounded bg-gray-200 px-4 py-2 hover:bg-gray-300"
           (click)="goToNextDay()"
           (keydown)="onKeydown($event, 'next')"
           tabindex="0"
@@ -34,9 +34,9 @@ import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@
       </div>
 
       <!-- Hourly Slots: Display Hours in Mobile-friendly View -->
-      <div class="w-full grid gap-2">
+      <div class="grid w-full gap-2">
         <div
-          class="flex flex-col items-start justify-start p-2 border rounded-lg bg-white shadow-md hover:bg-gray-100"
+          class="flex flex-col items-start justify-start rounded-lg border bg-white p-2 shadow-md hover:bg-gray-100"
           *ngFor="let hour of hoursInDay"
           [ngClass]="{
             'bg-blue-100': isNow(hour),
@@ -46,7 +46,7 @@ import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@
         >
           <span class="font-medium">{{ hour }}:00</span>
           <div
-            class="mt-1 text-xs sm:text-sm bg-blue-500 text-white rounded px-2 py-1 truncate"
+            class="mt-1 truncate rounded bg-blue-500 px-2 py-1 text-xs text-white sm:text-sm"
             *ngFor="let event of getEventsForTime(hour)"
           >
             {{ event }}
