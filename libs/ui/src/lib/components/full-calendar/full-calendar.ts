@@ -14,78 +14,27 @@ import { cn } from '@semantic-components/utils';
   selector: 'sc-full-calendar',
   imports: [NgClass, NgFor, NgIf],
   template: `
-    <div class="flex flex-col items-center w-full h-full max-w-full mx-auto px-4">
-      <!-- Calendar Controls -->
-      <div class="flex justify-around gap-2 w-full mb-4">
-        <button
-          class="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded w-full sm:w-auto"
-          (click)="setView('month')"
-        >
-          Month
-        </button>
-        <button
-          class="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded w-full sm:w-auto"
-          (click)="setView('week')"
-        >
-          Week
-        </button>
-        <button
-          class="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded w-full sm:w-auto"
-          (click)="setView('day')"
-        >
-          Day
-        </button>
-      </div>
-
-      <!-- Calendar Header -->
-      <div class="flex justify-between items-center w-full mb-4">
-        <button
-          class="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded"
-          (click)="goToPreviousMonth()"
-        >
-          &lt;
-        </button>
-        <span class="text-lg font-semibold text-center flex-grow text-center">
-          {{ currentDate.toLocaleString('default', { month: 'long' }) }} {{ currentYear }}
-        </span>
-        <button class="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded" (click)="goToNextMonth()">
-          &gt;
-        </button>
-      </div>
-
-      <!-- Weekdays -->
-      <div class="grid grid-cols-7 gap-2 w-full text-center font-semibold text-sm sm:text-base">
-        <div class="text-gray-600" *ngFor="let day of weekdays">{{ day }}</div>
-      </div>
-
-      <!-- Days -->
-      <div
-        class="grid w-full gap-2 flex-grow"
-        [ngClass]="{
-          'grid-cols-7': currentView === 'month',
-          'grid-cols-1 sm:grid-cols-7': currentView === 'week',
-          'grid-cols-1': currentView === 'day',
-        }"
-      >
+    <div
+      class="flex flex-col items-center justify-start rounded border p-2"
+      *ngFor="let day of daysInMonth"
+      [ngClass]="{
+        'h-20 sm:h-32': currentView === 'month',
+        'h-full': currentView === 'week',
+        'h-full': currentView === 'day',
+      }"
+      (click)="day !== null && addEvent(formatDate(day))"
+      (keydown.enter)="day !== null && addEvent(formatDate(day))"
+      (keydown.space)="day !== null && addEvent(formatDate(day))"
+      tabindex="0"
+      role="button"
+    >
+      <span class="font-medium" *ngIf="day !== null">{{ day }}</span>
+      <div class="mt-1 w-full" *ngIf="day !== null">
         <div
-          class="flex flex-col items-center justify-start p-2 border rounded"
-          *ngFor="let day of daysInMonth"
-          [ngClass]="{
-            'h-20 sm:h-32': currentView === 'month',
-            'h-full': currentView === 'week',
-            'h-full': currentView === 'day',
-          }"
-          (click)="day !== null && addEvent(formatDate(day))"
+          class="truncate rounded bg-blue-500 px-1 py-0.5 text-xs text-white sm:text-sm"
+          *ngFor="let event of getEventsForDate(day)"
         >
-          <span class="font-medium" *ngIf="day !== null">{{ day }}</span>
-          <div class="mt-1 w-full" *ngIf="day !== null">
-            <div
-              class="text-xs sm:text-sm bg-blue-500 text-white rounded px-1 py-0.5 truncate"
-              *ngFor="let event of getEventsForDate(day)"
-            >
-              {{ event.title }}
-            </div>
-          </div>
+          {{ event.title }}
         </div>
       </div>
     </div>
