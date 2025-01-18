@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  OnChanges,
   OnInit,
   ViewEncapsulation,
   computed,
@@ -14,10 +15,10 @@ import { cn } from '@semantic-components/utils';
   selector: 'sc-circular-progress',
   imports: [],
   template: `
-    <svg class="relative transform -rotate-90" [attr.height]="radius * 2" [attr.width]="radius * 2">
+    <svg class="relative -rotate-90" [attr.height]="radius * 2" [attr.width]="radius * 2">
       <!-- Background Circle -->
       <circle
-        class="text-gray-200 fill-transparent"
+        class="fill-transparent text-gray-200"
         [attr.stroke-width]="stroke"
         [attr.r]="normalizedRadius"
         [attr.cx]="radius"
@@ -27,7 +28,7 @@ import { cn } from '@semantic-components/utils';
 
       <!-- Progress Circle -->
       <circle
-        class="text-primary fill-transparent transition-all duration-300"
+        class="fill-transparent text-primary transition-all duration-300"
         [attr.stroke-width]="stroke"
         [attr.r]="normalizedRadius"
         [attr.cx]="radius"
@@ -40,7 +41,7 @@ import { cn } from '@semantic-components/utils';
     </svg>
 
     <!-- Progress Text -->
-    <div class="absolute flex items-center justify-center text-primary font-semibold text-xl">
+    <div class="absolute flex items-center justify-center text-xl font-semibold text-primary">
       {{ value() }}%
     </div>
   `,
@@ -51,7 +52,7 @@ import { cn } from '@semantic-components/utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCircularProgress implements OnInit {
+export class ScCircularProgress implements OnInit, OnChanges {
   readonly classInput = input<string>('', {
     alias: 'class',
   });
