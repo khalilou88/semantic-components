@@ -43,6 +43,10 @@ import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@
             'cursor-pointer': hour !== null,
           }"
           (click)="hour !== null && addEvent(hour)"
+          (keydown.enter)="hour !== null && addEvent(hour)"
+          (keydown.space)="hour !== null && addEvent(hour)"
+          tabindex="0"
+          role="button"
         >
           <span class="font-medium">{{ hour }}:00</span>
           <div

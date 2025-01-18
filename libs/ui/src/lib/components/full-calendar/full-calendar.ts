@@ -65,6 +65,10 @@ import { cn } from '@semantic-components/utils';
           *ngFor="let day of daysInMonth"
           [ngClass]="{ 'bg-gray-100': day === null, 'bg-green-200 border-green-500': isToday(day) }"
           (click)="day !== null && addEvent(formatDate(day))"
+          (keydown.enter)="day !== null && addEvent(formatDate(day))"
+          (keydown.space)="day !== null && addEvent(formatDate(day))"
+          tabindex="0"
+          role="button"
         >
           <span class="font-medium" *ngIf="day !== null">{{ day }}</span>
           <div class="mt-1 w-full" *ngIf="day !== null">
