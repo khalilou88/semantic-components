@@ -41,7 +41,8 @@ import { cn } from '@semantic-components/utils';
         <div
           class="flex flex-col items-center justify-start p-2 border rounded h-20"
           *ngFor="let day of daysInMonth; let i = index"
-          [ngClass]="{ 'bg-gray-100': day === null }"
+          [ngClass]="{ 'bg-gray-100': day === null, 'bg-green-200 border-green-500': isToday(day) }"
+          (click)="day !== null && addEvent(formatDate(day))"
         >
           <div *ngIf="day !== null">
             <span class="font-medium">{{ day }}</span>
@@ -127,5 +128,22 @@ export class ScFullCalendar implements OnInit {
   getEventsForDate(day: number | null): { date: string; title: string }[] {
     const dateStr = this.formatDate(day);
     return this.events.filter((event) => event.date === dateStr);
+  }
+
+  isToday(day: number | null): boolean {
+    if (day === null) return false;
+    const today = new Date();
+    return (
+      today.getDate() === day &&
+      today.getMonth() === this.currentMonth &&
+      today.getFullYear() === this.currentYear
+    );
+  }
+
+  addEvent(date: string) {
+    const title = prompt('Enter the event title:');
+    if (title) {
+      this.events.push({ date, title });
+    }
   }
 }
