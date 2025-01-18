@@ -14,23 +14,23 @@ import { cn } from '@semantic-components/utils';
   selector: 'sc-full-calendar',
   imports: [NgClass, NgFor, NgIf],
   template: `
-    <div class="flex flex-col items-center w-full h-full max-w-full mx-auto px-4">
+    <div class="mx-auto flex size-full max-w-full flex-col items-center px-4">
       <!-- Calendar Controls -->
-      <div class="flex justify-around gap-2 w-full mb-4">
+      <div class="mb-4 flex w-full justify-around gap-2">
         <button
-          class="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded w-full sm:w-auto"
+          class="w-full rounded bg-gray-200 px-4 py-2 hover:bg-gray-300 sm:w-auto"
           (click)="setView('month')"
         >
           Month
         </button>
         <button
-          class="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded w-full sm:w-auto"
+          class="w-full rounded bg-gray-200 px-4 py-2 hover:bg-gray-300 sm:w-auto"
           (click)="setView('week')"
         >
           Week
         </button>
         <button
-          class="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded w-full sm:w-auto"
+          class="w-full rounded bg-gray-200 px-4 py-2 hover:bg-gray-300 sm:w-auto"
           (click)="setView('day')"
         >
           Day
@@ -38,30 +38,30 @@ import { cn } from '@semantic-components/utils';
       </div>
 
       <!-- Calendar Header -->
-      <div class="flex justify-between items-center w-full mb-4">
+      <div class="mb-4 flex w-full items-center justify-between">
         <button
-          class="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded"
+          class="rounded bg-gray-200 px-4 py-2 hover:bg-gray-300"
           (click)="goToPreviousMonth()"
         >
           &lt;
         </button>
-        <span class="text-lg font-semibold text-center flex-grow text-center">
+        <span class="grow text-center text-lg font-semibold">
           {{ currentDate.toLocaleString('default', { month: 'long' }) }} {{ currentYear }}
         </span>
-        <button class="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded" (click)="goToNextMonth()">
+        <button class="rounded bg-gray-200 px-4 py-2 hover:bg-gray-300" (click)="goToNextMonth()">
           &gt;
         </button>
       </div>
 
       <!-- Weekdays -->
-      <div class="grid grid-cols-7 gap-2 w-full text-center font-semibold text-sm sm:text-base">
+      <div class="grid w-full grid-cols-7 gap-2 text-center text-sm font-semibold sm:text-base">
         <div class="text-gray-600" *ngFor="let day of weekdays">{{ day }}</div>
       </div>
 
       <!-- Days -->
-      <div class="grid grid-cols-7 sm:grid-cols-7 gap-2 w-full flex-grow">
+      <div class="grid w-full grow grid-cols-7 gap-2 sm:grid-cols-7">
         <div
-          class="flex flex-col items-center justify-start p-2 border rounded h-28 sm:h-32 md:h-40"
+          class="flex h-28 flex-col items-center justify-start rounded border p-2 sm:h-32 md:h-40"
           *ngFor="let day of daysInMonth"
           [ngClass]="{ 'bg-gray-100': day === null, 'bg-green-200 border-green-500': isToday(day) }"
           (click)="day !== null && addEvent(formatDate(day))"
@@ -69,7 +69,7 @@ import { cn } from '@semantic-components/utils';
           <span class="font-medium" *ngIf="day !== null">{{ day }}</span>
           <div class="mt-1 w-full" *ngIf="day !== null">
             <div
-              class="text-xs sm:text-sm bg-blue-500 text-white rounded px-1 py-0.5 truncate"
+              class="truncate rounded bg-blue-500 px-1 py-0.5 text-xs text-white sm:text-sm"
               *ngFor="let event of getEventsForDate(day)"
             >
               {{ event.title }}

@@ -25,6 +25,6 @@ export const appConfig: ApplicationConfig = {
       v3SiteKey: '6LczIrAqAAAAANk0sH07W5kW6hPNwfWAJbnaoEat',
       languageCode: 'en',
     }),
-    { provide: LOCALE_ID, useValue: 'fr' },
+    // { provide: LOCALE_ID, useValue: 'fr' },
   ],
 };
