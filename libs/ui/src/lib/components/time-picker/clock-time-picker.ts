@@ -1,5 +1,11 @@
 import { DecimalPipe, NgClass, NgFor } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  ViewEncapsulation,
+  signal,
+} from '@angular/core';
 
 @Component({
   selector: 'sc-clock-time-picker',
@@ -8,7 +14,7 @@ import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@
     <div class="flex flex-col items-center justify-center space-y-6">
       <!-- Selected Time Display -->
       <div class="text-4xl font-bold text-gray-800">
-        {{ currentHour | number: '2.0' }} : {{ currentMinute | number: '2.0' }}
+        {{ currentHour() | number: '2.0' }} : {{ currentMinute() | number: '2.0' }}
       </div>
 
       <!-- Clock Container -->
@@ -28,10 +34,10 @@ import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@
           [style.top]="hourPositions[i]?.top + '%' || minutePositions[i]?.top + '%'"
           [style.left]="hourPositions[i]?.left + '%' || minutePositions[i]?.left + '%'"
           [ngClass]="{
-            'text-blue-500': isHourSelection ? currentHour === num : currentMinute === num,
+            'text-blue-500': isHourSelection ? currentHour() === num : currentMinute() === num,
           }"
           [attr.aria-label]="'Select ' + (isHourSelection ? 'hour' : 'minute') + ' ' + num"
-          (click)="selectTime($event)"
+          (click)="selectTime($event, isHourSelection ? 'hour' : 'minute', num)"
           (keydown)="handleKeyPress($event, num)"
           tabindex="0"
           role="button"
@@ -43,7 +49,7 @@ import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@
         <div
           class="absolute h-20 w-0.5 origin-bottom bg-blue-500"
           [style.transform]="
-            'rotate(' + (isHourSelection ? (currentHour % 12) * 30 : currentMinute * 6) + 'deg)'
+            'rotate(' + (isHourSelection ? (currentHour() % 12) * 30 : currentMinute() * 6) + 'deg)'
           "
         ></div>
       </div>
@@ -62,8 +68,9 @@ import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScClockTimePicker implements OnInit {
-  currentHour = 12; // Default hour
-  currentMinute = 0; // Default minute
+  currentHour = signal(12); // Default hour
+  currentMinute = signal(0); // Default minute
+
   isHourSelection = true; // Toggle between hours and minutes
   hourPositions: any[] = [];
   minutePositions: any[] = [];
@@ -90,24 +97,13 @@ export class ScClockTimePicker implements OnInit {
   }
 
   // Method to select hour or minute based on clock click
-  selectTime(event: MouseEvent): void {
-    const clock = event.target as HTMLElement;
-    const clockRect = clock.getBoundingClientRect();
-    const centerX = clockRect.left + clockRect.width / 2;
-    const centerY = clockRect.top + clockRect.height / 2;
+  selectTime(event: MouseEvent, a: 'hour' | 'minute', num: number): void {
+    if (a === 'hour') {
+      this.currentHour.set(num);
+    }
 
-    // Calculate angle
-    const deltaX = event.clientX - centerX;
-    const deltaY = centerY - event.clientY; // Invert Y-axis for proper angle calculation
-    const angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
-    const adjustedAngle = (angle + 360) % 360; // Normalize to 0–360 degrees
-
-    if (this.isHourSelection) {
-      // Map angle to hours (12-hour clock)
-      this.currentHour = Math.round(adjustedAngle / 30) || 12;
-    } else {
-      // Map angle to minutes
-      this.currentMinute = Math.round(adjustedAngle / 6) % 60;
+    if (a === 'minute') {
+      this.currentMinute.set(num);
     }
   }
 
@@ -120,9 +116,9 @@ export class ScClockTimePicker implements OnInit {
   handleKeyPress(event: KeyboardEvent, num: number): void {
     if (event.key === 'Enter' || event.key === ' ') {
       if (this.isHourSelection) {
-        this.currentHour = num; // Update hour
+        this.currentHour.set(num); // Update hour
       } else {
-        this.currentMinute = num; // Update minute
+        this.currentMinute.set(num); // Update minute
       }
       event.preventDefault(); // Prevent default scroll behavior for the Space key
     }
