@@ -78,16 +78,18 @@ export class ScClockTimePicker implements OnInit {
     // Calculate the positions for hours (12-hour clock)
     this.hourPositions = [];
     for (let i = 0; i < 12; i++) {
-      const angle = (i * 30 - 90) * (Math.PI / 180); // Convert angle to radians
+      // Adjust the angle to ensure hours are in clockwise order
+      const angle = i * 30 * (Math.PI / 180); // Convert angle to radians (30° for each hour)
       const top = 50 - Math.cos(angle) * 40; // Calculate the Y position
       const left = 50 + Math.sin(angle) * 40; // Calculate the X position
       this.hourPositions.push({ top, left });
     }
 
-    // Calculate the positions for minutes (0-55)
+    // Calculate the positions for minutes (0-55, every 5 minutes)
     this.minutePositions = [];
     for (let i = 0; i < 12; i++) {
-      const angle = (i * 30 - 90) * (Math.PI / 180); // Convert angle to radians
+      // Adjust the angle for minute markers (every 5 minutes)
+      const angle = i * 30 * (Math.PI / 180); // Convert angle to radians (30° for each 5-minute marker)
       const top = 50 - Math.cos(angle) * 40; // Calculate the Y position
       const left = 50 + Math.sin(angle) * 40; // Calculate the X position
       this.minutePositions.push({ top, left });
