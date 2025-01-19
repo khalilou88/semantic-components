@@ -47,7 +47,7 @@ import {
 
         <!-- Clock Hand -->
         <div
-          class="absolute h-20 w-0.5 origin-bottom bg-blue-500"
+          class="absolute h-20 w-0.5 bg-primary"
           [style.transform]="
             'rotate(' + (isHourSelection ? (currentHour() % 12) * 30 : currentMinute() * 6) + 'deg)'
           "
