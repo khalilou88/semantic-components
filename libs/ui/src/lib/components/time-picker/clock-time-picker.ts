@@ -77,21 +77,21 @@ export class ScClockTimePicker implements OnInit {
   calculateClockPositions(): void {
     // Calculate the positions for hours (12-hour clock)
     this.hourPositions = [];
-    for (let i = 0; i < 12; i++) {
-      // Adjust the angle to ensure hours are in clockwise order
-      const angle = i * 30 * (Math.PI / 180); // Convert angle to radians (30° for each hour)
-      const top = 50 - Math.cos(angle) * 40; // Calculate the Y position
-      const left = 50 + Math.sin(angle) * 40; // Calculate the X position
+    for (let i = 1; i <= 12; i++) {
+      // Convert angle to radians (30° per hour)
+      const angle = i * 30 * (Math.PI / 180); // Start at 12 o'clock (adjust by -90°)
+      const top = 50 - Math.cos(angle) * 40; // Y position
+      const left = 50 + Math.sin(angle) * 40; // X position
       this.hourPositions.push({ top, left });
     }
 
     // Calculate the positions for minutes (0-55, every 5 minutes)
     this.minutePositions = [];
-    for (let i = 0; i < 12; i++) {
-      // Adjust the angle for minute markers (every 5 minutes)
-      const angle = i * 30 * (Math.PI / 180); // Convert angle to radians (30° for each 5-minute marker)
-      const top = 50 - Math.cos(angle) * 40; // Calculate the Y position
-      const left = 50 + Math.sin(angle) * 40; // Calculate the X position
+    for (let i = 1; i <= 12; i++) {
+      // Convert angle to radians (30° per 5-minute increment)
+      const angle = (i - 3) * 30 * (Math.PI / 180); // Start at 0 minutes (adjust by -90°)
+      const top = 50 - Math.cos(angle) * 40; // Y position
+      const left = 50 + Math.sin(angle) * 40; // X position
       this.minutePositions.push({ top, left });
     }
   }
