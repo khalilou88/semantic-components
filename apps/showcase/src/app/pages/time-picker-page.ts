@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { ScClockTimePicker, ScTimePicker } from '@semantic-components/ui';
+import { ScClock, ScClockTimePicker, ScTimePicker } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-time-picker-page',
-  imports: [ScTimePicker, ScClockTimePicker],
+  imports: [ScTimePicker, ScClockTimePicker, ScClock],
   template: `
     <div class="m-10">
       <sc-time-picker />
@@ -14,6 +14,12 @@ import { ScClockTimePicker, ScTimePicker } from '@semantic-components/ui';
       <br />
 
       <sc-clock-time-picker />
+
+      <br />
+      <br />
+      <br />
+
+      <sc-clock />
     </div>
   `,
   styles: ``,
