@@ -21,7 +21,7 @@ import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@
           class="absolute -translate-x-1/2 -translate-y-1/2 font-medium text-gray-600"
           *ngFor="
             let num of isHourSelection
-              ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+              ? [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
               : [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
             let i = index
           "
@@ -76,22 +76,15 @@ export class ScClockTimePicker implements OnInit {
   // Method to calculate the positions of the numbers for hours and minutes
   calculateClockPositions(): void {
     // Calculate the positions for hours (12-hour clock)
+    // Calculate the positions for minutes (0-55, every 5 minutes)
     this.hourPositions = [];
-    for (let i = 1; i <= 12; i++) {
-      // Convert angle to radians (30° per hour)
-      const angle = i * 30 * (Math.PI / 180); // Start at 12 o'clock (adjust by -90°)
+    this.minutePositions = [];
+    for (let i = 0; i < 12; i++) {
+      // Convert angle to radians (30° per hour and 30° per 5-minute increment)
+      const angle = i * 30 * (Math.PI / 180); // Start at 0 minutes (adjust by -90°)
       const top = 50 - Math.cos(angle) * 40; // Y position
       const left = 50 + Math.sin(angle) * 40; // X position
       this.hourPositions.push({ top, left });
-    }
-
-    // Calculate the positions for minutes (0-55, every 5 minutes)
-    this.minutePositions = [];
-    for (let i = 1; i <= 12; i++) {
-      // Convert angle to radians (30° per 5-minute increment)
-      const angle = (i - 3) * 30 * (Math.PI / 180); // Start at 0 minutes (adjust by -90°)
-      const top = 50 - Math.cos(angle) * 40; // Y position
-      const left = 50 + Math.sin(angle) * 40; // X position
       this.minutePositions.push({ top, left });
     }
   }
