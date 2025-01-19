@@ -14,9 +14,9 @@ import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@
       <!-- Clock Container -->
       <div
         class="relative flex size-64 items-center justify-center rounded-full border border-gray-300 bg-white shadow-md"
-        (click)="selectTime($event)"
+        aria-label="Clock Time Picker"
       >
-        <!-- Clock Numbers -->
+        <!-- Clock Numbers for Hour or Minute -->
         <div
           class="absolute -translate-x-1/2 -translate-y-1/2 font-medium text-gray-600"
           *ngFor="
@@ -25,11 +25,16 @@ import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@
               : [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
             let i = index
           "
-          [style.top]="50 - Math.cos(((i * 30 - 90) * Math.PI) / 180) * 40 + '%'"
-          [style.left]="50 + Math.sin(((i * 30 - 90) * Math.PI) / 180) * 40 + '%'"
+          [style.top]="hourPositions[i]?.top + '%' || minutePositions[i]?.top + '%'"
+          [style.left]="hourPositions[i]?.left + '%' || minutePositions[i]?.left + '%'"
           [ngClass]="{
             'text-blue-500': isHourSelection ? currentHour === num : currentMinute === num,
           }"
+          [attr.aria-label]="'Select ' + (isHourSelection ? 'hour' : 'minute') + ' ' + num"
+          (click)="selectTime($event)"
+          (keydown)="handleKeyPress($event, num)"
+          tabindex="0"
+          role="button"
         >
           {{ num }}
         </div>
@@ -60,16 +65,33 @@ export class ScClockTimePicker implements OnInit {
   currentHour = 12; // Default hour
   currentMinute = 0; // Default minute
   isHourSelection = true; // Toggle between hours and minutes
-
-  //TODO remove this
-  Math: any;
-
-  constructor() {
-    console.log('constructor');
-  }
+  hourPositions: any[] = [];
+  minutePositions: any[] = [];
 
   ngOnInit(): void {
-    console.log('ngOnInit');
+    // Pre-calculate positions for hours and minutes
+    this.calculateClockPositions();
+  }
+
+  // Method to calculate the positions of the numbers for hours and minutes
+  calculateClockPositions(): void {
+    // Calculate the positions for hours (12-hour clock)
+    this.hourPositions = [];
+    for (let i = 0; i < 12; i++) {
+      const angle = (i * 30 - 90) * (Math.PI / 180); // Convert angle to radians
+      const top = 50 - Math.cos(angle) * 40; // Calculate the Y position
+      const left = 50 + Math.sin(angle) * 40; // Calculate the X position
+      this.hourPositions.push({ top, left });
+    }
+
+    // Calculate the positions for minutes (0-55)
+    this.minutePositions = [];
+    for (let i = 0; i < 12; i++) {
+      const angle = (i * 30 - 90) * (Math.PI / 180); // Convert angle to radians
+      const top = 50 - Math.cos(angle) * 40; // Calculate the Y position
+      const left = 50 + Math.sin(angle) * 40; // Calculate the X position
+      this.minutePositions.push({ top, left });
+    }
   }
 
   // Method to select hour or minute based on clock click
@@ -97,5 +119,17 @@ export class ScClockTimePicker implements OnInit {
   // Toggle between hour and minute selection
   toggleSelection(): void {
     this.isHourSelection = !this.isHourSelection;
+  }
+
+  // Handle keyboard navigation for accessibility
+  handleKeyPress(event: KeyboardEvent, num: number): void {
+    if (event.key === 'Enter' || event.key === ' ') {
+      if (this.isHourSelection) {
+        this.currentHour = num; // Update hour
+      } else {
+        this.currentMinute = num; // Update minute
+      }
+      event.preventDefault(); // Prevent default scroll behavior for the Space key
+    }
   }
 }
