@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
   computed,
   input,
+  model,
   signal,
 } from '@angular/core';
 
@@ -32,4 +33,8 @@ export class ScInput {
   });
 
   protected readonly class = computed(() => cn(scInputStyles(), this.classInput()));
+
+  //TODO add value as a model to track it, need to test this
+  //https://www.youtube.com/watch?v=ycqoDQpgcds
+  readonly value = model<string>();
 }

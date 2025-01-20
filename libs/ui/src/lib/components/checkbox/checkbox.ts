@@ -121,6 +121,8 @@ export class ScCheckbox implements ControlValueAccessor {
   });
   protected readonly indeterminate = linkedSignal(() => this.indeterminateInput());
 
+  //TODO maybe make checked as a model and remove change output
+  //https://www.youtube.com/watch?v=ycqoDQpgcds
   readonly checkedInput = input<boolean, unknown>(false, {
     alias: 'checked',
     transform: booleanAttribute,
