@@ -12,26 +12,26 @@ interface Section {
   selector: 'app-button-showcase',
   imports: [NgFor],
   template: `
-    <div class="max-w-6xl mx-auto px-4 py-8 flex gap-8">
+    <div class="mx-auto flex max-w-6xl gap-8 px-4 py-8">
       <!-- Main content -->
       <div class="flex-1">
-        <h1 class="text-3xl font-bold mb-8">Button Showcase</h1>
+        <h1 class="mb-8 text-3xl font-bold">Button Showcase</h1>
 
         <section class="mb-12 scroll-mt-4" id="basic" #sectionEl>
-          <div class="border rounded-lg p-6">
-            <h2 class="text-2xl font-semibold mb-2">Basic Buttons</h2>
-            <p class="text-gray-600 mb-6">Standard button variations</p>
+          <div class="rounded-lg border p-6">
+            <h2 class="mb-2 text-2xl font-semibold">Basic Buttons</h2>
+            <p class="mb-6 text-gray-600">Standard button variations</p>
             <div class="grid gap-6">
-              <div class="bg-gray-50 p-6 rounded-lg">
-                <h3 class="text-lg font-medium mb-4">Preview</h3>
-                <div class="flex gap-4 flex-wrap">
-                  <button class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+              <div class="rounded-lg bg-gray-50 p-6">
+                <h3 class="mb-4 text-lg font-medium">Preview</h3>
+                <div class="flex flex-wrap gap-4">
+                  <button class="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">
                     Primary
                   </button>
-                  <button class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600">
+                  <button class="rounded-lg bg-gray-500 px-4 py-2 text-white hover:bg-gray-600">
                     Secondary
                   </button>
-                  <button class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">
+                  <button class="rounded-lg bg-red-500 px-4 py-2 text-white hover:bg-red-600">
                     Danger
                   </button>
                 </div>
@@ -41,20 +41,20 @@ interface Section {
         </section>
 
         <section class="mb-12 scroll-mt-4" id="outline" #sectionEl>
-          <div class="border rounded-lg p-6">
-            <h2 class="text-2xl font-semibold mb-2">Outline Buttons</h2>
-            <p class="text-gray-600 mb-6">Border-only style buttons</p>
+          <div class="rounded-lg border p-6">
+            <h2 class="mb-2 text-2xl font-semibold">Outline Buttons</h2>
+            <p class="mb-6 text-gray-600">Border-only style buttons</p>
             <div class="grid gap-6">
-              <div class="bg-gray-50 p-6 rounded-lg">
-                <h3 class="text-lg font-medium mb-4">Preview</h3>
-                <div class="flex gap-4 flex-wrap">
+              <div class="rounded-lg bg-gray-50 p-6">
+                <h3 class="mb-4 text-lg font-medium">Preview</h3>
+                <div class="flex flex-wrap gap-4">
                   <button
-                    class="px-4 py-2 border-2 border-blue-500 text-blue-500 rounded-lg hover:bg-blue-50"
+                    class="rounded-lg border-2 border-blue-500 px-4 py-2 text-blue-500 hover:bg-blue-50"
                   >
                     Primary
                   </button>
                   <button
-                    class="px-4 py-2 border-2 border-gray-500 text-gray-500 rounded-lg hover:bg-gray-50"
+                    class="rounded-lg border-2 border-gray-500 px-4 py-2 text-gray-500 hover:bg-gray-50"
                   >
                     Secondary
                   </button>
@@ -65,23 +65,23 @@ interface Section {
         </section>
 
         <section class="mb-12 scroll-mt-4" id="sizes" #sectionEl>
-          <div class="border rounded-lg p-6">
-            <h2 class="text-2xl font-semibold mb-2">Button Sizes</h2>
-            <p class="text-gray-600 mb-6">Different size variations</p>
+          <div class="rounded-lg border p-6">
+            <h2 class="mb-2 text-2xl font-semibold">Button Sizes</h2>
+            <p class="mb-6 text-gray-600">Different size variations</p>
             <div class="grid gap-6">
-              <div class="bg-gray-50 p-6 rounded-lg">
-                <h3 class="text-lg font-medium mb-4">Preview</h3>
-                <div class="flex gap-4 items-center flex-wrap">
+              <div class="rounded-lg bg-gray-50 p-6">
+                <h3 class="mb-4 text-lg font-medium">Preview</h3>
+                <div class="flex flex-wrap items-center gap-4">
                   <button
-                    class="px-2 py-1 text-sm bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                    class="rounded-lg bg-blue-500 px-2 py-1 text-sm text-white hover:bg-blue-600"
                   >
                     Small
                   </button>
-                  <button class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+                  <button class="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">
                     Medium
                   </button>
                   <button
-                    class="px-6 py-3 text-lg bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                    class="rounded-lg bg-blue-500 px-6 py-3 text-lg text-white hover:bg-blue-600"
                   >
                     Large
                   </button>
@@ -92,20 +92,20 @@ interface Section {
         </section>
 
         <section class="mb-12 scroll-mt-4" id="icons" #sectionEl>
-          <div class="border rounded-lg p-6">
-            <h2 class="text-2xl font-semibold mb-2">Icon Buttons</h2>
-            <p class="text-gray-600 mb-6">Buttons with icons</p>
+          <div class="rounded-lg border p-6">
+            <h2 class="mb-2 text-2xl font-semibold">Icon Buttons</h2>
+            <p class="mb-6 text-gray-600">Buttons with icons</p>
             <div class="grid gap-6">
-              <div class="bg-gray-50 p-6 rounded-lg">
-                <h3 class="text-lg font-medium mb-4">Preview</h3>
-                <div class="flex gap-4 flex-wrap">
+              <div class="rounded-lg bg-gray-50 p-6">
+                <h3 class="mb-4 text-lg font-medium">Preview</h3>
+                <div class="flex flex-wrap gap-4">
                   <button
-                    class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center gap-2"
+                    class="flex items-center gap-2 rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
                   >
                     <i class="fas fa-code"></i>
                     With Icon
                   </button>
-                  <button class="p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+                  <button class="rounded-lg bg-blue-500 p-2 text-white hover:bg-blue-600">
                     <i class="fas fa-code"></i>
                   </button>
                 </div>
@@ -116,12 +116,12 @@ interface Section {
       </div>
 
       <!-- Right side navigation -->
-      <div class="hidden lg:block w-48 flex-shrink-0">
-        <div class="sticky top-4 p-4 border rounded-lg">
-          <h3 class="font-medium mb-4">On this page</h3>
+      <div class="hidden w-48 shrink-0 lg:block">
+        <div class="sticky top-4 rounded-lg border p-4">
+          <h3 class="mb-4 font-medium">On this page</h3>
           <nav class="space-y-2">
             <button
-              class="block w-full text-left px-2 py-1 text-sm rounded hover:bg-gray-100"
+              class="block w-full rounded px-2 py-1 text-left text-sm hover:bg-gray-100"
               *ngFor="let section of sections"
               [class.text-blue-500]="activeSection === section.id"
               [class.bg-blue-50]="activeSection === section.id"
@@ -145,7 +145,7 @@ export default class ButtonShowcaseComponent implements AfterViewInit, OnDestroy
     { id: 'icons', title: 'Icon Buttons', description: 'Buttons with icons' },
   ];
 
-  activeSection: string = '';
+  activeSection = '';
   private observer!: IntersectionObserver;
 
   constructor(private readonly el: ElementRef) {}
