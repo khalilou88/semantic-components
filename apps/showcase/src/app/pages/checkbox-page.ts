@@ -2,11 +2,11 @@ import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
-import { ScCheckbox } from '@semantic-components/ui';
+import { ScButton, ScCheckbox } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-checkbox-page',
-  imports: [ScCheckbox, ReactiveFormsModule, JsonPipe],
+  imports: [ScCheckbox, ReactiveFormsModule, JsonPipe, ScButton],
   template: `
     <sc-checkbox>Accept terms and conditions</sc-checkbox>
 
@@ -17,6 +17,8 @@ import { ScCheckbox } from '@semantic-components/ui';
     <form [formGroup]="checkForm">
       <sc-checkbox formControlName="check" />
     </form>
+    <br />
+    <button (click)="disable()" sc-button>Disable or enable FormControl</button>
 
     <br />
     <br />
@@ -70,6 +72,13 @@ import { ScCheckbox } from '@semantic-components/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class CheckboxPage {
+  disable() {
+    if (this.checkForm.get('check')?.disabled) {
+      this.checkForm.get('check')?.enable();
+    } else {
+      this.checkForm.get('check')?.disable();
+    }
+  }
   checkForm = new FormGroup({
     check: new FormControl(),
   });
