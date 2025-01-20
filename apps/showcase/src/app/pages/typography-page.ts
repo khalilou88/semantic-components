@@ -5,7 +5,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   imports: [],
   template: `
     <section class="space-y-8">
-      <div class="prose dark:prose-invert max-w-none">
+      <div class="prose max-w-none dark:prose-invert">
         <h1>Typography</h1>
         <p class="text-slate-600 dark:text-slate-400">
           Our type scale is designed for optimal readability and hierarchy.
@@ -13,7 +13,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
       </div>
 
       <div class="grid gap-8">
-        <div class="p-6 bg-white dark:bg-slate-800 rounded-xl shadow-sm">
+        <div class="rounded-xl bg-white p-6 shadow-sm dark:bg-slate-800">
           <div class="space-y-4">
             <h1 class="text-4xl font-bold">Heading 1</h1>
             <h2 class="text-3xl font-bold">Heading 2</h2>
@@ -24,7 +24,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
           </div>
         </div>
 
-        <div class="p-6 bg-white dark:bg-slate-800 rounded-xl shadow-sm">
+        <div class="rounded-xl bg-white p-6 shadow-sm dark:bg-slate-800">
           <div class="space-y-4">
             <p class="text-sm text-slate-600 dark:text-slate-400">
               Small Text - For captions and helper text
