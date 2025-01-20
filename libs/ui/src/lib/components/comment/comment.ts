@@ -1,11 +1,11 @@
-import { DatePipe, NgFor, NgIf } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
 
 import { ScCommentModel } from './comment-model';
 
 @Component({
   selector: 'sc-comment',
-  imports: [DatePipe, NgFor, NgIf],
+  imports: [DatePipe],
   template: `
     <div class="rounded-lg bg-white p-4 shadow-sm">
       <!-- Comment Header -->
@@ -67,20 +67,24 @@ import { ScCommentModel } from './comment-model';
       </div>
 
       <!-- Nested Replies -->
-      <div class="ml-8 mt-4 space-y-4" *ngIf="comment().replies?.length">
-        <div class="rounded-lg bg-gray-50 p-3" *ngFor="let reply of comment().replies">
-          <div class="mb-2 flex items-center gap-3">
-            <img class="size-6 rounded-full" [src]="reply.avatar" alt="Reply author avatar" />
-            <div>
-              <h5 class="font-medium text-gray-900">{{ reply.author }}</h5>
-              <p class="text-xs text-gray-500">
-                {{ reply.timestamp | date: 'MMM d, y, h:mm a' }}
-              </p>
+      @if (comment().replies.length) {
+        <div class="ml-8 mt-4 space-y-4">
+          @for (reply of comment().replies; track reply) {
+            <div class="rounded-lg bg-gray-50 p-3">
+              <div class="mb-2 flex items-center gap-3">
+                <img class="size-6 rounded-full" [src]="reply.avatar" alt="Reply author avatar" />
+                <div>
+                  <h5 class="font-medium text-gray-900">{{ reply.author }}</h5>
+                  <p class="text-xs text-gray-500">
+                    {{ reply.timestamp | date: 'MMM d, y, h:mm a' }}
+                  </p>
+                </div>
+              </div>
+              <p class="text-sm text-gray-700">{{ reply.content }}</p>
             </div>
-          </div>
-          <p class="text-sm text-gray-700">{{ reply.content }}</p>
+          }
         </div>
-      </div>
+      }
     </div>
   `,
   styles: ``,

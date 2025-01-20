@@ -1,18 +1,14 @@
-import { NgForOf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'sc-minute-markers',
-  imports: [NgForOf],
+  imports: [],
   template: `
-    <div
-      class="minute-marker"
-      *ngFor="let minute of minutePositions"
-      [style.top.%]="minute.top"
-      [style.left.%]="minute.left"
-    >
-      <div class="minute-label">{{ (minutePositions.indexOf(minute) * 5) % 60 }}</div>
-    </div>
+    @for (minute of minutePositions; track minute) {
+      <div class="minute-marker" [style.top.%]="minute.top" [style.left.%]="minute.left">
+        <div class="minute-label">{{ (minutePositions.indexOf(minute) * 5) % 60 }}</div>
+      </div>
+    }
   `,
   styles: `
     .minute-marker {

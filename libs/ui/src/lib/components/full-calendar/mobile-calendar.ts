@@ -1,9 +1,9 @@
-import { DatePipe, NgClass, NgFor } from '@angular/common';
+import { DatePipe, NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'sc-mobile-calendar',
-  imports: [NgClass, NgFor, DatePipe],
+  imports: [NgClass, DatePipe],
   template: `
     <div class="mx-auto flex size-full max-w-full flex-col items-center px-4">
       <!-- Calendar Header: Date Navigation -->
@@ -35,27 +35,29 @@ import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@
 
       <!-- Hourly Slots: Display Hours in Mobile-friendly View -->
       <div class="grid w-full gap-2">
-        <div
-          class="flex flex-col items-start justify-start rounded-lg border bg-white p-2 shadow-md hover:bg-gray-100"
-          *ngFor="let hour of hoursInDay"
-          [ngClass]="{
-            'bg-blue-100': isNow(hour),
-            'cursor-pointer': hour !== null,
-          }"
-          (click)="hour !== null && addEvent(hour)"
-          (keydown.enter)="hour !== null && addEvent(hour)"
-          (keydown.space)="hour !== null && addEvent(hour)"
-          tabindex="0"
-          role="button"
-        >
-          <span class="font-medium">{{ hour }}:00</span>
+        @for (hour of hoursInDay; track hour) {
           <div
-            class="mt-1 truncate rounded bg-blue-500 px-2 py-1 text-xs text-white sm:text-sm"
-            *ngFor="let event of getEventsForTime(hour)"
+            class="flex flex-col items-start justify-start rounded-lg border bg-white p-2 shadow-md hover:bg-gray-100"
+            [ngClass]="{
+              'bg-blue-100': isNow(hour),
+              'cursor-pointer': hour !== null,
+            }"
+            (click)="hour !== null && addEvent(hour)"
+            (keydown.enter)="hour !== null && addEvent(hour)"
+            (keydown.space)="hour !== null && addEvent(hour)"
+            tabindex="0"
+            role="button"
           >
-            {{ event }}
+            <span class="font-medium">{{ hour }}:00</span>
+            @for (event of getEventsForTime(hour); track event) {
+              <div
+                class="mt-1 truncate rounded bg-blue-500 px-2 py-1 text-xs text-white sm:text-sm"
+              >
+                {{ event }}
+              </div>
+            }
           </div>
-        </div>
+        }
       </div>
     </div>
   `,

@@ -1,11 +1,11 @@
-import { DatePipe, NgFor } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { ScDayView } from './day-view';
 
 @Component({
   selector: 'sc-week-view',
-  imports: [NgFor, DatePipe, ScDayView],
+  imports: [DatePipe, ScDayView],
   template: `
     <div class="mb-4 flex items-center justify-between">
       <!-- Previous Week Button -->
@@ -35,10 +35,12 @@ import { ScDayView } from './day-view';
 
     <!-- Week Days -->
     <div class="grid grid-cols-7 gap-4">
-      <div *ngFor="let day of weekDays">
-        <sc-day-view [date]="day"></sc-day-view>
-        <!-- Pass each day to Day Component -->
-      </div>
+      @for (day of weekDays; track day) {
+        <div>
+          <sc-day-view [date]="day"></sc-day-view>
+          <!-- Pass each day to Day Component -->
+        </div>
+      }
     </div>
   `,
   styles: ``,

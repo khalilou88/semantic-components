@@ -1,18 +1,14 @@
-import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'sc-hour-markers',
-  imports: [NgFor],
+  imports: [],
   template: `
-    <div
-      class="hour-marker"
-      *ngFor="let hour of hourPositions"
-      [style.top.%]="hour.top"
-      [style.left.%]="hour.left"
-    >
-      <div class="hour-label">{{ hourPositions.indexOf(hour) + 1 }}</div>
-    </div>
+    @for (hour of hourPositions; track hour) {
+      <div class="hour-marker" [style.top.%]="hour.top" [style.left.%]="hour.left">
+        <div class="hour-label">{{ hourPositions.indexOf(hour) + 1 }}</div>
+      </div>
+    }
   `,
   styles: `
     .hour-marker {

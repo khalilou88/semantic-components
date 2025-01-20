@@ -1,4 +1,4 @@
-import { DecimalPipe, NgClass, NgFor } from '@angular/common';
+import { DecimalPipe, NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -9,7 +9,7 @@ import {
 
 @Component({
   selector: 'sc-clock-time-picker',
-  imports: [NgFor, NgClass, DecimalPipe],
+  imports: [NgClass, DecimalPipe],
   template: `
     <div class="flex flex-col items-center justify-center space-y-6">
       <!-- Selected Time Display -->
@@ -23,27 +23,29 @@ import {
         aria-label="Clock Time Picker"
       >
         <!-- Clock Numbers for Hour or Minute -->
-        <div
-          class="absolute -translate-x-1/2 -translate-y-1/2 font-medium text-gray-600"
-          *ngFor="
-            let num of isHourSelection
-              ? [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
-              : [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
-            let i = index
-          "
-          [style.top]="hourPositions[i]?.top + '%' || minutePositions[i]?.top + '%'"
-          [style.left]="hourPositions[i]?.left + '%' || minutePositions[i]?.left + '%'"
-          [ngClass]="{
-            'text-blue-500': isHourSelection ? currentHour() === num : currentMinute() === num,
-          }"
-          [attr.aria-label]="'Select ' + (isHourSelection ? 'hour' : 'minute') + ' ' + num"
-          (click)="selectTime($event, isHourSelection ? 'hour' : 'minute', num)"
-          (keydown)="handleKeyPress($event, num)"
-          tabindex="0"
-          role="button"
-        >
-          {{ num }}
-        </div>
+        @for (
+          num of isHourSelection
+            ? [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+            : [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
+          track num;
+          let i = $index
+        ) {
+          <div
+            class="absolute -translate-x-1/2 -translate-y-1/2 font-medium text-gray-600"
+            [style.top]="hourPositions[i]?.top + '%' || minutePositions[i]?.top + '%'"
+            [style.left]="hourPositions[i]?.left + '%' || minutePositions[i]?.left + '%'"
+            [ngClass]="{
+              'text-blue-500': isHourSelection ? currentHour() === num : currentMinute() === num,
+            }"
+            [attr.aria-label]="'Select ' + (isHourSelection ? 'hour' : 'minute') + ' ' + num"
+            (click)="selectTime($event, isHourSelection ? 'hour' : 'minute', num)"
+            (keydown)="handleKeyPress($event, num)"
+            tabindex="0"
+            role="button"
+          >
+            {{ num }}
+          </div>
+        }
 
         <!-- Clock Hand -->
         <div

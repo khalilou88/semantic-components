@@ -1,5 +1,4 @@
 // button-showcase.component.ts
-import { NgFor } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, OnDestroy } from '@angular/core';
 
 interface Section {
@@ -10,7 +9,7 @@ interface Section {
 
 @Component({
   selector: 'app-button-showcase',
-  imports: [NgFor],
+  imports: [],
   template: `
     <div class="mx-auto flex max-w-6xl gap-8 px-4 py-8">
       <!-- Main content -->
@@ -120,16 +119,17 @@ interface Section {
         <div class="sticky top-4 rounded-lg border p-4">
           <h3 class="mb-4 font-medium">On this page</h3>
           <nav class="space-y-2">
-            <button
-              class="block w-full rounded px-2 py-1 text-left text-sm hover:bg-gray-100"
-              *ngFor="let section of sections"
-              [class.text-blue-500]="activeSection === section.id"
-              [class.bg-blue-50]="activeSection === section.id"
-              [class.text-gray-600]="activeSection !== section.id"
-              (click)="scrollToSection(section.id)"
-            >
-              {{ section.title }}
-            </button>
+            @for (section of sections; track section) {
+              <button
+                class="block w-full rounded px-2 py-1 text-left text-sm hover:bg-gray-100"
+                [class.text-blue-500]="activeSection === section.id"
+                [class.bg-blue-50]="activeSection === section.id"
+                [class.text-gray-600]="activeSection !== section.id"
+                (click)="scrollToSection(section.id)"
+              >
+                {{ section.title }}
+              </button>
+            }
           </nav>
         </div>
       </div>

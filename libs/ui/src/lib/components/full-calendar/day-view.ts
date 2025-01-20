@@ -1,4 +1,4 @@
-import { DatePipe, NgClass, NgFor } from '@angular/common';
+import { DatePipe, NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -9,24 +9,26 @@ import {
 
 @Component({
   selector: 'sc-day-view',
-  imports: [NgClass, DatePipe, NgFor],
+  imports: [NgClass, DatePipe],
   template: `
     <div class="rounded-lg border bg-white p-4 shadow-md hover:bg-gray-100">
       <div class="text-center font-medium">{{ date | date: 'fullDate' }}</div>
 
       <!-- Display hours for the day -->
-      <div class="flex items-center justify-between p-2" *ngFor="let hour of hoursInDay">
-        <span>{{ hour }}:00</span>
-        <button
-          class="rounded px-2 py-1 hover:bg-blue-400"
-          [ngClass]="{ 'bg-blue-500 text-white': isNow(hour) }"
-          (click)="addEvent(hour)"
-          (keydown)="onKeydown($event, hour)"
-          tabindex="0"
-        >
-          Add Event
-        </button>
-      </div>
+      @for (hour of hoursInDay; track hour) {
+        <div class="flex items-center justify-between p-2">
+          <span>{{ hour }}:00</span>
+          <button
+            class="rounded px-2 py-1 hover:bg-blue-400"
+            [ngClass]="{ 'bg-blue-500 text-white': isNow(hour) }"
+            (click)="addEvent(hour)"
+            (keydown)="onKeydown($event, hour)"
+            tabindex="0"
+          >
+            Add Event
+          </button>
+        </div>
+      }
     </div>
   `,
   styles: ``,

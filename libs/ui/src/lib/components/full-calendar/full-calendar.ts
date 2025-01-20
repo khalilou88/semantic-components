@@ -1,4 +1,4 @@
-import { NgClass, NgFor, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -12,7 +12,7 @@ import { cn } from '@semantic-components/utils';
 
 @Component({
   selector: 'sc-full-calendar',
-  imports: [NgClass, NgFor, NgIf],
+  imports: [NgClass],
   template: `
     <div class="mx-auto flex size-full max-w-full flex-col items-center px-4">
       <!-- Calendar Controls -->
@@ -55,31 +55,42 @@ import { cn } from '@semantic-components/utils';
 
       <!-- Weekdays -->
       <div class="grid w-full grid-cols-7 gap-2 text-center text-sm font-semibold sm:text-base">
-        <div class="text-gray-600" *ngFor="let day of weekdays">{{ day }}</div>
+        @for (day of weekdays; track day) {
+          <div class="text-gray-600">{{ day }}</div>
+        }
       </div>
 
       <!-- Days -->
       <div class="grid w-full grow grid-cols-7 gap-2 sm:grid-cols-7">
-        <div
-          class="flex h-28 flex-col items-center justify-start rounded border p-2 sm:h-32 md:h-40"
-          *ngFor="let day of daysInMonth"
-          [ngClass]="{ 'bg-gray-100': day === null, 'bg-green-200 border-green-500': isToday(day) }"
-          (click)="day !== null && addEvent(formatDate(day))"
-          (keydown.enter)="day !== null && addEvent(formatDate(day))"
-          (keydown.space)="day !== null && addEvent(formatDate(day))"
-          tabindex="0"
-          role="button"
-        >
-          <span class="font-medium" *ngIf="day !== null">{{ day }}</span>
-          <div class="mt-1 w-full" *ngIf="day !== null">
-            <div
-              class="truncate rounded bg-blue-500 px-1 py-0.5 text-xs text-white sm:text-sm"
-              *ngFor="let event of getEventsForDate(day)"
-            >
-              {{ event.title }}
-            </div>
+        @for (day of daysInMonth; track day) {
+          <div
+            class="flex h-28 flex-col items-center justify-start rounded border p-2 sm:h-32 md:h-40"
+            [ngClass]="{
+              'bg-gray-100': day === null,
+              'bg-green-200 border-green-500': isToday(day),
+            }"
+            (click)="day !== null && addEvent(formatDate(day))"
+            (keydown.enter)="day !== null && addEvent(formatDate(day))"
+            (keydown.space)="day !== null && addEvent(formatDate(day))"
+            tabindex="0"
+            role="button"
+          >
+            @if (day !== null) {
+              <span class="font-medium">{{ day }}</span>
+            }
+            @if (day !== null) {
+              <div class="mt-1 w-full">
+                @for (event of getEventsForDate(day); track event) {
+                  <div
+                    class="truncate rounded bg-blue-500 px-1 py-0.5 text-xs text-white sm:text-sm"
+                  >
+                    {{ event.title }}
+                  </div>
+                }
+              </div>
+            }
           </div>
-        </div>
+        }
       </div>
     </div>
   `,
