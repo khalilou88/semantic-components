@@ -115,6 +115,7 @@ export class ScCheckbox implements ControlValueAccessor {
 
   readonly ariaLabel = input<string | null>(null, { alias: 'aria-label' });
 
+  //TODO make indeterminate work like a model by adding indeterminateChange ouput
   readonly indeterminateInput = input<boolean, unknown>(false, {
     alias: 'indeterminate',
     transform: booleanAttribute,
