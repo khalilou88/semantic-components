@@ -115,30 +115,24 @@ export class ScCheckbox implements ControlValueAccessor {
 
   readonly ariaLabel = input<string | null>(null, { alias: 'aria-label' });
 
-  //TODO make indeterminate work like a model by adding indeterminateChange ouput
   readonly indeterminateInput = input<boolean, unknown>(false, {
     alias: 'indeterminate',
     transform: booleanAttribute,
   });
   protected readonly indeterminate = linkedSignal(() => this.indeterminateInput());
 
-  //TODO I think here also I need to add checkedChange instead of making checked a model
-  //TODO maybe make checked as a model and remove change output
-  //https://www.youtube.com/watch?v=ycqoDQpgcds
   readonly checkedInput = input<boolean, unknown>(false, {
     alias: 'checked',
     transform: booleanAttribute,
   });
   protected readonly checked = linkedSignal(() => this.checkedInput());
+  readonly checkedChange = output<boolean>();
 
   readonly disabledInput = input<boolean, unknown>(false, {
     alias: 'disabled',
     transform: booleanAttribute,
   });
   protected readonly disabled = linkedSignal(() => this.disabledInput());
-
-  //TODO: change name to changed, or toggled
-  readonly change = output<boolean>();
 
   protected readonly state = computed<'indeterminate' | 'checked' | 'unchecked'>(() => {
     if (this.indeterminate()) {
@@ -156,6 +150,10 @@ export class ScCheckbox implements ControlValueAccessor {
     effect(() => {
       this.hostRef.nativeElement.indeterminate = this.indeterminate();
     });
+
+    effect(() => {
+      this.checkedChange.emit(this.checked());
+    });
   }
 
   protected toggle() {
@@ -165,7 +163,6 @@ export class ScCheckbox implements ControlValueAccessor {
 
     const v = !this.checked();
     this.checked.set(v);
-    this.change.emit(v);
 
     if (this.indeterminate()) {
       this.indeterminate.set(false);

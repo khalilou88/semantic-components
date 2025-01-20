@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import { ScCheckbox } from '@semantic-components/ui';
@@ -55,6 +55,15 @@ import { ScCheckbox } from '@semantic-components/ui';
     <br />
     <br />
     <br />
+
+    <br />
+    <br />
+    <br />
+    checked with Two-way binding
+    <br />
+    checked : {{ checked() }}
+    <br />
+    <sc-checkbox [(checked)]="checked" />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -64,4 +73,6 @@ export default class CheckboxPage {
   checkForm = new FormGroup({
     check: new FormControl(),
   });
+
+  readonly checked = signal(false);
 }
