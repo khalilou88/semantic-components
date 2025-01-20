@@ -212,9 +212,9 @@ export const appRoutes: Route[] = [
             title: 'Button Page',
           },
           {
-            path: 'comment',
-            loadComponent: () => import('./pages/comment-page'),
-            title: 'Comment Page',
+            path: 'comments',
+            loadComponent: () => import('./pages/comments-page'),
+            title: 'Comments Page',
           },
           {
             path: 'button-showcase',
