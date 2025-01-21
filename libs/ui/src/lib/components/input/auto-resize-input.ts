@@ -73,7 +73,7 @@ export class ScAutoResizeInput implements ControlValueAccessor {
   readonly type = input('text');
   readonly placeholder = input('');
   readonly minWidth = input(60);
-  readonly maxWidth = input(5000);
+  readonly maxWidth = input(500);
   readonly inputClass = input(
     'px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
   );
