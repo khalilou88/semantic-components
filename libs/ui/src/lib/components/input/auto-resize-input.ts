@@ -43,6 +43,8 @@ import { cn } from '@semantic-components/utils';
         (blur)="onBlur()"
       />
     </div>
+
+    width: {{ width() }}
   `,
   host: {
     '[class]': 'class()',
@@ -82,14 +84,18 @@ export class ScAutoResizeInput implements ControlValueAccessor {
 
   private readonly sizerWidth = signal(0);
 
-  //TODO understand the meaning of 16
+  //TODO understand the meaning of 16, 24 worked better
   setSizerWidth(): void {
-    this.sizerWidth.set(this.sizer().nativeElement.offsetWidth + 16);
+    this.sizerWidth.set(this.sizer().nativeElement.offsetWidth + 24);
   }
 
   // Adjust input width based on span content
   width = computed(() => {
-    return Math.max(this.minWidth(), Math.min(this.sizerWidth(), this.maxWidth()));
+    if (this.sizerWidth() <= this.minWidth()) {
+      return this.minWidth();
+    }
+
+    return Math.min(this.sizerWidth(), this.maxWidth());
   });
 
   readonly disabledInput = input<boolean, unknown>(false, {
