@@ -3,12 +3,11 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  Input,
-  ViewChild,
   ViewEncapsulation,
   computed,
   forwardRef,
   input,
+  viewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -21,19 +20,19 @@ import { cn } from '@semantic-components/utils';
     <div class="inline-flex items-center">
       <!-- Hidden span to calculate width -->
       <span class="invisible absolute whitespace-pre" #sizer [style.font]="getFont()">
-        {{ value || placeholder }}
+        {{ value || placeholder() }}
       </span>
 
       <!-- Actual input -->
       <input
         #input
-        [type]="type"
+        [type]="type()"
         [value]="value"
-        [placeholder]="placeholder"
-        [class]="inputClass"
+        [placeholder]="placeholder()"
+        [class]="inputClass()"
         [style.width.px]="width"
-        [min]="minWidth"
-        [max]="maxWidth"
+        [min]="minWidth()"
+        [max]="maxWidth()"
         [disabled]="disabled"
         (input)="onInput($event)"
         (blur)="onBlur()"
@@ -58,18 +57,19 @@ export class ScAutoResizeInput implements AfterViewInit, ControlValueAccessor {
 
   protected readonly class = computed(() => cn('relative inline-block', this.classInput()));
 
-  @ViewChild('input') input!: ElementRef<HTMLInputElement>;
-  @ViewChild('sizer') sizer!: ElementRef<HTMLSpanElement>;
+  readonly input = viewChild.required<ElementRef<HTMLInputElement>>('input');
+  readonly sizer = viewChild.required<ElementRef<HTMLSpanElement>>('sizer');
 
-  @Input() type = 'text';
-  @Input() placeholder = '';
-  @Input() minWidth = 60;
-  @Input() maxWidth = 500;
-  @Input() inputClass =
-    'px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500';
+  readonly type = input('text');
+  readonly placeholder = input('');
+  readonly minWidth = input(60);
+  readonly maxWidth = input(500);
+  readonly inputClass = input(
+    'px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
+  );
 
   value = '';
-  width: number = this.minWidth;
+  width: number = this.minWidth();
   disabled = false;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -83,17 +83,19 @@ export class ScAutoResizeInput implements AfterViewInit, ControlValueAccessor {
 
   // Get computed font style of input for accurate width calculation
   getFont(): string {
-    if (!this.input?.nativeElement) return '';
-    const computed = window.getComputedStyle(this.input.nativeElement);
+    const inputValue = this.input();
+    if (!inputValue?.nativeElement) return '';
+    const computed = window.getComputedStyle(inputValue.nativeElement);
     return computed.font;
   }
 
   // Adjust input width based on content
   adjustWidth(): void {
-    if (this.sizer?.nativeElement) {
+    const sizer = this.sizer();
+    if (sizer?.nativeElement) {
       const newWidth = Math.max(
-        this.minWidth,
-        Math.min(this.sizer.nativeElement.offsetWidth + 16, this.maxWidth),
+        this.minWidth(),
+        Math.min(sizer.nativeElement.offsetWidth + 16, this.maxWidth()),
       );
       this.width = newWidth;
     }
