@@ -1,12 +1,16 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   ViewEncapsulation,
+  booleanAttribute,
   computed,
   forwardRef,
+  inject,
   input,
+  linkedSignal,
+  model,
   viewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -27,18 +31,21 @@ import { cn } from '@semantic-components/utils';
       <input
         #input
         [type]="type()"
-        [value]="value"
+        [value]="value()"
         [placeholder]="placeholder()"
         [class]="inputClass()"
-        [style.width.px]="width"
+        [style.width.px]="width()"
         [min]="minWidth()"
         [max]="maxWidth()"
-        [disabled]="disabled"
+        [disabled]="disabled()"
         (input)="onInput($event)"
         (blur)="onBlur()"
       />
     </div>
   `,
+  host: {
+    '[class]': 'class()',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -50,7 +57,9 @@ import { cn } from '@semantic-components/utils';
     },
   ],
 })
-export class ScAutoResizeInput implements AfterViewInit, ControlValueAccessor {
+export class ScAutoResizeInput implements ControlValueAccessor {
+  private readonly changeDetectorRef = inject(ChangeDetectorRef);
+
   readonly classInput = input<string>('', {
     alias: 'class',
   });
@@ -68,18 +77,32 @@ export class ScAutoResizeInput implements AfterViewInit, ControlValueAccessor {
     'px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
   );
 
-  value = '';
-  width: number = this.minWidth();
-  disabled = false;
+  readonly value = model('');
+
+  width = computed(() => {
+    // Adjust input width based on content
+    const sizer = this.sizer();
+    if (sizer?.nativeElement) {
+      const newWidth = Math.max(
+        this.minWidth(),
+        Math.min(sizer.nativeElement.offsetWidth + 16, this.maxWidth()),
+      );
+      return newWidth;
+    }
+
+    return this.minWidth();
+  });
+
+  readonly disabledInput = input<boolean, unknown>(false, {
+    alias: 'disabled',
+    transform: booleanAttribute,
+  });
+  protected readonly disabled = linkedSignal(() => this.disabledInput());
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onChange: any = () => {};
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onTouch: any = () => {};
-
-  ngAfterViewInit() {
-    this.adjustWidth();
-  }
 
   // Get computed font style of input for accurate width calculation
   getFont(): string {
@@ -89,24 +112,12 @@ export class ScAutoResizeInput implements AfterViewInit, ControlValueAccessor {
     return computed.font;
   }
 
-  // Adjust input width based on content
-  adjustWidth(): void {
-    const sizer = this.sizer();
-    if (sizer?.nativeElement) {
-      const newWidth = Math.max(
-        this.minWidth(),
-        Math.min(sizer.nativeElement.offsetWidth + 16, this.maxWidth()),
-      );
-      this.width = newWidth;
-    }
-  }
-
   // Handle input event
   onInput(event: Event): void {
     const input = event.target as HTMLInputElement;
-    this.value = input.value;
-    this.adjustWidth();
-    this.onChange(this.value);
+    this.value.set(input.value);
+    this.onChange(this.value());
+    this.changeDetectorRef.markForCheck();
   }
 
   onBlur(): void {
@@ -115,8 +126,7 @@ export class ScAutoResizeInput implements AfterViewInit, ControlValueAccessor {
 
   // ControlValueAccessor methods
   writeValue(value: string): void {
-    this.value = value;
-    setTimeout(() => this.adjustWidth());
+    this.value.set(value);
   }
 
   registerOnChange(fn: any): void {
@@ -128,6 +138,6 @@ export class ScAutoResizeInput implements AfterViewInit, ControlValueAccessor {
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+    this.disabled.set(isDisabled);
   }
 }
