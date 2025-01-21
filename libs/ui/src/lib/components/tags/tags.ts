@@ -53,8 +53,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
             #tagInput
             [formControl]="tagControl"
             [placeholder]="tags.length === 0 ? placeholder : ''"
-            (keyup.enter)="addTag()"
-            (keyup.comma)="addTag()"
+            (keydown)="onKeyDown($event)"
             (blur)="addTag()"
           />
         </div>
@@ -87,6 +86,14 @@ export class ScTags {
   tagControl = new FormControl('');
   error = '';
 
+  onKeyDown(event: KeyboardEvent): void {
+    // Check for Enter key or Comma
+    if (event.key === 'Enter' || event.key === ',') {
+      event.preventDefault(); // Prevent the comma from being typed
+      this.addTag();
+    }
+  }
+
   addTag(): void {
     const tag = this.tagControl.value?.trim().toLowerCase();
 
@@ -95,13 +102,21 @@ export class ScTags {
       return;
     }
 
+    // Remove comma if it was added
+    const cleanTag = tag.replace(/,/g, '');
+
+    if (!cleanTag) {
+      this.tagControl.setValue('');
+      return;
+    }
+
     // Validation
-    if (tag.length < this.minLength) {
+    if (cleanTag.length < this.minLength) {
       this.error = `Tag must be at least ${this.minLength} characters long`;
       return;
     }
 
-    if (tag.length > this.maxLength) {
+    if (cleanTag.length > this.maxLength) {
       this.error = `Tag must be less than ${this.maxLength} characters long`;
       return;
     }
@@ -111,14 +126,14 @@ export class ScTags {
       return;
     }
 
-    if (this.tags.includes(tag)) {
+    if (this.tags.includes(cleanTag)) {
       this.error = 'Tag already exists';
       return;
     }
 
     // Add tag
     this.error = '';
-    this.tags = [...this.tags, tag];
+    this.tags = [...this.tags, cleanTag];
     this.tagsChange.emit(this.tags);
     this.tagControl.setValue('');
   }
