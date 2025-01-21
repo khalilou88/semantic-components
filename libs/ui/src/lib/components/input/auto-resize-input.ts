@@ -4,6 +4,7 @@ import {
   Component,
   ElementRef,
   ViewEncapsulation,
+  afterNextRender,
   booleanAttribute,
   computed,
   forwardRef,
@@ -44,7 +45,12 @@ import { cn } from '@semantic-components/utils';
       />
     </div>
 
+    <br />
     width: {{ width() }}
+    <br />
+    sizerWidth: {{ sizerWidth() }}
+    <br />
+    maxWidth: {{ maxWidth() }}
   `,
   host: {
     '[class]': 'class()',
@@ -82,7 +88,7 @@ export class ScAutoResizeInput implements ControlValueAccessor {
 
   readonly value = model('');
 
-  private readonly sizerWidth = signal(0);
+  protected readonly sizerWidth = signal(0);
 
   //TODO understand the meaning of 16, 24 worked better
   setSizerWidth(): void {
@@ -103,6 +109,12 @@ export class ScAutoResizeInput implements ControlValueAccessor {
     transform: booleanAttribute,
   });
   protected readonly disabled = linkedSignal(() => this.disabledInput());
+
+  constructor() {
+    afterNextRender(() => {
+      this.setSizerWidth();
+    });
+  }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onChange: any = () => {};
