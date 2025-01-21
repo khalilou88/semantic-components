@@ -141,7 +141,7 @@ export class ScTags {
     // Add tag
     this.error = '';
     this.tags.update((tags) => [...tags, cleanTag]);
-    this.tagsChange.emit(tags);
+    this.tagsChange.emit(this.tags());
     this.tagControl.setValue('');
   }
 
