@@ -7,6 +7,7 @@ import {
   Input,
   OnInit,
   Output,
+  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 
@@ -23,17 +24,10 @@ import {
       </div>
 
       <!-- Clock Face -->
-      <div
-        class="relative size-64 rounded-full border-2 border-gray-200 bg-gray-100"
-        #clockFace
-        (mousedown)="startDrag($event)"
-        (mousemove)="drag($event)"
-        (mouseup)="stopDrag()"
-        (mouseleave)="stopDrag()"
-      >
+      <div class="relative size-64 rounded-full border-2 border-gray-200 bg-gray-100" #clockFace>
         <!-- Hour Markers -->
         <div
-          class="absolute size-full"
+          class="pointer-events-none absolute size-full"
           *ngFor="let hour of hours"
           [style.transform]="'rotate(' + hour * 30 + 'deg)'"
         >
@@ -44,21 +38,34 @@ import {
           </div>
         </div>
 
+        <!-- Clickable Areas -->
+        <div
+          class="absolute inset-0"
+          (mousedown)="startMinuteDrag($event)"
+          (touchstart)="startMinuteDrag($event)"
+        >
+          <div
+            class="absolute inset-8"
+            (mousedown)="startHourDrag($event)"
+            (touchstart)="startHourDrag($event)"
+          ></div>
+        </div>
+
         <!-- Hour Hand -->
         <div
-          class="absolute left-1/2 top-1/2 h-16 w-1 origin-top rounded-full bg-blue-600"
-          [style.transform]="'rotate(' + getHourDegrees() + 'deg)'"
+          class="pointer-events-none absolute left-1/2 top-1/2 h-16 w-1 origin-top rounded-full bg-blue-600"
+          [style.transform]="'rotate(' + getHourDegrees() + 'deg) translateX(-50%)'"
         ></div>
 
         <!-- Minute Hand -->
         <div
-          class="absolute left-1/2 top-1/2 h-24 w-0.5 origin-top rounded-full bg-blue-400"
-          [style.transform]="'rotate(' + getMinuteDegrees() + 'deg)'"
+          class="pointer-events-none absolute left-1/2 top-1/2 h-24 w-0.5 origin-top rounded-full bg-blue-400"
+          [style.transform]="'rotate(' + getMinuteDegrees() + 'deg) translateX(-50%)'"
         ></div>
 
         <!-- Center Dot -->
         <div
-          class="absolute left-1/2 top-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-600"
+          class="pointer-events-none absolute left-1/2 top-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-600"
         ></div>
       </div>
 
@@ -82,6 +89,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScClockPicker implements OnInit {
+  @ViewChild('clockFace') clockFace!: ElementRef;
   @Input() initialTime?: string;
   @Output() timeSelected = new EventEmitter<string>();
 
@@ -93,9 +101,15 @@ export class ScClockPicker implements OnInit {
   selectedPeriod = 'AM';
 
   isDragging = false;
-  isHourDrag = true; // true for hour hand, false for minute hand
+  isHourMode = true;
 
-  constructor(private readonly elementRef: ElementRef) {}
+  private readonly moveHandler: (event: MouseEvent | TouchEvent) => void;
+  private readonly endHandler: () => void;
+
+  constructor() {
+    this.moveHandler = (event: MouseEvent | TouchEvent) => this.handleMove(event);
+    this.endHandler = () => this.stopDrag();
+  }
 
   ngOnInit() {
     if (this.initialTime) {
@@ -112,55 +126,67 @@ export class ScClockPicker implements OnInit {
     this.selectedPeriod = period;
   }
 
-  startDrag(event: MouseEvent) {
+  startHourDrag(event: MouseEvent | TouchEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.isHourMode = true;
+    this.startDrag(event);
+  }
+
+  startMinuteDrag(event: MouseEvent | TouchEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.isHourMode = false;
+    this.startDrag(event);
+  }
+
+  private startDrag(event: MouseEvent | TouchEvent) {
     this.isDragging = true;
-    // Determine if click is closer to hour or minute hand
-    const rect = (this.elementRef.nativeElement as HTMLElement)
-      .querySelector('#clockFace')
-      ?.getBoundingClientRect();
-
-    if (rect) {
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      const distance = Math.sqrt(
-        Math.pow(event.clientX - centerX, 2) + Math.pow(event.clientY - centerY, 2),
-      );
-
-      this.isHourDrag = distance < rect.width / 3;
-    }
-
-    this.updateHandPosition(event);
+    document.addEventListener('mousemove', this.moveHandler);
+    document.addEventListener('touchmove', this.moveHandler);
+    document.addEventListener('mouseup', this.endHandler);
+    document.addEventListener('touchend', this.endHandler);
+    this.handleMove(event);
   }
 
-  drag(event: MouseEvent) {
-    if (this.isDragging) {
-      this.updateHandPosition(event);
-    }
-  }
+  private handleMove(event: MouseEvent | TouchEvent) {
+    if (!this.isDragging) return;
 
-  stopDrag() {
-    this.isDragging = false;
+    const rect = this.clockFace.nativeElement.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    let clientX: number, clientY: number;
+
+    if (event instanceof MouseEvent) {
+      clientX = event.clientX;
+      clientY = event.clientY;
+    } else {
+      clientX = event.touches[0].clientX;
+      clientY = event.touches[0].clientY;
+    }
+
+    const angle = (Math.atan2(clientY - centerY, clientX - centerX) * 180) / Math.PI + 90;
+
+    if (this.isHourMode) {
+      this.selectedHour = Math.round(((angle + 360) % 360) / 30) % 12 || 12;
+    } else {
+      this.selectedMinute = Math.round(((angle + 360) % 360) / 6) % 60;
+    }
+
     this.emitTimeChange();
   }
 
-  updateHandPosition(event: MouseEvent) {
-    const rect = (this.elementRef.nativeElement as HTMLElement)
-      .querySelector('#clockFace')
-      ?.getBoundingClientRect();
+  private stopDrag() {
+    if (!this.isDragging) return;
 
-    if (rect) {
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
+    this.isDragging = false;
+    document.removeEventListener('mousemove', this.moveHandler);
+    document.removeEventListener('touchmove', this.moveHandler);
+    document.removeEventListener('mouseup', this.endHandler);
+    document.removeEventListener('touchend', this.endHandler);
 
-      const angle =
-        (Math.atan2(event.clientY - centerY, event.clientX - centerX) * 180) / Math.PI + 90;
-
-      if (this.isHourDrag) {
-        this.selectedHour = Math.round(((angle + 360) % 360) / 30) % 12 || 12;
-      } else {
-        this.selectedMinute = Math.round(((angle + 360) % 360) / 6) % 60;
-      }
-    }
+    this.emitTimeChange();
   }
 
   getHourDegrees(): number {
