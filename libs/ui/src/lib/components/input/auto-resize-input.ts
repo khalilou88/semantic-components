@@ -11,6 +11,7 @@ import {
   input,
   linkedSignal,
   model,
+  signal,
   viewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -24,7 +25,7 @@ import { cn } from '@semantic-components/utils';
     <div class="inline-flex items-center">
       <!-- Hidden span to calculate width -->
       <span class="invisible absolute whitespace-pre" #sizer [style.font]="getFont()">
-        {{ value || placeholder() }}
+        {{ value() || placeholder() }}
       </span>
 
       <!-- Actual input -->
@@ -72,25 +73,23 @@ export class ScAutoResizeInput implements ControlValueAccessor {
   readonly type = input('text');
   readonly placeholder = input('');
   readonly minWidth = input(60);
-  readonly maxWidth = input(500);
+  readonly maxWidth = input(5000);
   readonly inputClass = input(
     'px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
   );
 
   readonly value = model('');
 
-  width = computed(() => {
-    // Adjust input width based on content
-    const sizer = this.sizer();
-    if (sizer?.nativeElement) {
-      const newWidth = Math.max(
-        this.minWidth(),
-        Math.min(sizer.nativeElement.offsetWidth + 16, this.maxWidth()),
-      );
-      return newWidth;
-    }
+  private readonly sizerWidth = signal(0);
 
-    return this.minWidth();
+  //TODO understand the meaning of 16
+  setSizerWidth(): void {
+    this.sizerWidth.set(this.sizer().nativeElement.offsetWidth + 16);
+  }
+
+  // Adjust input width based on span content
+  width = computed(() => {
+    return Math.max(this.minWidth(), Math.min(this.sizerWidth(), this.maxWidth()));
   });
 
   readonly disabledInput = input<boolean, unknown>(false, {
@@ -116,6 +115,7 @@ export class ScAutoResizeInput implements ControlValueAccessor {
   onInput(event: Event): void {
     const input = event.target as HTMLInputElement;
     this.value.set(input.value);
+    this.setSizerWidth();
     this.onChange(this.value());
     this.changeDetectorRef.markForCheck();
   }
