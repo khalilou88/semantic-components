@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -11,7 +10,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'sc-tags',
-  imports: [NgFor, ReactiveFormsModule, NgIf],
+  imports: [ReactiveFormsModule],
   template: `
     <div class="w-full">
       <!-- Tags Input -->
@@ -21,31 +20,32 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
       >
         <div class="flex flex-wrap gap-2">
           <!-- Existing Tags -->
-          <span
-            class="inline-flex items-center gap-1 rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-800"
-            *ngFor="let tag of tags"
-          >
-            {{ tag }}
-            <button
-              class="hover:text-blue-600 focus:outline-none"
-              (click)="removeTag(tag)"
-              type="button"
-              aria-label="Remove tag"
+          @for (tag of tags; track tag) {
+            <span
+              class="inline-flex items-center gap-1 rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-800"
             >
-              <svg
-                class="size-4"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
+              {{ tag }}
+              <button
+                class="hover:text-blue-600 focus:outline-none"
+                (click)="removeTag(tag)"
+                type="button"
+                aria-label="Remove tag"
               >
-                <path
-                  fill-rule="evenodd"
-                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-            </button>
-          </span>
+                <svg
+                  class="size-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </button>
+            </span>
+          }
 
           <!-- Input Field -->
           <input
@@ -60,14 +60,18 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
       </div>
 
       <!-- Error Message -->
-      <div class="mt-1 text-sm text-red-500" *ngIf="error">
-        {{ error }}
-      </div>
+      @if (error) {
+        <div class="mt-1 text-sm text-red-500">
+          {{ error }}
+        </div>
+      }
 
       <!-- Helper Text -->
-      <div class="mt-1 text-sm text-gray-500" *ngIf="helperText">
-        {{ helperText }}
-      </div>
+      @if (helperText) {
+        <div class="mt-1 text-sm text-gray-500">
+          {{ helperText }}
+        </div>
+      }
     </div>
   `,
   styles: ``,
