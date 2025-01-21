@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { _IdGenerator } from '@angular/cdk/a11y';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  inject,
+  signal,
+} from '@angular/core';
 
 @Component({
   selector: 'sc-form-field',
@@ -10,4 +17,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormField {}
+export class ScFormField {
+  readonly id = signal<string>(inject(_IdGenerator).getId('sc-form-field-'));
+}
