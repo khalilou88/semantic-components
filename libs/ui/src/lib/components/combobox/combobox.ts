@@ -44,13 +44,14 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
           role="combobox"
         />
 
-        <!-- Dropdown arrow -->
+        <!-- Dropdown button -->
         <button
           class="absolute inset-y-0 right-0 flex items-center px-2"
-          (click)="toggleDropdown()"
+          [attr.aria-label]="isOpen ? 'Close options' : 'Open options'"
+          (keydown)="onButtonKeyDown($event)"
+          (click)="handleButtonInteraction($event)"
           type="button"
-          tabindex="-1"
-          aria-hidden="true"
+          tabindex="0"
         >
           <svg class="size-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
@@ -78,14 +79,16 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
         <ul *ngIf="!loading && filteredOptions.length > 0">
           <li
-            class="cursor-pointer px-4 py-2"
+            class="cursor-pointer px-4 py-2 outline-none"
             *ngFor="let option of filteredOptions; let i = index"
             [id]="id + '-option-' + i"
             [attr.aria-selected]="i === activeIndex"
             [class.bg-blue-100]="i === activeIndex"
-            (click)="selectOption(option)"
-            (mouseenter)="activeIndex = i"
+            (click)="handleOptionClick($event, option)"
+            (keydown)="onOptionKeyDown($event, option)"
+            (mouseenter)="setActiveIndex(i)"
             role="option"
+            tabindex="0"
           >
             <ng-container
               *ngTemplateOutlet="
@@ -131,18 +134,80 @@ export class ScCombobox implements OnInit {
     return this.activeIndex >= 0 ? `${this.id}-option-${this.activeIndex}` : '';
   }
 
-  constructor(private elementRef: ElementRef) {
-    // Set up search debounce
+  constructor(private readonly elementRef: ElementRef) {
     this.searchControl.valueChanges
       .pipe(debounceTime(300), distinctUntilChanged())
       .subscribe((value) => {
-        this.onSearch(value || '');
+        this.onSearch(value ?? '');
       });
   }
 
   ngOnInit() {
-    // Ensure unique IDs
     this.listboxId = `${this.id}-listbox`;
+  }
+
+  // Handle button interactions
+  handleButtonInteraction(event: MouseEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.toggleDropdown();
+  }
+
+  onButtonKeyDown(event: KeyboardEvent) {
+    switch (event.key) {
+      case ' ':
+      case 'Enter':
+        event.preventDefault();
+        event.stopPropagation();
+        this.toggleDropdown();
+        break;
+    }
+  }
+
+  // Handle option interactions
+  handleOptionClick(event: MouseEvent, option: any) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.selectOption(option);
+  }
+
+  onOptionKeyDown(event: KeyboardEvent, option: any) {
+    switch (event.key) {
+      case ' ':
+      case 'Enter':
+        event.preventDefault();
+        event.stopPropagation();
+        this.selectOption(option);
+        break;
+      case 'ArrowDown':
+        event.preventDefault();
+        this.moveActiveIndex(1);
+        break;
+      case 'ArrowUp':
+        event.preventDefault();
+        this.moveActiveIndex(-1);
+        break;
+      case 'Home':
+        event.preventDefault();
+        this.setActiveIndex(0);
+        break;
+      case 'End':
+        event.preventDefault();
+        this.setActiveIndex(this.filteredOptions.length - 1);
+        break;
+    }
+  }
+
+  moveActiveIndex(delta: number) {
+    const newIndex = this.activeIndex + delta;
+    if (newIndex >= 0 && newIndex < this.filteredOptions.length) {
+      this.setActiveIndex(newIndex);
+    }
+  }
+
+  setActiveIndex(index: number) {
+    this.activeIndex = index;
+    this.scrollActiveOptionIntoView();
   }
 
   @HostListener('document:click', ['$event'])
@@ -171,11 +236,9 @@ export class ScCombobox implements OnInit {
     if (this.closeTimeout) {
       clearTimeout(this.closeTimeout);
     }
-    this.open();
   }
 
   onBlur() {
-    // Delay closing to allow for option selection
     this.closeTimeout = setTimeout(() => this.close(), 200);
   }
 
@@ -185,7 +248,7 @@ export class ScCombobox implements OnInit {
   }
 
   filterOptions() {
-    const query = this.searchControl.value?.toLowerCase() || '';
+    const query = this.searchControl.value?.toLowerCase() ?? '';
     this.filteredOptions = this.options.filter((option) =>
       this.getOptionLabel(option).toLowerCase().includes(query),
     );
@@ -209,13 +272,11 @@ export class ScCombobox implements OnInit {
         if (!this.isOpen) {
           this.open();
         }
-        this.activeIndex = Math.min(this.activeIndex + 1, this.filteredOptions.length - 1);
-        this.scrollActiveOptionIntoView();
+        this.moveActiveIndex(1);
         break;
       case 'ArrowUp':
         event.preventDefault();
-        this.activeIndex = Math.max(this.activeIndex - 1, -1);
-        this.scrollActiveOptionIntoView();
+        this.moveActiveIndex(-1);
         break;
       case 'Enter':
         event.preventDefault();
@@ -225,6 +286,9 @@ export class ScCombobox implements OnInit {
         break;
       case 'Escape':
         event.preventDefault();
+        this.close();
+        break;
+      case 'Tab':
         this.close();
         break;
     }
