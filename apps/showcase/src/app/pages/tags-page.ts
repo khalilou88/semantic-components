@@ -6,7 +6,7 @@ import { ScTags } from '@semantic-components/ui';
   selector: 'app-tags-page',
   imports: [ScTags],
   template: `
-    <div class="max-w-md mx-auto p-4">
+    <div class="mx-auto max-w-md p-4">
       <sc-tags
         [(tags)]="myTags"
         [maxTags]="5"
