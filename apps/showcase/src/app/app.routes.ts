@@ -217,6 +217,11 @@ export const appRoutes: Route[] = [
             title: 'Comments Page',
           },
           {
+            path: 'tags',
+            loadComponent: () => import('./pages/tags-page'),
+            title: 'Tags Page',
+          },
+          {
             path: 'button-showcase',
             loadComponent: () => import('./pages/button-showcase'),
             title: 'Button Showcase Page',
