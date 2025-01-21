@@ -122,6 +122,16 @@ export const appRoutes: Route[] = [
             title: 'Hover Card Page',
           },
           {
+            path: 'input',
+            loadComponent: () => import('./pages/input-page'),
+            title: 'Input Page',
+          },
+          {
+            path: 'auto-resize-input',
+            loadComponent: () => import('./pages/auto-resize-input-page'),
+            title: 'Auto resize input Page',
+          },
+          {
             path: 'input-password',
             loadComponent: () => import('./pages/input-password-page'),
             title: 'Input Password Page',
