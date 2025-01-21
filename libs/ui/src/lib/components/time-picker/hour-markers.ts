@@ -1,12 +1,12 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
 
 @Component({
   selector: 'sc-hour-markers',
   imports: [],
   template: `
-    @for (hour of hourPositions; track hour) {
+    @for (hour of hourPositions(); track hour) {
       <div class="hour-marker" [style.top.%]="hour.top" [style.left.%]="hour.left">
-        <div class="hour-label">{{ hourPositions.indexOf(hour) + 1 }}</div>
+        <div class="hour-label">{{ hourPositions().indexOf(hour) + 1 }}</div>
       </div>
     }
   `,
@@ -32,5 +32,10 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScHourMarkers {
-  @Input() hourPositions: { top: number; left: number }[] = [];
+  readonly hourPositions = input<
+    {
+      top: number;
+      left: number;
+    }[]
+  >([]);
 }

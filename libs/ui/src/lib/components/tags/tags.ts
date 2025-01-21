@@ -1,10 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
-  Input,
-  Output,
   ViewEncapsulation,
+  input,
+  linkedSignal,
+  output,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
@@ -20,7 +20,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
       >
         <div class="flex flex-wrap gap-2">
           <!-- Existing Tags -->
-          @for (tag of tags; track tag) {
+          @for (tag of tags(); track tag) {
             <span
               class="inline-flex items-center gap-1 rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-800"
             >
@@ -52,7 +52,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
             class="min-w-[120px] grow bg-transparent outline-none"
             #tagInput
             [formControl]="tagControl"
-            [placeholder]="tags.length === 0 ? placeholder : ''"
+            [placeholder]="tags().length === 0 ? placeholder() : ''"
             (keydown)="onKeyDown($event)"
             (blur)="addTag()"
           />
@@ -67,9 +67,9 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
       }
 
       <!-- Helper Text -->
-      @if (helperText) {
+      @if (helperText()) {
         <div class="mt-1 text-sm text-gray-500">
-          {{ helperText }}
+          {{ helperText() }}
         </div>
       }
     </div>
@@ -79,13 +79,15 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScTags {
-  @Input() tags: string[] = [];
-  @Input() placeholder = 'Add tags...';
-  @Input() helperText = 'Press enter or comma to add tags';
-  @Input() maxTags = 10;
-  @Input() minLength = 2;
-  @Input() maxLength = 20;
-  @Output() tagsChange = new EventEmitter<string[]>();
+  readonly placeholder = input('Add tags...');
+  readonly helperText = input('Press enter or comma to add tags');
+  readonly maxTags = input(10);
+  readonly minLength = input(2);
+  readonly maxLength = input(20);
+
+  readonly tagsInput = input<string[]>([], { alias: 'tags' });
+  protected readonly tags = linkedSignal(() => this.tagsInput());
+  readonly tagsChange = output<string[]>();
 
   tagControl = new FormControl('');
   error = '';
@@ -115,36 +117,37 @@ export class ScTags {
     }
 
     // Validation
-    if (cleanTag.length < this.minLength) {
-      this.error = `Tag must be at least ${this.minLength} characters long`;
+    if (cleanTag.length < this.minLength()) {
+      this.error = `Tag must be at least ${this.minLength()} characters long`;
       return;
     }
 
-    if (cleanTag.length > this.maxLength) {
-      this.error = `Tag must be less than ${this.maxLength} characters long`;
+    if (cleanTag.length > this.maxLength()) {
+      this.error = `Tag must be less than ${this.maxLength()} characters long`;
       return;
     }
 
-    if (this.tags.length >= this.maxTags) {
-      this.error = `Maximum ${this.maxTags} tags allowed`;
+    if (this.tags().length >= this.maxTags()) {
+      this.error = `Maximum ${this.maxTags()} tags allowed`;
       return;
     }
 
-    if (this.tags.includes(cleanTag)) {
+    const tags = this.tags();
+    if (tags.includes(cleanTag)) {
       this.error = 'Tag already exists';
       return;
     }
 
     // Add tag
     this.error = '';
-    this.tags = [...this.tags, cleanTag];
-    this.tagsChange.emit(this.tags);
+    this.tags.update((tags) => [...tags, cleanTag]);
+    this.tagsChange.emit(tags);
     this.tagControl.setValue('');
   }
 
   removeTag(tagToRemove: string): void {
-    this.tags = this.tags.filter((tag) => tag !== tagToRemove);
-    this.tagsChange.emit(this.tags);
+    this.tags.update((tags) => tags.filter((tag) => tag !== tagToRemove));
+    this.tagsChange.emit(this.tags());
     this.error = '';
   }
 }

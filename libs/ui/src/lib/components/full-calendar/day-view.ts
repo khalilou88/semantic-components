@@ -2,9 +2,9 @@ import { DatePipe, NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
   OnInit,
   ViewEncapsulation,
+  input,
 } from '@angular/core';
 
 @Component({
@@ -12,7 +12,7 @@ import {
   imports: [NgClass, DatePipe],
   template: `
     <div class="rounded-lg border bg-white p-4 shadow-md hover:bg-gray-100">
-      <div class="text-center font-medium">{{ date | date: 'fullDate' }}</div>
+      <div class="text-center font-medium">{{ date() | date: 'fullDate' }}</div>
 
       <!-- Display hours for the day -->
       @for (hour of hoursInDay; track hour) {
@@ -36,7 +36,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScDayView implements OnInit {
-  @Input() date!: Date; // Receive the date for each day
+  readonly date = input.required<Date>(); // Receive the date for each day
   hoursInDay: number[];
 
   constructor() {
@@ -51,14 +51,14 @@ export class ScDayView implements OnInit {
   addEvent(hour: number): void {
     const eventTitle = prompt('Enter event title:');
     if (eventTitle) {
-      alert(`Event "${eventTitle}" added to ${this.date.toDateString()} at ${hour}:00`);
+      alert(`Event "${eventTitle}" added to ${this.date().toDateString()} at ${hour}:00`);
     }
   }
 
   // Method to check if the current hour is now
   isNow(hour: number): boolean {
     const now = new Date();
-    return now.getHours() === hour && now.getDate() === this.date.getDate();
+    return now.getHours() === hour && now.getDate() === this.date().getDate();
   }
 
   // Handle keyboard events for accessibility

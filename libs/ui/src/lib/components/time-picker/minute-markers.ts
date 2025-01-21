@@ -1,12 +1,12 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
 
 @Component({
   selector: 'sc-minute-markers',
   imports: [],
   template: `
-    @for (minute of minutePositions; track minute) {
+    @for (minute of minutePositions(); track minute) {
       <div class="minute-marker" [style.top.%]="minute.top" [style.left.%]="minute.left">
-        <div class="minute-label">{{ (minutePositions.indexOf(minute) * 5) % 60 }}</div>
+        <div class="minute-label">{{ (minutePositions().indexOf(minute) * 5) % 60 }}</div>
       </div>
     }
   `,
@@ -32,5 +32,10 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScMinuteMarkers {
-  @Input() minutePositions: { top: number; left: number }[] = [];
+  readonly minutePositions = input<
+    {
+      top: number;
+      left: number;
+    }[]
+  >([]);
 }
