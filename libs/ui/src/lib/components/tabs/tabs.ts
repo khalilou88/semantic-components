@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -16,7 +16,7 @@ import { ScTabsHeader } from './tabs-header';
 
 @Component({
   selector: 'sc-tabs',
-  imports: [CommonModule, ScTabsHeader],
+  imports: [NgTemplateOutlet, ScTabsHeader],
   template: `
     <div [class]="tabsHeaderClass()" sc-tabs-header>
       @for (tab of tabs(); track tab) {

@@ -47,6 +47,11 @@ export const appRoutes: Route[] = [
             title: 'Confirmation Dialog Page',
           },
           {
+            path: 'combobox',
+            loadComponent: () => import('./pages/combobox-page'),
+            title: 'Combobox Page',
+          },
+          {
             path: 'home',
             loadComponent: () => import('./pages/home-page'),
             title: 'Home Page',
