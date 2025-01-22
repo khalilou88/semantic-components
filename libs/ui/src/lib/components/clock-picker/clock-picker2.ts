@@ -11,29 +11,47 @@ import {
   selector: 'sc-clock-picker2',
   imports: [NgClass],
   template: `
-    <div class="w-80 p-5 bg-white rounded-lg shadow-lg">
-      <div class="text-center text-2xl mb-5">{{ formattedHour() }}:{{ formattedMinute() }}</div>
+    <div class="w-80 rounded-lg bg-white p-5 shadow-lg">
+      <div class="mb-5 text-center text-2xl">{{ formattedHour() }}:{{ formattedMinute() }}</div>
 
-      <div class="relative w-52 h-52 mx-auto mb-5">
+      <div class="relative mx-auto mb-5 size-52">
         <!--  Clock face -->
-        <div class="absolute w-full h-full rounded-full bg-gray-100 border-2 border-gray-200">
+        <div class="absolute size-full rounded-full border-2 border-gray-200 bg-gray-100">
           <!--  Center dot -->
           <div
-            class="absolute w-3 h-3 bg-gray-800 rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+            class="absolute left-1/2 top-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gray-800"
           ></div>
 
           <!--  Clock hand -->
           <div
-            class="absolute w-0.5 h-20 bg-blue-500 top-5 left-1/2 -translate-x-1/2 origin-bottom"
+            class="absolute left-1/2 top-5 h-20 w-0.5 origin-bottom -translate-x-1/2 bg-blue-500"
             [style]="myStyle()"
           ></div>
+
+          <!-- Numbers -->
+
+          @for (item of generateClockNumbers(); track $index) {
+            <div
+              class="absolute flex size-8 cursor-pointer items-center justify-center rounded-full text-sm"
+              [ngClass]="
+                (isHourMode() && item.number === selectedHour()) ||
+                (!isHourMode() && item.number * 5 === selectedMinute())
+                  ? 'bg-blue-500 text-white'
+                  : 'hover:bg-gray-200'
+              "
+              [style]="item.style"
+              (click)="handleNumberClick(item.number)"
+            >
+              {{ isHourMode() ? item.number : item.number * 5 }}
+            </div>
+          }
         </div>
       </div>
 
       <!-- Mode switches -->
       <div class="flex justify-center gap-2">
         <button
-          class="px-4 py-2 rounded text-white"
+          class="rounded px-4 py-2 text-white"
           [ngClass]="isHourMode() ? 'bg-blue-600' : 'bg-blue-400'"
           (click)="isHourMode.set(true)"
         >
@@ -41,7 +59,7 @@ import {
         </button>
 
         <button
-          class="px-4 py-2 rounded text-white"
+          class="rounded px-4 py-2 text-white"
           [ngClass]="!isHourMode() ? 'bg-blue-600' : 'bg-blue-400'"
           (click)="isHourMode.set(false)"
         >
@@ -65,7 +83,7 @@ export class ScClockPicker2 {
   );
 
   // Generate positions for clock numbers
-  generateClockNumbers = () => {
+  generateClockNumbers = computed(() => {
     const numbers = this.isHourMode() ? 12 : 60;
     const step = this.isHourMode() ? 1 : 5;
     const items = [];
@@ -86,7 +104,7 @@ export class ScClockPicker2 {
     }
 
     return items;
-  };
+  });
 
   handleNumberClick = (num: number) => {
     if (this.isHourMode()) {
