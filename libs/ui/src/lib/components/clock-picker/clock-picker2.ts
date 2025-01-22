@@ -14,6 +14,22 @@ import {
     <div class="w-80 p-5 bg-white rounded-lg shadow-lg">
       <div class="text-center text-2xl mb-5">{{ formattedHour() }}:{{ formattedMinute() }}</div>
 
+      <div class="relative w-52 h-52 mx-auto mb-5">
+        <!--  Clock face -->
+        <div class="absolute w-full h-full rounded-full bg-gray-100 border-2 border-gray-200">
+          <!--  Center dot -->
+          <div
+            class="absolute w-3 h-3 bg-gray-800 rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+          ></div>
+
+          <!--  Clock hand -->
+          <div
+            class="absolute w-0.5 h-20 bg-blue-500 top-5 left-1/2 -translate-x-1/2 origin-bottom"
+            [style]="myStyle()"
+          ></div>
+        </div>
+      </div>
+
       <!-- Mode switches -->
       <div class="flex justify-center gap-2">
         <button
@@ -80,9 +96,11 @@ export class ScClockPicker2 {
     }
   };
 
-  getHandRotation = () => {
+  getHandRotation = computed(() => {
     const value = this.isHourMode() ? this.selectedHour() : this.selectedMinute() / 5;
     const angle = value * (360 / (this.isHourMode() ? 12 : 60 / 5)) - 90;
     return `rotate(${angle}deg)`;
-  };
+  });
+
+  myStyle = computed(() => `transform: ${this.getHandRotation()}`);
 }
