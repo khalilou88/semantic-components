@@ -61,3 +61,4 @@ export * from './lib/components/comments';
 export * from './lib/components/tags';
 export * from './lib/components/combobox';
 export * from './lib/components/clock-picker';
+export * from './lib/components/code-highlighter';

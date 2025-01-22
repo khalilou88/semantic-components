@@ -10,6 +10,7 @@ import {
   ScButton,
   ScCard,
   ScCardContent,
+  ScCodeHighlighter,
   ScHeading,
   ScPageDescription,
   ScPageSubtitle,
@@ -42,6 +43,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
     ScTabContent,
     ScCard,
     ScHeading,
+    ScCodeHighlighter,
     ScCardContent,
   ],
   template: `
@@ -74,7 +76,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
               <sc-tab-label>Preview</sc-tab-label>
               <sc-tab-content>
                 <div sc-card>
-                  <div class="m-10 flex gap-2" sc-card-content>
+                  <div class="m-10 flex gap-2 p-0" sc-card-content>
                     <button sc-button type="button">Primary</button>
                     <button sc-button variant="secondary" type="button">Secondary</button>
                     <button sc-button variant="destructive" type="button">Destructive</button>
@@ -89,11 +91,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
             <sc-tab>
               <sc-tab-label>Code</sc-tab-label>
               <sc-tab-content>
-                <div sc-card>
-                  <div class="m-10 flex gap-2" sc-card-content>
-                    <p>Coming soon</p>
-                  </div>
-                </div>
+                <sc-code-highlighter [code]="codeSnippet" />
               </sc-tab-content>
             </sc-tab>
           </sc-tabs>
@@ -107,7 +105,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
               <sc-tab-label>Preview</sc-tab-label>
               <sc-tab-content>
                 <div sc-card>
-                  <div class="m-10 flex gap-2" sc-card-content>
+                  <div class="m-10 flex gap-2 p-0" sc-card-content>
                     <button sc-button type="button" size="sm">Primary</button>
                     <button sc-button variant="secondary" type="button" size="sm">Secondary</button>
                     <button sc-button variant="destructive" type="button" size="sm">
@@ -125,7 +123,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
               <sc-tab-label>Code</sc-tab-label>
               <sc-tab-content>
                 <div sc-card>
-                  <div class="m-10 flex gap-2" sc-card-content>
+                  <div class="m-10 flex gap-2 p-0" sc-card-content>
                     <p>Coming soon</p>
                   </div>
                 </div>
@@ -142,7 +140,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
               <sc-tab-label>Preview</sc-tab-label>
               <sc-tab-content>
                 <div sc-card>
-                  <div class="m-10 flex gap-2" sc-card-content>
+                  <div class="m-10 flex gap-2 p-0" sc-card-content>
                     <button sc-button type="button" size="lg">Primary</button>
                     <button sc-button variant="secondary" type="button" size="lg">Secondary</button>
                     <button sc-button variant="destructive" type="button" size="lg">
@@ -160,7 +158,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
               <sc-tab-label>Code</sc-tab-label>
               <sc-tab-content>
                 <div sc-card>
-                  <div class="m-10 flex gap-2" sc-card-content>
+                  <div class="m-10 flex gap-2 p-0" sc-card-content>
                     <p>Coming soon</p>
                   </div>
                 </div>
@@ -177,7 +175,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
               <sc-tab-label>Preview</sc-tab-label>
               <sc-tab-content>
                 <div sc-card>
-                  <div class="m-10 flex gap-2" sc-card-content>
+                  <div class="m-10 flex gap-2 p-0" sc-card-content>
                     <button sc-button type="button" disabled>Primary</button>
                     <button sc-button variant="secondary" type="button" disabled>Secondary</button>
                     <button sc-button variant="destructive" type="button" disabled>
@@ -195,7 +193,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
               <sc-tab-label>Code</sc-tab-label>
               <sc-tab-content>
                 <div sc-card>
-                  <div class="m-10 flex gap-2" sc-card-content>
+                  <div class="m-10 flex gap-2 p-0" sc-card-content>
                     <p>Coming soon</p>
                   </div>
                 </div>
@@ -212,7 +210,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
               <sc-tab-label>Preview</sc-tab-label>
               <sc-tab-content>
                 <div sc-card>
-                  <div class="m-10 flex gap-2" sc-card-content>
+                  <div class="m-10 flex gap-2 p-0" sc-card-content>
                     <a sc-button type="button" disabled>Primary</a>
                     <a sc-button variant="secondary" type="button" disabled>Secondary</a>
                     <a sc-button variant="destructive" type="button" disabled>Destructive</a>
@@ -228,7 +226,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
               <sc-tab-label>Code</sc-tab-label>
               <sc-tab-content>
                 <div sc-card>
-                  <div class="m-10 flex gap-2" sc-card-content>
+                  <div class="m-10 flex gap-2 p-0" sc-card-content>
                     <p>Coming soon</p>
                   </div>
                 </div>
@@ -245,7 +243,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
               <sc-tab-label>Preview</sc-tab-label>
               <sc-tab-content>
                 <div sc-card>
-                  <div class="m-10 flex gap-2 items-center" sc-card-content>
+                  <div class="m-10 flex items-center gap-2" sc-card-content>
                     <button sc-button type="button" size="icon">
                       <svg si-chevron-right-icon></svg>
                     </button>
@@ -273,7 +271,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
               <sc-tab-label>Code</sc-tab-label>
               <sc-tab-content>
                 <div sc-card>
-                  <div class="m-10 flex gap-2" sc-card-content>
+                  <div class="m-10 flex gap-2 p-0" sc-card-content>
                     <p>Coming soon</p>
                   </div>
                 </div>
@@ -290,7 +288,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
               <sc-tab-label>Preview</sc-tab-label>
               <sc-tab-content>
                 <div sc-card>
-                  <div class="m-10 flex gap-2" sc-card-content>
+                  <div class="m-10 flex gap-2 p-0" sc-card-content>
                     <button sc-button disabled>
                       <svg class="animate-spin" si-loader-circle-icon></svg>
                       Please wait
@@ -304,7 +302,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
               <sc-tab-label>Code</sc-tab-label>
               <sc-tab-content>
                 <div sc-card>
-                  <div class="m-10 flex gap-2" sc-card-content>
+                  <div class="m-10 flex gap-2 p-0" sc-card-content>
                     <p>Coming soon</p>
                   </div>
                 </div>
@@ -370,4 +368,12 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
 })
 export default class ButtonPage {
   class = signal<string>('block w-full');
+
+  codeSnippet = `
+  <button sc-button type="button">Primary</button>
+  <button sc-button variant="secondary" type="button">Secondary</button>
+  <button sc-button variant="destructive" type="button">Destructive</button>
+  <button sc-button variant="outline" type="button">Outline</button>
+  <button sc-button variant="ghost" type="button">Ghost</button>
+  <button sc-button variant="link" type="button">Link</button>`;
 }
