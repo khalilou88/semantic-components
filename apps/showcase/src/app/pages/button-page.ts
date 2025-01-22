@@ -9,6 +9,7 @@ import {
   ScBreadcrumbSeparator,
   ScButton,
   ScCard,
+  ScCardContent,
   ScHeading,
   ScPageDescription,
   ScPageSubtitle,
@@ -41,6 +42,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
     ScTabContent,
     ScCard,
     ScHeading,
+    ScCardContent,
   ],
   template: `
     <div class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
