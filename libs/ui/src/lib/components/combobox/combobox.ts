@@ -9,6 +9,7 @@ import {
   OnInit,
   Output,
   ViewEncapsulation,
+  inject,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
@@ -113,6 +114,8 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCombobox implements OnInit {
+  private readonly elementRef = inject(ElementRef);
+
   @Input() id = `combobox-${Math.random().toString(36).substr(2, 9)}`;
   @Input() label?: string;
   @Input() placeholder = 'Select an option';
@@ -136,7 +139,7 @@ export class ScCombobox implements OnInit {
     return this.activeIndex >= 0 ? `${this.id}-option-${this.activeIndex}` : '';
   }
 
-  constructor(private readonly elementRef: ElementRef) {
+  constructor() {
     this.searchControl.valueChanges
       .pipe(debounceTime(300), distinctUntilChanged())
       .subscribe((value) => {

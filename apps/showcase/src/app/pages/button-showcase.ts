@@ -1,5 +1,5 @@
 // button-showcase.component.ts
-import { AfterViewInit, Component, ElementRef, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, inject } from '@angular/core';
 
 interface Section {
   id: string;
@@ -138,6 +138,8 @@ interface Section {
   styles: [],
 })
 export default class ButtonShowcaseComponent implements AfterViewInit, OnDestroy {
+  private readonly el = inject(ElementRef);
+
   sections: Section[] = [
     { id: 'basic', title: 'Basic Buttons', description: 'Standard button variations' },
     { id: 'outline', title: 'Outline Buttons', description: 'Border-only style buttons' },
@@ -147,8 +149,6 @@ export default class ButtonShowcaseComponent implements AfterViewInit, OnDestroy
 
   activeSection = '';
   private observer!: IntersectionObserver;
-
-  constructor(private readonly el: ElementRef) {}
 
   ngAfterViewInit() {
     this.setupIntersectionObserver();

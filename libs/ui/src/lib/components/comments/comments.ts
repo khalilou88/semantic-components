@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  inject,
+  input,
+} from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { ScComment } from './comment';
@@ -45,13 +51,15 @@ import { ScCommentModel, ScUserModel } from './comment-model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScComments {
+  private readonly fb = inject(FormBuilder);
+
   comments = input.required<ScCommentModel[]>();
 
   currentUser = input.required<ScUserModel>();
 
   commentForm: FormGroup;
 
-  constructor(private readonly fb: FormBuilder) {
+  constructor() {
     this.commentForm = this.fb.group({
       content: ['', [Validators.required, Validators.minLength(1)]],
     });
