@@ -60,3 +60,4 @@ export * from './lib/components/cookie-consent';
 export * from './lib/components/comments';
 export * from './lib/components/tags';
 export * from './lib/components/combobox';
+export * from './lib/components/clock-picker';
