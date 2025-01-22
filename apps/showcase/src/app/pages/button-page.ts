@@ -64,97 +64,252 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
 
         <h2 class="mb-5" sc-page-subtitle>Examples</h2>
 
-        <h3 class="mb-2" sc-heading level="3">Variants</h3>
+        <section class="my-10">
+          <h3 class="mb-2" sc-heading level="3">Variants</h3>
 
-        <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
-          <sc-tab>
-            <sc-tab-label>Preview</sc-tab-label>
-            <sc-tab-content>
-              <div sc-card>
-                <div class="m-10 flex gap-2" sc-card-content>
-                  <button sc-button type="button">Primary</button>
-                  <button sc-button variant="secondary" type="button">Secondary</button>
-                  <button sc-button variant="destructive" type="button">Destructive</button>
-                  <button sc-button variant="outline" type="button">Outline</button>
-                  <button sc-button variant="ghost" type="button">Ghost</button>
-                  <button sc-button variant="link" type="button">Link</button>
+          <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
+            <sc-tab>
+              <sc-tab-label>Preview</sc-tab-label>
+              <sc-tab-content>
+                <div sc-card>
+                  <div class="m-10 flex gap-2" sc-card-content>
+                    <button sc-button type="button">Primary</button>
+                    <button sc-button variant="secondary" type="button">Secondary</button>
+                    <button sc-button variant="destructive" type="button">Destructive</button>
+                    <button sc-button variant="outline" type="button">Outline</button>
+                    <button sc-button variant="ghost" type="button">Ghost</button>
+                    <button sc-button variant="link" type="button">Link</button>
+                  </div>
                 </div>
-              </div>
-            </sc-tab-content>
-          </sc-tab>
+              </sc-tab-content>
+            </sc-tab>
 
-          <sc-tab>
-            <sc-tab-label>Code</sc-tab-label>
-            <sc-tab-content>
-              <div sc-card>
-                <div class="m-10 flex gap-2" sc-card-content>
-                  <p>Coming soon</p>
+            <sc-tab>
+              <sc-tab-label>Code</sc-tab-label>
+              <sc-tab-content>
+                <div sc-card>
+                  <div class="m-10 flex gap-2" sc-card-content>
+                    <p>Coming soon</p>
+                  </div>
                 </div>
-              </div>
-            </sc-tab-content>
-          </sc-tab>
-        </sc-tabs>
+              </sc-tab-content>
+            </sc-tab>
+          </sc-tabs>
+        </section>
 
-        <h1>Sm</h1>
-        <button sc-button type="button" size="sm">Primary</button>
-        <button sc-button variant="secondary" type="button" size="sm">Secondary</button>
-        <button sc-button variant="destructive" type="button" size="sm">Destructive</button>
-        <button sc-button variant="outline" type="button" size="sm">Outline</button>
-        <button sc-button variant="ghost" type="button" size="sm">Ghost</button>
-        <button sc-button variant="link" type="button" size="sm">Link</button>
+        <section class="my-10">
+          <h3 class="mb-2" sc-heading level="3">Small Buttons</h3>
 
-        <h1>Lg</h1>
-        <button sc-button type="button" size="lg">Primary</button>
-        <button sc-button variant="secondary" type="button" size="lg">Secondary</button>
-        <button sc-button variant="destructive" type="button" size="lg">Destructive</button>
-        <button sc-button variant="outline" type="button" size="lg">Outline</button>
-        <button sc-button variant="ghost" type="button" size="lg">Ghost</button>
-        <button sc-button variant="link" type="button" size="lg">Link</button>
+          <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
+            <sc-tab>
+              <sc-tab-label>Preview</sc-tab-label>
+              <sc-tab-content>
+                <div sc-card>
+                  <div class="m-10 flex gap-2" sc-card-content>
+                    <button sc-button type="button" size="sm">Primary</button>
+                    <button sc-button variant="secondary" type="button" size="sm">Secondary</button>
+                    <button sc-button variant="destructive" type="button" size="sm">
+                      Destructive
+                    </button>
+                    <button sc-button variant="outline" type="button" size="sm">Outline</button>
+                    <button sc-button variant="ghost" type="button" size="sm">Ghost</button>
+                    <button sc-button variant="link" type="button" size="sm">Link</button>
+                  </div>
+                </div>
+              </sc-tab-content>
+            </sc-tab>
 
-        <h1>Disabled</h1>
-        <button sc-button type="button" disabled>Primary</button>
-        <button sc-button variant="secondary" type="button" disabled>Secondary</button>
-        <button sc-button variant="destructive" type="button" disabled>Destructive</button>
-        <button sc-button variant="outline" type="button" disabled>Outline</button>
-        <button sc-button variant="ghost" type="button" disabled>Ghost</button>
-        <button sc-button variant="link" type="button" disabled>Link</button>
+            <sc-tab>
+              <sc-tab-label>Code</sc-tab-label>
+              <sc-tab-content>
+                <div sc-card>
+                  <div class="m-10 flex gap-2" sc-card-content>
+                    <p>Coming soon</p>
+                  </div>
+                </div>
+              </sc-tab-content>
+            </sc-tab>
+          </sc-tabs>
+        </section>
 
-        <h1>Disabled Links</h1>
-        <a sc-button type="button" disabled>Primary</a>
-        <a sc-button variant="secondary" type="button" disabled>Secondary</a>
-        <a sc-button variant="destructive" type="button" disabled>Destructive</a>
-        <a sc-button variant="outline" type="button" disabled>Outline</a>
-        <a sc-button variant="ghost" type="button" disabled>Ghost</a>
-        <a sc-button variant="link" type="button" disabled>Link</a>
+        <section class="my-10">
+          <h3 class="mb-2" sc-heading level="3">Large Buttons</h3>
 
-        <h1>Icon</h1>
-        <button sc-button type="button" size="icon">
-          <svg si-chevron-right-icon></svg>
-        </button>
-        <button sc-button variant="secondary" type="button" size="icon">
-          <svg si-chevron-right-icon></svg>
-        </button>
-        <button sc-button variant="destructive" type="button" size="icon">
-          <svg si-chevron-right-icon></svg>
-        </button>
-        <button class="size-20" sc-button variant="outline" type="button" size="icon">
-          <svg si-chevron-right-icon></svg>
-        </button>
-        <button sc-button variant="ghost" type="button" size="icon">
-          <svg si-chevron-right-icon></svg>
-        </button>
-        <button sc-button variant="link" type="button" size="icon">
-          <svg si-chevron-right-icon></svg>
-        </button>
+          <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
+            <sc-tab>
+              <sc-tab-label>Preview</sc-tab-label>
+              <sc-tab-content>
+                <div sc-card>
+                  <div class="m-10 flex gap-2" sc-card-content>
+                    <button sc-button type="button" size="lg">Primary</button>
+                    <button sc-button variant="secondary" type="button" size="lg">Secondary</button>
+                    <button sc-button variant="destructive" type="button" size="lg">
+                      Destructive
+                    </button>
+                    <button sc-button variant="outline" type="button" size="lg">Outline</button>
+                    <button sc-button variant="ghost" type="button" size="lg">Ghost</button>
+                    <button sc-button variant="link" type="button" size="lg">Link</button>
+                  </div>
+                </div>
+              </sc-tab-content>
+            </sc-tab>
 
-        <br />
-        <br />
-        <br />
+            <sc-tab>
+              <sc-tab-label>Code</sc-tab-label>
+              <sc-tab-content>
+                <div sc-card>
+                  <div class="m-10 flex gap-2" sc-card-content>
+                    <p>Coming soon</p>
+                  </div>
+                </div>
+              </sc-tab-content>
+            </sc-tab>
+          </sc-tabs>
+        </section>
 
-        <button sc-button disabled>
-          <svg class="animate-spin" si-loader-circle-icon></svg>
-          Please wait
-        </button>
+        <section class="my-10">
+          <h3 class="mb-2" sc-heading level="3">Disabled Buttons</h3>
+
+          <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
+            <sc-tab>
+              <sc-tab-label>Preview</sc-tab-label>
+              <sc-tab-content>
+                <div sc-card>
+                  <div class="m-10 flex gap-2" sc-card-content>
+                    <button sc-button type="button" disabled>Primary</button>
+                    <button sc-button variant="secondary" type="button" disabled>Secondary</button>
+                    <button sc-button variant="destructive" type="button" disabled>
+                      Destructive
+                    </button>
+                    <button sc-button variant="outline" type="button" disabled>Outline</button>
+                    <button sc-button variant="ghost" type="button" disabled>Ghost</button>
+                    <button sc-button variant="link" type="button" disabled>Link</button>
+                  </div>
+                </div>
+              </sc-tab-content>
+            </sc-tab>
+
+            <sc-tab>
+              <sc-tab-label>Code</sc-tab-label>
+              <sc-tab-content>
+                <div sc-card>
+                  <div class="m-10 flex gap-2" sc-card-content>
+                    <p>Coming soon</p>
+                  </div>
+                </div>
+              </sc-tab-content>
+            </sc-tab>
+          </sc-tabs>
+        </section>
+
+        <section class="my-10">
+          <h3 class="mb-2" sc-heading level="3">Disabled Links</h3>
+
+          <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
+            <sc-tab>
+              <sc-tab-label>Preview</sc-tab-label>
+              <sc-tab-content>
+                <div sc-card>
+                  <div class="m-10 flex gap-2" sc-card-content>
+                    <a sc-button type="button" disabled>Primary</a>
+                    <a sc-button variant="secondary" type="button" disabled>Secondary</a>
+                    <a sc-button variant="destructive" type="button" disabled>Destructive</a>
+                    <a sc-button variant="outline" type="button" disabled>Outline</a>
+                    <a sc-button variant="ghost" type="button" disabled>Ghost</a>
+                    <a sc-button variant="link" type="button" disabled>Link</a>
+                  </div>
+                </div>
+              </sc-tab-content>
+            </sc-tab>
+
+            <sc-tab>
+              <sc-tab-label>Code</sc-tab-label>
+              <sc-tab-content>
+                <div sc-card>
+                  <div class="m-10 flex gap-2" sc-card-content>
+                    <p>Coming soon</p>
+                  </div>
+                </div>
+              </sc-tab-content>
+            </sc-tab>
+          </sc-tabs>
+        </section>
+
+        <section class="my-10">
+          <h3 class="mb-2" sc-heading level="3">Buttons with icons</h3>
+
+          <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
+            <sc-tab>
+              <sc-tab-label>Preview</sc-tab-label>
+              <sc-tab-content>
+                <div sc-card>
+                  <div class="m-10 flex gap-2 items-center" sc-card-content>
+                    <button sc-button type="button" size="icon">
+                      <svg si-chevron-right-icon></svg>
+                    </button>
+                    <button sc-button variant="secondary" type="button" size="icon">
+                      <svg si-chevron-right-icon></svg>
+                    </button>
+                    <button sc-button variant="destructive" type="button" size="icon">
+                      <svg si-chevron-right-icon></svg>
+                    </button>
+                    <button class="size-20" sc-button variant="outline" type="button" size="icon">
+                      <svg si-chevron-right-icon></svg>
+                    </button>
+                    <button sc-button variant="ghost" type="button" size="icon">
+                      <svg si-chevron-right-icon></svg>
+                    </button>
+                    <button sc-button variant="link" type="button" size="icon">
+                      <svg si-chevron-right-icon></svg>
+                    </button>
+                  </div>
+                </div>
+              </sc-tab-content>
+            </sc-tab>
+
+            <sc-tab>
+              <sc-tab-label>Code</sc-tab-label>
+              <sc-tab-content>
+                <div sc-card>
+                  <div class="m-10 flex gap-2" sc-card-content>
+                    <p>Coming soon</p>
+                  </div>
+                </div>
+              </sc-tab-content>
+            </sc-tab>
+          </sc-tabs>
+        </section>
+
+        <section class="my-10">
+          <h3 class="mb-2" sc-heading level="3">Button with loading state</h3>
+
+          <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
+            <sc-tab>
+              <sc-tab-label>Preview</sc-tab-label>
+              <sc-tab-content>
+                <div sc-card>
+                  <div class="m-10 flex gap-2" sc-card-content>
+                    <button sc-button disabled>
+                      <svg class="animate-spin" si-loader-circle-icon></svg>
+                      Please wait
+                    </button>
+                  </div>
+                </div>
+              </sc-tab-content>
+            </sc-tab>
+
+            <sc-tab>
+              <sc-tab-label>Code</sc-tab-label>
+              <sc-tab-content>
+                <div sc-card>
+                  <div class="m-10 flex gap-2" sc-card-content>
+                    <p>Coming soon</p>
+                  </div>
+                </div>
+              </sc-tab-content>
+            </sc-tab>
+          </sc-tabs>
+        </section>
       </div>
 
       <div class="hidden text-sm xl:block">
