@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -11,7 +10,7 @@ import {
 
 @Component({
   selector: 'sc-time-picker2',
-  imports: [NgFor, NgIf],
+  imports: [],
   template: `
     <div class="relative">
       <!-- Time Input Field -->
@@ -25,71 +24,73 @@ import {
       />
 
       <!-- Dropdown Panel -->
-      <div class="absolute z-50 mt-1 w-64 rounded-lg border bg-white shadow-lg" *ngIf="isOpen">
-        <!-- Time Selection Grid -->
-        <div class="p-4">
-          <!-- Hour Selection -->
-          <div class="mb-4">
-            <span class="mb-2 block text-sm font-medium text-gray-700">Hour</span>
-            <div class="grid grid-cols-4 gap-2">
-              <button
-                *ngFor="let hour of hours"
-                [class]="
-                  'px-2 py-1 text-sm rounded-md ' +
-                  (selectedHour === hour ? 'bg-blue-500 text-white' : 'hover:bg-gray-100')
-                "
-                (click)="selectHour(hour)"
-              >
-                {{ hour }}
-              </button>
+      @if (isOpen) {
+        <div class="absolute z-50 mt-1 w-64 rounded-lg border bg-white shadow-lg">
+          <!-- Time Selection Grid -->
+          <div class="p-4">
+            <!-- Hour Selection -->
+            <div class="mb-4">
+              <span class="mb-2 block text-sm font-medium text-gray-700">Hour</span>
+              <div class="grid grid-cols-4 gap-2">
+                @for (hour of hours; track hour) {
+                  <button
+                    [class]="
+                      'px-2 py-1 text-sm rounded-md ' +
+                      (selectedHour === hour ? 'bg-blue-500 text-white' : 'hover:bg-gray-100')
+                    "
+                    (click)="selectHour(hour)"
+                  >
+                    {{ hour }}
+                  </button>
+                }
+              </div>
+            </div>
+            <!-- Minute Selection -->
+            <div class="mb-4">
+              <span class="mb-2 block text-sm font-medium text-gray-700">Minute</span>
+              <div class="grid grid-cols-4 gap-2">
+                @for (minute of minutes; track minute) {
+                  <button
+                    [class]="
+                      'px-2 py-1 text-sm rounded-md ' +
+                      (selectedMinute === minute ? 'bg-blue-500 text-white' : 'hover:bg-gray-100')
+                    "
+                    (click)="selectMinute(minute)"
+                  >
+                    {{ minute.toString().padStart(2, '0') }}
+                  </button>
+                }
+              </div>
+            </div>
+            <!-- AM/PM Selection -->
+            <div>
+              <span class="mb-2 block text-sm font-medium text-gray-700">Period</span>
+              <div class="grid grid-cols-2 gap-2">
+                @for (period of periods; track period) {
+                  <button
+                    [class]="
+                      'px-4 py-2 text-sm rounded-md ' +
+                      (selectedPeriod === period ? 'bg-blue-500 text-white' : 'hover:bg-gray-100')
+                    "
+                    (click)="selectPeriod(period)"
+                  >
+                    {{ period }}
+                  </button>
+                }
+              </div>
             </div>
           </div>
-
-          <!-- Minute Selection -->
-          <div class="mb-4">
-            <span class="mb-2 block text-sm font-medium text-gray-700">Minute</span>
-            <div class="grid grid-cols-4 gap-2">
-              <button
-                *ngFor="let minute of minutes"
-                [class]="
-                  'px-2 py-1 text-sm rounded-md ' +
-                  (selectedMinute === minute ? 'bg-blue-500 text-white' : 'hover:bg-gray-100')
-                "
-                (click)="selectMinute(minute)"
-              >
-                {{ minute.toString().padStart(2, '0') }}
-              </button>
-            </div>
-          </div>
-
-          <!-- AM/PM Selection -->
-          <div>
-            <span class="mb-2 block text-sm font-medium text-gray-700">Period</span>
-            <div class="grid grid-cols-2 gap-2">
-              <button
-                *ngFor="let period of periods"
-                [class]="
-                  'px-4 py-2 text-sm rounded-md ' +
-                  (selectedPeriod === period ? 'bg-blue-500 text-white' : 'hover:bg-gray-100')
-                "
-                (click)="selectPeriod(period)"
-              >
-                {{ period }}
-              </button>
-            </div>
+          <!-- Done Button -->
+          <div class="border-t p-4">
+            <button
+              class="w-full rounded-md bg-blue-500 px-4 py-2 text-white transition-colors hover:bg-blue-600"
+              (click)="confirmSelection()"
+            >
+              Done
+            </button>
           </div>
         </div>
-
-        <!-- Done Button -->
-        <div class="border-t p-4">
-          <button
-            class="w-full rounded-md bg-blue-500 px-4 py-2 text-white transition-colors hover:bg-blue-600"
-            (click)="confirmSelection()"
-          >
-            Done
-          </button>
-        </div>
-      </div>
+      }
     </div>
   `,
   styles: ``,

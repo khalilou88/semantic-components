@@ -1,4 +1,4 @@
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -16,13 +16,15 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'sc-combobox',
-  imports: [ReactiveFormsModule, NgIf, NgFor, NgTemplateOutlet],
+  imports: [ReactiveFormsModule, NgTemplateOutlet],
   template: `
     <div class="relative w-full" #container>
       <!-- Label -->
-      <label class="mb-1 block text-sm font-medium text-gray-700" *ngIf="label" [for]="id">
-        {{ label }}
-      </label>
+      @if (label) {
+        <label class="mb-1 block text-sm font-medium text-gray-700" [for]="id">
+          {{ label }}
+        </label>
+      }
 
       <!-- Input Group -->
       <div class="relative">
@@ -60,45 +62,45 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
       </div>
 
       <!-- Dropdown -->
-      <div
-        class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white shadow-lg"
-        *ngIf="isOpen"
-        [id]="listboxId"
-        [attr.aria-label]="label || 'Options'"
-        role="listbox"
-      >
-        <div class="p-4 text-center text-gray-500" *ngIf="loading" role="status">Loading...</div>
-
+      @if (isOpen) {
         <div
-          class="p-4 text-center text-gray-500"
-          *ngIf="!loading && filteredOptions.length === 0"
-          role="status"
+          class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white shadow-lg"
+          [id]="listboxId"
+          [attr.aria-label]="label || 'Options'"
+          role="listbox"
         >
-          No results found
+          @if (loading) {
+            <div class="p-4 text-center text-gray-500" role="status">Loading...</div>
+          }
+          @if (!loading && filteredOptions.length === 0) {
+            <div class="p-4 text-center text-gray-500" role="status">No results found</div>
+          }
+          @if (!loading && filteredOptions.length > 0) {
+            <ul>
+              @for (option of filteredOptions; track option; let i = $index) {
+                <li
+                  class="cursor-pointer px-4 py-2 outline-none"
+                  [id]="id + '-option-' + i"
+                  [attr.aria-selected]="i === activeIndex"
+                  [class.bg-blue-100]="i === activeIndex"
+                  (click)="handleOptionClick($event, option)"
+                  (keydown)="onOptionKeyDown($event, option)"
+                  (mouseenter)="setActiveIndex(i)"
+                  role="option"
+                  tabindex="0"
+                >
+                  <ng-container
+                    *ngTemplateOutlet="
+                      optionTemplate || defaultOptionTemplate;
+                      context: { $implicit: option }
+                    "
+                  ></ng-container>
+                </li>
+              }
+            </ul>
+          }
         </div>
-
-        <ul *ngIf="!loading && filteredOptions.length > 0">
-          <li
-            class="cursor-pointer px-4 py-2 outline-none"
-            *ngFor="let option of filteredOptions; let i = index"
-            [id]="id + '-option-' + i"
-            [attr.aria-selected]="i === activeIndex"
-            [class.bg-blue-100]="i === activeIndex"
-            (click)="handleOptionClick($event, option)"
-            (keydown)="onOptionKeyDown($event, option)"
-            (mouseenter)="setActiveIndex(i)"
-            role="option"
-            tabindex="0"
-          >
-            <ng-container
-              *ngTemplateOutlet="
-                optionTemplate || defaultOptionTemplate;
-                context: { $implicit: option }
-              "
-            ></ng-container>
-          </li>
-        </ul>
-      </div>
+      }
     </div>
 
     <!-- Default option template -->

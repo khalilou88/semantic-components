@@ -21,3 +21,7 @@ npx npm-check-updates --filter "/@schematics/angular/" -u
 npx npm-check-updates @tiptap\* -u
 
 nx generate @angular/core:cleanup-unused-imports
+
+nx generate @angular/core:control-flow
+
+nx generate @angular/core:inject

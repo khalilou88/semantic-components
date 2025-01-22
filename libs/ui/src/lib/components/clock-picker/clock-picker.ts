@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -13,7 +12,7 @@ import {
 
 @Component({
   selector: 'sc-clock-picker',
-  imports: [NgFor],
+  imports: [],
   template: `
     <div class="inline-block">
       <!-- Time Display -->
@@ -26,17 +25,18 @@ import {
       <!-- Clock Face -->
       <div class="relative size-64 rounded-full border-2 border-gray-200 bg-gray-100" #clockFace>
         <!-- Hour Markers -->
-        <div
-          class="pointer-events-none absolute size-full"
-          *ngFor="let hour of hours"
-          [style.transform]="'rotate(' + hour * 30 + 'deg)'"
-        >
-          <div class="absolute left-1/2 top-0 h-full -translate-x-1/2">
-            <span class="absolute top-2 -translate-x-1/2 font-medium">
-              {{ hour === 0 ? 12 : hour }}
-            </span>
+        @for (hour of hours; track hour) {
+          <div
+            class="pointer-events-none absolute size-full"
+            [style.transform]="'rotate(' + hour * 30 + 'deg)'"
+          >
+            <div class="absolute left-1/2 top-0 h-full -translate-x-1/2">
+              <span class="absolute top-2 -translate-x-1/2 font-medium">
+                {{ hour === 0 ? 12 : hour }}
+              </span>
+            </div>
           </div>
-        </div>
+        }
 
         <!-- Clickable Areas -->
         <div
@@ -71,16 +71,19 @@ import {
 
       <!-- AM/PM Toggle -->
       <div class="mt-4 flex justify-center gap-2">
-        <button
-          *ngFor="let period of periods"
-          [class]="
-            'px-4 py-2 rounded-lg ' +
-            (selectedPeriod === period ? 'bg-blue-500 text-white' : 'bg-gray-100 hover:bg-gray-200')
-          "
-          (click)="selectPeriod(period)"
-        >
-          {{ period }}
-        </button>
+        @for (period of periods; track period) {
+          <button
+            [class]="
+              'px-4 py-2 rounded-lg ' +
+              (selectedPeriod === period
+                ? 'bg-blue-500 text-white'
+                : 'bg-gray-100 hover:bg-gray-200')
+            "
+            (click)="selectPeriod(period)"
+          >
+            {{ period }}
+          </button>
+        }
       </div>
     </div>
   `,
