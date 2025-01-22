@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Highlighter, getHighlighter } from 'shiki';
+import { Highlighter, createHighlighter } from 'shiki';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +10,7 @@ export class ShikiService {
 
   async initializeHighlighter() {
     if (!this.highlighter) {
-      this.highlighter = await getHighlighter({
+      this.highlighter = await createHighlighter({
         themes: ['github-dark'],
         langs: ['typescript', 'javascript', 'html', 'css'], // add languages you need
       });
