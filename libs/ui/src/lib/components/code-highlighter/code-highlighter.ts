@@ -3,67 +3,36 @@ import {
   Component,
   OnInit,
   ViewEncapsulation,
-  computed,
   input,
 } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
-import { HighlightService } from './highlight.service';
+import { ShikiService } from './shiki.service';
 
 @Component({
   selector: 'sc-code-highlighter',
   imports: [],
   template: `
-    @if (highlightedCode()) {
-      <pre [innerHTML]="highlightedCode()"></pre>
-    } @else {
-      <div class="loading">Loading...</div>
-    }
+    <pre [innerHTML]="highlightedCode"></pre>
   `,
-  styles: `
-    pre {
-      padding: 1rem;
-      border-radius: 4px;
-      overflow-x: auto;
-    }
-    .loading {
-      padding: 1rem;
-      color: #666;
-    }
-  `,
+  styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCodeHighlighter implements OnInit {
   code = input.required<string>();
-  language = input('typescript');
-  theme = input('nord');
+  language = input('html');
+  theme = input('github-dark');
+
+  highlightedCode: SafeHtml = '';
 
   constructor(
-    private readonly highlightService: HighlightService,
+    private readonly shikiService: ShikiService,
     private readonly sanitizer: DomSanitizer,
   ) {}
 
   async ngOnInit() {
-    await this.highlightService.loadHighlighter();
+    const highlighted = await this.shikiService.highlightCode(this.code(), this.language());
+    this.highlightedCode = this.sanitizer.bypassSecurityTrustHtml(highlighted);
   }
-
-  //highlightedCode: SafeHtml | null = null;
-  highlightedCode = computed(() => {
-    console.log(this.code());
-    console.log(this.highlightService.highlighter);
-
-    const highlighter = this.highlightService.highlighter;
-
-    if (highlighter === null) {
-      console.error('Failed to load highlighter');
-    }
-
-    const highlighted = highlighter!.codeToHtml(this.code(), {
-      lang: this.language(),
-      theme: this.theme(),
-    });
-
-    return this.sanitizer.bypassSecurityTrustHtml(highlighted);
-  });
 }
