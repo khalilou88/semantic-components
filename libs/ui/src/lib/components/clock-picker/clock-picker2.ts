@@ -1,9 +1,19 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  signal,
+} from '@angular/core';
 
 @Component({
   selector: 'sc-clock-picker2',
   imports: [],
-  template: ``,
+  template: `
+    <div class="w-80 p-5 bg-white rounded-lg shadow-lg">
+      <div class="text-center text-2xl mb-5">{{ formattedHour() }}:{{ formattedMinute() }}</div>
+    </div>
+  `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -12,6 +22,11 @@ export class ScClockPicker2 {
   protected readonly isHourMode = signal(true);
   protected readonly selectedHour = signal(12);
   protected readonly selectedMinute = signal(0);
+
+  protected readonly formattedHour = computed(() => String(this.selectedHour()).padStart(2, '0'));
+  protected readonly formattedMinute = computed(() =>
+    String(this.selectedMinute()).padStart(2, '0'),
+  );
 
   // Generate positions for clock numbers
   generateClockNumbers = () => {
