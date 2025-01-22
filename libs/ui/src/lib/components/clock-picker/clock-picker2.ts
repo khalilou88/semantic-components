@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -8,10 +9,29 @@ import {
 
 @Component({
   selector: 'sc-clock-picker2',
-  imports: [],
+  imports: [NgClass],
   template: `
     <div class="w-80 p-5 bg-white rounded-lg shadow-lg">
       <div class="text-center text-2xl mb-5">{{ formattedHour() }}:{{ formattedMinute() }}</div>
+
+      <!-- Mode switches -->
+      <div class="flex justify-center gap-2">
+        <button
+          class="px-4 py-2 rounded text-white"
+          [ngClass]="isHourMode() ? 'bg-blue-600' : 'bg-blue-400'"
+          (click)="isHourMode.set(true)"
+        >
+          Hours
+        </button>
+
+        <button
+          class="px-4 py-2 rounded text-white"
+          [ngClass]="!isHourMode() ? 'bg-blue-600' : 'bg-blue-400'"
+          (click)="isHourMode.set(false)"
+        >
+          Minutes
+        </button>
+      </div>
     </div>
   `,
   styles: ``,
