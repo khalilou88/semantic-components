@@ -75,7 +75,7 @@ import {
 export class ScClockPicker2 {
   protected readonly isHourMode = signal(true);
   protected readonly selectedHour = signal(12);
-  protected readonly selectedMinute = signal(0);
+  protected readonly selectedMinute = signal(60);
 
   protected readonly formattedHour = computed(() => String(this.selectedHour()).padStart(2, '0'));
   protected readonly formattedMinute = computed(() =>
@@ -116,7 +116,8 @@ export class ScClockPicker2 {
 
   getHandRotation = computed(() => {
     const value = this.isHourMode() ? this.selectedHour() : this.selectedMinute() / 5;
-    const angle = value * (360 / (this.isHourMode() ? 12 : 60 / 5)) - 90;
+    // Calculate angle, ensuring correct rotation and offset
+    const angle = (value % 12) * (360 / 12);
     return `rotate(${angle}deg)`;
   });
 
