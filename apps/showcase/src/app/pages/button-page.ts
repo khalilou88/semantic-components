@@ -93,7 +93,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
               <sc-tab-content>
                 <div sc-card>
                   <div class="m-10 flex gap-2" sc-card-content>
-                    <sc-code-highlighter [code]="codeSnippet"></sc-code-highlighter>
+                    <sc-code-highlighter [code]="codeSnippet" />
                   </div>
                 </div>
               </sc-tab-content>
