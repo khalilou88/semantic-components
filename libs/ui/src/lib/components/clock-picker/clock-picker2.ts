@@ -25,14 +25,14 @@ import {
           <!--  Clock hand -->
           <div
             class="absolute left-1/2 top-5 h-20 w-0.5 origin-bottom -translate-x-1/2 bg-blue-500"
-            [style]="myStyle()"
+            [style.transform]="getHandRotation()"
           ></div>
 
           <!-- Numbers -->
 
           @for (item of generateClockNumbers(); track $index) {
             <button
-              class="absolute flex size-8 cursor-pointer items-center justify-center rounded-full text-sm"
+              class="absolute flex size-8 items-center justify-center rounded-full text-sm"
               [ngClass]="
                 (isHourMode() && item.number === selectedHour()) ||
                 (!isHourMode() && item.number * 5 === selectedMinute())
@@ -42,7 +42,7 @@ import {
               [style]="item.style"
               (click)="handleNumberClick(item.number)"
             >
-              {{ isHourMode() ? item.number : item.number * 5 }}
+              {{ numToDisplay(item.number) }}
             </button>
           }
         </div>
@@ -77,10 +77,26 @@ export class ScClockPicker2 {
   protected readonly selectedHour = signal(12);
   protected readonly selectedMinute = signal(60);
 
+  protected numToDisplay(number: number) {
+    if (this.isHourMode()) {
+      return number;
+    }
+    const minutes = number * 5;
+    if (minutes === 60) {
+      return 0;
+    }
+    return minutes;
+  }
+
   protected readonly formattedHour = computed(() => String(this.selectedHour()).padStart(2, '0'));
-  protected readonly formattedMinute = computed(() =>
-    String(this.selectedMinute()).padStart(2, '0'),
-  );
+  protected readonly formattedMinute = computed(() => {
+    let minutes = this.selectedMinute();
+    if (minutes === 60) {
+      minutes = 0;
+    }
+
+    return String(minutes).padStart(2, '0');
+  });
 
   // Generate positions for clock numbers
   generateClockNumbers = computed(() => {
@@ -94,11 +110,13 @@ export class ScClockPicker2 {
       const x = Math.cos((angle * Math.PI) / 180) * radius;
       const y = Math.sin((angle * Math.PI) / 180) * radius;
 
+      //86 because the width of div is 204 and the width of the button is 32
+      // 86 = (204 - 32 ) / 2
       items.push({
         number: i,
         style: {
-          left: `${x + 100}px`,
-          top: `${y + 100}px`,
+          left: `${x + 86}px`,
+          top: `${y + 86}px`,
         },
       });
     }
@@ -120,6 +138,4 @@ export class ScClockPicker2 {
     const angle = (value % 12) * (360 / 12);
     return `rotate(${angle}deg)`;
   });
-
-  myStyle = computed(() => `transform: ${this.getHandRotation()}`);
 }
