@@ -31,7 +31,7 @@ import {
           <!-- Numbers -->
 
           @for (item of generateClockNumbers(); track $index) {
-            <div
+            <button
               class="absolute flex size-8 cursor-pointer items-center justify-center rounded-full text-sm"
               [ngClass]="
                 (isHourMode() && item.number === selectedHour()) ||
@@ -43,7 +43,7 @@ import {
               (click)="handleNumberClick(item.number)"
             >
               {{ isHourMode() ? item.number : item.number * 5 }}
-            </div>
+            </button>
           }
         </div>
       </div>
