@@ -12,7 +12,7 @@ export class ShikiService {
     if (!this.highlighter) {
       this.highlighter = await createHighlighter({
         themes: ['github-dark'],
-        langs: ['typescript', 'javascript', 'html', 'css'], // add languages you need
+        langs: ['angular-html'],
       });
     }
     return this.highlighter;

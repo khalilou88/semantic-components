@@ -4,6 +4,7 @@ import {
   OnInit,
   ViewEncapsulation,
   input,
+  signal,
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
@@ -13,7 +14,7 @@ import { ShikiService } from './shiki.service';
   selector: 'sc-code-highlighter',
   imports: [],
   template: `
-    <pre [innerHTML]="highlightedCode"></pre>
+    <div [innerHTML]="highlightedCode()"></div>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -21,10 +22,10 @@ import { ShikiService } from './shiki.service';
 })
 export class ScCodeHighlighter implements OnInit {
   code = input.required<string>();
-  language = input('html');
+  language = input('angular-html');
   theme = input('github-dark');
 
-  highlightedCode: SafeHtml = '';
+  highlightedCode = signal<SafeHtml>('');
 
   constructor(
     private readonly shikiService: ShikiService,
@@ -33,6 +34,6 @@ export class ScCodeHighlighter implements OnInit {
 
   async ngOnInit() {
     const highlighted = await this.shikiService.highlightCode(this.code(), this.language());
-    this.highlightedCode = this.sanitizer.bypassSecurityTrustHtml(highlighted);
+    this.highlightedCode.set(this.sanitizer.bypassSecurityTrustHtml(highlighted));
   }
 }
