@@ -14,9 +14,16 @@ import { ShikiService } from './shiki.service';
   selector: 'sc-code-highlighter',
   imports: [],
   template: `
-    <div [innerHTML]="highlightedCode()"></div>
+    <div class="code-block" [innerHTML]="highlightedCode()"></div>
   `,
-  styles: ``,
+  styles: `
+    .code-block {
+      background: #24292e;
+      border-radius: 6px;
+      padding: 16px;
+      padding-bottom: 40px;
+    }
+  `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

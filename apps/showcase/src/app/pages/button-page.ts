@@ -91,11 +91,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
             <sc-tab>
               <sc-tab-label>Code</sc-tab-label>
               <sc-tab-content>
-                <div sc-card>
-                  <div class="m-10 flex gap-2" sc-card-content>
-                    <sc-code-highlighter [code]="codeSnippet" />
-                  </div>
-                </div>
+                <sc-code-highlighter [code]="codeSnippet" />
               </sc-tab-content>
             </sc-tab>
           </sc-tabs>
@@ -373,7 +369,8 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
 export default class ButtonPage {
   class = signal<string>('block w-full');
 
-  codeSnippet = `<button sc-button type="button">Primary</button>
+  codeSnippet = `
+  <button sc-button type="button">Primary</button>
   <button sc-button variant="secondary" type="button">Secondary</button>
   <button sc-button variant="destructive" type="button">Destructive</button>
   <button sc-button variant="outline" type="button">Outline</button>
