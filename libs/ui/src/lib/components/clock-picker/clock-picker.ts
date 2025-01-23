@@ -3,11 +3,11 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  Input,
   OnInit,
   Output,
   ViewChild,
   ViewEncapsulation,
+  input,
 } from '@angular/core';
 
 @Component({
@@ -93,7 +93,7 @@ import {
 })
 export class ScClockPicker implements OnInit {
   @ViewChild('clockFace') clockFace!: ElementRef;
-  @Input() initialTime?: string;
+  readonly initialTime = input<string>();
   @Output() timeSelected = new EventEmitter<string>();
 
   hours = Array.from({ length: 12 }, (_, i) => i);
@@ -115,8 +115,9 @@ export class ScClockPicker implements OnInit {
   }
 
   ngOnInit() {
-    if (this.initialTime) {
-      this.parseInitialTime(this.initialTime);
+    const initialTime = this.initialTime();
+    if (initialTime) {
+      this.parseInitialTime(initialTime);
     }
   }
 

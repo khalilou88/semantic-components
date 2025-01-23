@@ -1,4 +1,4 @@
-import { DatePipe, NgClass, NgFor, NgIf } from '@angular/common';
+import { DatePipe, NgClass } from '@angular/common';
 import {
   AfterViewChecked,
   ChangeDetectionStrategy,
@@ -26,7 +26,7 @@ interface Message {
 
 @Component({
   selector: 'app-chat-page',
-  imports: [NgClass, NgFor, DatePipe, FormsModule, NgIf, ScImagePlaceholder],
+  imports: [NgClass, DatePipe, FormsModule, ScImagePlaceholder],
   template: `
     <div class="mx-auto flex h-[600px] max-w-xl flex-col rounded-xl border bg-white shadow-lg">
       <!-- Chat Header -->
@@ -34,11 +34,13 @@ interface Message {
         <div class="flex items-center space-x-3">
           <!-- <img class="size-10 rounded-full" src="/api/placeholder/50/50" alt="Chat Partner" /> -->
 
-          <sc-image-placeholder
+          <img
+            class="size-10 rounded-full"
             [width]="50"
             [height]="50"
             [text]="'Chat Partner'"
-          ></sc-image-placeholder>
+            sc-image-placeholder
+          />
 
           <div>
             <h2 class="font-semibold">AI Assistant</h2>
@@ -54,7 +56,7 @@ interface Message {
 
       <!-- Messages Container -->
       <div class="grow space-y-4 overflow-y-auto bg-gray-50 p-4" #chatContainer>
-        <ng-container *ngFor="let message of messages">
+        @for (message of messages; track message) {
           <div
             class="mb-3"
             [ngClass]="{
@@ -71,19 +73,20 @@ interface Message {
               }"
             >
               {{ message.text }}
-
               <!-- Timestamp & Status -->
               <div class="mt-1 flex justify-between text-xs text-opacity-70">
                 <span>
                   {{ message.timestamp | date: 'shortTime' }}
                 </span>
-                <span class="ml-2" *ngIf="message.status">
-                  {{ message.status }}
-                </span>
+                @if (message.status) {
+                  <span class="ml-2">
+                    {{ message.status }}
+                  </span>
+                }
               </div>
             </div>
           </div>
-        </ng-container>
+        }
       </div>
 
       <!-- Message Input Area -->

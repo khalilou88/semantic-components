@@ -2,10 +2,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  Input,
   OnInit,
   Output,
   ViewEncapsulation,
+  input,
 } from '@angular/core';
 
 @Component({
@@ -98,7 +98,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScTimePicker2 implements OnInit {
-  @Input() initialTime?: string;
+  readonly initialTime = input<string>();
   @Output() timeSelected = new EventEmitter<string>();
 
   isOpen = false;
@@ -111,8 +111,9 @@ export class ScTimePicker2 implements OnInit {
   selectedPeriod = 'AM';
 
   ngOnInit() {
-    if (this.initialTime) {
-      this.parseInitialTime(this.initialTime);
+    const initialTime = this.initialTime();
+    if (initialTime) {
+      this.parseInitialTime(initialTime);
     }
   }
 

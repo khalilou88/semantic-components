@@ -25,3 +25,5 @@ nx generate @angular/core:cleanup-unused-imports
 nx generate @angular/core:control-flow
 
 nx generate @angular/core:inject
+
+nx generate @angular/core:signal-input-migration

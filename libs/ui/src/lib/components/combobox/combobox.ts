@@ -5,11 +5,11 @@ import {
   ElementRef,
   EventEmitter,
   HostListener,
-  Input,
   OnInit,
   Output,
   ViewEncapsulation,
   inject,
+  input,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
@@ -21,9 +21,9 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
   template: `
     <div class="relative w-full" #container>
       <!-- Label -->
-      @if (label) {
-        <label class="mb-1 block text-sm font-medium text-gray-700" [for]="id">
-          {{ label }}
+      @if (label()) {
+        <label class="mb-1 block text-sm font-medium text-gray-700" [for]="id()">
+          {{ label() }}
         </label>
       }
 
@@ -31,9 +31,9 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
       <div class="relative">
         <input
           class="w-full rounded-lg border px-4 py-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
-          [id]="id"
+          [id]="id()"
           [formControl]="searchControl"
-          [placeholder]="placeholder"
+          [placeholder]="placeholder()"
           [attr.aria-expanded]="isOpen"
           [attr.aria-activedescendant]="activeId"
           [attr.aria-controls]="listboxId"
@@ -67,21 +67,21 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
         <div
           class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white shadow-lg"
           [id]="listboxId"
-          [attr.aria-label]="label || 'Options'"
+          [attr.aria-label]="label() || 'Options'"
           role="listbox"
         >
-          @if (loading) {
+          @if (loading()) {
             <div class="p-4 text-center text-gray-500" role="status">Loading...</div>
           }
-          @if (!loading && filteredOptions.length === 0) {
+          @if (!loading() && filteredOptions.length === 0) {
             <div class="p-4 text-center text-gray-500" role="status">No results found</div>
           }
-          @if (!loading && filteredOptions.length > 0) {
+          @if (!loading() && filteredOptions.length > 0) {
             <ul>
               @for (option of filteredOptions; track option; let i = $index) {
                 <li
                   class="cursor-pointer px-4 py-2 outline-none"
-                  [id]="id + '-option-' + i"
+                  [id]="id() + '-option-' + i"
                   [attr.aria-selected]="i === activeIndex"
                   [class.bg-blue-100]="i === activeIndex"
                   (click)="handleOptionClick($event, option)"
@@ -92,7 +92,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
                 >
                   <ng-container
                     *ngTemplateOutlet="
-                      optionTemplate || defaultOptionTemplate;
+                      optionTemplate() || defaultOptionTemplate;
                       context: { $implicit: option }
                     "
                   ></ng-container>
@@ -116,13 +116,13 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 export class ScCombobox implements OnInit {
   private readonly elementRef = inject(ElementRef);
 
-  @Input() id = `combobox-${Math.random().toString(36).substr(2, 9)}`;
-  @Input() label?: string;
-  @Input() placeholder = 'Select an option';
-  @Input() options: any[] = [];
-  @Input() optionTemplate?: any;
-  @Input() loading = false;
-  @Input() labelKey = 'label';
+  readonly id = input(`combobox-${Math.random().toString(36).substr(2, 9)}`);
+  readonly label = input<string>();
+  readonly placeholder = input('Select an option');
+  readonly options = input<any[]>([]);
+  readonly optionTemplate = input<any>();
+  readonly loading = input(false);
+  readonly labelKey = input('label');
 
   @Output() optionSelected = new EventEmitter<any>();
   @Output() search = new EventEmitter<string>();
@@ -131,12 +131,12 @@ export class ScCombobox implements OnInit {
   isOpen = false;
   activeIndex = -1;
   filteredOptions: any[] = [];
-  listboxId = `${this.id}-listbox`;
+  listboxId = `${this.id()}-listbox`;
 
   private closeTimeout?: any;
 
   get activeId(): string {
-    return this.activeIndex >= 0 ? `${this.id}-option-${this.activeIndex}` : '';
+    return this.activeIndex >= 0 ? `${this.id()}-option-${this.activeIndex}` : '';
   }
 
   constructor() {
@@ -148,7 +148,7 @@ export class ScCombobox implements OnInit {
   }
 
   ngOnInit() {
-    this.listboxId = `${this.id}-listbox`;
+    this.listboxId = `${this.id()}-listbox`;
   }
 
   // Handle button interactions
@@ -254,7 +254,7 @@ export class ScCombobox implements OnInit {
 
   filterOptions() {
     const query = this.searchControl.value?.toLowerCase() ?? '';
-    this.filteredOptions = this.options.filter((option) =>
+    this.filteredOptions = this.options().filter((option) =>
       this.getOptionLabel(option).toLowerCase().includes(query),
     );
     this.activeIndex = -1;
@@ -267,7 +267,7 @@ export class ScCombobox implements OnInit {
   }
 
   getOptionLabel(option: any): string {
-    return typeof option === 'object' ? option[this.labelKey] : option.toString();
+    return typeof option === 'object' ? option[this.labelKey()] : option.toString();
   }
 
   onKeyDown(event: KeyboardEvent) {
@@ -301,7 +301,7 @@ export class ScCombobox implements OnInit {
 
   private scrollActiveOptionIntoView() {
     if (this.activeIndex >= 0) {
-      const activeOption = document.getElementById(`${this.id}-option-${this.activeIndex}`);
+      const activeOption = document.getElementById(`${this.id()}-option-${this.activeIndex}`);
       if (activeOption) {
         activeOption.scrollIntoView({ block: 'nearest' });
       }

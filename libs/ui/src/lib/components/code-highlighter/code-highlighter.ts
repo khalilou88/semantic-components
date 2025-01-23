@@ -3,6 +3,7 @@ import {
   Component,
   OnInit,
   ViewEncapsulation,
+  inject,
   input,
   signal,
 } from '@angular/core';
@@ -28,16 +29,14 @@ import { ShikiService } from './shiki.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCodeHighlighter implements OnInit {
+  private readonly shikiService = inject(ShikiService);
+  private readonly sanitizer = inject(DomSanitizer);
+
   code = input.required<string>();
   language = input('angular-html');
   theme = input('github-dark');
 
   highlightedCode = signal<SafeHtml>('');
-
-  constructor(
-    private readonly shikiService: ShikiService,
-    private readonly sanitizer: DomSanitizer,
-  ) {}
 
   async ngOnInit() {
     const highlighted = await this.shikiService.highlightCode(this.code(), this.language());
