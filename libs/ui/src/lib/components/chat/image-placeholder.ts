@@ -39,6 +39,8 @@ export class ScImagePlaceholder {
   readonly width = input(300);
   readonly height = input(200);
   readonly alt = input('Placeholder');
+
+  //TODO use alt instead of text
   readonly text = input('');
 
   protected readonly placeholderSrc = computed(() => {

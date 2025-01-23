@@ -39,6 +39,7 @@ interface Message {
             [width]="50"
             [height]="50"
             [text]="'Chat Partner'"
+            alt="Chat Partner"
             sc-image-placeholder
           />
 
