@@ -52,6 +52,11 @@ export const appRoutes: Route[] = [
             title: 'Combobox Page',
           },
           {
+            path: 'chat',
+            loadComponent: () => import('./pages/chat-page'),
+            title: 'Chat Page',
+          },
+          {
             path: 'home',
             loadComponent: () => import('./pages/home-page'),
             title: 'Home Page',
