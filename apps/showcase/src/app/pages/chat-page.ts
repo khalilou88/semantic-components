@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { ScImagePlaceholder } from '@semantic-components/ui';
 import { BehaviorSubject } from 'rxjs';
 
 interface Message {
@@ -25,13 +26,20 @@ interface Message {
 
 @Component({
   selector: 'app-chat-page',
-  imports: [NgClass, NgFor, DatePipe, FormsModule, NgIf],
+  imports: [NgClass, NgFor, DatePipe, FormsModule, NgIf, ScImagePlaceholder],
   template: `
     <div class="mx-auto flex h-[600px] max-w-xl flex-col rounded-xl border bg-white shadow-lg">
       <!-- Chat Header -->
       <div class="flex items-center justify-between rounded-t-xl bg-gray-100 p-4">
         <div class="flex items-center space-x-3">
-          <img class="size-10 rounded-full" src="/api/placeholder/50/50" alt="Chat Partner" />
+          <!-- <img class="size-10 rounded-full" src="/api/placeholder/50/50" alt="Chat Partner" /> -->
+
+          <sc-image-placeholder
+            [width]="50"
+            [height]="50"
+            [text]="'Chat Partner'"
+          ></sc-image-placeholder>
+
           <div>
             <h2 class="font-semibold">AI Assistant</h2>
             <p class="text-xs text-gray-500">Online</p>
