@@ -1,1 +1,1 @@
-export * from './image-placeholder';
+export * from './chat';
