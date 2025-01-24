@@ -6,11 +6,11 @@ import {
   signal,
 } from '@angular/core';
 
-import { ScPlainInput } from '@semantic-components/ui';
+import { ScButton, ScPlainInput } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-input-page',
-  imports: [ScPlainInput],
+  imports: [ScPlainInput, ScButton],
   template: `
     <div class="m-10">
       <p>inputs</p>
@@ -18,11 +18,17 @@ import { ScPlainInput } from '@semantic-components/ui';
       <br />
       <br />
 
+      <!-- Search input -->
       <input
         class="grow rounded-lg border p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
         [(value)]="search"
+        (keydown.escape)="search.set('')"
         sc-plain-input
       />
+      <br />
+      <br />
+
+      <button (click)="reset()" sc-button>Reset</button>
       <br />
       <br />
     </div>
@@ -33,6 +39,10 @@ import { ScPlainInput } from '@semantic-components/ui';
 })
 export default class InputPage {
   protected readonly search = signal('');
+
+  reset() {
+    this.search.set('');
+  }
 
   constructor() {
     effect(() => {
