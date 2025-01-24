@@ -57,6 +57,11 @@ export const appRoutes: Route[] = [
             title: 'Chat Page',
           },
           {
+            path: 'rtl',
+            loadComponent: () => import('./pages/rtl-page'),
+            title: 'RTL Page',
+          },
+          {
             path: 'home',
             loadComponent: () => import('./pages/home-page'),
             title: 'Home Page',
