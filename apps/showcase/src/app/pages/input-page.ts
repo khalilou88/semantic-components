@@ -32,7 +32,7 @@ import { ScPlainInput } from '@semantic-components/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class InputPage {
-  readonly search = signal('');
+  protected readonly search = signal('');
 
   constructor() {
     effect(() => {
