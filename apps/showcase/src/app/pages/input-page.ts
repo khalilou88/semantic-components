@@ -6,11 +6,11 @@ import {
   signal,
 } from '@angular/core';
 
-import { ScButton, ScPlainInput } from '@semantic-components/ui';
+import { ScButton, ScInput } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-input-page',
-  imports: [ScPlainInput, ScButton],
+  imports: [ScInput, ScButton],
   template: `
     <div class="m-10">
       <p>inputs</p>
@@ -19,12 +19,7 @@ import { ScButton, ScPlainInput } from '@semantic-components/ui';
       <br />
 
       <!-- Search input -->
-      <input
-        class="grow rounded-lg border p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        [(value)]="search"
-        (keydown.escape)="search.set('')"
-        sc-plain-input
-      />
+      <input [(value)]="search" (keydown.escape)="search.set('')" sc-input />
       <br />
       <br />
 
