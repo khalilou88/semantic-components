@@ -28,6 +28,10 @@ import { ScButton, ScPlainInput } from '@semantic-components/ui';
       <br />
       <br />
 
+      search: {{ search() }}
+      <br />
+      <br />
+
       <button (click)="reset()" sc-button>Reset</button>
       <br />
       <br />
@@ -38,7 +42,7 @@ import { ScButton, ScPlainInput } from '@semantic-components/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class InputPage {
-  protected readonly search = signal('');
+  protected readonly search = signal('test');
 
   reset() {
     this.search.set('');

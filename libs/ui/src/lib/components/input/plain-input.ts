@@ -3,6 +3,7 @@ import { Directive, ElementRef, inject, model } from '@angular/core';
 @Directive({
   selector: 'input[sc-plain-input]',
   host: {
+    '[value]': 'value()',
     '(input)': 'handleInput()',
   },
 })
