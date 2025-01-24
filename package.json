@@ -58,7 +58,7 @@
     "embla-carousel": "^8.5.2",
     "embla-carousel-autoplay": "^8.5.2",
     "express": "~4.21.2",
-    "motion": "^12.0.1",
+    "motion": "^12.0.3",
     "rxjs": "~7.8.1",
     "shiki": "^2.1.0",
     "tailwind-merge": "^2.6.0",
