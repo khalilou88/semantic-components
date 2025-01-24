@@ -57,6 +57,11 @@ export const appRoutes: Route[] = [
             title: 'Chat Page',
           },
           {
+            path: 'deferred-event-plugin',
+            loadComponent: () => import('./pages/deferred-event-plugin-page'),
+            title: 'Deferred Event Plugin Page',
+          },
+          {
             path: 'rtl',
             loadComponent: () => import('./pages/rtl-page'),
             title: 'RTL Page',
