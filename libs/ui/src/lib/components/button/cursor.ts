@@ -5,7 +5,7 @@ import { Directive, ElementRef, OnInit, PLATFORM_ID, Renderer2, inject } from '@
   selector: 'button[sc-cursor], a[sc-cursor]',
 })
 export class ScCursor implements OnInit {
-  isPlatformBrowser = isPlatformBrowser(inject(PLATFORM_ID));
+  private readonly isPlatformBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
   private readonly hostRef = inject(ElementRef);
   private readonly renderer = inject(Renderer2);
