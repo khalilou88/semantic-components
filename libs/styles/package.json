@@ -1,6 +1,15 @@
 {
   "name": "@semantic-components/styles",
   "version": "0.0.1",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "peerDependencies": {},
-  "sideEffects": false
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/khalilou88/semantic-components",
+    "directory": "libs/styles"
+  }
 }
