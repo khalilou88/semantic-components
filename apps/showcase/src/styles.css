@@ -1,5 +1,5 @@
 @import '@angular/cdk/overlay-prebuilt.css';
-@import '@semantic-components/styles.css';
+@import '@semantic-components/ui/styles.css';
 
 @config "../../../tailwind.config.js";
 
