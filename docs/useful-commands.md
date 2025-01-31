@@ -27,3 +27,5 @@ nx generate @angular/core:control-flow
 nx generate @angular/core:inject
 
 nx generate @angular/core:signal-input-migration
+
+nx g @nx/angular:library libs/styles --publishable --import-path=@semantic-components/styles
