@@ -32,6 +32,6 @@ export const appConfig: ApplicationConfig = {
       multi: true,
       useClass: DeferredEventPlugin,
     },
-    // { provide: LOCALE_ID, useValue: 'fr' },
+    { provide: LOCALE_ID, useValue: 'fr' },
   ],
 };
