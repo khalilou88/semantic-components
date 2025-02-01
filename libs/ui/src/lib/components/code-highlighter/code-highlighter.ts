@@ -22,7 +22,11 @@ import { ShikiService } from './shiki.service';
     '[class]': 'class()',
     '[innerHTML]': 'highlightedCode()',
   },
-  styles: ``,
+  styles: `
+    pre {
+      @apply pb-6 px-4 rounded-md;
+    }
+  `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -31,9 +35,7 @@ export class ScCodeHighlighter implements OnInit {
     alias: 'class',
   });
 
-  protected readonly class = computed(() =>
-    cn('block pt-4 pb-10 px-4 rounded-md bg-[#24292e]', this.classInput()),
-  );
+  protected readonly class = computed(() => cn('block', this.classInput()));
 
   private readonly shikiService = inject(ShikiService);
   private readonly sanitizer = inject(DomSanitizer);
