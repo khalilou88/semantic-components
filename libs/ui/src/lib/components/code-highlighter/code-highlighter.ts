@@ -17,20 +17,12 @@ import { ShikiService } from './shiki.service';
 @Component({
   selector: 'sc-code-highlighter',
   imports: [],
-  template: `
-    <div class="code-block" [innerHTML]="highlightedCode()"></div>
-  `,
+  template: ``,
   host: {
     '[class]': 'class()',
+    '[innerHTML]': 'highlightedCode()',
   },
-  styles: `
-    .code-block {
-      background: #24292e;
-      border-radius: 6px;
-      padding: 16px;
-      padding-bottom: 40px;
-    }
-  `,
+  styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -39,7 +31,9 @@ export class ScCodeHighlighter implements OnInit {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('block', this.classInput()));
+  protected readonly class = computed(() =>
+    cn('block pt-4 pb-10 px-4 rounded-md bg-[#24292e]', this.classInput()),
+  );
 
   private readonly shikiService = inject(ShikiService);
   private readonly sanitizer = inject(DomSanitizer);
