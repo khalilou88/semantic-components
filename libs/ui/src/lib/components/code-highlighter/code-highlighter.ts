@@ -3,11 +3,14 @@ import {
   Component,
   OnInit,
   ViewEncapsulation,
+  computed,
   inject,
   input,
   signal,
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+
+import { cn } from '@semantic-components/utils';
 
 import { ShikiService } from './shiki.service';
 
@@ -17,6 +20,9 @@ import { ShikiService } from './shiki.service';
   template: `
     <div class="code-block" [innerHTML]="highlightedCode()"></div>
   `,
+  host: {
+    '[class]': 'class()',
+  },
   styles: `
     .code-block {
       background: #24292e;
@@ -29,11 +35,17 @@ import { ShikiService } from './shiki.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCodeHighlighter implements OnInit {
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
+
+  protected readonly class = computed(() => cn('block', this.classInput()));
+
   private readonly shikiService = inject(ShikiService);
   private readonly sanitizer = inject(DomSanitizer);
 
   code = input.required<string>();
-  language = input('angular-html');
+  language = input<'angular-html' | 'typescript'>('angular-html');
   theme = input('github-dark');
 
   highlightedCode = signal<SafeHtml>('');

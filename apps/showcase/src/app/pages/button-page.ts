@@ -66,6 +66,10 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
 
         <h2 sc-page-subtitle>Usage</h2>
 
+        <sc-code-highlighter class="mt-2" [code]="codeSnippet1" language="typescript" />
+
+        <sc-code-highlighter class="mt-2" [code]="codeSnippet2" />
+
         <h2 class="mb-5" sc-page-subtitle>Examples</h2>
 
         <section class="my-10">
@@ -368,6 +372,12 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
 })
 export default class ButtonPage {
   class = signal<string>('block w-full');
+
+  codeSnippet1 = `
+  import { ScButton } from '@semantic-components/ui';`;
+
+  codeSnippet2 = `
+  <button sc-button type="button">Primary</button>`;
 
   codeSnippet = `
   <button sc-button type="button">Primary</button>
