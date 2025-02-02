@@ -6,7 +6,6 @@ import {
   provideZoneChangeDetection,
 } from '@angular/core';
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter } from '@angular/router';
 
 import { DeferredEventPlugin } from '@semantic-components/event-manager';
@@ -20,7 +19,6 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
     provideHttpClient(withFetch()),
-    provideAnimationsAsync(),
     provideAppInitializer(scThemeProvider()),
     provideScReCaptchaSettings({
       v2SiteKey: '6Ldl1bQqAAAAANUJsycemVBh6pMXSYAQeOIZyfV2',
