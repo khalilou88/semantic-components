@@ -3,7 +3,7 @@
   "dest": "../../dist/libs/ui",
   "assets": [
     {
-      "input": "src/styles",
+      "input": "src/lib/styles",
       "glob": "styles.css",
       "output": "."
     }
