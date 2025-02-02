@@ -252,11 +252,6 @@ export const appRoutes: Route[] = [
             title: 'Tags Page',
           },
           {
-            path: 'button-showcase',
-            loadComponent: () => import('./pages/button-showcase'),
-            title: 'Button Showcase Page',
-          },
-          {
             path: 'toggle',
             loadComponent: () => import('./pages/toggle-page'),
             title: 'Toggle Page',

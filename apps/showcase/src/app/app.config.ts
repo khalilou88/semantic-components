@@ -6,7 +6,7 @@ import {
   provideZoneChangeDetection,
 } from '@angular/core';
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withInMemoryScrolling } from '@angular/router';
 
 import { DeferredEventPlugin } from '@semantic-components/event-manager';
 import { provideScReCaptchaSettings } from '@semantic-components/re-captcha';
@@ -17,7 +17,13 @@ import { appRoutes } from './app.routes';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(appRoutes),
+    provideRouter(
+      appRoutes,
+      withInMemoryScrolling({
+        anchorScrolling: 'enabled',
+        scrollPositionRestoration: 'enabled',
+      }),
+    ),
     provideHttpClient(withFetch()),
     provideAppInitializer(scThemeProvider()),
     provideScReCaptchaSettings({

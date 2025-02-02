@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 import {
   ScBreadcrumb,
@@ -45,6 +46,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
     ScHeading,
     ScCodeHighlighter,
     ScCardContent,
+    RouterLink,
   ],
   template: `
     <div class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
@@ -284,7 +286,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
           </sc-tabs>
         </section>
 
-        <section class="my-10">
+        <section class="my-10" id="button-with-loading-state">
           <h3 class="mb-2" sc-heading level="3">Button with loading state</h3>
 
           <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
@@ -349,9 +351,10 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
                     <li class="mt-0 pt-2">
                       <a
                         class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
-                        href="#horizontal-scrolling"
+                        routerLink="."
+                        fragment="button-with-loading-state"
                       >
-                        Horizontal Scrolling
+                        Button with loading state
                       </a>
                     </li>
                   </ul>
