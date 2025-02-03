@@ -6,6 +6,7 @@ import {
   ScSidebarGroup,
   ScSidebarGroupContent,
   ScSidebarMenu,
+  ScSidebarMenuButton,
   ScSidebarMenuItem,
   ScSidebarProvider,
   ScSidebarState,
@@ -28,6 +29,7 @@ import { LayoutState } from '../services/layout-state';
     ScSidebarMenu,
     ScSidebarMenuItem,
     RouterLink,
+    ScSidebarMenuButton,
   ],
   template: `
     <!--div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -45,13 +47,13 @@ import { LayoutState } from '../services/layout-state';
           <div sc-sidebar-group-content>
             <ul sc-sidebar-menu>
               <li sc-sidebar-menu-item>
-                <a routerLink="button">
+                <a routerLink="button" sc-sidebar-menu-button>
                   <span>Button</span>
                 </a>
               </li>
 
               <li sc-sidebar-menu-item>
-                <a routerLink="checkbox">
+                <a routerLink="checkbox" sc-sidebar-menu-button>
                   <span>Checkbox</span>
                 </a>
               </li>
