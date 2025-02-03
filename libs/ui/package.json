@@ -45,7 +45,8 @@
     "@semantic-components/utils": ">=0.0.1",
     "@semantic-components/supabase": ">=0.0.1",
     "@angular/platform-browser": ">=19.0.0",
-    "shiki": "^2.1.0"
+    "shiki": "^2.1.0",
+    "@angular/router": ">=19.0.0"
   },
   "sideEffects": false,
   "repository": {
