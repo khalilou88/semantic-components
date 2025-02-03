@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 
 import {
   ScSidebar,
   ScSidebarGroup,
-  ScSidebarGroupAction,
   ScSidebarGroupContent,
   ScSidebarMenu,
   ScSidebarMenuItem,
@@ -25,10 +24,10 @@ import { LayoutState } from '../services/layout-state';
     ScSidebarToggler,
     SiPanelLeftIcon,
     ScSidebarGroup,
-    ScSidebarGroupAction,
     ScSidebarGroupContent,
     ScSidebarMenu,
     ScSidebarMenuItem,
+    RouterLink,
   ],
   template: `
     <!--div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -42,14 +41,20 @@ import { LayoutState } from '../services/layout-state';
 
     <sc-sidebar-provider>
       <sc-sidebar>
-        <div class="border-2 border-red-600">Sidebar</div>
-
         <sc-sidebar-group>
-          <sc-sidebar-group-action>Button</sc-sidebar-group-action>
-
           <div sc-sidebar-group-content>
             <ul sc-sidebar-menu>
-              <li sc-sidebar-menu-item></li>
+              <li sc-sidebar-menu-item>
+                <a routerLink="button">
+                  <span>Button</span>
+                </a>
+              </li>
+
+              <li sc-sidebar-menu-item>
+                <a routerLink="checkbox">
+                  <span>Checkbox</span>
+                </a>
+              </li>
             </ul>
           </div>
         </sc-sidebar-group>
