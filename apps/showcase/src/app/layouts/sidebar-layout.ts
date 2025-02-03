@@ -3,6 +3,8 @@ import { RouterModule } from '@angular/router';
 
 import {
   ScSidebar,
+  ScSidebarGroup,
+  ScSidebarGroupAction,
   ScSidebarProvider,
   ScSidebarState,
   ScSidebarToggler,
@@ -13,7 +15,15 @@ import { LayoutState } from '../services/layout-state';
 
 @Component({
   selector: 'app-sidebar-layout',
-  imports: [RouterModule, ScSidebarProvider, ScSidebar, ScSidebarToggler, SiPanelLeftIcon],
+  imports: [
+    RouterModule,
+    ScSidebarProvider,
+    ScSidebar,
+    ScSidebarToggler,
+    SiPanelLeftIcon,
+    ScSidebarGroup,
+    ScSidebarGroupAction,
+  ],
   template: `
     <!--div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
       <div class="flex min-h-screen">
@@ -27,6 +37,10 @@ import { LayoutState } from '../services/layout-state';
     <sc-sidebar-provider>
       <sc-sidebar>
         <div class="border-2 border-red-600">Sidebar</div>
+
+        <sc-sidebar-group>
+          <sc-sidebar-group-action>Button</sc-sidebar-group-action>
+        </sc-sidebar-group>
       </sc-sidebar>
 
       <main class="w-full">
