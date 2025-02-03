@@ -19,6 +19,17 @@ export const appRoutes: Route[] = [
     ],
   },
   {
+    path: 'getting-started',
+    loadComponent: () => import('./layouts/sidebar-layout'),
+    children: [
+      {
+        path: 'installation',
+        loadComponent: () => import('./pages/installation-page'),
+        title: 'Installation Page',
+      },
+    ],
+  },
+  {
     path: 'components',
     loadComponent: () => import('./layouts/sidebar-layout'),
     children: [

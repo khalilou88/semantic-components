@@ -46,18 +46,32 @@ import { LayoutState } from '../services/layout-state';
     <sc-sidebar-provider>
       <sc-sidebar>
         <sc-sidebar-group>
+          <sc-sidebar-group-label>Getting Started</sc-sidebar-group-label>
+
+          <div sc-sidebar-group-content>
+            <ul sc-sidebar-menu>
+              <li sc-sidebar-menu-item>
+                <a routerLink="../getting-started/installation" sc-sidebar-menu-button>
+                  <span>Installation</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </sc-sidebar-group>
+
+        <sc-sidebar-group>
           <sc-sidebar-group-label>Components</sc-sidebar-group-label>
 
           <div sc-sidebar-group-content>
             <ul sc-sidebar-menu>
               <li sc-sidebar-menu-item>
-                <a routerLink="button" sc-sidebar-menu-button>
+                <a routerLink="../components/button" sc-sidebar-menu-button>
                   <span>Button</span>
                 </a>
               </li>
 
               <li sc-sidebar-menu-item>
-                <a routerLink="checkbox" sc-sidebar-menu-button>
+                <a routerLink="../components/checkbox" sc-sidebar-menu-button>
                   <span>Checkbox</span>
                 </a>
               </li>
