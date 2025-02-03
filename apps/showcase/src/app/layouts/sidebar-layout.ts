@@ -7,8 +7,8 @@ import {
   ScSidebarGroupContent,
   ScSidebarGroupLabel,
   ScSidebarMenu,
-  ScSidebarMenuButton,
   ScSidebarMenuItem,
+  ScSidebarMenuLink,
   ScSidebarProvider,
   ScSidebarState,
   ScSidebarToggler,
@@ -30,7 +30,7 @@ import { LayoutState } from '../services/layout-state';
     ScSidebarMenuItem,
     RouterLink,
     RouterOutlet,
-    ScSidebarMenuButton,
+    ScSidebarMenuLink,
     ScSidebarGroupLabel,
   ],
   template: `
@@ -51,7 +51,7 @@ import { LayoutState } from '../services/layout-state';
           <div sc-sidebar-group-content>
             <ul sc-sidebar-menu>
               <li sc-sidebar-menu-item>
-                <a routerLink="../getting-started/installation" sc-sidebar-menu-button>
+                <a routerLink="../getting-started/installation" sc-sidebar-menu-link>
                   <span>Installation</span>
                 </a>
               </li>
@@ -65,13 +65,13 @@ import { LayoutState } from '../services/layout-state';
           <div sc-sidebar-group-content>
             <ul sc-sidebar-menu>
               <li sc-sidebar-menu-item>
-                <a routerLink="../components/button" sc-sidebar-menu-button>
+                <a routerLink="../components/button" sc-sidebar-menu-link>
                   <span>Button</span>
                 </a>
               </li>
 
               <li sc-sidebar-menu-item>
-                <a routerLink="../components/checkbox" sc-sidebar-menu-button>
+                <a routerLink="../components/checkbox" sc-sidebar-menu-link>
                   <span>Checkbox</span>
                 </a>
               </li>

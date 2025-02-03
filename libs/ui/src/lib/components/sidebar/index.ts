@@ -8,4 +8,5 @@ export * from './sidebar-group-action';
 export * from './sidebar-group-content';
 export * from './sidebar-menu';
 export * from './sidebar-menu-item';
+export * from './sidebar-menu-link';
 export * from './sidebar-menu-button';
