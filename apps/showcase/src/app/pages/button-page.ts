@@ -249,7 +249,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
               <sc-tab-label>Preview</sc-tab-label>
               <sc-tab-content>
                 <div sc-card>
-                  <div class="m-10 flex items-center gap-2" sc-card-content>
+                  <div class="m-10 flex gap-2 p-0" sc-card-content>
                     <button sc-button type="button" size="icon">
                       <svg si-chevron-right-icon></svg>
                     </button>
