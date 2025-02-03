@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'sc-installation-page',
+  selector: 'app-installation-page',
   imports: [],
   template: `
     <p>installation-page works!</p>
