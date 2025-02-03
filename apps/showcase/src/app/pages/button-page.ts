@@ -49,7 +49,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
     RouterLink,
   ],
   template: `
-    <div class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
+    <div class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px] px-4">
       <div class="mx-auto w-full max-w-3xl">
         <nav sc-breadcrumb>
           <ol sc-breadcrumb-list>
