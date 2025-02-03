@@ -66,15 +66,15 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
 
         <p sc-page-description>Displays a button or a link that looks like a button.</p>
 
-        <h2 sc-page-subtitle>Usage</h2>
+        <h2 id="usage" sc-page-subtitle>Usage</h2>
 
         <sc-code-highlighter class="mt-2" [code]="codeSnippet1" language="typescript" />
 
         <sc-code-highlighter class="mt-2" [code]="codeSnippet2" />
 
-        <h2 class="mb-5" sc-page-subtitle>Examples</h2>
+        <h2 class="mb-5" id="examples" sc-page-subtitle>Examples</h2>
 
-        <section class="my-10">
+        <section class="my-10" id="variants">
           <h3 class="mb-2" sc-heading level="3">Variants</h3>
 
           <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
@@ -103,7 +103,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
           </sc-tabs>
         </section>
 
-        <section class="my-10">
+        <section class="my-10" id="small-buttons">
           <h3 class="mb-2" sc-heading level="3">Small buttons</h3>
 
           <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
@@ -138,7 +138,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
           </sc-tabs>
         </section>
 
-        <section class="my-10">
+        <section class="my-10" id="large-buttons">
           <h3 class="mb-2" sc-heading level="3">Large buttons</h3>
 
           <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
@@ -173,7 +173,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
           </sc-tabs>
         </section>
 
-        <section class="my-10">
+        <section class="my-10" id="disabled-buttons">
           <h3 class="mb-2" sc-heading level="3">Disabled buttons</h3>
 
           <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
@@ -208,7 +208,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
           </sc-tabs>
         </section>
 
-        <section class="my-10">
+        <section class="my-10" id="disabled-links">
           <h3 class="mb-2" sc-heading level="3">Disabled links</h3>
 
           <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
@@ -241,7 +241,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
           </sc-tabs>
         </section>
 
-        <section class="my-10">
+        <section class="my-10" id="buttons-with-icons">
           <h3 class="mb-2" sc-heading level="3">Buttons with icons</h3>
 
           <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
@@ -324,18 +324,19 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
             <div class="space-y-2">
               <p class="font-medium">On This Page</p>
               <ul class="m-0 list-none">
-                <li class="mt-0 pt-2">
+                <!--li class="mt-0 pt-2">
                   <a
                     class="inline-block font-medium text-foreground no-underline transition-colors hover:text-foreground"
                     href="#installation"
                   >
                     Installation
                   </a>
-                </li>
+                </li-->
                 <li class="mt-0 pt-2">
                   <a
                     class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
-                    href="#usage"
+                    routerLink="."
+                    fragment="usage"
                   >
                     Usage
                   </a>
@@ -343,11 +344,72 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
                 <li class="mt-0 pt-2">
                   <a
                     class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
-                    href="#examples"
+                    routerLink="."
+                    fragment="examples"
                   >
                     Examples
                   </a>
                   <ul class="m-0 list-none pl-4">
+                    <li class="mt-0 pt-2">
+                      <a
+                        class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
+                        routerLink="."
+                        fragment="variants"
+                      >
+                        Variants
+                      </a>
+                    </li>
+
+                    <li class="mt-0 pt-2">
+                      <a
+                        class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
+                        routerLink="."
+                        fragment="small-buttons"
+                      >
+                        Small buttons
+                      </a>
+                    </li>
+
+                    <li class="mt-0 pt-2">
+                      <a
+                        class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
+                        routerLink="."
+                        fragment="large-buttons"
+                      >
+                        Large buttons
+                      </a>
+                    </li>
+
+                    <li class="mt-0 pt-2">
+                      <a
+                        class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
+                        routerLink="."
+                        fragment="disabled-buttons"
+                      >
+                        Disabled buttons
+                      </a>
+                    </li>
+
+                    <li class="mt-0 pt-2">
+                      <a
+                        class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
+                        routerLink="."
+                        fragment="disabled-links"
+                      >
+                        Disabled links
+                      </a>
+                    </li>
+
+                    <li class="mt-0 pt-2">
+                      <a
+                        class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
+                        routerLink="."
+                        fragment="buttons-with-icons"
+                      >
+                        Buttons with icons
+                      </a>
+                    </li>
+
                     <li class="mt-0 pt-2">
                       <a
                         class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
