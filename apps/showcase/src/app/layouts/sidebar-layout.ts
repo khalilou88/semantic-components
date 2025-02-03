@@ -5,6 +5,9 @@ import {
   ScSidebar,
   ScSidebarGroup,
   ScSidebarGroupAction,
+  ScSidebarGroupContent,
+  ScSidebarMenu,
+  ScSidebarMenuItem,
   ScSidebarProvider,
   ScSidebarState,
   ScSidebarToggler,
@@ -23,6 +26,9 @@ import { LayoutState } from '../services/layout-state';
     SiPanelLeftIcon,
     ScSidebarGroup,
     ScSidebarGroupAction,
+    ScSidebarGroupContent,
+    ScSidebarMenu,
+    ScSidebarMenuItem,
   ],
   template: `
     <!--div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -40,6 +46,12 @@ import { LayoutState } from '../services/layout-state';
 
         <sc-sidebar-group>
           <sc-sidebar-group-action>Button</sc-sidebar-group-action>
+
+          <div sc-sidebar-group-content>
+            <ul sc-sidebar-menu>
+              <li sc-sidebar-menu-item></li>
+            </ul>
+          </div>
         </sc-sidebar-group>
       </sc-sidebar>
 
