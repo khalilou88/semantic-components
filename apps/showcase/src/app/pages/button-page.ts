@@ -104,7 +104,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
         </section>
 
         <section class="my-10">
-          <h3 class="mb-2" sc-heading level="3">Small Buttons</h3>
+          <h3 class="mb-2" sc-heading level="3">Small buttons</h3>
 
           <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
             <sc-tab>
@@ -139,7 +139,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
         </section>
 
         <section class="my-10">
-          <h3 class="mb-2" sc-heading level="3">Large Buttons</h3>
+          <h3 class="mb-2" sc-heading level="3">Large buttons</h3>
 
           <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
             <sc-tab>
@@ -174,7 +174,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
         </section>
 
         <section class="my-10">
-          <h3 class="mb-2" sc-heading level="3">Disabled Buttons</h3>
+          <h3 class="mb-2" sc-heading level="3">Disabled buttons</h3>
 
           <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
             <sc-tab>
@@ -209,7 +209,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
         </section>
 
         <section class="my-10">
-          <h3 class="mb-2" sc-heading level="3">Disabled Links</h3>
+          <h3 class="mb-2" sc-heading level="3">Disabled links</h3>
 
           <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
             <sc-tab>
