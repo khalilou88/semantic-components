@@ -5,6 +5,7 @@ import {
   ScSidebar,
   ScSidebarGroup,
   ScSidebarGroupContent,
+  ScSidebarGroupLabel,
   ScSidebarMenu,
   ScSidebarMenuButton,
   ScSidebarMenuItem,
@@ -30,6 +31,7 @@ import { LayoutState } from '../services/layout-state';
     RouterLink,
     RouterOutlet,
     ScSidebarMenuButton,
+    ScSidebarGroupLabel,
   ],
   template: `
     <!--div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -44,6 +46,8 @@ import { LayoutState } from '../services/layout-state';
     <sc-sidebar-provider>
       <sc-sidebar>
         <sc-sidebar-group>
+          <sc-sidebar-group-label>Components</sc-sidebar-group-label>
+
           <div sc-sidebar-group-content>
             <ul sc-sidebar-menu>
               <li sc-sidebar-menu-item>
