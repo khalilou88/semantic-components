@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
-import { RouterLink, RouterModule } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 import {
   ScSidebar,
@@ -19,7 +19,6 @@ import { LayoutState } from '../services/layout-state';
 @Component({
   selector: 'app-sidebar-layout',
   imports: [
-    RouterModule,
     ScSidebarProvider,
     ScSidebar,
     ScSidebarToggler,
@@ -29,6 +28,7 @@ import { LayoutState } from '../services/layout-state';
     ScSidebarMenu,
     ScSidebarMenuItem,
     RouterLink,
+    RouterOutlet,
     ScSidebarMenuButton,
   ],
   template: `

@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 
 import { Footer } from '../components/footer';
 
 @Component({
   selector: 'app-footer-layout',
-  imports: [RouterModule, Footer],
+  imports: [RouterOutlet, Footer],
   template: `
     <router-outlet />
     <app-footer />

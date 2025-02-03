@@ -7,10 +7,10 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
-  imports: [RouterModule],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
   selector: 'app-root',
   template: `
     <router-outlet />
