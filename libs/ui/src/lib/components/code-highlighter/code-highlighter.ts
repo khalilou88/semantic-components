@@ -24,7 +24,7 @@ import { ShikiService } from './shiki.service';
   },
   styles: `
     pre {
-      @apply pb-6 px-4 rounded-md;
+      @apply pb-6 px-4 rounded-md overflow-auto;
     }
   `,
   encapsulation: ViewEncapsulation.None,

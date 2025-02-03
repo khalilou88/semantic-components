@@ -81,7 +81,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
             <sc-tab>
               <sc-tab-label>Preview</sc-tab-label>
               <sc-tab-content>
-                <div sc-card>
+                <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0" sc-card-content>
                     <button sc-button type="button">Primary</button>
                     <button sc-button variant="secondary" type="button">Secondary</button>
@@ -110,7 +110,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
             <sc-tab>
               <sc-tab-label>Preview</sc-tab-label>
               <sc-tab-content>
-                <div sc-card>
+                <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0" sc-card-content>
                     <button sc-button type="button" size="sm">Primary</button>
                     <button sc-button variant="secondary" type="button" size="sm">Secondary</button>
@@ -128,7 +128,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
             <sc-tab>
               <sc-tab-label>Code</sc-tab-label>
               <sc-tab-content>
-                <div sc-card>
+                <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0" sc-card-content>
                     <p>Coming soon</p>
                   </div>
@@ -145,7 +145,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
             <sc-tab>
               <sc-tab-label>Preview</sc-tab-label>
               <sc-tab-content>
-                <div sc-card>
+                <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0" sc-card-content>
                     <button sc-button type="button" size="lg">Primary</button>
                     <button sc-button variant="secondary" type="button" size="lg">Secondary</button>
@@ -163,7 +163,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
             <sc-tab>
               <sc-tab-label>Code</sc-tab-label>
               <sc-tab-content>
-                <div sc-card>
+                <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0" sc-card-content>
                     <p>Coming soon</p>
                   </div>
@@ -180,7 +180,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
             <sc-tab>
               <sc-tab-label>Preview</sc-tab-label>
               <sc-tab-content>
-                <div sc-card>
+                <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0" sc-card-content>
                     <button sc-button type="button" disabled>Primary</button>
                     <button sc-button variant="secondary" type="button" disabled>Secondary</button>
@@ -198,7 +198,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
             <sc-tab>
               <sc-tab-label>Code</sc-tab-label>
               <sc-tab-content>
-                <div sc-card>
+                <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0" sc-card-content>
                     <p>Coming soon</p>
                   </div>
@@ -215,7 +215,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
             <sc-tab>
               <sc-tab-label>Preview</sc-tab-label>
               <sc-tab-content>
-                <div sc-card>
+                <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0" sc-card-content>
                     <a sc-button type="button" disabled>Primary</a>
                     <a sc-button variant="secondary" type="button" disabled>Secondary</a>
@@ -231,7 +231,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
             <sc-tab>
               <sc-tab-label>Code</sc-tab-label>
               <sc-tab-content>
-                <div sc-card>
+                <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0" sc-card-content>
                     <p>Coming soon</p>
                   </div>
@@ -248,7 +248,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
             <sc-tab>
               <sc-tab-label>Preview</sc-tab-label>
               <sc-tab-content>
-                <div sc-card>
+                <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0 items-center" sc-card-content>
                     <button sc-button type="button" size="icon">
                       <svg si-chevron-right-icon></svg>
@@ -276,7 +276,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
             <sc-tab>
               <sc-tab-label>Code</sc-tab-label>
               <sc-tab-content>
-                <div sc-card>
+                <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0" sc-card-content>
                     <p>Coming soon</p>
                   </div>
@@ -293,7 +293,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
             <sc-tab>
               <sc-tab-label>Preview</sc-tab-label>
               <sc-tab-content>
-                <div sc-card>
+                <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0" sc-card-content>
                     <button sc-button disabled>
                       <svg class="animate-spin" si-loader-circle-icon></svg>
@@ -307,7 +307,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
             <sc-tab>
               <sc-tab-label>Code</sc-tab-label>
               <sc-tab-content>
-                <div sc-card>
+                <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0" sc-card-content>
                     <p>Coming soon</p>
                   </div>
