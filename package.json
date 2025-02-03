@@ -20,6 +20,8 @@
     "@angular/platform-server": "~19.1.4",
     "@angular/router": "19.1.4",
     "@angular/ssr": "19.1.5",
+    "@fontsource/inter": "^5.1.1",
+    "@fontsource/jetbrains-mono": "^5.1.2",
     "@semantic-icons/lucide-icons": "^0.40.0",
     "@supabase/supabase-js": "^2.48.1",
     "@tiptap/core": "^2.11.5",
