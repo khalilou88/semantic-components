@@ -3,8 +3,10 @@ import {
   Component,
   ViewEncapsulation,
   computed,
+  inject,
   input,
 } from '@angular/core';
+import { RouterLinkActive } from '@angular/router';
 
 import { cn } from '@semantic-components/utils';
 import { VariantProps, cva } from 'class-variance-authority';
@@ -42,10 +44,12 @@ type SidebarMenuButtonVariants = VariantProps<typeof sidebarMenuButtonVariants>;
   host: {
     '[class]': 'class()',
     '[attr.data-sidebar]': '"menu-button"',
+    '[attr.data-active]': 'routerLinkActive.isActive',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  hostDirectives: [RouterLinkActive],
 })
 export class ScSidebarMenuButton {
   readonly classInput = input<string>('', {
@@ -62,4 +66,6 @@ export class ScSidebarMenuButton {
       this.classInput(),
     ),
   );
+
+  protected readonly routerLinkActive = inject(RouterLinkActive);
 }
