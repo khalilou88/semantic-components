@@ -70,7 +70,7 @@
     "@angular/cli": "~19.1.5",
     "@angular/compiler-cli": "19.1.4",
     "@angular/language-service": "19.1.4",
-    "@commitlint/cli": "^19.6.1",
+    "@commitlint/cli": "^19.7.1",
     "@commitlint/config-conventional": "^19.7.1",
     "@eslint/js": "^9.18.0",
     "@nx/angular": "20.4.0",
