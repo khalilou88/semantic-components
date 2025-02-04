@@ -25,7 +25,7 @@ import { InputOtpHandler } from './input-otp-handler';
         #input
         [formControl]="control"
         [readonly]="!isActive()"
-        (input)="_handleInput()"
+        (input)="handleInput()"
         type="text"
         inputmode="numeric"
         autocomplete="one-time-code"
@@ -35,7 +35,7 @@ import { InputOtpHandler } from './input-otp-handler';
     }
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -44,13 +44,15 @@ import { InputOtpHandler } from './input-otp-handler';
 export class ScInputOTPSlot {
   inputOtpHandler = inject(InputOtpHandler);
 
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() =>
+  protected readonly class = computed(() =>
     cn(
       'flex h-10 w-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md',
       this.isActive() && 'z-10 ring-2 ring-ring ring-offset-background',
-      this.class(),
+      this.classInput(),
     ),
   );
 
@@ -61,7 +63,7 @@ export class ScInputOTPSlot {
 
   readonly input = viewChild.required<HTMLInputElement>('input');
 
-  _handleInput(): void {
+  handleInput(): void {
     this.inputOtpHandler.inputIndex.set(this.index);
   }
 }

@@ -41,7 +41,7 @@ import { ScInputOTPSlot } from './input-otp-slot';
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -55,21 +55,24 @@ import { ScInputOTPSlot } from './input-otp-slot';
   ],
 })
 export class ScInputOtp implements ControlValueAccessor, OnDestroy {
-  inputOtpHandler = inject(InputOtpHandler);
-  private readonly _focusMonitor = inject(FocusMonitor);
+  private readonly inputOtpHandler = inject(InputOtpHandler);
+  private readonly focusMonitor = inject(FocusMonitor);
+  private readonly changeDetectorRef = inject(ChangeDetectorRef);
 
-  private readonly _cdr = inject(ChangeDetectorRef);
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  class = input<string>('');
+  protected readonly class = computed(() =>
+    cn('flex items-center gap-2 has-[:disabled]:opacity-50', this.classInput()),
+  );
 
-  classes = computed(() => cn('flex items-center gap-2 has-[:disabled]:opacity-50', this.class()));
-
-  readonly _required = input<boolean, unknown>(false, {
+  readonly required = input<boolean, unknown>(false, {
     alias: 'required',
     transform: booleanAttribute,
   });
 
-  formGroup = new FormGroup({
+  readonly formGroup = new FormGroup({
     inputs: new FormArray([]),
   });
 
@@ -77,7 +80,7 @@ export class ScInputOtp implements ControlValueAccessor, OnDestroy {
     return this.formGroup.get('inputs') as FormArray;
   }
 
-  slots = contentChildren(ScInputOTPSlot, { descendants: true });
+  readonly slots = contentChildren(ScInputOTPSlot, { descendants: true });
 
   constructor() {
     effect(() => {
@@ -93,7 +96,7 @@ export class ScInputOtp implements ControlValueAccessor, OnDestroy {
 
         const nextSlot = this.slots()[index + 1];
         nextSlot.isActive.set(true);
-        this._focusMonitor.focusVia(nextSlot.input(), 'program');
+        this.focusMonitor.focusVia(nextSlot.input(), 'program');
       }
     });
 
@@ -133,7 +136,7 @@ export class ScInputOtp implements ControlValueAccessor, OnDestroy {
     this._value.set(tel);
 
     this.onChange(tel);
-    this._cdr.markForCheck();
+    this.changeDetectorRef.markForCheck();
   }
 
   readonly _value = model<string | null>(null, { alias: 'value' });
@@ -174,6 +177,6 @@ export class ScInputOtp implements ControlValueAccessor, OnDestroy {
   readonly stateChanges = new Subject<void>();
   ngOnDestroy() {
     this.stateChanges.complete();
-    this._focusMonitor.stopMonitoring(this._elementRef);
+    this.focusMonitor.stopMonitoring(this._elementRef);
   }
 }

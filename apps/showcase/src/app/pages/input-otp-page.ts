@@ -34,7 +34,6 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
     ScInputOTPSeparator,
     ScInputOTPSlot,
     ReactiveFormsModule,
-
     SiChevronRightIcon,
     ScBreadcrumb,
     ScBreadcrumbList,

@@ -16,14 +16,16 @@ import { SiDotIcon } from '@semantic-icons/lucide-icons';
     <svg si-dot-icon></svg>
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScInputOTPSeparator {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn('', this.class()));
+  protected readonly class = computed(() => cn('', this.classInput()));
 }
