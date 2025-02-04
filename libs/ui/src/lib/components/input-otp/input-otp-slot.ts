@@ -65,11 +65,10 @@ export class ScInputOTPSlot {
 
   protected handleKeydown(event: KeyboardEvent) {
     if (event.key === 'Backspace') {
-      event.preventDefault();
       this.autoFocusPrev();
+    } else {
+      this.autoFocusNext();
     }
-
-    this.autoFocusNext();
   }
 
   private autoFocusNext(): void {
@@ -81,7 +80,6 @@ export class ScInputOTPSlot {
 
   private autoFocusPrev() {
     if (this.inputOtpHandler.inputIndex() > 0) {
-      this.formControl()?.setValue('');
       this.isActive.set(false);
       this.inputOtpHandler.inputIndex.update((index) => index - 1);
     }
