@@ -1,14 +1,30 @@
-import { JsonPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import {
-  FormFieldCustomControlComponent,
+  ScBreadcrumb,
+  ScBreadcrumbItem,
+  ScBreadcrumbLink,
+  ScBreadcrumbList,
+  ScBreadcrumbPage,
+  ScBreadcrumbSeparator,
+  ScCard,
+  ScCardContent,
+  ScCodeHighlighter,
+  ScHeading,
   ScInputOTPGroup,
   ScInputOTPSeparator,
   ScInputOTPSlot,
   ScInputOtp,
+  ScPageDescription,
+  ScPageSubtitle,
+  ScPageTitle,
+  ScTab,
+  ScTabContent,
+  ScTabLabel,
+  ScTabs,
 } from '@semantic-components/ui';
+import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-input-otp-page',
@@ -18,107 +34,144 @@ import {
     ScInputOTPSeparator,
     ScInputOTPSlot,
     ReactiveFormsModule,
-    JsonPipe,
-    FormFieldCustomControlComponent,
+
+    SiChevronRightIcon,
+    ScBreadcrumb,
+    ScBreadcrumbList,
+    ScBreadcrumbItem,
+    ScBreadcrumbLink,
+    ScBreadcrumbPage,
+    ScBreadcrumbSeparator,
+    ScPageTitle,
+    ScPageSubtitle,
+    ScPageDescription,
+    ScTabs,
+    ScTab,
+    ScTabLabel,
+    ScTabContent,
+    ScCard,
+    ScHeading,
+    ScCodeHighlighter,
+    ScCardContent,
   ],
   template: `
-    <div class="m-10">
-      <form [formGroup]="inputOtpGroupForm">
-        <sc-input-otp formControlName="otp">
-          <sc-input-otp-group>
-            <sc-input-otp-slot />
-            <sc-input-otp-slot />
-            <sc-input-otp-slot />
-          </sc-input-otp-group>
-          <sc-input-otp-separator />
-          <sc-input-otp-group>
-            <sc-input-otp-slot />
-            <sc-input-otp-slot />
-            <sc-input-otp-slot />
-          </sc-input-otp-group>
-        </sc-input-otp>
-      </form>
+    <div class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px] px-4">
+      <div class="mx-auto w-full max-w-3xl">
+        <nav sc-breadcrumb>
+          <ol sc-breadcrumb-list>
+            <li sc-breadcrumb-item><a sc-breadcrumb-link>Components</a></li>
 
-      <br />
-      <br />
-      <br />
-      <br />
-      {{ inputOtpGroupForm.value | json }}
-      <br />
-      <br />
-      <br />
+            <li sc-breadcrumb-separator><svg si-chevron-right-icon></svg></li>
+            <li sc-breadcrumb-item>
+              <span sc-breadcrumb-page>Input OTP</span>
+            </li>
+          </ol>
+        </nav>
 
-      <sc-form-field-custom-control />
-      <br />
+        <h1 sc-page-title>Input OTP</h1>
 
-      <div class="preview flex min-h-[350px] w-full items-center justify-center p-10">
-        <noscript></noscript>
-        <div
-          class="flex items-center gap-2 has-[:disabled]:opacity-50"
-          data-input-otp-container="true"
-          style="position: relative; cursor: text; user-select: none; pointer-events: none; --root-height: 40px;"
-        >
-          <div class="flex items-center">
-            <div
-              class="relative flex size-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md"
-            ></div>
-            <div
-              class="relative flex size-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md"
-            ></div>
-            <div
-              class="relative flex size-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md"
-            ></div>
-          </div>
-          <div role="separator">
-            <svg
-              class="lucide lucide-dot "
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <circle cx="12.1" cy="12.1" r="1"></circle>
-            </svg>
-          </div>
-          <div class="flex items-center">
-            <div
-              class="relative flex size-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md"
-            ></div>
-            <div
-              class="relative flex size-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md"
-            ></div>
-            <div
-              class="relative flex size-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md"
-            ></div>
-          </div>
-          <div style="position: absolute; inset: 0px; pointer-events: none;">
-            <input
-              class="disabled:cursor-not-allowed"
-              autocomplete="one-time-code"
-              data-input-otp="true"
-              inputmode="numeric"
-              pattern="^d+$"
-              maxlength="6"
-              value=""
-              data-input-otp-mss="0"
-              data-input-otp-mse="0"
-              style="position: absolute; inset: 0px; width: calc(100% + 40px); height: 100%; display: flex; text-align: left; opacity: 1; color: transparent; pointer-events: all; background: transparent; caret-color: transparent; border: 0px solid transparent; outline: transparent solid 0px; box-shadow: none; line-height: 1; letter-spacing: -0.5em; font-size: var(--root-height); font-family: monospace; font-variant-numeric: tabular-nums; clip-path: inset(0px 40px 0px 0px);"
-            />
-          </div>
-        </div>
+        <p sc-page-description>
+          Accessible one-time password component with copy paste functionality.
+        </p>
+
+        <h2 id="usage" sc-page-subtitle>Usage</h2>
+
+        <sc-code-highlighter class="mt-2" [code]="codeSnippet1" language="typescript" />
+
+        <sc-code-highlighter class="mt-2" [code]="codeSnippet2" />
+
+        <h2 class="mb-5" id="examples" sc-page-subtitle>Examples</h2>
+
+        <section class="my-10" id="variants">
+          <h3 class="mb-2" sc-heading level="3">Variants</h3>
+
+          <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
+            <sc-tab>
+              <sc-tab-label>Preview</sc-tab-label>
+              <sc-tab-content>
+                <div class="overflow-auto" sc-card>
+                  <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
+                    <form [formGroup]="inputOtpGroupForm">
+                      <sc-input-otp formControlName="otp">
+                        <sc-input-otp-group>
+                          <sc-input-otp-slot />
+                          <sc-input-otp-slot />
+                          <sc-input-otp-slot />
+                        </sc-input-otp-group>
+                        <sc-input-otp-separator />
+                        <sc-input-otp-group>
+                          <sc-input-otp-slot />
+                          <sc-input-otp-slot />
+                          <sc-input-otp-slot />
+                        </sc-input-otp-group>
+                      </sc-input-otp>
+                    </form>
+                  </div>
+                </div>
+              </sc-tab-content>
+            </sc-tab>
+
+            <sc-tab>
+              <sc-tab-label>Code</sc-tab-label>
+              <sc-tab-content>
+                <sc-code-highlighter [code]="codeSnippet" />
+              </sc-tab-content>
+            </sc-tab>
+          </sc-tabs>
+        </section>
       </div>
     </div>
   `,
+  host: {
+    '[class]': 'class()',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class InputOtpPage {
+  class = signal<string>('block w-full');
+
+  codeSnippet1 = `
+import {
+  ScInputOTPGroup,
+  ScInputOTPSeparator,
+  ScInputOTPSlot,
+  ScInputOtp,
+} from '@semantic-components/ui';`;
+
+  codeSnippet2 = `
+<sc-input-otp formControlName="otp">
+  <sc-input-otp-group>
+    <sc-input-otp-slot />
+    <sc-input-otp-slot />
+    <sc-input-otp-slot />
+  </sc-input-otp-group>
+  <sc-input-otp-separator />
+  <sc-input-otp-group>
+    <sc-input-otp-slot />
+    <sc-input-otp-slot />
+    <sc-input-otp-slot />
+  </sc-input-otp-group>
+</sc-input-otp>`;
+
+  codeSnippet = `
+<form [formGroup]="inputOtpGroupForm">
+  <sc-input-otp formControlName="otp">
+    <sc-input-otp-group>
+      <sc-input-otp-slot />
+      <sc-input-otp-slot />
+      <sc-input-otp-slot />
+    </sc-input-otp-group>
+    <sc-input-otp-separator />
+    <sc-input-otp-group>
+      <sc-input-otp-slot />
+      <sc-input-otp-slot />
+      <sc-input-otp-slot />
+    </sc-input-otp-group>
+  </sc-input-otp>
+</form>`;
+
   inputOtpGroupForm = new FormGroup({
     otp: new FormControl(''),
   });

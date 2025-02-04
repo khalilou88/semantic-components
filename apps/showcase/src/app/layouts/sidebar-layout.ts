@@ -71,6 +71,12 @@ import { LayoutState } from '../services/layout-state';
               </li>
 
               <li sc-sidebar-menu-item>
+                <a routerLink="../components/input-otp" sc-sidebar-menu-link>
+                  <span>Input OTP</span>
+                </a>
+              </li>
+
+              <li sc-sidebar-menu-item>
                 <a routerLink="../components/checkbox" sc-sidebar-menu-link>
                   <span>Checkbox</span>
                 </a>
