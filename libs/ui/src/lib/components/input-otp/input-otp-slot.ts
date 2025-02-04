@@ -25,7 +25,7 @@ import { InputOtpHandler } from './input-otp-handler';
         #input
         [formControl]="control"
         [readonly]="!isActive()"
-        (input)="handleInput()"
+        (keydown)="handleKeydown($event)"
         type="text"
         inputmode="numeric"
         autocomplete="one-time-code"
@@ -63,7 +63,25 @@ export class ScInputOTPSlot {
 
   readonly input = viewChild.required<HTMLInputElement>('input');
 
-  handleInput(): void {
-    this.inputOtpHandler.inputIndex.set(this.index);
+  protected handleKeydown(event: KeyboardEvent) {
+    if (event.key === 'Backspace') {
+      this.autoFocusPrev();
+    } else {
+      this.autoFocusNext();
+    }
+  }
+
+  private autoFocusNext(): void {
+    if (this.inputOtpHandler.inputIndex() < this.inputOtpHandler.length() - 1) {
+      this.isActive.set(false);
+      this.inputOtpHandler.inputIndex.update((index) => index + 1);
+    }
+  }
+
+  private autoFocusPrev() {
+    if (this.inputOtpHandler.inputIndex() > 0) {
+      this.isActive.set(false);
+      this.inputOtpHandler.inputIndex.update((index) => index - 1);
+    }
   }
 }

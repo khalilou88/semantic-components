@@ -84,19 +84,12 @@ export class ScInputOtp implements ControlValueAccessor, OnDestroy {
 
   constructor() {
     effect(() => {
-      if (
-        this.inputOtpHandler.inputIndex() !== -1 &&
-        this.inputOtpHandler.inputIndex() < this.slots().length - 1 &&
-        this.slots().length > 1
-      ) {
+      if (this.inputOtpHandler.inputIndex() !== -1) {
         const index = this.inputOtpHandler.inputIndex();
+        const slot = this.slots()[index];
 
-        const currentSlot = this.slots()[index];
-        currentSlot.isActive.set(false);
-
-        const nextSlot = this.slots()[index + 1];
-        nextSlot.isActive.set(true);
-        this.focusMonitor.focusVia(nextSlot.input(), 'program');
+        slot.isActive.set(true);
+        this.focusMonitor.focusVia(slot.input(), 'program');
       }
     });
 
@@ -104,16 +97,15 @@ export class ScInputOtp implements ControlValueAccessor, OnDestroy {
       for (let i = 0; i < this.slots().length; i++) {
         const slot = this.slots()[i];
 
-        if (i === 0) {
-          slot.isActive.set(true);
-        }
-
         const formControl = new FormControl('', Validators.required);
 
         slot.index = i;
         slot.formControl.set(formControl);
         this.inputs.push(formControl);
       }
+
+      this.inputOtpHandler.length.set(this.slots().length);
+      this.inputOtpHandler.inputIndex.set(0);
     });
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
