@@ -88,6 +88,8 @@ export class ScInputOtp implements ControlValueAccessor, OnDestroy {
         const index = this.inputOtpHandler.inputIndex();
         const slot = this.slots()[index];
 
+        //TODO remove old data
+
         slot.isActive.set(true);
         this.focusMonitor.focusVia(slot.input(), 'program');
       }

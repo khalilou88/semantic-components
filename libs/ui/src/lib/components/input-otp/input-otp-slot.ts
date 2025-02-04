@@ -79,6 +79,8 @@ export class ScInputOTPSlot {
   }
 
   private autoFocusPrev() {
+    //TODO remove old data
+
     if (this.inputOtpHandler.inputIndex() > 0) {
       this.isActive.set(false);
       this.inputOtpHandler.inputIndex.update((index) => index - 1);
