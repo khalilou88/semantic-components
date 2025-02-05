@@ -5,6 +5,8 @@
   "publishConfig": {
     "access": "public"
   },
+  "author": "Khalil LAGRIDA",
+  "license": "MIT",
   "peerDependencies": {
     "clsx": "^2.1.1",
     "tailwind-merge": "^2.6.0"

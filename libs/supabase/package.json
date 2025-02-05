@@ -5,9 +5,11 @@
   "publishConfig": {
     "access": "public"
   },
+  "author": "Khalil LAGRIDA",
+  "license": "MIT",
   "peerDependencies": {
-    "@angular/common": "^19.0.0",
-    "@angular/core": "^19.0.0",
+    "@angular/common": ">=19.0.0",
+    "@angular/core": ">=19.0.0",
     "@supabase/supabase-js": "^2.47.10"
   },
   "sideEffects": false,
