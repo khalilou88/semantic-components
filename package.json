@@ -99,7 +99,7 @@
     "@typescript-eslint/utils": "^8.23.0",
     "angular-eslint": "19.0.2",
     "autoprefixer": "^10.4.20",
-    "eslint": "^9.18.0",
+    "eslint": "^9.19.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-playwright": "^2.2.0",
     "eslint-plugin-tailwindcss": "^3.18.0",
