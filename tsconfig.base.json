@@ -19,7 +19,7 @@
       "@semantic-components/re-captcha": ["libs/re-captcha/src/index.ts"],
       "@semantic-components/supabase": ["libs/supabase/src/index.ts"],
       "@semantic-components/ui": ["libs/ui/src/index.ts"],
-      "@semantic-components/ui/styles.css": ["libs/ui/src/lib/styles/styles.css"],
+      "@semantic-components/ui/styles/styles.css": ["libs/ui/src/lib/styles/styles.css"],
       "@semantic-components/utils": ["libs/utils/src/index.ts"]
     }
   },

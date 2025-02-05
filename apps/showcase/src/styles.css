@@ -11,7 +11,7 @@
 @import '@fontsource/jetbrains-mono/400.css';
 
 @import '@angular/cdk/overlay-prebuilt.css';
-@import '@semantic-components/ui/styles.css';
+@import '@semantic-components/ui/styles/styles.css';
 
 @config "../../../tailwind.config.js";
 
