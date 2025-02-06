@@ -1,4 +1,4 @@
-@import '@fontsource/inter/400.css';
+/* @import '@fontsource/inter/400.css';
 @import '@fontsource/inter/400-italic.css';
 @import '@fontsource/inter/500.css';
 @import '@fontsource/inter/500-italic.css';
@@ -8,16 +8,14 @@
 @import '@fontsource/inter/700-italic.css';
 @import '@fontsource/inter/800.css';
 @import '@fontsource/inter/800-italic.css';
-@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/400.css'; */
 
 @import '@angular/cdk/overlay-prebuilt.css';
-@import '@semantic-components/ui/styles/styles.css';
+@import '../../../libs/ui/src/lib/styles/styles.css';
 
 @config "../../../tailwind.config.js";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
 @layer base {
   :root {
