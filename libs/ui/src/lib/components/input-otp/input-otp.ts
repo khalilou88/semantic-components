@@ -68,7 +68,6 @@ export class ScInputOtp implements ControlValueAccessor, OnDestroy {
   );
 
   readonly required = input<boolean, unknown>(false, {
-    alias: 'required',
     transform: booleanAttribute,
   });
 
