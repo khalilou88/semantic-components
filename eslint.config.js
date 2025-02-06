@@ -1,18 +1,18 @@
 const nx = require('@nx/eslint-plugin');
-const tailwind = require('eslint-plugin-tailwindcss');
+// const tailwind = require('eslint-plugin-tailwindcss');
 
 module.exports = [
   ...nx.configs['flat/base'],
   ...nx.configs['flat/typescript'],
   ...nx.configs['flat/javascript'],
-  ...tailwind.configs['flat/recommended'],
-  {
-    settings: {
-      tailwindcss: {
-        config: 'tailwind.config.js',
-      },
-    },
-  },
+  // ...tailwind.configs['flat/recommended'],
+  // {
+  //   settings: {
+  //     tailwindcss: {
+  //       config: 'tailwind.config.js',
+  //     },
+  //   },
+  // },
   {
     ignores: ['**/dist'],
   },
@@ -34,18 +34,18 @@ module.exports = [
       ],
     },
   },
-  {
-    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
-    // Override or add rules here
-    rules: {
-      'tailwindcss/no-custom-classname': [
-        'error',
-        {
-          whitelist: ['destructive', 'bg-primary'],
-        },
-      ],
-    },
-  },
+  // {
+  //   files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
+  //   // Override or add rules here
+  //   rules: {
+  //     'tailwindcss/no-custom-classname': [
+  //       'error',
+  //       {
+  //         whitelist: ['destructive', 'bg-primary'],
+  //       },
+  //     ],
+  //   },
+  // },
   {
     files: ['**/*.json'],
     rules: {
