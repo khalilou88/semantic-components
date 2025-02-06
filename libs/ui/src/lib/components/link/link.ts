@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { ScButtonBase } from '../button/button-base';
+import { ScButtonBase } from '../button';
 
 @Component({
   selector: 'a[sc-link]',
