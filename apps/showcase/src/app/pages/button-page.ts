@@ -175,6 +175,8 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
           </sc-tabs>
         </section>
 
+        <button (click)="f()" sc-button>Togle</button>
+
         <section class="my-10" id="disabled-buttons">
           <h3 class="mb-2" sc-heading level="3">Disabled buttons</h3>
 
@@ -184,7 +186,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <button sc-button type="button" disabled>Primary</button>
+                    <button [disabled]="d()" sc-button type="button">Primary</button>
                     <button sc-button variant="secondary" type="button" disabled>Secondary</button>
                     <button sc-button variant="destructive" type="button" disabled>
                       Destructive
@@ -453,4 +455,10 @@ export default class ButtonPage {
   <button sc-button variant="outline" type="button">Outline</button>
   <button sc-button variant="ghost" type="button">Ghost</button>
   <button sc-button variant="link" type="button">Link</button>`;
+
+  d = signal(true);
+
+  f() {
+    this.d.update((v) => !v);
+  }
 }
