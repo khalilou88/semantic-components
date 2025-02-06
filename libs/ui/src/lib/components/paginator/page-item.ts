@@ -7,13 +7,14 @@ import {
   output,
 } from '@angular/core';
 
+import { ScLink } from '@semantic-components/ui';
 import { SiEllipsisIcon } from '@semantic-icons/lucide-icons';
 
 import { ScButton } from '../button';
 
 @Component({
   selector: 'sc-page-item',
-  imports: [ScButton, SiEllipsisIcon],
+  imports: [ScLink, SiEllipsisIcon],
   template: `
     <li>
       @if (page() === '...') {
@@ -27,7 +28,7 @@ import { ScButton } from '../button';
           [variant]="isActive() ? 'secondary' : 'outline'"
           [size]="'icon'"
           (click)="selectPage()"
-          sc-button
+          sc-link
           href="javascript:void(0)"
         >
           {{ page() }}

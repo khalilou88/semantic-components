@@ -13,6 +13,7 @@ import {
   ScCardContent,
   ScCodeHighlighter,
   ScHeading,
+  ScLink,
   ScPageDescription,
   ScPageSubtitle,
   ScPageTitle,
@@ -47,6 +48,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
     ScCodeHighlighter,
     ScCardContent,
     RouterLink,
+    ScLink,
   ],
   template: `
     <div class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px] px-4">
@@ -217,12 +219,12 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <a sc-button type="button" disabled>Primary</a>
-                    <a sc-button variant="secondary" type="button" disabled>Secondary</a>
-                    <a sc-button variant="destructive" type="button" disabled>Destructive</a>
-                    <a sc-button variant="outline" type="button" disabled>Outline</a>
-                    <a sc-button variant="ghost" type="button" disabled>Ghost</a>
-                    <a sc-button variant="link" type="button" disabled>Link</a>
+                    <a sc-link type="button" disabled>Primary</a>
+                    <a sc-link variant="secondary" type="button" disabled>Secondary</a>
+                    <a sc-link variant="destructive" type="button" disabled>Destructive</a>
+                    <a sc-link variant="outline" type="button" disabled>Outline</a>
+                    <a sc-link variant="ghost" type="button" disabled>Ghost</a>
+                    <a sc-link variant="link" type="button" disabled>Link</a>
                   </div>
                 </div>
               </sc-tab-content>

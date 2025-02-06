@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-import { ScBadge, ScButton } from '@semantic-components/ui';
+import { ScBadge, ScLink } from '@semantic-components/ui';
 import { SiArrowRightIcon, SiGithubIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-landing-page',
-  imports: [SiArrowRightIcon, SiGithubIcon, ScButton, ScBadge, RouterLink],
+  imports: [SiArrowRightIcon, SiGithubIcon, ScLink, ScBadge, RouterLink],
   template: `
     <section class="fade-bottom overflow-hidden pb-0 sm:pb-0 md:pb-0">
       <div class="max-w-container mx-auto flex flex-col gap-12 pt-16 sm:gap-24">
@@ -30,9 +30,9 @@ import { SiArrowRightIcon, SiGithubIcon } from '@semantic-icons/lucide-icons';
           </p>
           <div class="animate-appear relative z-10 flex justify-center gap-4  delay-300">
             <div class="animate-appear relative z-10 flex justify-center gap-4  delay-300">
-              <a variant="primary" size="lg" sc-button routerLink="/get-started">Get started</a>
+              <a variant="primary" size="lg" sc-link routerLink="/get-started">Get started</a>
 
-              <a variant="secondary" size="lg" sc-button>
+              <a variant="secondary" size="lg" sc-link>
                 <svg class="mr-2 size-4" si-github-icon></svg>
                 Github
               </a>
