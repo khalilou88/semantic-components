@@ -43,5 +43,5 @@ export class ScInput {
 
   protected readonly class = computed(() => cn(scInputStyles(), this.classInput()));
 
-  readonly value = model<string>();
+  readonly value = model<string>('');
 }

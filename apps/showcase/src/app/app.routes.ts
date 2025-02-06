@@ -158,6 +158,11 @@ export const appRoutes: Route[] = [
             title: 'Input Page',
           },
           {
+            path: 'input-group',
+            loadComponent: () => import('./pages/input-group-page'),
+            title: 'Input Group Page',
+          },
+          {
             path: 'auto-resize-input',
             loadComponent: () => import('./pages/auto-resize-input-page'),
             title: 'Auto resize input Page',

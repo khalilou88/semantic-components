@@ -9,6 +9,7 @@ export * from './lib/components/nav';
 export * from './lib/components/theme-toggler';
 export * from './lib/components/button';
 export * from './lib/components/input';
+export * from './lib/components/input-group';
 export * from './lib/components/input-password';
 export * from './lib/components/input-otp';
 export * from './lib/components/tel-input';
