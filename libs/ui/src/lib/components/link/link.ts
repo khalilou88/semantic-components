@@ -10,7 +10,6 @@ import { ScButtonBase } from '../button';
   `,
   host: {
     'data-slot': 'link',
-    tabIndex: '0',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,

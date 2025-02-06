@@ -29,6 +29,7 @@ import { ScLink } from '../link';
           (click)="selectPage()"
           (keydown.enter)="selectPage()"
           sc-link
+          href="javascript:void(0)"
         >
           {{ page() }}
         </a>
