@@ -23,6 +23,7 @@ import { ShikiService } from './shiki.service';
     '[innerHTML]': 'highlightedCode()',
   },
   styles: `
+    @reference "tailwindcss";
     pre {
       @apply pb-6 px-4 rounded-md overflow-auto;
     }
