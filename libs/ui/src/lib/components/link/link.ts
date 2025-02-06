@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import { ScButtonBase } from '../button';
 
@@ -10,13 +10,9 @@ import { ScButtonBase } from '../button';
   `,
   host: {
     'data-slot': 'link',
-    '[attr.href]': 'href()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScLink extends ScButtonBase {
-  //TODO just for test, remove it later
-  readonly href = input<string>('javascript:void(0)');
-}
+export class ScLink extends ScButtonBase {}

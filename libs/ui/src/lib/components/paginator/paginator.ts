@@ -68,6 +68,7 @@ const DEFAULT_PAGE_SIZE = 10;
               [disabled]="isPrevPageDisabled()"
               [attr.aria-label]="'Go to first page'"
               (click)="firstPage()"
+              (keydown.enter)="firstPage()"
               sc-link
               variant="outline"
               size="icon"
@@ -83,6 +84,7 @@ const DEFAULT_PAGE_SIZE = 10;
             [disabled]="isPrevPageDisabled()"
             [attr.aria-label]="'Go to previous page'"
             (click)="prevPage()"
+            (keydown.enter)="prevPage()"
             sc-link
             variant="outline"
             size="icon"
@@ -105,6 +107,7 @@ const DEFAULT_PAGE_SIZE = 10;
             [disabled]="isNextPageDisabled()"
             [attr.aria-label]="'Go to next page'"
             (click)="nextPage()"
+            (keydown.enter)="nextPage()"
             sc-link
             variant="outline"
             size="icon"
@@ -120,6 +123,7 @@ const DEFAULT_PAGE_SIZE = 10;
               [disabled]="isNextPageDisabled()"
               [attr.aria-label]="'Go to last page'"
               (click)="lastPage()"
+              (keydown.enter)="lastPage()"
               sc-link
               variant="outline"
               size="icon"
