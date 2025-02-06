@@ -10,8 +10,6 @@ import {
 import { ScLink } from '@semantic-components/ui';
 import { SiEllipsisIcon } from '@semantic-icons/lucide-icons';
 
-import { ScButton } from '../button';
-
 @Component({
   selector: 'sc-page-item',
   imports: [ScLink, SiEllipsisIcon],
@@ -29,7 +27,6 @@ import { ScButton } from '../button';
           [size]="'icon'"
           (click)="selectPage()"
           sc-link
-          href="javascript:void(0)"
         >
           {{ page() }}
         </a>

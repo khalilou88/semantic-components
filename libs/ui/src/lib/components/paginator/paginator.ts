@@ -18,7 +18,7 @@ import {
   SiChevronsRightIcon,
 } from '@semantic-icons/lucide-icons';
 
-import { ScButton } from '../button';
+import { ScLink } from '../link';
 import { ScOption, ScSelect } from '../select';
 import { ScPageEvent } from './page-event';
 import { ScPageItem } from './page-item';
@@ -33,7 +33,7 @@ const DEFAULT_PAGE_SIZE = 10;
     ScPageItem,
     ReactiveFormsModule,
     ScPagination,
-    ScButton,
+    ScLink,
     SiChevronLeftIcon,
     SiChevronsLeftIcon,
     SiChevronRightIcon,
@@ -62,34 +62,34 @@ const DEFAULT_PAGE_SIZE = 10;
 
     <nav sc-pagination>
       <ul class="flex flex-row items-center gap-1">
-        @if (showFirstLastButtons()) {
+        @if (showFirstLastLinks()) {
           <li>
-            <button
+            <a
               [disabled]="isPrevPageDisabled()"
               [attr.aria-label]="'Go to first page'"
               (click)="firstPage()"
-              sc-button
+              sc-link
               variant="outline"
               size="icon"
             >
               <svg si-chevrons-left-icon></svg>
               <span class="sr-only">First page</span>
-            </button>
+            </a>
           </li>
         }
 
         <li>
-          <button
+          <a
             [disabled]="isPrevPageDisabled()"
             [attr.aria-label]="'Go to previous page'"
             (click)="prevPage()"
-            sc-button
+            sc-link
             variant="outline"
             size="icon"
           >
             <svg si-chevron-left-icon></svg>
             <span class="sr-only">Previous page</span>
-          </button>
+          </a>
         </li>
 
         @for (page of pageRanges(); track $index) {
@@ -101,32 +101,32 @@ const DEFAULT_PAGE_SIZE = 10;
         }
 
         <li>
-          <button
+          <a
             [disabled]="isNextPageDisabled()"
             [attr.aria-label]="'Go to next page'"
             (click)="nextPage()"
-            sc-button
+            sc-link
             variant="outline"
             size="icon"
           >
             <svg si-chevron-right-icon></svg>
             <span class="sr-only">Next page</span>
-          </button>
+          </a>
         </li>
 
-        @if (showFirstLastButtons()) {
+        @if (showFirstLastLinks()) {
           <li>
-            <button
+            <a
               [disabled]="isNextPageDisabled()"
               [attr.aria-label]="'Go to last page'"
               (click)="lastPage()"
-              sc-button
+              sc-link
               variant="outline"
               size="icon"
             >
               <svg si-chevrons-right-icon></svg>
               <span class="sr-only">Last page</span>
-            </button>
+            </a>
           </li>
         }
       </ul>
@@ -160,7 +160,7 @@ export class ScPaginator implements OnInit {
   hidePageSize = input<boolean>(false);
 
   /** Whether to show the first/last buttons UI to the user. */
-  showFirstLastButtons = input<boolean>(false);
+  showFirstLastLinks = input<boolean>(false);
 
   /** Event emitted when the paginator changes the page index. */
   pageChanged = output<ScPageEvent>();

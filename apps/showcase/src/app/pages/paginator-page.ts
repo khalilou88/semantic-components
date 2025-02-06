@@ -8,7 +8,7 @@ import { ScPageEvent, ScPaginator } from '@semantic-components/ui';
   template: `
     <sc-paginator
       [hidePageSize]="false"
-      [showFirstLastButtons]="true"
+      [showFirstLastLinks]="true"
       [currentPage]="currentPage()"
       [pageSize]="pageSize()"
       [totalSize]="totalSize()"
