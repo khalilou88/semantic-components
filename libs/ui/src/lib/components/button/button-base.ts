@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  booleanAttribute,
-  computed,
-  input,
-} from '@angular/core';
+import { Directive, booleanAttribute, computed, input } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
 import { VariantProps, cva } from 'class-variance-authority';
@@ -40,20 +33,11 @@ export const buttonVariants = cva(
 
 export type ButtonVariants = VariantProps<typeof buttonVariants>;
 
-@Component({
-  selector: 'button[sc-button], a[sc-button]',
-  imports: [],
-  template: `
-    <ng-content />
-  `,
+@Directive({
   host: {
     '[class]': 'class()',
     '[attr.data-disabled]': 'disabled()',
-    'data-slot': 'button',
   },
-  styles: ``,
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
   hostDirectives: [
     {
       directive: ScCursor,
@@ -61,7 +45,7 @@ export type ButtonVariants = VariantProps<typeof buttonVariants>;
     },
   ],
 })
-export class ScButton {
+export class ScButtonBase {
   readonly variant = input<ButtonVariants['variant']>('primary');
 
   readonly size = input<ButtonVariants['size']>('default');

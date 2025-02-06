@@ -7,6 +7,7 @@ export * from './lib/components/full-calendar';
 export * from './lib/components/date-picker';
 export * from './lib/components/nav';
 export * from './lib/components/theme-toggler';
+export * from './lib/components/link';
 export * from './lib/components/button';
 export * from './lib/components/input';
 export * from './lib/components/input-group';
