@@ -53,7 +53,12 @@ export type ButtonVariants = VariantProps<typeof buttonVariants>;
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  hostDirectives: [ScCursor],
+  hostDirectives: [
+    {
+      directive: ScCursor,
+      inputs: ['disabled'],
+    },
+  ],
 })
 export class ScButton {
   readonly variant = input<ButtonVariants['variant']>('primary');
