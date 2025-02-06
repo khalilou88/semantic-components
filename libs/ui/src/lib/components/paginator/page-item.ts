@@ -27,6 +27,7 @@ import { ScLink } from '../link';
           [variant]="isActive() ? 'secondary' : 'outline'"
           [size]="'icon'"
           (click)="selectPage()"
+          (keydown)="handleKeydown($event)"
           sc-link
         >
           {{ page() }}
@@ -53,5 +54,9 @@ export class ScPageItem {
     if (page !== '...' && page !== this.currentPage()) {
       this.pageChanged.emit(page);
     }
+  }
+
+  handleKeydown(event: KeyboardEvent) {
+    console.log('handleKeydown');
   }
 }
