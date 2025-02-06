@@ -11,11 +11,11 @@
 @import '@fontsource/jetbrains-mono/400.css';
 
 @import '@angular/cdk/overlay-prebuilt.css';
+
+@import 'tailwindcss';
 @import '@semantic-components/ui/styles/styles.css';
 
 @config "../../../tailwind.config.js";
-
-@import 'tailwindcss';
 
 @layer base {
   :root {
