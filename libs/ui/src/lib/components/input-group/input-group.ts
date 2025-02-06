@@ -26,5 +26,14 @@ export class ScInputGroup {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('', this.classInput()));
+  protected readonly class = computed(() =>
+    cn(
+      // Default styles
+      'grid grid-cols-[24px_1fr_24px]',
+      '[&>[data-slot=icon]]:row-start-1',
+      '',
+      '',
+      this.classInput(),
+    ),
+  );
 }
