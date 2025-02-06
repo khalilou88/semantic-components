@@ -7,8 +7,9 @@ import {
   output,
 } from '@angular/core';
 
-import { ScLink } from '@semantic-components/ui';
 import { SiEllipsisIcon } from '@semantic-icons/lucide-icons';
+
+import { ScLink } from '../link';
 
 @Component({
   selector: 'sc-page-item',
