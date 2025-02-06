@@ -5,6 +5,7 @@ import { Directive, ElementRef, inject, model } from '@angular/core';
   host: {
     '[value]': 'value()',
     '(input)': 'handleInput()',
+    'data-slot': 'control',
   },
 })
 export class ScPlainInput {
