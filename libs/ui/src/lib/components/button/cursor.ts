@@ -10,7 +10,7 @@ import {
   input,
 } from '@angular/core';
 
-@Directive({})
+@Directive()
 export class ScCursor {
   private readonly isPlatformBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 

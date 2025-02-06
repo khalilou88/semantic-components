@@ -175,7 +175,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
           </sc-tabs>
         </section>
 
-        <button (click)="f()" sc-button>Togle</button>
+        <button (click)="f()" sc-button>Toggle</button>
 
         <section class="my-10" id="disabled-buttons">
           <h3 class="mb-2" sc-heading level="3">Disabled buttons</h3>
