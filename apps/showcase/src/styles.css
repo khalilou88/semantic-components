@@ -13,7 +13,7 @@
 @import '@angular/cdk/overlay-prebuilt.css';
 @import '../../../libs/ui/src/lib/styles/styles.css';
 
-@config "../../../tailwind.config.js";
+@config "../tailwind.config.js";
 
 @import 'tailwindcss';
 
