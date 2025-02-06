@@ -6,9 +6,11 @@ import { ScInput, ScInputGroup } from '@semantic-components/ui';
   selector: 'app-input-group-page',
   imports: [ScInputGroup, ScInput],
   template: `
-    <sc-input-group>
-      <input sc-input />
-    </sc-input-group>
+    <div class="m-10">
+      <sc-input-group>
+        <input sc-input />
+      </sc-input-group>
+    </div>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
