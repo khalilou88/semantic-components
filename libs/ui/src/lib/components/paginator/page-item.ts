@@ -41,16 +41,16 @@ import { ScLink } from '../link';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScPageItem {
-  currentPage = input.required<number>();
-  page = input.required<number | '...'>();
+  readonly currentPage = input.required<number>();
+  readonly page = input.required<number | '...'>();
 
-  pageChanged = output<number>();
+  readonly pageChanged = output<number>();
 
-  isActive = computed(() => {
+  protected readonly isActive = computed(() => {
     return this.page() === this.currentPage();
   });
 
-  selectPage() {
+  protected selectPage() {
     const page = this.page();
     if (page !== '...' && page !== this.currentPage()) {
       this.pageChanged.emit(page);

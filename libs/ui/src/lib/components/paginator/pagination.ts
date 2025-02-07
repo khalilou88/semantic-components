@@ -16,15 +16,19 @@ import { cn } from '@semantic-components/utils';
   `,
   host: {
     role: 'navigation',
-    '[attr.aria-label]': '"pagination"',
-    '[class]': 'classes()',
+    'aria-label': 'pagination',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScPagination {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn('mx-auto flex w-full justify-center', this.class()));
+  protected readonly class = computed(() =>
+    cn('mx-auto flex w-full justify-center', this.classInput()),
+  );
 }

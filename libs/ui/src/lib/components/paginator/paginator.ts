@@ -137,37 +137,39 @@ const DEFAULT_PAGE_SIZE = 10;
     </nav>
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScPaginator implements OnInit {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn('flex', this.class()));
+  protected readonly class = computed(() => cn('flex', this.classInput()));
 
   /** The one-based page index of the displayed list of items. Defaulted to 1. */
-  currentPage = input<number>(1);
+  readonly currentPage = input<number>(1);
 
   /** The total number of items that are being paginated. */
-  totalSize = input.required<number>();
+  readonly totalSize = input.required<number>();
 
   /** The set of provided page size options to display to the user. */
-  pageSizeOptions = input<number[]>([5, DEFAULT_PAGE_SIZE, 25]);
+  readonly pageSizeOptions = input<number[]>([5, DEFAULT_PAGE_SIZE, 25]);
 
-  /** Number of items to display on a page. By default set to 10. */
-  pageSize = input<number>(DEFAULT_PAGE_SIZE);
+  /** Number of items to display on a page. By default, set to 10. */
+  readonly pageSize = input<number>(DEFAULT_PAGE_SIZE);
 
   /** Whether to hide the page size selection UI from the user. */
-  hidePageSize = input<boolean>(false);
+  readonly hidePageSize = input<boolean>(false);
 
   /** Whether to show the first/last buttons UI to the user. */
-  showFirstLastLinks = input<boolean>(false);
+  readonly showFirstLastLinks = input<boolean>(false);
 
   /** Event emitted when the paginator changes the page index. */
-  pageChanged = output<ScPageEvent>();
+  readonly pageChanged = output<ScPageEvent>();
 
   constructor() {
     //TODO find a better way
