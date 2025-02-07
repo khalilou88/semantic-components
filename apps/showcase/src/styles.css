@@ -1,14 +1,5 @@
-/* @import '@fontsource/inter/400.css';
-@import '@fontsource/inter/400-italic.css';
-@import '@fontsource/inter/500.css';
-@import '@fontsource/inter/500-italic.css';
-@import '@fontsource/inter/600.css';
-@import '@fontsource/inter/600-italic.css';
-@import '@fontsource/inter/700.css';
-@import '@fontsource/inter/700-italic.css';
-@import '@fontsource/inter/800.css';
-@import '@fontsource/inter/800-italic.css';
-@import '@fontsource/jetbrains-mono/400.css'; */
+@import url('@fontsource/inter/index.css');
+@import url('@fontsource/jetbrains-mono/index.css');
 
 @import '@angular/cdk/overlay-prebuilt.css';
 @import '../../../libs/ui/src/lib/styles/styles.css';
@@ -23,7 +14,7 @@
 @theme {
   --font-sans: Inter, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
     'Segoe UI Symbol', 'Noto Color Emoji';
-  --font-mono: JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     'Liberation Mono', 'Courier New', monospace;
 
   --color-background: hsl(var(--background));
