@@ -22,12 +22,7 @@ import { ShikiService } from './shiki.service';
     '[class]': 'class()',
     '[innerHTML]': 'highlightedCode()',
   },
-  styles: `
-    @reference "tailwindcss";
-    pre {
-      @apply pb-6 px-4 rounded-md overflow-auto;
-    }
-  `,
+  styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
