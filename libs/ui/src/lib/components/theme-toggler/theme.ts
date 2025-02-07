@@ -1,11 +1,15 @@
 import { DOCUMENT } from '@angular/common';
 import { Injectable, afterNextRender, effect, inject, signal } from '@angular/core';
 
+import { LocalStorage } from './local-storage';
+
 @Injectable({
   providedIn: 'root',
 })
 export class ScTheme {
   private readonly document = inject<Document>(DOCUMENT);
+
+  private readonly localStorage = inject(LocalStorage);
 
   value = signal<'light' | 'dark' | undefined>(undefined);
 
