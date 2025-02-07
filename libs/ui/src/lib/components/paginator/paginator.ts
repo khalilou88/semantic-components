@@ -45,7 +45,7 @@ const DEFAULT_PAGE_SIZE = 10;
     @if (!hidePageSize()) {
       <div>
         <label class="" for="items-per-page">Items per page:</label>
-        <sc-select class="" id="items-per-page" [formControl]="pageSizeFormControl">
+        <sc-select class="inline-block" id="items-per-page" [formControl]="pageSizeFormControl">
           @for (pageSizeOption of pageSizeOptions(); track $index) {
             <sc-option [value]="pageSizeOption">{{ pageSizeOption }}</sc-option>
           }
@@ -60,7 +60,7 @@ const DEFAULT_PAGE_SIZE = 10;
       <span>{{ totalSize() }}</span>
     </div>
 
-    <nav sc-pagination>
+    <nav class="col-span-2" sc-pagination>
       <ul class="flex flex-row items-center gap-1">
         @if (showFirstLastLinks()) {
           <li>
@@ -148,7 +148,9 @@ export class ScPaginator implements OnInit {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('flex', this.classInput()));
+  protected readonly class = computed(() =>
+    cn('grid grid-cols-4 grid-rows-1 gap-4', this.classInput()),
+  );
 
   /** The one-based page index of the displayed list of items. Defaulted to 1. */
   readonly currentPage = input<number>(1);
