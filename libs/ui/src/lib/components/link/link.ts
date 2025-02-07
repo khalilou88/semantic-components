@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, computed } from '@angular/core';
 
 import { ScButtonBase } from '../button';
 
@@ -10,10 +10,18 @@ import { ScButtonBase } from '../button';
   `,
   host: {
     'data-slot': 'link',
-    tabindex: '0', //make the link focusable in case don't have href
+    '[tabindex]': 'tabindex()', //make the link focusable in case don't have href
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScLink extends ScButtonBase {}
+export class ScLink extends ScButtonBase {
+  protected readonly tabindex = computed(() => {
+    if (this.disabled()) {
+      return -1;
+    }
+
+    return 0;
+  });
+}
