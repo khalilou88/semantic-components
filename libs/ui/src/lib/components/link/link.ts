@@ -10,6 +10,7 @@ import { ScButtonBase } from '../button';
   `,
   host: {
     'data-slot': 'link',
+    tabindex: '0', //make the link focusable in case don't have href
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
