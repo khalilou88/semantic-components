@@ -442,14 +442,11 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
 export default class ButtonPage {
   class = signal<string>('block w-full');
 
-  codeSnippet1 = `
-  import { ScButton } from '@semantic-components/ui';`;
+  codeSnippet1 = `import { ScButton } from '@semantic-components/ui';`;
 
-  codeSnippet2 = `
-  <button sc-button type="button">Primary</button>`;
+  codeSnippet2 = `<button sc-button type="button">Primary</button>`;
 
-  codeSnippet = `
-  <button sc-button type="button">Primary</button>
+  codeSnippet = `<button sc-button type="button">Primary</button>
   <button sc-button variant="secondary" type="button">Secondary</button>
   <button sc-button variant="destructive" type="button">Destructive</button>
   <button sc-button variant="outline" type="button">Outline</button>
