@@ -24,7 +24,11 @@ export class ScCursorPointer {
   constructor() {
     effect(() => {
       if (this.isPlatformBrowser) {
-        if (!this.disabled()) {
+        if (this.disabled()) {
+          if (this.hostRef.nativeElement.classList.contains('cursor-pointer')) {
+            this.renderer.removeClass(this.hostRef.nativeElement, 'cursor-pointer');
+          }
+        } else {
           this.renderer.addClass(this.hostRef.nativeElement, 'cursor-pointer');
         }
       }
