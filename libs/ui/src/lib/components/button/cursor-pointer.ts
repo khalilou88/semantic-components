@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 
 @Directive()
-export class ScCursor {
+export class ScCursorPointer {
   private readonly isPlatformBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
   private readonly hostRef = inject(ElementRef);
