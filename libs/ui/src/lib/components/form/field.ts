@@ -44,6 +44,8 @@ export class ScField {
 
   constructor() {
     afterNextRender(() => {
+      console.log(this.id());
+
       this.scInput()?.setId(this.id());
       this.scLabel()?.setFor(this.id());
     });

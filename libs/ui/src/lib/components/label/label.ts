@@ -41,7 +41,8 @@ export class ScLabel {
 
   protected readonly for = linkedSignal(() => this.forInput());
 
-  setFor(v: string) {
-    this.for.set(v);
+  setFor(id: string) {
+    console.log(id);
+    this.for.set(id);
   }
 }

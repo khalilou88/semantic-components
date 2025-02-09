@@ -54,6 +54,7 @@ export class ScInput {
   protected readonly id = linkedSignal(() => this.idInput());
 
   setId(id: string) {
+    console.log(id);
     this.id.set(id);
   }
 }
