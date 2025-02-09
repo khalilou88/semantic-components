@@ -4,6 +4,7 @@ import {
   Component,
   ViewEncapsulation,
   computed,
+  effect,
   inject,
   input,
   linkedSignal,
@@ -58,5 +59,11 @@ export class ScInput {
   setId(id: string) {
     console.log(id);
     this.id.set(id);
+  }
+
+  constructor() {
+    effect(() => {
+      console.log(this.id());
+    });
   }
 }

@@ -4,6 +4,7 @@ import {
   Component,
   ViewEncapsulation,
   computed,
+  effect,
   inject,
   input,
   linkedSignal,
@@ -49,5 +50,11 @@ export class ScLabel {
   setFor(id: string) {
     console.log(id);
     this.for.set(id);
+  }
+
+  constructor() {
+    effect(() => {
+      console.log(this.for());
+    });
   }
 }
