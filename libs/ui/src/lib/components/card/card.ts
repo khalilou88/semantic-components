@@ -15,16 +15,18 @@ import { cn } from '@semantic-components/utils';
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCard {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() =>
-    cn('rounded-lg border bg-card text-card-foreground shadow-sm', this.class()),
+  protected readonly class = computed(() =>
+    cn('rounded-lg border bg-card text-card-foreground shadow-sm', this.classInput()),
   );
 }

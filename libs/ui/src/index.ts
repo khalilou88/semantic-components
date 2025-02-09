@@ -68,3 +68,4 @@ export * from './lib/components/chat';
 export * from './lib/components/image-placeholder';
 export * from './lib/components/rtl';
 export * from './lib/components/form';
+export * from './lib/components/touch-area';

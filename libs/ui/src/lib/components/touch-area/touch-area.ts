@@ -9,7 +9,7 @@ import {
 import { cn } from '@semantic-components/utils';
 
 @Component({
-  selector: 'p[sc-card-description]',
+  selector: 'span[sc-touch-area]',
   imports: [],
   template: `
     <ng-content />
@@ -21,10 +21,10 @@ import { cn } from '@semantic-components/utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCardDescription {
+export class ScTouchArea {
   readonly classInput = input<string>('', {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('text-sm text-muted-foreground', this.classInput()));
+  protected readonly class = computed(() => cn('', this.classInput()));
 }
