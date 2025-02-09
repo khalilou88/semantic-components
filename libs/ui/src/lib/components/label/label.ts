@@ -1,13 +1,10 @@
-import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
-  inject,
   input,
   linkedSignal,
-  signal,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
@@ -39,9 +36,7 @@ export class ScLabel {
     ),
   );
 
-  readonly id = signal<string>(inject(_IdGenerator).getId('sc-label-'));
-
-  readonly forInput = input<string>(this.id(), {
+  readonly forInput = input<string>('', {
     alias: 'for',
   });
 

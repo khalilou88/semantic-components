@@ -36,8 +36,7 @@ export class ScField {
 
   protected readonly class = computed(() =>
     cn(
-      '[&>[data-slot=control]]:mt-2 [&>[data-slot=control]+[data-slot=description]]:mt-2 ',
-      '',
+      '[&>[data-slot=control]]:mt-2 [&>[data-slot=control]+[data-slot=description]]:mt-2',
       this.classInput(),
     ),
   );
