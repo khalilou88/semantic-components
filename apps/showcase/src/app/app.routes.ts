@@ -153,6 +153,11 @@ export const appRoutes: Route[] = [
             title: 'Hover Card Page',
           },
           {
+            path: 'form',
+            loadComponent: () => import('./pages/form-page'),
+            title: 'Form Page',
+          },
+          {
             path: 'input',
             loadComponent: () => import('./pages/input-page'),
             title: 'Input Page',
