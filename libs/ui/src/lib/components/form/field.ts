@@ -5,10 +5,10 @@ import {
   ViewEncapsulation,
   afterNextRender,
   computed,
+  contentChild,
   inject,
   input,
   signal,
-  viewChild,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
@@ -38,16 +38,14 @@ export class ScField {
 
   readonly id = signal<string>(inject(_IdGenerator).getId('sc-field-'));
 
-  readonly scInput = viewChild(ScInput);
+  readonly scLabel = contentChild(ScLabel);
 
-  readonly scLabel = viewChild(ScLabel);
+  readonly scInput = contentChild(ScInput);
 
   constructor() {
     afterNextRender(() => {
-      console.log(this.id());
-
-      this.scInput()?.setId(this.id());
       this.scLabel()?.for.set(this.id());
+      this.scInput()?.id.set(this.id());
     });
   }
 }

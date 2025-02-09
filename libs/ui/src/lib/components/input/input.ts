@@ -4,7 +4,6 @@ import {
   Component,
   ViewEncapsulation,
   computed,
-  effect,
   inject,
   input,
   linkedSignal,
@@ -54,16 +53,5 @@ export class ScInput {
     alias: 'id',
   });
 
-  protected readonly id = linkedSignal(() => this.idInput());
-
-  setId(id: string) {
-    console.log(id);
-    this.id.set(id);
-  }
-
-  constructor() {
-    effect(() => {
-      console.log(this.id());
-    });
-  }
+  readonly id = linkedSignal(() => this.idInput());
 }
