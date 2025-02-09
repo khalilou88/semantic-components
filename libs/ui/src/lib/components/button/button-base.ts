@@ -3,10 +3,8 @@ import { Directive, booleanAttribute, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/utils';
 import { VariantProps, cva } from 'class-variance-authority';
 
-import { ScCursorPointer } from './cursor-pointer';
-
 export const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 [@media(pointer:fine)]:cursor-pointer',
   {
     variants: {
       variant: {
@@ -38,12 +36,6 @@ export type ButtonVariants = VariantProps<typeof buttonVariants>;
     '[class]': 'class()',
     '[attr.data-disabled]': 'disabled()',
   },
-  hostDirectives: [
-    {
-      directive: ScCursorPointer,
-      inputs: ['disabled'],
-    },
-  ],
 })
 export class ScButtonBase {
   readonly variant = input<ButtonVariants['variant']>('primary');
