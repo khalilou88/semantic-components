@@ -1,9 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  OnInit,
   ViewEncapsulation,
   computed,
+  effect,
   inject,
   input,
   signal,
@@ -26,7 +26,7 @@ import { ShikiService } from './shiki.service';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCodeHighlighter implements OnInit {
+export class ScCodeHighlighter {
   readonly classInput = input<string>('', {
     alias: 'class',
   });
@@ -36,14 +36,21 @@ export class ScCodeHighlighter implements OnInit {
   private readonly shikiService = inject(ShikiService);
   private readonly sanitizer = inject(DomSanitizer);
 
-  code = input.required<string>();
-  language = input<'angular-html' | 'typescript'>('angular-html');
-  theme = input('github-dark');
+  readonly code = input.required<string>();
+  readonly language = input<'angular-html' | 'typescript'>('angular-html');
+  readonly theme = input('github-dark');
 
-  highlightedCode = signal<SafeHtml>('');
+  protected readonly highlightedCode = signal<SafeHtml>('');
 
-  async ngOnInit() {
-    const highlighted = await this.shikiService.highlightCode(this.code(), this.language());
-    this.highlightedCode.set(this.sanitizer.bypassSecurityTrustHtml(highlighted));
+  constructor() {
+    effect(async () => {
+      const normalizedCode = this.code()
+        .split('\n')
+        .map((line) => line.trimStart()) // Removes leading spaces
+        .join('\n');
+
+      const highlighted = await this.shikiService.highlightCode(normalizedCode, this.language());
+      this.highlightedCode.set(this.sanitizer.bypassSecurityTrustHtml(highlighted));
+    });
   }
 }
