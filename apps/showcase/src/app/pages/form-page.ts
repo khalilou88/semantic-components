@@ -9,7 +9,7 @@ import { ScDescription, ScField, ScInput, ScLabel } from '@semantic-components/u
     <div class="m-10">
       <sc-field>
         <label sc-label>Label</label>
-        <input sc-input />
+        <input class="max-w-32" sc-input />
         <p sc-description>A description.</p>
       </sc-field>
 
