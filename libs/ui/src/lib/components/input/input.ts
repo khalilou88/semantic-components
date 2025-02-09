@@ -1,8 +1,10 @@
+import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
+  inject,
   input,
   linkedSignal,
   model,
@@ -47,7 +49,7 @@ export class ScInput {
 
   readonly value = model<string>('');
 
-  readonly idInput = input<string>('', {
+  readonly idInput = input<string>(inject(_IdGenerator).getId('sc-input-'), {
     alias: 'id',
   });
 
