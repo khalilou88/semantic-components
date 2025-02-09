@@ -8,8 +8,8 @@ import { ScField } from '@semantic-components/ui';
   template: `
     <div class="m-10">
       <sc-field>
-        <label>Label</label>
-        <input />
+        <label for="id">Label</label>
+        <input id="id" />
         <p>A description.</p>
       </sc-field>
     </div>
