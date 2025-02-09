@@ -153,6 +153,11 @@ export const appRoutes: Route[] = [
             title: 'Hover Card Page',
           },
           {
+            path: 'touch-area',
+            loadComponent: () => import('./pages/touch-area-page'),
+            title: 'Touch Area Page',
+          },
+          {
             path: 'form',
             loadComponent: () => import('./pages/form-page'),
             title: 'Form Page',
