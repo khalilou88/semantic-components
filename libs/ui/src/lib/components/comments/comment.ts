@@ -92,7 +92,7 @@ import { ScCommentModel } from './comment-model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScComment {
-  comment = input.required<ScCommentModel>();
+  readonly comment = input.required<ScCommentModel>();
 
   likeComment(comment: ScCommentModel) {
     comment.likes++;

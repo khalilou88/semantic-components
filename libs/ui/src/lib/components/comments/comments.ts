@@ -53,11 +53,11 @@ import { ScCommentModel, ScUserModel } from './comment-model';
 export class ScComments {
   private readonly fb = inject(FormBuilder);
 
-  comments = input.required<ScCommentModel[]>();
+  readonly comments = input.required<ScCommentModel[]>();
 
-  currentUser = input.required<ScUserModel>();
+  readonly currentUser = input.required<ScUserModel>();
 
-  commentForm: FormGroup;
+  protected readonly commentForm: FormGroup;
 
   constructor() {
     this.commentForm = this.fb.group({
@@ -68,8 +68,8 @@ export class ScComments {
   onSubmit() {
     if (this.commentForm.valid) {
       const newComment: ScCommentModel = {
-        id: this.comments.length + 1,
-        author: this.currentUser.name,
+        id: this.comments().length + 1,
+        author: this.currentUser().name,
         avatar: this.currentUser().avatar,
         content: this.commentForm.value.content,
         timestamp: new Date(),
