@@ -9,7 +9,7 @@ import {
 import { cn } from '@semantic-components/utils';
 
 @Component({
-  selector: 'sc-description',
+  selector: 'p[sc-description]',
   imports: [],
   template: `
     <ng-content />

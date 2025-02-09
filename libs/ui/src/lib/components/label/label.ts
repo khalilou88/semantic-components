@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
   computed,
   input,
+  linkedSignal,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
@@ -15,6 +16,7 @@ import { cn } from '@semantic-components/utils';
     <ng-content />
   `,
   host: {
+    '[for]': 'for()',
     '[class]': 'class()',
   },
   styles: ``,
@@ -32,4 +34,14 @@ export class ScLabel {
       this.classInput(),
     ),
   );
+
+  readonly forInput = input<string>('', {
+    alias: 'for',
+  });
+
+  protected readonly for = linkedSignal(() => this.forInput());
+
+  setFor(v: string) {
+    this.for.set(v);
+  }
 }

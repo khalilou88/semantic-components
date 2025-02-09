@@ -1,16 +1,16 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { ScField } from '@semantic-components/ui';
+import { ScDescription, ScField, ScInput, ScLabel } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-form-page',
-  imports: [ScField],
+  imports: [ScField, ScLabel, ScInput, ScDescription],
   template: `
     <div class="m-10">
       <sc-field>
-        <label for="id">Label</label>
-        <input id="id" />
-        <p>A description.</p>
+        <label sc-label>Label</label>
+        <input sc-input />
+        <p sc-description>A description.</p>
       </sc-field>
     </div>
   `,

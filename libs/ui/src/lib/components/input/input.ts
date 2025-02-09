@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
   computed,
   input,
+  linkedSignal,
   model,
   signal,
 } from '@angular/core';
@@ -23,6 +24,7 @@ export const scInputStyles = signal(
     <ng-content />
   `,
   host: {
+    '[id]': 'id()',
     '[class]': 'class()',
   },
   styles: ``,
@@ -44,4 +46,14 @@ export class ScInput {
   protected readonly class = computed(() => cn(scInputStyles(), this.classInput()));
 
   readonly value = model<string>('');
+
+  readonly idInput = input<string>('', {
+    alias: 'id',
+  });
+
+  protected readonly id = linkedSignal(() => this.idInput());
+
+  setId(id: string) {
+    this.id.set(id);
+  }
 }
