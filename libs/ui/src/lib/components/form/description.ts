@@ -15,6 +15,7 @@ import { cn } from '@semantic-components/utils';
     <ng-content />
   `,
   host: {
+    'data-slot': 'description',
     '[class]': 'class()',
   },
   styles: ``,

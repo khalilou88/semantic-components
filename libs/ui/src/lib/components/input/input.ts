@@ -26,6 +26,7 @@ export const scInputStyles = signal(
     <ng-content />
   `,
   host: {
+    'data-slot': 'control',
     '[id]': 'id()',
     '[class]': 'class()',
   },

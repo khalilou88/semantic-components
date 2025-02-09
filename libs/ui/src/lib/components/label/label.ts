@@ -19,6 +19,7 @@ import { cn } from '@semantic-components/utils';
     <ng-content />
   `,
   host: {
+    'data-slot': 'label',
     '[for]': 'for()',
     '[class]': 'class()',
   },

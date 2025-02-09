@@ -34,7 +34,13 @@ export class ScField {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('', this.classInput()));
+  protected readonly class = computed(() =>
+    cn(
+      '[&>[data-slot=control]]:mt-2 [&>[data-slot=control]+[data-slot=description]]:mt-2 ',
+      '',
+      this.classInput(),
+    ),
+  );
 
   readonly id = signal<string>(inject(_IdGenerator).getId('sc-field-'));
 

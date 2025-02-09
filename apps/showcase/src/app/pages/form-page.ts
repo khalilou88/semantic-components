@@ -12,6 +12,15 @@ import { ScDescription, ScField, ScInput, ScLabel } from '@semantic-components/u
         <input sc-input />
         <p sc-description>A description.</p>
       </sc-field>
+
+      <br />
+      <br />
+
+      <sc-field>
+        <label sc-label>Label</label>
+        <p sc-description>A description.</p>
+        <input sc-input />
+      </sc-field>
     </div>
   `,
   styles: ``,
