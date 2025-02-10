@@ -66,7 +66,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
 
         <h1 sc-page-title>Button</h1>
 
-        <p sc-page-description>Displays a button or a link that looks like a button.</p>
+        <p sc-page-description>Displays a button that looks like a button or a link.</p>
 
         <h2 id="usage" sc-page-subtitle>Usage</h2>
 
@@ -194,39 +194,6 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
                     <button sc-button variant="outline" type="button" disabled>Outline</button>
                     <button sc-button variant="ghost" type="button" disabled>Ghost</button>
                     <button sc-button variant="link" type="button" disabled>Link</button>
-                  </div>
-                </div>
-              </sc-tab-content>
-            </sc-tab>
-
-            <sc-tab>
-              <sc-tab-label>Code</sc-tab-label>
-              <sc-tab-content>
-                <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <p>Coming soon</p>
-                  </div>
-                </div>
-              </sc-tab-content>
-            </sc-tab>
-          </sc-tabs>
-        </section>
-
-        <section class="my-10" id="disabled-links">
-          <h3 class="mb-2" sc-heading level="3">Disabled links</h3>
-
-          <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
-            <sc-tab>
-              <sc-tab-label>Preview</sc-tab-label>
-              <sc-tab-content>
-                <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <a sc-link type="button" disabled>Primary</a>
-                    <a sc-link variant="secondary" type="button" disabled>Secondary</a>
-                    <a sc-link variant="destructive" type="button" disabled>Destructive</a>
-                    <a sc-link variant="outline" type="button" disabled>Outline</a>
-                    <a sc-link variant="ghost" type="button" disabled>Ghost</a>
-                    <a sc-link variant="link" type="button" disabled>Link</a>
                   </div>
                 </div>
               </sc-tab-content>
@@ -391,16 +358,6 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
                         fragment="disabled-buttons"
                       >
                         Disabled buttons
-                      </a>
-                    </li>
-
-                    <li class="mt-0 pt-2">
-                      <a
-                        class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
-                        routerLink="."
-                        fragment="disabled-links"
-                      >
-                        Disabled links
                       </a>
                     </li>
 
