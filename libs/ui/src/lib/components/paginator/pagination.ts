@@ -116,7 +116,7 @@ import { PaginatorService } from './paginator.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScPagination {
-  readonly paginatorService = inject(PaginatorService);
+  protected readonly paginatorService = inject(PaginatorService);
 
   readonly classInput = input<string>('', {
     alias: 'class',
