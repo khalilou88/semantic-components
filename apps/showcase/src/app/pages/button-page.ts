@@ -13,7 +13,6 @@ import {
   ScCardContent,
   ScCodeHighlighter,
   ScHeading,
-  ScLink,
   ScPageDescription,
   ScPageSubtitle,
   ScPageTitle,
@@ -48,7 +47,6 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
     ScCodeHighlighter,
     ScCardContent,
     RouterLink,
-    ScLink,
   ],
   template: `
     <div class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px] px-4">
