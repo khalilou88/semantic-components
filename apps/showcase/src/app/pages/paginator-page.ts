@@ -1,19 +1,40 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
 
-import { ScPageEvent, ScPaginator } from '@semantic-components/ui';
+import {
+  ScPageEvent,
+  ScPageSizeSelect,
+  ScPaginator,
+  ScPaginatorContainer,
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-paginator-page',
-  imports: [ScPaginator],
+  imports: [ScPaginator, ScPageSizeSelect, ScPaginatorContainer],
   template: `
-    <sc-paginator
-      [hidePageSize]="false"
-      [showFirstLastLinks]="true"
-      [currentPage]="currentPage()"
-      [pageSize]="pageSize()"
-      [totalSize]="totalSize()"
-      (pageChanged)="setPageEvent($event)"
-    />
+    <div class="m-10">
+      <sc-paginator-container>
+        <sc-paginator
+          #p="scPaginator"
+          [hidePageSize]="false"
+          [showFirstLastLinks]="true"
+          [currentPage]="currentPage()"
+          [pageSize]="pageSize()"
+          [totalSize]="totalSize()"
+          (pageChanged)="setPageEvent($event)"
+        >
+          Items per page:
+
+          <sc-page-size-select />
+
+          <div class="">
+            Showing
+            <span>{{ p.firstItemPage() }}-{{ p.lastItemPage() }}</span>
+            of
+            <span>{{ p.totalSize() }}</span>
+          </div>
+        </sc-paginator>
+      </sc-paginator-container>
+    </div>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,

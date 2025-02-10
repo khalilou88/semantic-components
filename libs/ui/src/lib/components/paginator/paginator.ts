@@ -29,6 +29,7 @@ const DEFAULT_PAGE_SIZE = 10;
 
 @Component({
   selector: 'sc-paginator',
+  exportAs: 'scPaginator',
   imports: [
     ScPageItem,
     ReactiveFormsModule,
@@ -42,6 +43,8 @@ const DEFAULT_PAGE_SIZE = 10;
     ScOption,
   ],
   template: `
+    <ng-content />
+
     @if (!hidePageSize()) {
       <div>
         <label class="" for="items-per-page">Items per page:</label>
@@ -53,12 +56,12 @@ const DEFAULT_PAGE_SIZE = 10;
       </div>
     }
 
-    <div class="">
+    <!--div class="">
       Showing
       <span>{{ firstItemPage() }}-{{ lastItemPage() }}</span>
       of
       <span>{{ totalSize() }}</span>
-    </div>
+    </div-->
 
     <nav class="col-span-2" sc-pagination>
       <ul class="flex flex-row items-center gap-1">
