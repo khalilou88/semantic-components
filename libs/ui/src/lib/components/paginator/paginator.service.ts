@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, computed, signal } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 /** The default page size if there is no page size and there are no provided page size options. */
@@ -19,4 +19,21 @@ export class PaginatorService {
   readonly pageSize = signal<number>(DEFAULT_PAGE_SIZE);
 
   readonly pageSizeFormControl = new FormControl(this.pageSize());
+
+  readonly firstItemPage = computed(() => {
+    if (this.totalSize() === 0) {
+      return 0;
+    }
+    return this.pageSize() * (this.currentPage() - 1) + 1;
+  });
+
+  readonly lastItemPage = computed(() => {
+    const a = this.firstItemPage() + this.pageSize() - 1;
+
+    if (a < this.totalSize()) {
+      return a;
+    }
+
+    return this.totalSize();
+  });
 }

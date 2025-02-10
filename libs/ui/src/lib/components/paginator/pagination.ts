@@ -182,23 +182,6 @@ export class ScPagination {
     Math.ceil(this.paginatorService.totalSize() / this.paginatorService.pageSize()),
   );
 
-  firstItemPage = computed(() => {
-    if (this.paginatorService.totalSize() === 0) {
-      return 0;
-    }
-    return this.paginatorService.pageSize() * (this.paginatorService.currentPage() - 1) + 1;
-  });
-
-  lastItemPage = computed(() => {
-    const a = this.firstItemPage() + this.paginatorService.pageSize() - 1;
-
-    if (a < this.paginatorService.totalSize()) {
-      return a;
-    }
-
-    return this.paginatorService.totalSize();
-  });
-
   firstPage() {
     this.pageChanged.emit({ page: 1, pageSize: this.paginatorService.pageSize() });
   }

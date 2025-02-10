@@ -97,4 +97,8 @@ export class ScPaginator implements OnInit {
       }
     });
   }
+
+  readonly firstItemPage = computed(() => this.paginatorService.firstItemPage());
+
+  readonly lastItemPage = computed(() => this.paginatorService.lastItemPage());
 }
