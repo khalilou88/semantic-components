@@ -23,25 +23,24 @@ import { SiCheckIcon, SiMinusIcon } from '@semantic-icons/lucide-icons';
   selector: 'sc-checkbox',
   imports: [SiCheckIcon, SiMinusIcon],
   template: `
-    <div [class]="wrapperClass()">
-      <input
-        [id]="id()"
-        [attr.aria-label]="ariaLabel()"
-        [class]="checkboxClass()"
-        [disabled]="disabled()"
-        [checked]="checked()"
-        [attr.data-state]="state()"
-        (change)="onInteractionEvent($event)"
-        (click)="toggle()"
-        type="checkbox"
-      />
+    <input
+      [id]="id()"
+      [attr.aria-label]="ariaLabel()"
+      [class]="checkboxClass()"
+      [disabled]="disabled()"
+      [checked]="checked()"
+      [attr.data-state]="state()"
+      (change)="onInteractionEvent($event)"
+      (click)="toggle()"
+      data-slot="control"
+      type="checkbox"
+    />
 
-      @if (indeterminate()) {
-        <svg [class]="svgClass()" si-minus-icon></svg>
-      } @else if (checked()) {
-        <svg [class]="svgClass()" si-check-icon></svg>
-      }
-    </div>
+    @if (indeterminate()) {
+      <svg [class]="svgClass()" si-minus-icon></svg>
+    } @else if (checked()) {
+      <svg [class]="svgClass()" si-check-icon></svg>
+    }
   `,
   host: {
     '[class]': 'class()',
@@ -71,13 +70,7 @@ export class ScCheckbox implements ControlValueAccessor {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('flex items-center space-x-2', this.classInput()));
-
-  readonly wrapperClassInput = input<string>('', {
-    alias: 'wrapperClass',
-  });
-
-  protected readonly wrapperClass = computed(() => cn('relative size-4', this.wrapperClassInput()));
+  protected readonly class = computed(() => cn('relative block size-4', this.classInput()));
 
   readonly checkboxClassInput = input<string>('', {
     alias: 'checkboxClass',
