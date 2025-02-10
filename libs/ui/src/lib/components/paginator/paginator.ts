@@ -5,6 +5,7 @@ import {
   ViewEncapsulation,
   computed,
   effect,
+  inject,
   input,
   output,
 } from '@angular/core';
@@ -23,6 +24,7 @@ import { ScOption, ScSelect } from '../select';
 import { ScPageEvent } from './page-event';
 import { ScPageItem } from './page-item';
 import { ScPagination } from './pagination';
+import { PaginatorService } from './paginator.service';
 
 /** The default page size if there is no page size and there are no provided page size options. */
 const DEFAULT_PAGE_SIZE = 10;
@@ -136,8 +138,11 @@ const DEFAULT_PAGE_SIZE = 10;
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [PaginatorService],
 })
 export class ScPaginator implements OnInit {
+  private readonly paginatorService = inject(PaginatorService);
+
   readonly classInput = input<string>('', {
     alias: 'class',
   });
