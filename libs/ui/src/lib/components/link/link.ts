@@ -1,6 +1,12 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, computed } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
 
-import { ScButtonBase } from '../button';
+import { ButtonVariants, ScButtonBase } from '../button';
 
 @Component({
   selector: 'a[sc-link]',
@@ -17,6 +23,8 @@ import { ScButtonBase } from '../button';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScLink extends ScButtonBase {
+  override readonly variant = input<ButtonVariants['variant']>('link');
+
   protected readonly tabindex = computed(() => {
     if (this.disabled()) {
       return -1;

@@ -85,12 +85,12 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <a sc-link type="button">Primary</a>
-                    <a sc-link variant="secondary" type="button">Secondary</a>
-                    <a sc-link variant="destructive" type="button">Destructive</a>
-                    <a sc-link variant="outline" type="button">Outline</a>
-                    <a sc-link variant="ghost" type="button">Ghost</a>
-                    <a sc-link variant="link" type="button">Link</a>
+                    <a sc-link variant="primary">Primary</a>
+                    <a sc-link variant="secondary">Secondary</a>
+                    <a sc-link variant="destructive">Destructive</a>
+                    <a sc-link variant="outline">Outline</a>
+                    <a sc-link variant="ghost">Ghost</a>
+                    <a sc-link variant="link">Link</a>
                   </div>
                 </div>
               </sc-tab-content>
@@ -114,12 +114,12 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <a sc-link type="button" size="sm">Primary</a>
-                    <a sc-link variant="secondary" type="button" size="sm">Secondary</a>
-                    <a sc-link variant="destructive" type="button" size="sm">Destructive</a>
-                    <a sc-link variant="outline" type="button" size="sm">Outline</a>
-                    <a sc-link variant="ghost" type="button" size="sm">Ghost</a>
-                    <a sc-link variant="link" type="button" size="sm">Link</a>
+                    <a sc-link variant="primary" size="sm">Primary</a>
+                    <a sc-link variant="secondary" size="sm">Secondary</a>
+                    <a sc-link variant="destructive" size="sm">Destructive</a>
+                    <a sc-link variant="outline" size="sm">Outline</a>
+                    <a sc-link variant="ghost" size="sm">Ghost</a>
+                    <a sc-link variant="link" size="sm">Link</a>
                   </div>
                 </div>
               </sc-tab-content>
@@ -147,12 +147,12 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <a sc-link type="button" size="lg">Primary</a>
-                    <a sc-link variant="secondary" type="button" size="lg">Secondary</a>
-                    <a sc-link variant="destructive" type="button" size="lg">Destructive</a>
-                    <a sc-link variant="outline" type="button" size="lg">Outline</a>
-                    <a sc-link variant="ghost" type="button" size="lg">Ghost</a>
-                    <a sc-link variant="link" type="button" size="lg">Link</a>
+                    <a sc-link variant="primary" size="lg">Primary</a>
+                    <a sc-link variant="secondary" size="lg">Secondary</a>
+                    <a sc-link variant="destructive" size="lg">Destructive</a>
+                    <a sc-link variant="outline" size="lg">Outline</a>
+                    <a sc-link variant="ghost" size="lg">Ghost</a>
+                    <a sc-link variant="link" size="lg">Link</a>
                   </div>
                 </div>
               </sc-tab-content>
@@ -182,12 +182,12 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <a [disabled]="d()" sc-link type="button">Primary</a>
-                    <a sc-link variant="secondary" type="button" disabled>Secondary</a>
-                    <a sc-link variant="destructive" type="button" disabled>Destructive</a>
-                    <a sc-link variant="outline" type="button" disabled>Outline</a>
-                    <a sc-link variant="ghost" type="button" disabled>Ghost</a>
-                    <a sc-link variant="link" type="button" disabled>Link</a>
+                    <a [disabled]="d()" variant="primary" sc-link>Primary</a>
+                    <a sc-link variant="secondary" disabled>Secondary</a>
+                    <a sc-link variant="destructive" disabled>Destructive</a>
+                    <a sc-link variant="outline" disabled>Outline</a>
+                    <a sc-link variant="ghost" disabled>Ghost</a>
+                    <a sc-link variant="link" disabled>Link</a>
                   </div>
                 </div>
               </sc-tab-content>
@@ -215,22 +215,22 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0 items-center" sc-card-content>
-                    <a sc-link type="button" size="icon">
+                    <a sc-link variant="primary" size="icon">
                       <svg si-chevron-right-icon></svg>
                     </a>
-                    <a sc-link variant="secondary" type="button" size="icon">
+                    <a sc-link variant="secondary" size="icon">
                       <svg si-chevron-right-icon></svg>
                     </a>
-                    <a sc-link variant="destructive" type="button" size="icon">
+                    <a sc-link variant="destructive" size="icon">
                       <svg si-chevron-right-icon></svg>
                     </a>
-                    <a class="size-20" sc-link variant="outline" type="button" size="icon">
+                    <a class="size-20" sc-link variant="outline" size="icon">
                       <svg si-chevron-right-icon></svg>
                     </a>
-                    <a sc-link variant="ghost" type="button" size="icon">
+                    <a sc-link variant="ghost" size="icon">
                       <svg si-chevron-right-icon></svg>
                     </a>
-                    <a sc-link variant="link" type="button" size="icon">
+                    <a sc-link variant="link" size="icon">
                       <svg si-chevron-right-icon></svg>
                     </a>
                   </div>
@@ -395,14 +395,14 @@ export default class LinkPage {
 
   codeSnippet1 = `import { ScLink } from '@semantic-components/ui';`;
 
-  codeSnippet2 = `<a sc-link type="button">Primary</a>`;
+  codeSnippet2 = `<a sc-link >Primary</a>`;
 
-  codeSnippet = `<a sc-link type="button">Primary</a>
-  <a sc-link variant="secondary" type="button">Secondary</a>
-  <a sc-link variant="destructive" type="button">Destructive</a>
-  <a sc-link variant="outline" type="button">Outline</a>
-  <a sc-link variant="ghost" type="button">Ghost</a>
-  <a sc-link variant="link" type="button">Link</a>`;
+  codeSnippet = `<a sc-link >Primary</a>
+  <a sc-link variant="secondary" >Secondary</a>
+  <a sc-link variant="destructive" >Destructive</a>
+  <a sc-link variant="outline" >Outline</a>
+  <a sc-link variant="ghost" >Ghost</a>
+  <a sc-link variant="link" >Link</a>`;
 
   d = signal(true);
 
