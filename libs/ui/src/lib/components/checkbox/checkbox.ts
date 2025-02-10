@@ -13,7 +13,6 @@ import {
   input,
   linkedSignal,
   output,
-  signal,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -43,10 +42,6 @@ import { SiCheckIcon, SiMinusIcon } from '@semantic-icons/lucide-icons';
         <svg [class]="svgClass()" si-check-icon></svg>
       }
     </div>
-
-    <label [class]="labelClass()" [for]="id()">
-      <ng-content />
-    </label>
   `,
   host: {
     '[class]': 'class()',
@@ -63,7 +58,11 @@ import { SiCheckIcon, SiMinusIcon } from '@semantic-icons/lucide-icons';
   ],
 })
 export class ScCheckbox implements ControlValueAccessor {
-  protected readonly id = signal<string>(inject(_IdGenerator).getId('sc-checkbox-'));
+  readonly idInput = input<string>(inject(_IdGenerator).getId('sc-checkbox-'), {
+    alias: 'id',
+  });
+
+  readonly id = linkedSignal(() => this.idInput());
 
   private readonly hostRef = inject(ElementRef);
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
@@ -102,16 +101,16 @@ export class ScCheckbox implements ControlValueAccessor {
     ),
   );
 
-  readonly labelClassInput = input<string>('', {
-    alias: 'labelClass',
-  });
+  // readonly labelClassInput = input<string>('', {
+  //   alias: 'labelClass',
+  // });
 
-  protected readonly labelClass = computed(() =>
-    cn(
-      'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
-      this.labelClassInput(),
-    ),
-  );
+  // protected readonly labelClass = computed(() =>
+  //   cn(
+  //     'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
+  //     this.labelClassInput(),
+  //   ),
+  // );
 
   readonly ariaLabel = input<string | null>(null, { alias: 'aria-label' });
 
