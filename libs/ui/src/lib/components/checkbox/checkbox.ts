@@ -72,25 +72,17 @@ export class ScCheckbox implements ControlValueAccessor {
 
   protected readonly class = computed(() => cn('relative block size-4', this.classInput()));
 
-  readonly checkboxClassInput = input<string>('', {
-    alias: 'checkboxClass',
-  });
-
+  //TODO add this to class
   protected readonly checkboxClass = computed(() =>
     cn(
       'peer appearance-none absolute top-0 left-0 size-full shrink-0 cursor-pointer rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground data-[state=indeterminate]:bg-primary data-[state=indeterminate]:text-primary-foreground',
-      this.checkboxClassInput(),
     ),
   );
 
-  readonly svgClassInput = input<string>('', {
-    alias: 'svgClass',
-  });
-
+  //TODO add this to class
   protected readonly svgClass = computed(() =>
     cn(
       'absolute top-0 left-0 size-full outline-none cursor-pointer pointer-events-none text-primary-foreground',
-      this.svgClassInput(),
     ),
   );
 
