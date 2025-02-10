@@ -9,7 +9,7 @@ import {
   input,
   output,
 } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { cn } from '@semantic-components/utils';
 
@@ -27,7 +27,11 @@ import { DEFAULT_PAGE_SIZE, PaginatorService } from './paginator.service';
 
     <div>
       <label class="" for="items-per-page">Items per page:</label>
-      <sc-select class="inline-block" id="items-per-page" [formControl]="pageSizeFormControl">
+      <sc-select
+        class="inline-block"
+        id="items-per-page"
+        [formControl]="paginatorService.pageSizeFormControl"
+      >
         @for (pageSizeOption of pageSizeOptions(); track $index) {
           <sc-option [value]="pageSizeOption">{{ pageSizeOption }}</sc-option>
         }
@@ -45,7 +49,7 @@ import { DEFAULT_PAGE_SIZE, PaginatorService } from './paginator.service';
   providers: [PaginatorService],
 })
 export class ScPaginator implements OnInit {
-  private readonly paginatorService = inject(PaginatorService);
+  protected readonly paginatorService = inject(PaginatorService);
 
   readonly classInput = input<string>('', {
     alias: 'class',
@@ -74,21 +78,18 @@ export class ScPaginator implements OnInit {
   readonly pageChanged = output<ScPageEvent>();
 
   constructor() {
-    //TODO find a better way
     effect(() => {
-      this.pageSizeFormControl.setValue(this.pageSize());
+      this.paginatorService.pageSizeFormControl.setValue(this.pageSize());
     });
   }
 
   ngOnInit() {
-    this.pageSizeFormControl.valueChanges.subscribe((value) => {
+    this.paginatorService.pageSizeFormControl.valueChanges.subscribe((value) => {
       if (value) {
         this.pageChanged.emit({ page: 1, pageSize: value });
       }
     });
   }
-
-  pageSizeFormControl = new FormControl(this.pageSize());
 
   numberOfPages = computed(() => Math.ceil(this.totalSize() / this.pageSize()));
 
