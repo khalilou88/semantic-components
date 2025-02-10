@@ -395,14 +395,14 @@ export default class LinkPage {
 
   codeSnippet1 = `import { ScLink } from '@semantic-components/ui';`;
 
-  codeSnippet2 = `<a sc-link >Primary</a>`;
+  codeSnippet2 = `<a sc-link>Primary</a>`;
 
-  codeSnippet = `<a sc-link >Primary</a>
-  <a sc-link variant="secondary" >Secondary</a>
-  <a sc-link variant="destructive" >Destructive</a>
-  <a sc-link variant="outline" >Outline</a>
-  <a sc-link variant="ghost" >Ghost</a>
-  <a sc-link variant="link" >Link</a>`;
+  codeSnippet = `<a sc-link>Primary</a>
+  <a sc-link variant="secondary">Secondary</a>
+  <a sc-link variant="destructive">Destructive</a>
+  <a sc-link variant="outline">Outline</a>
+  <a sc-link variant="ghost">Ghost</a>
+  <a sc-link variant="link">Link</a>`;
 
   d = signal(true);
 
