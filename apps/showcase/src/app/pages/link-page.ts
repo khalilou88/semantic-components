@@ -397,7 +397,7 @@ export default class LinkPage {
 
   codeSnippet2 = `<a sc-link>Primary</a>`;
 
-  codeSnippet = `<a sc-link>Primary</a>
+  codeSnippet = `<a sc-link variant="primary">Primary</a>
   <a sc-link variant="secondary">Secondary</a>
   <a sc-link variant="destructive">Destructive</a>
   <a sc-link variant="outline">Outline</a>
