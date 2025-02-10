@@ -79,6 +79,22 @@ export class ScPaginator implements OnInit {
 
   constructor() {
     effect(() => {
+      this.paginatorService.currentPage.set(this.currentPage());
+    });
+
+    effect(() => {
+      this.paginatorService.totalSize.set(this.totalSize());
+    });
+
+    effect(() => {
+      this.paginatorService.pageSizeOptions.set(this.pageSizeOptions());
+    });
+
+    effect(() => {
+      this.paginatorService.pageSize.set(this.pageSize());
+    });
+
+    effect(() => {
       this.paginatorService.pageSizeFormControl.setValue(this.pageSize());
     });
   }
