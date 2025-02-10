@@ -24,7 +24,7 @@ import { ScSidebarState } from './sidebar-state';
     </ng-template>
 
     @if (collapsible() === 'none') {
-      <div class="flex h-full w-[--sidebar-width] flex-col bg-sidebar text-sidebar-foreground">
+      <div class="flex h-full w-(--sidebar-width) flex-col bg-sidebar text-sidebar-foreground">
         <ng-container *ngTemplateOutlet="sc_sidebar_content" />
       </div>
     } @else if (isMobile()) {
@@ -81,25 +81,25 @@ export class ScSidebar {
 
   classes1 = signal(
     cn(
-      'duration-200 relative h-svh w-[--sidebar-width] bg-transparent transition-[width] ease-linear',
+      'duration-200 relative h-svh w-(--sidebar-width) bg-transparent transition-[width] ease-linear',
       'group-data-[collapsible=offcanvas]:w-0',
       'group-data-[side=right]:rotate-180',
       this.variant() === 'floating' || this.variant() === 'inset'
         ? 'group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4))]'
-        : 'group-data-[collapsible=icon]:w-[--sidebar-width-icon]',
+        : 'group-data-[collapsible=icon]:w-(--sidebar-width-icon)',
     ),
   );
 
   classes2 = signal(
     cn(
-      'duration-200 fixed inset-y-0 z-10 hidden h-svh w-[--sidebar-width] transition-[left,right,width] ease-linear md:flex',
+      'duration-200 fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] ease-linear md:flex',
       this.side() === 'left'
         ? 'left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]'
         : 'right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]',
       // Adjust the padding for floating and inset variants.
       this.variant() === 'floating' || this.variant() === 'inset'
         ? 'p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4)_+2px)]'
-        : 'group-data-[collapsible=icon]:w-[--sidebar-width-icon] group-data-[side=left]:border-r group-data-[side=right]:border-l',
+        : 'group-data-[collapsible=icon]:w-(--sidebar-width-icon) group-data-[side=left]:border-r group-data-[side=right]:border-l',
     ),
   );
 

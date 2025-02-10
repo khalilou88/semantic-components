@@ -63,7 +63,7 @@ export class ScSidebarMobile {
   classes = computed(() =>
     cn(
       'absolute top-0 h-full bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-500 data-[state=open]:animate-in data-[state=closed]:animate-out',
-      this.openMobile() && 'w-[--sidebar-width]',
+      this.openMobile() && 'w-(--sidebar-width)',
       !this.openMobile() && 'w-0 overflow-hidden',
       this.side() === 'left' &&
         'left-0 data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left',
