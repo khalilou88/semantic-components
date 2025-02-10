@@ -2,10 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@a
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { ScOption, ScSelect } from '../select';
-
-//TODO remove this
-/** The default page size if there is no page size and there are no provided page size options. */
-const DEFAULT_PAGE_SIZE = 10;
+import { DEFAULT_PAGE_SIZE } from './paginator.service';
 
 @Component({
   selector: 'sc-page-size-select',
