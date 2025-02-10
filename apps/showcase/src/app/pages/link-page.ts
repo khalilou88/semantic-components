@@ -8,6 +8,7 @@ import {
   ScBreadcrumbList,
   ScBreadcrumbPage,
   ScBreadcrumbSeparator,
+  ScButton,
   ScCard,
   ScCardContent,
   ScCodeHighlighter,
@@ -47,6 +48,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
     ScCardContent,
     RouterLink,
     ScLink,
+    ScButton,
   ],
   template: `
     <div class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px] px-4">
@@ -169,7 +171,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
           </sc-tabs>
         </section>
 
-        <a (click)="f()" sc-link>Toggle</a>
+        <a (click)="f()" sc-button>Toggle</a>
 
         <section class="my-10" id="disabled-links">
           <h3 class="mb-2" sc-heading level="3">Disabled links</h3>
