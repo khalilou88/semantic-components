@@ -38,7 +38,12 @@ import { DEFAULT_PAGE_SIZE, PaginatorService } from './paginator.service';
       </sc-select>
     </div>
 
-    <nav class="col-span-2" [showFirstLastLinks]="showFirstLastLinks()" sc-pagination></nav>
+    <nav
+      class="col-span-2"
+      [showFirstLastLinks]="showFirstLastLinks()"
+      (pageChanged)="pageChanged.emit($event)"
+      sc-pagination
+    ></nav>
   `,
   host: {
     '[class]': 'class()',
