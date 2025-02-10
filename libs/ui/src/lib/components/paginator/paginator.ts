@@ -45,23 +45,14 @@ const DEFAULT_PAGE_SIZE = 10;
   template: `
     <ng-content />
 
-    @if (!hidePageSize()) {
-      <div>
-        <label class="" for="items-per-page">Items per page:</label>
-        <sc-select class="inline-block" id="items-per-page" [formControl]="pageSizeFormControl">
-          @for (pageSizeOption of pageSizeOptions(); track $index) {
-            <sc-option [value]="pageSizeOption">{{ pageSizeOption }}</sc-option>
-          }
-        </sc-select>
-      </div>
-    }
-
-    <!--div class="">
-      Showing
-      <span>{{ firstItemPage() }}-{{ lastItemPage() }}</span>
-      of
-      <span>{{ totalSize() }}</span>
-    </div-->
+    <div>
+      <label class="" for="items-per-page">Items per page:</label>
+      <sc-select class="inline-block" id="items-per-page" [formControl]="pageSizeFormControl">
+        @for (pageSizeOption of pageSizeOptions(); track $index) {
+          <sc-option [value]="pageSizeOption">{{ pageSizeOption }}</sc-option>
+        }
+      </sc-select>
+    </div>
 
     <nav class="col-span-2" sc-pagination>
       <ul class="flex flex-row items-center gap-1">
@@ -166,9 +157,6 @@ export class ScPaginator implements OnInit {
 
   /** Number of items to display on a page. By default, set to 10. */
   readonly pageSize = input<number>(DEFAULT_PAGE_SIZE);
-
-  /** Whether to hide the page size selection UI from the user. */
-  readonly hidePageSize = input<boolean>(false);
 
   /** Whether to show the first/last buttons UI to the user. */
   readonly showFirstLastLinks = input<boolean>(false);

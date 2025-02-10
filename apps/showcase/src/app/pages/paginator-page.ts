@@ -15,7 +15,6 @@ import {
       <sc-paginator-container>
         <sc-paginator
           #p="scPaginator"
-          [hidePageSize]="false"
           [showFirstLastLinks]="true"
           [currentPage]="currentPage()"
           [pageSize]="pageSize()"
