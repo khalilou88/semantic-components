@@ -1,6 +1,13 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  inject,
+  input,
+} from '@angular/core';
 
-import { ScButtonBase } from '../button';
+import { ButtonVariants, ScButtonBase } from '../button';
+import { PaginatorService } from './paginator.service';
 
 @Component({
   selector: 'a[sc-pagination-next]',
@@ -13,4 +20,9 @@ import { ScButtonBase } from '../button';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScPaginationNext extends ScButtonBase {}
+export class ScPaginationNext extends ScButtonBase {
+  override readonly variant = input<ButtonVariants['variant']>('outline');
+  override readonly size = input<ButtonVariants['size']>('icon');
+
+  private readonly paginatorService = inject(PaginatorService);
+}

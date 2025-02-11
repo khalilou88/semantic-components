@@ -20,6 +20,7 @@ import { ScLink } from '../link';
 import { ScPageEvent } from './page-event';
 import { ScPageItem } from './page-item';
 import { ScPaginationFirst } from './pagination-first';
+import { ScPaginationPrevious } from './pagination-previous';
 import { PaginatorService } from './paginator.service';
 
 @Component({
@@ -32,6 +33,7 @@ import { PaginatorService } from './paginator.service';
     SiChevronRightIcon,
     SiChevronsRightIcon,
     ScPaginationFirst,
+    ScPaginationPrevious,
   ],
   template: `
     <ul class="flex flex-row items-center gap-1">
@@ -43,15 +45,7 @@ import { PaginatorService } from './paginator.service';
       </li>
 
       <li>
-        <a
-          [disabled]="isPrevPageDisabled()"
-          [attr.aria-label]="'Go to previous page'"
-          (click)="prevPage()"
-          (keydown.enter)="prevPage()"
-          sc-link
-          variant="outline"
-          size="icon"
-        >
+        <a sc-pagination-previous>
           <svg si-chevron-left-icon></svg>
           <span class="sr-only">Previous page</span>
         </a>
@@ -187,15 +181,6 @@ export class ScPagination {
       page: this.numberOfPages(),
       pageSize: this.paginatorService.pageSize(),
     });
-  }
-
-  prevPage() {
-    if (!this.isPrevPageDisabled()) {
-      this.pageChanged.emit({
-        page: this.paginatorService.currentPage() - 1,
-        pageSize: this.paginatorService.pageSize(),
-      });
-    }
   }
 
   isPrevPageDisabled = computed(() => {

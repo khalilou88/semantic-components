@@ -41,4 +41,8 @@ export class PaginatorService {
 
     return this.totalSize();
   });
+
+  readonly isPrevPageDisabled = computed(() => {
+    return this.currentPage() === 1;
+  });
 }

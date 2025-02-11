@@ -1,6 +1,13 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  inject,
+  input,
+} from '@angular/core';
 
-import { ScButtonBase } from '../button';
+import { ButtonVariants, ScButtonBase } from '../button';
+import { PaginatorService } from './paginator.service';
 
 @Component({
   selector: 'a[sc-pagination-last]',
@@ -13,4 +20,9 @@ import { ScButtonBase } from '../button';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScPaginationLast extends ScButtonBase {}
+export class ScPaginationLast extends ScButtonBase {
+  override readonly variant = input<ButtonVariants['variant']>('outline');
+  override readonly size = input<ButtonVariants['size']>('icon');
+
+  private readonly paginatorService = inject(PaginatorService);
+}
