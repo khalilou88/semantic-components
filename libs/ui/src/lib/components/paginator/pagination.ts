@@ -19,6 +19,7 @@ import {
 import { ScLink } from '../link';
 import { ScPageEvent } from './page-event';
 import { ScPageItem } from './page-item';
+import { ScPaginationFirst } from './pagination-first';
 import { PaginatorService } from './paginator.service';
 
 @Component({
@@ -30,25 +31,16 @@ import { PaginatorService } from './paginator.service';
     SiChevronsLeftIcon,
     SiChevronRightIcon,
     SiChevronsRightIcon,
+    ScPaginationFirst,
   ],
   template: `
     <ul class="flex flex-row items-center gap-1">
-      @if (showFirstLastLinks()) {
-        <li>
-          <a
-            [disabled]="isPrevPageDisabled()"
-            [attr.aria-label]="'Go to first page'"
-            (click)="firstPage()"
-            (keydown.enter)="firstPage()"
-            sc-link
-            variant="outline"
-            size="icon"
-          >
-            <svg si-chevrons-left-icon></svg>
-            <span class="sr-only">First page</span>
-          </a>
-        </li>
-      }
+      <li>
+        <a sc-pagination-first>
+          <svg si-chevrons-left-icon></svg>
+          <span class="sr-only">First page</span>
+        </a>
+      </li>
 
       <li>
         <a
@@ -88,22 +80,20 @@ import { PaginatorService } from './paginator.service';
         </a>
       </li>
 
-      @if (showFirstLastLinks()) {
-        <li>
-          <a
-            [disabled]="isNextPageDisabled()"
-            [attr.aria-label]="'Go to last page'"
-            (click)="lastPage()"
-            (keydown.enter)="lastPage()"
-            sc-link
-            variant="outline"
-            size="icon"
-          >
-            <svg si-chevrons-right-icon></svg>
-            <span class="sr-only">Last page</span>
-          </a>
-        </li>
-      }
+      <li>
+        <a
+          [disabled]="isNextPageDisabled()"
+          [attr.aria-label]="'Go to last page'"
+          (click)="lastPage()"
+          (keydown.enter)="lastPage()"
+          sc-link
+          variant="outline"
+          size="icon"
+        >
+          <svg si-chevrons-right-icon></svg>
+          <span class="sr-only">Last page</span>
+        </a>
+      </li>
     </ul>
   `,
   host: {
@@ -125,9 +115,6 @@ export class ScPagination {
   protected readonly class = computed(() =>
     cn('mx-auto flex w-full justify-center', this.classInput()),
   );
-
-  /** Whether to show the first/last buttons UI to the user. */
-  readonly showFirstLastLinks = input<boolean>(false);
 
   /** Event emitted when the paginator changes the page index. */
   readonly pageChanged = output<ScPageEvent>();

@@ -18,18 +18,13 @@ import { ScPagination } from './pagination';
 import { DEFAULT_PAGE_SIZE, PaginatorService } from './paginator.service';
 
 @Component({
-  selector: 'sc-paginator',
+  selector: 'div[sc-paginator]',
   exportAs: 'scPaginator',
   imports: [ReactiveFormsModule, ScPagination],
   template: `
     <ng-content />
 
-    <nav
-      class="col-span-2"
-      [showFirstLastLinks]="showFirstLastLinks()"
-      (pageChanged)="pageChanged.emit($event)"
-      sc-pagination
-    ></nav>
+    <nav class="col-span-2" (pageChanged)="pageChanged.emit($event)" sc-pagination></nav>
   `,
   host: {
     '[class]': 'class()',
@@ -61,9 +56,6 @@ export class ScPaginator implements OnInit {
 
   /** Number of items to display on a page. By default, set to 10. */
   readonly pageSize = input<number>(DEFAULT_PAGE_SIZE);
-
-  /** Whether to show the first/last buttons UI to the user. */
-  readonly showFirstLastLinks = input<boolean>(false);
 
   /** Event emitted when the paginator changes the page index. */
   readonly pageChanged = output<ScPageEvent>();

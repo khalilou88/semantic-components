@@ -13,13 +13,13 @@ import {
   template: `
     <div class="m-10">
       <sc-paginator-container>
-        <sc-paginator
+        <div
           #p="scPaginator"
-          [showFirstLastLinks]="true"
           [currentPage]="currentPage()"
           [pageSize]="pageSize()"
           [totalSize]="totalSize()"
           (pageChanged)="setPageEvent($event)"
+          sc-paginator
         >
           Items per page:
 
@@ -31,7 +31,7 @@ import {
             of
             <span>{{ p.totalSize() }}</span>
           </div>
-        </sc-paginator>
+        </div>
       </sc-paginator-container>
     </div>
   `,
