@@ -80,6 +80,10 @@ export class ScPaginator implements OnInit {
     effect(() => {
       this.paginatorService.pageSizeFormControl.setValue(this.pageSize());
     });
+
+    effect(() => {
+      this.pageChanged.emit(this.paginatorService.pageChanged());
+    });
   }
 
   ngOnInit() {

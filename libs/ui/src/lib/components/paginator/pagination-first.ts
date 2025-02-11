@@ -35,4 +35,8 @@ export class ScPaginationFirst extends ScButtonBase {
   protected isPrevPageDisabled = computed(() => {
     return this.paginatorService.currentPage() === 1;
   });
+
+  firstPage() {
+    this.paginatorService.pageChanged.set({ page: 1, pageSize: this.paginatorService.pageSize() });
+  }
 }

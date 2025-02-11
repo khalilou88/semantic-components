@@ -1,6 +1,8 @@
 import { Injectable, computed, signal } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
+import { ScPageEvent } from './page-event';
+
 /** The default page size if there is no page size and there are no provided page size options. */
 export const DEFAULT_PAGE_SIZE = 10;
 
@@ -17,6 +19,9 @@ export class PaginatorService {
 
   /** Number of items to display on a page. By default, set to 10. */
   readonly pageSize = signal<number>(DEFAULT_PAGE_SIZE);
+
+  /** Event emitted when the paginator changes the page index. */
+  readonly pageChanged = signal<ScPageEvent>({ page: 1, pageSize: DEFAULT_PAGE_SIZE });
 
   readonly pageSizeFormControl = new FormControl(this.pageSize());
 

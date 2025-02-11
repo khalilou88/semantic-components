@@ -169,10 +169,6 @@ export class ScPagination {
     Math.ceil(this.paginatorService.totalSize() / this.paginatorService.pageSize()),
   );
 
-  firstPage() {
-    this.pageChanged.emit({ page: 1, pageSize: this.paginatorService.pageSize() });
-  }
-
   nextPage() {
     if (!this.isNextPageDisabled()) {
       this.pageChanged.emit({
