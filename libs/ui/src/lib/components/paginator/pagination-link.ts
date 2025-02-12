@@ -8,7 +8,9 @@ import {
   linkedSignal,
 } from '@angular/core';
 
-import { ButtonVariants, ScButtonBase } from '../button';
+import { cn } from '@semantic-components/utils';
+
+import { ButtonVariants, ScButtonBase, buttonVariants } from '../button';
 import { PaginatorService } from './paginator.service';
 
 @Component({
@@ -39,6 +41,16 @@ export class ScPaginationLink extends ScButtonBase {
     this.isActive()
       ? this.paginatorService.paginationActiveLinkVariant()
       : this.paginatorService.paginationLinkVariant(),
+  );
+
+  protected override readonly class = computed(() =>
+    cn(
+      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.isActive() &&
+        this.paginatorService.paginationActiveLinkVariant() === 'secondary' &&
+        'border border-input',
+      this.classInput(),
+    ),
   );
 
   protected override readonly size = linkedSignal<ButtonVariants['size']>(() => 'icon');
