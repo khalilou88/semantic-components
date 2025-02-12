@@ -115,6 +115,8 @@ import {
           [pageSize]="pageSize()"
           [totalSize]="totalSize()"
           (pageChanged)="setPageEvent($event)"
+          paginationActiveLinkVariant="secondary"
+          paginationLinkVariant="outline"
           sc-paginator
         >
           Items per page:
