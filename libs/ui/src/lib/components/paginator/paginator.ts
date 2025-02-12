@@ -13,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { cn } from '@semantic-components/utils';
 
+import { ButtonVariants } from '../button';
 import { ScPageEvent } from './page-event';
 import { DEFAULT_PAGE_SIZE, PaginatorService } from './paginator.service';
 
@@ -54,6 +55,9 @@ export class ScPaginator implements OnInit {
   /** Number of items to display on a page. By default, set to 10. */
   readonly pageSize = input<number>(DEFAULT_PAGE_SIZE);
 
+  readonly paginationActiveLinkVariant = input<ButtonVariants['variant']>('secondary');
+  readonly paginationNotActiveLinkVariant = input<ButtonVariants['variant']>('outline');
+
   /** Event emitted when the paginator changes the page index. */
   readonly pageChanged = output<ScPageEvent>();
 
@@ -72,6 +76,16 @@ export class ScPaginator implements OnInit {
 
     effect(() => {
       this.paginatorService.pageSize.set(this.pageSize());
+    });
+
+    effect(() => {
+      this.paginatorService.paginationActiveLinkVariant.set(this.paginationActiveLinkVariant());
+    });
+
+    effect(() => {
+      this.paginatorService.paginationNotActiveLinkVariant.set(
+        this.paginationNotActiveLinkVariant(),
+      );
     });
 
     effect(() => {

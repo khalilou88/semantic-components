@@ -1,6 +1,7 @@
 import { Injectable, computed, signal } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
+import { ButtonVariants } from '../button';
 import { ScPageEvent } from './page-event';
 
 /** The default page size if there is no page size and there are no provided page size options. */
@@ -51,4 +52,7 @@ export class PaginatorService {
   readonly isPrevPageDisabled = computed(() => {
     return this.currentPage() === 1;
   });
+
+  readonly paginationActiveLinkVariant = signal<ButtonVariants['variant']>('secondary');
+  readonly paginationNotActiveLinkVariant = signal<ButtonVariants['variant']>('outline');
 }
