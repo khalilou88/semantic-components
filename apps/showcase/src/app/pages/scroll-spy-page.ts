@@ -55,7 +55,7 @@ import { ScScrollSpy } from '@semantic-components/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ScrollSpyPage {
-  activeSection: string = '';
+  activeSection = '';
 
   onSectionChange(sectionId: string) {
     this.activeSection = sectionId;
