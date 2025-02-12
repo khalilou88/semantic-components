@@ -194,18 +194,19 @@ import {
                       paginationLinkVariant="outline"
                       sc-paginator
                     >
-                      Items per page:
-
-                      <div sc-page-size-select></div>
-
-                      <div class="">
-                        Showing
-                        <span>{{ p.firstItemPage() }}-{{ p.lastItemPage() }}</span>
-                        of
-                        <span>{{ p.totalSize() }}</span>
+                      <div class="flex items-center space-x-2">
+                        <p class="text-sm font-medium">Items per page :</p>
+                        <div sc-page-size-select></div>
                       </div>
 
-                      <nav class="col-span-2" sc-pagination>
+                      <div class="flex w-[150px] items-center justify-center text-sm font-medium">
+                        Showing
+                        {{ p.firstItemPage() }}-{{ p.lastItemPage() }}
+                        of
+                        {{ p.totalSize() }}
+                      </div>
+
+                      <nav class="" sc-pagination>
                         <ul sc-pagination-list>
                           <li>
                             <a sc-pagination-first size="icon">
