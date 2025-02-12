@@ -3,6 +3,8 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@
 import {
   ScPageEvent,
   ScPageSizeSelect,
+  ScPagination,
+  ScPaginationEllipsis,
   ScPaginationFirst,
   ScPaginationLast,
   ScPaginationLink,
@@ -19,8 +21,6 @@ import {
   SiChevronsRightIcon,
   SiEllipsisIcon,
 } from '@semantic-icons/lucide-icons';
-import { ScPagination } from 'libs/ui/src/lib/components/paginator/pagination';
-import { ScPaginationEllipsis } from 'libs/ui/src/lib/components/paginator/pagination-ellipsis';
 
 @Component({
   selector: 'app-paginator-page',
