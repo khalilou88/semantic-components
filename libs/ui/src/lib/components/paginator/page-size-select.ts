@@ -5,7 +5,7 @@ import { ScOption, ScSelect } from '../select';
 import { PaginatorService } from './paginator.service';
 
 @Component({
-  selector: 'sc-page-size-select',
+  selector: 'div[sc-page-size-select]',
   imports: [ScSelect, ScOption, ReactiveFormsModule],
   template: `
     <sc-select class="inline-block" [formControl]="paginatorService.pageSizeFormControl">

@@ -14,17 +14,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { cn } from '@semantic-components/utils';
 
 import { ScPageEvent } from './page-event';
-import { ScPagination } from './pagination';
 import { DEFAULT_PAGE_SIZE, PaginatorService } from './paginator.service';
 
 @Component({
   selector: 'div[sc-paginator]',
   exportAs: 'scPaginator',
-  imports: [ReactiveFormsModule, ScPagination],
+  imports: [ReactiveFormsModule],
   template: `
     <ng-content />
-
-    <nav class="col-span-2" (pageChanged)="pageChanged.emit($event)" sc-pagination></nav>
   `,
   host: {
     '[class]': 'class()',
@@ -97,4 +94,50 @@ export class ScPaginator implements OnInit {
   readonly firstItemPage = computed(() => this.paginatorService.firstItemPage());
 
   readonly lastItemPage = computed(() => this.paginatorService.lastItemPage());
+
+  private range(start: number, end: number) {
+    return Array.from({ length: end - start + 1 }, (_, i) => i + start);
+  }
+
+  //https://gist.github.com/kottenator/9d936eb3e4e3c3e02598#gistcomment-3238804
+  pageRanges = computed<(number | '...')[]>(() => {
+    const totalPages = this.paginatorService.numberOfPages();
+
+    if (totalPages < 7) {
+      return this.range(1, totalPages);
+    }
+
+    const currentPage = this.paginatorService.currentPage();
+
+    const leftSiblingIndex = Math.max(currentPage - 1, 1);
+    const rightSiblingIndex = Math.min(currentPage + 1, totalPages);
+
+    const shouldShowLeftEllipsis = leftSiblingIndex > 2;
+    const shouldShowRightEllipsis = rightSiblingIndex < totalPages - 2;
+
+    const firstPageIndex = 1;
+    const lastPageIndex = totalPages;
+
+    if (!shouldShowLeftEllipsis && shouldShowRightEllipsis) {
+      const leftItemCount = 3;
+      const leftRange = this.range(1, leftItemCount + 2);
+
+      return [...leftRange, '...', totalPages];
+    }
+
+    if (shouldShowLeftEllipsis && !shouldShowRightEllipsis) {
+      const rightItemCount = 3;
+      const rightRange = this.range(totalPages - rightItemCount - 1, totalPages);
+
+      return [firstPageIndex, '...', ...rightRange];
+    }
+
+    if (shouldShowLeftEllipsis && shouldShowRightEllipsis) {
+      const middleRange = this.range(leftSiblingIndex, rightSiblingIndex);
+
+      return [firstPageIndex, '...', ...middleRange, '...', lastPageIndex];
+    }
+
+    return this.range(1, totalPages);
+  });
 }
