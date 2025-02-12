@@ -8,7 +8,7 @@ import { PaginatorService } from './paginator.service';
   selector: 'div[sc-page-size-select]',
   imports: [ScSelect, ScOption, ReactiveFormsModule],
   template: `
-    <sc-select class="inline-block" [formControl]="paginatorService.pageSizeFormControl">
+    <sc-select [formControl]="paginatorService.pageSizeFormControl">
       @for (pageSizeOption of paginatorService.pageSizeOptions(); track $index) {
         <sc-option [value]="pageSizeOption">{{ pageSizeOption }}</sc-option>
       }
