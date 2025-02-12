@@ -6,6 +6,7 @@ import {
   ScPaginationFirst,
   ScPaginationLast,
   ScPaginationLink,
+  ScPaginationList,
   ScPaginationNext,
   ScPaginationPrevious,
   ScPaginator,
@@ -39,6 +40,7 @@ import { ScPaginationEllipsis } from 'libs/ui/src/lib/components/paginator/pagin
     ScPaginationLink,
     SiEllipsisIcon,
     ScPaginationEllipsis,
+    ScPaginationList,
   ],
   template: `
     <div class="m-10">
@@ -63,7 +65,7 @@ import { ScPaginationEllipsis } from 'libs/ui/src/lib/components/paginator/pagin
           </div>
 
           <nav class="col-span-2" sc-pagination>
-            <ul class="flex flex-row items-center gap-1">
+            <ul sc-pagination-list>
               <li>
                 <a sc-pagination-first>
                   <svg si-chevrons-left-icon></svg>

@@ -8,3 +8,4 @@ export * from './pagination-last';
 export * from './pagination-previous';
 export * from './pagination-next';
 export * from './pagination-link';
+export * from './pagination-list';
