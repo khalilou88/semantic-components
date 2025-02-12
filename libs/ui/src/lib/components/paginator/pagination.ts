@@ -16,17 +16,17 @@ import {
   SiChevronsRightIcon,
 } from '@semantic-icons/lucide-icons';
 
-import { ScLink } from '../link';
 import { ScPageEvent } from './page-event';
 import { ScPageItem } from './page-item';
 import { ScPaginationFirst } from './pagination-first';
+import { ScPaginationLast } from './pagination-last';
+import { ScPaginationNext } from './pagination-next';
 import { ScPaginationPrevious } from './pagination-previous';
 import { PaginatorService } from './paginator.service';
 
 @Component({
   selector: 'nav[sc-pagination]',
   imports: [
-    ScLink,
     ScPageItem,
     SiChevronLeftIcon,
     SiChevronsLeftIcon,
@@ -34,6 +34,8 @@ import { PaginatorService } from './paginator.service';
     SiChevronsRightIcon,
     ScPaginationFirst,
     ScPaginationPrevious,
+    ScPaginationLast,
+    ScPaginationNext,
   ],
   template: `
     <ul class="flex flex-row items-center gap-1">
@@ -60,30 +62,14 @@ import { PaginatorService } from './paginator.service';
       }
 
       <li>
-        <a
-          [disabled]="isNextPageDisabled()"
-          [attr.aria-label]="'Go to next page'"
-          (click)="nextPage()"
-          (keydown.enter)="nextPage()"
-          sc-link
-          variant="outline"
-          size="icon"
-        >
+        <a sc-pagination-next>
           <svg si-chevron-right-icon></svg>
           <span class="sr-only">Next page</span>
         </a>
       </li>
 
       <li>
-        <a
-          [disabled]="isNextPageDisabled()"
-          [attr.aria-label]="'Go to last page'"
-          (click)="lastPage()"
-          (keydown.enter)="lastPage()"
-          sc-link
-          variant="outline"
-          size="icon"
-        >
+        <a sc-pagination-last>
           <svg si-chevrons-right-icon></svg>
           <span class="sr-only">Last page</span>
         </a>
@@ -119,7 +105,7 @@ export class ScPagination {
 
   //https://gist.github.com/kottenator/9d936eb3e4e3c3e02598#gistcomment-3238804
   pageRanges = computed<(number | '...')[]>(() => {
-    const totalPages = this.numberOfPages();
+    const totalPages = this.paginatorService.numberOfPages();
 
     if (totalPages < 7) {
       return this.range(1, totalPages);
@@ -157,34 +143,6 @@ export class ScPagination {
     }
 
     return this.range(1, totalPages);
-  });
-
-  numberOfPages = computed(() =>
-    Math.ceil(this.paginatorService.totalSize() / this.paginatorService.pageSize()),
-  );
-
-  nextPage() {
-    if (!this.isNextPageDisabled()) {
-      this.pageChanged.emit({
-        page: this.paginatorService.currentPage() + 1,
-        pageSize: this.paginatorService.pageSize(),
-      });
-    }
-  }
-
-  isNextPageDisabled = computed(() => {
-    return this.paginatorService.currentPage() === this.numberOfPages();
-  });
-
-  lastPage() {
-    this.pageChanged.emit({
-      page: this.numberOfPages(),
-      pageSize: this.paginatorService.pageSize(),
-    });
-  }
-
-  isPrevPageDisabled = computed(() => {
-    return this.paginatorService.currentPage() === 1;
   });
 
   changePage(page: number) {

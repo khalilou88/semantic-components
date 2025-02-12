@@ -15,7 +15,12 @@ import { PaginatorService } from './paginator.service';
   template: `
     <ng-content />
   `,
-  host: {},
+  host: {
+    '[disabled]': 'paginatorService.isNextPageDisabled()',
+    'aria-label': 'Go to last page',
+    '(click)': 'lastPage()',
+    '(keydown.enter)': 'lastPage()',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,4 +30,11 @@ export class ScPaginationLast extends ScButtonBase {
   override readonly size = input<ButtonVariants['size']>('icon');
 
   private readonly paginatorService = inject(PaginatorService);
+
+  protected lastPage() {
+    this.paginatorService.pageChanged.set({
+      page: this.paginatorService.numberOfPages(),
+      pageSize: this.paginatorService.pageSize(),
+    });
+  }
 }

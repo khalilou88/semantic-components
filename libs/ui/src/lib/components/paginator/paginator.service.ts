@@ -25,6 +25,8 @@ export class PaginatorService {
 
   readonly pageSizeFormControl = new FormControl(this.pageSize());
 
+  readonly numberOfPages = computed(() => Math.ceil(this.totalSize() / this.pageSize()));
+
   readonly firstItemPage = computed(() => {
     if (this.totalSize() === 0) {
       return 0;
@@ -40,6 +42,10 @@ export class PaginatorService {
     }
 
     return this.totalSize();
+  });
+
+  readonly isNextPageDisabled = computed(() => {
+    return this.currentPage() === this.numberOfPages();
   });
 
   readonly isPrevPageDisabled = computed(() => {
