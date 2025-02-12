@@ -8,7 +8,6 @@ import {
   ScBreadcrumbList,
   ScBreadcrumbPage,
   ScBreadcrumbSeparator,
-  ScButton,
   ScCard,
   ScCardContent,
   ScCodeHighlighter,
@@ -38,7 +37,6 @@ import {
   SiChevronsLeftIcon,
   SiChevronsRightIcon,
   SiEllipsisIcon,
-  SiLoaderCircleIcon,
 } from '@semantic-icons/lucide-icons';
 
 @Component({
@@ -59,9 +57,7 @@ import {
     SiEllipsisIcon,
     ScPaginationEllipsis,
     ScPaginationList,
-    ScButton,
     SiChevronRightIcon,
-    SiLoaderCircleIcon,
     ScBreadcrumb,
     ScBreadcrumbList,
     ScBreadcrumbItem,
