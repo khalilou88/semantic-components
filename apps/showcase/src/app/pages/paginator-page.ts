@@ -108,7 +108,7 @@ import {
         <h2 class="mb-5" id="examples" sc-page-subtitle>Examples</h2>
 
         <section class="my-10" id="variants">
-          <h3 class="mb-2" sc-heading level="3">Variants</h3>
+          <h3 class="mb-2" sc-heading level="3">Pagination first variant</h3>
 
           <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
             <sc-tab>
@@ -176,7 +176,7 @@ import {
         </section>
 
         <section class="my-10" id="small-buttons">
-          <h3 class="mb-2" sc-heading level="3">Small buttons</h3>
+          <h3 class="mb-2" sc-heading level="3">Pagination second variant</h3>
 
           <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
             <sc-tab>
@@ -194,16 +194,94 @@ import {
                       paginationLinkVariant="outline"
                       sc-paginator
                     >
+                      <nav class="" sc-pagination>
+                        <ul sc-pagination-list>
+                          <li>
+                            <a sc-pagination-first size="icon">
+                              <svg si-chevrons-left-icon></svg>
+                              <span class="sr-only">First page</span>
+                            </a>
+                          </li>
+
+                          <li>
+                            <a sc-pagination-previous size="icon">
+                              <svg si-chevron-left-icon></svg>
+                              <span class="sr-only">Previous page</span>
+                            </a>
+                          </li>
+
+                          @for (page of p.pageRanges(); track $index) {
+                            <li>
+                              @if (page === '...') {
+                                <span sc-pagination-ellipsis>
+                                  <svg class="size-4" si-ellipsis-icon></svg>
+                                  <span class="sr-only">More pages</span>
+                                </span>
+                              } @else {
+                                <a [page]="page" sc-pagination-link>
+                                  {{ page }}
+                                </a>
+                              }
+                            </li>
+                          }
+
+                          <li>
+                            <a sc-pagination-next size="icon">
+                              <svg si-chevron-right-icon></svg>
+                              <span class="sr-only">Next page</span>
+                            </a>
+                          </li>
+
+                          <li>
+                            <a sc-pagination-last size="icon">
+                              <svg si-chevrons-right-icon></svg>
+                              <span class="sr-only">Last page</span>
+                            </a>
+                          </li>
+                        </ul>
+                      </nav>
+                    </div>
+                  </div>
+                </div>
+              </sc-tab-content>
+            </sc-tab>
+
+            <sc-tab>
+              <sc-tab-label>Code</sc-tab-label>
+              <sc-tab-content>
+                <div class="overflow-auto" sc-card>
+                  <div class="m-10 flex gap-2 p-0" sc-card-content>
+                    <p>Coming soon</p>
+                  </div>
+                </div>
+              </sc-tab-content>
+            </sc-tab>
+          </sc-tabs>
+        </section>
+
+        <section class="my-10" id="large-buttons">
+          <h3 class="mb-2" sc-heading level="3">Items per page</h3>
+
+          <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
+            <sc-tab>
+              <sc-tab-label>Preview</sc-tab-label>
+              <sc-tab-content>
+                <div class="overflow-auto" sc-card>
+                  <div class="m-10 flex gap-2 p-0" sc-card-content>
+                    <div
+                      class="flex justify-between"
+                      #p="scPaginator"
+                      [currentPage]="currentPage()"
+                      [pageSize]="pageSize()"
+                      [totalSize]="totalSize()"
+                      (pageChanged)="setPageEvent($event)"
+                      paginationActiveLinkVariant="secondary"
+                      paginationLinkVariant="outline"
+                      sc-paginator
+                    >
                       <div class="flex items-center space-x-2">
                         <p class="text-sm font-medium">Items per page :</p>
                         <div sc-page-size-select></div>
-                      </div>
-
-                      <div class="flex w-[150px] items-center justify-center text-sm font-medium">
-                        Showing
-                        {{ p.firstItemPage() }}-{{ p.lastItemPage() }}
-                        of
-                        {{ p.totalSize() }}
                       </div>
 
                       <nav class="" sc-pagination>
@@ -271,80 +349,8 @@ import {
           </sc-tabs>
         </section>
 
-        <section class="my-10" id="large-buttons">
-          <h3 class="mb-2" sc-heading level="3">Large buttons</h3>
-
-          <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
-            <sc-tab>
-              <sc-tab-label>Preview</sc-tab-label>
-              <sc-tab-content>
-                <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <button sc-button type="button" size="lg">Primary</button>
-                    <button sc-button variant="secondary" type="button" size="lg">Secondary</button>
-                    <button sc-button variant="destructive" type="button" size="lg">
-                      Destructive
-                    </button>
-                    <button sc-button variant="outline" type="button" size="lg">Outline</button>
-                    <button sc-button variant="ghost" type="button" size="lg">Ghost</button>
-                    <button sc-button variant="link" type="button" size="lg">Link</button>
-                  </div>
-                </div>
-              </sc-tab-content>
-            </sc-tab>
-
-            <sc-tab>
-              <sc-tab-label>Code</sc-tab-label>
-              <sc-tab-content>
-                <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <p>Coming soon</p>
-                  </div>
-                </div>
-              </sc-tab-content>
-            </sc-tab>
-          </sc-tabs>
-        </section>
-
-        <button (click)="f()" sc-button>Toggle</button>
-
-        <section class="my-10" id="disabled-buttons">
-          <h3 class="mb-2" sc-heading level="3">Disabled buttons</h3>
-
-          <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
-            <sc-tab>
-              <sc-tab-label>Preview</sc-tab-label>
-              <sc-tab-content>
-                <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <button [disabled]="d()" sc-button type="button">Primary</button>
-                    <button sc-button variant="secondary" type="button" disabled>Secondary</button>
-                    <button sc-button variant="destructive" type="button" disabled>
-                      Destructive
-                    </button>
-                    <button sc-button variant="outline" type="button" disabled>Outline</button>
-                    <button sc-button variant="ghost" type="button" disabled>Ghost</button>
-                    <button sc-button variant="link" type="button" disabled>Link</button>
-                  </div>
-                </div>
-              </sc-tab-content>
-            </sc-tab>
-
-            <sc-tab>
-              <sc-tab-label>Code</sc-tab-label>
-              <sc-tab-content>
-                <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <p>Coming soon</p>
-                  </div>
-                </div>
-              </sc-tab-content>
-            </sc-tab>
-          </sc-tabs>
-        </section>
-
         <section class="my-10" id="buttons-with-icons">
-          <h3 class="mb-2" sc-heading level="3">Buttons with icons</h3>
+          <h3 class="mb-2" sc-heading level="3">Pagination infos</h3>
 
           <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
             <sc-tab>
@@ -352,55 +358,23 @@ import {
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0 items-center" sc-card-content>
-                    <button sc-button type="button" size="icon">
-                      <svg si-chevron-right-icon></svg>
-                    </button>
-                    <button sc-button variant="secondary" type="button" size="icon">
-                      <svg si-chevron-right-icon></svg>
-                    </button>
-                    <button sc-button variant="destructive" type="button" size="icon">
-                      <svg si-chevron-right-icon></svg>
-                    </button>
-                    <button class="size-20" sc-button variant="outline" type="button" size="icon">
-                      <svg si-chevron-right-icon></svg>
-                    </button>
-                    <button sc-button variant="ghost" type="button" size="icon">
-                      <svg si-chevron-right-icon></svg>
-                    </button>
-                    <button sc-button variant="link" type="button" size="icon">
-                      <svg si-chevron-right-icon></svg>
-                    </button>
-                  </div>
-                </div>
-              </sc-tab-content>
-            </sc-tab>
-
-            <sc-tab>
-              <sc-tab-label>Code</sc-tab-label>
-              <sc-tab-content>
-                <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <p>Coming soon</p>
-                  </div>
-                </div>
-              </sc-tab-content>
-            </sc-tab>
-          </sc-tabs>
-        </section>
-
-        <section class="my-10" id="button-with-loading-state">
-          <h3 class="mb-2" sc-heading level="3">Button with loading state</h3>
-
-          <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
-            <sc-tab>
-              <sc-tab-label>Preview</sc-tab-label>
-              <sc-tab-content>
-                <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <button sc-button disabled>
-                      <svg class="animate-spin" si-loader-circle-icon></svg>
-                      Please wait
-                    </button>
+                    <div
+                      #pag="scPaginator"
+                      [currentPage]="currentPage()"
+                      [pageSize]="pageSize()"
+                      [totalSize]="totalSize()"
+                      (pageChanged)="setPageEvent($event)"
+                      paginationActiveLinkVariant="secondary"
+                      paginationLinkVariant="outline"
+                      sc-paginator
+                    >
+                      <div class="flex w-full items-center justify-center text-sm font-medium">
+                        Showing
+                        {{ pag.firstItemPage() }}-{{ pag.lastItemPage() }}
+                        of
+                        {{ pag.totalSize() }}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </sc-tab-content>
