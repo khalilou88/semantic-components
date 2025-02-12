@@ -57,7 +57,7 @@ import {
         <nav sc-pagination>
           <ul sc-pagination-list>
             <li>
-              <a sc-paginationn-previous>
+              <a class="gap-1 pl-2.5" sc-pagination-previous>
                 <svg si-chevron-left-icon></svg>
                 <span>Previous</span>
                 <span class="sr-only">Previous page</span>
@@ -80,7 +80,7 @@ import {
             }
 
             <li>
-              <a sc-pagination-next>
+              <a class="gap-1 pr-2.5" sc-pagination-next>
                 <span>Next</span>
                 <svg si-chevron-right-icon></svg>
                 <span class="sr-only">Next page</span>
