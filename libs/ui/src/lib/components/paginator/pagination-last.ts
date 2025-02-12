@@ -28,7 +28,6 @@ export class ScPaginationLast extends ScButtonBase {
   override readonly variant = linkedSignal<ButtonVariants['variant']>(() =>
     this.paginatorService.paginationLinkVariant(),
   );
-  override readonly size = linkedSignal<ButtonVariants['size']>(() => 'icon');
   override readonly disabled = linkedSignal<boolean>(() =>
     this.paginatorService.isNextPageDisabled(),
   );

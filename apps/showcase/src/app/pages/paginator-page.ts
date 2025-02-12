@@ -57,15 +57,9 @@ import {
         <nav sc-pagination>
           <ul sc-pagination-list>
             <li>
-              <a sc-pagination-first>
-                <svg si-chevrons-left-icon></svg>
-                <span class="sr-only">First page</span>
-              </a>
-            </li>
-
-            <li>
-              <a sc-pagination-previous>
+              <a sc-paginationn-previous>
                 <svg si-chevron-left-icon></svg>
+                <span>Previous</span>
                 <span class="sr-only">Previous page</span>
               </a>
             </li>
@@ -87,15 +81,9 @@ import {
 
             <li>
               <a sc-pagination-next>
+                <span>Next</span>
                 <svg si-chevron-right-icon></svg>
                 <span class="sr-only">Next page</span>
-              </a>
-            </li>
-
-            <li>
-              <a sc-pagination-last>
-                <svg si-chevrons-right-icon></svg>
-                <span class="sr-only">Last page</span>
               </a>
             </li>
           </ul>
@@ -133,14 +121,14 @@ import {
           <nav class="col-span-2" sc-pagination>
             <ul sc-pagination-list>
               <li>
-                <a sc-pagination-first>
+                <a sc-pagination-first size="icon">
                   <svg si-chevrons-left-icon></svg>
                   <span class="sr-only">First page</span>
                 </a>
               </li>
 
               <li>
-                <a sc-pagination-previous>
+                <a sc-pagination-previous size="icon">
                   <svg si-chevron-left-icon></svg>
                   <span class="sr-only">Previous page</span>
                 </a>
@@ -162,14 +150,14 @@ import {
               }
 
               <li>
-                <a sc-pagination-next>
+                <a sc-pagination-next size="icon">
                   <svg si-chevron-right-icon></svg>
                   <span class="sr-only">Next page</span>
                 </a>
               </li>
 
               <li>
-                <a sc-pagination-last>
+                <a sc-pagination-last size="icon">
                   <svg si-chevrons-right-icon></svg>
                   <span class="sr-only">Last page</span>
                 </a>
