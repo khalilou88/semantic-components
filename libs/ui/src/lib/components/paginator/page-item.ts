@@ -1,20 +1,13 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  input,
-  output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
 
 import { SiEllipsisIcon } from '@semantic-icons/lucide-icons';
 
-import { ScLink } from '../link';
 import { ScPaginationEllipsis } from './pagination-ellipsis';
+import { ScPaginationLink } from './pagination-link';
 
 @Component({
   selector: 'sc-page-item',
-  imports: [ScLink, SiEllipsisIcon, ScPaginationEllipsis],
+  imports: [ScPaginationLink, SiEllipsisIcon, ScPaginationEllipsis],
   template: `
     <li>
       @if (page() === '...') {
@@ -23,15 +16,7 @@ import { ScPaginationEllipsis } from './pagination-ellipsis';
           <span class="sr-only">More pages</span>
         </span>
       } @else {
-        <a
-          [attr.aria-current]="isActive() ? 'page' : undefined"
-          [variant]="isActive() ? 'secondary' : 'outline'"
-          [size]="'icon'"
-          (click)="selectPage()"
-          (keydown.enter)="selectPage()"
-          sc-link
-          href="javascript:void(0)"
-        >
+        <a [page]="page()" sc-pagination-link>
           {{ page() }}
         </a>
       }
@@ -42,19 +27,5 @@ import { ScPaginationEllipsis } from './pagination-ellipsis';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScPageItem {
-  readonly currentPage = input.required<number>();
   readonly page = input.required<number | '...'>();
-
-  readonly pageChanged = output<number>();
-
-  protected readonly isActive = computed(() => {
-    return this.page() === this.currentPage();
-  });
-
-  protected selectPage() {
-    const page = this.page();
-    if (page !== '...' && page !== this.currentPage()) {
-      this.pageChanged.emit(page);
-    }
-  }
 }

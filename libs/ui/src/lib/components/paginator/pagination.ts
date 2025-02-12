@@ -54,11 +54,7 @@ import { PaginatorService } from './paginator.service';
       </li>
 
       @for (page of pageRanges(); track $index) {
-        <sc-page-item
-          [page]="page"
-          [currentPage]="paginatorService.currentPage()"
-          (pageChanged)="changePage($event)"
-        />
+        <sc-page-item [page]="page" />
       }
 
       <li>
