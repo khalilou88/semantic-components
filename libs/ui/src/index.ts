@@ -69,3 +69,4 @@ export * from './lib/components/image-placeholder';
 export * from './lib/components/rtl';
 export * from './lib/components/fieldset';
 export * from './lib/components/touch-area';
+export * from './lib/components/scroll-spy';

@@ -243,6 +243,11 @@ export const appRoutes: Route[] = [
             title: 'Typography Page',
           },
           {
+            path: 'scroll-spy',
+            loadComponent: () => import('./pages/scroll-spy-page'),
+            title: 'Scroll Spy Page',
+          },
+          {
             path: 'tooltip',
             loadComponent: () => import('./pages/tooltip-page'),
             title: 'Tooltip Page',
