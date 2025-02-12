@@ -25,7 +25,9 @@ import { PaginatorService } from './paginator.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScPaginationPrevious extends ScButtonBase {
-  override readonly variant = linkedSignal<ButtonVariants['variant']>(() => 'outline');
+  override readonly variant = linkedSignal<ButtonVariants['variant']>(() =>
+    this.paginatorService.paginationLinkVariant(),
+  );
   override readonly size = linkedSignal<ButtonVariants['size']>(() => 'icon');
   override readonly disabled = linkedSignal<boolean>(() =>
     this.paginatorService.isPrevPageDisabled(),

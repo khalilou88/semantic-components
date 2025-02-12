@@ -53,6 +53,7 @@ export class PaginatorService {
     return this.currentPage() === 1;
   });
 
+  readonly paginationLinkVariant = signal<ButtonVariants['variant']>('outline');
+
   readonly paginationActiveLinkVariant = signal<ButtonVariants['variant']>('secondary');
-  readonly paginationNotActiveLinkVariant = signal<ButtonVariants['variant']>('outline');
 }

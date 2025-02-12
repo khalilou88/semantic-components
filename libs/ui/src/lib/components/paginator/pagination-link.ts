@@ -38,7 +38,7 @@ export class ScPaginationLink extends ScButtonBase {
   protected override readonly variant = linkedSignal<ButtonVariants['variant']>(() =>
     this.isActive()
       ? this.paginatorService.paginationActiveLinkVariant()
-      : this.paginatorService.paginationNotActiveLinkVariant(),
+      : this.paginatorService.paginationLinkVariant(),
   );
 
   protected override readonly size = linkedSignal<ButtonVariants['size']>(() => 'icon');

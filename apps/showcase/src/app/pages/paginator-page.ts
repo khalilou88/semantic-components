@@ -44,6 +44,70 @@ import {
   ],
   template: `
     <div class="m-10">
+      <div
+        #p="scPaginator"
+        [currentPage]="currentPage()"
+        [pageSize]="pageSize()"
+        [totalSize]="totalSize()"
+        (pageChanged)="setPageEvent($event)"
+        paginationActiveLinkVariant="outline"
+        paginationLinkVariant="ghost"
+        sc-paginator
+      >
+        <nav sc-pagination>
+          <ul sc-pagination-list>
+            <li>
+              <a sc-pagination-first>
+                <svg si-chevrons-left-icon></svg>
+                <span class="sr-only">First page</span>
+              </a>
+            </li>
+
+            <li>
+              <a sc-pagination-previous>
+                <svg si-chevron-left-icon></svg>
+                <span class="sr-only">Previous page</span>
+              </a>
+            </li>
+
+            @for (page of p.pageRanges(); track $index) {
+              <li>
+                @if (page === '...') {
+                  <span sc-pagination-ellipsis>
+                    <svg class="size-4" si-ellipsis-icon></svg>
+                    <span class="sr-only">More pages</span>
+                  </span>
+                } @else {
+                  <a [page]="page" sc-pagination-link>
+                    {{ page }}
+                  </a>
+                }
+              </li>
+            }
+
+            <li>
+              <a sc-pagination-next>
+                <svg si-chevron-right-icon></svg>
+                <span class="sr-only">Next page</span>
+              </a>
+            </li>
+
+            <li>
+              <a sc-pagination-last>
+                <svg si-chevrons-right-icon></svg>
+                <span class="sr-only">Last page</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="m-10">
       <sc-paginator-container>
         <div
           #p="scPaginator"

@@ -39,9 +39,7 @@ export class ScPaginator implements OnInit {
     alias: 'class',
   });
 
-  protected readonly class = computed(() =>
-    cn('grid grid-cols-4 grid-rows-1 gap-4', this.classInput()),
-  );
+  protected readonly class = computed(() => cn('', this.classInput()));
 
   /** The one-based page index of the displayed list of items. Defaulted to 1. */
   readonly currentPage = input<number>(1);
@@ -55,8 +53,8 @@ export class ScPaginator implements OnInit {
   /** Number of items to display on a page. By default, set to 10. */
   readonly pageSize = input<number>(DEFAULT_PAGE_SIZE);
 
+  readonly paginationLinkVariant = input<ButtonVariants['variant']>('outline');
   readonly paginationActiveLinkVariant = input<ButtonVariants['variant']>('secondary');
-  readonly paginationNotActiveLinkVariant = input<ButtonVariants['variant']>('outline');
 
   /** Event emitted when the paginator changes the page index. */
   readonly pageChanged = output<ScPageEvent>();
@@ -79,13 +77,11 @@ export class ScPaginator implements OnInit {
     });
 
     effect(() => {
-      this.paginatorService.paginationActiveLinkVariant.set(this.paginationActiveLinkVariant());
+      this.paginatorService.paginationLinkVariant.set(this.paginationLinkVariant());
     });
 
     effect(() => {
-      this.paginatorService.paginationNotActiveLinkVariant.set(
-        this.paginationNotActiveLinkVariant(),
-      );
+      this.paginatorService.paginationActiveLinkVariant.set(this.paginationActiveLinkVariant());
     });
 
     effect(() => {
