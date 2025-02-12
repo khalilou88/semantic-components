@@ -3,7 +3,7 @@ import {
   Component,
   ViewEncapsulation,
   inject,
-  input,
+  linkedSignal,
 } from '@angular/core';
 
 import { ButtonVariants, ScButtonBase } from '../button';
@@ -26,8 +26,8 @@ import { PaginatorService } from './paginator.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScPaginationFirst extends ScButtonBase {
-  override readonly variant = input<ButtonVariants['variant']>('outline');
-  override readonly size = input<ButtonVariants['size']>('icon');
+  override readonly variant = linkedSignal<ButtonVariants['variant']>(() => 'outline');
+  override readonly size = linkedSignal<ButtonVariants['size']>(() => 'icon');
 
   protected readonly paginatorService = inject(PaginatorService);
 

@@ -1,4 +1,4 @@
-import { Directive, booleanAttribute, computed, input } from '@angular/core';
+import { Directive, booleanAttribute, computed, input, linkedSignal } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
 import { VariantProps, cva } from 'class-variance-authority';
@@ -38,9 +38,15 @@ export type ButtonVariants = VariantProps<typeof buttonVariants>;
   },
 })
 export class ScButtonBase {
-  readonly variant = input<ButtonVariants['variant']>('primary');
+  readonly variantInput = input<ButtonVariants['variant']>('primary', {
+    alias: 'variant',
+  });
+  protected readonly variant = linkedSignal<ButtonVariants['variant']>(() => this.variantInput());
 
-  readonly size = input<ButtonVariants['size']>('default');
+  readonly sizeInput = input<ButtonVariants['size']>('default', {
+    alias: 'size',
+  });
+  protected readonly size = linkedSignal<ButtonVariants['size']>(() => this.sizeInput());
 
   readonly classInput = input<string>('', {
     alias: 'class',

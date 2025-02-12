@@ -23,7 +23,7 @@ import { ButtonVariants, ScButtonBase } from '../button';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScLink extends ScButtonBase {
-  override readonly variant = input<ButtonVariants['variant']>('link');
+  override readonly variantInput = input<ButtonVariants['variant']>('link');
 
   protected readonly tabindex = computed(() => {
     if (this.disabled()) {
