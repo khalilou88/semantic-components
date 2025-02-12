@@ -56,7 +56,10 @@ export class ScButtonBase {
     cn(buttonVariants({ variant: this.variant(), size: this.size() }), this.classInput()),
   );
 
-  readonly disabled = input<boolean, unknown>(false, {
+  readonly disabledInput = input<boolean, unknown>(false, {
+    alias: 'disabled',
     transform: booleanAttribute,
   });
+
+  protected readonly disabled = linkedSignal<boolean>(() => this.disabledInput());
 }

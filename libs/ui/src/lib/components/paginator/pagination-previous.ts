@@ -16,7 +16,6 @@ import { PaginatorService } from './paginator.service';
     <ng-content />
   `,
   host: {
-    '[disabled]': 'paginatorService.isPrevPageDisabled()',
     'aria-label': 'Go to previous page',
     '(click)': 'prevPage()',
     '(keydown.enter)': 'prevPage()',
@@ -28,6 +27,9 @@ import { PaginatorService } from './paginator.service';
 export class ScPaginationPrevious extends ScButtonBase {
   override readonly variant = linkedSignal<ButtonVariants['variant']>(() => 'outline');
   override readonly size = linkedSignal<ButtonVariants['size']>(() => 'icon');
+  override readonly disabled = linkedSignal<boolean>(() =>
+    this.paginatorService.isPrevPageDisabled(),
+  );
 
   protected readonly paginatorService = inject(PaginatorService);
 

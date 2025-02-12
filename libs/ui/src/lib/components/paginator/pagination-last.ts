@@ -16,7 +16,6 @@ import { PaginatorService } from './paginator.service';
     <ng-content />
   `,
   host: {
-    '[disabled]': 'paginatorService.isNextPageDisabled()',
     'aria-label': 'Go to last page',
     '(click)': 'lastPage()',
     '(keydown.enter)': 'lastPage()',
@@ -28,6 +27,9 @@ import { PaginatorService } from './paginator.service';
 export class ScPaginationLast extends ScButtonBase {
   override readonly variant = linkedSignal<ButtonVariants['variant']>(() => 'outline');
   override readonly size = linkedSignal<ButtonVariants['size']>(() => 'icon');
+  override readonly disabled = linkedSignal<boolean>(() =>
+    this.paginatorService.isNextPageDisabled(),
+  );
 
   private readonly paginatorService = inject(PaginatorService);
 

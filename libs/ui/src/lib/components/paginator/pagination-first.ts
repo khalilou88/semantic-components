@@ -16,7 +16,6 @@ import { PaginatorService } from './paginator.service';
     <ng-content />
   `,
   host: {
-    '[disabled]': 'paginatorService.isPrevPageDisabled()',
     'aria-label': 'Go to first page',
     '(click)': 'firstPage()',
     '(keydown.enter)': 'firstPage()',
@@ -28,6 +27,9 @@ import { PaginatorService } from './paginator.service';
 export class ScPaginationFirst extends ScButtonBase {
   override readonly variant = linkedSignal<ButtonVariants['variant']>(() => 'outline');
   override readonly size = linkedSignal<ButtonVariants['size']>(() => 'icon');
+  override readonly disabled = linkedSignal<boolean>(() =>
+    this.paginatorService.isPrevPageDisabled(),
+  );
 
   protected readonly paginatorService = inject(PaginatorService);
 
