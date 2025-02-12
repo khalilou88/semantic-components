@@ -10,14 +10,15 @@ import {
 import { SiEllipsisIcon } from '@semantic-icons/lucide-icons';
 
 import { ScLink } from '../link';
+import { ScPaginationEllipsis } from './pagination-ellipsis';
 
 @Component({
   selector: 'sc-page-item',
-  imports: [ScLink, SiEllipsisIcon],
+  imports: [ScLink, SiEllipsisIcon, ScPaginationEllipsis],
   template: `
     <li>
       @if (page() === '...') {
-        <span class="flex size-9 items-center justify-center" [attr.aria-hidden]="true">
+        <span sc-pagination-ellipsis>
           <svg class="size-4" si-ellipsis-icon></svg>
           <span class="sr-only">More pages</span>
         </span>
