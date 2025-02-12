@@ -2,11 +2,14 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  computed,
   inject,
   linkedSignal,
 } from '@angular/core';
 
-import { ButtonVariants, ScButtonBase } from '../button';
+import { cn } from '@semantic-components/utils';
+
+import { ButtonVariants, ScButtonBase, buttonVariants } from '../button';
 import { PaginatorService } from './paginator.service';
 
 @Component({
@@ -28,6 +31,15 @@ export class ScPaginationNext extends ScButtonBase {
   override readonly variant = linkedSignal<ButtonVariants['variant']>(() =>
     this.paginatorService.paginationLinkVariant(),
   );
+
+  protected override readonly class = computed(() =>
+    cn(
+      buttonVariants({ variant: this.variant(), size: this.size() }),
+      this.size() === 'default' && 'gap-1 pr-2.5',
+      this.classInput(),
+    ),
+  );
+
   override readonly disabled = linkedSignal<boolean>(() =>
     this.paginatorService.isNextPageDisabled(),
   );
