@@ -31,7 +31,7 @@ export class ScPaginationPrevious extends ScButtonBase {
 
   protected readonly paginatorService = inject(PaginatorService);
 
-  prevPage() {
+  protected prevPage() {
     if (!this.paginatorService.isPrevPageDisabled()) {
       this.paginatorService.pageChanged.set({
         page: this.paginatorService.currentPage() - 1,
