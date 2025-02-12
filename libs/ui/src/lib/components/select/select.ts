@@ -115,7 +115,6 @@ export class ScSelect implements ControlValueAccessor {
    * @param position Position to which to align the option relative to the scrollable container.
    */
   scrollOptionIntoView(option: ScOption, position: ScrollLogicalPosition) {
-    console.log(option.value());
     option.getHostElement().scrollIntoView({ block: position, inline: position });
   }
 
