@@ -248,6 +248,11 @@ export const appRoutes: Route[] = [
             title: 'Scroll Spy Page',
           },
           {
+            path: 'color-picker',
+            loadComponent: () => import('./pages/color-picker-page'),
+            title: 'Color Picker Page',
+          },
+          {
             path: 'tooltip',
             loadComponent: () => import('./pages/tooltip-page'),
             title: 'Tooltip Page',
