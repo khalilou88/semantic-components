@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
   private readonly document = inject<Document>(DOCUMENT);
 
   private readonly classList = signal([
-    'min-h-screen',
+    // 'min-h-screen',
     'bg-background',
     'font-sans',
     'antialiased',

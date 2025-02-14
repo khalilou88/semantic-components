@@ -3,21 +3,26 @@ import { Route } from '@angular/router';
 export const appRoutes: Route[] = [
   {
     path: '',
-    loadComponent: () => import('./layouts/stacked-layout'),
-    children: [
-      {
-        path: '',
-        loadComponent: () => import('./layouts/footer-layout'),
-        children: [
-          {
-            path: 'landing',
-            loadComponent: () => import('./pages/landing-page'),
-            title: 'Landing Page',
-          },
-        ],
-      },
-    ],
+    loadComponent: () => import('./pages/hero-section-page'),
+    title: 'Semantic components',
   },
+  // {
+  //   path: '',
+  //   loadComponent: () => import('./layouts/stacked-layout'),
+  //   children: [
+  //     {
+  //       path: '',
+  //       loadComponent: () => import('./layouts/footer-layout'),
+  //       children: [
+  //         {
+  //           path: 'landing',
+  //           loadComponent: () => import('./pages/landing-page'),
+  //           title: 'Landing Page',
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
   {
     path: 'getting-started',
     loadComponent: () => import('./layouts/sidebar-layout'),
