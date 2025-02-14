@@ -1,8 +1,6 @@
 import { Injectable, computed, signal } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ScExtensions {
   //history extension
   undo = signal<boolean>(false);

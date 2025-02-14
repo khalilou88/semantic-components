@@ -50,6 +50,7 @@ import { ScExtensions } from './extensions/extensions';
       useExisting: forwardRef(() => ScEditor),
       multi: true,
     },
+    ScExtensions,
   ],
 })
 export class ScEditor implements ControlValueAccessor {
