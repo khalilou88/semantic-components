@@ -65,18 +65,6 @@ import { LayoutState } from '../services/layout-state';
           <div sc-sidebar-group-content>
             <ul sc-sidebar-menu>
               <li sc-sidebar-menu-item>
-                <a routerLink="../components/button" sc-sidebar-menu-link>
-                  <span>Button</span>
-                </a>
-              </li>
-
-              <li sc-sidebar-menu-item>
-                <a routerLink="../components/link" sc-sidebar-menu-link>
-                  <span>Link</span>
-                </a>
-              </li>
-
-              <li sc-sidebar-menu-item>
                 <a routerLink="../components/editor" sc-sidebar-menu-link>
                   <span>Editor</span>
                 </a>
@@ -85,6 +73,18 @@ import { LayoutState } from '../services/layout-state';
               <li sc-sidebar-menu-item>
                 <a routerLink="../components/paginator" sc-sidebar-menu-link>
                   <span>Paginator</span>
+                </a>
+              </li>
+
+              <li sc-sidebar-menu-item>
+                <a routerLink="../components/button" sc-sidebar-menu-link>
+                  <span>Button</span>
+                </a>
+              </li>
+
+              <li sc-sidebar-menu-item>
+                <a routerLink="../components/link" sc-sidebar-menu-link>
+                  <span>Link</span>
                 </a>
               </li>
 
