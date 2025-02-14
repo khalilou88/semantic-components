@@ -13,10 +13,38 @@ import {
   ScCardContent,
   ScCodeHighlighter,
   ScEditor,
+  ScEditorBlockquote,
+  ScEditorBold,
+  ScEditorBulletList,
+  ScEditorCode,
+  ScEditorGroup,
+  ScEditorHighlight,
+  ScEditorHorizontalRule,
+  ScEditorItalic,
+  ScEditorOrderedList,
+  ScEditorParagraph,
+  ScEditorRedo,
+  ScEditorStrike,
+  ScEditorTextAlignCenter,
+  ScEditorTextAlignLeft,
+  ScEditorTextAlignRight,
+  ScEditorToolbar,
+  ScEditorUnderline,
+  ScEditorUndo,
+  ScEditorUnsetLink,
+  ScExtensionColor,
+  ScExtensionFontFamily,
+  ScExtensionHeading,
+  ScExtensionImage,
+  ScExtensionLink,
+  ScExtensionTable,
+  ScExtensionTextStyle,
+  ScExtensionYoutube,
   ScHeading,
   ScPageDescription,
   ScPageSubtitle,
   ScPageTitle,
+  ScSeparator,
   ScTab,
   ScTabContent,
   ScTabLabel,
@@ -48,6 +76,34 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
     ScCodeHighlighter,
     ScCardContent,
     RouterLink,
+    ScEditorUndo,
+    ScEditorRedo,
+    ScEditorHighlight,
+    ScExtensionColor,
+    ScEditorBold,
+    ScEditorUnderline,
+    ScExtensionYoutube,
+    ScExtensionImage,
+    ScExtensionFontFamily,
+    ScExtensionLink,
+    ScEditorItalic,
+    ScEditorBlockquote,
+    ScEditorBulletList,
+    ScEditorOrderedList,
+    ScExtensionTextStyle,
+    ScEditorParagraph,
+    ScSeparator,
+    ScEditorGroup,
+    ScEditorStrike,
+    ScEditorHorizontalRule,
+    ScEditorCode,
+    ScExtensionHeading,
+    ScExtensionTable,
+    ScEditorToolbar,
+    ScEditorUnsetLink,
+    ScEditorTextAlignRight,
+    ScEditorTextAlignLeft,
+    ScEditorTextAlignCenter,
   ],
   template: `
     <div class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px] px-4">
@@ -85,7 +141,47 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
                 <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0" sc-card-content>
                     <form [formGroup]="editorForm">
-                      <sc-editor formControlName="content" />
+                      <sc-editor formControlName="content">
+                        <sc-editor-toolbar>
+                          <sc-editor-group>
+                            <sc-editor-undo />
+                            <sc-editor-redo />
+                            <sc-separator class="h-5" orientation="vertical" />
+                            <sc-editor-bold />
+                            <sc-editor-italic />
+                            <sc-editor-underline />
+                            <sc-editor-highlight />
+                            <sc-extension-text-style />
+                            <sc-extension-color />
+                            <sc-extension-font-family />
+                            <sc-extension-link />
+                            <sc-editor-unset-link />
+                            <sc-separator class="h-5" orientation="vertical" />
+                            <sc-editor-text-align-left />
+                            <sc-editor-text-align-center />
+                            <sc-editor-text-align-right />
+                          </sc-editor-group>
+
+                          <sc-editor-group>
+                            <sc-extension-heading />
+                            <sc-editor-paragraph />
+                            <sc-separator class="h-5" orientation="vertical" />
+                            <sc-extension-image />
+                            <sc-extension-youtube />
+                            <sc-editor-bullet-list />
+                            <sc-editor-ordered-list />
+                            <sc-editor-blockquote />
+                            <sc-separator class="h-5" orientation="vertical" />
+                            <sc-editor-strike />
+                            <sc-editor-horizontal-rule />
+                            <sc-editor-code />
+                          </sc-editor-group>
+
+                          <sc-editor-group>
+                            <sc-extension-table />
+                          </sc-editor-group>
+                        </sc-editor-toolbar>
+                      </sc-editor>
                     </form>
                   </div>
                 </div>

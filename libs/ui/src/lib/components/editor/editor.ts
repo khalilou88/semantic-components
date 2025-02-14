@@ -21,109 +21,14 @@ import Heading from '@tiptap/extension-heading';
 import Paragraph from '@tiptap/extension-paragraph';
 import Text from '@tiptap/extension-text';
 
-import { ScSeparator } from '../separator';
 import { scArticleClasses } from '../typography';
-import { ScEditorBlockquote } from './actions/editor-blockquote';
-import { ScEditorBold } from './actions/editor-bold';
-import { ScEditorBulletList } from './actions/editor-bullet-list';
-import { ScEditorCode } from './actions/editor-code';
-import { ScEditorHighlight } from './actions/editor-highlight';
-import { ScEditorHorizontalRule } from './actions/editor-horizontal-rule';
-import { ScEditorItalic } from './actions/editor-italic';
-import { ScEditorOrderedList } from './actions/editor-ordered-list';
-import { ScEditorParagraph } from './actions/editor-paragraph';
-import { ScEditorRedo } from './actions/editor-redo';
-import { ScEditorStrike } from './actions/editor-strike';
-import { ScEditorTextAlignCenter } from './actions/editor-text-align-center';
-import { ScEditorTextAlignLeft } from './actions/editor-text-align-left';
-import { ScEditorTextAlignRight } from './actions/editor-text-align-right';
-import { ScEditorUnderline } from './actions/editor-underline';
-import { ScEditorUndo } from './actions/editor-undo';
-import { ScEditorUnsetLink } from './actions/editor-unset-link';
-import { ScEditorGroup } from './editor-group';
-import { ScEditorToolbar } from './editor-toolbar';
-import { ScExtensionColor } from './extensions/extension-color';
-import { ScExtensionFontFamily } from './extensions/extension-font-family';
-import { ScExtensionHeading } from './extensions/extension-heading';
-import { ScExtensionImage } from './extensions/extension-image';
-import { ScExtensionLink } from './extensions/extension-link';
-import { ScExtensionTable } from './extensions/extension-table';
-import { ScExtensionTextStyle } from './extensions/extension-text-style';
-import { ScExtensionYoutube } from './extensions/extension-youtube';
 import { ScExtensions } from './extensions/extensions';
 
 @Component({
   selector: 'sc-editor',
-  imports: [
-    ScEditorUndo,
-    ScEditorRedo,
-    ScEditorHighlight,
-    ScExtensionColor,
-    ScEditorBold,
-    ScEditorUnderline,
-    ScExtensionYoutube,
-    ScExtensionImage,
-    ScExtensionFontFamily,
-    ScExtensionLink,
-    ScEditorItalic,
-    ScEditorBlockquote,
-    ScEditorBulletList,
-    ScEditorOrderedList,
-    ScExtensionTextStyle,
-    ScEditorParagraph,
-    ScSeparator,
-    ScEditorGroup,
-    ScEditorStrike,
-    ScEditorHorizontalRule,
-    ScEditorCode,
-    ScExtensionHeading,
-    ScExtensionTable,
-    ScEditorToolbar,
-    ScEditorUnsetLink,
-    ScEditorTextAlignRight,
-    ScEditorTextAlignLeft,
-    ScEditorTextAlignCenter,
-  ],
+  imports: [],
   template: `
-    <sc-editor-toolbar>
-      <sc-editor-group>
-        <sc-editor-undo />
-        <sc-editor-redo />
-        <sc-separator class="h-5" orientation="vertical" />
-        <sc-editor-bold />
-        <sc-editor-italic />
-        <sc-editor-underline />
-        <sc-editor-highlight />
-        <sc-extension-text-style />
-        <sc-extension-color />
-        <sc-extension-font-family />
-        <sc-extension-link />
-        <sc-editor-unset-link />
-        <sc-separator class="h-5" orientation="vertical" />
-        <sc-editor-text-align-left />
-        <sc-editor-text-align-center />
-        <sc-editor-text-align-right />
-      </sc-editor-group>
-
-      <sc-editor-group>
-        <sc-extension-heading />
-        <sc-editor-paragraph />
-        <sc-separator class="h-5" orientation="vertical" />
-        <sc-extension-image />
-        <sc-extension-youtube />
-        <sc-editor-bullet-list />
-        <sc-editor-ordered-list />
-        <sc-editor-blockquote />
-        <sc-separator class="h-5" orientation="vertical" />
-        <sc-editor-strike />
-        <sc-editor-horizontal-rule />
-        <sc-editor-code />
-      </sc-editor-group>
-
-      <sc-editor-group>
-        <sc-extension-table />
-      </sc-editor-group>
-    </sc-editor-toolbar>
+    <ng-content />
 
     <div class="rounded-b-lg bg-white px-4 py-2 dark:bg-gray-800">
       <label class="sr-only" for="wysiwyg-example">Publish post</label>
