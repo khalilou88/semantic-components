@@ -7,7 +7,7 @@ import { ScToggleSwitch } from '@semantic-components/ui';
   imports: [ScToggleSwitch],
   template: `
     <div class="m-10">
-      <button sc-toggle-switch></button>
+      <button sc-toggle-switch>TODO</button>
     </div>
   `,
   styles: ``,
