@@ -8,17 +8,19 @@ import { ScSwitch } from '@semantic-components/ui';
   selector: 'app-switch-page',
   imports: [ScSwitch, ReactiveFormsModule, JsonPipe],
   template: `
-    <br />
-    <br />
-    <br />
-    <form [formGroup]="switchForm">
-      <sc-switch formControlName="switch">Airplane Mode</sc-switch>
-    </form>
+    <div class="m-10">
+      <br />
+      <br />
+      <br />
+      <form [formGroup]="switchForm">
+        <sc-switch formControlName="switch">Airplane Mode</sc-switch>
+      </form>
 
-    <br />
-    <br />
-    <br />
-    {{ switchForm.value | json }}
+      <br />
+      <br />
+      <br />
+      {{ switchForm.value | json }}
+    </div>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
