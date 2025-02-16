@@ -88,6 +88,11 @@ export const appRoutes: Route[] = [
             title: 'Home Page',
           },
           {
+            path: 'toggle-switch',
+            loadComponent: () => import('./pages/toggle-switch-page'),
+            title: 'Toggle Switch Page',
+          },
+          {
             path: 'badge',
             loadComponent: () => import('./pages/badge-page'),
             title: 'Badge Page',
