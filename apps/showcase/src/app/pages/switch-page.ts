@@ -13,7 +13,11 @@ import { ScSwitch } from '@semantic-components/ui';
       <br />
       <br />
       <form [formGroup]="switchForm">
-        <sc-switch formControlName="switch">Airplane Mode</sc-switch>
+        <div class="flex items-center space-x-2">
+          <input sc-switch formControlName="switch" />
+
+          Airplane Mode
+        </div>
       </form>
 
       <br />
