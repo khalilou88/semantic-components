@@ -18,6 +18,15 @@ import { ScSwitch } from '@semantic-components/ui';
 
           Airplane Mode
         </div>
+
+        <br />
+        <br />
+
+        <div class="flex items-center space-x-2">
+          <input [disabled]="true" sc-switch formControlName="switch2" />
+
+          Airplane Mode 2
+        </div>
       </form>
 
       <br />
@@ -33,5 +42,6 @@ import { ScSwitch } from '@semantic-components/ui';
 export default class SwitchPage {
   switchForm = new FormGroup({
     switch: new FormControl(),
+    switch2: new FormControl(),
   });
 }

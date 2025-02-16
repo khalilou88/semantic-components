@@ -1,15 +1,16 @@
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ViewEncapsulation,
+  booleanAttribute,
   computed,
-  effect,
   forwardRef,
   inject,
   input,
-  model,
+  linkedSignal,
+  output,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -22,6 +23,7 @@ import { cn } from '@semantic-components/utils';
     <ng-content />
   `,
   host: {
+    '[id]': 'id()',
     type: 'checkbox',
     '[checked]': 'checked()',
     '[attr.data-state]': 'state()',
@@ -40,7 +42,7 @@ import { cn } from '@semantic-components/utils';
   ],
 })
 export class ScSwitch implements ControlValueAccessor {
-  private readonly _cdr = inject(ChangeDetectorRef);
+  private readonly changeDetectorRef = inject(ChangeDetectorRef);
 
   readonly classInput = input<string>('', {
     alias: 'class',
@@ -80,29 +82,29 @@ export class ScSwitch implements ControlValueAccessor {
     ),
   );
 
-  id = input('');
+  readonly idInput = input<string>(inject(_IdGenerator).getId('sc-switch-'), {
+    alias: 'id',
+  });
+  readonly id = linkedSignal(() => this.idInput());
 
-  checked = model<BooleanInput>(false);
+  readonly checkedInput = input<boolean, unknown>(false, {
+    alias: 'checked',
+    transform: booleanAttribute,
+  });
+  protected readonly checked = linkedSignal(() => this.checkedInput());
+  readonly checkedChange = output<boolean>();
 
-  disabled = model<BooleanInput>(false);
+  readonly disabledInput = input<boolean, unknown>(false, {
+    alias: 'disabled',
+    transform: booleanAttribute,
+  });
+  protected readonly disabled = linkedSignal(() => this.disabledInput());
 
-  state = computed(() => {
+  protected readonly state = computed(() => {
     return this.checked() ? 'checked' : 'unchecked';
   });
 
-  constructor() {
-    effect(() => {
-      if (this.checked() !== true && this.checked() !== false) {
-        this.checked.update((v) => coerceBooleanProperty(v));
-      }
-
-      if (this.disabled() !== true && this.disabled() !== false) {
-        this.disabled.update((v) => coerceBooleanProperty(v));
-      }
-    });
-  }
-
-  toggle() {
+  protected toggle() {
     if (this.disabled()) {
       return;
     }
@@ -111,7 +113,7 @@ export class ScSwitch implements ControlValueAccessor {
     this.checked.set(v);
 
     this.onChange(v);
-    this._cdr.markForCheck();
+    this.changeDetectorRef.markForCheck();
   }
 
   writeValue(value: boolean): void {
