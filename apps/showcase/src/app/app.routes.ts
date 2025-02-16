@@ -88,6 +88,11 @@ export const appRoutes: Route[] = [
             title: 'Home Page',
           },
           {
+            path: 'badge',
+            loadComponent: () => import('./pages/badge-page'),
+            title: 'Badge Page',
+          },
+          {
             path: 'checkbox-group',
             loadComponent: () => import('./pages/checkbox-group-page'),
             title: 'Checkbox Group Page',

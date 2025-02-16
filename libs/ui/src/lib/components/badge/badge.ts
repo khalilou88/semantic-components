@@ -37,16 +37,20 @@ type BadgeVariants = VariantProps<typeof badgeVariants>;
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScBadge {
-  variant = input<BadgeVariants['variant']>('primary');
+  readonly variant = input<BadgeVariants['variant']>('primary');
 
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn(badgeVariants({ variant: this.variant() }), this.class()));
+  protected readonly class = computed(() =>
+    cn(badgeVariants({ variant: this.variant() }), this.classInput()),
+  );
 }
