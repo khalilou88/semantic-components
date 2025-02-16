@@ -5,6 +5,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import {
   ScButton,
   ScCheckbox,
+  ScCheckboxContainer,
   ScCheckboxField,
   ScDescription,
   ScLabel,
@@ -20,6 +21,7 @@ import {
     ScCheckboxField,
     ScLabel,
     ScDescription,
+    ScCheckboxContainer,
   ],
   template: `
     <div class="m-10">
@@ -85,6 +87,20 @@ import {
       checked : {{ checked() }}
       <br />
       <sc-checkbox [(checked)]="checked" />
+
+      <br />
+      <br />
+      <br />
+
+      <label sc-checkbox-container>
+        <sc-checkbox checked />
+        <div class="grid gap-1.5 font-normal">
+          <p class="text-sm leading-none font-medium">Enable notifications</p>
+          <p class="text-muted-foreground text-sm">
+            You can enable or disable notifications at any time.
+          </p>
+        </div>
+      </label>
     </div>
   `,
   styles: ``,

@@ -29,6 +29,7 @@ import { SiCheckIcon, SiMinusIcon } from '@semantic-icons/lucide-icons';
       [class]="checkboxClass()"
       [disabled]="disabled()"
       [checked]="checked()"
+      [attr.aria-checked]="checked()"
       [attr.data-state]="state()"
       (change)="onInteractionEvent($event)"
       (click)="toggle()"
