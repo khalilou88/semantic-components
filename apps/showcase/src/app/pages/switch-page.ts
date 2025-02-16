@@ -8,17 +8,32 @@ import { ScSwitch } from '@semantic-components/ui';
   selector: 'app-switch-page',
   imports: [ScSwitch, ReactiveFormsModule, JsonPipe],
   template: `
-    <br />
-    <br />
-    <br />
-    <form [formGroup]="switchForm">
-      <sc-switch formControlName="switch">Airplane Mode</sc-switch>
-    </form>
+    <div class="m-10">
+      <br />
+      <br />
+      <br />
+      <form [formGroup]="switchForm">
+        <div class="flex items-center space-x-2">
+          <input sc-switch formControlName="switch" />
 
-    <br />
-    <br />
-    <br />
-    {{ switchForm.value | json }}
+          Airplane Mode
+        </div>
+
+        <br />
+        <br />
+
+        <div class="flex items-center space-x-2">
+          <input [disabled]="true" sc-switch formControlName="switch2" />
+
+          Airplane Mode 2
+        </div>
+      </form>
+
+      <br />
+      <br />
+      <br />
+      {{ switchForm.value | json }}
+    </div>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -27,5 +42,6 @@ import { ScSwitch } from '@semantic-components/ui';
 export default class SwitchPage {
   switchForm = new FormGroup({
     switch: new FormControl(),
+    switch2: new FormControl(),
   });
 }

@@ -105,6 +105,12 @@ import { LayoutState } from '../services/layout-state';
                   <span>Checkbox</span>
                 </a>
               </li>
+
+              <li sc-sidebar-menu-item>
+                <a routerLink="../components/switch" sc-sidebar-menu-link>
+                  <span>Switch</span>
+                </a>
+              </li>
             </ul>
           </div>
         </sc-sidebar-group>

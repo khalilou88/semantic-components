@@ -1,45 +1,33 @@
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ViewEncapsulation,
+  booleanAttribute,
   computed,
-  effect,
   forwardRef,
   inject,
   input,
-  model,
+  linkedSignal,
+  output,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { cn } from '@semantic-components/utils';
 
-import { ScLabel } from '../label';
-
 @Component({
-  selector: 'sc-switch',
-  imports: [ScLabel],
+  selector: 'input[sc-switch]',
+  imports: [],
   template: `
-    <div class="relative inline-block h-6 w-11">
-      <input
-        [class]="classes()"
-        [id]="id()"
-        [checked]="checked()"
-        [attr.data-state]="state()"
-        type="checkbox"
-        role="switch"
-      />
-      <span
-        class="pointer-events-none absolute left-0 top-0 mt-0.5 block size-5 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0"
-        [attr.data-state]="state()"
-      ></span>
-    </div>
-
-    <label [for]="id()" sc-label><ng-content /></label>
+    <ng-content />
   `,
   host: {
-    '[class]': 'hostClasses()',
+    '[id]': 'id()',
+    type: 'checkbox',
+    '[checked]': 'checked()',
+    '[attr.data-state]': 'state()',
+    '[class]': 'class()',
     '(click)': 'toggle()',
   },
   styles: ``,
@@ -54,44 +42,69 @@ import { ScLabel } from '../label';
   ],
 })
 export class ScSwitch implements ControlValueAccessor {
-  private readonly _cdr = inject(ChangeDetectorRef);
+  private readonly changeDetectorRef = inject(ChangeDetectorRef);
 
-  hostClass = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  hostClasses = computed(() => cn('flex items-center space-x-2', this.hostClass()));
-
-  class = input<string>('');
-
-  classes = computed(() =>
+  protected readonly class = computed(() =>
     cn(
-      'peer appearance-none inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input',
-      this.class(),
+      'appearance-none',
+      'w-11 h-6 relative cursor-pointer inline-block',
+      'focus:outline-0 dark:focus:outline-0',
+      'border-0 dark:border-0',
+      'focus:ring-offset-transparent dark:focus:ring-offset-transparent',
+      'focus:ring-transparent dark:focus:ring-transparent',
+      'focus-within:ring-0 dark:focus-within:ring-0',
+      'focus:shadow-none dark:focus:shadow-none',
+
+      'after:absolute before:absolute',
+      'after:top-0 before:top-0',
+      'after:block before:inline-block',
+      'before:rounded-full after:rounded-full',
+
+      "after:content-[''] after:w-5 after:h-5 after:mt-0.5 after:ml-0.5",
+      'after:shadow-md after:duration-100',
+
+      "before:content-[''] before:w-10 before:h-full",
+      'before:shadow-[inset_0_0_#000]',
+
+      'after:bg-white dark:after:bg-gray-50',
+      'before:bg-gray-300 dark:before:bg-gray-600',
+      'before:checked:bg-lime-500 dark:before:checked:bg-lime-500',
+      'checked:after:duration-300 checked:after:translate-x-4',
+
+      'disabled:after:bg-opacity-75 disabled:cursor-not-allowed',
+      'disabled:checked:before:bg-opacity-40',
+
+      this.classInput(),
     ),
   );
 
-  id = input('');
+  readonly idInput = input<string>(inject(_IdGenerator).getId('sc-switch-'), {
+    alias: 'id',
+  });
+  readonly id = linkedSignal(() => this.idInput());
 
-  checked = model<BooleanInput>(false);
+  readonly checkedInput = input<boolean, unknown>(false, {
+    alias: 'checked',
+    transform: booleanAttribute,
+  });
+  protected readonly checked = linkedSignal(() => this.checkedInput());
+  readonly checkedChange = output<boolean>();
 
-  disabled = model<BooleanInput>(false);
+  readonly disabledInput = input<boolean, unknown>(false, {
+    alias: 'disabled',
+    transform: booleanAttribute,
+  });
+  protected readonly disabled = linkedSignal(() => this.disabledInput());
 
-  state = computed(() => {
+  protected readonly state = computed(() => {
     return this.checked() ? 'checked' : 'unchecked';
   });
 
-  constructor() {
-    effect(() => {
-      if (this.checked() !== true && this.checked() !== false) {
-        this.checked.update((v) => coerceBooleanProperty(v));
-      }
-
-      if (this.disabled() !== true && this.disabled() !== false) {
-        this.disabled.update((v) => coerceBooleanProperty(v));
-      }
-    });
-  }
-
-  toggle() {
+  protected toggle() {
     if (this.disabled()) {
       return;
     }
@@ -100,7 +113,7 @@ export class ScSwitch implements ControlValueAccessor {
     this.checked.set(v);
 
     this.onChange(v);
-    this._cdr.markForCheck();
+    this.changeDetectorRef.markForCheck();
   }
 
   writeValue(value: boolean): void {
