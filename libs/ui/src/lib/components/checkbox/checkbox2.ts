@@ -79,7 +79,7 @@ export class ScCheckbox2 implements ControlValueAccessor {
       'disabled:checked:bg-gray-300 disabled:checked:border-gray-300', //styles for checked and disabled
 
       // Applies SVG background image when checked
-      "[&:checked]:bg-[url('data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12l4 4l8-8' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E')]",
+      '[&:checked]:bg-[image:var(--checkbox-bg)]',
       'checked:bg-no-repeat', // Prevents background image from repeating
       'checked:bg-center', // Centers the background image
       'checked:bg-contain', // Scales image to fit while maintaining aspect ratio

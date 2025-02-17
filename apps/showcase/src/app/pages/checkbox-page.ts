@@ -27,6 +27,23 @@ import {
   ],
   template: `
     <div class="m-10">
+      <div class="bg-black">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path
+            d="M6 12l4 4l8-8"
+            fill="none"
+            stroke="white"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+
+      <br />
+      <br />
+      <br />
+
       <input sc-checkbox2 type="checkbox" checked />
 
       <br />
