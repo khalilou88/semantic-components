@@ -3,35 +3,33 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { ScAspectRatio } from '@semantic-components/ui';
 
 @Component({
-  selector: 'app-aspect-ratio-page',
+  selector: 'sc-aspect-ratio-page',
   imports: [ScAspectRatio],
   template: `
-    <div class="preview flex min-h-[350px] w-full items-center justify-center p-10">
-      <sc-aspect-ratio
-        wrapperClass="bg-muted"
-        ratio="16 / 9"
-        src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80"
-        alt="Photo by Drew Beamer"
-      />
-    </div>
+    <div class="m-10">
+      <!-- Basic usage with video aspect ratio (16:9) -->
+      <div class="" sc-aspect-ratio>
+        <img
+          class="w-full h-full object-cover"
+          src="https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?q=80&w=2676&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        />
+      </div>
 
-    <div class="preview flex min-h-[350px] w-full items-center justify-center p-10">
-      <div
-        data-radix-aspect-ratio-wrapper=""
-        style="position: relative; width: 100%; padding-bottom: 56.25%;"
-      >
-        <div class="bg-muted" style="position: absolute; inset: 0px;">
-          <img
-            class="size-full rounded-md object-cover"
-            alt="Photo by Drew Beamer"
-            loading="lazy"
-            decoding="async"
-            data-nimg="fill"
-            sizes="100vw"
-            src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80"
-            style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;"
-          />
-        </div>
+      <!-- Square aspect ratio (1:1) -->
+      <div sc-aspect-ratio ratio="square">
+        <div class="w-full h-full bg-gray-200 flex items-center justify-center">Square content</div>
+      </div>
+
+      <!-- Portrait aspect ratio (3:4) with custom classes -->
+      <div class="max-w-md mx-auto" sc-aspect-ratio ratio="portrait">
+        <video class="w-full h-full object-cover">
+          <source src="your-video.mp4" type="video/mp4" />
+        </video>
+      </div>
+
+      <!-- Widescreen aspect ratio (21:9) -->
+      <div sc-aspect-ratio ratio="widescreen">
+        <iframe class="w-full h-full" src="your-embed-url" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
   `,
