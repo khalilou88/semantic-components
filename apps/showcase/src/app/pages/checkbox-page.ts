@@ -5,6 +5,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import {
   ScButton,
   ScCheckbox,
+  ScCheckbox2,
   ScCheckboxContainer,
   ScCheckboxField,
   ScDescription,
@@ -15,6 +16,7 @@ import {
   selector: 'app-checkbox-page',
   imports: [
     ScCheckbox,
+    ScCheckbox2,
     ReactiveFormsModule,
     JsonPipe,
     ScButton,
@@ -102,6 +104,8 @@ import {
         </div>
       </label>
     </div>
+
+    <input sc-checkbox2 type="checkbox" checked />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
