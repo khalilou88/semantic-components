@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { ScAspectRatio } from '@semantic-components/ui';
 
 @Component({
-  selector: 'sc-aspect-ratio-page',
+  selector: 'app-aspect-ratio-page',
   imports: [ScAspectRatio],
   template: `
     <div class="m-10">
@@ -12,6 +12,7 @@ import { ScAspectRatio } from '@semantic-components/ui';
         <img
           class="w-full h-full object-cover"
           src="https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?q=80&w=2676&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt=""
         />
       </div>
 
