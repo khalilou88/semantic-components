@@ -37,7 +37,6 @@ import {
   ScExtensionHeading,
   ScExtensionImage,
   ScExtensionLink,
-  ScExtensionTable,
   ScExtensionTextStyle,
   ScExtensionYoutube,
   ScHeading,
@@ -98,7 +97,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
     ScEditorHorizontalRule,
     ScEditorCode,
     ScExtensionHeading,
-    ScExtensionTable,
+    // ScExtensionTable,
     ScEditorToolbar,
     ScEditorUnsetLink,
     ScEditorTextAlignRight,
@@ -177,9 +176,9 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
                             <sc-editor-code />
                           </sc-editor-group>
 
-                          <sc-editor-group>
+                          <!--sc-editor-group>
                             <sc-extension-table />
-                          </sc-editor-group>
+                          </sc-editor-group-->
                         </sc-editor-toolbar>
                       </sc-editor>
                     </form>
