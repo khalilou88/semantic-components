@@ -9,7 +9,6 @@ import {
   inject,
   input,
   model,
-  signal,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
@@ -21,7 +20,7 @@ import { cn } from '@semantic-components/utils';
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
     '(input)': 'handleInput($event)',
   },
   styles: ``,
@@ -31,28 +30,24 @@ import { cn } from '@semantic-components/utils';
 export class ScSlider {
   private readonly host = inject(ElementRef);
 
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  trackClass = signal(
-    '[&::-webkit-slider-runnable-track]:h-2 [&::-webkit-slider-runnable-track]:rounded-full',
-  );
-
-  thumbClass = signal(
-    '[&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:size-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:-mt-1.5 [&::-moz-range-thumb]:border-none [&::-moz-range-thumb]:rounded-none [&::-moz-range-thumb]:size-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-primary',
-  );
-
-  classes = computed(() =>
+  protected readonly class = computed(() =>
     cn(
       'appearance-none bg-transparent w-full rounded-full h-2',
-      this.trackClass(),
-      this.thumbClass(),
-      this.class(),
+      //track
+      '[&::-webkit-slider-runnable-track]:h-2 [&::-webkit-slider-runnable-track]:rounded-full',
+      //thumb
+      '[&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:size-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:-mt-1.5 [&::-moz-range-thumb]:border-none [&::-moz-range-thumb]:size-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-primary',
+      this.classInput(),
     ),
   );
 
-  value = model<number>(0);
-  min = input<number>(0);
-  max = input<number>(100);
+  readonly value = model<number>(0);
+  readonly min = input<number>(0);
+  readonly max = input<number>(100);
 
   constructor() {
     effect(() => {
@@ -67,7 +62,7 @@ export class ScSlider {
     });
   }
 
-  handleInput(event: KeyboardEvent) {
+  protected handleInput(event: KeyboardEvent) {
     if (!event.target) return;
     this.value.set(+(event.target as HTMLInputElement).value);
   }
