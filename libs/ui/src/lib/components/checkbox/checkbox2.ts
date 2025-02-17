@@ -4,6 +4,7 @@ import {
   Component,
   ElementRef,
   ViewEncapsulation,
+  afterRenderEffect,
   booleanAttribute,
   computed,
   effect,
@@ -70,10 +71,18 @@ export class ScCheckbox2 {
       'disabled:checked:bg-gray-300 disabled:checked:border-gray-300', //styles for checked and disabled
 
       // Applies SVG background image when checked
-      '[&:checked]:bg-[image:var(--checkbox-bg)]',
+      '[&:checked]:bg-[image:var(--checkbox-checked-bg)]',
       'checked:bg-no-repeat', // Prevents background image from repeating
       'checked:bg-center', // Centers the background image
       'checked:bg-contain', // Scales image to fit while maintaining aspect ratio
+
+      //indeterminate
+      'indeterminate:bg-blue-500 indeterminate:border-blue-500', //changes background and border when checked
+      'indeterminate:hover:bg-blue-600 indeterminate:hover:border-blue-600', //darker blue on hover when checked
+      '[&:indeterminate]:bg-[image:var(--checkbox-indeterminate-bg)]',
+      'indeterminate:bg-no-repeat', // Prevents background image from repeating
+      'indeterminate:bg-center', // Centers the background image
+      'indeterminate:bg-contain', // Scales image to fit while maintaining aspect ratio
 
       this.classInput(),
     ),
@@ -81,11 +90,9 @@ export class ScCheckbox2 {
 
   readonly ariaLabel = input<string | null>(null, { alias: 'aria-label' });
 
-  readonly indeterminateInput = input<boolean, unknown>(false, {
-    alias: 'indeterminate',
+  readonly indeterminate = input<boolean, unknown>(false, {
     transform: booleanAttribute,
   });
-  protected readonly indeterminate = linkedSignal(() => this.indeterminateInput());
 
   readonly checkedInput = input<boolean, unknown>(false, {
     alias: 'checked',
@@ -113,7 +120,7 @@ export class ScCheckbox2 {
   });
 
   constructor() {
-    effect(() => {
+    afterRenderEffect(() => {
       this.hostRef.nativeElement.indeterminate = this.indeterminate();
     });
 
