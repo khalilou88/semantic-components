@@ -27,6 +27,12 @@ import {
   ],
   template: `
     <div class="m-10">
+      <input sc-checkbox2 type="checkbox" checked />
+
+      <br />
+      <br />
+      <br />
+
       <sc-checkbox-field>
         <sc-checkbox></sc-checkbox>
         <label sc-label>Accept terms and conditions</label>
@@ -104,8 +110,6 @@ import {
         </div>
       </label>
     </div>
-
-    <input sc-checkbox2 type="checkbox" checked />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
