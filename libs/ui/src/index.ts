@@ -18,6 +18,7 @@ export * from './lib/components/label';
 export * from './lib/components/textarea';
 export * from './lib/components/select';
 export * from './lib/components/progress';
+export * from './lib/components/circular-progress';
 export * from './lib/components/sheet';
 export * from './lib/components/breadcrumb';
 export * from './lib/components/toggle';
