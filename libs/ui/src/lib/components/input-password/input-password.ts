@@ -33,9 +33,10 @@ import { ScProgress } from '../progress';
     ScProgress,
   ],
   template: `
-    <!--Password input field with toggle visibility button-->
     <div class="space-y-2">
-      <label [for]="id" sc-label>Input with password strength indicator</label>
+      <label [for]="id" sc-label>
+        Password input field with toggle visibility button and password strength indicator
+      </label>
       <div class="relative">
         <input
           class="pe-9"
