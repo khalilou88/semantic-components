@@ -9,7 +9,7 @@ import {
 import { cn } from '@semantic-components/utils';
 
 @Component({
-  selector: 'th[sc-table-head]',
+  selector: 'thead[sc-table-header-group]',
   imports: [],
   template: `
     <ng-content />
@@ -21,15 +21,10 @@ import { cn } from '@semantic-components/utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScTableHead {
+export class ScTableHeaderGroup {
   readonly classInput = input<string>('', {
     alias: 'class',
   });
 
-  protected readonly class = computed(() =>
-    cn(
-      'h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0',
-      this.classInput(),
-    ),
-  );
+  protected readonly class = computed(() => cn('[&_tr]:border-b', this.classInput()));
 }

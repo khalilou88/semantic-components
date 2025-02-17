@@ -9,7 +9,7 @@ import {
 import { cn } from '@semantic-components/utils';
 
 @Component({
-  selector: 'thead[sc-table-header]',
+  selector: 'th[sc-table-header]',
   imports: [],
   template: `
     <ng-content />
@@ -26,5 +26,10 @@ export class ScTableHeader {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('[&_tr]:border-b', this.classInput()));
+  protected readonly class = computed(() =>
+    cn(
+      'h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0',
+      this.classInput(),
+    ),
+  );
 }

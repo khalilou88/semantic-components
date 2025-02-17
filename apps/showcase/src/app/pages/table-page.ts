@@ -7,8 +7,8 @@ import {
   ScTableCell,
   ScTableContainer,
   ScTableFooter,
-  ScTableHead,
   ScTableHeader,
+  ScTableHeaderGroup,
   ScTableRow,
 } from '@semantic-components/ui';
 
@@ -19,8 +19,8 @@ import {
     ScTable,
     ScTableCaption,
     ScTableRow,
+    ScTableHeaderGroup,
     ScTableHeader,
-    ScTableHead,
     ScTableBody,
     ScTableFooter,
     ScTableCell,
@@ -29,12 +29,12 @@ import {
     <div sc-table-container>
       <table sc-table>
         <caption sc-table-caption>A list of your recent invoices.</caption>
-        <thead sc-table-header>
+        <thead sc-table-header-group>
           <tr sc-table-row>
-            <th class="w-[100px]" sc-table-head>Invoice</th>
-            <th sc-table-head>Status</th>
-            <th sc-table-head>Method</th>
-            <th class="text-right" sc-table-head>Amount</th>
+            <th class="w-[100px]" sc-table-header>Invoice</th>
+            <th sc-table-header>Status</th>
+            <th sc-table-header>Method</th>
+            <th class="text-right" sc-table-header>Amount</th>
           </tr>
         </thead>
         <tbody sc-table-body>
