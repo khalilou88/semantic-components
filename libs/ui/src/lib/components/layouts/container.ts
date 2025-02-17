@@ -21,7 +21,7 @@ import { cn } from '@semantic-components/utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class scContainer {
+export class ScContainer {
   class = input<string>('');
 
   //TODO add more cases
