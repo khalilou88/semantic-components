@@ -16,7 +16,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { cn } from '@semantic-components/utils';
 import { SiCheckIcon, SiEyeIcon, SiEyeOffIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 
-import { ScInput } from '../input/input';
+import { ScInput } from '../input';
 import { ScLabel } from '../label';
 import { ScProgress } from '../progress';
 
@@ -66,8 +66,7 @@ import { ScProgress } from '../progress';
 
     <!--Password strength indicator-->
     <sc-progress
-      class="mb-4 mt-3 h-1 w-full overflow-hidden rounded-full bg-border"
-      [indicatorClass]="indicatorClass()"
+      [class]="progressClass()"
       [value]="strengthScore()"
       max="4"
       aria-label="Password strength"
@@ -115,7 +114,7 @@ export class ScInputPassword implements OnInit {
 
   protected control = new FormControl();
 
-  private destroyRef = inject(DestroyRef);
+  private readonly destroyRef = inject(DestroyRef);
 
   ngOnInit() {
     this.control.valueChanges
@@ -126,36 +125,40 @@ export class ScInputPassword implements OnInit {
   readonly password = signal<string>('');
   readonly isVisible = signal<boolean>(false);
 
-  requirements = [
+  readonly requirements = [
     { regex: /.{8,}/, text: 'At least 8 characters' },
-    { regex: /[0-9]/, text: 'At least 1 number' },
+    { regex: /\d/, text: 'At least 1 number' },
     { regex: /[a-z]/, text: 'At least 1 lowercase letter' },
     { regex: /[A-Z]/, text: 'At least 1 uppercase letter' },
   ];
 
-  strength = computed(() =>
+  readonly strength = computed(() =>
     this.requirements.map((req) => ({
       met: req.regex.test(this.password()),
       text: req.text,
     })),
   );
 
-  strengthScore = computed(() => this.strength().filter((req) => req.met).length);
+  readonly strengthScore = computed(() => this.strength().filter((req) => req.met).length);
 
-  protected readonly indicatorClass = computed(() =>
-    cn('h-full transition-all duration-500 ease-out', this.strengthColor()),
+  protected readonly progressClass = computed(() =>
+    cn(
+      'mb-4 mt-3 h-1 w-full overflow-hidden rounded-full bg-border',
+      '[&>[data-slot=indicator]]:h-full [&>[data-slot=indicator]]:transition-all [&>[data-slot=indicator]]:duration-500 [&>[data-slot=indicator]]:ease-out',
+      this.strengthColor(),
+    ),
   );
 
-  strengthColor = computed(() => {
+  readonly strengthColor = computed(() => {
     const score = this.strengthScore();
-    if (score === 0) return 'bg-border';
-    if (score <= 1) return 'bg-red-500';
-    if (score <= 2) return 'bg-orange-500';
-    if (score === 3) return 'bg-amber-500';
-    return 'bg-emerald-500';
+    if (score === 0) return '[&>[data-slot=indicator]]:bg-border';
+    if (score <= 1) return '[&>[data-slot=indicator]]:bg-red-500';
+    if (score <= 2) return '[&>[data-slot=indicator]]:bg-orange-500';
+    if (score === 3) return '[&>[data-slot=indicator]]:bg-amber-500';
+    return '[&>[data-slot=indicator]]:bg-emerald-500';
   });
 
-  strengthText = computed(() => {
+  readonly strengthText = computed(() => {
     const score = this.strengthScore();
     if (score === 0) return 'Enter a password';
     if (score <= 2) return 'Weak password';
@@ -163,7 +166,7 @@ export class ScInputPassword implements OnInit {
     return 'Strong password';
   });
 
-  toggleVisibility() {
+  protected toggleVisibility() {
     this.isVisible.update((prev) => !prev);
   }
 }

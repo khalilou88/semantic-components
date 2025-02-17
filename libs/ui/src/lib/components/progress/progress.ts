@@ -13,7 +13,7 @@ import { cn } from '@semantic-components/utils';
   selector: 'sc-progress',
   imports: [],
   template: `
-    <div [class]="indicatorClass()" [style.transform]="transform()"></div>
+    <div [style.transform]="transform()" data-slot="indicator"></div>
   `,
   host: {
     // Sets the role for this component to "progressbar"
@@ -35,18 +35,12 @@ export class ScProgress {
   });
 
   protected readonly class = computed(() =>
-    cn('block relative h-4 w-full overflow-hidden rounded-full bg-secondary', this.classInput()),
-  );
-
-  readonly indicatorClassInput = input<string>('', {
-    alias: 'indicatorClass',
-  });
-
-  protected readonly indicatorClass = computed(() =>
     cn(
-      'size-full flex-1 bg-primary transition-all',
-      this.mode() === 'indeterminate' && 'animate-progress origin-left',
-      this.indicatorClassInput(),
+      'block relative h-4 w-full overflow-hidden rounded-full bg-secondary',
+      '[&>[data-slot=indicator]]:size-full [&>[data-slot=indicator]]:flex-1 [&>[data-slot=indicator]]:bg-primary [&>[data-slot=indicator]]:transition-all',
+      this.mode() === 'indeterminate' &&
+        '[&>[data-slot=indicator]]:animate-progress [&>[data-slot=indicator]]:origin-left',
+      this.classInput(),
     ),
   );
 
