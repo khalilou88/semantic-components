@@ -67,7 +67,7 @@ export class ScCheckbox2 implements ControlValueAccessor {
       //Interactive states
       'hover:border-gray-600', //darkens border on hover
       'focus:border-blue-500', //changes border color on focus
-      'focus:ring-2 focus:ring-blue-500 focus:ring-opacity-20', //adds focus ring
+      'focus:ring-2 focus:ring-blue-500/20', //adds focus ring
 
       //Checked state
       'checked:bg-blue-500 checked:border-blue-500', //changes background and border when checked
