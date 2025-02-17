@@ -54,40 +54,35 @@ export class ScCheckbox2 implements ControlValueAccessor {
 
   protected readonly class = computed(() =>
     cn(
-      'appearance-none',
-      'w-6',
-      'h-6',
-      'border-2',
-      'border-gray-300',
-      'rounded',
-      'bg-white',
+      //Base styles
+      'appearance-none', //removes default browser styling
+      'w-6 h-6', //sets width and height (24px)
+      'border-2 border-gray-300', //adds border
+      'rounded', //adds border radius
+      'bg-white', //sets background color
       'cursor-pointer',
       'outline-none',
-      'transition-all',
-      'duration-200',
+      'transition-all duration-200', //adds smooth transitions
 
-      'hover:border-gray-600',
+      //Interactive states
+      'hover:border-gray-600', //darkens border on hover
+      'focus:border-blue-500', //changes border color on focus
+      'focus:ring-2 focus:ring-blue-500 focus:ring-opacity-20', //adds focus ring
 
-      'focus:border-blue-500',
-      'focus:ring-2',
-      'focus:ring-blue-500',
-      'focus:ring-opacity-20',
+      //Checked state
+      'checked:bg-blue-500 checked:border-blue-500', //changes background and border when checked
+      'checked:hover:bg-blue-600 checked:hover:border-blue-600', //darker blue on hover when checked
 
-      'checked:bg-blue-500',
-      'checked:border-blue-500',
-      'checked:hover:bg-blue-600',
-      'checked:hover:border-blue-600',
+      //Disabled state
+      'disabled:bg-gray-100 disabled:border-gray-300', //styles for disabled state
+      'disabled:cursor-not-allowed', //changes cursor
+      'disabled:checked:bg-gray-300 disabled:checked:border-gray-300', //styles for checked and disabled
 
-      'disabled:bg-gray-100',
-      'disabled:border-gray-300',
-      'disabled:cursor-not-allowed',
-      'disabled:checked:bg-gray-300',
-      'disabled:checked:border-gray-300',
-
+      // Applies SVG background image when checked
       "[&:checked]:bg-[url('data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12l4 4l8-8' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E')]",
-      'checked:bg-no-repeat',
-      'checked:bg-center',
-      'checked:bg-contain',
+      'checked:bg-no-repeat', // Prevents background image from repeating
+      'checked:bg-center', // Centers the background image
+      'checked:bg-contain', // Scales image to fit while maintaining aspect ratio
 
       this.classInput(),
     ),
