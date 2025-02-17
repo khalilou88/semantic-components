@@ -1,12 +1,11 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  OnChanges,
-  OnInit,
   ViewEncapsulation,
   computed,
   input,
   numberAttribute,
+  signal,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
@@ -15,26 +14,26 @@ import { cn } from '@semantic-components/utils';
   selector: 'sc-circular-progress',
   imports: [],
   template: `
-    <svg class="relative -rotate-90" [attr.height]="radius * 2" [attr.width]="radius * 2">
+    <svg class="relative -rotate-90" [attr.height]="radius() * 2" [attr.width]="radius() * 2">
       <!-- Background Circle -->
       <circle
         class="fill-transparent text-gray-200"
-        [attr.stroke-width]="stroke"
-        [attr.r]="normalizedRadius"
-        [attr.cx]="radius"
-        [attr.cy]="radius"
+        [attr.stroke-width]="stroke()"
+        [attr.r]="normalizedRadius()"
+        [attr.cx]="radius()"
+        [attr.cy]="radius()"
         stroke="currentColor"
       ></circle>
 
       <!-- Progress Circle -->
       <circle
         class="fill-transparent text-primary transition-all duration-300"
-        [attr.stroke-width]="stroke"
-        [attr.r]="normalizedRadius"
-        [attr.cx]="radius"
-        [attr.cy]="radius"
-        [attr.stroke-dasharray]="circumference"
-        [attr.stroke-dashoffset]="strokeDashoffset"
+        [attr.stroke-width]="stroke()"
+        [attr.r]="normalizedRadius()"
+        [attr.cx]="radius()"
+        [attr.cy]="radius()"
+        [attr.stroke-dasharray]="circumference()"
+        [attr.stroke-dashoffset]="strokeDashoffset()"
         stroke="currentColor"
         stroke-linecap="round"
       ></circle>
@@ -52,7 +51,7 @@ import { cn } from '@semantic-components/utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCircularProgress implements OnInit, OnChanges {
+export class ScCircularProgress {
   readonly classInput = input<string>('', {
     alias: 'class',
   });
@@ -66,25 +65,18 @@ export class ScCircularProgress implements OnInit, OnChanges {
     transform: numberAttribute,
   });
 
-  radius = 50; // Radius of the circle
-  stroke = 8; // Thickness of the stroke
+  protected readonly radius = signal(50); // Radius of the circle
+  protected readonly stroke = signal(8); // Thickness of the stroke
 
-  normalizedRadius!: number; // Adjusted radius for the stroke width
-  circumference!: number; // Circle circumference
-  strokeDashoffset!: number; // Dash offset for progress
+  // Adjusted radius for the stroke width
+  protected readonly normalizedRadius = computed(() => this.radius() - this.stroke() * 0.5);
 
-  ngOnInit(): void {
-    this.normalizedRadius = this.radius - this.stroke * 0.5;
-    this.circumference = this.normalizedRadius * 2 * Math.PI;
-    this.updateProgress();
-  }
+  // Circle circumference
+  protected readonly circumference = computed(() => this.normalizedRadius() * 2 * Math.PI);
 
-  ngOnChanges(): void {
-    this.updateProgress();
-  }
-
-  updateProgress(): void {
-    // Calculate stroke-dashoffset based on progress
-    this.strokeDashoffset = this.circumference - (this.value() / 100) * this.circumference;
-  }
+  // Dash offset for progress
+  // Calculate stroke-dashoffset based on progress
+  protected readonly strokeDashoffset = computed(() => {
+    return this.circumference() - (this.value() / 100) * this.circumference();
+  });
 }
