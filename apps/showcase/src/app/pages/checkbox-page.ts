@@ -42,6 +42,14 @@ import {
       <br />
       <br />
 
+      <input disabled sc-checkbox2 type="checkbox" />
+      <input disabled="true" sc-checkbox2 type="checkbox" />
+      <input [disabled]="true" sc-checkbox2 type="checkbox" />
+
+      <br />
+      <br />
+      <br />
+
       <sc-checkbox-field>
         <sc-checkbox></sc-checkbox>
         <label sc-label>Accept terms and conditions</label>

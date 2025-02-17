@@ -23,6 +23,7 @@ import { cn } from '@semantic-components/utils';
     <ng-content />
   `,
   host: {
+    '[id]': 'id()',
     '[class]': 'class()',
   },
   styles: ``,
@@ -30,13 +31,12 @@ import { cn } from '@semantic-components/utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCheckbox2 {
+  private readonly hostRef = inject(ElementRef);
+
   readonly idInput = input<string>(inject(_IdGenerator).getId('sc-checkbox-'), {
     alias: 'id',
   });
-
   readonly id = linkedSignal(() => this.idInput());
-
-  private readonly hostRef = inject(ElementRef);
 
   readonly type = input.required<'checkbox'>();
 
@@ -64,12 +64,6 @@ export class ScCheckbox2 {
       //Checked state
       'checked:bg-blue-500 checked:border-blue-500', //changes background and border when checked
       'checked:hover:bg-blue-600 checked:hover:border-blue-600', //darker blue on hover when checked
-
-      //Disabled state
-      'disabled:bg-gray-100 disabled:border-gray-300', //styles for disabled state
-      'disabled:cursor-not-allowed', //changes cursor
-      'disabled:checked:bg-gray-300 disabled:checked:border-gray-300', //styles for checked and disabled
-
       // Applies SVG background image when checked
       '[&:checked]:bg-[image:var(--checkbox-checked-bg)]',
       'checked:bg-no-repeat', // Prevents background image from repeating
@@ -84,11 +78,14 @@ export class ScCheckbox2 {
       'indeterminate:bg-center', // Centers the background image
       'indeterminate:bg-contain', // Scales image to fit while maintaining aspect ratio
 
+      //Disabled state
+      'disabled:bg-gray-100 disabled:border-gray-300', //styles for disabled state
+      'disabled:cursor-not-allowed', //changes cursor
+      'disabled:checked:bg-gray-300 disabled:checked:border-gray-300', //styles for checked and disabled
+
       this.classInput(),
     ),
   );
-
-  readonly ariaLabel = input<string | null>(null, { alias: 'aria-label' });
 
   readonly indeterminate = input<boolean, unknown>(false, {
     transform: booleanAttribute,
@@ -101,22 +98,8 @@ export class ScCheckbox2 {
   protected readonly checked = linkedSignal(() => this.checkedInput());
   readonly checkedChange = output<boolean>();
 
-  readonly disabledInput = input<boolean, unknown>(false, {
-    alias: 'disabled',
+  readonly disabled = input<boolean, unknown>(false, {
     transform: booleanAttribute,
-  });
-  protected readonly disabled = linkedSignal(() => this.disabledInput());
-
-  protected readonly state = computed<'indeterminate' | 'checked' | 'unchecked'>(() => {
-    if (this.indeterminate()) {
-      return 'indeterminate';
-    }
-
-    if (this.checked()) {
-      return 'checked';
-    }
-
-    return 'unchecked';
   });
 
   constructor() {
