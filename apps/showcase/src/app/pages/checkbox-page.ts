@@ -62,6 +62,10 @@ import {
 
       <form [formGroup]="checkForm">
         <sc-checkbox formControlName="check" />
+
+        <br />
+
+        <input sc-checkbox2 formControlName="check2" type="checkbox" />
       </form>
       <br />
       <button (click)="disable()" sc-button>Disable or enable FormControl</button>
@@ -142,6 +146,7 @@ export default class CheckboxPage {
   }
   checkForm = new FormGroup({
     check: new FormControl(),
+    check2: new FormControl(),
   });
 
   readonly checked = signal(false);

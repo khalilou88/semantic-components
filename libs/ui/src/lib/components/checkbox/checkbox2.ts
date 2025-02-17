@@ -1,20 +1,17 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   ElementRef,
   ViewEncapsulation,
   booleanAttribute,
   computed,
   effect,
-  forwardRef,
   inject,
   input,
   linkedSignal,
   output,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { cn } from '@semantic-components/utils';
 
@@ -30,15 +27,8 @@ import { cn } from '@semantic-components/utils';
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ScCheckbox2),
-      multi: true,
-    },
-  ],
 })
-export class ScCheckbox2 implements ControlValueAccessor {
+export class ScCheckbox2 {
   readonly idInput = input<string>(inject(_IdGenerator).getId('sc-checkbox-'), {
     alias: 'id',
   });
@@ -46,7 +36,8 @@ export class ScCheckbox2 implements ControlValueAccessor {
   readonly id = linkedSignal(() => this.idInput());
 
   private readonly hostRef = inject(ElementRef);
-  private readonly changeDetectorRef = inject(ChangeDetectorRef);
+
+  readonly type = input.required<'checkbox'>();
 
   readonly classInput = input<string>('', {
     alias: 'class',
@@ -129,49 +120,5 @@ export class ScCheckbox2 implements ControlValueAccessor {
     effect(() => {
       this.checkedChange.emit(this.checked());
     });
-  }
-
-  protected toggle() {
-    if (this.disabled()) {
-      return;
-    }
-
-    const v = !this.checked();
-    this.checked.set(v);
-
-    if (this.indeterminate()) {
-      this.indeterminate.set(false);
-    }
-
-    this.onChange(v);
-    this.changeDetectorRef.markForCheck();
-  }
-
-  writeValue(checked: boolean): void {
-    this.checked.set(checked);
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onChange: any = () => {};
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onTouch: any = () => {};
-
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouch = fn;
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-    this.disabled.set(isDisabled);
-  }
-
-  protected onInteractionEvent(event: Event) {
-    // We always have to stop propagation on the change event.
-    // Otherwise the change event, from the input element, will bubble up and
-    // emit its event object to the `change` output.
-    event.stopPropagation();
   }
 }
