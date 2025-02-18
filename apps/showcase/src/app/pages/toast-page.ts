@@ -15,7 +15,6 @@ import {
   ScToastContent,
   ScToastDescription,
   ScToastTitle,
-  Toast2Service,
   Toaster,
 } from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
@@ -100,40 +99,6 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
         </div>
       </ng-template>
     </div>
-
-    <div class="container mx-auto p-4">
-      <h1 class="text-2xl font-bold mb-4">Toast Notification Demo</h1>
-
-      <div class="flex flex-wrap gap-2">
-        <button
-          class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition"
-          (click)="showSuccessToast()"
-        >
-          Success Toast
-        </button>
-
-        <button
-          class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
-          (click)="showErrorToast()"
-        >
-          Error Toast
-        </button>
-
-        <button
-          class="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition"
-          (click)="showWarningToast()"
-        >
-          Warning Toast
-        </button>
-
-        <button
-          class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
-          (click)="showInfoToast()"
-        >
-          Info Toast
-        </button>
-      </div>
-    </div>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -141,7 +106,6 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
 })
 export default class ToastPage {
   private readonly toaster = inject(Toaster);
-  private readonly toastService = inject(Toast2Service);
 
   private readonly toastTemplate = viewChild.required<TemplateRef<unknown>>('toastTemplate');
 
@@ -163,21 +127,5 @@ export default class ToastPage {
 
   protected showToast4() {
     this.toaster.show(this.toastTemplate4());
-  }
-
-  showSuccessToast(): void {
-    this.toastService.success('Operation completed successfully!');
-  }
-
-  showErrorToast(): void {
-    this.toastService.error('An error occurred. Please try again.');
-  }
-
-  showWarningToast(): void {
-    this.toastService.warning('Warning: This action cannot be undone.');
-  }
-
-  showInfoToast(): void {
-    this.toastService.info('Did you know? You can customize these toasts.');
   }
 }
