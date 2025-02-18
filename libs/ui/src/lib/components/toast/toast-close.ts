@@ -43,8 +43,6 @@ export class ScToastClose {
   );
 
   protected close() {
-    console.log('close');
-    console.log(this.toastId);
     this.toaster.remove(this.toastId);
   }
 }
