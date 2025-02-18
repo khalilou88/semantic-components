@@ -2,8 +2,10 @@ import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  Injector,
   TemplateRef,
   ViewEncapsulation,
+  inject,
   input,
 } from '@angular/core';
 
@@ -12,7 +14,7 @@ import {
   imports: [NgTemplateOutlet],
   template: `
     @if (templateRef()) {
-      <ng-container *ngTemplateOutlet="templateRef()"></ng-container>
+      <ng-container *ngTemplateOutlet="templateRef(); injector: injector"></ng-container>
     }
   `,
   styles: ``,
@@ -21,4 +23,6 @@ import {
 })
 export class ScToastContainer {
   readonly templateRef = input<TemplateRef<unknown> | null>(null);
+
+  protected readonly injector = inject(Injector);
 }
