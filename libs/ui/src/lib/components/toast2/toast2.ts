@@ -7,6 +7,8 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 
+import { TOAST_DATA } from './toast2.service';
+
 export interface ToastData {
   message: string;
   type: 'success' | 'error' | 'warning' | 'info';
@@ -155,7 +157,7 @@ export interface ToastData {
 export class Toast2 {
   @HostBinding('class') animationClass = 'toast-enter';
 
-  constructor(@Inject('TOAST_DATA') public data: ToastData) {}
+  constructor(@Inject(TOAST_DATA) public data: ToastData) {}
 
   close(): void {
     // This will be hooked up by the service
