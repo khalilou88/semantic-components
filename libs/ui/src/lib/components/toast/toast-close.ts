@@ -10,6 +10,7 @@ import {
 import { cn } from '@semantic-components/utils';
 
 import { SC_TOAST_ID } from './toast-id';
+import { Toaster } from './toaster';
 
 @Component({
   selector: 'button[sc-toast-close]',
@@ -26,7 +27,9 @@ import { SC_TOAST_ID } from './toast-id';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScToastClose {
-  private readonly toastId = inject<string>(SC_TOAST_ID, { optional: true });
+  private readonly toaster = inject(Toaster);
+
+  private readonly toastId = inject<string>(SC_TOAST_ID);
 
   readonly classInput = input<string>('', {
     alias: 'class',
@@ -42,5 +45,6 @@ export class ScToastClose {
   protected close() {
     console.log('close');
     console.log(this.toastId);
+    this.toaster.remove(this.toastId);
   }
 }

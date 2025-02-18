@@ -6,11 +6,16 @@ import { ComponentRef, Injectable, Injector, TemplateRef, inject } from '@angula
 import { ScToastContainer } from './toast-container';
 import { SC_TOAST_ID } from './toast-id';
 
+interface ToastRef {
+  id: string;
+  overlayRef: OverlayRef;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class Toaster {
-  private readonly toastRefs: OverlayRef[] = [];
+  private readonly toastRefs: ToastRef[] = [];
   private readonly maxToasts = 3;
 
   private readonly overlay = inject(Overlay);
@@ -19,15 +24,47 @@ export class Toaster {
 
   private readonly injector = inject(Injector);
 
-  show(toastTemplate: TemplateRef<unknown>): void {
+  /**
+   * Show a toast notification
+   * @returns The ID of the created toast
+   */
+  show(toastTemplate: TemplateRef<unknown>): string {
     if (this.toastRefs.length >= this.maxToasts) {
       // If we've reached max, remove the oldest toast
-      this.closeToast(this.toastRefs[0]);
+      this.closeToast(this.toastRefs[0].id);
     }
-    this.createToast(toastTemplate);
+
+    // Generate ID if not provided
+    const toastId = this.idGenerator.getId('sc-toast-');
+
+    // Create the toast with this ID
+    this.createToast(toastTemplate, toastId);
+
+    return toastId;
   }
 
-  private createToast(toastTemplate: TemplateRef<unknown>): void {
+  /**
+   * Remove a specific toast by ID
+   */
+  remove(id: string): boolean {
+    const index = this.toastRefs.findIndex((ref) => ref.id === id);
+    if (index > -1) {
+      this.closeToast(id);
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * Remove all currently displayed toasts
+   */
+  clear(): void {
+    while (this.toastRefs.length > 0) {
+      this.closeToast(this.toastRefs[0].id);
+    }
+  }
+
+  private createToast(toastTemplate: TemplateRef<unknown>, id: string): void {
     // Recalculate positions for all toasts
     this.updateToastPositions();
 
@@ -37,27 +74,32 @@ export class Toaster {
       positionStrategy,
     });
 
-    const id = this.idGenerator.getId('sc-toast-');
-
     const overlayRef = this.overlay.create(overlayConfig);
     const toastPortal = new ComponentPortal(ScToastContainer, null, this.createInjector(id));
 
     const toastRef: ComponentRef<ScToastContainer> = overlayRef.attach(toastPortal);
     toastRef.setInput('templateRef', toastTemplate);
 
-    this.toastRefs.push(overlayRef);
+    // Add toast reference with ID to our array
+    this.toastRefs.push({
+      id: id,
+      overlayRef,
+    });
+
     this.updateToastPositions();
 
     setTimeout(() => {
-      this.closeToast(overlayRef);
+      this.closeToast(id);
     }, 30000); //TODO just 3000
   }
 
-  private closeToast(ref: OverlayRef): void {
-    const index = this.toastRefs.indexOf(ref);
+  private closeToast(id: string): void {
+    const index = this.toastRefs.findIndex((ref) => ref.id === id);
     if (index > -1) {
+      const { overlayRef } = this.toastRefs[index];
       this.toastRefs.splice(index, 1);
-      ref.dispose();
+      overlayRef.dispose();
+
       // Recalculate positions for remaining toasts
       this.updateToastPositions();
     }
@@ -66,9 +108,9 @@ export class Toaster {
   private updateToastPositions(): void {
     // Update positions of all existing toasts
     this.toastRefs.forEach((ref, index) => {
-      const position = ref.getConfig().positionStrategy as any;
+      const position = ref.overlayRef.getConfig().positionStrategy as any;
       position.top(`${20 + index * 80}px`).right('20px');
-      ref.updatePosition();
+      ref.overlayRef.updatePosition();
     });
   }
 
