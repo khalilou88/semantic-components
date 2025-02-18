@@ -15,7 +15,10 @@ import { TOAST_DATA, ToastData } from './toast.model';
 export class Toast2Service {
   private readonly toastQueue: Array<{ data: ToastData; zIndex: number }> = [];
   private readonly activeToasts: Map<OverlayRef, Toast2> = new Map();
-  private readonly defaultDuration = 3000;
+
+  //TODO
+  // private readonly defaultDuration = 3000;
+  private readonly defaultDuration = 30000;
   private maxZIndex = 1000;
 
   constructor(
