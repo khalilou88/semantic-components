@@ -17,7 +17,6 @@ import {
   ScToastContent,
   ScToastDescription,
   ScToastTitle,
-  Toast2,
   Toast2Service,
   Toaster,
 } from '@semantic-components/ui';
@@ -34,7 +33,6 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     ScToast,
     ScToastContent,
     ScButton,
-    Toast2,
   ],
   template: `
     <div class="m-10">
@@ -87,8 +85,6 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
           Info Toast
         </button>
       </div>
-
-      <sc-toast2></sc-toast2>
     </div>
   `,
   styles: ``,
