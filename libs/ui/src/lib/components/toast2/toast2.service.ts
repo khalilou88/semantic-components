@@ -1,14 +1,13 @@
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { Injectable, InjectionToken, Injector, NgZone } from '@angular/core';
+import { Injectable, Injector, NgZone } from '@angular/core';
 
 import { take } from 'rxjs/operators';
 
 import { Subject } from 'rxjs';
 
-import { Toast2, ToastData } from './toast2';
-
-export const TOAST_DATA = new InjectionToken<string>('TOAST_DATA');
+import { Toast2 } from './toast2';
+import { TOAST_DATA, ToastData } from './toast.model';
 
 @Injectable({
   providedIn: 'root',
@@ -42,9 +41,7 @@ export class Toast2Service {
 
     const { data, zIndex } = this.toastQueue.shift()!;
     const overlayRef = this.createOverlay(zIndex);
-    //TODO
-    // const toastPortal = new ComponentPortal(Toast2, null, this.createInjector(data));
-    const toastPortal = new ComponentPortal(Toast2, null);
+    const toastPortal = new ComponentPortal(Toast2, null, this.createInjector(data));
     const componentRef = overlayRef.attach(toastPortal);
     const toastInstance = componentRef.instance;
 
@@ -98,7 +95,6 @@ export class Toast2Service {
   private createInjector(data: ToastData): Injector {
     return Injector.create({
       parent: this.injector,
-
       providers: [{ provide: TOAST_DATA, useValue: data }],
     });
   }

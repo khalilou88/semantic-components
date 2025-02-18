@@ -9,13 +9,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 
-import { TOAST_DATA } from './toast2.service';
-
-export interface ToastData {
-  message: string;
-  type: 'success' | 'error' | 'warning' | 'info';
-  duration?: number;
-}
+import { TOAST_DATA, ToastData } from './toast.model';
 
 @Component({
   selector: 'sc-toast2',
@@ -159,14 +153,7 @@ export interface ToastData {
 export class Toast2 {
   @HostBinding('class') animationClass = 'toast-enter';
 
-  //TODO
-  public data: ToastData = {
-    message: 'string',
-    type: 'success',
-    duration: 300,
-  };
-
-  // constructor(@Inject(TOAST_DATA) public data: ToastData) {}
+  constructor(@Inject(TOAST_DATA) public data: ToastData) {}
 
   close(): void {
     // This will be hooked up by the service
