@@ -1,6 +1,8 @@
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
-import { TemplatePortal } from '@angular/cdk/portal';
-import { Injectable, ViewContainerRef, inject } from '@angular/core';
+import { ComponentPortal } from '@angular/cdk/portal';
+import { ComponentRef, Injectable, inject } from '@angular/core';
+
+import { ScToastContainer } from './toast-container';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +10,6 @@ import { Injectable, ViewContainerRef, inject } from '@angular/core';
 export class Toaster {
   private readonly overlayRef: OverlayRef;
   private readonly overlay = inject(Overlay);
-  viewContainerRef!: ViewContainerRef;
 
   constructor() {
     this.overlayRef = this.overlay.create({
@@ -18,8 +19,9 @@ export class Toaster {
   }
 
   show(toastTemplate: any): void {
-    const portal = new TemplatePortal(toastTemplate, this.viewContainerRef);
-    this.overlayRef.attach(portal);
+    const portal = new ComponentPortal(ScToastContainer, null);
+    const componentRef: ComponentRef<ScToastContainer> = this.overlayRef.attach(portal);
+    componentRef.setInput('templateRef', toastTemplate);
 
     // Auto-close after 3 seconds
     setTimeout(() => this.overlayRef.dispose(), 3000);
