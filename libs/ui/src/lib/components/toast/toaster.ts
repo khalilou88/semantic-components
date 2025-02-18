@@ -14,7 +14,7 @@ export class Toaster {
   show(toastTemplate: any): void {
     this.overlayRef = this.overlay.create({
       hasBackdrop: false, // No background overlay
-      positionStrategy: this.overlay.position().global().top('20px').centerHorizontally(),
+      positionStrategy: this.overlay.position().global().top('20px').right('20px'),
     });
 
     const portal = new ComponentPortal(ScToastContainer, null);
