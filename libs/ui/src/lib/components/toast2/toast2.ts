@@ -1,4 +1,6 @@
-import { NgClass, NgIf } from '@angular/common';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { PortalModule } from '@angular/cdk/portal';
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -17,7 +19,7 @@ export interface ToastData {
 
 @Component({
   selector: 'sc-toast2',
-  imports: [NgClass, NgIf],
+  imports: [CommonModule, OverlayModule, PortalModule],
   template: `
     <div
       class="toast-container px-4 py-3 rounded-lg shadow-lg max-w-xs"
@@ -157,7 +159,14 @@ export interface ToastData {
 export class Toast2 {
   @HostBinding('class') animationClass = 'toast-enter';
 
-  constructor(@Inject(TOAST_DATA) public data: ToastData) {}
+  //TODO
+  public data: ToastData = {
+    message: 'string',
+    type: 'success',
+    duration: 300,
+  };
+
+  // constructor(@Inject(TOAST_DATA) public data: ToastData) {}
 
   close(): void {
     // This will be hooked up by the service

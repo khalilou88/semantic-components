@@ -42,7 +42,9 @@ export class Toast2Service {
 
     const { data, zIndex } = this.toastQueue.shift()!;
     const overlayRef = this.createOverlay(zIndex);
-    const toastPortal = new ComponentPortal(Toast2, null, this.createInjector(data));
+    //TODO
+    // const toastPortal = new ComponentPortal(Toast2, null, this.createInjector(data));
+    const toastPortal = new ComponentPortal(Toast2, null);
     const componentRef = overlayRef.attach(toastPortal);
     const toastInstance = componentRef.instance;
 
