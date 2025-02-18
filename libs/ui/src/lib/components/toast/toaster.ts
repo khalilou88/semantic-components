@@ -68,7 +68,7 @@ export class Toaster {
     // Recalculate positions for all toasts
     this.updateToastPositions();
 
-    const positionStrategy = this.overlay.position().global().top('20px').right('20px');
+    const positionStrategy = this.overlay.position().global().bottom('20px').right('20px');
 
     const overlayConfig = new OverlayConfig({
       positionStrategy,
@@ -109,7 +109,7 @@ export class Toaster {
     // Update positions of all existing toasts
     this.toastRefs.forEach((ref, index) => {
       const position = ref.overlayRef.getConfig().positionStrategy as GlobalPositionStrategy;
-      position.top(`${20 + index * 80}px`).right('20px');
+      position.bottom(`${20 + index * 80}px`).right('20px');
       ref.overlayRef.updatePosition();
     });
   }
