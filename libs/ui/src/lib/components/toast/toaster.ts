@@ -1,5 +1,5 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
-import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
+import { GlobalPositionStrategy, Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ComponentRef, Injectable, Injector, TemplateRef, inject } from '@angular/core';
 
@@ -108,7 +108,7 @@ export class Toaster {
   private updateToastPositions(): void {
     // Update positions of all existing toasts
     this.toastRefs.forEach((ref, index) => {
-      const position = ref.overlayRef.getConfig().positionStrategy as any;
+      const position = ref.overlayRef.getConfig().positionStrategy as GlobalPositionStrategy;
       position.top(`${20 + index * 80}px`).right('20px');
       ref.overlayRef.updatePosition();
     });
