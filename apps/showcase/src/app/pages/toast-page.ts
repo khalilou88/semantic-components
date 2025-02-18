@@ -2,7 +2,9 @@ import {
   ChangeDetectionStrategy,
   Component,
   TemplateRef,
+  ViewContainerRef,
   ViewEncapsulation,
+  afterNextRender,
   inject,
   viewChild,
 } from '@angular/core';
@@ -57,7 +59,14 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
 export default class ToastPage {
   private readonly toaster = inject(Toaster);
 
+  private readonly viewContainerRef = inject(ViewContainerRef);
   private readonly toastTemplate = viewChild.required<TemplateRef<unknown>>('toastTemplate');
+
+  constructor() {
+    afterNextRender(() => {
+      this.toaster.viewContainerRef = this.viewContainerRef;
+    });
+  }
 
   protected showToast() {
     this.toaster.show(this.toastTemplate());

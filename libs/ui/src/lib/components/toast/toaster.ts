@@ -8,7 +8,7 @@ import { Injectable, ViewContainerRef, inject } from '@angular/core';
 export class Toaster {
   private readonly overlayRef: OverlayRef;
   private readonly overlay = inject(Overlay);
-  private readonly viewContainerRef = inject(ViewContainerRef);
+  viewContainerRef!: ViewContainerRef;
 
   constructor() {
     this.overlayRef = this.overlay.create({
