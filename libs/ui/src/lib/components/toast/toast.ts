@@ -34,15 +34,19 @@ type ToastVariants = VariantProps<typeof toastVariants>;
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScToast {
-  variant = input<ToastVariants['variant']>('default');
+  readonly variant = input<ToastVariants['variant']>('default');
 
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn(toastVariants({ variant: this.variant() }), this.class()));
+  protected readonly class = computed(() =>
+    cn(toastVariants({ variant: this.variant() }), this.classInput()),
+  );
 }

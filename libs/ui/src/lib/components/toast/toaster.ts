@@ -8,8 +8,8 @@ import { ScToast } from './toast';
   providedIn: 'root',
 })
 export class Toaster {
-  private overlayRef: OverlayRef;
-  overlay = inject(Overlay);
+  private readonly overlayRef: OverlayRef;
+  private readonly overlay = inject(Overlay);
 
   constructor() {
     // Initialize an overlay and define a relative position
