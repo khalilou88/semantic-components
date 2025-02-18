@@ -8,22 +8,25 @@ import { ScToastContainer } from './toast-container';
   providedIn: 'root',
 })
 export class Toaster {
-  private readonly overlayRef: OverlayRef;
+  private overlayRef!: OverlayRef;
   private readonly overlay = inject(Overlay);
 
-  constructor() {
+  show(toastTemplate: any): void {
     this.overlayRef = this.overlay.create({
       hasBackdrop: false, // No background overlay
       positionStrategy: this.overlay.position().global().top('20px').centerHorizontally(),
     });
-  }
 
-  show(toastTemplate: any): void {
     const portal = new ComponentPortal(ScToastContainer, null);
     const componentRef: ComponentRef<ScToastContainer> = this.overlayRef.attach(portal);
     componentRef.setInput('templateRef', toastTemplate);
 
     // Auto-close after 3 seconds
-    setTimeout(() => this.overlayRef.dispose(), 3000);
+    // setTimeout(() => this.overlayRef.dispose(), 3000);
+    setTimeout(() => this.overlayRef.dispose(), 30000);
+  }
+
+  close() {
+    this.overlayRef.dispose();
   }
 }

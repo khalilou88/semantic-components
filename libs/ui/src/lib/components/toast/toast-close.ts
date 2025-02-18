@@ -3,10 +3,13 @@ import {
   Component,
   ViewEncapsulation,
   computed,
+  inject,
   input,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
+
+import { Toaster } from './toaster';
 
 @Component({
   selector: 'button[sc-toast-close]',
@@ -16,12 +19,15 @@ import { cn } from '@semantic-components/utils';
   `,
   host: {
     '[class]': 'class()',
+    '(click)': 'close()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScToastClose {
+  private readonly toaster = inject(Toaster);
+
   readonly classInput = input<string>('', {
     alias: 'class',
   });
@@ -32,4 +38,8 @@ export class ScToastClose {
       this.classInput(),
     ),
   );
+
+  protected close() {
+    this.toaster.close();
+  }
 }
