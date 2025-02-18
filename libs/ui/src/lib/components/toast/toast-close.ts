@@ -3,13 +3,10 @@ import {
   Component,
   ViewEncapsulation,
   computed,
-  inject,
   input,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
-
-import { ToastRef } from './toast-ref';
 
 @Component({
   selector: 'button[sc-toast-close]',
@@ -26,8 +23,6 @@ import { ToastRef } from './toast-ref';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScToastClose {
-  readonly ref = inject(ToastRef);
-
   readonly classInput = input<string>('', {
     alias: 'class',
   });
@@ -40,6 +35,6 @@ export class ScToastClose {
   );
 
   protected close() {
-    this.ref.close();
+    console.log('close');
   }
 }

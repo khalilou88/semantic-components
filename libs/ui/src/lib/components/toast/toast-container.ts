@@ -4,8 +4,11 @@ import {
   Component,
   TemplateRef,
   ViewEncapsulation,
+  inject,
   input,
 } from '@angular/core';
+
+import { ToastRef } from './toast-ref';
 
 @Component({
   selector: 'sc-toast-container',
@@ -20,5 +23,11 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScToastContainer {
+  readonly ref = inject(ToastRef);
+
   readonly templateRef = input<TemplateRef<unknown> | null>(null);
+
+  close() {
+    this.ref.close();
+  }
 }
