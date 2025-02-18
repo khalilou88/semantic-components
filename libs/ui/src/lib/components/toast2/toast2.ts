@@ -1,5 +1,3 @@
-import { OverlayModule } from '@angular/cdk/overlay';
-import { PortalModule } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -13,7 +11,7 @@ import { TOAST_DATA, ToastData } from './toast.model';
 
 @Component({
   selector: 'sc-toast2',
-  imports: [CommonModule, OverlayModule, PortalModule],
+  imports: [CommonModule],
   template: `
     <div
       class="toast-container px-4 py-3 rounded-lg shadow-lg max-w-xs"
