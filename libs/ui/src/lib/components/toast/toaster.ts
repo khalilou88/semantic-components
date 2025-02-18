@@ -110,7 +110,7 @@ export class Toaster {
     const reversedToastRefs = this.toastRefs.slice().reverse();
     reversedToastRefs.forEach((ref, index) => {
       const position = ref.overlayRef.getConfig().positionStrategy as GlobalPositionStrategy;
-      position.bottom(`${20 + index * 80}px`).right('20px');
+      position.bottom(`${20 + index * 110}px`).right('20px');
       ref.overlayRef.updatePosition();
     });
   }
