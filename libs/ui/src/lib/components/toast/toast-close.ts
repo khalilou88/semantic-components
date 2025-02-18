@@ -9,7 +9,7 @@ import {
 
 import { cn } from '@semantic-components/utils';
 
-import { Toaster } from './toaster';
+import { ToastRef } from './toast-ref';
 
 @Component({
   selector: 'button[sc-toast-close]',
@@ -26,7 +26,7 @@ import { Toaster } from './toaster';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScToastClose {
-  private readonly toaster = inject(Toaster);
+  readonly ref = inject(ToastRef);
 
   readonly classInput = input<string>('', {
     alias: 'class',
@@ -40,6 +40,6 @@ export class ScToastClose {
   );
 
   protected close() {
-    this.toaster.close();
+    this.ref.close();
   }
 }

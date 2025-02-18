@@ -1,6 +1,6 @@
-import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { Overlay } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { ComponentRef, Injectable, inject } from '@angular/core';
+import { ComponentRef, Injectable, Injector, TemplateRef, inject } from '@angular/core';
 
 import { ScToastContainer } from './toast-container';
 import { ToastRef } from './toast-ref';
@@ -9,41 +9,27 @@ import { ToastRef } from './toast-ref';
   providedIn: 'root',
 })
 export class Toaster {
-  private overlayRef!: OverlayRef;
   private readonly overlay = inject(Overlay);
+
+  private readonly injector = inject(Injector);
 
   private lastToast?: ToastRef;
 
-  // private readonly toastConfig = inject<ToastConfig>(TOAST_CONFIG_TOKEN);
-
-  show2(toastTemplate: any): void {
-    this.overlayRef = this.overlay.create({
-      hasBackdrop: false, // No background overlay
-      positionStrategy: this.overlay.position().global().top('20px').right('20px'),
-    });
-
-    const portal = new ComponentPortal(ScToastContainer, null);
-    const componentRef: ComponentRef<ScToastContainer> = this.overlayRef.attach(portal);
-    componentRef.setInput('templateRef', toastTemplate);
-
-    // Auto-close after 3 seconds
-    // setTimeout(() => this.overlayRef.dispose(), 3000);
-    setTimeout(() => this.overlayRef.dispose(), 30000);
-  }
-
-  show(toastTemplate: any) {
+  show(toastTemplate: TemplateRef<unknown>) {
     const positionStrategy = this.getPositionStrategy();
     const overlayRef = this.overlay.create({ positionStrategy });
 
     const toastRef = new ToastRef(overlayRef);
     this.lastToast = toastRef;
 
-    const portal = new ComponentPortal(ScToastContainer, null);
+    const portal = new ComponentPortal(ScToastContainer, null, this.createInjector(toastRef));
 
     const componentRef: ComponentRef<ScToastContainer> = overlayRef.attach(portal);
     componentRef.setInput('templateRef', toastTemplate);
 
-    return toastRef;
+    // Auto-close after 3 seconds
+    // setTimeout(() => this.overlayRef.dispose(), 3000);
+    setTimeout(() => overlayRef.dispose(), 30000);
   }
 
   getPositionStrategy() {
@@ -61,7 +47,10 @@ export class Toaster {
     return position + 'px';
   }
 
-  close() {
-    this.overlayRef.dispose();
+  private createInjector(toastRef: ToastRef): Injector {
+    return Injector.create({
+      parent: this.injector,
+      providers: [{ provide: ToastRef, useValue: toastRef }],
+    });
   }
 }
