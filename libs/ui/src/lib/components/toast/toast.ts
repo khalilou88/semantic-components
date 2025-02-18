@@ -28,12 +28,13 @@ const toastVariants = cva(
 type ToastVariants = VariantProps<typeof toastVariants>;
 
 @Component({
-  selector: 'li[sc-toast]',
+  selector: 'div[sc-toast]',
   imports: [],
   template: `
     <ng-content />
   `,
   host: {
+    role: 'status',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

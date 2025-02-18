@@ -1,8 +1,6 @@
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
-import { ComponentRef, Injectable, inject } from '@angular/core';
-
-import { ScToast } from './toast';
+import { TemplatePortal } from '@angular/cdk/portal';
+import { Injectable, ViewContainerRef, inject } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
@@ -10,29 +8,20 @@ import { ScToast } from './toast';
 export class Toaster {
   private readonly overlayRef: OverlayRef;
   private readonly overlay = inject(Overlay);
+  private readonly viewContainerRef = inject(ViewContainerRef);
 
   constructor() {
-    // Initialize an overlay and define a relative position
-    // Change this to control where your toaster should appear
     this.overlayRef = this.overlay.create({
-      hasBackdrop: false,
-      positionStrategy: this.overlay.position().global().top('20px').right('20px'),
+      hasBackdrop: false, // No background overlay
+      positionStrategy: this.overlay.position().global().top('20px').centerHorizontally(),
     });
   }
 
-  toast(message: string): void {
-    // Create a Portal instance of our `NotificationComponent`
-    const notificationPortal = new ComponentPortal(ScToast);
-    // Attach our `NotificationComponent` to the Overlay Portal
-    //  const notificationRef: ComponentRef<Toaster> = this.overlayRef.attach(notificationPortal);
-    // Now we can access the component instance
-    // and we can pass input for the `message` prop we created.
-    // notificationRef.instance.message = message;
+  show(toastTemplate: any): void {
+    const portal = new TemplatePortal(toastTemplate, this.viewContainerRef);
+    this.overlayRef.attach(portal);
 
-    // Set a timeout to detach our component from the overlay
-    // after 3000 milliseconds
-    setTimeout(() => {
-      this.overlayRef.detach();
-    }, 3000);
+    // Auto-close after 3 seconds
+    setTimeout(() => this.overlayRef.dispose(), 3000);
   }
 }
