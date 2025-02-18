@@ -1,8 +1,10 @@
+import { _IdGenerator } from '@angular/cdk/a11y';
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { ComponentRef, Injectable, TemplateRef, inject } from '@angular/core';
+import { ComponentRef, Injectable, Injector, TemplateRef, inject } from '@angular/core';
 
 import { ScToastContainer } from './toast-container';
+import { SC_TOAST_ID } from './toast-id';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +14,10 @@ export class Toaster {
   private readonly maxToasts = 3;
 
   private readonly overlay = inject(Overlay);
+
+  private readonly idGenerator = inject(_IdGenerator);
+
+  private readonly injector = inject(Injector);
 
   show(toastTemplate: TemplateRef<unknown>): void {
     if (this.toastRefs.length >= this.maxToasts) {
@@ -31,8 +37,10 @@ export class Toaster {
       positionStrategy,
     });
 
+    const id = this.idGenerator.getId('sc-toast-');
+
     const overlayRef = this.overlay.create(overlayConfig);
-    const toastPortal = new ComponentPortal(ScToastContainer);
+    const toastPortal = new ComponentPortal(ScToastContainer, null, this.createInjector(id));
 
     const toastRef: ComponentRef<ScToastContainer> = overlayRef.attach(toastPortal);
     toastRef.setInput('templateRef', toastTemplate);
@@ -61,6 +69,13 @@ export class Toaster {
       const position = ref.getConfig().positionStrategy as any;
       position.top(`${20 + index * 80}px`).right('20px');
       ref.updatePosition();
+    });
+  }
+
+  private createInjector(id: string): Injector {
+    return Injector.create({
+      parent: this.injector,
+      providers: [{ provide: SC_TOAST_ID, useValue: id }],
     });
   }
 }
