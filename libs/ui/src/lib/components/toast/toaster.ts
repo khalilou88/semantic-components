@@ -76,7 +76,7 @@ export class Toaster {
     });
 
     const overlayRef = this.overlay.create(overlayConfig);
-    const s = new ToastService(this);
+    const s = new ToastService();
     const toastPortal = new ComponentPortal(ScToastContainer, null, this.createInjector(id, s));
 
     const toastRef: ComponentRef<ScToastContainer> = overlayRef.attach(toastPortal);

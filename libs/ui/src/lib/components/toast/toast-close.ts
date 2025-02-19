@@ -40,6 +40,6 @@ export class ScToastClose {
   );
 
   protected close() {
-    this.toastService.close();
+    this.toastService.updateState('closed');
   }
 }
