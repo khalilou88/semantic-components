@@ -90,7 +90,7 @@ export class Toaster {
 
     setTimeout(() => {
       this.closeToast(id);
-    }, 30000); //TODO just 3000
+    }, 3000);
   }
 
   private closeToast(id: string): void {
