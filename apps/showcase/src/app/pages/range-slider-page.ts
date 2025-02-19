@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { ScRangeSlider } from '@semantic-components/ui';
+import { ScDualRangeSlider, ScRangeSlider } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-range-slider-page',
-  imports: [ScRangeSlider],
+  imports: [ScRangeSlider, ScDualRangeSlider],
   template: `
     <div class="m-10">
-      <sc-range-slider
+      <sc-dual-range-slider
         [(minValue)]="minVal"
         [(maxValue)]="maxVal"
         [min]="0"
@@ -15,6 +15,12 @@ import { ScRangeSlider } from '@semantic-components/ui';
         (minValueChange)="onMinValueChange($event)"
         (maxValueChange)="onMaxValueChange($event)"
       />
+
+      <br />
+      <br />
+      <br />
+
+      <input sc-range-slider type="range" />
     </div>
   `,
   styles: ``,

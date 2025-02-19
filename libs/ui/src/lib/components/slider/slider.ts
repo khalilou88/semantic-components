@@ -49,6 +49,8 @@ export class ScSlider {
   readonly min = input<number>(0);
   readonly max = input<number>(100);
 
+  readonly type = input.required<'range'>();
+
   constructor() {
     effect(() => {
       const progress = (this.value() / this.max()) * 100;
