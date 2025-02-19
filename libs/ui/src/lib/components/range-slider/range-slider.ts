@@ -79,10 +79,10 @@ import { FormsModule } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScRangeSlider {
-  @Input() min: number = 0;
-  @Input() max: number = 100;
-  @Input() minValue: number = 20;
-  @Input() maxValue: number = 80;
+  @Input() min = 0;
+  @Input() max = 100;
+  @Input() minValue = 20;
+  @Input() maxValue = 80;
 
   @Output() minValueChange = new EventEmitter<number>();
   @Output() maxValueChange = new EventEmitter<number>();
