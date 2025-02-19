@@ -5,6 +5,7 @@ import { ComponentRef, Injectable, Injector, TemplateRef, inject } from '@angula
 
 import { ScToastContainer } from './toast-container';
 import { SC_TOAST_ID } from './toast-id';
+import { ToastService } from './toast.service';
 
 interface ToastRef {
   id: string;
@@ -75,7 +76,8 @@ export class Toaster {
     });
 
     const overlayRef = this.overlay.create(overlayConfig);
-    const toastPortal = new ComponentPortal(ScToastContainer, null, this.createInjector(id));
+    const s = new ToastService(this);
+    const toastPortal = new ComponentPortal(ScToastContainer, null, this.createInjector(id, s));
 
     const toastRef: ComponentRef<ScToastContainer> = overlayRef.attach(toastPortal);
     toastRef.setInput('templateRef', toastTemplate);
@@ -87,10 +89,6 @@ export class Toaster {
     });
 
     this.updateToastPositions();
-
-    setTimeout(() => {
-      this.closeToast(id);
-    }, 3000);
   }
 
   private closeToast(id: string): void {
@@ -115,10 +113,13 @@ export class Toaster {
     });
   }
 
-  private createInjector(id: string): Injector {
+  private createInjector(id: string, s: ToastService): Injector {
     return Injector.create({
       parent: this.injector,
-      providers: [{ provide: SC_TOAST_ID, useValue: id }],
+      providers: [
+        { provide: SC_TOAST_ID, useValue: id },
+        { provide: ToastService, useValue: s },
+      ],
     });
   }
 }
