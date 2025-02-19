@@ -88,6 +88,11 @@ export const appRoutes: Route[] = [
             title: 'Home Page',
           },
           {
+            path: 'range-slider',
+            loadComponent: () => import('./pages/range-slider-page'),
+            title: 'Range Slider Page',
+          },
+          {
             path: 'toggle-switch',
             loadComponent: () => import('./pages/toggle-switch-page'),
             title: 'Toggle Switch Page',
