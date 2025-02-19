@@ -36,7 +36,7 @@ import {
   ScToastTitle,
   Toaster,
 } from '@semantic-components/ui';
-import { SiChevronRightIcon, SiLoaderCircleIcon, SiXIcon } from '@semantic-icons/lucide-icons';
+import { SiChevronRightIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-toast-page',
@@ -51,7 +51,6 @@ import { SiChevronRightIcon, SiLoaderCircleIcon, SiXIcon } from '@semantic-icons
     ScButton,
     ScButton,
     SiChevronRightIcon,
-    SiLoaderCircleIcon,
     ScBreadcrumb,
     ScBreadcrumbList,
     ScBreadcrumbItem,
@@ -140,20 +139,25 @@ import { SiChevronRightIcon, SiLoaderCircleIcon, SiXIcon } from '@semantic-icons
         <h2 class="mb-5" id="examples" sc-page-subtitle>Examples</h2>
 
         <section class="my-10" id="variants">
-          <h3 class="mb-2" sc-heading level="3">Variants</h3>
+          <h3 class="mb-2" sc-heading level="3">Simple</h3>
 
           <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
             <sc-tab>
               <sc-tab-label>Preview</sc-tab-label>
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <button sc-button type="button">Primary</button>
-                    <button sc-button variant="secondary" type="button">Secondary</button>
-                    <button sc-button variant="destructive" type="button">Destructive</button>
-                    <button sc-button variant="outline" type="button">Outline</button>
-                    <button sc-button variant="ghost" type="button">Ghost</button>
-                    <button sc-button variant="link" type="button">Link</button>
+                  <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
+                    <button (click)="showSimpleToast()" sc-button type="button" variant="outline">
+                      Show Simple Toast
+                    </button>
+
+                    <ng-template #simpleToastTemplate>
+                      <div sc-toast>
+                        <div sc-toast-content>
+                          <p sc-toast-description>Your message has been sent.</p>
+                        </div>
+                      </div>
+                    </ng-template>
                   </div>
                 </div>
               </sc-tab-content>
@@ -162,29 +166,42 @@ import { SiChevronRightIcon, SiLoaderCircleIcon, SiXIcon } from '@semantic-icons
             <sc-tab>
               <sc-tab-label>Code</sc-tab-label>
               <sc-tab-content>
-                <sc-code-highlighter [code]="codeSnippet" />
+                <div class="overflow-auto" sc-card>
+                  <div class="m-10 flex gap-2 p-0" sc-card-content>
+                    <p>Coming soon</p>
+                  </div>
+                </div>
               </sc-tab-content>
             </sc-tab>
           </sc-tabs>
         </section>
 
         <section class="my-10" id="small-buttons">
-          <h3 class="mb-2" sc-heading level="3">Small buttons</h3>
+          <h3 class="mb-2" sc-heading level="3">With title</h3>
 
           <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
             <sc-tab>
               <sc-tab-label>Preview</sc-tab-label>
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <button sc-button type="button" size="sm">Primary</button>
-                    <button sc-button variant="secondary" type="button" size="sm">Secondary</button>
-                    <button sc-button variant="destructive" type="button" size="sm">
-                      Destructive
+                  <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
+                    <button
+                      (click)="showToastWithTitle()"
+                      sc-button
+                      type="button"
+                      variant="outline"
+                    >
+                      Show Toast
                     </button>
-                    <button sc-button variant="outline" type="button" size="sm">Outline</button>
-                    <button sc-button variant="ghost" type="button" size="sm">Ghost</button>
-                    <button sc-button variant="link" type="button" size="sm">Link</button>
+
+                    <ng-template #toastWithTitleTemplate>
+                      <div sc-toast>
+                        <div sc-toast-content>
+                          <h2 sc-toast-title>Uh oh! Something went wrong.</h2>
+                          <p sc-toast-description>There was a problem with your request.</p>
+                        </div>
+                      </div>
+                    </ng-template>
                   </div>
                 </div>
               </sc-tab-content>
@@ -204,22 +221,36 @@ import { SiChevronRightIcon, SiLoaderCircleIcon, SiXIcon } from '@semantic-icons
         </section>
 
         <section class="my-10" id="large-buttons">
-          <h3 class="mb-2" sc-heading level="3">Large buttons</h3>
+          <h3 class="mb-2" sc-heading level="3">With Action</h3>
 
           <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
             <sc-tab>
               <sc-tab-label>Preview</sc-tab-label>
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <button sc-button type="button" size="lg">Primary</button>
-                    <button sc-button variant="secondary" type="button" size="lg">Secondary</button>
-                    <button sc-button variant="destructive" type="button" size="lg">
-                      Destructive
+                  <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
+                    <button
+                      (click)="showToastWithAction()"
+                      sc-button
+                      type="button"
+                      variant="outline"
+                    >
+                      Show Toast
                     </button>
-                    <button sc-button variant="outline" type="button" size="lg">Outline</button>
-                    <button sc-button variant="ghost" type="button" size="lg">Ghost</button>
-                    <button sc-button variant="link" type="button" size="lg">Link</button>
+
+                    <ng-template #toastWithActionTemplate>
+                      <div sc-toast>
+                        <div sc-toast-content>
+                          <h2 sc-toast-title>Uh oh! Something went wrong.</h2>
+                          <p sc-toast-description>There was a problem with your request.</p>
+                        </div>
+                        <button sc-toast-action type="button">Try again</button>
+                        <button type="button" sc-toast-close>
+                          <svg class="size-4" si-x-icon></svg>
+                          <span class="sr-only">Close 4</span>
+                        </button>
+                      </div>
+                    </ng-template>
                   </div>
                 </div>
               </sc-tab-content>
@@ -237,102 +268,38 @@ import { SiChevronRightIcon, SiLoaderCircleIcon, SiXIcon } from '@semantic-icons
             </sc-tab>
           </sc-tabs>
         </section>
-
-        <button (click)="f()" sc-button>Toggle</button>
 
         <section class="my-10" id="disabled-buttons">
-          <h3 class="mb-2" sc-heading level="3">Disabled buttons</h3>
+          <h3 class="mb-2" sc-heading level="3">Destructive</h3>
 
           <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
             <sc-tab>
               <sc-tab-label>Preview</sc-tab-label>
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <button [disabled]="d()" sc-button type="button">Primary</button>
-                    <button sc-button variant="secondary" type="button" disabled>Secondary</button>
-                    <button sc-button variant="destructive" type="button" disabled>
-                      Destructive
+                  <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
+                    <button
+                      (click)="showDestructiveToast()"
+                      sc-button
+                      type="button"
+                      variant="outline"
+                    >
+                      Show Toast
                     </button>
-                    <button sc-button variant="outline" type="button" disabled>Outline</button>
-                    <button sc-button variant="ghost" type="button" disabled>Ghost</button>
-                    <button sc-button variant="link" type="button" disabled>Link</button>
-                  </div>
-                </div>
-              </sc-tab-content>
-            </sc-tab>
 
-            <sc-tab>
-              <sc-tab-label>Code</sc-tab-label>
-              <sc-tab-content>
-                <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <p>Coming soon</p>
-                  </div>
-                </div>
-              </sc-tab-content>
-            </sc-tab>
-          </sc-tabs>
-        </section>
-
-        <section class="my-10" id="buttons-with-icons">
-          <h3 class="mb-2" sc-heading level="3">Buttons with icons</h3>
-
-          <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
-            <sc-tab>
-              <sc-tab-label>Preview</sc-tab-label>
-              <sc-tab-content>
-                <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0 items-center" sc-card-content>
-                    <button sc-button type="button" size="icon">
-                      <svg si-chevron-right-icon></svg>
-                    </button>
-                    <button sc-button variant="secondary" type="button" size="icon">
-                      <svg si-chevron-right-icon></svg>
-                    </button>
-                    <button sc-button variant="destructive" type="button" size="icon">
-                      <svg si-chevron-right-icon></svg>
-                    </button>
-                    <button class="size-20" sc-button variant="outline" type="button" size="icon">
-                      <svg si-chevron-right-icon></svg>
-                    </button>
-                    <button sc-button variant="ghost" type="button" size="icon">
-                      <svg si-chevron-right-icon></svg>
-                    </button>
-                    <button sc-button variant="link" type="button" size="icon">
-                      <svg si-chevron-right-icon></svg>
-                    </button>
-                  </div>
-                </div>
-              </sc-tab-content>
-            </sc-tab>
-
-            <sc-tab>
-              <sc-tab-label>Code</sc-tab-label>
-              <sc-tab-content>
-                <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <p>Coming soon</p>
-                  </div>
-                </div>
-              </sc-tab-content>
-            </sc-tab>
-          </sc-tabs>
-        </section>
-
-        <section class="my-10" id="button-with-loading-state">
-          <h3 class="mb-2" sc-heading level="3">Button with loading state</h3>
-
-          <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
-            <sc-tab>
-              <sc-tab-label>Preview</sc-tab-label>
-              <sc-tab-content>
-                <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <button sc-button disabled>
-                      <svg class="animate-spin" si-loader-circle-icon></svg>
-                      Please wait
-                    </button>
+                    <ng-template #destructiveToastTemplate>
+                      <div sc-toast variant="destructive">
+                        <div sc-toast-content>
+                          <h2 sc-toast-title>Uh oh! Something went wrong.</h2>
+                          <p sc-toast-description>There was a problem with your request.</p>
+                        </div>
+                        <button sc-toast-action type="button">Try again</button>
+                        <button type="button" sc-toast-close>
+                          <svg class="size-4" si-x-icon></svg>
+                          <span class="sr-only">Close 4</span>
+                        </button>
+                      </div>
+                    </ng-template>
                   </div>
                 </div>
               </sc-tab-content>
@@ -451,60 +418,6 @@ import { SiChevronRightIcon, SiLoaderCircleIcon, SiXIcon } from '@semantic-icons
         </div>
       </div>
     </div>
-
-    <div class="m-10">
-      <div class="flex space-x-2">
-        <button (click)="showToast()" sc-button type="button">Show Toast 1</button>
-
-        <button (click)="showToast2()" sc-button type="button">Show Toast 2</button>
-
-        <button (click)="showToast3()" sc-button type="button">Show Toast 3</button>
-
-        <button (click)="showToast4()" sc-button type="button">Show Toast 4</button>
-      </div>
-
-      <ng-template #toastTemplate2>
-        <div sc-toast>
-          <div sc-toast-content>
-            <h2 sc-toast-title>Toast 2</h2>
-            <p sc-toast-description>Friday, February 10, 2023 at 5:57 PM</p>
-          </div>
-          <button sc-toast-action type="button">Undo</button>
-          <button type="button" sc-toast-close>
-            <svg class="size-4" si-x-icon></svg>
-            <span class="sr-only">Close 2</span>
-          </button>
-        </div>
-      </ng-template>
-
-      <ng-template #toastTemplate3>
-        <div sc-toast>
-          <div sc-toast-content>
-            <h2 sc-toast-title>Toast 3</h2>
-            <p sc-toast-description>Friday, February 10, 2023 at 5:57 PM</p>
-          </div>
-          <button sc-toast-action type="button">Undo</button>
-          <button type="button" sc-toast-close>
-            <svg class="size-4" si-x-icon></svg>
-            <span class="sr-only">Close 3</span>
-          </button>
-        </div>
-      </ng-template>
-
-      <ng-template #toastTemplate4>
-        <div sc-toast>
-          <div sc-toast-content>
-            <h2 sc-toast-title>Toast 4</h2>
-            <p sc-toast-description>Friday, February 10, 2023 at 5:57 PM</p>
-          </div>
-          <button sc-toast-action type="button">Undo</button>
-          <button type="button" sc-toast-close>
-            <svg class="size-4" si-x-icon></svg>
-            <span class="sr-only">Close 4</span>
-          </button>
-        </div>
-      </ng-template>
-    </div>
   `,
   host: {
     '[class]': 'class()',
@@ -517,25 +430,34 @@ export default class ToastPage {
   private readonly toaster = inject(Toaster);
 
   private readonly toastTemplate = viewChild.required<TemplateRef<unknown>>('toastTemplate');
-
-  private readonly toastTemplate2 = viewChild.required<TemplateRef<unknown>>('toastTemplate2');
-  private readonly toastTemplate3 = viewChild.required<TemplateRef<unknown>>('toastTemplate3');
-  private readonly toastTemplate4 = viewChild.required<TemplateRef<unknown>>('toastTemplate4');
+  private readonly simpleToastTemplate =
+    viewChild.required<TemplateRef<unknown>>('simpleToastTemplate');
+  private readonly toastWithTitleTemplate =
+    viewChild.required<TemplateRef<unknown>>('toastWithTitleTemplate');
+  private readonly toastWithActionTemplate =
+    viewChild.required<TemplateRef<unknown>>('toastWithActionTemplate');
+  private readonly destructiveToastTemplate = viewChild.required<TemplateRef<unknown>>(
+    'destructiveToastTemplate',
+  );
 
   protected showToast() {
     this.toaster.show(this.toastTemplate());
   }
 
-  protected showToast2() {
-    this.toaster.show(this.toastTemplate2());
+  protected showSimpleToast() {
+    this.toaster.show(this.simpleToastTemplate());
   }
 
-  protected showToast3() {
-    this.toaster.show(this.toastTemplate3());
+  protected showToastWithTitle() {
+    this.toaster.show(this.toastWithTitleTemplate());
   }
 
-  protected showToast4() {
-    this.toaster.show(this.toastTemplate4());
+  protected showToastWithAction() {
+    this.toaster.show(this.toastWithActionTemplate());
+  }
+
+  protected showDestructiveToast() {
+    this.toaster.show(this.destructiveToastTemplate());
   }
 
   class = signal<string>('block w-full');
@@ -550,10 +472,4 @@ export default class ToastPage {
     <button sc-button variant="outline" type="button">Outline</button>
     <button sc-button variant="ghost" type="button">Ghost</button>
     <button sc-button variant="link" type="button">Link</button>`;
-
-  d = signal(true);
-
-  f() {
-    this.d.update((v) => !v);
-  }
 }

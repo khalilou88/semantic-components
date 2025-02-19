@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
   computed,
   input,
+  signal,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
@@ -36,6 +37,7 @@ type ToastVariants = VariantProps<typeof toastVariants>;
   host: {
     role: 'status',
     '[class]': 'class()',
+    '[attr.data-state]': 'state()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -50,4 +52,6 @@ export class ScToast {
   protected readonly class = computed(() =>
     cn(toastVariants({ variant: this.variant() }), this.classInput()),
   );
+
+  readonly state = signal<'open' | 'closed' | undefined>(undefined);
 }
