@@ -8,14 +8,12 @@ import { ScRangeSlider } from '@semantic-components/ui';
   template: `
     <div class="m-10">
       <sc-range-slider
-        [(value)]="sliderValue"
+        [(minValue)]="minVal"
+        [(maxValue)]="maxVal"
         [min]="0"
         [max]="100"
-        [step]="1"
-        [showMarks]="true"
-        (valueChange)="onValueChange($event)"
-        label="Volume"
-        unit="%"
+        (minValueChange)="onMinValueChange($event)"
+        (maxValueChange)="onMaxValueChange($event)"
       />
     </div>
   `,
@@ -24,9 +22,15 @@ import { ScRangeSlider } from '@semantic-components/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class RangeSliderPage {
-  sliderValue = 0;
+  minVal = 10;
 
-  onValueChange(v: any) {
+  maxVal = 80;
+
+  onMinValueChange(v: any) {
+    console.log(v);
+  }
+
+  onMaxValueChange(v: any) {
     console.log(v);
   }
 }

@@ -13,97 +13,66 @@ import { FormsModule } from '@angular/forms';
   selector: 'sc-range-slider',
   imports: [FormsModule, CommonModule],
   template: `
-    <div class="slider-container">
-      <label *ngIf="label">{{ label }}</label>
-      <div class="slider-controls">
+    <div class="w-full max-w-md px-4 py-6">
+      <div class="relative h-2">
+        <!-- Track background -->
+        <div class="absolute w-full h-full bg-gray-200 rounded-full"></div>
+
+        <!-- Selected range track -->
+        <div
+          class="absolute h-full bg-blue-500 rounded-full"
+          [style.left]="minPercentage + '%'"
+          [style.right]="100 - maxPercentage + '%'"
+        ></div>
+
+        <!-- Min value slider -->
         <input
-          class="range-input"
-          [(ngModel)]="value"
+          class="absolute w-full h-full appearance-none bg-transparent pointer-events-none"
+          [(ngModel)]="minValue"
           [min]="min"
           [max]="max"
-          [step]="step"
-          (input)="onInput($event)"
+          (input)="onMinChange($event)"
           type="range"
         />
-        <div class="value-display">{{ value }}{{ unit }}</div>
+
+        <!-- Max value slider -->
+        <input
+          class="absolute w-full h-full appearance-none bg-transparent pointer-events-none"
+          [(ngModel)]="maxValue"
+          [min]="min"
+          [max]="max"
+          (input)="onMaxChange($event)"
+          type="range"
+        />
       </div>
-      <div class="range-marks" *ngIf="showMarks">
-        <span>{{ min }}{{ unit }}</span>
-        <span>{{ max }}{{ unit }}</span>
+
+      <!-- Value display -->
+      <div class="mt-4 flex justify-between text-sm text-gray-600">
+        <span>Min: {{ minValue }}</span>
+        <span>Max: {{ maxValue }}</span>
       </div>
     </div>
   `,
   styles: `
-    .slider-container {
-      width: 100%;
-      max-width: 300px;
-      margin: 15px 0;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 500;
-    }
-
-    .slider-controls {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .range-input {
-      flex: 1;
+    input[type='range']::-webkit-slider-thumb {
       -webkit-appearance: none;
-      height: 4px;
-      background: #e2e8f0;
-      border-radius: 2px;
-      outline: none;
-    }
-
-    .range-input::-webkit-slider-thumb {
-      -webkit-appearance: none;
+      pointer-events: all;
       width: 16px;
       height: 16px;
-      background: #3b82f6;
+      background-color: white;
       border-radius: 50%;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
       cursor: pointer;
-      transition: background 0.2s;
     }
 
-    .range-input::-moz-range-thumb {
+    input[type='range']::-moz-range-thumb {
+      pointer-events: all;
       width: 16px;
       height: 16px;
-      background: #3b82f6;
-      border: none;
+      background-color: white;
       border-radius: 50%;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
       cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .range-input::-webkit-slider-thumb:hover {
-      background: #2563eb;
-    }
-
-    .range-input::-moz-range-thumb:hover {
-      background: #2563eb;
-    }
-
-    .value-display {
-      min-width: 40px;
-      padding: 4px 8px;
-      background: #f1f5f9;
-      border-radius: 4px;
-      text-align: center;
-      font-size: 14px;
-    }
-
-    .range-marks {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 4px;
-      font-size: 12px;
-      color: #64748b;
     }
   `,
   encapsulation: ViewEncapsulation.None,
@@ -112,17 +81,33 @@ import { FormsModule } from '@angular/forms';
 export class ScRangeSlider {
   @Input() min: number = 0;
   @Input() max: number = 100;
-  @Input() step: number = 1;
-  @Input() value: number = 50;
-  @Input() label: string = '';
-  @Input() unit: string = '';
-  @Input() showMarks: boolean = true;
+  @Input() minValue: number = 20;
+  @Input() maxValue: number = 80;
 
-  @Output() valueChange = new EventEmitter<number>();
+  @Output() minValueChange = new EventEmitter<number>();
+  @Output() maxValueChange = new EventEmitter<number>();
 
-  onInput(event: Event) {
-    const input = event.target as HTMLInputElement;
-    this.value = Number(input.value);
-    this.valueChange.emit(this.value);
+  get minPercentage(): number {
+    return ((this.minValue - this.min) * 100) / (this.max - this.min);
+  }
+
+  get maxPercentage(): number {
+    return ((this.maxValue - this.min) * 100) / (this.max - this.min);
+  }
+
+  onMinChange(event: Event): void {
+    const value = Number((event.target as HTMLInputElement).value);
+    if (value < this.maxValue) {
+      this.minValue = value;
+      this.minValueChange.emit(value);
+    }
+  }
+
+  onMaxChange(event: Event): void {
+    const value = Number((event.target as HTMLInputElement).value);
+    if (value > this.minValue) {
+      this.maxValue = value;
+      this.maxValueChange.emit(value);
+    }
   }
 }
