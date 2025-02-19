@@ -27,7 +27,7 @@ import { FormsModule } from '@angular/forms';
 
         <!-- Min value slider -->
         <input
-          class="absolute w-full h-full appearance-none bg-transparent pointer-events-none"
+          class="absolute w-full h-full appearance-none bg-transparent pointer-events-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:cursor-pointer [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:bg-white [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:cursor-pointer"
           [(ngModel)]="minValue"
           [min]="min"
           [max]="max"
@@ -37,7 +37,7 @@ import { FormsModule } from '@angular/forms';
 
         <!-- Max value slider -->
         <input
-          class="absolute w-full h-full appearance-none bg-transparent pointer-events-none"
+          class="absolute w-full h-full appearance-none bg-transparent pointer-events-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:cursor-pointer [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:bg-white [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:cursor-pointer"
           [(ngModel)]="maxValue"
           [min]="min"
           [max]="max"
@@ -53,28 +53,7 @@ import { FormsModule } from '@angular/forms';
       </div>
     </div>
   `,
-  styles: `
-    input[type='range']::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      pointer-events: all;
-      width: 16px;
-      height: 16px;
-      background-color: white;
-      border-radius: 50%;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-      cursor: pointer;
-    }
-
-    input[type='range']::-moz-range-thumb {
-      pointer-events: all;
-      width: 16px;
-      height: 16px;
-      background-color: white;
-      border-radius: 50%;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-      cursor: pointer;
-    }
-  `,
+  styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
