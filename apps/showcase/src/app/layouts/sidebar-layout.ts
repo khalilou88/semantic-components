@@ -83,6 +83,18 @@ import { LayoutState } from '../services/layout-state';
               </li>
 
               <li sc-sidebar-menu-item>
+                <a routerLink="../components/table" sc-sidebar-menu-link>
+                  <span>Table</span>
+                </a>
+              </li>
+
+              <li sc-sidebar-menu-item>
+                <a routerLink="../components/toast" sc-sidebar-menu-link>
+                  <span>Toast</span>
+                </a>
+              </li>
+
+              <li sc-sidebar-menu-item>
                 <a routerLink="../components/link" sc-sidebar-menu-link>
                   <span>Link</span>
                 </a>
