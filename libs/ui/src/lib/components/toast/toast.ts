@@ -46,6 +46,7 @@ type ToastVariants = VariantProps<typeof toastVariants>;
     '[attr.data-state]': 'state()',
     '(animationend)': 'animationend()',
   },
+  styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
