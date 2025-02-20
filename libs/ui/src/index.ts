@@ -75,3 +75,4 @@ export * from './lib/components/color-picker';
 export * from './lib/components/toggle-switch';
 export * from './lib/components/range-slider';
 export * from './lib/components/dual-range-slider';
+export * from './lib/components/swipeable-toast';

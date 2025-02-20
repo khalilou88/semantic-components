@@ -10,6 +10,7 @@ import {
   ScCheckboxField,
   ScDescription,
   ScLabel,
+  ScSwipeableToast,
 } from '@semantic-components/ui';
 
 @Component({
@@ -24,9 +25,16 @@ import {
     ScLabel,
     ScDescription,
     ScCheckboxContainer,
+    ScSwipeableToast,
   ],
   template: `
     <div class="m-10">
+      <sc-swipeable-toast
+        [duration]="5000"
+        [showCloseButton]="true"
+        (dismissed)="onToastDismissed()"
+        message="This is a swipeable toast message!"
+      ></sc-swipeable-toast>
       <br />
       <br />
       <br />
@@ -150,4 +158,8 @@ export default class CheckboxPage {
   });
 
   readonly checked = signal(false);
+
+  onToastDismissed() {
+    console.log('onToastDismissed');
+  }
 }
