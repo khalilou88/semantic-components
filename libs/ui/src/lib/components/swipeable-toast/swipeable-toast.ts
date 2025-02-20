@@ -9,7 +9,11 @@ import {
   OnInit,
   Output,
   ViewEncapsulation,
+  computed,
+  input,
 } from '@angular/core';
+
+import { cn } from '@semantic-components/utils';
 
 @Component({
   selector: 'sc-swipeable-toast',
@@ -40,11 +44,20 @@ import {
       </div>
     </div>
   `,
+  host: {
+    '[class]': 'class()',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSwipeableToast implements OnInit, OnDestroy {
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
+
+  protected readonly class = computed(() => cn('block', this.classInput()));
+
   @Input() message = '';
   @Input() duration = 3000;
   @Input() showCloseButton = true;
