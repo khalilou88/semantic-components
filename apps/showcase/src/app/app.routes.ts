@@ -42,11 +42,17 @@ export const appRoutes: Route[] = [
         path: '',
         loadComponent: () => import('./layouts/footer-layout'),
         children: [
+          //TODO make a Components Page
           {
             path: '',
-            loadComponent: () => import('./pages/components-page'),
-            title: 'Components Page',
+            loadComponent: () => import('./pages/button-page'),
+            title: 'Button Page',
           },
+          // {
+          //   path: '',
+          //   loadComponent: () => import('./pages/components-page'),
+          //   title: 'Components Page',
+          // },
           {
             path: 'cookie-consent',
             loadComponent: () => import('./pages/cookie-consent-page'),

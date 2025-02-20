@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-hero-section-page',
-  imports: [],
+  imports: [RouterLink],
   template: `
     <div class="bg-white">
       <div class="relative isolate px-6 pt-14 lg:px-8">
@@ -27,20 +28,24 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@
               projects.
             </p>
             <div class="mt-10 flex items-center justify-center gap-x-6">
-              <a
+              <!--a
                 class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 href="#"
               >
                 Get started
-              </a>
+              </a-->
 
               <a
                 class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                href="#"
+                routerLink="components"
               >
                 Components
               </a>
-              <a class="text-sm/6 font-semibold text-gray-900" href="#">
+              <a
+                class="text-sm/6 font-semibold text-gray-900"
+                href="https://github.com/khalilou88/semantic-components/"
+                target="_blank"
+              >
                 GitHub
                 <span aria-hidden="true">→</span>
               </a>
