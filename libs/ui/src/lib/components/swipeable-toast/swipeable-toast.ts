@@ -2,12 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
-  EventEmitter,
   Input,
-  OnDestroy,
-  OnInit,
-  Output,
   ViewEncapsulation,
   computed,
   input,
@@ -19,28 +14,45 @@ import { cn } from '@semantic-components/utils';
   selector: 'sc-swipeable-toast',
   imports: [CommonModule],
   template: `
-    <div
-      *ngIf="visible"
-      [class]="baseClasses"
-      [class.opacity-0]="state === 'hidden'"
-      [class.opacity-100]="state === 'visible'"
-      [class.duration-300]="state !== 'swiping'"
-      [class.ease-out]="state !== 'swiping'"
-      [class.cursor-grab]="state === 'swiping'"
-      [style.transform]="getTransform()"
-      (touchstart)="onTouchStart($event)"
-      (touchmove)="onTouchMove($event)"
-      (touchend)="onTouchEnd()"
-    >
-      <div class="flex items-center justify-between gap-3">
-        <span class="flex-grow text-sm">{{ message }}</span>
-        <button
-          class="text-white/80 hover:text-white text-xl leading-none focus:outline-none"
-          *ngIf="showCloseButton"
-          (click)="dismiss()"
-        >
-          ×
-        </button>
+    <div class="fixed bottom-4 right-4 z-50" *ngIf="isVisible">
+      <div
+        class="bg-white rounded-lg shadow-lg p-4 w-72 cursor-grab active:cursor-grabbing"
+        [style.transform]="'translateX(' + currentX + 'px)'"
+        [class.transition-transform]="!isDragging"
+        [class.duration-200]="!isDragging"
+        (touchstart)="handleTouchStart($event)"
+        (touchmove)="handleTouchMove($event)"
+        (touchend)="handleTouchEnd()"
+        (mousedown)="handleMouseDown($event)"
+        (mousemove)="handleMouseMove($event)"
+        (mouseup)="handleMouseUp()"
+        (mouseleave)="handleMouseUp()"
+      >
+        <div class="flex items-center justify-between">
+          <p class="text-gray-800 pr-4">{{ message }}</p>
+          <button
+            class="text-gray-500 hover:text-gray-700 transition-colors"
+            (click)="handleClose()"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <div class="mt-2 h-1 w-full bg-gray-100 rounded">
+          <div class="h-full bg-blue-500 rounded" [style.width.%]="progressWidth"></div>
+        </div>
       </div>
     </div>
   `,
@@ -51,104 +63,69 @@ import { cn } from '@semantic-components/utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSwipeableToast implements OnInit, OnDestroy {
+export class ScSwipeableToast {
   readonly classInput = input<string>('', {
     alias: 'class',
   });
 
   protected readonly class = computed(() => cn('block', this.classInput()));
 
-  @Input() message = '';
-  @Input() duration = 3000;
-  @Input() showCloseButton = true;
-  @Output() dismissed = new EventEmitter<void>();
+  @Input() message: string = 'This is a toast message';
 
-  visible = true;
-  state: 'hidden' | 'visible' | 'swiping' = 'visible';
-  translateX = 0;
+  isVisible: boolean = true;
+  isDragging: boolean = false;
+  startX: number = 0;
+  currentX: number = 0;
+  progressWidth: number = 100;
 
-  private touchStartX = 0;
-  private readonly SWIPE_THRESHOLD = 100;
-  private timeoutId?: number;
-
-  // Base classes for the toast container
-  baseClasses = `
-    fixed bottom-5 left-1/2 
-    min-w-[250px] max-w-[90%]
-    bg-gray-800 text-white
-    px-4 py-3 rounded-lg
-    shadow-lg z-50
-    touch-pan-x select-none
-    transition-all transform
-  `.trim();
-
-  constructor(private readonly elementRef: ElementRef) {}
-
-  ngOnInit() {
-    // Start hidden
-    this.state = 'hidden';
-
-    // Transition to visible after a frame
-    requestAnimationFrame(() => {
-      this.state = 'visible';
-
-      if (this.duration > 0) {
-        this.timeoutId = window.setTimeout(() => this.dismiss(), this.duration);
-      }
-    });
+  handleTouchStart(event: TouchEvent): void {
+    this.startX = event.touches[0].clientX;
+    this.isDragging = true;
   }
 
-  getTransform(): string {
-    if (this.state === 'swiping') {
-      return `translateX(calc(-50% + ${this.translateX}px))`;
-    }
-    return this.state === 'hidden' ? 'translateX(100%)' : 'translateX(-50%)';
+  handleMouseDown(event: MouseEvent): void {
+    this.startX = event.clientX;
+    this.isDragging = true;
   }
 
-  onTouchStart(event: TouchEvent) {
-    this.touchStartX = event.touches[0].clientX;
-    this.state = 'swiping';
-
-    if (this.timeoutId) {
-      clearTimeout(this.timeoutId);
-    }
+  handleTouchMove(event: TouchEvent): void {
+    if (!this.isDragging) return;
+    const currentX = event.touches[0].clientX;
+    const diff = currentX - this.startX;
+    this.updatePosition(diff);
   }
 
-  onTouchMove(event: TouchEvent) {
-    if (this.state === 'swiping') {
-      const deltaX = event.touches[0].clientX - this.touchStartX;
-      if (deltaX > 0) {
-        // Only allow right swipe
-        this.translateX = deltaX;
-        event.preventDefault();
-      }
-    }
+  handleMouseMove(event: MouseEvent): void {
+    if (!this.isDragging) return;
+    event.preventDefault();
+    const diff = event.clientX - this.startX;
+    this.updatePosition(diff);
   }
 
-  onTouchEnd() {
-    if (this.translateX > this.SWIPE_THRESHOLD) {
-      this.dismiss();
+  handleTouchEnd(): void {
+    this.handleDragEnd();
+  }
+
+  handleMouseUp(): void {
+    this.handleDragEnd();
+  }
+
+  private updatePosition(diff: number): void {
+    this.currentX = Math.min(Math.max(diff, -200), 0);
+    this.progressWidth = Math.max(100 + this.currentX / 2, 0);
+  }
+
+  private handleDragEnd(): void {
+    this.isDragging = false;
+    if (this.currentX < -100) {
+      this.isVisible = false;
     } else {
-      this.translateX = 0;
-      this.state = 'visible';
-
-      if (this.duration > 0) {
-        this.timeoutId = window.setTimeout(() => this.dismiss(), this.duration);
-      }
+      this.currentX = 0;
+      this.progressWidth = 100;
     }
   }
 
-  dismiss() {
-    this.state = 'hidden';
-    setTimeout(() => {
-      this.visible = false;
-      this.dismissed.emit();
-    }, 300); // Match the transition duration
-  }
-
-  ngOnDestroy() {
-    if (this.timeoutId) {
-      clearTimeout(this.timeoutId);
-    }
+  handleClose(): void {
+    this.isVisible = false;
   }
 }
