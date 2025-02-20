@@ -76,7 +76,7 @@ export class ScToast implements OnInit {
   //TODO make swipe works
   protected readonly swipe = signal<'start' | 'move' | 'cancel' | 'end' | undefined>(undefined);
 
-  private readonly animationState = new Subject<'start' | 'end'>();
+  private readonly animationState = new Subject<'end'>();
 
   constructor() {
     afterNextRender(() => {
@@ -99,6 +99,8 @@ export class ScToast implements OnInit {
   }
 
   protected animationend() {
-    this.animationState.next('end');
+    if (this.state() === 'closed') {
+      this.animationState.next('end');
+    }
   }
 }
