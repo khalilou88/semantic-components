@@ -3,6 +3,7 @@ import {
   Component,
   OnInit,
   ViewEncapsulation,
+  afterNextRender,
   computed,
   inject,
   input,
@@ -12,6 +13,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 
 import { cn } from '@semantic-components/utils';
 import { VariantProps, cva } from 'class-variance-authority';
+import { Subject, combineLatest } from 'rxjs';
 
 import { SC_TOAST_ID } from './toast-id';
 import { ToastService, ToastState } from './toast.service';
@@ -74,21 +76,29 @@ export class ScToast implements OnInit {
   //TODO make swipe works
   protected readonly swipe = signal<'start' | 'move' | 'cancel' | 'end' | undefined>(undefined);
 
+  private readonly animationState = new Subject<'start' | 'end'>();
+
+  constructor() {
+    afterNextRender(() => {
+      this.toastService.updateState('open');
+    });
+
+    combineLatest([this.toastService.currentState, this.animationState]).subscribe(
+      ([state, animationState]) => {
+        if (state === 'closed' && animationState === 'end') {
+          this.toaster.remove(this.toastId);
+        }
+      },
+    );
+  }
+
   ngOnInit() {
     setTimeout(() => {
       this.toastService.updateState('closed');
     }, 3000);
-
-    this.toastService.currentState.subscribe((v) => {
-      if (v === 'closed-animation-end') {
-        this.toaster.remove(this.toastId);
-      }
-    });
   }
 
   protected animationend() {
-    if (this.state() === 'closed') {
-      this.toastService.updateState('closed-animation-end');
-    }
+    this.animationState.next('end');
   }
 }
