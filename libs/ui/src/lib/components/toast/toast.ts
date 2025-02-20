@@ -6,6 +6,7 @@ import {
   computed,
   inject,
   input,
+  signal,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 
@@ -44,6 +45,7 @@ type ToastVariants = VariantProps<typeof toastVariants>;
     role: 'status',
     '[class]': 'class()',
     '[attr.data-state]': 'state()',
+    '[attr.data-swipe]': 'swipe()',
     '(animationend)': 'animationend()',
   },
   styles: ``,
@@ -68,6 +70,9 @@ export class ScToast implements OnInit {
   );
 
   protected readonly state = toSignal<ToastState>(this.toastService.currentState);
+
+  //TODO make swipe works
+  protected readonly swipe = signal<'start' | 'move' | 'cancel' | 'end' | undefined>(undefined);
 
   ngOnInit() {
     setTimeout(() => {
