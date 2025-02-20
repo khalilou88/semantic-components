@@ -70,13 +70,13 @@ export class ScSwipeableToast {
 
   protected readonly class = computed(() => cn('block', this.classInput()));
 
-  @Input() message: string = 'This is a toast message';
+  @Input() message = 'This is a toast message';
 
-  isVisible: boolean = true;
-  isDragging: boolean = false;
-  startX: number = 0;
-  currentX: number = 0;
-  progressWidth: number = 100;
+  isVisible = true;
+  isDragging = false;
+  startX = 0;
+  currentX = 0;
+  progressWidth = 100;
 
   handleTouchStart(event: TouchEvent): void {
     this.startX = event.touches[0].clientX;
