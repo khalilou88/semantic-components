@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 
-import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 // Define allowed state values
-export type ToastState = 'open' | 'closed' | 'closed-animation-end';
+export type ToastState = 'open' | 'closed';
 
 @Injectable()
 export class ToastService {
-  private readonly stateSource = new BehaviorSubject<ToastState>('open');
+  private readonly stateSource = new Subject<ToastState>();
   currentState = this.stateSource.asObservable();
 
   updateState(newState: ToastState) {
