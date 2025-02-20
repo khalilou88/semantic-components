@@ -98,6 +98,7 @@ export class ScToast implements OnInit {
     }, 3000);
   }
 
+  //TODO try to use AnimationEvent: animationName property
   protected animationend() {
     if (this.state() === 'closed') {
       this.animationState.next('end');
