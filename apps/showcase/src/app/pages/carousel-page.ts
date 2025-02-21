@@ -149,52 +149,41 @@ import Autoplay from 'embla-carousel-autoplay';
 
         <h2 class="mb-5" id="examples" sc-page-subtitle>Examples</h2>
 
-        <section class="my-10" id="variants">
-          <h3 class="mb-2" sc-heading level="3">Variants</h3>
-
+        <section class="my-10" id="sizes">
+          <h3 class="mb-2" sc-heading level="3">Sizes</h3>
           <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
             <sc-tab>
               <sc-tab-label>Preview</sc-tab-label>
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <button sc-button type="button">Primary</button>
-                    <button sc-button variant="secondary" type="button">Secondary</button>
-                    <button sc-button variant="destructive" type="button">Destructive</button>
-                    <button sc-button variant="outline" type="button">Outline</button>
-                    <button sc-button variant="ghost" type="button">Ghost</button>
-                    <button sc-button variant="link" type="button">Link</button>
-                  </div>
-                </div>
-              </sc-tab-content>
-            </sc-tab>
+                  <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
+                    <div class="m-10 w-full max-w-xs" sc-carousel-container>
+                      <div [plugins]="plugins" [plugins]="plugins" sc-carousel>
+                        <div sc-carousel-items>
+                          @for (item of items; track $index) {
+                            <div class="md:basis-1/2 lg:basis-1/3" sc-carousel-item>
+                              <div class="p-1">
+                                <div sc-card>
+                                  <div
+                                    class="flex aspect-square items-center justify-center p-6"
+                                    sc-card-content
+                                  >
+                                    <span class="text-4xl font-semibold">{{ item }}</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          }
+                        </div>
 
-            <sc-tab>
-              <sc-tab-label>Code</sc-tab-label>
-              <sc-tab-content>
-                <sc-code-highlighter [code]="codeSnippet" />
-              </sc-tab-content>
-            </sc-tab>
-          </sc-tabs>
-        </section>
-
-        <section class="my-10" id="small-buttons">
-          <h3 class="mb-2" sc-heading level="3">Small buttons</h3>
-
-          <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
-            <sc-tab>
-              <sc-tab-label>Preview</sc-tab-label>
-              <sc-tab-content>
-                <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <button sc-button type="button" size="sm">Primary</button>
-                    <button sc-button variant="secondary" type="button" size="sm">Secondary</button>
-                    <button sc-button variant="destructive" type="button" size="sm">
-                      Destructive
-                    </button>
-                    <button sc-button variant="outline" type="button" size="sm">Outline</button>
-                    <button sc-button variant="ghost" type="button" size="sm">Ghost</button>
-                    <button sc-button variant="link" type="button" size="sm">Link</button>
+                        <button sc-carousel-previous variant="secondary" size="icon">
+                          <svg class="size-4" si-arrow-left-icon></svg>
+                        </button>
+                        <button sc-carousel-next variant="secondary" size="icon">
+                          <svg class="size-4" si-arrow-right-icon></svg>
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </sc-tab-content>
@@ -213,136 +202,47 @@ import Autoplay from 'embla-carousel-autoplay';
           </sc-tabs>
         </section>
 
-        <section class="my-10" id="large-buttons">
-          <h3 class="mb-2" sc-heading level="3">Large buttons</h3>
-
+        <section class="my-10" id="spacing">
+          <h3 class="mb-2" sc-heading level="3">Orientation</h3>
           <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
             <sc-tab>
               <sc-tab-label>Preview</sc-tab-label>
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <button sc-button type="button" size="lg">Primary</button>
-                    <button sc-button variant="secondary" type="button" size="lg">Secondary</button>
-                    <button sc-button variant="destructive" type="button" size="lg">
-                      Destructive
-                    </button>
-                    <button sc-button variant="outline" type="button" size="lg">Outline</button>
-                    <button sc-button variant="ghost" type="button" size="lg">Ghost</button>
-                    <button sc-button variant="link" type="button" size="lg">Link</button>
-                  </div>
-                </div>
-              </sc-tab-content>
-            </sc-tab>
+                  <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
+                    <div class="m-10 w-full max-w-xs" sc-carousel-container>
+                      <div
+                        class="h-[200px]"
+                        [plugins]="plugins"
+                        [plugins]="plugins"
+                        sc-carousel
+                        orientation="vertical"
+                      >
+                        <div sc-carousel-items>
+                          @for (item of items; track $index) {
+                            <div class="pt-1 md:basis-1/2" sc-carousel-item>
+                              <div class="p-1">
+                                <div sc-card>
+                                  <div
+                                    class="flex aspect-square items-center justify-center p-6"
+                                    sc-card-content
+                                  >
+                                    <span class="text-4xl font-semibold">{{ item }}</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          }
+                        </div>
 
-            <sc-tab>
-              <sc-tab-label>Code</sc-tab-label>
-              <sc-tab-content>
-                <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <p>Coming soon</p>
-                  </div>
-                </div>
-              </sc-tab-content>
-            </sc-tab>
-          </sc-tabs>
-        </section>
-
-        <button (click)="f()" sc-button>Toggle</button>
-
-        <section class="my-10" id="disabled-buttons">
-          <h3 class="mb-2" sc-heading level="3">Disabled buttons</h3>
-
-          <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
-            <sc-tab>
-              <sc-tab-label>Preview</sc-tab-label>
-              <sc-tab-content>
-                <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <button [disabled]="d()" sc-button type="button">Primary</button>
-                    <button sc-button variant="secondary" type="button" disabled>Secondary</button>
-                    <button sc-button variant="destructive" type="button" disabled>
-                      Destructive
-                    </button>
-                    <button sc-button variant="outline" type="button" disabled>Outline</button>
-                    <button sc-button variant="ghost" type="button" disabled>Ghost</button>
-                    <button sc-button variant="link" type="button" disabled>Link</button>
-                  </div>
-                </div>
-              </sc-tab-content>
-            </sc-tab>
-
-            <sc-tab>
-              <sc-tab-label>Code</sc-tab-label>
-              <sc-tab-content>
-                <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <p>Coming soon</p>
-                  </div>
-                </div>
-              </sc-tab-content>
-            </sc-tab>
-          </sc-tabs>
-        </section>
-
-        <section class="my-10" id="buttons-with-icons">
-          <h3 class="mb-2" sc-heading level="3">Buttons with icons</h3>
-
-          <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
-            <sc-tab>
-              <sc-tab-label>Preview</sc-tab-label>
-              <sc-tab-content>
-                <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0 items-center" sc-card-content>
-                    <button sc-button type="button" size="icon">
-                      <svg si-chevron-right-icon></svg>
-                    </button>
-                    <button sc-button variant="secondary" type="button" size="icon">
-                      <svg si-chevron-right-icon></svg>
-                    </button>
-                    <button sc-button variant="destructive" type="button" size="icon">
-                      <svg si-chevron-right-icon></svg>
-                    </button>
-                    <button class="size-20" sc-button variant="outline" type="button" size="icon">
-                      <svg si-chevron-right-icon></svg>
-                    </button>
-                    <button sc-button variant="ghost" type="button" size="icon">
-                      <svg si-chevron-right-icon></svg>
-                    </button>
-                    <button sc-button variant="link" type="button" size="icon">
-                      <svg si-chevron-right-icon></svg>
-                    </button>
-                  </div>
-                </div>
-              </sc-tab-content>
-            </sc-tab>
-
-            <sc-tab>
-              <sc-tab-label>Code</sc-tab-label>
-              <sc-tab-content>
-                <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <p>Coming soon</p>
-                  </div>
-                </div>
-              </sc-tab-content>
-            </sc-tab>
-          </sc-tabs>
-        </section>
-
-        <section class="my-10" id="button-with-loading-state">
-          <h3 class="mb-2" sc-heading level="3">Button with loading state</h3>
-
-          <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
-            <sc-tab>
-              <sc-tab-label>Preview</sc-tab-label>
-              <sc-tab-content>
-                <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <button sc-button disabled>
-                      <svg class="animate-spin" si-loader-circle-icon></svg>
-                      Please wait
-                    </button>
+                        <button sc-carousel-previous variant="secondary" size="icon">
+                          <svg class="size-4" si-arrow-left-icon></svg>
+                        </button>
+                        <button sc-carousel-next variant="secondary" size="icon">
+                          <svg class="size-4" si-arrow-right-icon></svg>
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </sc-tab-content>
