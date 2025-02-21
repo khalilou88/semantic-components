@@ -1,11 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   ViewEncapsulation,
   afterNextRender,
   computed,
-  inject,
+  contentChild,
   input,
   signal,
 } from '@angular/core';
@@ -16,6 +15,8 @@ import EmblaCarousel, {
   EmblaOptionsType,
   EmblaPluginType,
 } from 'embla-carousel';
+
+import { ScCarouselViewport } from './carousel-viewport';
 
 @Component({
   selector: 'div[sc-carousel]',
@@ -34,7 +35,7 @@ import EmblaCarousel, {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCarousel {
-  private readonly emblaNode = inject(ElementRef);
+  private readonly scCarouselViewport = contentChild.required(ScCarouselViewport);
 
   readonly classInput = input<string>('', {
     alias: 'class',
@@ -66,7 +67,11 @@ export class ScCarousel {
 
   constructor() {
     afterNextRender(() => {
-      this.emblaApi = EmblaCarousel(this.emblaNode.nativeElement, this.options(), this.plugins());
+      this.emblaApi = EmblaCarousel(
+        this.scCarouselViewport().getNativeElement(),
+        this.options(),
+        this.plugins(),
+      );
 
       this.emblaApi
         .on('select', this.togglePrevNextBtnsState)
