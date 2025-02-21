@@ -17,7 +17,6 @@ import { ScSidebarState } from './sidebar-state';
     <span class="sr-only">Toggle Sidebar</span>
   `,
   host: {
-    // '[class]': 'class()',
     'data-sidebar': 'trigger',
     '(click)': 'toggleSidebar()',
   },
