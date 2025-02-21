@@ -7,30 +7,46 @@ import { ScAspectRatio } from '@semantic-components/ui';
   imports: [ScAspectRatio],
   template: `
     <div class="m-10">
-      <!-- Basic usage with video aspect ratio (16:9) -->
-      <div class="" sc-aspect-ratio>
+      <!-- Basic image example -->
+      <div [ratio]="16 / 9" sc-aspect-ratio>
         <img
           class="w-full h-full object-cover"
-          src="https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80"
-          alt=""
+          src="https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b"
+          alt="Your image"
         />
       </div>
 
-      <!-- Square aspect ratio (1:1) -->
-      <div sc-aspect-ratio ratio="square">
-        <div class="w-full h-full bg-gray-200 flex items-center justify-center">Square content</div>
-      </div>
+      <br />
 
-      <!-- Portrait aspect ratio (3:4) with custom classes -->
-      <div class="max-w-md mx-auto" sc-aspect-ratio ratio="portrait">
-        <video class="w-full h-full object-cover">
+      <!-- Video example-->
+      <!--div [ratio]="16 / 9" sc-aspect-ratio>
+        <video class="w-full h-full object-cover" autoplay loop muted>
           <source src="your-video.mp4" type="video/mp4" />
         </video>
+      </div-->
+
+      <!-- With background image-->
+      <div [ratio]="1" sc-aspect-ratio>
+        <div
+          class="w-full h-full bg-cover bg-center bg-no-repeat"
+          style="background-image: url('https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b')"
+        ></div>
       </div>
 
-      <!-- Widescreen aspect ratio (21:9) -->
-      <div sc-aspect-ratio ratio="widescreen">
-        <iframe class="w-full h-full" src="your-embed-url" frameborder="0" allowfullscreen></iframe>
+      <br />
+
+      <!-- With content overlay-->
+      <div [ratio]="16 / 9" sc-aspect-ratio>
+        <div class="relative w-full h-full">
+          <img
+            class="w-full h-full object-cover"
+            src="https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b"
+            alt="Background"
+          />
+          <div class="absolute inset-0 flex items-center justify-center bg-black/50">
+            <h2 class="text-white text-2xl font-bold">Overlay Content</h2>
+          </div>
+        </div>
       </div>
     </div>
   `,

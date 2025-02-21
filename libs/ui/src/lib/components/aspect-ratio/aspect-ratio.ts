@@ -12,39 +12,28 @@ import { cn } from '@semantic-components/utils';
   selector: 'div[sc-aspect-ratio]',
   imports: [],
   template: `
-    <ng-content />
+    <div class="absolute inset-0">
+      <ng-content />
+    </div>
   `,
   host: {
     '[class]': 'class()',
+    '[style.paddingBottom]': 'calculatePadding()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScAspectRatio {
-  readonly ratio = input<'square' | 'video' | 'portrait' | 'widescreen' | 'ultra-wide'>('video');
+  readonly ratio = input<number>(1);
+
   readonly classInput = input<string>('', {
     alias: 'class',
   });
 
-  protected readonly class = computed(() =>
-    cn('relative w-full', this.ratioClass(), '', this.classInput()),
-  );
+  protected readonly class = computed(() => cn('relative w-full', this.classInput()));
 
-  private readonly ratioClass = computed(() => {
-    switch (this.ratio()) {
-      case 'square':
-        return 'aspect-square'; // 1:1
-      case 'video':
-        return 'aspect-video'; // 16:9
-      case 'portrait':
-        return 'aspect-[3/4]'; // 3:4
-      case 'widescreen':
-        return 'aspect-[21/9]'; // 21:9
-      case 'ultra-wide':
-        return 'aspect-[32/9]'; // 32:9
-      default:
-        return 'aspect-video';
-    }
-  });
+  calculatePadding(): string {
+    return `${(1 / this.ratio()) * 100}%`;
+  }
 }
