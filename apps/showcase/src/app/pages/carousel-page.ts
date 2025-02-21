@@ -94,7 +94,7 @@ import Autoplay from 'embla-carousel-autoplay';
                   <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
                     <div
                       class="w-full max-w-xs"
-                      [plugins]="plugins"
+                      [options]="options"
                       [plugins]="plugins"
                       sc-carousel
                     >
