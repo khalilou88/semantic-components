@@ -40,7 +40,7 @@ export class ScCarousel {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('overflow-hidden', this.classInput()));
+  protected readonly class = computed(() => cn('relative', this.classInput()));
 
   readonly options = input<EmblaOptionsType>({ loop: false });
 

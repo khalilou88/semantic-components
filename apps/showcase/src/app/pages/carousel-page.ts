@@ -8,15 +8,14 @@ import {
   ScBreadcrumbList,
   ScBreadcrumbPage,
   ScBreadcrumbSeparator,
-  ScButton,
   ScCard,
   ScCardContent,
   ScCarousel,
-  ScCarouselContainer,
   ScCarouselItem,
   ScCarouselItems,
   ScCarouselNext,
   ScCarouselPrevious,
+  ScCarouselViewport,
   ScCodeHighlighter,
   ScHeading,
   ScPageDescription,
@@ -31,7 +30,6 @@ import {
   SiArrowLeftIcon,
   SiArrowRightIcon,
   SiChevronRightIcon,
-  SiLoaderCircleIcon,
 } from '@semantic-icons/lucide-icons';
 import { EmblaOptionsType, EmblaPluginType } from 'embla-carousel';
 import Autoplay from 'embla-carousel-autoplay';
@@ -40,6 +38,7 @@ import Autoplay from 'embla-carousel-autoplay';
   selector: 'app-carousel-page',
   imports: [
     ScCarousel,
+    ScCarouselViewport,
     ScCarouselItems,
     ScCarouselItem,
     ScCarouselPrevious,
@@ -48,10 +47,7 @@ import Autoplay from 'embla-carousel-autoplay';
     SiArrowRightIcon,
     ScCard,
     ScCardContent,
-    ScCarouselContainer,
-    ScButton,
     SiChevronRightIcon,
-    SiLoaderCircleIcon,
     ScBreadcrumb,
     ScBreadcrumbList,
     ScBreadcrumbItem,
@@ -96,8 +92,13 @@ import Autoplay from 'embla-carousel-autoplay';
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
-                    <div class="m-10 w-full max-w-xs" sc-carousel-container>
-                      <div [plugins]="plugins" [plugins]="plugins" sc-carousel>
+                    <div
+                      class="w-full max-w-xs"
+                      [plugins]="plugins"
+                      [plugins]="plugins"
+                      sc-carousel
+                    >
+                      <div sc-carousel-viewport>
                         <div sc-carousel-items>
                           @for (item of items; track $index) {
                             <div sc-carousel-item>
@@ -114,14 +115,16 @@ import Autoplay from 'embla-carousel-autoplay';
                             </div>
                           }
                         </div>
-
-                        <button sc-carousel-previous variant="secondary" size="icon">
-                          <svg class="size-4" si-arrow-left-icon></svg>
-                        </button>
-                        <button sc-carousel-next variant="secondary" size="icon">
-                          <svg class="size-4" si-arrow-right-icon></svg>
-                        </button>
                       </div>
+
+                      <button sc-carousel-previous variant="secondary" size="icon">
+                        <svg class="size-4" si-arrow-left-icon></svg>
+                        <span class="sr-only">Previous slide</span>
+                      </button>
+                      <button sc-carousel-next variant="secondary" size="icon">
+                        <svg class="size-4" si-arrow-right-icon></svg>
+                        <span class="sr-only">Next slide</span>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -157,32 +160,30 @@ import Autoplay from 'embla-carousel-autoplay';
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
-                    <div class="m-10 w-full max-w-xs" sc-carousel-container>
-                      <div [plugins]="plugins" [plugins]="plugins" sc-carousel>
-                        <div sc-carousel-items>
-                          @for (item of items; track $index) {
-                            <div class="md:basis-1/2 lg:basis-1/3" sc-carousel-item>
-                              <div class="p-1">
-                                <div sc-card>
-                                  <div
-                                    class="flex aspect-square items-center justify-center p-6"
-                                    sc-card-content
-                                  >
-                                    <span class="text-4xl font-semibold">{{ item }}</span>
-                                  </div>
+                    <div [plugins]="plugins" [plugins]="plugins" sc-carousel>
+                      <div sc-carousel-items>
+                        @for (item of items; track $index) {
+                          <div class="md:basis-1/2 lg:basis-1/3" sc-carousel-item>
+                            <div class="p-1">
+                              <div sc-card>
+                                <div
+                                  class="flex aspect-square items-center justify-center p-6"
+                                  sc-card-content
+                                >
+                                  <span class="text-4xl font-semibold">{{ item }}</span>
                                 </div>
                               </div>
                             </div>
-                          }
-                        </div>
-
-                        <button sc-carousel-previous variant="secondary" size="icon">
-                          <svg class="size-4" si-arrow-left-icon></svg>
-                        </button>
-                        <button sc-carousel-next variant="secondary" size="icon">
-                          <svg class="size-4" si-arrow-right-icon></svg>
-                        </button>
+                          </div>
+                        }
                       </div>
+
+                      <button sc-carousel-previous variant="secondary" size="icon">
+                        <svg class="size-4" si-arrow-left-icon></svg>
+                      </button>
+                      <button sc-carousel-next variant="secondary" size="icon">
+                        <svg class="size-4" si-arrow-right-icon></svg>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -210,38 +211,36 @@ import Autoplay from 'embla-carousel-autoplay';
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
-                    <div class="m-10 w-full max-w-xs" sc-carousel-container>
-                      <div
-                        class="h-[200px]"
-                        [plugins]="plugins"
-                        [plugins]="plugins"
-                        sc-carousel
-                        orientation="vertical"
-                      >
-                        <div sc-carousel-items>
-                          @for (item of items; track $index) {
-                            <div class="pt-1 md:basis-1/2" sc-carousel-item>
-                              <div class="p-1">
-                                <div sc-card>
-                                  <div
-                                    class="flex aspect-square items-center justify-center p-6"
-                                    sc-card-content
-                                  >
-                                    <span class="text-4xl font-semibold">{{ item }}</span>
-                                  </div>
+                    <div
+                      class="h-[200px]"
+                      [plugins]="plugins"
+                      [plugins]="plugins"
+                      sc-carousel
+                      orientation="vertical"
+                    >
+                      <div sc-carousel-items>
+                        @for (item of items; track $index) {
+                          <div class="pt-1 md:basis-1/2" sc-carousel-item>
+                            <div class="p-1">
+                              <div sc-card>
+                                <div
+                                  class="flex aspect-square items-center justify-center p-6"
+                                  sc-card-content
+                                >
+                                  <span class="text-4xl font-semibold">{{ item }}</span>
                                 </div>
                               </div>
                             </div>
-                          }
-                        </div>
-
-                        <button sc-carousel-previous variant="secondary" size="icon">
-                          <svg class="size-4" si-arrow-left-icon></svg>
-                        </button>
-                        <button sc-carousel-next variant="secondary" size="icon">
-                          <svg class="size-4" si-arrow-right-icon></svg>
-                        </button>
+                          </div>
+                        }
                       </div>
+
+                      <button sc-carousel-previous variant="secondary" size="icon">
+                        <svg class="size-4" si-arrow-left-icon></svg>
+                      </button>
+                      <button sc-carousel-next variant="secondary" size="icon">
+                        <svg class="size-4" si-arrow-right-icon></svg>
+                      </button>
                     </div>
                   </div>
                 </div>

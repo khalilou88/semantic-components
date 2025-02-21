@@ -17,7 +17,6 @@ import { ScCarousel } from './carousel';
   imports: [],
   template: `
     <ng-content />
-    <span class="sr-only">Previous slide</span>
   `,
   host: {
     '[class]': 'class()',

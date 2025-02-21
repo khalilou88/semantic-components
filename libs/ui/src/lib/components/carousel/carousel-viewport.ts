@@ -9,7 +9,7 @@ import {
 import { cn } from '@semantic-components/utils';
 
 @Component({
-  selector: 'div[sc-carousel-container]',
+  selector: 'div[sc-carousel-viewport]',
   imports: [],
   template: `
     <ng-content />
@@ -21,10 +21,10 @@ import { cn } from '@semantic-components/utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCarouselContainer {
+export class ScCarouselViewport {
   readonly classInput = input<string>('', {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('relative', this.classInput()));
+  protected readonly class = computed(() => cn('overflow-hidden', this.classInput()));
 }
