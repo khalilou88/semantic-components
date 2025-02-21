@@ -12,7 +12,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 import { cn } from '@semantic-components/utils';
 
-import { ShikiService } from './shiki.service';
+import { ShikiService, defaultThemes } from './shiki.service';
 
 @Component({
   selector: 'sc-code-highlighter',
@@ -38,7 +38,7 @@ export class ScCodeHighlighter {
 
   readonly code = input.required<string>();
   readonly language = input<'angular-html' | 'typescript'>('angular-html');
-  readonly theme = input('github-dark');
+  readonly theme = input(defaultThemes.light);
 
   protected readonly highlightedCode = signal<SafeHtml>('');
 
