@@ -129,10 +129,10 @@ import { LayoutState } from '../services/layout-state';
       </sc-sidebar>
 
       <main class="w-full">
-        <div class="sticky top-0 z-50">
-          <sc-sidebar-toggler>
+        <div class="sticky top-0 z-40">
+          <button sc-sidebar-toggler>
             <svg si-panel-left-icon></svg>
-          </sc-sidebar-toggler>
+          </button>
         </div>
         <router-outlet />
       </main>

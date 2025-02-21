@@ -20,9 +20,9 @@ import { ScSidebarToggler } from './sidebar-toggler';
   imports: [ScSidebarToggler, SiXIcon],
   template: `
     <div class="flex size-full flex-col">
-      <sc-sidebar-toggler class="absolute right-1 top-1">
+      <button class="absolute right-1 top-1" sc-sidebar-toggler>
         <svg si-x-icon></svg>
-      </sc-sidebar-toggler>
+      </button>
 
       <ng-content />
     </div>

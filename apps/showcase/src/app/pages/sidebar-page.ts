@@ -18,9 +18,9 @@ import { SiPanelLeftIcon } from '@semantic-icons/lucide-icons';
       </sc-sidebar>
 
       <main>
-        <sc-sidebar-toggler>
+        <button sc-sidebar-toggler>
           <svg si-panel-left-icon></svg>
-        </sc-sidebar-toggler>
+        </button>
 
         <br />
         <br />
