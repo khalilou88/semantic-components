@@ -24,14 +24,6 @@ import { ScSidebarToggler } from './sidebar-toggler';
         <svg si-x-icon></svg>
       </sc-sidebar-toggler>
 
-      <br />
-      <br />
-      open : {{ sidebarState.open() }}
-      <br />
-      openMobile : {{ sidebarState.openMobile() }}
-      <br />
-      isMobile : {{ sidebarState.isMobile() }}
-
       <ng-content />
     </div>
   `,

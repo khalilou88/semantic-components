@@ -66,7 +66,7 @@ export class ScSidebar {
 
   class = input<string>('');
 
-  classes = computed(() => cn('block relative', this.class()));
+  classes = computed(() => cn('block relative z-50', this.class()));
 
   side = input<'left' | 'right'>('left');
   variant = input<'sidebar' | 'floating' | 'inset'>('sidebar');
