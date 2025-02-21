@@ -159,10 +159,37 @@ import Autoplay from 'embla-carousel-autoplay';
               <sc-tab-label>Preview</sc-tab-label>
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
-                  <div
-                    class="m-10 flex gap-2 p-0 items-center justify-center"
-                    sc-card-content
-                  ></div>
+                  <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
+                    <div class="w-full max-w-xs" sc-carousel>
+                      <div sc-carousel-viewport>
+                        <div sc-carousel-items>
+                          @for (item of items; track $index) {
+                            <div class="md:basis-1/2 lg:basis-1/3" sc-carousel-item>
+                              <div class="p-1">
+                                <div sc-card>
+                                  <div
+                                    class="flex aspect-square items-center justify-center p-6"
+                                    sc-card-content
+                                  >
+                                    <span class="text-4xl font-semibold">{{ item }}</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          }
+                        </div>
+                      </div>
+
+                      <button sc-carousel-previous>
+                        <svg class="size-4" si-arrow-left-icon></svg>
+                        <span class="sr-only">Previous slide</span>
+                      </button>
+                      <button sc-carousel-next>
+                        <svg class="size-4" si-arrow-right-icon></svg>
+                        <span class="sr-only">Next slide</span>
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </sc-tab-content>
             </sc-tab>
@@ -187,10 +214,34 @@ import Autoplay from 'embla-carousel-autoplay';
               <sc-tab-label>Preview</sc-tab-label>
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
-                  <div
-                    class="m-10 flex gap-2 p-0 items-center justify-center"
-                    sc-card-content
-                  ></div>
+                  <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
+                    <div class="w-full max-w-xs" orientation="vertical" sc-carousel>
+                      <div sc-carousel-viewport>
+                        <div class="-mt-1 h-[200px]" sc-carousel-items>
+                          @for (item of items; track $index) {
+                            <div class="pt-1 md:basis-1/2" sc-carousel-item>
+                              <div class="p-1">
+                                <div sc-card>
+                                  <div class="flex items-center justify-center p-6" sc-card-content>
+                                    <span class="text-4xl font-semibold">{{ item }}</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          }
+                        </div>
+                      </div>
+
+                      <button sc-carousel-previous>
+                        <svg class="size-4" si-arrow-left-icon></svg>
+                        <span class="sr-only">Previous slide</span>
+                      </button>
+                      <button sc-carousel-next>
+                        <svg class="size-4" si-arrow-right-icon></svg>
+                        <span class="sr-only">Next slide</span>
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </sc-tab-content>
             </sc-tab>
