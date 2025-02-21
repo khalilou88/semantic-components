@@ -43,7 +43,23 @@ export class ScCarousel {
 
   protected readonly class = computed(() => cn('relative', this.classInput()));
 
-  readonly options = input<EmblaOptionsType>({ loop: false });
+  readonly orientation = input<'horizontal' | 'vertical'>('horizontal');
+
+  readonly optionsInput = input<EmblaOptionsType>(
+    {},
+    {
+      alias: 'options',
+    },
+  );
+
+  readonly options = computed<EmblaOptionsType>(() => {
+    const opts = this.optionsInput();
+
+    return {
+      ...opts,
+      axis: this.orientation() === 'horizontal' ? 'x' : 'y',
+    };
+  });
 
   readonly plugins = input<EmblaPluginType[]>([]);
 
@@ -56,14 +72,6 @@ export class ScCarousel {
   get carouselApi() {
     return this.emblaApi;
   }
-
-  readonly orientationInput = input<'horizontal' | 'vertical'>('horizontal', {
-    alias: 'orientation',
-  });
-
-  readonly orientation = computed<'horizontal' | 'vertical'>(() => {
-    return this.options()?.axis === 'y' ? 'vertical' : this.orientationInput();
-  });
 
   constructor() {
     afterNextRender(() => {

@@ -213,9 +213,14 @@ import Autoplay from 'embla-carousel-autoplay';
             <sc-tab>
               <sc-tab-label>Preview</sc-tab-label>
               <sc-tab-content>
-                <div class="overflow-auto" sc-card>
+                <div class="overflow-auto min-h-[350px]" sc-card>
                   <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
-                    <div class="w-full max-w-xs" orientation="vertical" sc-carousel>
+                    <div
+                      class="w-full max-w-xs mt-10"
+                      [options]="orientationOptions"
+                      orientation="vertical"
+                      sc-carousel
+                    >
                       <div sc-carousel-viewport>
                         <div class="-mt-1 h-[200px]" sc-carousel-items>
                           @for (item of items; track $index) {
@@ -371,6 +376,8 @@ export default class CarouselPage {
   items = Array.from({ length: 5 }, (_, i) => i + 1);
 
   options: EmblaOptionsType = { loop: false };
+
+  orientationOptions: EmblaOptionsType = { align: 'start' };
 
   plugins: EmblaPluginType[] = [Autoplay()];
 
