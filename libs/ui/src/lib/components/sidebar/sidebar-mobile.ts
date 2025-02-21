@@ -7,6 +7,7 @@ import {
   input,
   signal,
 } from '@angular/core';
+import { Event, NavigationEnd, Router } from '@angular/router';
 
 import { cn } from '@semantic-components/utils';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
@@ -28,7 +29,7 @@ import { ScSidebarToggler } from './sidebar-toggler';
     </div>
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
     '[style]': 'styles()',
     '[attr.data-sidebar]': '"sidebar"',
     '[attr.data-mobile]': '"true"',
@@ -39,20 +40,24 @@ import { ScSidebarToggler } from './sidebar-toggler';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSidebarMobile {
-  sidebarState = inject(ScSidebarState);
+  private readonly router = inject(Router);
 
-  styles = signal(`--sidebar-width: ${SIDEBAR_WIDTH_MOBILE};`);
+  private readonly sidebarState = inject(ScSidebarState);
 
-  side = input.required<'left' | 'right'>();
-  openMobile = computed(() => this.sidebarState.openMobile());
+  protected readonly styles = signal(`--sidebar-width: ${SIDEBAR_WIDTH_MOBILE};`);
 
-  state = computed<'open' | 'closed'>(() => {
+  readonly side = input.required<'left' | 'right'>();
+  private readonly openMobile = computed(() => this.sidebarState.openMobile());
+
+  protected readonly state = computed<'open' | 'closed'>(() => {
     return this.openMobile() ? 'open' : 'closed';
   });
 
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() =>
+  protected readonly class = computed(() =>
     cn(
       'absolute top-0 h-full bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-500 data-[state=open]:animate-in data-[state=closed]:animate-out',
       this.openMobile() && 'w-(--sidebar-width)',
@@ -61,7 +66,17 @@ export class ScSidebarMobile {
         'left-0 data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left',
       this.side() === 'right' &&
         'right-0 data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right',
-      this.class(),
+      this.classInput(),
     ),
   );
+
+  constructor() {
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationEnd) {
+        if (this.openMobile()) {
+          this.sidebarState.toggleSidebar();
+        }
+      }
+    });
+  }
 }
