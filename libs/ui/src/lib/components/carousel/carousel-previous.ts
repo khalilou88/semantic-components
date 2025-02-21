@@ -5,11 +5,12 @@ import {
   computed,
   inject,
   input,
+  linkedSignal,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
 
-import { ButtonVariants, buttonVariants } from '../button';
+import { ButtonVariants, ScButtonBase, buttonVariants } from '../button';
 import { ScCarousel } from './carousel';
 
 @Component({
@@ -19,26 +20,20 @@ import { ScCarousel } from './carousel';
     <ng-content />
   `,
   host: {
-    '[class]': 'class()',
-    '[disabled]': 'disabled()',
     '(click)': 'scrollPrev()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCarouselPrevious {
+export class ScCarouselPrevious extends ScButtonBase {
   private readonly scCarousel = inject(ScCarousel);
 
-  readonly variant = input<ButtonVariants['variant']>('primary');
+  override readonly variantInput = input<ButtonVariants['variant']>('outline');
 
-  readonly size = input<ButtonVariants['size']>('default');
+  override readonly sizeInput = input<ButtonVariants['size']>('icon');
 
-  readonly classInput = input<string>('', {
-    alias: 'class',
-  });
-
-  protected readonly class = computed(() =>
+  protected override readonly class = computed(() =>
     cn(
       buttonVariants({ variant: this.variant(), size: this.size() }),
       'absolute h-8 w-8 rounded-full',
@@ -49,7 +44,7 @@ export class ScCarouselPrevious {
     ),
   );
 
-  protected readonly disabled = computed(() => {
+  protected override readonly disabled = linkedSignal(() => {
     return !this.scCarousel.canScrollPrev();
   });
 

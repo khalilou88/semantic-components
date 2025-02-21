@@ -117,11 +117,11 @@ import Autoplay from 'embla-carousel-autoplay';
                         </div>
                       </div>
 
-                      <button sc-carousel-previous variant="secondary" size="icon">
+                      <button sc-carousel-previous>
                         <svg class="size-4" si-arrow-left-icon></svg>
                         <span class="sr-only">Previous slide</span>
                       </button>
-                      <button sc-carousel-next variant="secondary" size="icon">
+                      <button sc-carousel-next>
                         <svg class="size-4" si-arrow-right-icon></svg>
                         <span class="sr-only">Next slide</span>
                       </button>
