@@ -49,6 +49,6 @@ export class ScCarouselPrevious extends ScButtonBase {
   });
 
   protected scrollPrev() {
-    this.scCarousel.carouselApi.scrollPrev();
+    this.scCarousel.api.scrollPrev();
   }
 }

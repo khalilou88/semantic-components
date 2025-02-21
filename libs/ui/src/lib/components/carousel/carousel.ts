@@ -70,7 +70,7 @@ export class ScCarousel implements OnDestroy {
 
   private emblaApi!: EmblaCarouselType;
 
-  get carouselApi() {
+  get api() {
     return this.emblaApi;
   }
 

@@ -49,6 +49,6 @@ export class ScCarouselNext extends ScButtonBase {
   });
 
   protected scrollNext() {
-    this.scCarousel.carouselApi.scrollNext();
+    this.scCarousel.api.scrollNext();
   }
 }
