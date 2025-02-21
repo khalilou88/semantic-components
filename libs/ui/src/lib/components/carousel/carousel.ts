@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  OnDestroy,
   ViewEncapsulation,
   afterNextRender,
   computed,
@@ -34,7 +35,7 @@ import { ScCarouselViewport } from './carousel-viewport';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCarousel {
+export class ScCarousel implements OnDestroy {
   private readonly scCarouselViewport = contentChild.required(ScCarouselViewport);
 
   readonly classInput = input<string>('', {
@@ -118,5 +119,9 @@ export class ScCarousel {
 
   private scrollNext() {
     this.emblaApi.scrollNext();
+  }
+
+  ngOnDestroy() {
+    this.emblaApi.destroy();
   }
 }
