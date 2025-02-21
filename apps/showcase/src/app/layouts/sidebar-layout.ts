@@ -45,7 +45,7 @@ import { LayoutState } from '../services/layout-state';
 
     <sc-sidebar-provider>
       <sc-sidebar>
-        <sc-sidebar-group>
+        <!--sc-sidebar-group>
           <sc-sidebar-group-label>Getting Started</sc-sidebar-group-label>
 
           <div sc-sidebar-group-content>
@@ -57,7 +57,7 @@ import { LayoutState } from '../services/layout-state';
               </li>
             </ul>
           </div>
-        </sc-sidebar-group>
+        </sc-sidebar-group-->
 
         <sc-sidebar-group>
           <sc-sidebar-group-label>Components</sc-sidebar-group-label>
