@@ -20,6 +20,7 @@ import { SiGithubIcon } from '@semantic-icons/lucide-icons';
             <a
               class="text-gray-400 hover:text-gray-900 dark:hover:text-white"
               href="https://github.com/khalilou88/semantic-components"
+              target="_blank"
             >
               <svg class="size-4" aria-hidden="true" si-github-icon></svg>
               <span class="sr-only">Github</span>
