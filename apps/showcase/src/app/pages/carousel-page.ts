@@ -11,11 +11,11 @@ import {
   ScCard,
   ScCardContent,
   ScCarousel,
+  ScCarouselContainer,
   ScCarouselItem,
   ScCarouselItems,
   ScCarouselNext,
   ScCarouselPrevious,
-  ScCarouselViewport,
   ScCodeHighlighter,
   ScHeading,
   ScPageDescription,
@@ -38,7 +38,7 @@ import Autoplay from 'embla-carousel-autoplay';
   selector: 'app-carousel-page',
   imports: [
     ScCarousel,
-    ScCarouselViewport,
+    ScCarouselContainer,
     ScCarouselItems,
     ScCarouselItem,
     ScCarouselPrevious,
@@ -92,13 +92,8 @@ import Autoplay from 'embla-carousel-autoplay';
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
-                    <div
-                      class="w-full max-w-xs"
-                      [options]="options"
-                      [plugins]="plugins"
-                      sc-carousel
-                    >
-                      <div sc-carousel-viewport>
+                    <div class="w-full max-w-xs" sc-carousel-container>
+                      <div class="w-full" [options]="options" [plugins]="plugins" sc-carousel>
                         <div sc-carousel-items>
                           @for (item of items; track $index) {
                             <div sc-carousel-item>
@@ -115,16 +110,16 @@ import Autoplay from 'embla-carousel-autoplay';
                             </div>
                           }
                         </div>
-                      </div>
 
-                      <button sc-carousel-previous>
-                        <svg class="size-4" si-arrow-left-icon></svg>
-                        <span class="sr-only">Previous slide</span>
-                      </button>
-                      <button sc-carousel-next>
-                        <svg class="size-4" si-arrow-right-icon></svg>
-                        <span class="sr-only">Next slide</span>
-                      </button>
+                        <button sc-carousel-previous>
+                          <svg class="size-4" si-arrow-left-icon></svg>
+                          <span class="sr-only">Previous slide</span>
+                        </button>
+                        <button sc-carousel-next>
+                          <svg class="size-4" si-arrow-right-icon></svg>
+                          <span class="sr-only">Next slide</span>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -160,8 +155,8 @@ import Autoplay from 'embla-carousel-autoplay';
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
-                    <div class="w-full max-w-xs" sc-carousel>
-                      <div sc-carousel-viewport>
+                    <div class="w-full max-w-xs" sc-carousel-container>
+                      <div class="w-full" sc-carousel>
                         <div sc-carousel-items>
                           @for (item of items; track $index) {
                             <div class="md:basis-1/2 lg:basis-1/3" sc-carousel-item>
@@ -178,16 +173,16 @@ import Autoplay from 'embla-carousel-autoplay';
                             </div>
                           }
                         </div>
-                      </div>
 
-                      <button sc-carousel-previous>
-                        <svg class="size-4" si-arrow-left-icon></svg>
-                        <span class="sr-only">Previous slide</span>
-                      </button>
-                      <button sc-carousel-next>
-                        <svg class="size-4" si-arrow-right-icon></svg>
-                        <span class="sr-only">Next slide</span>
-                      </button>
+                        <button sc-carousel-previous>
+                          <svg class="size-4" si-arrow-left-icon></svg>
+                          <span class="sr-only">Previous slide</span>
+                        </button>
+                        <button sc-carousel-next>
+                          <svg class="size-4" si-arrow-right-icon></svg>
+                          <span class="sr-only">Next slide</span>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -215,13 +210,13 @@ import Autoplay from 'embla-carousel-autoplay';
               <sc-tab-content>
                 <div class="overflow-auto min-h-[350px]" sc-card>
                   <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
-                    <div
-                      class="w-full max-w-xs mt-10"
-                      [options]="orientationOptions"
-                      orientation="vertical"
-                      sc-carousel
-                    >
-                      <div sc-carousel-viewport>
+                    <div class="w-full max-w-xs mt-10" sc-carousel-container>
+                      <div
+                        class="w-full"
+                        [options]="orientationOptions"
+                        orientation="vertical"
+                        sc-carousel
+                      >
                         <div class="-mt-1 h-[200px]" sc-carousel-items>
                           @for (item of items; track $index) {
                             <div class="pt-1 md:basis-1/2" sc-carousel-item>
@@ -235,16 +230,16 @@ import Autoplay from 'embla-carousel-autoplay';
                             </div>
                           }
                         </div>
-                      </div>
 
-                      <button sc-carousel-previous>
-                        <svg class="size-4" si-arrow-left-icon></svg>
-                        <span class="sr-only">Previous slide</span>
-                      </button>
-                      <button sc-carousel-next>
-                        <svg class="size-4" si-arrow-right-icon></svg>
-                        <span class="sr-only">Next slide</span>
-                      </button>
+                        <button sc-carousel-previous>
+                          <svg class="size-4" si-arrow-left-icon></svg>
+                          <span class="sr-only">Previous slide</span>
+                        </button>
+                        <button sc-carousel-next>
+                          <svg class="size-4" si-arrow-right-icon></svg>
+                          <span class="sr-only">Next slide</span>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -393,10 +388,4 @@ export default class CarouselPage {
     <button sc-button variant="outline" type="button">Outline</button>
     <button sc-button variant="ghost" type="button">Ghost</button>
     <button sc-button variant="link" type="button">Link</button>`;
-
-  d = signal(true);
-
-  f() {
-    this.d.update((v) => !v);
-  }
 }

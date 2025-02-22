@@ -1,11 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   OnDestroy,
   ViewEncapsulation,
   afterNextRender,
   computed,
-  contentChild,
+  inject,
   input,
   signal,
 } from '@angular/core';
@@ -16,8 +17,6 @@ import EmblaCarousel, {
   EmblaOptionsType,
   EmblaPluginType,
 } from 'embla-carousel';
-
-import { ScCarouselViewport } from './carousel-viewport';
 
 @Component({
   selector: 'div[sc-carousel]',
@@ -36,13 +35,13 @@ import { ScCarouselViewport } from './carousel-viewport';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCarousel implements OnDestroy {
-  private readonly scCarouselViewport = contentChild.required(ScCarouselViewport);
+  private readonly host = inject(ElementRef);
 
   readonly classInput = input<string>('', {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('relative', this.classInput()));
+  protected readonly class = computed(() => cn('overflow-hidden', this.classInput()));
 
   readonly orientation = input<'horizontal' | 'vertical'>('horizontal');
 
@@ -76,11 +75,7 @@ export class ScCarousel implements OnDestroy {
 
   constructor() {
     afterNextRender(() => {
-      this.emblaApi = EmblaCarousel(
-        this.scCarouselViewport().getNativeElement(),
-        this.options(),
-        this.plugins(),
-      );
+      this.emblaApi = EmblaCarousel(this.host.nativeElement, this.options(), this.plugins());
 
       this.emblaApi
         .on('select', this.togglePrevNextBtnsState)

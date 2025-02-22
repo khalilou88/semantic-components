@@ -1,17 +1,15 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   ViewEncapsulation,
   computed,
-  inject,
   input,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
 
 @Component({
-  selector: 'div[sc-carousel-viewport]',
+  selector: 'div[sc-carousel-container]',
   imports: [],
   template: `
     <ng-content />
@@ -23,16 +21,10 @@ import { cn } from '@semantic-components/utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCarouselViewport {
-  private readonly host = inject(ElementRef);
-
+export class ScCarouselContainer {
   readonly classInput = input<string>('', {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('overflow-hidden', this.classInput()));
-
-  getNativeElement() {
-    return this.host.nativeElement;
-  }
+  protected readonly class = computed(() => cn('relative', this.classInput()));
 }

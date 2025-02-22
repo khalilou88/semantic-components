@@ -1,5 +1,5 @@
 export * from './carousel';
-export * from './carousel-viewport';
+export * from './carousel-container';
 export * from './carousel-items';
 export * from './carousel-item';
 export * from './carousel-previous';
