@@ -75,9 +75,9 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 
         <h2 id="usage" sc-page-subtitle>Usage</h2>
 
-        <sc-code-highlighter class="mt-2" [code]="codeSnippet1" language="typescript" />
+        <sc-code-highlighter class="mt-2" [code]="importCodeSnippet" language="typescript" />
 
-        <sc-code-highlighter class="mt-2" [code]="codeSnippet2" />
+        <sc-code-highlighter class="mt-2" [code]="templateCodeSnippet" />
 
         <h2 class="mb-5" id="examples" sc-page-subtitle>Examples</h2>
 
@@ -113,7 +113,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
             <sc-tab>
               <sc-tab-label>Code</sc-tab-label>
               <sc-tab-content>
-                <sc-code-highlighter [code]="codeSnippet" />
+                <sc-code-highlighter [code]="templateCodeSnippet" />
               </sc-tab-content>
             </sc-tab>
           </sc-tabs>
@@ -131,16 +131,14 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 export default class InputOtpPage {
   class = signal<string>('block w-full');
 
-  codeSnippet1 = `
-import {
+  importCodeSnippet = `import {
   ScInputOTPGroup,
   ScInputOTPSeparator,
   ScInputOTPSlot,
   ScInputOtp,
 } from '@semantic-components/ui';`;
 
-  codeSnippet2 = `
-<sc-input-otp formControlName="otp">
+  templateCodeSnippet = `<sc-input-otp formControlName="otp">
   <sc-input-otp-group>
     <sc-input-otp-slot />
     <sc-input-otp-slot />
@@ -153,23 +151,6 @@ import {
     <sc-input-otp-slot />
   </sc-input-otp-group>
 </sc-input-otp>`;
-
-  codeSnippet = `
-<form [formGroup]="inputOtpGroupForm">
-  <sc-input-otp formControlName="otp">
-    <sc-input-otp-group>
-      <sc-input-otp-slot />
-      <sc-input-otp-slot />
-      <sc-input-otp-slot />
-    </sc-input-otp-group>
-    <sc-input-otp-separator />
-    <sc-input-otp-group>
-      <sc-input-otp-slot />
-      <sc-input-otp-slot />
-      <sc-input-otp-slot />
-    </sc-input-otp-group>
-  </sc-input-otp>
-</form>`;
 
   inputOtpGroupForm = new FormGroup({
     otp: new FormControl(''),
