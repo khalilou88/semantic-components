@@ -22,7 +22,7 @@ import {
   ScEditorHorizontalRule,
   ScEditorItalic,
   ScEditorOrderedList,
-  ScEditorParagraph,
+  // ScEditorParagraph,
   ScEditorRedo,
   ScEditorStrike,
   ScEditorTextAlignCenter,
@@ -32,13 +32,13 @@ import {
   ScEditorUnderline,
   ScEditorUndo,
   ScEditorUnsetLink,
-  ScExtensionColor,
-  ScExtensionFontFamily,
-  ScExtensionHeading,
-  ScExtensionImage,
-  ScExtensionLink,
-  ScExtensionTextStyle,
-  ScExtensionYoutube,
+  // ScExtensionColor,
+  // ScExtensionFontFamily,
+  // ScExtensionHeading,
+  // ScExtensionImage,
+  // ScExtensionLink,
+  // ScExtensionTextStyle,
+  // ScExtensionYoutube,
   ScHeading,
   ScPageDescription,
   ScPageSubtitle,
@@ -78,25 +78,25 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
     ScEditorUndo,
     ScEditorRedo,
     ScEditorHighlight,
-    ScExtensionColor,
+    // ScExtensionColor,
     ScEditorBold,
     ScEditorUnderline,
-    ScExtensionYoutube,
-    ScExtensionImage,
-    ScExtensionFontFamily,
-    ScExtensionLink,
+    // ScExtensionYoutube,
+    // ScExtensionImage,
+    // ScExtensionFontFamily,
+    // ScExtensionLink,
     ScEditorItalic,
     ScEditorBlockquote,
     ScEditorBulletList,
     ScEditorOrderedList,
-    ScExtensionTextStyle,
-    ScEditorParagraph,
+    // ScExtensionTextStyle,
+    // ScEditorParagraph,
     ScSeparator,
     ScEditorGroup,
     ScEditorStrike,
     ScEditorHorizontalRule,
     ScEditorCode,
-    ScExtensionHeading,
+    // ScExtensionHeading,
     // ScExtensionTable,
     ScEditorToolbar,
     ScEditorUnsetLink,
@@ -120,15 +120,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 
         <h1 sc-page-title>Editor</h1>
 
-        <p sc-page-description>Editor.</p>
-
-        <h2 id="usage" sc-page-subtitle>Usage</h2>
-
-        <sc-code-highlighter class="mt-2" [code]="codeSnippet1" language="typescript" />
-
-        <sc-code-highlighter class="mt-2" [code]="codeSnippet2" />
-
-        <h2 class="mb-5" id="examples" sc-page-subtitle>Examples</h2>
+        <p sc-page-description>An editor using Tiptap.</p>
 
         <section class="my-10" id="small-buttons">
           <h3 class="mb-2" sc-heading level="3">Editor</h3>
@@ -150,10 +142,10 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
                             <sc-editor-italic />
                             <sc-editor-underline />
                             <sc-editor-highlight />
-                            <sc-extension-text-style />
-                            <sc-extension-color />
-                            <sc-extension-font-family />
-                            <sc-extension-link />
+                            <!--sc-extension-text-style /-->
+                            <!--sc-extension-color /-->
+                            <!--sc-extension-font-family /-->
+                            <!--sc-extension-link /-->
                             <sc-editor-unset-link />
                             <sc-separator class="h-5" orientation="vertical" />
                             <sc-editor-text-align-left />
@@ -162,11 +154,11 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
                           </sc-editor-group>
 
                           <sc-editor-group>
-                            <sc-extension-heading />
-                            <sc-editor-paragraph />
+                            <!--sc-extension-heading /-->
+                            <!--sc-editor-paragraph /-->
                             <sc-separator class="h-5" orientation="vertical" />
-                            <sc-extension-image />
-                            <sc-extension-youtube />
+                            <!--sc-extension-image /-->
+                            <!--sc-extension-youtube /-->
                             <sc-editor-bullet-list />
                             <sc-editor-ordered-list />
                             <sc-editor-blockquote />
@@ -190,15 +182,17 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
             <sc-tab>
               <sc-tab-label>Code</sc-tab-label>
               <sc-tab-content>
-                <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <p>Coming soon</p>
-                  </div>
-                </div>
+                <sc-code-highlighter [code]="templateCodeSnippet" />
               </sc-tab-content>
             </sc-tab>
           </sc-tabs>
         </section>
+
+        <h2 id="usage" sc-page-subtitle>Usage</h2>
+
+        <sc-code-highlighter class="mt-2" [code]="importCodeSnippet" language="typescript" />
+
+        <sc-code-highlighter class="mt-2" [code]="templateCodeSnippet" />
       </div>
 
       <div class="hidden text-sm xl:block">
@@ -207,14 +201,6 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
             <div class="space-y-2">
               <p class="font-medium">On This Page</p>
               <ul class="m-0 list-none">
-                <!--li class="mt-0 pt-2">
-                  <a
-                    class="inline-block font-medium text-foreground no-underline transition-colors hover:text-foreground"
-                    href="#installation"
-                  >
-                    Installation
-                  </a>
-                </li-->
                 <li class="mt-0 pt-2">
                   <a
                     class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
@@ -223,76 +209,6 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
                   >
                     Usage
                   </a>
-                </li>
-                <li class="mt-0 pt-2">
-                  <a
-                    class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
-                    routerLink="."
-                    fragment="examples"
-                  >
-                    Examples
-                  </a>
-                  <ul class="m-0 list-none pl-4">
-                    <li class="mt-0 pt-2">
-                      <a
-                        class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
-                        routerLink="."
-                        fragment="variants"
-                      >
-                        Variants
-                      </a>
-                    </li>
-
-                    <li class="mt-0 pt-2">
-                      <a
-                        class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
-                        routerLink="."
-                        fragment="small-buttons"
-                      >
-                        Small buttons
-                      </a>
-                    </li>
-
-                    <li class="mt-0 pt-2">
-                      <a
-                        class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
-                        routerLink="."
-                        fragment="large-buttons"
-                      >
-                        Large buttons
-                      </a>
-                    </li>
-
-                    <li class="mt-0 pt-2">
-                      <a
-                        class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
-                        routerLink="."
-                        fragment="disabled-buttons"
-                      >
-                        Disabled buttons
-                      </a>
-                    </li>
-
-                    <li class="mt-0 pt-2">
-                      <a
-                        class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
-                        routerLink="."
-                        fragment="buttons-with-icons"
-                      >
-                        Buttons with icons
-                      </a>
-                    </li>
-
-                    <li class="mt-0 pt-2">
-                      <a
-                        class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
-                        routerLink="."
-                        fragment="button-with-loading-state"
-                      >
-                        Button with loading state
-                      </a>
-                    </li>
-                  </ul>
                 </li>
               </ul>
             </div>
@@ -326,14 +242,56 @@ export default class EditorPage {
 
   class = signal<string>('block w-full');
 
-  codeSnippet1 = `import { ScButton } from '@semantic-components/ui';`;
+  importCodeSnippet = `import {
+  ScEditor,
+  ScEditorBlockquote,
+  ScEditorBold,
+  ScEditorBulletList,
+  ScEditorCode,
+  ScEditorGroup,
+  ScEditorHighlight,
+  ScEditorHorizontalRule,
+  ScEditorItalic,
+  ScEditorOrderedList,
+  ScEditorParagraph,
+  ScEditorRedo,
+  ScEditorStrike,
+  ScEditorTextAlignCenter,
+  ScEditorTextAlignLeft,
+  ScEditorTextAlignRight,
+  ScEditorToolbar,
+  ScEditorUnderline,
+  ScEditorUndo,
+  ScEditorUnsetLink,
+} from '@semantic-components/ui';`;
 
-  codeSnippet2 = `<button sc-button type="button">Primary</button>`;
+  templateCodeSnippet = `<sc-editor formControlName="content">
+  <sc-editor-toolbar>
+    <sc-editor-group>
+      <sc-editor-undo />
+      <sc-editor-redo />
+      <sc-separator class="h-5" orientation="vertical" />
+      <sc-editor-bold />
+      <sc-editor-italic />
+      <sc-editor-underline />
+      <sc-editor-highlight />
+      <sc-editor-unset-link />
+      <sc-separator class="h-5" orientation="vertical" />
+      <sc-editor-text-align-left />
+      <sc-editor-text-align-center />
+      <sc-editor-text-align-right />
+    </sc-editor-group>
 
-  codeSnippet = `<button sc-button type="button">Primary</button>
-    <button sc-button variant="secondary" type="button">Secondary</button>
-    <button sc-button variant="destructive" type="button">Destructive</button>
-    <button sc-button variant="outline" type="button">Outline</button>
-    <button sc-button variant="ghost" type="button">Ghost</button>
-    <button sc-button variant="link" type="button">Link</button>`;
+    <sc-editor-group>
+      <sc-separator class="h-5" orientation="vertical" />
+      <sc-editor-bullet-list />
+      <sc-editor-ordered-list />
+      <sc-editor-blockquote />
+      <sc-separator class="h-5" orientation="vertical" />
+      <sc-editor-strike />
+      <sc-editor-horizontal-rule />
+      <sc-editor-code />
+    </sc-editor-group>
+  </sc-editor-toolbar>
+</sc-editor>`;
 }
