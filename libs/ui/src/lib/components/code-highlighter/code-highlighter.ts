@@ -44,12 +44,7 @@ export class ScCodeHighlighter {
 
   constructor() {
     effect(async () => {
-      const normalizedCode = this.code()
-        .split('\n')
-        .map((line) => line.trimStart()) // Removes leading spaces
-        .join('\n');
-
-      const highlighted = await this.shikiService.highlightCode(normalizedCode, this.language());
+      const highlighted = await this.shikiService.highlightCode(this.code(), this.language());
       this.highlightedCode.set(this.sanitizer.bypassSecurityTrustHtml(highlighted));
     });
   }

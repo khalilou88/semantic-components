@@ -85,7 +85,7 @@ import Autoplay from 'embla-carousel-autoplay';
 
         <p sc-page-description>A carousel with motion and swipe built using Embla.</p>
 
-        <section class="my-10" id="variants">
+        <section class="my-10">
           <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
             <sc-tab>
               <sc-tab-label>Preview</sc-tab-label>
@@ -129,11 +129,7 @@ import Autoplay from 'embla-carousel-autoplay';
             <sc-tab>
               <sc-tab-label>Code</sc-tab-label>
               <sc-tab-content>
-                <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <p>Coming soon</p>
-                  </div>
-                </div>
+                <sc-code-highlighter [code]="templateCodeSnippet" />
               </sc-tab-content>
             </sc-tab>
           </sc-tabs>
@@ -141,9 +137,9 @@ import Autoplay from 'embla-carousel-autoplay';
 
         <h2 id="usage" sc-page-subtitle>Usage</h2>
 
-        <sc-code-highlighter class="mt-2" [code]="codeSnippet1" language="typescript" />
+        <sc-code-highlighter class="mt-2" [code]="importCodeSnippet" language="typescript" />
 
-        <sc-code-highlighter class="mt-2" [code]="codeSnippet2" />
+        <sc-code-highlighter class="mt-2" [code]="templateCodeSnippet" />
 
         <h2 class="mb-5" id="examples" sc-page-subtitle>Examples</h2>
 
@@ -202,7 +198,7 @@ import Autoplay from 'embla-carousel-autoplay';
           </sc-tabs>
         </section>
 
-        <section class="my-10" id="spacing">
+        <section class="my-10" id="orientation">
           <h3 class="mb-2" sc-heading level="3">Orientation</h3>
           <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
             <sc-tab>
@@ -266,14 +262,6 @@ import Autoplay from 'embla-carousel-autoplay';
             <div class="space-y-2">
               <p class="font-medium">On This Page</p>
               <ul class="m-0 list-none">
-                <!--li class="mt-0 pt-2">
-                  <a
-                    class="inline-block font-medium text-foreground no-underline transition-colors hover:text-foreground"
-                    href="#installation"
-                  >
-                    Installation
-                  </a>
-                </li-->
                 <li class="mt-0 pt-2">
                   <a
                     class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
@@ -296,9 +284,9 @@ import Autoplay from 'embla-carousel-autoplay';
                       <a
                         class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
                         routerLink="."
-                        fragment="variants"
+                        fragment="sizes"
                       >
-                        Variants
+                        Sizes
                       </a>
                     </li>
 
@@ -306,49 +294,9 @@ import Autoplay from 'embla-carousel-autoplay';
                       <a
                         class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
                         routerLink="."
-                        fragment="small-buttons"
+                        fragment="orientation"
                       >
-                        Small buttons
-                      </a>
-                    </li>
-
-                    <li class="mt-0 pt-2">
-                      <a
-                        class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
-                        routerLink="."
-                        fragment="large-buttons"
-                      >
-                        Large buttons
-                      </a>
-                    </li>
-
-                    <li class="mt-0 pt-2">
-                      <a
-                        class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
-                        routerLink="."
-                        fragment="disabled-buttons"
-                      >
-                        Disabled buttons
-                      </a>
-                    </li>
-
-                    <li class="mt-0 pt-2">
-                      <a
-                        class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
-                        routerLink="."
-                        fragment="buttons-with-icons"
-                      >
-                        Buttons with icons
-                      </a>
-                    </li>
-
-                    <li class="mt-0 pt-2">
-                      <a
-                        class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
-                        routerLink="."
-                        fragment="button-with-loading-state"
-                      >
-                        Button with loading state
+                        Orientation
                       </a>
                     </li>
                   </ul>
@@ -378,14 +326,42 @@ export default class CarouselPage {
 
   class = signal<string>('block w-full');
 
-  codeSnippet1 = `import { ScButton } from '@semantic-components/ui';`;
+  importCodeSnippet = `import {
+  ScCarousel,
+  ScCarouselContainer,
+  ScCarouselItem,
+  ScCarouselItems,
+  ScCarouselNext,
+  ScCarouselPrevious,
+} from '@semantic-components/ui';`;
 
-  codeSnippet2 = `<button sc-button type="button">Primary</button>`;
+  templateCodeSnippet = `<div class="w-full max-w-xs" sc-carousel-container>
+  <div class="w-full" sc-carousel>
+    <div sc-carousel-items>
+      @for (item of items; track $index) {
+        <div class="md:basis-1/2 lg:basis-1/3" sc-carousel-item>
+          <div class="p-1">
+            <div sc-card>
+              <div
+                class="flex aspect-square items-center justify-center p-6"
+                sc-card-content
+              >
+                <span class="text-4xl font-semibold">{{ item }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
 
-  codeSnippet = `<button sc-button type="button">Primary</button>
-    <button sc-button variant="secondary" type="button">Secondary</button>
-    <button sc-button variant="destructive" type="button">Destructive</button>
-    <button sc-button variant="outline" type="button">Outline</button>
-    <button sc-button variant="ghost" type="button">Ghost</button>
-    <button sc-button variant="link" type="button">Link</button>`;
+    <button sc-carousel-previous>
+      <svg class="size-4" si-arrow-left-icon></svg>
+      <span class="sr-only">Previous slide</span>
+    </button>
+    <button sc-carousel-next>
+      <svg class="size-4" si-arrow-right-icon></svg>
+      <span class="sr-only">Next slide</span>
+    </button>
+  </div>
+</div>`;
 }
