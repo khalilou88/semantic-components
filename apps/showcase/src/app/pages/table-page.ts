@@ -123,11 +123,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
             <sc-tab>
               <sc-tab-label>Code</sc-tab-label>
               <sc-tab-content>
-                <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <p>Coming soon</p>
-                  </div>
-                </div>
+                <sc-code-highlighter [code]="templateCodeSnippet" />
               </sc-tab-content>
             </sc-tab>
           </sc-tabs>
@@ -135,9 +131,9 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 
         <h2 id="usage" sc-page-subtitle>Usage</h2>
 
-        <sc-code-highlighter class="mt-2" [code]="codeSnippet1" language="typescript" />
+        <sc-code-highlighter class="mt-2" [code]="importCodeSnippet" language="typescript" />
 
-        <sc-code-highlighter class="mt-2" [code]="codeSnippet2" />
+        <sc-code-highlighter class="mt-2" [code]="templateCodeSnippet" />
       </div>
 
       <div class="hidden text-sm xl:block">
@@ -217,7 +213,43 @@ export default class TablePage {
 
   class = signal<string>('block w-full');
 
-  codeSnippet1 = `import { ScButton } from '@semantic-components/ui';`;
+  importCodeSnippet = `import {
+  ScTable,
+  ScTableBody,
+  ScTableCaption,
+  ScTableCell,
+  ScTableContainer,
+  ScTableFooter,
+  ScTableHeader,
+  ScTableHeaderGroup,
+  ScTableRow,
+} from '@semantic-components/ui';`;
 
-  codeSnippet2 = `<button sc-button type="button">Primary</button>`;
+  templateCodeSnippet = `<table sc-table>
+  <caption sc-table-caption>A list of your recent invoices.</caption>
+  <thead sc-table-header-group>
+    <tr sc-table-row>
+      <th class="w-[100px]" sc-table-header>Invoice</th>
+      <th sc-table-header>Status</th>
+      <th sc-table-header>Method</th>
+      <th class="text-right" sc-table-header>Amount</th>
+    </tr>
+  </thead>
+  <tbody sc-table-body>
+    @for (item of invoices; track $index) {
+      <tr sc-table-row>
+        <td class="font-medium" sc-table-cell>{{ item.invoice }}</td>
+        <td sc-table-cell>{{ item.paymentStatus }}</td>
+        <td sc-table-cell>{{ item.paymentMethod }}</td>
+        <td class="text-right" sc-table-cell>{{ item.totalAmount }}</td>
+      </tr>
+    }
+  </tbody>
+  <tfoot sc-table-footer>
+    <tr sc-table-row>
+      <td sc-table-cell colspan="3">Total</td>
+      <td class="text-right" sc-table-cell>$2,500.00</td>
+    </tr>
+  </tfoot>
+</table>`;
 }
