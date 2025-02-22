@@ -484,7 +484,7 @@ export default class PaginatorPage {
 } from '@semantic-components/ui';`;
 
   templateCodeSnippet = `<div
-  #pp="scPaginator"
+  #paginator="scPaginator"
   [currentPage]="currentPage()"
   [pageSize]="pageSize()"
   [totalSize]="totalSize()"
@@ -503,7 +503,7 @@ export default class PaginatorPage {
         </a>
       </li>
 
-      @for (page of pp.pageRanges(); track $index) {
+      @for (page of paginator.pageRanges(); track $index) {
         <li>
           @if (page === '...') {
             <span sc-pagination-ellipsis>
