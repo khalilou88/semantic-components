@@ -8,7 +8,6 @@ import {
   ScBreadcrumbList,
   ScBreadcrumbPage,
   ScBreadcrumbSeparator,
-  ScButton,
   ScCard,
   ScCardContent,
   ScCodeHighlighter,
@@ -48,7 +47,6 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
     ScCardContent,
     RouterLink,
     ScLink,
-    ScButton,
   ],
   template: `
     <div class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px] px-4">
@@ -66,7 +64,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
 
         <h1 sc-page-title>Link</h1>
 
-        <p sc-page-description>Displays a link that looks like a button or a link.</p>
+        <p sc-page-description>Displays a link that looks like a link or a button.</p>
 
         <h2 id="usage" sc-page-subtitle>Usage</h2>
 
@@ -171,8 +169,6 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
           </sc-tabs>
         </section>
 
-        <button (click)="f()" sc-button>Toggle</button>
-
         <section class="my-10" id="disabled-links">
           <h3 class="mb-2" sc-heading level="3">Disabled links</h3>
 
@@ -182,7 +178,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <a [disabled]="d()" variant="primary" sc-link>Primary</a>
+                    <a [disabled]="'true'" variant="primary" sc-link>Primary</a>
                     <a sc-link variant="secondary" disabled>Secondary</a>
                     <a sc-link variant="destructive" disabled>Destructive</a>
                     <a sc-link variant="outline" disabled>Outline</a>
@@ -398,15 +394,9 @@ export default class LinkPage {
   codeSnippet2 = `<a sc-link>Primary</a>`;
 
   codeSnippet = `<a sc-link variant="primary">Primary</a>
-  <a sc-link variant="secondary">Secondary</a>
-  <a sc-link variant="destructive">Destructive</a>
-  <a sc-link variant="outline">Outline</a>
-  <a sc-link variant="ghost">Ghost</a>
-  <a sc-link variant="link">Link</a>`;
-
-  d = signal(true);
-
-  f() {
-    this.d.update((v) => !v);
-  }
+<a sc-link variant="secondary">Secondary</a>
+<a sc-link variant="destructive">Destructive</a>
+<a sc-link variant="outline">Outline</a>
+<a sc-link variant="ghost">Ghost</a>
+<a sc-link variant="link">Link</a>`;
 }

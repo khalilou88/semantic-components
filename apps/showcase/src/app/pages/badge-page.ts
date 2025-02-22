@@ -166,7 +166,7 @@ export default class BadgePage {
   codeSnippet2 = `<div sc-badge variant="primary">Primary</div>`;
 
   codeSnippet = `<div sc-badge variant="primary">Primary</div>
-    <div sc-badge variant="secondary">Secondary</div>
-    <div sc-badge variant="destructive">Destructive</div>
-    <div sc-badge variant="outline">Outline</div>`;
+<div sc-badge variant="secondary">Secondary</div>
+<div sc-badge variant="destructive">Destructive</div>
+<div sc-badge variant="outline">Outline</div>`;
 }
