@@ -20,16 +20,18 @@ import { cn } from '@semantic-components/utils';
     }
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSheetContainer {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn('block size-full', this.class()));
+  protected readonly class = computed(() => cn('block size-full', this.classInput()));
 
-  templateRef = signal<TemplateRef<unknown> | null>(null);
+  readonly templateRef = signal<TemplateRef<unknown> | null>(null);
 }

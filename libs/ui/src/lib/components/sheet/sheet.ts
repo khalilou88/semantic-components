@@ -40,7 +40,7 @@ export type SheetVariants = VariantProps<typeof sheetVariants>;
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
     '[attr.data-state]': 'state()',
   },
   styles: ``,
@@ -48,17 +48,21 @@ export type SheetVariants = VariantProps<typeof sheetVariants>;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSheet {
-  scSheetTrigger = inject(ScSheetTrigger);
+  private readonly scSheetTrigger = inject(ScSheetTrigger);
 
-  state = computed<'open' | 'closed'>(() => {
+  readonly state = computed<'open' | 'closed'>(() => {
     return this.scSheetTrigger.state();
   });
 
-  side = computed<'top' | 'bottom' | 'left' | 'right'>(() => {
+  readonly side = computed<'top' | 'bottom' | 'left' | 'right'>(() => {
     return this.scSheetTrigger.side();
   });
 
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn(sheetVariants({ side: this.side() }), this.class()));
+  protected readonly class = computed(() =>
+    cn(sheetVariants({ side: this.side() }), this.classInput()),
+  );
 }

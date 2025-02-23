@@ -10,24 +10,24 @@ import { ScSheetContainer } from './sheet-container';
   providedIn: 'root',
 })
 export class ScSheetTrigger {
-  private readonly _overlayContainer = inject(OverlayContainer);
-  private readonly _overlay = inject(Overlay);
-  private _overlayRef!: OverlayRef;
+  private readonly overlayContainer = inject(OverlayContainer);
+  private readonly overlay = inject(Overlay);
+  private overlayRef!: OverlayRef;
 
-  state = signal<'open' | 'closed'>('closed');
-  side = signal<'top' | 'bottom' | 'left' | 'right'>('right');
+  readonly state = signal<'open' | 'closed'>('closed');
+  readonly side = signal<'top' | 'bottom' | 'left' | 'right'>('right');
 
   constructor() {
     effect(() => {
       if (this.state() === 'open') {
-        this._overlayContainer.getContainerElement().classList.add(...scOverlayClasses());
+        this.overlayContainer.getContainerElement().classList.add(...scOverlayClasses());
       }
 
       if (this.state() === 'closed') {
-        this._overlayContainer.getContainerElement().classList.remove(...scOverlayClasses());
+        this.overlayContainer.getContainerElement().classList.remove(...scOverlayClasses());
       }
 
-      this._overlayContainer.getContainerElement().setAttribute('data-state', this.state());
+      this.overlayContainer.getContainerElement().setAttribute('data-state', this.state());
     });
   }
 
@@ -36,19 +36,19 @@ export class ScSheetTrigger {
     this.side.set(config.side);
 
     const overlayConfig = this.getOverlayConfig(config);
-    this._overlayRef = this._overlay.create(overlayConfig);
+    this.overlayRef = this.overlay.create(overlayConfig);
 
     const scSheetPortal = new ComponentPortal(ScSheetContainer);
-    const scSheetRef: ComponentRef<ScSheetContainer> = this._overlayRef.attach(scSheetPortal);
+    const scSheetRef: ComponentRef<ScSheetContainer> = this.overlayRef.attach(scSheetPortal);
 
     scSheetRef.instance.templateRef.set(templateRef);
 
-    this._overlayRef.backdropClick().subscribe(() => this.close());
+    this.overlayRef.backdropClick().subscribe(() => this.close());
   }
 
   close() {
-    if (this._overlayRef?.hasAttached()) {
-      this._overlayRef?.detach();
+    if (this.overlayRef?.hasAttached()) {
+      this.overlayRef?.detach();
       this.state.set('closed');
     }
   }
@@ -57,7 +57,7 @@ export class ScSheetTrigger {
     switch (config.side) {
       case 'top': {
         return new OverlayConfig({
-          positionStrategy: this._overlay.position().global().top(),
+          positionStrategy: this.overlay.position().global().top(),
           width: config.width,
           height: config.height,
           hasBackdrop: true,
@@ -65,7 +65,7 @@ export class ScSheetTrigger {
       }
       case 'bottom': {
         return new OverlayConfig({
-          positionStrategy: this._overlay.position().global().bottom(),
+          positionStrategy: this.overlay.position().global().bottom(),
           width: config.width,
           height: config.height,
           hasBackdrop: true,
@@ -73,7 +73,7 @@ export class ScSheetTrigger {
       }
       case 'left': {
         return new OverlayConfig({
-          positionStrategy: this._overlay.position().global().left(),
+          positionStrategy: this.overlay.position().global().left(),
           width: config.width,
           height: config.height,
           hasBackdrop: true,
@@ -81,7 +81,7 @@ export class ScSheetTrigger {
       }
       case 'right': {
         return new OverlayConfig({
-          positionStrategy: this._overlay.position().global().right(),
+          positionStrategy: this.overlay.position().global().right(),
           width: config.width,
           height: config.height,
           hasBackdrop: true,

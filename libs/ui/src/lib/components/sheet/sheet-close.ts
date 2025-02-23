@@ -18,7 +18,7 @@ import { ScSheetTrigger } from './sheet-trigger';
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
     '(click)': 'close()',
   },
   styles: ``,
@@ -26,18 +26,20 @@ import { ScSheetTrigger } from './sheet-trigger';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSheetClose {
-  scSheetTrigger = inject(ScSheetTrigger);
+  private readonly scSheetTrigger = inject(ScSheetTrigger);
 
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() =>
+  protected readonly class = computed(() =>
     cn(
       'absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground',
-      this.class(),
+      this.classInput(),
     ),
   );
 
-  close() {
+  protected close() {
     this.scSheetTrigger.close();
   }
 }
