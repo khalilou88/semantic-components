@@ -81,7 +81,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
               <sc-tab-label>Preview</sc-tab-label>
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0" sc-card-content>
+                  <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
                     <div sc-badge variant="primary">Primary</div>
                     <div sc-badge variant="secondary">Secondary</div>
                     <div sc-badge variant="destructive">Destructive</div>
