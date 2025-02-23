@@ -36,6 +36,10 @@ export class ScSheetTrigger {
     this.side.set(config.side);
 
     const overlayConfig = this.getOverlayConfig(config);
+
+    // Set block scroll strategy
+    overlayConfig.scrollStrategy = this.overlay.scrollStrategies.block();
+
     this.overlayRef = this.overlay.create(overlayConfig);
 
     const scSheetPortal = new ComponentPortal(ScSheetContainer);
