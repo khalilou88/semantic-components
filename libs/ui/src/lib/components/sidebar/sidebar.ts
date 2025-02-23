@@ -3,15 +3,19 @@ import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  TemplateRef,
   ViewEncapsulation,
   computed,
+  effect,
   inject,
   input,
   signal,
+  viewChild,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
 
+import { ScSheetConfig, ScSheetTrigger } from '../sheet';
 import { ScSidebarMobile } from './sidebar-mobile';
 import { ScSidebarState } from './sidebar-state';
 
@@ -28,9 +32,11 @@ import { ScSidebarState } from './sidebar-state';
         <ng-container *ngTemplateOutlet="sc_sidebar_content" />
       </div>
     } @else if (isMobile()) {
-      <sc-sidebar-mobile [side]="side()">
-        <ng-container *ngTemplateOutlet="sc_sidebar_content" />
-      </sc-sidebar-mobile>
+      <ng-template #sc_sidebar_mobile_content>
+        <sc-sidebar-mobile [side]="side()">
+          <ng-container *ngTemplateOutlet="sc_sidebar_content" />
+        </sc-sidebar-mobile>
+      </ng-template>
     } @else {
       <div
         class="group peer hidden text-sidebar-foreground md:block"
@@ -111,5 +117,34 @@ export class ScSidebar {
         this.sidebarState.openMobile.set(false);
       }
     });
+
+    effect(() => {
+      if (this.openMobile()) {
+        this.openSheet(this.side());
+      }
+
+      if (!this.openMobile()) {
+        this.scSheetTrigger.close();
+      }
+    });
+  }
+
+  private readonly scSheetTrigger = inject(ScSheetTrigger);
+
+  readonly sheetRef = viewChild.required<TemplateRef<unknown>>('sc_sidebar_mobile_content');
+
+  openSheet(side: 'top' | 'bottom' | 'left' | 'right') {
+    const config = new ScSheetConfig();
+    config.side = side;
+
+    if (side === 'left' || side === 'right') {
+      config.width = '300';
+    }
+
+    if (side === 'top' || side === 'bottom') {
+      config.height = '300';
+    }
+
+    this.scSheetTrigger.open(this.sheetRef(), config);
   }
 }

@@ -10,7 +10,6 @@ import {
 
 import { cn } from '@semantic-components/utils';
 
-import { scOverlayClasses } from '../overlay';
 import { SIDEBAR_WIDTH, SIDEBAR_WIDTH_ICON } from './constants';
 import { ScSidebarState } from './sidebar-state';
 
@@ -38,7 +37,6 @@ export class ScSidebarProvider {
   classes = computed(() =>
     cn(
       'group/sidebar-wrapper flex min-h-svh w-full has-[[data-variant=inset]]:bg-sidebar',
-      this.sidebarState.openMobile() && scOverlayClasses(),
       this.class(),
     ),
   );
