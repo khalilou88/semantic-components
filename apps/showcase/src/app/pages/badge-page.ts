@@ -41,7 +41,6 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
     ScTabLabel,
     ScTabContent,
     ScCard,
-    ScHeading,
     ScCodeHighlighter,
     ScCardContent,
     RouterLink,
@@ -65,17 +64,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 
         <p sc-page-description>Displays a badge or a component that looks like a badge.</p>
 
-        <h2 id="usage" sc-page-subtitle>Usage</h2>
-
-        <sc-code-highlighter class="mt-2" [code]="codeSnippet1" language="typescript" />
-
-        <sc-code-highlighter class="mt-2" [code]="codeSnippet2" />
-
-        <h2 class="mb-5" id="examples" sc-page-subtitle>Examples</h2>
-
-        <section class="my-10" id="variants">
-          <h3 class="mb-2" sc-heading level="3">Variants</h3>
-
+        <section class="my-10">
           <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
             <sc-tab>
               <sc-tab-label>Preview</sc-tab-label>
@@ -94,11 +83,17 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
             <sc-tab>
               <sc-tab-label>Code</sc-tab-label>
               <sc-tab-content>
-                <sc-code-highlighter [code]="codeSnippet" />
+                <sc-code-highlighter [code]="templateCodeSnippet" />
               </sc-tab-content>
             </sc-tab>
           </sc-tabs>
         </section>
+
+        <h2 id="usage" sc-page-subtitle>Usage</h2>
+
+        <sc-code-highlighter class="mt-2" [code]="importCodeSnippet" language="typescript" />
+
+        <sc-code-highlighter class="mt-2" [code]="templateCodeSnippet" />
       </div>
 
       <div class="hidden text-sm xl:block">
@@ -107,14 +102,6 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
             <div class="space-y-2">
               <p class="font-medium">On This Page</p>
               <ul class="m-0 list-none">
-                <!--li class="mt-0 pt-2">
-                  <a
-                    class="inline-block font-medium text-foreground no-underline transition-colors hover:text-foreground"
-                    href="#installation"
-                  >
-                    Installation
-                  </a>
-                </li-->
                 <li class="mt-0 pt-2">
                   <a
                     class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
@@ -123,26 +110,6 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
                   >
                     Usage
                   </a>
-                </li>
-                <li class="mt-0 pt-2">
-                  <a
-                    class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
-                    routerLink="."
-                    fragment="examples"
-                  >
-                    Examples
-                  </a>
-                  <ul class="m-0 list-none pl-4">
-                    <li class="mt-0 pt-2">
-                      <a
-                        class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
-                        routerLink="."
-                        fragment="variants"
-                      >
-                        Variants
-                      </a>
-                    </li>
-                  </ul>
                 </li>
               </ul>
             </div>
@@ -161,11 +128,9 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 export default class BadgePage {
   class = signal<string>('block w-full');
 
-  codeSnippet1 = `import { ScBadge } from '@semantic-components/ui';`;
+  importCodeSnippet = `import { ScBadge } from '@semantic-components/ui';`;
 
-  codeSnippet2 = `<div sc-badge variant="primary">Primary</div>`;
-
-  codeSnippet = `<div sc-badge variant="primary">Primary</div>
+  templateCodeSnippet = `<div sc-badge variant="primary">Primary</div>
 <div sc-badge variant="secondary">Secondary</div>
 <div sc-badge variant="destructive">Destructive</div>
 <div sc-badge variant="outline">Outline</div>`;

@@ -120,11 +120,7 @@ import { SiChevronRightIcon, SiXIcon } from '@semantic-icons/lucide-icons';
             <sc-tab>
               <sc-tab-label>Code</sc-tab-label>
               <sc-tab-content>
-                <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0" sc-card-content>
-                    <p>Coming soon</p>
-                  </div>
-                </div>
+                <sc-code-highlighter [code]="templateCodeSnippet" />
               </sc-tab-content>
             </sc-tab>
           </sc-tabs>
@@ -132,13 +128,13 @@ import { SiChevronRightIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 
         <h2 id="usage" sc-page-subtitle>Usage</h2>
 
-        <sc-code-highlighter class="mt-2" [code]="codeSnippet1" language="typescript" />
+        <sc-code-highlighter class="mt-2" [code]="importCodeSnippet" language="typescript" />
 
-        <sc-code-highlighter class="mt-2" [code]="codeSnippet2" />
+        <sc-code-highlighter class="mt-2" [code]="templateCodeSnippet" />
 
         <h2 class="mb-5" id="examples" sc-page-subtitle>Examples</h2>
 
-        <section class="my-10" id="variants">
+        <section class="my-10" id="simple">
           <h3 class="mb-2" sc-heading level="3">Simple</h3>
 
           <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
@@ -176,7 +172,7 @@ import { SiChevronRightIcon, SiXIcon } from '@semantic-icons/lucide-icons';
           </sc-tabs>
         </section>
 
-        <section class="my-10" id="small-buttons">
+        <section class="my-10" id="with-title">
           <h3 class="mb-2" sc-heading level="3">With title</h3>
 
           <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
@@ -220,7 +216,7 @@ import { SiChevronRightIcon, SiXIcon } from '@semantic-icons/lucide-icons';
           </sc-tabs>
         </section>
 
-        <section class="my-10" id="large-buttons">
+        <section class="my-10" id="with-action">
           <h3 class="mb-2" sc-heading level="3">With Action</h3>
 
           <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
@@ -269,7 +265,7 @@ import { SiChevronRightIcon, SiXIcon } from '@semantic-icons/lucide-icons';
           </sc-tabs>
         </section>
 
-        <section class="my-10" id="disabled-buttons">
+        <section class="my-10" id="destructive">
           <h3 class="mb-2" sc-heading level="3">Destructive</h3>
 
           <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
@@ -325,14 +321,6 @@ import { SiChevronRightIcon, SiXIcon } from '@semantic-icons/lucide-icons';
             <div class="space-y-2">
               <p class="font-medium">On This Page</p>
               <ul class="m-0 list-none">
-                <!--li class="mt-0 pt-2">
-                  <a
-                    class="inline-block font-medium text-foreground no-underline transition-colors hover:text-foreground"
-                    href="#installation"
-                  >
-                    Installation
-                  </a>
-                </li-->
                 <li class="mt-0 pt-2">
                   <a
                     class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
@@ -355,9 +343,9 @@ import { SiChevronRightIcon, SiXIcon } from '@semantic-icons/lucide-icons';
                       <a
                         class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
                         routerLink="."
-                        fragment="variants"
+                        fragment="simple"
                       >
-                        Variants
+                        Simple
                       </a>
                     </li>
 
@@ -365,9 +353,9 @@ import { SiChevronRightIcon, SiXIcon } from '@semantic-icons/lucide-icons';
                       <a
                         class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
                         routerLink="."
-                        fragment="small-buttons"
+                        fragment="with-title"
                       >
-                        Small buttons
+                        With title
                       </a>
                     </li>
 
@@ -375,9 +363,9 @@ import { SiChevronRightIcon, SiXIcon } from '@semantic-icons/lucide-icons';
                       <a
                         class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
                         routerLink="."
-                        fragment="large-buttons"
+                        fragment="with-action"
                       >
-                        Large buttons
+                        With Action
                       </a>
                     </li>
 
@@ -385,29 +373,9 @@ import { SiChevronRightIcon, SiXIcon } from '@semantic-icons/lucide-icons';
                       <a
                         class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
                         routerLink="."
-                        fragment="disabled-buttons"
+                        fragment="destructive"
                       >
-                        Disabled buttons
-                      </a>
-                    </li>
-
-                    <li class="mt-0 pt-2">
-                      <a
-                        class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
-                        routerLink="."
-                        fragment="buttons-with-icons"
-                      >
-                        Buttons with icons
-                      </a>
-                    </li>
-
-                    <li class="mt-0 pt-2">
-                      <a
-                        class="inline-block text-muted-foreground no-underline transition-colors hover:text-foreground"
-                        routerLink="."
-                        fragment="button-with-loading-state"
-                      >
-                        Button with loading state
+                        Destructive
                       </a>
                     </li>
                   </ul>
@@ -462,14 +430,31 @@ export default class ToastPage {
 
   class = signal<string>('block w-full');
 
-  codeSnippet1 = `import { ScButton } from '@semantic-components/ui';`;
+  importCodeSnippet = `import {
+  ScToast,
+  ScToastAction,
+  ScToastClose,
+  ScToastContent,
+  ScToastDescription,
+  ScToastTitle,
+  Toaster,
+} from '@semantic-components/ui';`;
 
-  codeSnippet2 = `<button sc-button type="button">Primary</button>`;
+  templateCodeSnippet = `<button (click)="showToast()" variant="outline" sc-button type="button">
+      Add to calendar
+</button>
 
-  codeSnippet = `<button sc-button type="button">Primary</button>
-    <button sc-button variant="secondary" type="button">Secondary</button>
-    <button sc-button variant="destructive" type="button">Destructive</button>
-    <button sc-button variant="outline" type="button">Outline</button>
-    <button sc-button variant="ghost" type="button">Ghost</button>
-    <button sc-button variant="link" type="button">Link</button>`;
+<ng-template #toastTemplate>
+  <div sc-toast>
+    <div sc-toast-content>
+      <h2 sc-toast-title>Scheduled: Catch up</h2>
+      <p sc-toast-description>Friday, February 10, 2023 at 5:57 PM</p>
+    </div>
+    <button sc-toast-action type="button">Undo</button>
+    <button type="button" sc-toast-close>
+      <svg class="size-4" si-x-icon></svg>
+      <span class="sr-only">Close</span>
+    </button>
+  </div>
+</ng-template>`;
 }
