@@ -155,3 +155,63 @@
     --sidebar-ring: 240 4.9% 83.9%;
   }
 }
+
+/* Music styles */
+.btn-primary {
+  @apply inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90;
+}
+
+.tabs-list {
+  @apply inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground;
+}
+
+.tab-trigger {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm;
+
+  &.active {
+    @apply bg-background text-foreground shadow-sm;
+  }
+}
+
+.sidebar-item {
+  @apply w-full justify-start rounded-md p-2 text-sm font-medium hover:underline;
+}
+
+.separator {
+  @apply h-[1px] w-full bg-border;
+}
+
+.menu-item {
+  &.text-muted-foreground {
+    @apply text-gray-500;
+  }
+}
+
+.scroll-area {
+  @apply relative overflow-hidden;
+
+  .scroll-bar {
+    @apply flex touch-none select-none transition-colors;
+
+    &.horizontal {
+      @apply h-2.5 border-t border-border;
+    }
+  }
+}
+
+/* Icons placeholders */
+.plus-circle-icon,
+.playlist-icon,
+.browse-icon,
+.radio-icon,
+.artist-icon,
+.album-icon,
+.search-icon,
+.podcast-icon {
+  @apply h-4 w-4 mr-2;
+  background-color: currentColor;
+  mask-size: contain;
+  mask-position: center;
+  mask-repeat: no-repeat;
+}
+/* Fin Music styles */

@@ -2,6 +2,11 @@ import { Route } from '@angular/router';
 
 export const appRoutes: Route[] = [
   {
+    path: 'blocks/music',
+    loadComponent: () => import('./blocks/music/music-page'),
+    title: 'Music',
+  },
+  {
     path: '',
     loadComponent: () => import('./pages/hero-section-page'),
     title: 'Semantic components',
