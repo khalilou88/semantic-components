@@ -24,7 +24,6 @@ import {
   ScCardHeader,
   ScCardTitle,
   ScCodeHighlighter,
-  ScHeading,
   ScInput,
   ScLabel,
   ScPageDescription,
@@ -69,7 +68,6 @@ import { SiChevronRightIcon, SiXIcon } from '@semantic-icons/lucide-icons';
     ScTabLabel,
     ScTabContent,
     ScCard,
-    ScHeading,
     ScCodeHighlighter,
     ScCardContent,
     RouterLink,
@@ -95,17 +93,7 @@ import { SiChevronRightIcon, SiXIcon } from '@semantic-icons/lucide-icons';
           screen.
         </p>
 
-        <h2 id="usage" sc-page-subtitle>Usage</h2>
-
-        <sc-code-highlighter class="mt-2" [code]="importCodeSnippet" language="typescript" />
-
-        <sc-code-highlighter class="mt-2" [code]="templateCodeSnippet" />
-
-        <h2 class="mb-5" id="examples" sc-page-subtitle>Examples</h2>
-
-        <section class="my-10" id="variants">
-          <h3 class="mb-2" sc-heading level="3">Variants</h3>
-
+        <section class="my-10">
           <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
             <sc-tab>
               <sc-tab-label>Preview</sc-tab-label>
@@ -161,6 +149,12 @@ import { SiChevronRightIcon, SiXIcon } from '@semantic-icons/lucide-icons';
             </sc-tab>
           </sc-tabs>
         </section>
+
+        <h2 id="usage" sc-page-subtitle>Usage</h2>
+
+        <sc-code-highlighter class="mt-2" [code]="importCodeSnippet" language="typescript" />
+
+        <sc-code-highlighter class="mt-2" [code]="templateCodeSnippet" />
       </div>
 
       <div class="hidden text-sm xl:block">
