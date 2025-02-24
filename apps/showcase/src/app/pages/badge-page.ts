@@ -12,7 +12,6 @@ import {
   ScCard,
   ScCardContent,
   ScCodeHighlighter,
-  ScHeading,
   ScPageDescription,
   ScPageSubtitle,
   ScPageTitle,
