@@ -28,7 +28,7 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
 export class AlbumArtwork {
   @Input() album: any;
   @Input() aspectRatio: 'portrait' | 'square' = 'portrait';
-  @Input() width: number = 250;
-  @Input() height: number = 330;
-  @Input() class: string = '';
+  @Input() width = 250;
+  @Input() height = 330;
+  @Input() class = '';
 }
