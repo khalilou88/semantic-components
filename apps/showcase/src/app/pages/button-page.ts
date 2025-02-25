@@ -68,9 +68,9 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
 
         <h2 id="usage" sc-page-subtitle>Usage</h2>
 
-        <sc-code-highlighter class="mt-2" [code]="codeSnippet1" language="typescript" />
+        <sc-code-highlighter class="mt-2" [code]="importCodeSnippet" language="typescript" />
 
-        <sc-code-highlighter class="mt-2" [code]="codeSnippet2" />
+        <sc-code-highlighter class="mt-2" [code]="templateCodeSnippet" />
 
         <h2 class="mb-5" id="examples" sc-page-subtitle>Examples</h2>
 
@@ -82,7 +82,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
               <sc-tab-label>Preview</sc-tab-label>
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0" sc-card-content>
+                  <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
                     <button sc-button type="button">Primary</button>
                     <button sc-button variant="secondary" type="button">Secondary</button>
                     <button sc-button variant="destructive" type="button">Destructive</button>
@@ -97,7 +97,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
             <sc-tab>
               <sc-tab-label>Code</sc-tab-label>
               <sc-tab-content>
-                <sc-code-highlighter [code]="codeSnippet" />
+                <sc-code-highlighter [code]="templateCodeSnippet" />
               </sc-tab-content>
             </sc-tab>
           </sc-tabs>
@@ -111,7 +111,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
               <sc-tab-label>Preview</sc-tab-label>
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0" sc-card-content>
+                  <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
                     <button sc-button type="button" size="sm">Primary</button>
                     <button sc-button variant="secondary" type="button" size="sm">Secondary</button>
                     <button sc-button variant="destructive" type="button" size="sm">
@@ -146,7 +146,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
               <sc-tab-label>Preview</sc-tab-label>
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0" sc-card-content>
+                  <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
                     <button sc-button type="button" size="lg">Primary</button>
                     <button sc-button variant="secondary" type="button" size="lg">Secondary</button>
                     <button sc-button variant="destructive" type="button" size="lg">
@@ -181,7 +181,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
               <sc-tab-label>Preview</sc-tab-label>
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0" sc-card-content>
+                  <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
                     <button [disabled]="'true'" sc-button type="button">Primary</button>
                     <button sc-button variant="secondary" type="button" disabled>Secondary</button>
                     <button sc-button variant="destructive" type="button" disabled>
@@ -216,7 +216,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
               <sc-tab-label>Preview</sc-tab-label>
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0 items-center" sc-card-content>
+                  <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
                     <button sc-button type="button" size="icon">
                       <svg si-chevron-right-icon></svg>
                     </button>
@@ -261,7 +261,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
               <sc-tab-label>Preview</sc-tab-label>
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
-                  <div class="m-10 flex gap-2 p-0" sc-card-content>
+                  <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
                     <button sc-button disabled>
                       <svg class="animate-spin" si-loader-circle-icon></svg>
                       Please wait
@@ -395,11 +395,9 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
 export default class ButtonPage {
   class = signal<string>('block w-full');
 
-  codeSnippet1 = `import { ScButton } from '@semantic-components/ui';`;
+  importCodeSnippet = `import { ScButton } from '@semantic-components/ui';`;
 
-  codeSnippet2 = `<button sc-button type="button">Primary</button>`;
-
-  codeSnippet = `<button sc-button type="button">Primary</button>
+  templateCodeSnippet = `<button sc-button type="button">Primary</button>
 <button sc-button variant="secondary" type="button">Secondary</button>
 <button sc-button variant="destructive" type="button">Destructive</button>
 <button sc-button variant="outline" type="button">Outline</button>
