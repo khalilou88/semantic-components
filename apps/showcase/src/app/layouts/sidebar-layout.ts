@@ -119,6 +119,12 @@ import { LayoutState } from '../services/layout-state';
               </li>
 
               <li sc-sidebar-menu-item>
+                <a routerLink="../components/input-password" sc-sidebar-menu-link>
+                  <span>Input Password</span>
+                </a>
+              </li>
+
+              <li sc-sidebar-menu-item>
                 <a routerLink="../components/input-otp" sc-sidebar-menu-link>
                   <span>Input OTP</span>
                 </a>

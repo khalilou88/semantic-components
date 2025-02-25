@@ -34,9 +34,7 @@ import { ScProgress } from '../progress';
   ],
   template: `
     <div class="space-y-2">
-      <label [for]="id" sc-label>
-        Password input field with toggle visibility button and password strength indicator
-      </label>
+      <label [for]="id" sc-label>Password</label>
       <div class="relative">
         <input
           class="pe-9"
@@ -111,7 +109,7 @@ export class ScInputPassword implements OnInit {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('block', this.classInput()));
+  protected readonly class = computed(() => cn('block w-full', this.classInput()));
 
   protected control = new FormControl();
 
