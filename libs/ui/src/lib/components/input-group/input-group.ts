@@ -29,6 +29,7 @@ export class ScInputGroup {
 
   protected readonly class = computed(() =>
     cn(
+      'w-full',
       'grid grid-cols-[24px_1fr_24px]',
       //[&>[data-slot=icon]]:fill-neutral-500
       '[&>[data-slot=icon]:first-child]:col-start-1 [&>[data-slot=icon]:last-child]:col-start-3 [&>[data-slot=icon]]:row-start-1 [&>[data-slot=icon]]:z-10 [&>[data-slot=icon]]:place-self-center [&>[data-slot=icon]]:size-4 ',
