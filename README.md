@@ -1,5 +1,9 @@
 # **Semantic Components**
 
+<p align="center">
+    <img src="./logo.svg" width="50%">
+</p>
+
 **Semantic Components** are **self-contained, meaningful, and reusable UI elements**. They prioritize **semantic HTML**, **accessibility**, and **modular design**, making UI more readable, maintainable, and accessible.
 
 Built using **Angular CDK** and **Tailwind CSS**, this UI library ensures:

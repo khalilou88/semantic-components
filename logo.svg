@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+
+  <!-- Dark background -->
+  <rect width="500" height="500" fill="#1a1f2e" rx="15" ry="15" />
+
+  <!-- Central hexagon -->
+  <polygon
+    points="250,165 315,205 315,285 250,325 185,285 185,205"
+    fill="none"
+    stroke="white"
+    stroke-width="8"
+  />
+
+  <!-- 3D cube -->
+  <polygon
+    points="250,200 290,225 250,250 210,225"
+    fill="white"
+    stroke="#111827"
+    stroke-width="3"
+  />
+  <polygon
+    points="250,250 290,225 290,275 250,300"
+    fill="#3b82f6"
+    stroke="#111827"
+    stroke-width="3"
+  />
+  <polygon
+    points="250,250 210,225 210,275 250,300"
+    fill="white"
+    stroke="#111827"
+    stroke-width="3"
+  />
+
+  <!-- Surrounding geometric elements -->
+  <!-- Top elements -->
+  <circle cx="250" cy="130" r="8" fill="white" />
+  <rect x="240" y="110" width="20" height="6" fill="white" />
+
+  <!-- Right top elements -->
+  <circle
+    cx="350"
+    cy="180"
+    r="15"
+    fill="none"
+    stroke="white"
+    stroke-width="6"
+  />
+  <rect x="320" y="177" width="20" height="6" fill="#3b82f6" />
+  <rect x="320" y="160" width="15" height="6" fill="#3b82f6" />
+
+  <!-- Right elements -->
+  <circle cx="370" cy="250" r="5" fill="white" />
+  <rect x="330" y="246" width="30" height="6" fill="white" />
+  <rect x="340" y="260" width="20" height="6" fill="#3b82f6" />
+
+  <!-- Right bottom elements -->
+  <rect x="315" y="315" width="20" height="6" fill="#3b82f6" />
+  <rect x="315" y="330" width="15" height="6" fill="#3b82f6" />
+  <circle
+    cx="350"
+    cy="320"
+    r="15"
+    fill="none"
+    stroke="white"
+    stroke-width="6"
+  />
+
+  <!-- Bottom elements -->
+  <rect x="245" y="345" width="10" height="25" fill="white" />
+  <circle cx="250" cy="385" r="8" fill="white" />
+
+  <!-- Left bottom elements -->
+  <circle
+    cx="150"
+    cy="320"
+    r="15"
+    fill="none"
+    stroke="white"
+    stroke-width="6"
+  />
+  <rect x="165" y="315" width="20" height="6" fill="white" />
+  <rect x="170" y="330" width="15" height="6" fill="white" />
+
+  <!-- Left elements -->
+  <circle cx="130" cy="250" r="5" fill="white" />
+  <rect x="140" y="246" width="30" height="6" fill="white" />
+  <rect x="150" y="260" width="20" height="6" fill="white" />
+
+  <!-- Left top elements -->
+  <rect x="165" y="177" width="20" height="6" fill="white" />
+  <rect x="170" y="160" width="15" height="6" fill="white" />
+  <circle
+    cx="150"
+    cy="180"
+    r="15"
+    fill="none"
+    stroke="#3b82f6"
+    stroke-width="6"
+  />
+
+  <!-- Additional small dots for detail -->
+  <circle cx="285" cy="130" r="4" fill="white" />
+  <circle cx="215" cy="130" r="4" fill="white" />
+  <circle cx="375" cy="200" r="4" fill="#3b82f6" />
+  <circle cx="375" cy="300" r="4" fill="#3b82f6" />
+  <circle cx="125" cy="200" r="4" fill="white" />
+  <circle cx="125" cy="300" r="4" fill="white" />
+  <circle cx="215" cy="370" r="4" fill="white" />
+  <circle cx="285" cy="370" r="4" fill="#3b82f6" />
+
+  <!-- Text  -->
+ <text
+    x="250"
+    y="430"
+    font-family="Arial, sans-serif"
+    font-size="24"
+    font-weight="bold"
+    text-anchor="middle"
+    fill="white"
+  >Semantic Components</text>
+</svg>
