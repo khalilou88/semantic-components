@@ -75,12 +75,12 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 
             <li sc-breadcrumb-separator><svg si-chevron-right-icon></svg></li>
             <li sc-breadcrumb-item>
-              <span sc-breadcrumb-page>Menu-bar</span>
+              <span sc-breadcrumb-page>Menu Bar</span>
             </li>
           </ol>
         </nav>
 
-        <h1 sc-page-title>Menu-bar</h1>
+        <h1 sc-page-title>Menu Bar</h1>
 
         <p sc-page-description>
           A visually persistent menu common in desktop applications that provides quick access to a
