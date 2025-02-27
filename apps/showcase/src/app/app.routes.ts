@@ -2,6 +2,11 @@ import { Route } from '@angular/router';
 
 export const appRoutes: Route[] = [
   {
+    path: 'blocks/sticky-header',
+    loadComponent: () => import('./blocks/layouts/sticky-header'),
+    title: 'Sticky Header',
+  },
+  {
     path: 'blocks/sticky-footer',
     loadComponent: () => import('./blocks/layouts/sticky-footer'),
     title: 'Sticky Footer',
