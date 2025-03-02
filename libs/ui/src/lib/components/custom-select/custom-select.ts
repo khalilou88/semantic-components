@@ -10,6 +10,7 @@ import { TemplatePortal } from '@angular/cdk/portal';
 import { ViewportRuler } from '@angular/cdk/scrolling';
 import {
   AfterContentInit,
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ContentChildren,
@@ -82,7 +83,7 @@ import { CustomOption } from './custom-option';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CustomSelect implements AfterContentInit, OnDestroy {
+export class CustomSelect implements AfterContentInit, OnDestroy, AfterViewInit {
   @Input() placeholder = 'Select an option';
   @Input() value: any = null;
 

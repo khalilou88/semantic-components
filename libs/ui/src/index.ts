@@ -77,3 +77,4 @@ export * from './lib/components/range-slider';
 export * from './lib/components/dual-range-slider';
 export * from './lib/components/swipeable-toast';
 export * from './lib/components/custom-select';
+export * from './lib/components/toc';

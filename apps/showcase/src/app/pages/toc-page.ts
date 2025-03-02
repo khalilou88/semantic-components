@@ -1,110 +1,60 @@
 import { CommonModule } from '@angular/common';
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  OnDestroy,
-  ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-interface Section {
-  id: string;
-  title: string;
-  element: HTMLElement;
-}
+import { ScToc } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-toc-page',
-  imports: [CommonModule],
+  imports: [CommonModule, ScToc],
   template: `
-    <div
-      class="sticky top-8 self-start w-64 max-h-[90vh] overflow-y-auto p-4 bg-gray-50 rounded-lg shadow-md"
-    >
-      <h3 class="text-lg font-semibold mb-4">Table of Contents</h3>
-      <ul class="space-y-1">
-        <li *ngFor="let section of sections">
-          <a
-            class="block py-2 pl-4 border-l-2 transition-all duration-200 rounded-r"
-            [ngClass]="{
-              'border-blue-600 text-blue-600 font-medium bg-blue-50': activeSection === section.id,
-              'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-100':
-                activeSection !== section.id,
-            }"
-            (click)="scrollToSection($event, section.id)"
-            href="#{{ section.id }}"
-          >
-            {{ section.title }}
-          </a>
-        </li>
-      </ul>
+    <div class="container mx-auto max-w-6xl px-4 py-8 flex gap-8">
+      <!-- Insert the TOC component -->
+      <sc-toc />
+
+      <!-- Content sections -->
+      <div class="flex-1">
+        <section class="min-h-[70vh] mb-8 p-4 bg-white rounded-lg shadow-md" id="section1">
+          <h2 class="text-xl font-bold mb-4">Getting Started</h2>
+          <p class="mb-4">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae
+            vestibulum vestibulum. Cras porttitor metus in metus ultrices, nec convallis odio
+            pharetra.
+          </p>
+          <!-- More content -->
+        </section>
+
+        <section class="min-h-[70vh] mb-8 p-4 bg-white rounded-lg shadow-md" id="section2">
+          <h2 class="text-xl font-bold mb-4">Installation</h2>
+          <p class="mb-4">
+            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat.
+          </p>
+          <!-- More content -->
+        </section>
+
+        <section class="min-h-[70vh] mb-8 p-4 bg-white rounded-lg shadow-md" id="section3">
+          <h2 class="text-xl font-bold mb-4">Configuration</h2>
+          <p class="mb-4">
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+            nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+          </p>
+          <!-- More content -->
+        </section>
+
+        <section class="min-h-[70vh] mb-8 p-4 bg-white rounded-lg shadow-md" id="section4">
+          <h2 class="text-xl font-bold mb-4">Advanced Usage</h2>
+          <p class="mb-4">
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo consequat. Duis aute irure dolor in reprehenderit in voluptate.
+          </p>
+          <!-- More content -->
+        </section>
+      </div>
     </div>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class TocPage implements AfterViewInit, OnDestroy {
-  sections: Section[] = [];
-  activeSection = '';
-  private observer: IntersectionObserver | null = null;
-
-  constructor(private readonly elementRef: ElementRef) {}
-
-  ngAfterViewInit(): void {
-    // After the view is initialized, find all sections
-    this.initializeToc();
-  }
-
-  ngOnDestroy(): void {
-    // Clean up the observer when component is destroyed
-    if (this.observer) {
-      this.observer.disconnect();
-    }
-  }
-
-  private initializeToc(): void {
-    // Get all sections from the document (with section tag and id attribute)
-    const foundSections = Array.from(document.querySelectorAll('section[id]'));
-
-    this.sections = foundSections.map((section) => ({
-      id: section.id,
-      title: section.querySelector('h2')?.textContent ?? 'Untitled Section',
-      element: section as HTMLElement,
-    }));
-
-    // Set up and start the intersection observer
-    this.setupIntersectionObserver();
-  }
-
-  private setupIntersectionObserver(): void {
-    const options = {
-      rootMargin: '-100px 0px -70% 0px',
-      threshold: 0,
-    };
-
-    this.observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          this.activeSection = entry.target.id;
-        }
-      });
-    }, options);
-
-    // Start observing each section
-    this.sections.forEach((section) => {
-      this.observer?.observe(section.element);
-    });
-  }
-
-  scrollToSection(event: Event, sectionId: string): void {
-    event.preventDefault();
-    const section = document.getElementById(sectionId);
-
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
-      // Update URL without triggering navigation
-      window.history.pushState(null, '', `#${sectionId}`);
-    }
-  }
-}
+export default class TocPage {}
