@@ -5,7 +5,6 @@ import {
   Component,
   ElementRef,
   OnDestroy,
-  OnInit,
   ViewEncapsulation,
 } from '@angular/core';
 
@@ -45,16 +44,12 @@ interface Section {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class TocPage implements OnInit, AfterViewInit, OnDestroy {
+export default class TocPage implements AfterViewInit, OnDestroy {
   sections: Section[] = [];
   activeSection = '';
   private observer: IntersectionObserver | null = null;
 
   constructor(private readonly elementRef: ElementRef) {}
-
-  ngOnInit(): void {
-    // Initialize the component
-  }
 
   ngAfterViewInit(): void {
     // After the view is initialized, find all sections
