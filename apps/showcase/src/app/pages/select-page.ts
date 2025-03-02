@@ -2,11 +2,11 @@ import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
-import { ScLabel, ScOption, ScSelect } from '@semantic-components/ui';
+import { CustomOption, CustomSelect, ScLabel, ScOption, ScSelect } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-select-page',
-  imports: [ScLabel, ScSelect, ScOption, ReactiveFormsModule, JsonPipe],
+  imports: [ScLabel, ScSelect, ScOption, ReactiveFormsModule, JsonPipe, CustomSelect, CustomOption],
   template: `
     <form [formGroup]="selectForm">
       <label sc-label for="car">Choose a car:</label>
@@ -59,6 +59,30 @@ import { ScLabel, ScOption, ScSelect } from '@semantic-components/ui';
       <sc-option value="3">3</sc-option>
       <sc-option value="4">4</sc-option>
     </sc-select>
+
+    <div class="p-6 max-w-md mx-auto">
+      <h3 class="text-lg font-medium text-gray-900 mb-4">Custom Select Demo</h3>
+
+      <sc-custom-select
+        [value]="selectedValue"
+        (valueChange)="onValueChange($event)"
+        placeholder="Select a fruit"
+      >
+        <sc-custom-option [value]="'apple'">Apple</sc-custom-option>
+        <sc-custom-option [value]="'banana'">Banana</sc-custom-option>
+        <sc-custom-option [value]="'orange'">Orange</sc-custom-option>
+        <sc-custom-option [value]="'grape'">Grape</sc-custom-option>
+        <sc-custom-option [value]="'strawberry'">Strawberry</sc-custom-option>
+        <sc-custom-option [value]="'mango'">Mango</sc-custom-option>
+      </sc-custom-select>
+
+      @if (selectedValue) {
+        <p class="mt-4 text-sm text-gray-700">
+          Selected value:
+          <span class="font-medium">{{ selectedValue }}</span>
+        </p>
+      }
+    </div>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -71,5 +95,12 @@ export default class SelectPage {
 
   f(event: any) {
     console.log(event);
+  }
+
+  selectedValue: string | null = null;
+
+  onValueChange(value: string) {
+    this.selectedValue = value;
+    console.log('Selected:', value);
   }
 }
