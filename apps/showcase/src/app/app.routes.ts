@@ -104,6 +104,11 @@ export const appRoutes: Route[] = [
             title: 'RTL Page',
           },
           {
+            path: 'toc',
+            loadComponent: () => import('./pages/toc-page'),
+            title: 'TOC Page',
+          },
+          {
             path: 'home',
             loadComponent: () => import('./pages/home-page'),
             title: 'Home Page',
