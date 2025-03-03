@@ -6,6 +6,7 @@ import {
   ElementRef,
   OnDestroy,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 
 export interface ScSection {
@@ -23,7 +24,7 @@ export interface ScSection {
     >
       <h3 class="text-lg font-semibold mb-4">Table of Contents</h3>
       <ul class="space-y-1">
-        <li *ngFor="let section of sections">
+        <li *ngFor="let section of sections()">
           <a
             class="block py-2 pl-4 border-l-2 transition-all duration-200 rounded-r"
             [ngClass]="{
@@ -45,7 +46,7 @@ export interface ScSection {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScToc implements AfterViewInit, OnDestroy {
-  sections: ScSection[] = [];
+  sections = signal<ScSection[]>([]);
   activeSection = '';
   private observer: IntersectionObserver | null = null;
 
@@ -67,11 +68,13 @@ export class ScToc implements AfterViewInit, OnDestroy {
     // Get all sections from the document (with section tag and id attribute)
     const foundSections = Array.from(document.querySelectorAll('section[id]'));
 
-    this.sections = foundSections.map((section) => ({
-      id: section.id,
-      title: section.querySelector('h2')?.textContent ?? 'Untitled Section',
-      element: section as HTMLElement,
-    }));
+    this.sections.set(
+      foundSections.map((section) => ({
+        id: section.id,
+        title: section.querySelector('h2')?.textContent ?? 'Untitled Section',
+        element: section as HTMLElement,
+      })),
+    );
 
     // Set up and start the intersection observer
     this.setupIntersectionObserver();
@@ -92,7 +95,7 @@ export class ScToc implements AfterViewInit, OnDestroy {
     }, options);
 
     // Start observing each section
-    this.sections.forEach((section) => {
+    this.sections().forEach((section) => {
       this.observer?.observe(section.element);
     });
   }
