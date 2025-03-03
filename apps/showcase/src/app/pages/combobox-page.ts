@@ -13,13 +13,13 @@ import { ScCombobox } from '@semantic-components/ui';
       label="Select a user"
       placeholder="Search users..."
       labelKey="name"
-    ></sc-combobox>
+    />
 
     <br />
     <br />
     <br />
     <br />
-    <sc-combobox [options]="users" [optionTemplate]="customOption"></sc-combobox>
+    <sc-combobox [options]="users" [optionTemplate]="customOption" />
 
     <ng-template #customOption let-user>
       <div class="flex items-center">

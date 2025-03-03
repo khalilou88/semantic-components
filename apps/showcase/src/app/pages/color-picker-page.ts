@@ -6,10 +6,7 @@ import { ScColorPicker } from '@semantic-components/ui';
   selector: 'app-color-picker-page',
   imports: [ScColorPicker],
   template: `
-    <sc-color-picker
-      [initialColor]="'#ff0000'"
-      (colorChange)="onColorChange($event)"
-    ></sc-color-picker>
+    <sc-color-picker [initialColor]="'#ff0000'" (colorChange)="onColorChange($event)" />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,

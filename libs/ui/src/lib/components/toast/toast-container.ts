@@ -17,7 +17,7 @@ import { cn } from '@semantic-components/utils';
   imports: [NgTemplateOutlet],
   template: `
     @if (templateRef()) {
-      <ng-container *ngTemplateOutlet="templateRef(); injector: injector"></ng-container>
+      <ng-container *ngTemplateOutlet="templateRef(); injector: injector" />
     }
   `,
   host: {
