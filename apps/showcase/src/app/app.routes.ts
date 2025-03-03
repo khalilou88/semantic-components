@@ -94,6 +94,11 @@ export const appRoutes: Route[] = [
             title: 'Chat Page',
           },
           {
+            path: 'stepper',
+            loadComponent: () => import('./pages/stepper-page'),
+            title: 'Stepper Page',
+          },
+          {
             path: 'deferred-event-plugin',
             loadComponent: () => import('./pages/deferred-event-plugin-page'),
             title: 'Deferred Event Plugin Page',
