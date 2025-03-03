@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { ScToc } from '@semantic-components/ui';
+import { ScTableOfContents } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-toc-page',
-  imports: [CommonModule, ScToc],
+  imports: [CommonModule, ScTableOfContents],
   template: `
     <div class="container mx-auto max-w-6xl px-4 py-8 flex gap-8">
       <!-- Content sections -->
@@ -50,7 +50,7 @@ import { ScToc } from '@semantic-components/ui';
       </div>
 
       <!-- Insert the TOC component -->
-      <sc-toc />
+      <sc-table-of-contents />
     </div>
   `,
   styles: ``,

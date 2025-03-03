@@ -24,7 +24,7 @@ export interface ScSection {
 }
 
 @Component({
-  selector: 'sc-toc',
+  selector: 'sc-table-of-contents',
   imports: [CommonModule],
   template: `
     <div
@@ -54,7 +54,7 @@ export interface ScSection {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScToc implements AfterViewInit, OnDestroy {
+export class ScTableOfContents implements AfterViewInit, OnDestroy {
   sections = signal<ScSection[]>([]);
   activeSection = signal('');
   private observer: IntersectionObserver | null = null;
