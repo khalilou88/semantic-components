@@ -8,9 +8,6 @@ import { ScToc } from '@semantic-components/ui';
   imports: [CommonModule, ScToc],
   template: `
     <div class="container mx-auto max-w-6xl px-4 py-8 flex gap-8">
-      <!-- Insert the TOC component -->
-      <sc-toc />
-
       <!-- Content sections -->
       <div class="flex-1">
         <section class="min-h-[70vh] mb-8 p-4 bg-white rounded-lg shadow-md" id="section1">
@@ -51,6 +48,9 @@ import { ScToc } from '@semantic-components/ui';
           <!-- More content -->
         </section>
       </div>
+
+      <!-- Insert the TOC component -->
+      <sc-toc />
     </div>
   `,
   styles: ``,

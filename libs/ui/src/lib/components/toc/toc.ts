@@ -9,6 +9,14 @@ import {
   signal,
 } from '@angular/core';
 
+// Automatically detects sections with the <section id="..."> format
+// Uses IntersectionObserver to track which sections are in view
+// Highlights the active section in the TOC
+// Implements smooth scrolling when clicking TOC links
+// Updates URL hash without causing page jumps
+// Works with any content structure that uses section tags with IDs
+// Clean separation of concerns between component, template, and styles
+
 export interface ScSection {
   id: string;
   title: string;
@@ -28,9 +36,10 @@ export interface ScSection {
           <a
             class="block py-2 pl-4 border-l-2 transition-all duration-200 rounded-r"
             [ngClass]="{
-              'border-blue-600 text-blue-600 font-medium bg-blue-50': activeSection === section.id,
+              'border-blue-600 text-blue-600 font-medium bg-blue-50':
+                activeSection() === section.id,
               'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-100':
-                activeSection !== section.id,
+                activeSection() !== section.id,
             }"
             (click)="scrollToSection($event, section.id)"
             href="#{{ section.id }}"
@@ -47,7 +56,7 @@ export interface ScSection {
 })
 export class ScToc implements AfterViewInit, OnDestroy {
   sections = signal<ScSection[]>([]);
-  activeSection = '';
+  activeSection = signal('');
   private observer: IntersectionObserver | null = null;
 
   constructor(private readonly elementRef: ElementRef) {}
@@ -89,7 +98,7 @@ export class ScToc implements AfterViewInit, OnDestroy {
     this.observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          this.activeSection = entry.target.id;
+          this.activeSection.set(entry.target.id);
         }
       });
     }, options);
