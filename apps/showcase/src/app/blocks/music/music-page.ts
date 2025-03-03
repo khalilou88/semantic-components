@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import { AlbumArtwork } from './album-artwork';
@@ -9,7 +8,7 @@ import { Sidebar } from './sidebar';
 
 @Component({
   selector: 'app-music-page',
-  imports: [AlbumArtwork, CommonModule, Sidebar, Menu, PodcastEmptyPlaceholder],
+  imports: [AlbumArtwork, Sidebar, Menu, PodcastEmptyPlaceholder],
   template: `
     <div class="md:hidden">
       <img class="block dark:hidden" src="assets/images/music-light.png" alt="Music" />
@@ -63,68 +62,74 @@ import { Sidebar } from './sidebar';
                   </div>
 
                   <!-- Music tab content -->
-                  <div class="border-none p-0 outline-none" *ngIf="activeTab === 'music'">
-                    <div class="flex items-center justify-between">
-                      <div class="space-y-1">
-                        <h2 class="text-2xl font-semibold tracking-tight">Listen Now</h2>
+                  @if (activeTab === 'music') {
+                    <div class="border-none p-0 outline-none">
+                      <div class="flex items-center justify-between">
+                        <div class="space-y-1">
+                          <h2 class="text-2xl font-semibold tracking-tight">Listen Now</h2>
+                          <p class="text-sm text-muted-foreground">
+                            Top picks for you. Updated daily.
+                          </p>
+                        </div>
+                      </div>
+                      <div class="separator my-4"></div>
+                      <div class="relative">
+                        <div class="scroll-area">
+                          <div class="flex space-x-4 pb-4">
+                            @for (album of listenNowAlbums; track album) {
+                              <app-album-artwork
+                                [album]="album"
+                                [class]="'w-[250px]'"
+                                [aspectRatio]="'portrait'"
+                                [width]="250"
+                                [height]="330"
+                              ></app-album-artwork>
+                            }
+                          </div>
+                          <div class="scroll-bar horizontal"></div>
+                        </div>
+                      </div>
+                      <div class="mt-6 space-y-1">
+                        <h2 class="text-2xl font-semibold tracking-tight">Made for You</h2>
                         <p class="text-sm text-muted-foreground">
-                          Top picks for you. Updated daily.
+                          Your personal playlists. Updated daily.
                         </p>
                       </div>
-                    </div>
-                    <div class="separator my-4"></div>
-                    <div class="relative">
-                      <div class="scroll-area">
-                        <div class="flex space-x-4 pb-4">
-                          <app-album-artwork
-                            *ngFor="let album of listenNowAlbums"
-                            [album]="album"
-                            [class]="'w-[250px]'"
-                            [aspectRatio]="'portrait'"
-                            [width]="250"
-                            [height]="330"
-                          ></app-album-artwork>
+                      <div class="separator my-4"></div>
+                      <div class="relative">
+                        <div class="scroll-area">
+                          <div class="flex space-x-4 pb-4">
+                            @for (album of madeForYouAlbums; track album) {
+                              <app-album-artwork
+                                [album]="album"
+                                [class]="'w-[150px]'"
+                                [aspectRatio]="'square'"
+                                [width]="150"
+                                [height]="150"
+                              ></app-album-artwork>
+                            }
+                          </div>
+                          <div class="scroll-bar horizontal"></div>
                         </div>
-                        <div class="scroll-bar horizontal"></div>
                       </div>
                     </div>
-                    <div class="mt-6 space-y-1">
-                      <h2 class="text-2xl font-semibold tracking-tight">Made for You</h2>
-                      <p class="text-sm text-muted-foreground">
-                        Your personal playlists. Updated daily.
-                      </p>
-                    </div>
-                    <div class="separator my-4"></div>
-                    <div class="relative">
-                      <div class="scroll-area">
-                        <div class="flex space-x-4 pb-4">
-                          <app-album-artwork
-                            *ngFor="let album of madeForYouAlbums"
-                            [album]="album"
-                            [class]="'w-[150px]'"
-                            [aspectRatio]="'square'"
-                            [width]="150"
-                            [height]="150"
-                          ></app-album-artwork>
-                        </div>
-                        <div class="scroll-bar horizontal"></div>
-                      </div>
-                    </div>
-                  </div>
+                  }
 
                   <!-- Podcasts tab content -->
-                  <div class="h-full flex-col border-none p-0" *ngIf="activeTab === 'podcasts'">
-                    <div class="flex items-center justify-between">
-                      <div class="space-y-1">
-                        <h2 class="text-2xl font-semibold tracking-tight">New Episodes</h2>
-                        <p class="text-sm text-muted-foreground">
-                          Your favorite podcasts. Updated daily.
-                        </p>
+                  @if (activeTab === 'podcasts') {
+                    <div class="h-full flex-col border-none p-0">
+                      <div class="flex items-center justify-between">
+                        <div class="space-y-1">
+                          <h2 class="text-2xl font-semibold tracking-tight">New Episodes</h2>
+                          <p class="text-sm text-muted-foreground">
+                            Your favorite podcasts. Updated daily.
+                          </p>
+                        </div>
                       </div>
+                      <div class="separator my-4"></div>
+                      <app-podcast-empty-placeholder></app-podcast-empty-placeholder>
                     </div>
-                    <div class="separator my-4"></div>
-                    <app-podcast-empty-placeholder></app-podcast-empty-placeholder>
-                  </div>
+                  }
                 </div>
               </div>
             </div>

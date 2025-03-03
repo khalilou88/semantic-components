@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -12,49 +11,51 @@ import { cn } from '@semantic-components/utils';
 
 @Component({
   selector: 'sc-swipeable-toast',
-  imports: [CommonModule],
+  imports: [],
   template: `
-    <div class="fixed bottom-4 right-4 z-50" *ngIf="isVisible">
-      <div
-        class="bg-white rounded-lg shadow-lg p-4 w-72 cursor-grab active:cursor-grabbing"
-        [style.transform]="'translateX(' + currentX + 'px)'"
-        [class.transition-transform]="!isDragging"
-        [class.duration-200]="!isDragging"
-        (touchstart)="handleTouchStart($event)"
-        (touchmove)="handleTouchMove($event)"
-        (touchend)="handleTouchEnd()"
-        (mousedown)="handleMouseDown($event)"
-        (mousemove)="handleMouseMove($event)"
-        (mouseup)="handleMouseUp()"
-        (mouseleave)="handleMouseUp()"
-      >
-        <div class="flex items-center justify-between">
-          <p class="text-gray-800 pr-4">{{ message }}</p>
-          <button
-            class="text-gray-500 hover:text-gray-700 transition-colors"
-            (click)="handleClose()"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+    @if (isVisible) {
+      <div class="fixed bottom-4 right-4 z-50">
+        <div
+          class="bg-white rounded-lg shadow-lg p-4 w-72 cursor-grab active:cursor-grabbing"
+          [style.transform]="'translateX(' + currentX + 'px)'"
+          [class.transition-transform]="!isDragging"
+          [class.duration-200]="!isDragging"
+          (touchstart)="handleTouchStart($event)"
+          (touchmove)="handleTouchMove($event)"
+          (touchend)="handleTouchEnd()"
+          (mousedown)="handleMouseDown($event)"
+          (mousemove)="handleMouseMove($event)"
+          (mouseup)="handleMouseUp()"
+          (mouseleave)="handleMouseUp()"
+        >
+          <div class="flex items-center justify-between">
+            <p class="text-gray-800 pr-4">{{ message }}</p>
+            <button
+              class="text-gray-500 hover:text-gray-700 transition-colors"
+              (click)="handleClose()"
             >
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </button>
-        </div>
-        <div class="mt-2 h-1 w-full bg-gray-100 rounded">
-          <div class="h-full bg-blue-500 rounded" [style.width.%]="progressWidth"></div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+          <div class="mt-2 h-1 w-full bg-gray-100 rounded">
+            <div class="h-full bg-blue-500 rounded" [style.width.%]="progressWidth"></div>
+          </div>
         </div>
       </div>
-    </div>
+    }
   `,
   host: {
     '[class]': 'class()',

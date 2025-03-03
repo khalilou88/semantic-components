@@ -32,21 +32,23 @@ export interface ScSection {
     >
       <h3 class="text-lg font-semibold mb-4">Table of Contents</h3>
       <ul class="space-y-1">
-        <li *ngFor="let section of sections()">
-          <a
-            class="block py-2 pl-4 border-l-2 transition-all duration-200 rounded-r"
-            [ngClass]="{
-              'border-blue-600 text-blue-600 font-medium bg-blue-50':
-                activeSection() === section.id,
-              'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-100':
-                activeSection() !== section.id,
-            }"
-            (click)="scrollToSection($event, section.id)"
-            href="#{{ section.id }}"
-          >
-            {{ section.title }}
-          </a>
-        </li>
+        @for (section of sections(); track section) {
+          <li>
+            <a
+              class="block py-2 pl-4 border-l-2 transition-all duration-200 rounded-r"
+              [ngClass]="{
+                'border-blue-600 text-blue-600 font-medium bg-blue-50':
+                  activeSection() === section.id,
+                'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-100':
+                  activeSection() !== section.id,
+              }"
+              (click)="scrollToSection($event, section.id)"
+              href="#{{ section.id }}"
+            >
+              {{ section.title }}
+            </a>
+          </li>
+        }
       </ul>
     </div>
   `,

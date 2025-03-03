@@ -1,5 +1,4 @@
 import { CdkStep, CdkStepperModule } from '@angular/cdk/stepper';
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -11,7 +10,7 @@ import {
 
 @Component({
   selector: 'sc-step',
-  imports: [CommonModule, CdkStepperModule],
+  imports: [CdkStepperModule],
   template: `
     <ng-template>
       <div class="step-content">

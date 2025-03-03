@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -6,7 +5,7 @@ import { ScStep, ScStepper } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-stepper-page',
-  imports: [CommonModule, ReactiveFormsModule, ScStepper, ScStep],
+  imports: [ReactiveFormsModule, ScStepper, ScStep],
   template: `
     <div class="container mx-auto p-6 max-w-4xl">
       <h1 class="text-2xl font-bold mb-6">Multi-step Form</h1>
@@ -22,12 +21,9 @@ import { ScStep, ScStepper } from '@semantic-components/ui';
                 type="text"
                 formControlName="name"
               />
-              <p
-                class="mt-1 text-sm text-red-600"
-                *ngIf="personalForm.get('name')?.invalid && personalForm.get('name')?.touched"
-              >
-                Name is required
-              </p>
+              @if (personalForm.get('name')?.invalid && personalForm.get('name')?.touched) {
+                <p class="mt-1 text-sm text-red-600">Name is required</p>
+              }
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
@@ -36,12 +32,9 @@ import { ScStep, ScStepper } from '@semantic-components/ui';
                 type="email"
                 formControlName="email"
               />
-              <p
-                class="mt-1 text-sm text-red-600"
-                *ngIf="personalForm.get('email')?.invalid && personalForm.get('email')?.touched"
-              >
-                Valid email is required
-              </p>
+              @if (personalForm.get('email')?.invalid && personalForm.get('email')?.touched) {
+                <p class="mt-1 text-sm text-red-600">Valid email is required</p>
+              }
             </div>
           </form>
         </sc-step>

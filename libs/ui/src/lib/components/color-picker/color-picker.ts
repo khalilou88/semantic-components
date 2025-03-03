@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -12,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'sc-color-picker',
-  imports: [FormsModule, NgFor],
+  imports: [FormsModule],
   template: `
     <div class="max-w-md p-4 bg-white rounded-lg shadow-md">
       <div class="flex items-center mb-4 space-x-4">
@@ -81,14 +80,15 @@ import { FormsModule } from '@angular/forms';
         <div>
           <p class="mb-2 text-sm font-medium text-gray-700">Preset Colors:</p>
           <div class="grid grid-cols-5 gap-2">
-            <button
-              class="w-8 h-8 rounded border border-gray-300 transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-              *ngFor="let color of presetColors"
-              [style.backgroundColor]="color"
-              (click)="selectPresetColor(color)"
-            >
-              <span></span>
-            </button>
+            @for (color of presetColors; track color) {
+              <button
+                class="w-8 h-8 rounded border border-gray-300 transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                [style.backgroundColor]="color"
+                (click)="selectPresetColor(color)"
+              >
+                <span></span>
+              </button>
+            }
           </div>
         </div>
       </div>

@@ -16,7 +16,7 @@ import {
     <div class="w-full">
       <!-- Step header navigation -->
       <div class="flex justify-between mb-8">
-        <ng-container *ngFor="let step of steps; let i = index; let last = last">
+        @for (step of steps; track step; let i = $index; let last = $last) {
           <div class="flex items-center">
             <!-- Step circle with number -->
             <button
@@ -27,10 +27,13 @@ import {
               }"
               (click)="onClick(i)"
             >
-              <span class="text-lg" *ngIf="selectedIndex > i">✓</span>
-              <span *ngIf="selectedIndex <= i">{{ i + 1 }}</span>
+              @if (selectedIndex > i) {
+                <span class="text-lg">✓</span>
+              }
+              @if (selectedIndex <= i) {
+                <span>{{ i + 1 }}</span>
+              }
             </button>
-
             <!-- Step label -->
             <span
               class="ml-3 font-medium transition-colors duration-200"
@@ -42,14 +45,14 @@ import {
               {{ step.label }}
             </span>
           </div>
-
           <!-- Connector line between steps -->
-          <div
-            class="flex-grow mx-4 h-0.5 mt-5"
-            *ngIf="!last"
-            [ngClass]="{ 'bg-blue-600': selectedIndex > i, 'bg-gray-200': selectedIndex <= i }"
-          ></div>
-        </ng-container>
+          @if (!last) {
+            <div
+              class="flex-grow mx-4 h-0.5 mt-5"
+              [ngClass]="{ 'bg-blue-600': selectedIndex > i, 'bg-gray-200': selectedIndex <= i }"
+            ></div>
+          }
+        }
       </div>
 
       <!-- Step content -->
@@ -58,28 +61,31 @@ import {
 
         <!-- Navigation buttons -->
         <div class="flex justify-between mt-8">
-          <button
-            class="px-4 py-2 text-blue-600 border border-blue-600 rounded-md hover:bg-blue-50 transition-colors duration-200"
-            *ngIf="selectedIndex > 0"
-            (click)="previous()"
-          >
-            Previous
-          </button>
+          @if (selectedIndex > 0) {
+            <button
+              class="px-4 py-2 text-blue-600 border border-blue-600 rounded-md hover:bg-blue-50 transition-colors duration-200"
+              (click)="previous()"
+            >
+              Previous
+            </button>
+          }
           <div class="flex-grow"></div>
-          <button
-            class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-200"
-            *ngIf="selectedIndex < steps.length - 1"
-            (click)="next()"
-          >
-            Next
-          </button>
-          <button
-            class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors duration-200"
-            *ngIf="selectedIndex === steps.length - 1"
-            (click)="complete()"
-          >
-            Complete
-          </button>
+          @if (selectedIndex < steps.length - 1) {
+            <button
+              class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-200"
+              (click)="next()"
+            >
+              Next
+            </button>
+          }
+          @if (selectedIndex === steps.length - 1) {
+            <button
+              class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors duration-200"
+              (click)="complete()"
+            >
+              Complete
+            </button>
+          }
         </div>
       </div>
     </div>

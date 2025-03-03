@@ -1,9 +1,8 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [CommonModule],
+  imports: [],
   template: `
     <div class="pb-12">
       <div class="space-y-4 py-4">
@@ -44,9 +43,11 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
         <div class="px-3 py-2">
           <h2 class="mb-2 px-4 text-lg font-semibold tracking-tight">Playlists</h2>
           <div class="space-y-1">
-            <button class="sidebar-item" *ngFor="let playlist of playlists">
-              {{ playlist.name }}
-            </button>
+            @for (playlist of playlists; track playlist) {
+              <button class="sidebar-item">
+                {{ playlist.name }}
+              </button>
+            }
           </div>
         </div>
       </div>

@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -11,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'sc-dual-range-slider',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule],
   template: `
     <div class="w-full max-w-md px-4 py-6">
       <div class="relative h-2">
