@@ -14,6 +14,7 @@ npx npm-check-updates --filter "/@nx/\*/" -u
 npm i nx@latest
 
 npx npm-check-updates "@angular\*" -u
+npm i @schematics/angular@latest --force
 
 npx npm-check-updates --filter "/@angular\*/" -u
 npx npm-check-updates --filter "/@schematics/angular/" -u
