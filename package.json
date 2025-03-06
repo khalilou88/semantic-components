@@ -55,6 +55,7 @@
     "@tiptap/extension-underline": "^2.11.5",
     "@tiptap/extension-youtube": "^2.11.5",
     "@tiptap/pm": "^2.11.5",
+    "chart.js": "^4.4.8",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "embla-carousel": "^8.5.2",

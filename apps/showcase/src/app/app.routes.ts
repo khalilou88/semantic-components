@@ -94,6 +94,11 @@ export const appRoutes: Route[] = [
             title: 'Chat Page',
           },
           {
+            path: 'chart',
+            loadComponent: () => import('./pages/chart-page'),
+            title: 'Chart Page',
+          },
+          {
             path: 'stepper',
             loadComponent: () => import('./pages/stepper-page'),
             title: 'Stepper Page',
