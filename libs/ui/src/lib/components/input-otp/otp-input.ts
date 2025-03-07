@@ -67,10 +67,46 @@ export class OtpInput implements AfterContentInit {
           digits[index - 1].focus();
         }
       });
+
+      // Handle paste event - distribute characters to subsequent inputs
+      digit.paste.subscribe((remainingText: string) => {
+        // Process the remaining pasted text
+        this.handleMultiDigitPaste(remainingText, index + 1);
+      });
     });
 
     // Set initial focus
     digits[0].focus();
+  }
+
+  private handleMultiDigitPaste(text: string, startIndex: number) {
+    if (!text) return;
+
+    const digits = this.digitComponents.toArray();
+    const chars = text.split('');
+
+    // Fill the remaining inputs with the pasted characters
+    chars.forEach((char, i) => {
+      const targetIndex = startIndex + i;
+      if (targetIndex < digits.length) {
+        digits[targetIndex].setValue(char);
+      }
+    });
+
+    // Focus the next empty input or the last input if all are filled
+    const nextEmptyIndex = digits.findIndex(
+      (digit, index) => index >= startIndex + chars.length && !digit.value,
+    );
+    if (nextEmptyIndex !== -1) {
+      digits[nextEmptyIndex].focus();
+    } else if (startIndex + chars.length < digits.length) {
+      digits[startIndex + chars.length].focus();
+    } else {
+      // All digits filled, focus the last one
+      digits[digits.length - 1].focus();
+    }
+
+    this.updateOtpValue();
   }
 
   private updateOtpValue() {

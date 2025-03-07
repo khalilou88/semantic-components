@@ -31,6 +31,7 @@ export class OtpInputSlot {
   @ViewChild('inputRef') inputRef!: ElementRef<HTMLInputElement>;
   @Output() valueChange = new EventEmitter<string>();
   @Output() backspace = new EventEmitter<void>();
+  @Output() paste = new EventEmitter<string>();
 
   private _value = '';
 
@@ -71,12 +72,18 @@ export class OtpInputSlot {
     const pastedText = clipboardData.getData('text');
     if (!pastedText) return;
 
-    // Only use the first character
-    const sanitizedValue = pastedText.replace(/[^a-zA-Z0-9]/g, '').charAt(0);
+    // Clean the pasted text to only include alphanumeric characters
+    const sanitizedText = pastedText.replace(/[^a-zA-Z0-9]/g, '');
 
-    // Update value
-    this.value = sanitizedValue;
-    this.inputRef.nativeElement.value = sanitizedValue;
+    // Set the first character in this input
+    const firstChar = sanitizedText.charAt(0);
+    this.value = firstChar;
+    this.inputRef.nativeElement.value = firstChar;
+
+    // Emit the remaining characters for potential distribution to other inputs
+    if (sanitizedText.length > 1) {
+      this.paste.emit(sanitizedText.substring(1));
+    }
   }
 
   // Public methods
