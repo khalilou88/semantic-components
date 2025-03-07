@@ -69,7 +69,6 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
   );
 
   readonly slots = contentChildren(ScInputOTPSlot, { descendants: true });
-  readonly otpChange = output<string>();
 
   private otpValue = '';
 
@@ -91,41 +90,45 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
   }
 
   private setupDigitComponents() {
-    const slots = this.slots();
-    if (!slots || slots.length === 0) {
+    const digits = this.slots();
+
+    if (!digits || digits.length === 0) {
       console.error('No OTP digit components found');
       return;
     }
 
     // Set up focus management and value change handling
-    slots.forEach((slot, index) => {
+    digits.forEach((digit, index) => {
       // Subscribe to value changes
-      slot.valueChange.subscribe((value: string) => {
+      digit.valueChange.subscribe((value: string) => {
         this.updateOtpValue();
+        this.onTouched();
 
         // Auto-focus next input when a digit is entered
-        if (value && index < slots.length - 1) {
-          slots[index + 1].focus();
+        if (value && index < digits.length - 1) {
+          digits[index + 1].focus();
         }
       });
 
       // Handle backspace - move focus to previous input
-      slot.backspace.subscribe(() => {
+      digit.backspace.subscribe(() => {
         if (index > 0) {
-          slots[index - 1].focus();
+          digits[index - 1].focus();
+          this.onTouched();
         }
       });
 
       // Handle paste event - distribute characters to subsequent inputs
-      slot.paste.subscribe((remainingText: string) => {
+      digit.paste.subscribe((remainingText: string) => {
         // Process the remaining pasted text
         this.handleMultiDigitPaste(remainingText, index + 1);
+        this.onTouched();
       });
     });
 
     // Set initial focus if not disabled
     if (!this.disabled()) {
-      slots[0].focus();
+      digits[0].focus();
     }
   }
 
@@ -164,7 +167,7 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
       .map((digit) => digit.value || '')
       .join('');
 
-    this.otpChange.emit(this.otpValue);
+    this.onChange(this.otpValue);
   }
 
   // Validator implementation
@@ -185,25 +188,24 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
 
   // Public method to clear all inputs
   public clear() {
-    this.slots().forEach((digit) => digit.clear());
-    this.otpValue = '';
-    this.otpChange.emit(this.otpValue);
+    if (this.slots()) {
+      this.slots().forEach((digit) => digit.clear());
+      this.otpValue = '';
+      this.onChange(this.otpValue);
 
-    // Focus the first input
-    const digits = this.slots();
-    if (digits.length > 0) {
-      digits[0].focus();
+      if (this.slots().length > 0 && !this.disabled()) {
+        this.slots()[0].focus();
+      }
     }
   }
 
   // Public method to set OTP value programmatically
   public setValue(value: string) {
-    if (!value) return;
+    if (!value || !this.slots()) return;
 
-    const digits = this.slots();
     const valueArray = value.split('');
 
-    digits.forEach((digit, index) => {
+    this.slots().forEach((digit, index) => {
       if (index < valueArray.length) {
         digit.setValue(valueArray[index]);
       } else {

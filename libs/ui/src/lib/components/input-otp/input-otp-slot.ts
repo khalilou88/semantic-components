@@ -20,10 +20,13 @@ import { cn } from '@semantic-components/utils';
       class="size-full border-0 bg-transparent text-center shadow-none outline-none ring-0"
       #inputRef
       [disabled]="disabled()"
+      [readonly]="!isActive()"
       [value]="value"
       (input)="onInput($event)"
       (keydown)="onKeyDown($event)"
       (paste)="onPaste($event)"
+      (focus)="onFocus()"
+      (blur)="onBlur()"
       type="text"
       maxlength="1"
     />
@@ -43,11 +46,12 @@ export class ScInputOTPSlot {
   protected readonly class = computed(() =>
     cn(
       'flex h-10 w-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md',
-      //TODO
-      //  isActive() && 'ring-2 ring-ring ring-offset-background',
+      this.isActive() && 'ring-2 ring-ring ring-offset-background',
       this.classInput(),
     ),
   );
+
+  isActive = signal(false);
 
   disabled = signal(false);
 
@@ -109,10 +113,19 @@ export class ScInputOTPSlot {
     }
   }
 
+  onFocus() {
+    this.isActive.set(true);
+  }
+
+  onBlur() {
+    this.isActive.set(false);
+  }
+
   // Public methods
   public focus() {
     if (!this.disabled()) {
       this.inputRef().nativeElement.focus();
+      this.isActive.set(true);
     }
   }
   public clear() {
