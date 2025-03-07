@@ -193,6 +193,11 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
   }
 
   private updateOtpValue() {
+    // Check if OTP is complete
+    // const isComplete = this.slots().every((digit) => digit.value);
+    // if (isComplete) {
+    // }
+
     this.otpValue = this.slots()
       .map((digit) => digit.value || '')
       .join('');
