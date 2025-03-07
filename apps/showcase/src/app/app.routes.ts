@@ -244,6 +244,11 @@ export const appRoutes: Route[] = [
             title: 'Input OTP Page',
           },
           {
+            path: 'verification',
+            loadComponent: () => import('./pages/verification-page'),
+            title: 'Verification Page',
+          },
+          {
             path: 'radio-group',
             loadComponent: () => import('./pages/radio-group-page'),
             title: 'Radio Group Page',
