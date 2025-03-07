@@ -14,7 +14,14 @@ import {
   linkedSignal,
   output,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import {
+  AbstractControl,
+  ControlValueAccessor,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  ReactiveFormsModule,
+  ValidationErrors,
+} from '@angular/forms';
 
 import { cn } from '@semantic-components/utils';
 
@@ -34,6 +41,11 @@ import { ScInputOTPSlot } from './input-otp-slot';
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => ScInputOtp),
+      multi: true,
+    },
+    {
+      provide: NG_VALIDATORS,
       useExisting: forwardRef(() => ScInputOtp),
       multi: true,
     },
@@ -153,6 +165,22 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
       .join('');
 
     this.otpChange.emit(this.otpValue);
+  }
+
+  // Validator implementation
+  validate(control: AbstractControl): ValidationErrors | null {
+    const value = control.value;
+
+    if (!value) {
+      return null;
+    }
+
+    // Check if the OTP is complete
+    if (value.length < this.slots().length) {
+      return { incomplete: true };
+    }
+
+    return null;
   }
 
   // Public method to clear all inputs
