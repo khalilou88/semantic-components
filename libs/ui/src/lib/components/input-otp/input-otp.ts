@@ -1,37 +1,22 @@
-import { FocusMonitor } from '@angular/cdk/a11y';
 import {
+  AfterContentInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  ElementRef,
-  OnDestroy,
   ViewEncapsulation,
-  afterNextRender,
   booleanAttribute,
   computed,
   contentChildren,
-  effect,
   forwardRef,
   inject,
   input,
-  model,
-  signal,
+  linkedSignal,
+  output,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import {
-  ControlValueAccessor,
-  FormArray,
-  FormControl,
-  FormGroup,
-  NG_VALUE_ACCESSOR,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 
 import { cn } from '@semantic-components/utils';
-import { Subject } from 'rxjs';
 
-import { InputOtpHandler } from './input-otp-handler';
 import { ScInputOTPSlot } from './input-otp-slot';
 
 @Component({
@@ -51,12 +36,15 @@ import { ScInputOTPSlot } from './input-otp-slot';
       useExisting: forwardRef(() => ScInputOtp),
       multi: true,
     },
-    InputOtpHandler,
   ],
 })
-export class ScInputOtp implements ControlValueAccessor, OnDestroy {
-  private readonly inputOtpHandler = inject(InputOtpHandler);
-  private readonly focusMonitor = inject(FocusMonitor);
+export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
+  readonly disabledInput = input<boolean, unknown>(false, {
+    alias: 'disabled',
+    transform: booleanAttribute,
+  });
+  protected readonly disabled = linkedSignal(() => this.disabledInput());
+
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
 
   readonly classInput = input<string>('', {
@@ -67,88 +55,137 @@ export class ScInputOtp implements ControlValueAccessor, OnDestroy {
     cn('flex items-center gap-2 has-[:disabled]:opacity-50', this.classInput()),
   );
 
-  readonly required = input<boolean, unknown>(false, {
-    transform: booleanAttribute,
-  });
-
-  readonly formGroup = new FormGroup({
-    inputs: new FormArray([]),
-  });
-
-  get inputs(): FormArray {
-    return this.formGroup.get('inputs') as FormArray;
-  }
-
   readonly slots = contentChildren(ScInputOTPSlot, { descendants: true });
+  readonly otpChange = output<string>();
+  readonly length = input(6);
 
-  constructor() {
-    effect(() => {
-      if (this.inputOtpHandler.inputIndex() !== -1) {
-        const index = this.inputOtpHandler.inputIndex();
-        const slot = this.slots()[index];
+  private otpValue = '';
 
-        //TODO remove old data
-
-        slot.isActive.set(true);
-        this.focusMonitor.focusVia(slot.input(), 'program');
-      }
-    });
-
-    afterNextRender(() => {
-      for (let i = 0; i < this.slots().length; i++) {
-        const slot = this.slots()[i];
-
-        const formControl = new FormControl('', Validators.required);
-
-        slot.index = i;
-        slot.formControl.set(formControl);
-        this.inputs.push(formControl);
-      }
-
-      this.inputOtpHandler.length.set(this.slots().length);
-      this.inputOtpHandler.inputIndex.set(0);
-    });
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    this.formGroup.valueChanges.pipe(takeUntilDestroyed()).subscribe((value) => {
-      const tel = this.formGroup.valid ? this.inputs.value.join('') : null;
-      this._updateValue(tel);
+  ngAfterContentInit() {
+    // Wait for content children to be initialized
+    setTimeout(() => {
+      this.setupDigitComponents();
     });
   }
 
-  private _updateValue(tel: string | null) {
-    // const current = this._value();
-    // if (
-    //   tel === current ||
-    //   (tel?.area === current?.area &&
-    //     tel?.exchange === current?.exchange &&
-    //     tel?.subscriber === current?.subscriber)
-    // ) {
-    //   return;
-    // }
-    this._value.set(tel);
+  private setupDigitComponents() {
+    const digitComponents = this.slots();
+    if (!digitComponents || digitComponents.length === 0) {
+      console.error('No OTP digit components found');
+      return;
+    }
 
-    this.onChange(tel);
-    this.changeDetectorRef.markForCheck();
+    // Convert QueryList to array for easier manipulation
+    const digits = digitComponents;
+
+    // Set up focus management and value change handling
+    digits.forEach((digit, index) => {
+      // Subscribe to value changes
+      digit.valueChange.subscribe((value: string) => {
+        this.updateOtpValue();
+
+        // Auto-focus next input when a digit is entered
+        if (value && index < digits.length - 1) {
+          digits[index + 1].focus();
+        }
+      });
+
+      // Handle backspace - move focus to previous input
+      digit.backspace.subscribe(() => {
+        if (index > 0) {
+          digits[index - 1].focus();
+        }
+      });
+
+      // Handle paste event - distribute characters to subsequent inputs
+      digit.paste.subscribe((remainingText: string) => {
+        // Process the remaining pasted text
+        this.handleMultiDigitPaste(remainingText, index + 1);
+      });
+    });
+
+    // Set initial focus
+    digits[0].focus();
   }
 
-  readonly _value = model<string | null>(null, { alias: 'value' });
+  private handleMultiDigitPaste(text: string, startIndex: number) {
+    if (!text) return;
 
-  readonly disabledByInput = input<boolean, unknown>(false, {
-    alias: 'disabled',
-    transform: booleanAttribute,
-  });
+    const digits = this.slots();
+    const chars = text.split('');
 
-  private readonly disabledByCva = signal(false);
-  private readonly _disabled = computed(() => this.disabledByInput() || this.disabledByCva());
+    // Fill the remaining inputs with the pasted characters
+    chars.forEach((char, i) => {
+      const targetIndex = startIndex + i;
+      if (targetIndex < digits.length) {
+        digits[targetIndex].setValue(char);
+      }
+    });
+
+    // Focus the next empty input or the last input if all are filled
+    const nextEmptyIndex = digits.findIndex(
+      (digit, index) => index >= startIndex + chars.length && !digit.value,
+    );
+    if (nextEmptyIndex !== -1) {
+      digits[nextEmptyIndex].focus();
+    } else if (startIndex + chars.length < digits.length) {
+      digits[startIndex + chars.length].focus();
+    } else {
+      // All digits filled, focus the last one
+      digits[digits.length - 1].focus();
+    }
+
+    this.updateOtpValue();
+  }
+
+  private updateOtpValue() {
+    this.otpValue = this.slots()
+      .map((digit) => digit.value || '')
+      .join('');
+
+    this.otpChange.emit(this.otpValue);
+  }
+
+  // Public method to clear all inputs
+  public clear() {
+    this.slots().forEach((digit) => digit.clear());
+    this.otpValue = '';
+    this.otpChange.emit(this.otpValue);
+
+    // Focus the first input
+    const digits = this.slots();
+    if (digits.length > 0) {
+      digits[0].focus();
+    }
+  }
+
+  // Public method to set OTP value programmatically
+  public setValue(value: string) {
+    if (!value) return;
+
+    const digits = this.slots();
+    const valueArray = value.split('');
+
+    digits.forEach((digit, index) => {
+      if (index < valueArray.length) {
+        digit.setValue(valueArray[index]);
+      } else {
+        digit.clear();
+      }
+    });
+
+    this.updateOtpValue();
+  }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
   onChange = (_: any) => {};
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onTouched = () => {};
 
-  writeValue(tel: string | null): void {
-    this._updateValue(tel);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  writeValue(obj: any): void {
+    this.otpValue = obj;
+    this.changeDetectorRef.markForCheck();
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -162,14 +199,6 @@ export class ScInputOtp implements ControlValueAccessor, OnDestroy {
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.disabledByCva.set(isDisabled);
-  }
-
-  private readonly _elementRef = inject(ElementRef);
-  //TODO use stateChanges to handle state changes
-  readonly stateChanges = new Subject<void>();
-  ngOnDestroy() {
-    this.stateChanges.complete();
-    this.focusMonitor.stopMonitoring(this._elementRef);
+    this.disabled.set(isDisabled);
   }
 }
