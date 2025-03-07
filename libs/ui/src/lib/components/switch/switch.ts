@@ -1,18 +1,15 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   ViewEncapsulation,
   booleanAttribute,
   computed,
-  forwardRef,
   inject,
   input,
   linkedSignal,
   output,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { cn } from '@semantic-components/utils';
 
@@ -26,24 +23,13 @@ import { cn } from '@semantic-components/utils';
     '[id]': 'id()',
     type: 'checkbox',
     '[checked]': 'checked()',
-    '[attr.data-state]': 'state()',
     '[class]': 'class()',
-    '(click)': 'toggle()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ScSwitch),
-      multi: true,
-    },
-  ],
 })
-export class ScSwitch implements ControlValueAccessor {
-  private readonly changeDetectorRef = inject(ChangeDetectorRef);
-
+export class ScSwitch {
   readonly classInput = input<string>('', {
     alias: 'class',
   });
@@ -102,41 +88,4 @@ export class ScSwitch implements ControlValueAccessor {
     transform: booleanAttribute,
   });
   protected readonly disabled = linkedSignal(() => this.disabledInput());
-
-  protected readonly state = computed(() => {
-    return this.checked() ? 'checked' : 'unchecked';
-  });
-
-  protected toggle() {
-    if (this.disabled()) {
-      return;
-    }
-
-    const v = !this.checked();
-    this.checked.set(v);
-
-    this.onChange(v);
-    this.changeDetectorRef.markForCheck();
-  }
-
-  writeValue(value: boolean): void {
-    this.checked.set(value);
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onChange: any = () => {};
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onTouch: any = () => {};
-
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouch = fn;
-  }
-
-  setDisabledState?(isDisabled: boolean): void {
-    this.disabled.set(isDisabled);
-  }
 }
