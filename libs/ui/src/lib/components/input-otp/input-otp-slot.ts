@@ -6,6 +6,7 @@ import {
   computed,
   input,
   output,
+  signal,
   viewChild,
 } from '@angular/core';
 
@@ -18,6 +19,7 @@ import { cn } from '@semantic-components/utils';
     <input
       class="size-full border-0 bg-transparent text-center shadow-none outline-none ring-0"
       #inputRef
+      [disabled]="disabled()"
       [value]="value"
       (input)="onInput($event)"
       (keydown)="onKeyDown($event)"
@@ -46,6 +48,8 @@ export class ScInputOTPSlot {
       this.classInput(),
     ),
   );
+
+  disabled = signal(false);
 
   readonly inputRef = viewChild.required<ElementRef<HTMLInputElement>>('inputRef');
   readonly valueChange = output<string>();
@@ -107,9 +111,10 @@ export class ScInputOTPSlot {
 
   // Public methods
   public focus() {
-    this.inputRef().nativeElement.focus();
+    if (!this.disabled()) {
+      this.inputRef().nativeElement.focus();
+    }
   }
-
   public clear() {
     this.value = '';
     this.inputRef().nativeElement.value = '';

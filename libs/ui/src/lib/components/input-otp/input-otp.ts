@@ -7,6 +7,7 @@ import {
   booleanAttribute,
   computed,
   contentChildren,
+  effect,
   forwardRef,
   inject,
   input,
@@ -57,9 +58,18 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
 
   readonly slots = contentChildren(ScInputOTPSlot, { descendants: true });
   readonly otpChange = output<string>();
-  readonly length = input(6);
 
   private otpValue = '';
+
+  constructor() {
+    effect(() => {
+      if (this.slots()) {
+        this.slots().forEach((slot) => {
+          slot.disabled.set(this.disabled());
+        });
+      }
+    });
+  }
 
   ngAfterContentInit() {
     // Wait for content children to be initialized
@@ -69,43 +79,42 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
   }
 
   private setupDigitComponents() {
-    const digitComponents = this.slots();
-    if (!digitComponents || digitComponents.length === 0) {
+    const slots = this.slots();
+    if (!slots || slots.length === 0) {
       console.error('No OTP digit components found');
       return;
     }
 
-    // Convert QueryList to array for easier manipulation
-    const digits = digitComponents;
-
     // Set up focus management and value change handling
-    digits.forEach((digit, index) => {
+    slots.forEach((slot, index) => {
       // Subscribe to value changes
-      digit.valueChange.subscribe((value: string) => {
+      slot.valueChange.subscribe((value: string) => {
         this.updateOtpValue();
 
         // Auto-focus next input when a digit is entered
-        if (value && index < digits.length - 1) {
-          digits[index + 1].focus();
+        if (value && index < slots.length - 1) {
+          slots[index + 1].focus();
         }
       });
 
       // Handle backspace - move focus to previous input
-      digit.backspace.subscribe(() => {
+      slot.backspace.subscribe(() => {
         if (index > 0) {
-          digits[index - 1].focus();
+          slots[index - 1].focus();
         }
       });
 
       // Handle paste event - distribute characters to subsequent inputs
-      digit.paste.subscribe((remainingText: string) => {
+      slot.paste.subscribe((remainingText: string) => {
         // Process the remaining pasted text
         this.handleMultiDigitPaste(remainingText, index + 1);
       });
     });
 
-    // Set initial focus
-    digits[0].focus();
+    // Set initial focus if not disabled
+    if (!this.disabled()) {
+      slots[0].focus();
+    }
   }
 
   private handleMultiDigitPaste(text: string, startIndex: number) {
@@ -182,10 +191,13 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onTouched = () => {};
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  writeValue(obj: any): void {
-    this.otpValue = obj;
-    this.changeDetectorRef.markForCheck();
+  writeValue(value: string): void {
+    if (!value) {
+      this.clear();
+      return;
+    }
+
+    this.setValue(value);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
