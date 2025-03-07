@@ -153,6 +153,6 @@ export default class InputOtpPage {
 </sc-input-otp>`;
 
   inputOtpGroupForm = new FormGroup({
-    otp: new FormControl(''),
+    otp: new FormControl('123456'),
   });
 }

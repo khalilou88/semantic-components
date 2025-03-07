@@ -142,9 +142,23 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
 
     // Set initial focus if not disabled
     if (!this.disabled()) {
-      digits[0].isActive.set(true);
-      digits[0].focus();
+      const d = this.getLastNotEmptyElement();
+      d.isActive.set(true);
+      d.focus();
     }
+  }
+
+  private getLastNotEmptyElement() {
+    const arr = this.slots();
+    for (let i = arr.length - 1; i >= 0; i--) {
+      if (arr[i].value) {
+        this.currentIndex.set(i);
+        return arr[i];
+      }
+    }
+
+    this.currentIndex.set(0);
+    return arr[0];
   }
 
   private handleMultiDigitPaste(text: string, startIndex: number) {
