@@ -25,7 +25,6 @@ import { cn } from '@semantic-components/utils';
       (input)="onInput($event)"
       (keydown)="onKeyDown($event)"
       (paste)="onPaste($event)"
-      (focus)="onFocus()"
       (blur)="onBlur()"
       type="text"
       maxlength="1"
@@ -113,10 +112,6 @@ export class ScInputOTPSlot {
     }
   }
 
-  onFocus() {
-    this.isActive.set(true);
-  }
-
   onBlur() {
     this.isActive.set(false);
   }
@@ -125,7 +120,6 @@ export class ScInputOTPSlot {
   public focus() {
     if (!this.disabled()) {
       this.inputRef().nativeElement.focus();
-      this.isActive.set(true);
     }
   }
   public clear() {
