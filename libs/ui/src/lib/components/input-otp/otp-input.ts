@@ -67,7 +67,7 @@ export class OtpInput implements OnInit {
     });
 
     // Create form controls based on length
-    for (let i = 0; i < this.length; i++) {
+    for (const _ of Array(this.length)) {
       this.otpControls.push(
         this.fb.control('', [Validators.required, Validators.pattern(`[${this.allowedChars}]`)]),
       );
@@ -87,10 +87,10 @@ export class OtpInput implements OnInit {
     }
 
     // Find first empty input
-    for (let i = 0; i < inputs.length; i++) {
-      const input = inputs[i] as HTMLInputElement;
-      if (!input.value) {
-        input.focus();
+    for (const input of Array.from(inputs)) {
+      const htmlInput = input as HTMLInputElement;
+      if (!htmlInput.value) {
+        htmlInput.focus();
         return;
       }
     }
