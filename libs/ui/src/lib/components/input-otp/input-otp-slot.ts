@@ -41,7 +41,8 @@ export class ScInputOTPSlot {
   protected readonly class = computed(() =>
     cn(
       'flex h-10 w-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md',
-      'focus:ring-2 focus:ring-ring focus:ring-offset-background',
+      //TODO
+      //  isActive() && 'ring-2 ring-ring ring-offset-background',
       this.classInput(),
     ),
   );
