@@ -3,9 +3,9 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  ViewChild,
   ViewEncapsulation,
   signal,
+  viewChild,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
@@ -133,7 +133,7 @@ import { Chart, registerables } from 'chart.js';
 export default class ChartPage implements AfterViewInit {
   class = signal<string>('block w-full');
 
-  @ViewChild('chartCanvas') chartCanvas!: ElementRef;
+  readonly chartCanvas = viewChild.required<ElementRef>('chartCanvas');
   chart: any;
 
   constructor() {
@@ -146,7 +146,7 @@ export default class ChartPage implements AfterViewInit {
   }
 
   createChart(): void {
-    const ctx = this.chartCanvas.nativeElement.getContext('2d');
+    const ctx = this.chartCanvas().nativeElement.getContext('2d');
     this.chart = new Chart(ctx, {
       type: 'bar',
       data: {

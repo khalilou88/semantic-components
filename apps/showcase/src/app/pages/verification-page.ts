@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, viewChild } from '@angular/core';
 
 import { OtpInput, OtpInputSlot } from '@semantic-components/ui';
 
@@ -39,7 +39,7 @@ import { OtpInput, OtpInputSlot } from '@semantic-components/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class VerificationPage {
-  @ViewChild('otpInput') otpInput!: OtpInput;
+  readonly otpInput = viewChild.required<OtpInput>('otpInput');
 
   otpValue = '';
   isOtpComplete = false;
@@ -50,7 +50,7 @@ export default class VerificationPage {
   }
 
   clearOtp() {
-    this.otpInput.clear();
+    this.otpInput().clear();
     this.otpValue = '';
     this.isOtpComplete = false;
   }

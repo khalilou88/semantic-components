@@ -5,9 +5,9 @@ import {
   EventEmitter,
   OnInit,
   Output,
-  ViewChild,
   ViewEncapsulation,
   input,
+  viewChild,
 } from '@angular/core';
 
 @Component({
@@ -92,7 +92,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScClockPicker implements OnInit {
-  @ViewChild('clockFace') clockFace!: ElementRef;
+  readonly clockFace = viewChild.required<ElementRef>('clockFace');
   readonly initialTime = input<string>();
   @Output() timeSelected = new EventEmitter<string>();
 
@@ -156,7 +156,7 @@ export class ScClockPicker implements OnInit {
   private handleMove(event: MouseEvent | TouchEvent) {
     if (!this.isDragging) return;
 
-    const rect = this.clockFace.nativeElement.getBoundingClientRect();
+    const rect = this.clockFace().nativeElement.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
 

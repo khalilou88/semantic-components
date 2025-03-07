@@ -4,8 +4,8 @@ import {
   ElementRef,
   EventEmitter,
   Output,
-  ViewChild,
   ViewEncapsulation,
+  viewChild,
 } from '@angular/core';
 
 @Component({
@@ -28,7 +28,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OtpInputSlot {
-  @ViewChild('inputRef') inputRef!: ElementRef<HTMLInputElement>;
+  readonly inputRef = viewChild.required<ElementRef<HTMLInputElement>>('inputRef');
   @Output() valueChange = new EventEmitter<string>();
   @Output() backspace = new EventEmitter<void>();
   @Output() paste = new EventEmitter<string>();
@@ -78,7 +78,7 @@ export class OtpInputSlot {
     // Set the first character in this input
     const firstChar = sanitizedText.charAt(0);
     this.value = firstChar;
-    this.inputRef.nativeElement.value = firstChar;
+    this.inputRef().nativeElement.value = firstChar;
 
     // Emit the remaining characters for potential distribution to other inputs
     if (sanitizedText.length > 1) {
@@ -88,16 +88,16 @@ export class OtpInputSlot {
 
   // Public methods
   public focus() {
-    this.inputRef.nativeElement.focus();
+    this.inputRef().nativeElement.focus();
   }
 
   public clear() {
     this.value = '';
-    this.inputRef.nativeElement.value = '';
+    this.inputRef().nativeElement.value = '';
   }
 
   public setValue(val: string) {
     this.value = val;
-    this.inputRef.nativeElement.value = val;
+    this.inputRef().nativeElement.value = val;
   }
 }

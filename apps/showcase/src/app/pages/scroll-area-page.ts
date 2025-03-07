@@ -5,8 +5,8 @@ import {
   Component,
   ElementRef,
   OnDestroy,
-  ViewChild,
   ViewEncapsulation,
+  viewChild,
 } from '@angular/core';
 
 import { takeUntil } from 'rxjs/operators';
@@ -60,9 +60,9 @@ import { Subject, fromEvent } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ScrollAreaPage implements AfterViewInit, OnDestroy {
-  @ViewChild('viewport') viewportRef!: ElementRef;
-  @ViewChild('scrollbar') scrollbarRef!: ElementRef;
-  @ViewChild('thumb') thumbRef!: ElementRef;
+  readonly viewportRef = viewChild.required<ElementRef>('viewport');
+  readonly scrollbarRef = viewChild.required<ElementRef>('scrollbar');
+  readonly thumbRef = viewChild.required<ElementRef>('thumb');
 
   isScrolling = false;
   isHovering = false;
@@ -71,9 +71,9 @@ export default class ScrollAreaPage implements AfterViewInit, OnDestroy {
   private scrollTimeout: any;
 
   ngAfterViewInit() {
-    const viewport = this.viewportRef.nativeElement;
-    const scrollbar = this.scrollbarRef.nativeElement;
-    const thumb = this.thumbRef.nativeElement;
+    const viewport = this.viewportRef().nativeElement;
+    const scrollbar = this.scrollbarRef().nativeElement;
+    const thumb = this.thumbRef().nativeElement;
 
     // Update thumb size and position on scroll
     fromEvent(viewport, 'scroll')
@@ -106,8 +106,8 @@ export default class ScrollAreaPage implements AfterViewInit, OnDestroy {
   }
 
   updateThumbPosition() {
-    const viewport = this.viewportRef.nativeElement;
-    const thumb = this.thumbRef.nativeElement;
+    const viewport = this.viewportRef().nativeElement;
+    const thumb = this.thumbRef().nativeElement;
 
     const scrollPercentage = viewport.scrollTop / (viewport.scrollHeight - viewport.clientHeight);
     const thumbHeight = (viewport.clientHeight / viewport.scrollHeight) * viewport.clientHeight;

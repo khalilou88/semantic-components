@@ -5,8 +5,8 @@ import {
   Component,
   ElementRef,
   OnInit,
-  ViewChild,
   ViewEncapsulation,
+  viewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -119,8 +119,8 @@ interface Message {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ChatPage implements OnInit, AfterViewChecked {
-  @ViewChild('chatContainer') private readonly chatContainer!: ElementRef;
-  @ViewChild('fileInput') fileInput!: ElementRef;
+  readonly chatContainer = viewChild.required<ElementRef>('chatContainer');
+  readonly fileInput = viewChild.required<ElementRef>('fileInput');
 
   messages: Message[] = [];
   newMessage = '';
@@ -178,7 +178,7 @@ export default class ChatPage implements OnInit, AfterViewChecked {
   }
 
   triggerFileUpload() {
-    this.fileInput.nativeElement.click();
+    this.fileInput().nativeElement.click();
   }
 
   onFileSelected(event: any) {
@@ -203,7 +203,7 @@ export default class ChatPage implements OnInit, AfterViewChecked {
   }
 
   private scrollToBottom() {
-    this.chatContainer.nativeElement.scrollTop = this.chatContainer.nativeElement.scrollHeight;
+    this.chatContainer().nativeElement.scrollTop = this.chatContainer().nativeElement.scrollHeight;
   }
 
   private generateUniqueId(): string {

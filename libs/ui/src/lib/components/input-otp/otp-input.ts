@@ -3,12 +3,11 @@ import {
   AfterContentInit,
   ChangeDetectionStrategy,
   Component,
-  ContentChildren,
   EventEmitter,
   Input,
   Output,
-  QueryList,
   ViewEncapsulation,
+  contentChildren,
 } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -27,7 +26,7 @@ import { OtpInputSlot } from './otp-input-slot';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OtpInput implements AfterContentInit {
-  @ContentChildren(OtpInputSlot) digitComponents!: QueryList<OtpInputSlot>;
+  readonly digitComponents = contentChildren(OtpInputSlot);
   @Output() otpChange = new EventEmitter<string>();
   @Input() length = 6;
 
@@ -41,13 +40,14 @@ export class OtpInput implements AfterContentInit {
   }
 
   private setupDigitComponents() {
-    if (!this.digitComponents || this.digitComponents.length === 0) {
+    const digitComponents = this.digitComponents();
+    if (!digitComponents || digitComponents.length === 0) {
       console.error('No OTP digit components found');
       return;
     }
 
     // Convert QueryList to array for easier manipulation
-    const digits = this.digitComponents.toArray();
+    const digits = digitComponents;
 
     // Set up focus management and value change handling
     digits.forEach((digit, index) => {
@@ -82,7 +82,7 @@ export class OtpInput implements AfterContentInit {
   private handleMultiDigitPaste(text: string, startIndex: number) {
     if (!text) return;
 
-    const digits = this.digitComponents.toArray();
+    const digits = this.digitComponents();
     const chars = text.split('');
 
     // Fill the remaining inputs with the pasted characters
@@ -110,19 +110,21 @@ export class OtpInput implements AfterContentInit {
   }
 
   private updateOtpValue() {
-    this.otpValue = this.digitComponents.map((digit) => digit.value || '').join('');
+    this.otpValue = this.digitComponents()
+      .map((digit) => digit.value || '')
+      .join('');
 
     this.otpChange.emit(this.otpValue);
   }
 
   // Public method to clear all inputs
   public clear() {
-    this.digitComponents.forEach((digit) => digit.clear());
+    this.digitComponents().forEach((digit) => digit.clear());
     this.otpValue = '';
     this.otpChange.emit(this.otpValue);
 
     // Focus the first input
-    const digits = this.digitComponents.toArray();
+    const digits = this.digitComponents();
     if (digits.length > 0) {
       digits[0].focus();
     }
@@ -132,7 +134,7 @@ export class OtpInput implements AfterContentInit {
   public setValue(value: string) {
     if (!value) return;
 
-    const digits = this.digitComponents.toArray();
+    const digits = this.digitComponents();
     const valueArray = value.split('');
 
     digits.forEach((digit, index) => {
