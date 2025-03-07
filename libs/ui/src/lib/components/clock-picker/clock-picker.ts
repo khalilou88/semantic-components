@@ -2,11 +2,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  EventEmitter,
   OnInit,
-  Output,
   ViewEncapsulation,
   input,
+  output,
   viewChild,
 } from '@angular/core';
 
@@ -94,7 +93,7 @@ import {
 export class ScClockPicker implements OnInit {
   readonly clockFace = viewChild.required<ElementRef>('clockFace');
   readonly initialTime = input<string>();
-  @Output() timeSelected = new EventEmitter<string>();
+  readonly timeSelected = output<string>();
 
   hours = Array.from({ length: 12 }, (_, i) => i);
   periods = ['AM', 'PM'];

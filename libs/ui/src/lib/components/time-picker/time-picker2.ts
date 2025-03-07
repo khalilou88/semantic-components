@@ -1,11 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
   OnInit,
-  Output,
   ViewEncapsulation,
   input,
+  output,
 } from '@angular/core';
 
 @Component({
@@ -99,7 +98,7 @@ import {
 })
 export class ScTimePicker2 implements OnInit {
   readonly initialTime = input<string>();
-  @Output() timeSelected = new EventEmitter<string>();
+  readonly timeSelected = output<string>();
 
   isOpen = false;
   hours = Array.from({ length: 12 }, (_, i) => i + 1);

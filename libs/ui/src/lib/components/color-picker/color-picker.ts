@@ -1,11 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
   Input,
   OnInit,
-  Output,
   ViewEncapsulation,
+  output,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -100,7 +99,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class ScColorPicker implements OnInit {
   @Input() initialColor = '#ff0000';
-  @Output() colorChange = new EventEmitter<string>();
+  readonly colorChange = output<string>();
 
   red = 255;
   green = 0;

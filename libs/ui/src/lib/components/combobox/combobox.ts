@@ -3,13 +3,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  EventEmitter,
   HostListener,
   OnInit,
-  Output,
   ViewEncapsulation,
   inject,
   input,
+  output,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
@@ -124,8 +123,8 @@ export class ScCombobox implements OnInit {
   readonly loading = input(false);
   readonly labelKey = input('label');
 
-  @Output() optionSelected = new EventEmitter<any>();
-  @Output() search = new EventEmitter<string>();
+  readonly optionSelected = output<any>();
+  readonly search = output<string>();
 
   searchControl = new FormControl('');
   isOpen = false;

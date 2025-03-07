@@ -1,10 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
   Input,
-  Output,
   ViewEncapsulation,
+  output,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -62,8 +61,8 @@ export class ScDualRangeSlider {
   @Input() minValue = 20;
   @Input() maxValue = 80;
 
-  @Output() minValueChange = new EventEmitter<number>();
-  @Output() maxValueChange = new EventEmitter<number>();
+  readonly minValueChange = output<number>();
+  readonly maxValueChange = output<number>();
 
   get minPercentage(): number {
     return ((this.minValue - this.min) * 100) / (this.max - this.min);

@@ -2,9 +2,8 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  EventEmitter,
-  Output,
   ViewEncapsulation,
+  output,
   viewChild,
 } from '@angular/core';
 
@@ -29,9 +28,9 @@ import {
 })
 export class OtpInputSlot {
   readonly inputRef = viewChild.required<ElementRef<HTMLInputElement>>('inputRef');
-  @Output() valueChange = new EventEmitter<string>();
-  @Output() backspace = new EventEmitter<void>();
-  @Output() paste = new EventEmitter<string>();
+  readonly valueChange = output<string>();
+  readonly backspace = output<void>();
+  readonly paste = output<string>();
 
   private _value = '';
 

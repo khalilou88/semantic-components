@@ -3,11 +3,10 @@ import {
   AfterContentInit,
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
   Input,
-  Output,
   ViewEncapsulation,
   contentChildren,
+  output,
 } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -27,7 +26,7 @@ import { OtpInputSlot } from './otp-input-slot';
 })
 export class OtpInput implements AfterContentInit {
   readonly digitComponents = contentChildren(OtpInputSlot);
-  @Output() otpChange = new EventEmitter<string>();
+  readonly otpChange = output<string>();
   @Input() length = 6;
 
   private otpValue = '';

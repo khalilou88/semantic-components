@@ -15,16 +15,15 @@ import {
   Component,
   ContentChildren,
   ElementRef,
-  EventEmitter,
   Input,
   OnDestroy,
-  Output,
   QueryList,
   TemplateRef,
   ViewChild,
   ViewContainerRef,
   ViewEncapsulation,
   inject,
+  output,
 } from '@angular/core';
 
 import { filter, takeUntil } from 'rxjs/operators';
@@ -87,9 +86,9 @@ export class CustomSelect implements AfterContentInit, OnDestroy, AfterViewInit 
   @Input() placeholder = 'Select an option';
   @Input() value: any = null;
 
-  @Output() valueChange = new EventEmitter<any>();
-  @Output() opened = new EventEmitter<void>();
-  @Output() closed = new EventEmitter<void>();
+  readonly valueChange = output<any>();
+  readonly opened = output<void>();
+  readonly closed = output<void>();
 
   @ContentChildren(CustomOption) optionComponents!: QueryList<CustomOption>;
 

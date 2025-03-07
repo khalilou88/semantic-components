@@ -1,11 +1,11 @@
-import { Directive, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Directive, ElementRef, Input, OnInit, output } from '@angular/core';
 
 @Directive({
   selector: '[scScrollSpy]',
 })
 export class ScScrollSpy implements OnInit {
   @Input() spySections: string[] = []; // Section IDs to track
-  @Output() sectionChange = new EventEmitter<string>(); // Emits active section ID
+  readonly sectionChange = output<string>(); // Emits active section ID
 
   private observer!: IntersectionObserver;
 
