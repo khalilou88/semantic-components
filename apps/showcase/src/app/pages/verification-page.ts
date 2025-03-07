@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
 
 import { OtpInput } from '@semantic-components/ui';
 
@@ -36,7 +42,7 @@ import { OtpInput } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class VerificationPage {
+export default class VerificationPage implements OnInit, OnDestroy {
   verificationComplete = false;
   timeLeft = 60; // Initial countdown value
   private timer: any;
