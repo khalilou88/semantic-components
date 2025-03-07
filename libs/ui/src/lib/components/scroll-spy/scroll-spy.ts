@@ -1,10 +1,10 @@
-import { Directive, ElementRef, Input, OnInit, output } from '@angular/core';
+import { Directive, ElementRef, OnInit, input, output } from '@angular/core';
 
 @Directive({
   selector: '[scScrollSpy]',
 })
 export class ScScrollSpy implements OnInit {
-  @Input() spySections: string[] = []; // Section IDs to track
+  readonly spySections = input<string[]>([]); // Section IDs to track
   readonly sectionChange = output<string>(); // Emits active section ID
 
   private observer!: IntersectionObserver;
@@ -26,7 +26,7 @@ export class ScScrollSpy implements OnInit {
       },
     );
 
-    this.spySections.forEach((id) => {
+    this.spySections().forEach((id) => {
       const section = document.getElementById(id);
       if (section) {
         this.observer.observe(section);

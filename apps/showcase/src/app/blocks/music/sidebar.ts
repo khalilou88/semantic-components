@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
@@ -43,7 +43,7 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
         <div class="px-3 py-2">
           <h2 class="mb-2 px-4 text-lg font-semibold tracking-tight">Playlists</h2>
           <div class="space-y-1">
-            @for (playlist of playlists; track playlist) {
+            @for (playlist of playlists(); track playlist) {
               <button class="sidebar-item">
                 {{ playlist.name }}
               </button>
@@ -63,5 +63,5 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Sidebar {
-  @Input() playlists: any[] = [];
+  readonly playlists = input<any[]>([]);
 }

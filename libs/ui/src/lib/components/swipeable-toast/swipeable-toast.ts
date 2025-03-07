@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
   ViewEncapsulation,
   computed,
   input,
@@ -29,7 +28,7 @@ import { cn } from '@semantic-components/utils';
           (mouseleave)="handleMouseUp()"
         >
           <div class="flex items-center justify-between">
-            <p class="text-gray-800 pr-4">{{ message }}</p>
+            <p class="text-gray-800 pr-4">{{ message() }}</p>
             <button
               class="text-gray-500 hover:text-gray-700 transition-colors"
               (click)="handleClose()"
@@ -71,7 +70,7 @@ export class ScSwipeableToast {
 
   protected readonly class = computed(() => cn('block', this.classInput()));
 
-  @Input() message = 'This is a toast message';
+  readonly message = input('This is a toast message');
 
   isVisible = true;
   isDragging = false;
