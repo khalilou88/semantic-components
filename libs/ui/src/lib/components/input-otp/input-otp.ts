@@ -12,7 +12,7 @@ import {
   inject,
   input,
   linkedSignal,
-  output,
+  signal,
 } from '@angular/core';
 import {
   AbstractControl,
@@ -35,6 +35,7 @@ import { ScInputOTPSlot } from './input-otp-slot';
   `,
   host: {
     '[class]': 'class()',
+    '(click)': 'onClick()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -89,6 +90,13 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
     });
   }
 
+  currentIndex = signal(0);
+
+  onClick() {
+    this.slots()[this.currentIndex()].isActive.set(true);
+    this.slots()[this.currentIndex()].focus();
+  }
+
   private setupDigitComponents() {
     const digits = this.slots();
 
@@ -106,14 +114,20 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
 
         // Auto-focus next input when a digit is entered
         if (value && index < digits.length - 1) {
+          digits[index].isActive.set(false);
+          digits[index + 1].isActive.set(true);
           digits[index + 1].focus();
+          this.currentIndex.set(index + 1);
         }
       });
 
       // Handle backspace - move focus to previous input
       digit.backspace.subscribe(() => {
         if (index > 0) {
+          digits[index].isActive.set(false);
+          digits[index - 1].isActive.set(true);
           digits[index - 1].focus();
+          this.currentIndex.set(index - 1);
           this.onTouched();
         }
       });
@@ -128,6 +142,7 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
 
     // Set initial focus if not disabled
     if (!this.disabled()) {
+      digits[0].isActive.set(true);
       digits[0].focus();
     }
   }
@@ -157,6 +172,7 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
     } else {
       // All digits filled, focus the last one
       digits[digits.length - 1].focus();
+      this.currentIndex.set(digits.length - 1);
     }
 
     this.updateOtpValue();
@@ -195,6 +211,7 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
 
       if (this.slots().length > 0 && !this.disabled()) {
         this.slots()[0].focus();
+        this.currentIndex.set(0);
       }
     }
   }
