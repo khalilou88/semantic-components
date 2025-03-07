@@ -1,190 +1,96 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   EventEmitter,
-  Input,
-  OnInit,
   Output,
+  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import {
-  FormArray,
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
 
 @Component({
   selector: 'sc-otp-input-slot',
-  imports: [FormsModule, ReactiveFormsModule, CommonModule],
+  imports: [],
   template: `
-    <div class="flex justify-center my-5">
-      <form [formGroup]="otpForm">
-        <div class="flex space-x-2 sm:space-x-4" formArrayName="otpDigits">
-          <ng-container *ngFor="let control of otpControls.controls; let i = index">
-            <input
-              class="w-10 h-12 sm:w-12 sm:h-14 text-center text-lg font-semibold bg-gray-50 border-2 border-gray-300 rounded-md focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors"
-              [formControlName]="i"
-              [type]="inputType"
-              [class]="inputClass"
-              [ngClass]="{ 'border-red-500': control.invalid && control.touched }"
-              (keydown)="onKeyDown($event, i)"
-              (keyup)="onKeyUp($event, i)"
-              (paste)="onPaste($event)"
-              (focus)="onFocus($event)"
-              maxlength="1"
-              autocomplete="one-time-code"
-            />
-          </ng-container>
-        </div>
-      </form>
-    </div>
+    <input
+      class="w-10 h-12 border border-gray-300 rounded text-center text-lg font-bold focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
+      #inputRef
+      [value]="value"
+      (input)="onInput($event)"
+      (keydown)="onKeyDown($event)"
+      (paste)="onPaste($event)"
+      type="text"
+      maxlength="1"
+    />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OtpInputSlot implements OnInit {
-  @Input() length = 6;
-  @Input() allowedChars = '0123456789';
-  @Input() inputType = 'tel';
-  @Input() inputClass = 'otp-input';
-  @Output() otpChange = new EventEmitter<string>();
-  @Output() otpCompleted = new EventEmitter<string>();
+export class OtpInputSlot {
+  @ViewChild('inputRef') inputRef!: ElementRef<HTMLInputElement>;
+  @Output() valueChange = new EventEmitter<string>();
+  @Output() backspace = new EventEmitter<void>();
 
-  otpForm!: FormGroup;
-  otpControls!: FormArray;
+  private _value = '';
 
-  constructor(private readonly fb: FormBuilder) {}
-
-  ngOnInit(): void {
-    this.otpControls = this.fb.array([]);
-    this.otpForm = this.fb.group({
-      otpDigits: this.otpControls,
-    });
-
-    // Create form controls based on length
-    for (const _ of Array(this.length)) {
-      this.otpControls.push(
-        this.fb.control('', [Validators.required, Validators.pattern(`[${this.allowedChars}]`)]),
-      );
-    }
+  get value(): string {
+    return this._value;
   }
 
-  // Focus to the first empty input or the input at the index provided
-  focusInput(index?: number): void {
-    const inputs = document.getElementsByClassName(this.inputClass);
-
-    if (index !== undefined) {
-      const input = inputs[index] as HTMLInputElement;
-      if (input) {
-        input.focus();
-        return;
-      }
-    }
-
-    // Find first empty input
-    for (const input of Array.from(inputs)) {
-      const htmlInput = input as HTMLInputElement;
-      if (!htmlInput.value) {
-        htmlInput.focus();
-        return;
-      }
-    }
+  set value(val: string) {
+    this._value = val;
+    this.valueChange.emit(this._value);
   }
 
-  onKeyDown(event: KeyboardEvent, index: number): void {
-    const isBackspace = event.key === 'Backspace';
-    const isDelete = event.key === 'Delete';
-    const isLeftArrow = event.key === 'ArrowLeft';
-    const isRightArrow = event.key === 'ArrowRight';
+  onInput(event: Event) {
+    const input = event.target as HTMLInputElement;
 
-    // Allow navigation keys
-    if (isBackspace || isDelete || isLeftArrow || isRightArrow) {
-      return;
-    }
+    // Ensure only digits, letters, or empty values
+    const sanitizedValue = input.value.replace(/[^a-zA-Z0-9]/g, '');
+    input.value = sanitizedValue;
 
-    // Prevent default for non-allowed characters
-    if (!this.allowedChars.includes(event.key)) {
+    this.value = sanitizedValue;
+  }
+
+  onKeyDown(event: KeyboardEvent) {
+    // Handle backspace key when input is empty
+    if (event.key === 'Backspace' && !this.value) {
       event.preventDefault();
+      this.backspace.emit();
     }
   }
 
-  onKeyUp(event: KeyboardEvent, index: number): void {
-    const isBackspace = event.key === 'Backspace';
-    const isDelete = event.key === 'Delete';
-    const isLeftArrow = event.key === 'ArrowLeft';
-    const isRightArrow = event.key === 'ArrowRight';
-    const target = event.target as HTMLInputElement;
-
-    // Handle navigation keys
-    if (isBackspace || isDelete) {
-      // Clear current input and focus previous on backspace
-      if (isBackspace && index > 0 && !target.value) {
-        this.focusInput(index - 1);
-      }
-      return;
-    } else if (isLeftArrow && index > 0) {
-      this.focusInput(index - 1);
-      return;
-    } else if (isRightArrow && index < this.length - 1) {
-      this.focusInput(index + 1);
-      return;
-    }
-
-    // Auto focus next empty input
-    if (target.value && index < this.length - 1) {
-      this.focusInput(index + 1);
-    }
-
-    // Emit current OTP value
-    this.emitOtpValue();
-  }
-
-  onPaste(event: ClipboardEvent): void {
+  onPaste(event: ClipboardEvent) {
     event.preventDefault();
 
+    // Get pasted content and clean it
     const clipboardData = event.clipboardData;
     if (!clipboardData) return;
 
     const pastedText = clipboardData.getData('text');
     if (!pastedText) return;
 
-    // Check if pasted text matches allowed characters
-    const validPastedText = [...pastedText]
-      .filter((char) => this.allowedChars.includes(char))
-      .slice(0, this.length);
+    // Only use the first character
+    const sanitizedValue = pastedText.replace(/[^a-zA-Z0-9]/g, '').charAt(0);
 
-    // Fill in the OTP inputs with pasted valid characters
-    validPastedText.forEach((char, index) => {
-      if (index < this.length) {
-        this.otpControls.at(index).setValue(char);
-      }
-    });
-
-    // Focus next empty input or last input if all filled
-    const nextIndex =
-      validPastedText.length < this.length ? validPastedText.length : this.length - 1;
-    this.focusInput(nextIndex);
-
-    // Emit current OTP value
-    this.emitOtpValue();
+    // Update value
+    this.value = sanitizedValue;
+    this.inputRef.nativeElement.value = sanitizedValue;
   }
 
-  private emitOtpValue(): void {
-    const otpValue = this.otpControls.value.join('');
-    this.otpChange.emit(otpValue);
-
-    // Check if OTP is complete and emit completed event
-    if (otpValue.length === this.length && !this.otpControls.invalid) {
-      this.otpCompleted.emit(otpValue);
-    }
+  // Public methods
+  public focus() {
+    this.inputRef.nativeElement.focus();
   }
 
-  onFocus(event: any) {
-    event.target.select();
+  public clear() {
+    this.value = '';
+    this.inputRef.nativeElement.value = '';
+  }
+
+  public setValue(val: string) {
+    this.value = val;
+    this.inputRef.nativeElement.value = val;
   }
 }

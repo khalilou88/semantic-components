@@ -1,96 +1,64 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 
-import { OtpInput } from '@semantic-components/ui';
+import { OtpInput, OtpInputSlot } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-verification-page',
-  imports: [OtpInput, CommonModule],
+  imports: [OtpInput, CommonModule, OtpInputSlot],
   template: `
-    <div class="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
-      <h2 class="text-2xl font-bold text-gray-800 mb-2">Enter verification code</h2>
-      <p class="text-gray-600 mb-6">We've sent a 6-digit code to your phone number</p>
+    <div class="max-w-lg mx-auto p-6 text-center">
+      <h2 class="text-xl font-semibold mb-4">Enter Verification Code</h2>
 
-      <sc-otp-input [length]="6" (otpCompleted)="onOtpCompleted($event)"></sc-otp-input>
+      <sc-otp-input #otpInput (otpChange)="onOtpChange($event)">
+        <sc-otp-input-slot *ngFor="let _ of [0, 1, 2, 3, 4, 5]"></sc-otp-input-slot>
+      </sc-otp-input>
 
-      <div class="mt-4 p-3 bg-green-100 text-green-700 rounded-md" *ngIf="verificationComplete">
-        Verification successful!
-      </div>
-
-      <div class="mt-6 flex justify-between items-center">
+      <div class="mt-6 flex gap-4 justify-center">
         <button
-          class="text-blue-600 hover:text-blue-800 text-sm font-medium"
-          *ngIf="!verificationComplete"
-          (click)="resendCode()"
+          class="px-4 py-2 border border-gray-300 rounded hover:bg-gray-100 transition-colors"
+          (click)="clearOtp()"
         >
-          Resend code
+          Clear
         </button>
 
-        <span class="text-sm text-gray-500" *ngIf="!verificationComplete">
-          Expires in {{ timeLeft }} seconds
-        </span>
+        <button
+          class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          [disabled]="!isOtpComplete"
+          (click)="verifyOtp()"
+        >
+          Verify
+        </button>
       </div>
+
+      <div class="mt-4 text-gray-600" *ngIf="otpValue">Current OTP value: {{ otpValue }}</div>
     </div>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class VerificationPage implements OnInit, OnDestroy {
-  verificationComplete = false;
-  timeLeft = 60; // Initial countdown value
-  private timer: any;
+export default class VerificationPage {
+  @ViewChild('otpInput') otpInput!: OtpInput;
 
-  ngOnInit(): void {
-    this.startTimer();
+  otpValue = '';
+  isOtpComplete = false;
+
+  onOtpChange(otp: string) {
+    this.otpValue = otp;
+    this.isOtpComplete = otp.length === 6;
   }
 
-  ngOnDestroy(): void {
-    this.clearTimer();
+  clearOtp() {
+    this.otpInput.clear();
+    this.otpValue = '';
+    this.isOtpComplete = false;
   }
 
-  onOtpCompleted(otp: string): void {
-    console.log('Completed OTP:', otp);
-    // Call your verification service here
-    this.verifyOtp(otp);
-  }
-
-  verifyOtp(otp: string): void {
-    // Simulate API call
-    setTimeout(() => {
-      // Mock successful verification
-      this.verificationComplete = true;
-      this.clearTimer();
-    }, 1000);
-  }
-
-  resendCode(): void {
-    // Implement your resend logic here
-    console.log('Resending code...');
-    this.timeLeft = 60;
-    this.startTimer();
-  }
-
-  private startTimer(): void {
-    this.clearTimer();
-    this.timer = setInterval(() => {
-      if (this.timeLeft > 0) {
-        this.timeLeft--;
-      } else {
-        this.clearTimer();
-      }
-    }, 1000);
-  }
-
-  private clearTimer(): void {
-    if (this.timer) {
-      clearInterval(this.timer);
+  verifyOtp() {
+    if (this.isOtpComplete) {
+      console.log('Verifying OTP:', this.otpValue);
+      // Add verification logic here
     }
   }
 }
