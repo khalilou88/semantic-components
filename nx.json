@@ -19,6 +19,7 @@
     "projects": ["libs/*"],
     "projectsRelationship": "independent",
     "version": {
+      "preVersionCommand": "npx nx run-many -t build",
       "generatorOptions": {
         "packageRoot": "{projectRoot}"
       }

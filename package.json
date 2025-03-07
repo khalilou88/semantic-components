@@ -100,6 +100,7 @@
     "@types/node": "22.13.9",
     "@typescript-eslint/utils": "^8.24.1",
     "angular-eslint": "19.2.0",
+    "autoprefixer": "^10.4.0",
     "eslint": "^9.21.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-playwright": "^2.2.0",

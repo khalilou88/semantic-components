@@ -30,3 +30,5 @@ nx generate @angular/core:inject
 nx generate @angular/core:signal-input-migration
 
 nx g @nx/angular:library libs/styles --publishable --import-path=@semantic-components/styles
+
+nx g @nx/angular:library libs/logging --publishable --import-path=@semantic-components/logging
