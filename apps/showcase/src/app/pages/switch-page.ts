@@ -76,8 +76,8 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
                   <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
                     <form [formGroup]="switchForm">
                       <div class="flex items-center space-x-2">
-                        <input sc-switch formControlName="switch" />
-                        Airplane Mode
+                        <input id="airplane-mode" sc-switch formControlName="switch" />
+                        <label for="airplane-mode">Airplane Mode</label>
                       </div>
                     </form>
                   </div>
