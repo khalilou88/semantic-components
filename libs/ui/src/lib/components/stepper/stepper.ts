@@ -4,9 +4,9 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  Input,
   OnInit,
   ViewEncapsulation,
+  input,
 } from '@angular/core';
 
 @Component({
@@ -96,7 +96,7 @@ import {
   providers: [{ provide: CdkStepper, useExisting: ScStepper }],
 })
 export class ScStepper extends CdkStepper implements OnInit {
-  @Input() stepCompleteEvent = new EventEmitter<void>();
+  readonly stepCompleteEvent = input(new EventEmitter<void>());
 
   ngOnInit() {
     this.linear = false; // Allow steps to be accessed in any order
@@ -107,7 +107,7 @@ export class ScStepper extends CdkStepper implements OnInit {
   }
 
   complete(): void {
-    this.stepCompleteEvent.emit();
+    this.stepCompleteEvent().emit();
     console.log('Stepper completed!');
   }
 }

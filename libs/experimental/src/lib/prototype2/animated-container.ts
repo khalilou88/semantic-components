@@ -3,11 +3,11 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  Input,
   OnChanges,
   Output,
   SimpleChanges,
   ViewEncapsulation,
+  input,
 } from '@angular/core';
 
 // Animation states type
@@ -30,17 +30,18 @@ export type AnimationState = 'initial' | 'entering' | 'visible' | 'exiting' | 'r
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AnimatedContainer implements OnChanges {
-  @Input() state: 'visible' | 'hidden' = 'visible';
-  @Input() animation: 'fade' | 'slide' | 'zoom' | 'collapse' = 'fade';
-  @Input() duration: 'fast' | 'normal' | 'slow' = 'normal';
+  readonly state = input<'visible' | 'hidden'>('visible');
+  readonly animation = input<'fade' | 'slide' | 'zoom' | 'collapse'>('fade');
+  readonly duration = input<'fast' | 'normal' | 'slow'>('normal');
   @Output() stateChange = new EventEmitter<AnimationState>();
 
   currentState: AnimationState = 'initial';
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['state']) {
+      const state = this.state();
       if (
-        this.state === 'visible' &&
+        state === 'visible' &&
         (this.currentState === 'initial' ||
           this.currentState === 'removed' ||
           this.currentState === 'exiting')
@@ -54,7 +55,7 @@ export class AnimatedContainer implements OnChanges {
           this.stateChange.emit(this.currentState);
         }, 50);
       } else if (
-        this.state === 'hidden' &&
+        state === 'hidden' &&
         (this.currentState === 'visible' || this.currentState === 'entering')
       ) {
         this.currentState = 'exiting';
@@ -69,7 +70,7 @@ export class AnimatedContainer implements OnChanges {
     let classes = `transition-all ${durationClass} ease-in-out `;
 
     // Animation type specific classes
-    switch (this.animation) {
+    switch (this.animation()) {
       case 'fade':
         classes += this.getFadeClasses();
         break;
@@ -88,7 +89,7 @@ export class AnimatedContainer implements OnChanges {
   }
 
   private getDurationClass(): string {
-    switch (this.duration) {
+    switch (this.duration()) {
       case 'fast':
         return 'duration-150';
       case 'slow':

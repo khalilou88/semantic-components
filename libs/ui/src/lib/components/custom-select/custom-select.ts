@@ -23,6 +23,7 @@ import {
   ViewContainerRef,
   ViewEncapsulation,
   inject,
+  input,
   output,
 } from '@angular/core';
 
@@ -45,7 +46,7 @@ import { CustomOption } from './custom-option';
       tabindex="0"
     >
       <div class="select-value truncate">
-        {{ selectedOption ? selectedOption.label : placeholder }}
+        {{ selectedOption ? selectedOption.label : placeholder() }}
       </div>
       <div
         class="ml-2 text-gray-500 transition-transform duration-200"
@@ -83,7 +84,7 @@ import { CustomOption } from './custom-option';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomSelect implements AfterContentInit, OnDestroy, AfterViewInit {
-  @Input() placeholder = 'Select an option';
+  readonly placeholder = input('Select an option');
   @Input() value: any = null;
 
   readonly valueChange = output<any>();
@@ -150,7 +151,7 @@ export class CustomSelect implements AfterContentInit, OnDestroy, AfterViewInit 
   updateSelectedOption() {
     if (this.value !== null && this.value !== undefined) {
       this.selectedOption =
-        this.optionComponents.find((option) => option.value === this.value) || null;
+        this.optionComponents.find((option) => option.value() === this.value) || null;
     } else {
       this.selectedOption = null;
     }
@@ -258,7 +259,7 @@ export class CustomSelect implements AfterContentInit, OnDestroy, AfterViewInit 
   }
 
   selectOption(option: CustomOption) {
-    this.value = option.value;
+    this.value = option.value();
     this.selectedOption = option;
 
     // Update active state on all options

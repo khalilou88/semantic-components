@@ -3,6 +3,7 @@ import {
   Component,
   Input,
   ViewEncapsulation,
+  input,
   output,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -27,8 +28,8 @@ import { FormsModule } from '@angular/forms';
         <input
           class="absolute w-full h-full appearance-none bg-transparent pointer-events-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:cursor-pointer [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:bg-white [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:cursor-pointer"
           [(ngModel)]="minValue"
-          [min]="min"
-          [max]="max"
+          [min]="min()"
+          [max]="max()"
           (input)="onMinChange($event)"
           type="range"
         />
@@ -37,8 +38,8 @@ import { FormsModule } from '@angular/forms';
         <input
           class="absolute w-full h-full appearance-none bg-transparent pointer-events-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:cursor-pointer [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:bg-white [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:cursor-pointer"
           [(ngModel)]="maxValue"
-          [min]="min"
-          [max]="max"
+          [min]="min()"
+          [max]="max()"
           (input)="onMaxChange($event)"
           type="range"
         />
@@ -56,8 +57,8 @@ import { FormsModule } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScDualRangeSlider {
-  @Input() min = 0;
-  @Input() max = 100;
+  readonly min = input(0);
+  readonly max = input(100);
   @Input() minValue = 20;
   @Input() maxValue = 80;
 
@@ -65,11 +66,11 @@ export class ScDualRangeSlider {
   readonly maxValueChange = output<number>();
 
   get minPercentage(): number {
-    return ((this.minValue - this.min) * 100) / (this.max - this.min);
+    return ((this.minValue - this.min()) * 100) / (this.max() - this.min());
   }
 
   get maxPercentage(): number {
-    return ((this.maxValue - this.min) * 100) / (this.max - this.min);
+    return ((this.maxValue - this.min()) * 100) / (this.max() - this.min());
   }
 
   onMinChange(event: Event): void {
