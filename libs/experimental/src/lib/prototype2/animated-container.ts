@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -14,7 +15,7 @@ export type AnimationState = 'initial' | 'entering' | 'visible' | 'exiting' | 'r
 
 @Component({
   selector: 'lib-animated-container',
-  imports: [],
+  imports: [CommonModule],
   template: `
     <div
       *ngIf="currentState !== 'removed'"
