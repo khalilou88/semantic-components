@@ -27,7 +27,7 @@ import { cn } from '@semantic-components/utils';
       (paste)="onPaste($event)"
       (blur)="onBlur()"
       type="text"
-      maxlength="1"
+      maxlength="2"
     />
 
     @if (showFakeCaret()) {
@@ -75,7 +75,7 @@ export class ScInputOTPSlot {
     const input = event.target as HTMLInputElement;
 
     // Ensure only digits, letters, or empty values
-    const sanitizedValue = input.value.replace(/[^a-zA-Z0-9]/g, '');
+    const sanitizedValue = input.value.replace(/[^a-zA-Z0-9]/g, '').slice(-1); // Keep only the last entered character
     input.value = sanitizedValue;
 
     this.value.set(sanitizedValue);
