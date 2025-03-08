@@ -12,6 +12,7 @@ import {
   inject,
   input,
   linkedSignal,
+  model,
   signal,
 } from '@angular/core';
 import {
@@ -71,9 +72,9 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
 
   readonly slots = contentChildren(ScInputOTPSlot, { descendants: true });
 
-  currentIndex = signal(0);
+  readonly currentIndex = signal(0);
 
-  value = '';
+  readonly value = model('');
 
   constructor() {
     effect(() => {
@@ -198,11 +199,13 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
     // if (isComplete) {
     // }
 
-    this.value = this.slots()
+    const value = this.slots()
       .map((digit) => digit.value || '')
       .join('');
 
-    this.onChange(this.value);
+    this.value.set(value);
+
+    this.onChange(value);
   }
 
   // Validator implementation
@@ -225,7 +228,7 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
   public clear() {
     if (this.slots()) {
       this.slots().forEach((digit) => digit.clear());
-      this.value = '';
+      this.value.set('');
       this.onChange(this.value);
 
       if (this.slots().length > 0 && !this.disabled()) {
