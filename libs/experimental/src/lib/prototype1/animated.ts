@@ -3,6 +3,9 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  Input,
+  NgZone,
+  OnInit,
   Output,
   ViewEncapsulation,
 } from '@angular/core';
@@ -12,40 +15,72 @@ import {
   imports: [],
   template: `
     <div
-      class="p-6 bg-white rounded-lg shadow-md transform transition-all duration-300 ease-in-out opacity-100 translate-y-0"
+      [class]="
+        'transform transition-all duration-500 ease-in-out p-6 bg-white rounded-lg shadow-xl max-w-md w-full ' +
+        (animationState === 'entering'
+          ? 'opacity-0 scale-95'
+          : animationState === 'visible'
+            ? 'opacity-100 scale-100'
+            : animationState === 'exiting'
+              ? 'opacity-0 scale-95'
+              : '')
+      "
     >
-      <h2 class="text-xl font-bold mb-4">Animated Content</h2>
-      <p class="mb-4">This content will animate when exiting</p>
-      <button
-        class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
-        (click)="close.emit()"
-      >
-        Close
-      </button>
+      <h2 class="text-xl font-bold mb-3">{{ title }}</h2>
+      <div class="mb-4">{{ content }}</div>
+      <div class="flex justify-end space-x-3">
+        <button
+          class="px-4 py-2 text-gray-700 bg-gray-200 rounded hover:bg-gray-300 transition-colors"
+          (click)="cancel.emit()"
+        >
+          Cancel
+        </button>
+        <button
+          class="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700 transition-colors"
+          (click)="confirm.emit()"
+        >
+          Confirm
+        </button>
+      </div>
     </div>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AnimatedContent {
-  @Output() close = new EventEmitter<void>();
+export class AnimatedContent implements OnInit {
+  @Input() title: string = 'Dialog Title';
+  @Input() content: string = 'Dialog content goes here.';
+  @Output() confirm = new EventEmitter<void>();
+  @Output() cancel = new EventEmitter<void>();
 
-  constructor(private readonly elementRef: ElementRef) {}
+  animationState: 'entering' | 'visible' | 'exiting' = 'entering';
 
-  startExitAnimation(callback: () => void) {
-    const element = this.elementRef.nativeElement.firstChild;
+  constructor(
+    private readonly el: ElementRef,
+    private readonly ngZone: NgZone,
+  ) {}
 
-    // Add Tailwind classes to trigger exit animation
-    element.classList.remove(['opacity-100', 'translate-y-0']);
-    element.classList.add(['opacity-0', 'translate-y-10']);
+  ngOnInit() {
+    // Start with entering animation, then transition to visible
+    setTimeout(() => {
+      this.animationState = 'visible';
+    }, 50);
+  }
 
-    element.addEventListener(
-      'transitionend',
-      () => {
-        callback();
-      },
-      { once: true },
-    );
+  startExitAnimation(): Promise<void> {
+    return new Promise<void>((resolve) => {
+      this.animationState = 'exiting';
+
+      const element = this.el.nativeElement.firstChild;
+      const onTransitionEnd = () => {
+        this.ngZone.run(() => {
+          element.removeEventListener('transitionend', onTransitionEnd);
+          resolve();
+        });
+      };
+
+      element.addEventListener('transitionend', onTransitionEnd);
+    });
   }
 }

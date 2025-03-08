@@ -11,13 +11,6 @@ import {
   selector: 'app-verification-page',
   imports: [OverlayExample, ModalExample, InlineAnimation, AnimationDemo],
   template: `
-    <lib-animation-demo />
-
-    <br />
-    <br />
-    <br />
-    <br />
-
     <lib-modal-example />
 
     <br />
