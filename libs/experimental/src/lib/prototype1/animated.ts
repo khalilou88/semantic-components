@@ -49,8 +49,8 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AnimatedContent implements OnInit {
-  @Input() title: string = 'Dialog Title';
-  @Input() content: string = 'Dialog content goes here.';
+  @Input() title = 'Dialog Title';
+  @Input() content = 'Dialog content goes here.';
   @Output() confirm = new EventEmitter<void>();
   @Output() cancel = new EventEmitter<void>();
 
