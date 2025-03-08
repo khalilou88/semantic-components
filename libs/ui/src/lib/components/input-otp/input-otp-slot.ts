@@ -4,8 +4,8 @@ import {
   ElementRef,
   ViewEncapsulation,
   computed,
+  effect,
   input,
-  model,
   output,
   signal,
   viewChild,
@@ -70,7 +70,13 @@ export class ScInputOTPSlot {
   readonly backspace = output<void>();
   readonly paste = output<string>();
 
-  readonly value = model('');
+  readonly value = signal('');
+
+  constructor() {
+    effect(() => {
+      this.valueChange.emit(this.value());
+    });
+  }
 
   onInput(event: Event) {
     const input = event.target as HTMLInputElement;
