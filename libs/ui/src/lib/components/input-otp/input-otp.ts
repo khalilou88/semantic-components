@@ -146,7 +146,6 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
           digits[index - 1].isActive.set(true);
           digits[index - 1].focus();
           this.currentIndex.set(index - 1);
-          this.onTouched();
         }
       });
 
