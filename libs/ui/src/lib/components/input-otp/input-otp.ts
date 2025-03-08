@@ -93,6 +93,21 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
     });
   }
 
+  setCurrentIndex(index: number) {
+    if (index !== this.currentIndex()) {
+      this.currentIndex.set(index);
+
+      // Add visual indication to the currently active digit
+      this.slots().forEach((digit, i) => {
+        digit.isActive.set(i === index);
+      });
+    }
+  }
+
+  getCurrentIndex(): number {
+    return this.currentIndex();
+  }
+
   onClick() {
     this.slots()[this.currentIndex()].isActive.set(true);
     this.slots()[this.currentIndex()].focus();
