@@ -4,7 +4,6 @@ import {
   ElementRef,
   ViewEncapsulation,
   computed,
-  effect,
   input,
   output,
   signal,
@@ -72,12 +71,6 @@ export class ScInputOTPSlot {
 
   readonly value = signal('');
 
-  constructor() {
-    effect(() => {
-      this.valueChange.emit(this.value());
-    });
-  }
-
   onInput(event: Event) {
     const input = event.target as HTMLInputElement;
 
@@ -86,6 +79,7 @@ export class ScInputOTPSlot {
     input.value = sanitizedValue;
 
     this.value.set(sanitizedValue);
+    this.valueChange.emit(this.value());
   }
 
   onKeyDown(event: KeyboardEvent) {
