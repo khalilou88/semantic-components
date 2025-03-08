@@ -69,15 +69,15 @@ export class ScInputOTPSlot {
   readonly backspace = output<void>();
   readonly paste = output<string>();
 
-  private _value = '';
+  private readonly _value = signal('');
 
   get value(): string {
-    return this._value;
+    return this._value();
   }
 
   set value(val: string) {
-    this._value = val;
-    this.valueChange.emit(this._value);
+    this._value.set(val);
+    this.valueChange.emit(this._value());
   }
 
   onInput(event: Event) {
