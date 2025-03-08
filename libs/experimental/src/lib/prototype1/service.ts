@@ -39,6 +39,12 @@ export class AnimatedOverlayService {
       this.componentRef.instance.title = config.title;
       this.componentRef.instance.content = config.content;
 
+      // Add backdrop click to close
+      this.overlayRef.backdropClick().subscribe(async () => {
+        await this.close();
+        resolve(false);
+      });
+
       this.componentRef.instance.confirm.subscribe(async () => {
         await this.close();
         resolve(true);
