@@ -22,14 +22,16 @@ import {
     <ng-template #modalTemplate>
       <div class="fixed inset-0 flex items-center justify-center z-50">
         <!-- Backdrop -->
-        <button
+        <div
           [class]="
             isExiting
               ? 'absolute inset-0 bg-black transition-opacity duration-300 ease-in-out opacity-0'
               : 'absolute inset-0 bg-black transition-opacity duration-300 ease-in-out opacity-60'
           "
           (click)="closeModal()"
-        ></button>
+          (keydown)="onKeydown($event)"
+          tabindex="0"
+        ></div>
 
         <!-- Modal content -->
         <div
@@ -93,6 +95,12 @@ export class ModalExample {
           this.overlayRef = null;
         }
       }, 300); // Match duration with Tailwind's duration-300
+    }
+  }
+
+  onKeydown(event: any) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.target.click();
     }
   }
 }
