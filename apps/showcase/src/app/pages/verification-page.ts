@@ -1,10 +1,15 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { InlineAnimation, ModalExample, OverlayExample } from '@semantic-components/experimental';
+import {
+  AnimatedList,
+  InlineAnimation,
+  ModalExample,
+  OverlayExample,
+} from '@semantic-components/experimental';
 
 @Component({
   selector: 'app-verification-page',
-  imports: [OverlayExample, ModalExample, InlineAnimation],
+  imports: [OverlayExample, ModalExample, InlineAnimation, AnimatedList],
   template: `
     <lib-modal-example />
 
@@ -21,6 +26,13 @@ import { InlineAnimation, ModalExample, OverlayExample } from '@semantic-compone
     <br />
 
     <lib-inline-animation />
+
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <lib-animated-list />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
