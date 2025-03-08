@@ -71,7 +71,9 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
 
   readonly slots = contentChildren(ScInputOTPSlot, { descendants: true });
 
-  private otpValue = '';
+  currentIndex = signal(0);
+
+  value = '';
 
   constructor() {
     effect(() => {
@@ -89,8 +91,6 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
       this.setupDigitComponents();
     });
   }
-
-  currentIndex = signal(0);
 
   onClick() {
     this.slots()[this.currentIndex()].isActive.set(true);
@@ -198,11 +198,11 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
     // if (isComplete) {
     // }
 
-    this.otpValue = this.slots()
+    this.value = this.slots()
       .map((digit) => digit.value || '')
       .join('');
 
-    this.onChange(this.otpValue);
+    this.onChange(this.value);
   }
 
   // Validator implementation
@@ -225,8 +225,8 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
   public clear() {
     if (this.slots()) {
       this.slots().forEach((digit) => digit.clear());
-      this.otpValue = '';
-      this.onChange(this.otpValue);
+      this.value = '';
+      this.onChange(this.value);
 
       if (this.slots().length > 0 && !this.disabled()) {
         this.slots()[0].focus();
@@ -252,11 +252,6 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
     this.updateOtpValue();
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
-  onChange = (_: any) => {};
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onTouched = () => {};
-
   writeValue(value: string): void {
     if (!value) {
       this.clear();
@@ -265,6 +260,11 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
 
     this.setValue(value);
   }
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
+  onChange = (_: any) => {};
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onTouched = () => {};
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   registerOnChange(fn: any): void {
