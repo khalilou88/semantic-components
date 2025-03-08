@@ -59,7 +59,7 @@ export class ScInputOTPSlot {
     ),
   );
 
-  showFakeCaret = computed(() => this.isActive() && !this.value);
+  showFakeCaret = computed(() => this.isActive() && !this.value());
 
   isActive = signal(false);
 
@@ -84,7 +84,7 @@ export class ScInputOTPSlot {
 
   onKeyDown(event: KeyboardEvent) {
     // Handle backspace key when input is empty
-    if (event.key === 'Backspace' && !this.value) {
+    if (event.key === 'Backspace' && !this.value()) {
       event.preventDefault();
       this.backspace.emit();
     }
