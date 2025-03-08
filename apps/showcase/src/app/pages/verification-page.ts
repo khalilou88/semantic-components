@@ -1,9 +1,18 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { ModalExample, OverlayExample } from '@semantic-components/experimental';
+
 @Component({
   selector: 'app-verification-page',
-  imports: [],
-  template: ``,
+  imports: [OverlayExample, ModalExample],
+  template: `
+    <lib-modal-example />
+
+    <br />
+    <br />
+
+    <lib-overlay-example />
+  `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
