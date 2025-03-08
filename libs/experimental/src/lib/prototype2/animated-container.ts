@@ -1,13 +1,12 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  OnChanges,
   Output,
-  SimpleChanges,
   ViewEncapsulation,
+  effect,
   input,
+  signal,
 } from '@angular/core';
 
 // Animation states type
@@ -15,11 +14,11 @@ export type AnimationState = 'initial' | 'entering' | 'visible' | 'exiting' | 'r
 
 @Component({
   selector: 'lib-animated-container',
-  imports: [CommonModule],
+  imports: [],
   template: `
-    @if (currentState !== 'removed') {
+    @if (currentState() !== 'removed') {
       <div [class]="getClassesForState()" (transitionend)="onTransitionEnd($event)">
-        <ng-content></ng-content>
+        <ng-content />
       </div>
     }
   `,
@@ -27,39 +26,39 @@ export type AnimationState = 'initial' | 'entering' | 'visible' | 'exiting' | 'r
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AnimatedContainer implements OnChanges {
+export class AnimatedContainer {
   readonly state = input<'visible' | 'hidden'>('visible');
   readonly animation = input<'fade' | 'slide' | 'zoom' | 'collapse'>('fade');
   readonly duration = input<'fast' | 'normal' | 'slow'>('normal');
   @Output() stateChange = new EventEmitter<AnimationState>();
 
-  currentState: AnimationState = 'initial';
+  protected readonly currentState = signal<AnimationState>('initial');
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['state']) {
+  constructor() {
+    effect(() => {
       const state = this.state();
       if (
         state === 'visible' &&
-        (this.currentState === 'initial' ||
-          this.currentState === 'removed' ||
-          this.currentState === 'exiting')
+        (this.currentState() === 'initial' ||
+          this.currentState() === 'removed' ||
+          this.currentState() === 'exiting')
       ) {
-        this.currentState = 'entering';
-        this.stateChange.emit(this.currentState);
+        this.currentState.set('entering');
+        this.stateChange.emit(this.currentState());
 
         // Schedule change to visible after a brief delay
         setTimeout(() => {
-          this.currentState = 'visible';
-          this.stateChange.emit(this.currentState);
+          this.currentState.set('visible');
+          this.stateChange.emit(this.currentState());
         }, 50);
       } else if (
         state === 'hidden' &&
-        (this.currentState === 'visible' || this.currentState === 'entering')
+        (this.currentState() === 'visible' || this.currentState() === 'entering')
       ) {
-        this.currentState = 'exiting';
-        this.stateChange.emit(this.currentState);
+        this.currentState.set('exiting');
+        this.stateChange.emit(this.currentState());
       }
-    }
+    });
   }
 
   getClassesForState(): string {
@@ -98,7 +97,7 @@ export class AnimatedContainer implements OnChanges {
   }
 
   private getFadeClasses(): string {
-    switch (this.currentState) {
+    switch (this.currentState()) {
       case 'entering':
         return 'opacity-0';
       case 'visible':
@@ -111,7 +110,7 @@ export class AnimatedContainer implements OnChanges {
   }
 
   private getSlideClasses(): string {
-    switch (this.currentState) {
+    switch (this.currentState()) {
       case 'entering':
         return 'opacity-0 -translate-x-6';
       case 'visible':
@@ -124,7 +123,7 @@ export class AnimatedContainer implements OnChanges {
   }
 
   private getZoomClasses(): string {
-    switch (this.currentState) {
+    switch (this.currentState()) {
       case 'entering':
         return 'opacity-0 scale-90';
       case 'visible':
@@ -137,7 +136,7 @@ export class AnimatedContainer implements OnChanges {
   }
 
   private getCollapseClasses(): string {
-    switch (this.currentState) {
+    switch (this.currentState()) {
       case 'entering':
         return 'opacity-0 max-h-0 overflow-hidden';
       case 'visible':
@@ -153,9 +152,9 @@ export class AnimatedContainer implements OnChanges {
     // Only handle transitions on the host element
     if (event.target !== event.currentTarget) return;
 
-    if (this.currentState === 'exiting') {
-      this.currentState = 'removed';
-      this.stateChange.emit(this.currentState);
+    if (this.currentState() === 'exiting') {
+      this.currentState.set('removed');
+      this.stateChange.emit(this.currentState());
     }
   }
 }
