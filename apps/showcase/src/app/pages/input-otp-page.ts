@@ -82,7 +82,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
         <h2 class="mb-5" id="examples" sc-page-subtitle>Examples</h2>
 
         <section class="my-10" id="variants">
-          <h3 class="mb-2" sc-heading level="3">Variants</h3>
+          <h3 class="mb-2" sc-heading level="3">With separator</h3>
 
           <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
             <sc-tab>
