@@ -30,8 +30,8 @@ export class OverlayExample {
   openOverlay() {
     const config = new OverlayConfig({
       hasBackdrop: true,
-      backdropClass: 'bg-black bg-opacity-50 transition-opacity duration-300',
-      panelClass: 'flex items-center justify-center p-4',
+      backdropClass: ['bg-black', 'bg-opacity-50', 'transition-opacity', 'duration-300'],
+      panelClass: ['flex', 'items-center', 'justify-center', 'p-4'],
     });
 
     this.overlayRef = this.overlay.create(config);

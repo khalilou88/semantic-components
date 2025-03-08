@@ -37,8 +37,8 @@ export class AnimatedContent {
     const element = this.elementRef.nativeElement.firstChild;
 
     // Add Tailwind classes to trigger exit animation
-    element.classList.remove('opacity-100', 'translate-y-0');
-    element.classList.add('opacity-0', 'translate-y-10');
+    element.classList.remove(['opacity-100', 'translate-y-0']);
+    element.classList.add(['opacity-0', 'translate-y-10']);
 
     element.addEventListener(
       'transitionend',

@@ -1,5 +1,6 @@
-import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { Overlay, OverlayModule, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -10,7 +11,7 @@ import {
 
 @Component({
   selector: 'lib-modal-example',
-  imports: [],
+  imports: [CommonModule, OverlayModule],
   template: `
     <button
       class="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition-colors"
