@@ -8,6 +8,7 @@ import {
   OnInit,
   Output,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 
 @Component({
@@ -17,11 +18,11 @@ import {
     <div
       [class]="
         'transform transition-all duration-500 ease-in-out p-6 bg-white rounded-lg shadow-xl max-w-md w-full ' +
-        (animationState === 'entering'
+        (animationState() === 'entering'
           ? 'opacity-0 scale-95'
-          : animationState === 'visible'
+          : animationState() === 'visible'
             ? 'opacity-100 scale-100'
-            : animationState === 'exiting'
+            : animationState() === 'exiting'
               ? 'opacity-0 scale-95'
               : '')
       "
@@ -54,7 +55,7 @@ export class AnimatedContent implements OnInit {
   @Output() confirm = new EventEmitter<void>();
   @Output() cancel = new EventEmitter<void>();
 
-  animationState: 'entering' | 'visible' | 'exiting' = 'entering';
+  animationState = signal<'entering' | 'visible' | 'exiting'>('entering');
 
   constructor(
     private readonly el: ElementRef,
@@ -64,13 +65,16 @@ export class AnimatedContent implements OnInit {
   ngOnInit() {
     // Start with entering animation, then transition to visible
     setTimeout(() => {
-      this.animationState = 'visible';
+      console.log('vv');
+      this.animationState.set('visible');
     }, 50);
   }
 
   startExitAnimation(): Promise<void> {
+    console.log('startExitAnimation');
+
     return new Promise<void>((resolve) => {
-      this.animationState = 'exiting';
+      this.animationState.set('exiting');
 
       const element = this.el.nativeElement.firstChild;
       const onTransitionEnd = () => {
