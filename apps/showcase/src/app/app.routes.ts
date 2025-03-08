@@ -244,6 +244,11 @@ export const appRoutes: Route[] = [
             title: 'Input OTP Page',
           },
           {
+            path: 'animation',
+            loadComponent: () => import('./pages/animation-page'),
+            title: 'Animation Page',
+          },
+          {
             path: 'verification',
             loadComponent: () => import('./pages/verification-page'),
             title: 'Verification Page',
