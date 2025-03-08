@@ -29,6 +29,12 @@ import { cn } from '@semantic-components/utils';
       type="text"
       maxlength="1"
     />
+
+    @if (showFakeCaret()) {
+      <div class="pointer-events-none absolute inset-0 flex items-center justify-center">
+        <div class="h-4 w-px animate-caret-blink bg-foreground duration-1000"></div>
+      </div>
+    }
   `,
   host: {
     '[class]': 'class()',
@@ -44,11 +50,15 @@ export class ScInputOTPSlot {
 
   protected readonly class = computed(() =>
     cn(
+      'relative',
+      'caret-transparent',
       'flex h-10 w-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md',
       this.isActive() && 'ring-2 ring-ring ring-offset-background',
       this.classInput(),
     ),
   );
+
+  showFakeCaret = computed(() => this.isActive() && !this.value);
 
   isActive = signal(false);
 
