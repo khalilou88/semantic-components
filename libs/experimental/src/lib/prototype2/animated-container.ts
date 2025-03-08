@@ -17,13 +17,11 @@ export type AnimationState = 'initial' | 'entering' | 'visible' | 'exiting' | 'r
   selector: 'lib-animated-container',
   imports: [CommonModule],
   template: `
-    <div
-      *ngIf="currentState !== 'removed'"
-      [class]="getClassesForState()"
-      (transitionend)="onTransitionEnd($event)"
-    >
-      <ng-content></ng-content>
-    </div>
+    @if (currentState !== 'removed') {
+      <div [class]="getClassesForState()" (transitionend)="onTransitionEnd($event)">
+        <ng-content></ng-content>
+      </div>
+    }
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
