@@ -6,7 +6,9 @@ import {
   Component,
   TemplateRef,
   ViewChild,
+  ViewContainerRef,
   ViewEncapsulation,
+  inject,
 } from '@angular/core';
 
 @Component({
@@ -65,6 +67,8 @@ export class ModalExample {
   overlayRef: OverlayRef | null = null;
   isExiting = false;
 
+  private readonly viewContainerRef = inject(ViewContainerRef);
+
   constructor(private readonly overlay: Overlay) {}
 
   openModal() {
@@ -81,7 +85,7 @@ export class ModalExample {
       hasBackdrop: false, // We're handling our own backdrop in the template
     });
 
-    const portal = new TemplatePortal(this.modalTemplate, null as any);
+    const portal = new TemplatePortal(this.modalTemplate, this.viewContainerRef);
     this.overlayRef.attach(portal);
   }
 
