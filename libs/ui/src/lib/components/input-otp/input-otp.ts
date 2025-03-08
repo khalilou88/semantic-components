@@ -76,6 +76,8 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
 
   readonly value = model('');
 
+  type = input<'numeric' | 'alphanumeric'>('numeric');
+
   constructor() {
     effect(() => {
       if (this.slots()) {

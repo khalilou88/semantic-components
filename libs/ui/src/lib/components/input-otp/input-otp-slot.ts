@@ -13,6 +13,7 @@ import {
 import { cn } from '@semantic-components/utils';
 
 const alphanumeric_regex = /[^a-zA-Z0-9]/g;
+const numeric_regex = /\D/g;
 
 @Component({
   selector: 'sc-input-otp-slot',
@@ -77,7 +78,7 @@ export class ScInputOTPSlot {
     const input = event.target as HTMLInputElement;
 
     // Ensure only digits, letters, or empty values
-    let sanitizedValue = input.value.replace(alphanumeric_regex, '');
+    let sanitizedValue = input.value.replace(numeric_regex, '');
 
     if (sanitizedValue.length > 1) {
       sanitizedValue = sanitizedValue.slice(-1); // Keep only the last entered character
@@ -108,7 +109,7 @@ export class ScInputOTPSlot {
     if (!pastedText) return;
 
     // Clean the pasted text to only include alphanumeric characters
-    const sanitizedText = pastedText.replace(alphanumeric_regex, '');
+    const sanitizedText = pastedText.replace(numeric_regex, '');
 
     // Set the first character in this input
     const firstChar = sanitizedText.charAt(0);
