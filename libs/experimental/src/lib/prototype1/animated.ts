@@ -65,14 +65,11 @@ export class AnimatedContent implements OnInit {
   ngOnInit() {
     // Start with entering animation, then transition to visible
     setTimeout(() => {
-      console.log('vv');
       this.animationState.set('visible');
     }, 50);
   }
 
   startExitAnimation(): Promise<void> {
-    console.log('startExitAnimation');
-
     return new Promise<void>((resolve) => {
       this.animationState.set('exiting');
 
