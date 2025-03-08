@@ -167,7 +167,7 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
   private getLastNotEmptyElement() {
     const arr = this.slots();
     for (let i = arr.length - 1; i >= 0; i--) {
-      if (arr[i].value) {
+      if (arr[i].value()) {
         this.currentIndex.set(i);
         return arr[i];
       }
@@ -187,7 +187,7 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
     chars.forEach((char, i) => {
       const targetIndex = startIndex + i;
       if (targetIndex < digits.length) {
-        digits[targetIndex].setValue(char);
+        digits[targetIndex].value.set(char);
       }
     });
 
@@ -242,7 +242,7 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
   // Public method to clear all inputs
   public clear() {
     if (this.slots()) {
-      this.slots().forEach((digit) => digit.clear());
+      this.slots().forEach((digit) => digit.value.set(''));
       this.value.set('');
       this.onChange(this.value);
 
@@ -261,9 +261,9 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
 
     this.slots().forEach((digit, index) => {
       if (index < valueArray.length) {
-        digit.setValue(valueArray[index]);
+        digit.value.set(valueArray[index]);
       } else {
-        digit.clear();
+        digit.value.set('');
       }
     });
 

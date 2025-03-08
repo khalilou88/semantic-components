@@ -5,6 +5,7 @@ import {
   ViewEncapsulation,
   computed,
   input,
+  model,
   output,
   signal,
   viewChild,
@@ -21,7 +22,7 @@ import { cn } from '@semantic-components/utils';
       #inputRef
       [disabled]="disabled()"
       [readonly]="!isActive()"
-      [value]="value"
+      [value]="value()"
       (input)="onInput($event)"
       (keydown)="onKeyDown($event)"
       (paste)="onPaste($event)"
@@ -69,16 +70,7 @@ export class ScInputOTPSlot {
   readonly backspace = output<void>();
   readonly paste = output<string>();
 
-  private readonly _value = signal('');
-
-  get value(): string {
-    return this._value();
-  }
-
-  set value(val: string) {
-    this._value.set(val);
-    this.valueChange.emit(this._value());
-  }
+  readonly value = model('');
 
   onInput(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -87,7 +79,7 @@ export class ScInputOTPSlot {
     const sanitizedValue = input.value.replace(/[^a-zA-Z0-9]/g, '');
     input.value = sanitizedValue;
 
-    this.value = sanitizedValue;
+    this.value.set(sanitizedValue);
   }
 
   onKeyDown(event: KeyboardEvent) {
@@ -113,7 +105,7 @@ export class ScInputOTPSlot {
 
     // Set the first character in this input
     const firstChar = sanitizedText.charAt(0);
-    this.value = firstChar;
+    this.value.set(firstChar);
     this.inputRef().nativeElement.value = firstChar;
 
     // Emit the remaining characters for potential distribution to other inputs
@@ -131,14 +123,5 @@ export class ScInputOTPSlot {
     if (!this.disabled()) {
       this.inputRef().nativeElement.focus();
     }
-  }
-  public clear() {
-    this.value = '';
-    this.inputRef().nativeElement.value = '';
-  }
-
-  public setValue(val: string) {
-    this.value = val;
-    this.inputRef().nativeElement.value = val;
   }
 }
