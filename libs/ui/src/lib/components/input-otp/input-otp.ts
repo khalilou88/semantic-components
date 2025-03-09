@@ -136,8 +136,19 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
       });
 
       // Track focus events
-      digit.focus.subscribe(() => {
-        this.setCurrentPosition(index);
+      digit.focus.subscribe((value: string) => {
+        if (value) {
+          digit.setActive(true);
+          this.setCurrentPosition(index);
+        } else {
+          const { index, slot } = this.findFirstSlotToHighlight();
+          this.setCurrentPosition(index);
+          slot.setActive();
+        }
+      });
+
+      digit.blur.subscribe(() => {
+        digit.setActive(false);
       });
 
       // Handle paste event - distribute characters to subsequent inputs
@@ -150,33 +161,28 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
 
     // Set initial focus if not disabled
     if (!this.disabled()) {
-      const d = this.getLastNotEmptyElement();
-      d.setActive();
+      const { index, slot } = this.findFirstSlotToHighlight();
+      this.setCurrentPosition(index);
+      slot.setActive();
     }
   }
 
   setCurrentPosition(position: number) {
     if (position !== this.currentIndex()) {
       this.currentIndex.set(position);
-
-      // Add visual indication to the currently active digit
-      this.slots().forEach((digit, index) => {
-        digit.setActive(index === position);
-      });
     }
   }
 
-  private getLastNotEmptyElement() {
+  private findFirstSlotToHighlight() {
     const arr = this.slots();
-    for (let i = arr.length - 1; i >= 0; i--) {
-      if (arr[i].value()) {
-        this.currentIndex.set(i);
-        return arr[i];
+
+    for (let i = 0; i < arr.length; i++) {
+      if (!arr[i].value()) {
+        return { index: i, slot: arr[i] };
       }
     }
 
-    this.currentIndex.set(0);
-    return arr[0];
+    return { index: arr.length - 1, slot: arr[arr.length - 1] };
   }
 
   private handleMultiDigitPaste(text: string, startIndex: number) {
