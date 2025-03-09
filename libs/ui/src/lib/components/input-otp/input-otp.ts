@@ -167,12 +167,11 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
   setCurrentPosition(position: number) {
     if (position !== this.currentIndex()) {
       this.currentIndex.set(position);
-
-      // Add visual indication to the currently active digit
-      this.slots().forEach((digit, index) => {
-        digit.setActive(index === position);
-      });
     }
+    // Add visual indication to the currently active digit
+    this.slots().forEach((digit, index) => {
+      digit.setActive(index === position);
+    });
   }
 
   private findFirstSlotToHighlight() {
