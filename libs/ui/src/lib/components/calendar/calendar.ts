@@ -17,8 +17,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { cn } from '@semantic-components/utils';
 
-import { ScButton } from '../button';
-import { ScCard, ScCardContent, ScCardFooter, ScCardHeader } from '../card';
+import { ScCard, ScCardContent, ScCardHeader } from '../card';
 import { ScMonthDays } from './month-days';
 import { MonthSelector } from './month-selector';
 import { ScMonthYearHeader } from './month-year-header';
@@ -32,8 +31,8 @@ import { YearSelector } from './year-selector';
     ScMonthDays,
     ScCard,
     ScCardHeader,
-    ScButton,
-    ScCardFooter,
+    // ScButton,
+    // ScCardFooter,
     ScCardContent,
     MonthSelector,
     YearSelector,
@@ -65,10 +64,10 @@ import { YearSelector } from './year-selector';
         }
       </div>
 
-      <div class="justify-between" sc-card-footer>
+      <!--div class="justify-between" sc-card-footer>
         <button sc-button variant="outline" type="button">Cancel</button>
         <button sc-button type="button">Done</button>
-      </div>
+      </div-->
     </div>
   `,
   host: {
