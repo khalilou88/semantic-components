@@ -71,7 +71,7 @@ export class ScInputOTPSlot {
 
   readonly inputRef = viewChild.required<ElementRef<HTMLInputElement>>('inputRef');
 
-  readonly focus = output<string>();
+  readonly userFocus = output<string>();
   readonly blur = output<void>();
   readonly backspace = output<void>();
   readonly arrowLeft = output<void>();
@@ -143,8 +143,13 @@ export class ScInputOTPSlot {
     }
   }
 
+  private readonly isUserFocus = signal<boolean>(true);
+
   protected onFocus(): void {
-    this.focus.emit(this.value());
+    if (this.isUserFocus()) {
+      this.userFocus.emit(this.value());
+      this.isUserFocus.set(true);
+    }
   }
 
   protected onBlur(): void {
@@ -154,6 +159,7 @@ export class ScInputOTPSlot {
   // Public methods
   setActive(active = true): void {
     if (active && !this.disabled()) {
+      this.isUserFocus.set(false);
       this.inputRef().nativeElement.focus();
       this.inputRef().nativeElement.select();
     }
