@@ -50,7 +50,7 @@ import { YearSelector } from './year-selector';
       <div class="h-64" sc-card-content>
         @switch (view()) {
           @case ('years') {
-            <sc-year-selector />
+            <sc-year-selector [year]="year()" />
           }
           @case ('months') {
             <sc-month-selector />
