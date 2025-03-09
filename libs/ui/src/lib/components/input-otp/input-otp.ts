@@ -134,6 +134,25 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
         }
       });
 
+      // Handle arrow keys for navigation
+      digit.arrowLeft.subscribe(() => {
+        if (index > 0) {
+          digits[index].isActive.set(false);
+          digits[index - 1].isActive.set(true);
+          digits[index - 1].focus();
+          this.currentIndex.set(index - 1);
+        }
+      });
+
+      digit.arrowRight.subscribe(() => {
+        if (index < digits.length - 1) {
+          digits[index].isActive.set(false);
+          digits[index + 1].isActive.set(true);
+          digits[index + 1].focus();
+          this.currentIndex.set(index + 1);
+        }
+      });
+
       // Handle paste event - distribute characters to subsequent inputs
       digit.paste.subscribe((remainingText: string) => {
         // Process the remaining pasted text

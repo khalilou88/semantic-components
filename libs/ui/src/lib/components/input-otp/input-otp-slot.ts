@@ -71,6 +71,8 @@ export class ScInputOTPSlot {
   readonly inputRef = viewChild.required<ElementRef<HTMLInputElement>>('inputRef');
 
   readonly backspace = output<void>();
+  readonly arrowLeft = output<void>();
+  readonly arrowRight = output<void>();
   readonly paste = output<string>();
 
   readonly value = model('');
@@ -95,6 +97,17 @@ export class ScInputOTPSlot {
     if (event.key === 'Backspace' && !this.value()) {
       event.preventDefault();
       this.backspace.emit();
+    }
+
+    // Handle arrow keys for navigation between inputs
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      this.arrowLeft.emit();
+    }
+
+    if (event.key === 'ArrowRight' && this.value()) {
+      event.preventDefault();
+      this.arrowRight.emit();
     }
   }
 
