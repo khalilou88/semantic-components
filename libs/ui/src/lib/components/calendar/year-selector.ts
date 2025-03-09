@@ -13,7 +13,7 @@ import {
   imports: [CommonModule],
   template: `
     <!-- Year selection -->
-    <div class="p-2 grid grid-cols-4 gap-1 max-h-48 overflow-y-auto">
+    <div class="p-2 grid grid-cols-4 gap-1">
       <button
         class="p-2 text-sm rounded hover:bg-blue-100"
         *ngFor="let year of years"
