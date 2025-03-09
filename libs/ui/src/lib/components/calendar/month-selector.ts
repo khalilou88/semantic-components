@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  input,
+  output,
+} from '@angular/core';
 
 @Component({
   selector: 'sc-month-selector',
@@ -9,12 +15,12 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     <div class="p-2 grid grid-cols-3 gap-1">
       <button
         class="p-2 text-sm rounded hover:bg-blue-100"
-        *ngFor="let month of months; let i = index"
-        [class.bg-blue-500]="i === selectedMonth"
-        [class.text-white]="i === selectedMonth"
+        *ngFor="let m of months; let i = index"
+        [class.bg-blue-500]="i === month()"
+        [class.text-white]="i === month()"
         (click)="selectMonth(i); $event.stopPropagation()"
       >
-        {{ month.substr(0, 3) }}
+        {{ m.substr(0, 3) }}
       </button>
     </div>
   `,
@@ -23,6 +29,8 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MonthSelector {
+  month = input.required<number>();
+
   months: string[] = [
     'January',
     'February',
@@ -38,10 +46,9 @@ export class MonthSelector {
     'December',
   ];
 
-  selectedMonth: number = new Date().getMonth();
+  readonly monthSelected = output<number>();
 
   selectMonth(monthIndex: number): void {
-    this.selectedMonth = monthIndex;
-    console.log(monthIndex);
+    this.monthSelected.emit(monthIndex);
   }
 }
