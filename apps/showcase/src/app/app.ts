@@ -20,7 +20,7 @@ import { RouterOutlet } from '@angular/router';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent implements OnInit {
+export class App implements OnInit {
   private readonly document = inject<Document>(DOCUMENT);
 
   private readonly classList = signal([

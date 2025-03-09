@@ -9,4 +9,4 @@ import { RouterModule } from '@angular/router';
   `,
   styles: ``,
 })
-export class AppComponent {}
+export class App {}
