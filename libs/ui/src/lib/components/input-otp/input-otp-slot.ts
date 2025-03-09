@@ -69,7 +69,7 @@ export class ScInputOTPSlot {
   disabled = signal(false);
 
   readonly inputRef = viewChild.required<ElementRef<HTMLInputElement>>('inputRef');
-  // readonly valueChange = output<string>();
+
   readonly backspace = output<void>();
   readonly paste = output<string>();
 
