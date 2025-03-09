@@ -1,12 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  OnInit,
-  Output,
-  ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'sc-year-selector',
@@ -30,101 +23,20 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class YearSelector implements OnInit {
-  @Output() dateChange = new EventEmitter<Date>();
-
-  months: string[] = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
-
   years: number[] = [];
-  selectedMonth: number = new Date().getMonth();
+
   selectedYear: number = new Date().getFullYear();
 
-  isOpen = false;
-  showMonths = false;
-  showYears = false;
-
-  currentDate: Date = new Date();
-  displayValue = '';
-
   ngOnInit(): void {
-    // Generate years (current year - 10 to current year + 10)
+    // Generate years (current year - 9 to current year + 10)
     const currentYear = new Date().getFullYear();
-    for (let year = currentYear - 10; year <= currentYear + 10; year++) {
+    for (let year = currentYear - 9; year <= currentYear + 10; year++) {
       this.years.push(year);
     }
-
-    this.updateDisplayValue();
-  }
-
-  toggleDropdown(): void {
-    this.isOpen = !this.isOpen;
-    if (this.isOpen) {
-      this.showMonths = true;
-      this.showYears = false;
-    }
-  }
-
-  toggleYearView(): void {
-    this.showMonths = false;
-    this.showYears = true;
-  }
-
-  toggleMonthView(): void {
-    this.showMonths = true;
-    this.showYears = false;
-  }
-
-  selectMonth(monthIndex: number): void {
-    this.selectedMonth = monthIndex;
-    this.updateDateAndClose();
   }
 
   selectYear(year: number): void {
     this.selectedYear = year;
-    this.toggleMonthView();
-  }
-
-  updateDateAndClose(): void {
-    const newDate = new Date(this.selectedYear, this.selectedMonth, 1);
-    this.currentDate = newDate;
-    this.updateDisplayValue();
-    this.dateChange.emit(newDate);
-    this.isOpen = false;
-  }
-
-  updateDisplayValue(): void {
-    this.displayValue = `${this.months[this.selectedMonth]} ${this.selectedYear}`;
-  }
-
-  nextMonth(): void {
-    if (this.selectedMonth === 11) {
-      this.selectedMonth = 0;
-      this.selectedYear++;
-    } else {
-      this.selectedMonth++;
-    }
-    this.updateDateAndClose();
-  }
-
-  previousMonth(): void {
-    if (this.selectedMonth === 0) {
-      this.selectedMonth = 11;
-      this.selectedYear--;
-    } else {
-      this.selectedMonth--;
-    }
-    this.updateDateAndClose();
+    console.log(year);
   }
 }
