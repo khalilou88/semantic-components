@@ -71,7 +71,7 @@ export class ScInputOTPSlot {
 
   readonly inputRef = viewChild.required<ElementRef<HTMLInputElement>>('inputRef');
 
-  readonly userFocus = output<string>();
+  readonly focus = output<string>();
   readonly blur = output<void>();
   readonly backspace = output<void>();
   readonly arrowLeft = output<void>();
@@ -144,7 +144,7 @@ export class ScInputOTPSlot {
   }
 
   protected onFocus(): void {
-    this.userFocus.emit(this.value());
+    this.focus.emit(this.value());
   }
 
   protected onBlur(): void {

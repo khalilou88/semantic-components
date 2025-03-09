@@ -136,7 +136,7 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
       });
 
       // Track focus events
-      digit.userFocus.subscribe((value: string) => {
+      digit.focus.subscribe((value: string) => {
         if (value) {
           this.setCurrentPosition(index);
         } else {
