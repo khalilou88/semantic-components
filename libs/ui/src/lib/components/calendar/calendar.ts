@@ -20,8 +20,10 @@ import { cn } from '@semantic-components/utils';
 import { ScButton } from '../button';
 import { ScCard, ScCardContent, ScCardFooter, ScCardHeader } from '../card';
 import { ScMonthDays } from './month-days';
+import { MonthSelector } from './month-selector';
 import { ScMonthYearHeader } from './month-year-header';
 import { WeekDayName } from './util';
+import { YearSelector } from './year-selector';
 
 @Component({
   selector: 'sc-calendar',
@@ -33,6 +35,8 @@ import { WeekDayName } from './util';
     ScButton,
     ScCardFooter,
     ScCardContent,
+    MonthSelector,
+    YearSelector,
   ],
   template: `
     <div sc-card>
@@ -41,14 +45,24 @@ import { WeekDayName } from './util';
       </div>
 
       <div sc-card-content>
-        <sc-month-days
-          [weekDaysNames]="weekDaysNames()"
-          [days]="monthDays()"
-          [firstDayMonth]="firstDayMonth()"
-          [selectedDay]="value()"
-          [focusedDate]="focusedDate()"
-          (selectedDayChange)="setSelectedDay($event)"
-        />
+        @switch (view()) {
+          @case ('years') {
+            <sc-year-selector />
+          }
+          @case ('months') {
+            <sc-month-selector />
+          }
+          @default {
+            <sc-month-days
+              [weekDaysNames]="weekDaysNames()"
+              [days]="monthDays()"
+              [firstDayMonth]="firstDayMonth()"
+              [selectedDay]="value()"
+              [focusedDate]="focusedDate()"
+              (selectedDayChange)="setSelectedDay($event)"
+            />
+          }
+        }
       </div>
 
       <div class="justify-between" sc-card-footer>
@@ -73,6 +87,8 @@ import { WeekDayName } from './util';
   ],
 })
 export class ScCalendar implements OnInit, ControlValueAccessor {
+  protected readonly view = signal<'days' | 'years' | 'months'>('days');
+
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
 
   readonly classInput = input<string>('', {
