@@ -143,13 +143,8 @@ export class ScInputOTPSlot {
     }
   }
 
-  private readonly isUserFocus = signal<boolean>(true);
-
   protected onFocus(): void {
-    if (this.isUserFocus()) {
-      this.userFocus.emit(this.value());
-      this.isUserFocus.set(true);
-    }
+    this.userFocus.emit(this.value());
   }
 
   protected onBlur(): void {
@@ -159,7 +154,6 @@ export class ScInputOTPSlot {
   // Public methods
   setActive(active = true): void {
     if (active && !this.disabled()) {
-      this.isUserFocus.set(false);
       this.inputRef().nativeElement.focus();
       this.inputRef().nativeElement.select();
     }
