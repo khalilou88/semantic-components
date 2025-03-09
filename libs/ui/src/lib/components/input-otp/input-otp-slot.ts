@@ -89,7 +89,12 @@ export class ScInputOTPSlot {
 
     input.value = sanitizedValue;
 
-    this.value.set(sanitizedValue);
+    //If the value is the same, emit arrow right to move to the next input
+    if (sanitizedValue === this.value()) {
+      this.arrowRight.emit();
+    } else {
+      this.value.set(sanitizedValue);
+    }
   }
 
   onKeyDown(event: KeyboardEvent) {
