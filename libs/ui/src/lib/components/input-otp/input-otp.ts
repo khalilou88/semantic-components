@@ -71,7 +71,7 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
 
   readonly slots = contentChildren(ScInputOTPSlot, { descendants: true });
 
-  readonly currentIndex = signal(0);
+  readonly currentIndex = signal(-1);
 
   readonly value = model('');
 
