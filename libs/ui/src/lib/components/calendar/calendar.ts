@@ -40,10 +40,14 @@ import { YearSelector } from './year-selector';
   template: `
     <div sc-card>
       <div sc-card-header>
-        <sc-month-year-header [monthYear]="monthYear()" (monthYearChange)="setMonthYear($event)" />
+        <sc-month-year-header
+          [monthYear]="monthYear()"
+          (monthYearChange)="setMonthYear($event)"
+          (viewToggled)="toggleView()"
+        />
       </div>
 
-      <div sc-card-content>
+      <div class="h-64" sc-card-content>
         @switch (view()) {
           @case ('years') {
             <sc-year-selector />
@@ -87,6 +91,16 @@ import { YearSelector } from './year-selector';
 })
 export class ScCalendar implements OnInit, ControlValueAccessor {
   protected readonly view = signal<'days' | 'years' | 'months'>('days');
+
+  protected toggleView(): void {
+    if (this.view() === 'days') {
+      this.view.set('years');
+    } else if (this.view() === 'years') {
+      this.view.set('months');
+    } else {
+      this.view.set('days');
+    }
+  }
 
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
 

@@ -27,7 +27,7 @@ import { ScButton } from '../button';
       <svg si-chevron-left-icon></svg>
     </button>
 
-    <button sc-button variant="ghost" type="button">
+    <button (click)="viewToggled.emit()" sc-button variant="ghost" type="button">
       {{ monthYear() }}
     </button>
 
@@ -58,4 +58,6 @@ export class ScMonthYearHeader {
   monthYear = input.required<string>();
 
   monthYearChange = output<number>();
+
+  readonly viewToggled = output<void>();
 }
