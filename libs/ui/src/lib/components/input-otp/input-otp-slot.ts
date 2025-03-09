@@ -5,6 +5,7 @@ import {
   ViewEncapsulation,
   computed,
   input,
+  model,
   output,
   signal,
   viewChild,
@@ -68,11 +69,11 @@ export class ScInputOTPSlot {
   disabled = signal(false);
 
   readonly inputRef = viewChild.required<ElementRef<HTMLInputElement>>('inputRef');
-  readonly valueChange = output<string>();
+  // readonly valueChange = output<string>();
   readonly backspace = output<void>();
   readonly paste = output<string>();
 
-  readonly value = signal('');
+  readonly value = model('');
 
   onInput(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -87,7 +88,6 @@ export class ScInputOTPSlot {
     input.value = sanitizedValue;
 
     this.value.set(sanitizedValue);
-    this.valueChange.emit(this.value());
   }
 
   onKeyDown(event: KeyboardEvent) {
@@ -114,7 +114,6 @@ export class ScInputOTPSlot {
     // Set the first character in this input
     const firstChar = sanitizedText.charAt(0);
     this.value.set(firstChar);
-    this.valueChange.emit(firstChar);
     this.inputRef().nativeElement.value = firstChar;
 
     // Emit the remaining characters for potential distribution to other inputs

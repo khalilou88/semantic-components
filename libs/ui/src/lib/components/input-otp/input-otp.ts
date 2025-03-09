@@ -111,7 +111,7 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
     // Set up focus management and value change handling
     digits.forEach((digit, index) => {
       // Subscribe to value changes
-      digit.valueChange.subscribe((value: string) => {
+      digit.value.subscribe((value: string) => {
         this.updateOtpValue();
         this.onTouched();
 
