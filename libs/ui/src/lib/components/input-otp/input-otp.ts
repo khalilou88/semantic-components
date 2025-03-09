@@ -36,7 +36,6 @@ import { ScInputOTPSlot } from './input-otp-slot';
   `,
   host: {
     '[class]': 'class()',
-    '(click)': 'onClick()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -95,11 +94,6 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
     });
   }
 
-  onClick() {
-    this.slots()[this.currentIndex()].isActive.set(true);
-    this.slots()[this.currentIndex()].focus();
-  }
-
   private setupDigitComponents() {
     const digits = this.slots();
 
@@ -117,40 +111,33 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
 
         // Auto-focus next input when a digit is entered
         if (value && index < digits.length - 1) {
-          digits[index].isActive.set(false);
-          digits[index + 1].isActive.set(true);
-          digits[index + 1].focus();
-          this.currentIndex.set(index + 1);
+          this.setCurrentPosition(index + 1);
+        }
+      });
+
+      digit.arrowRight.subscribe(() => {
+        if (index < digits.length - 1) {
+          this.setCurrentPosition(index + 1);
         }
       });
 
       // Handle backspace - move focus to previous input
       digit.backspace.subscribe(() => {
         if (index > 0) {
-          digits[index].isActive.set(false);
-          digits[index - 1].isActive.set(true);
-          digits[index - 1].focus();
-          this.currentIndex.set(index - 1);
+          this.setCurrentPosition(index - 1);
         }
       });
 
       // Handle arrow keys for navigation
       digit.arrowLeft.subscribe(() => {
         if (index > 0) {
-          digits[index].isActive.set(false);
-          digits[index - 1].isActive.set(true);
-          digits[index - 1].focus();
-          this.currentIndex.set(index - 1);
+          this.setCurrentPosition(index - 1);
         }
       });
 
-      digit.arrowRight.subscribe(() => {
-        if (index < digits.length - 1) {
-          digits[index].isActive.set(false);
-          digits[index + 1].isActive.set(true);
-          digits[index + 1].focus();
-          this.currentIndex.set(index + 1);
-        }
+      // Track focus events
+      digit.focus.subscribe(() => {
+        this.setCurrentPosition(index);
       });
 
       // Handle paste event - distribute characters to subsequent inputs
@@ -164,8 +151,18 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
     // Set initial focus if not disabled
     if (!this.disabled()) {
       const d = this.getLastNotEmptyElement();
-      d.isActive.set(true);
-      d.focus();
+      d.setActive();
+    }
+  }
+
+  setCurrentPosition(position: number) {
+    if (position !== this.currentIndex()) {
+      this.currentIndex.set(position);
+
+      // Add visual indication to the currently active digit
+      this.slots().forEach((digit, index) => {
+        digit.setActive(index === position);
+      });
     }
   }
 
@@ -201,13 +198,12 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
       (digit, index) => index >= startIndex + chars.length && !digit.value,
     );
     if (nextEmptyIndex !== -1) {
-      digits[nextEmptyIndex].focus();
+      this.setCurrentPosition(nextEmptyIndex);
     } else if (startIndex + chars.length < digits.length) {
-      digits[startIndex + chars.length].focus();
+      this.setCurrentPosition(startIndex + chars.length);
     } else {
       // All digits filled, focus the last one
-      digits[digits.length - 1].focus();
-      this.currentIndex.set(digits.length - 1);
+      this.setCurrentPosition(digits.length - 1);
     }
 
     this.updateOtpValue();
@@ -252,8 +248,7 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
       this.onChange(this.value);
 
       if (this.slots().length > 0 && !this.disabled()) {
-        this.slots()[0].focus();
-        this.currentIndex.set(0);
+        this.setCurrentPosition(0);
       }
     }
   }

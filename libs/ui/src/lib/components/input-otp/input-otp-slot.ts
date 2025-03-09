@@ -28,8 +28,9 @@ const numeric_regex = /\D/g;
       [value]="value()"
       (input)="onInput($event)"
       (keydown)="onKeyDown($event)"
-      (paste)="onPaste($event)"
+      (focus)="onFocus()"
       (blur)="onBlur()"
+      (paste)="onPaste($event)"
       type="text"
       maxlength="2"
     />
@@ -62,14 +63,16 @@ export class ScInputOTPSlot {
     ),
   );
 
-  showFakeCaret = computed(() => this.isActive() && !this.value());
+  protected readonly showFakeCaret = computed(() => this.isActive() && !this.value());
 
-  isActive = signal(false);
+  protected readonly isActive = signal(false);
 
-  disabled = signal(false);
+  readonly disabled = signal(false);
 
   readonly inputRef = viewChild.required<ElementRef<HTMLInputElement>>('inputRef');
 
+  readonly focus = output<void>();
+  readonly blur = output<void>();
   readonly backspace = output<void>();
   readonly arrowLeft = output<void>();
   readonly arrowRight = output<void>();
@@ -77,7 +80,7 @@ export class ScInputOTPSlot {
 
   readonly value = model('');
 
-  onInput(event: Event) {
+  protected onInput(event: Event) {
     const input = event.target as HTMLInputElement;
 
     // Ensure only digits, letters, or empty values
@@ -97,7 +100,7 @@ export class ScInputOTPSlot {
     }
   }
 
-  onKeyDown(event: KeyboardEvent) {
+  protected onKeyDown(event: KeyboardEvent) {
     // Handle backspace key when input is empty
     if (event.key === 'Backspace' && !this.value()) {
       event.preventDefault();
@@ -116,7 +119,7 @@ export class ScInputOTPSlot {
     }
   }
 
-  onPaste(event: ClipboardEvent) {
+  protected onPaste(event: ClipboardEvent) {
     event.preventDefault();
 
     // Get pasted content and clean it
@@ -140,14 +143,21 @@ export class ScInputOTPSlot {
     }
   }
 
-  onBlur() {
-    this.isActive.set(false);
+  protected onFocus(): void {
+    this.focus.emit();
+  }
+
+  protected onBlur(): void {
+    this.blur.emit();
   }
 
   // Public methods
-  public focus() {
-    if (!this.disabled()) {
+  setActive(active: boolean = true): void {
+    if (active && !this.disabled()) {
       this.inputRef().nativeElement.focus();
+      this.inputRef().nativeElement.select();
     }
+
+    this.isActive.set(active);
   }
 }
