@@ -152,7 +152,7 @@ export class ScInputOTPSlot {
   }
 
   // Public methods
-  setActive(active: boolean = true): void {
+  setActive(active = true): void {
     if (active && !this.disabled()) {
       this.inputRef().nativeElement.focus();
       this.inputRef().nativeElement.select();
