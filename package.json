@@ -22,6 +22,7 @@
     "@angular/ssr": "19.2.1",
     "@fontsource/inter": "^5.2.5",
     "@fontsource/jetbrains-mono": "^5.2.5",
+    "@js-temporal/polyfill": "^0.4.4",
     "@semantic-icons/lucide-icons": "^0.43.0",
     "@supabase/supabase-js": "^2.49.1",
     "@tailwindcss/postcss": "^4.0.12",
