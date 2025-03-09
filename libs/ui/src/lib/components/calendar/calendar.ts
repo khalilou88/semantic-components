@@ -50,7 +50,7 @@ import { YearSelector } from './year-selector';
       <div class="h-64" sc-card-content>
         @switch (view()) {
           @case ('years') {
-            <sc-year-selector [year]="year()" />
+            <sc-year-selector [year]="year()" (yearSelected)="selectYear($event)" />
           }
           @case ('months') {
             <sc-month-selector />
@@ -100,6 +100,11 @@ export class ScCalendar implements OnInit, ControlValueAccessor {
     } else {
       this.view.set('days');
     }
+  }
+
+  protected selectYear(year: number) {
+    this.year.set(year);
+    this.toggleView();
   }
 
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
