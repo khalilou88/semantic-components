@@ -138,12 +138,10 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
       // Track focus events
       digit.focus.subscribe((value: string) => {
         if (value) {
-          digit.setActive(true);
           this.setCurrentPosition(index);
         } else {
-          const { index, slot } = this.findFirstSlotToHighlight();
+          const index = this.findFirstSlotToHighlight();
           this.setCurrentPosition(index);
-          slot.setActive();
         }
       });
 
@@ -161,15 +159,19 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
 
     // Set initial focus if not disabled
     if (!this.disabled()) {
-      const { index, slot } = this.findFirstSlotToHighlight();
+      const index = this.findFirstSlotToHighlight();
       this.setCurrentPosition(index);
-      slot.setActive();
     }
   }
 
   setCurrentPosition(position: number) {
     if (position !== this.currentIndex()) {
       this.currentIndex.set(position);
+
+      // Add visual indication to the currently active digit
+      this.slots().forEach((digit, index) => {
+        digit.setActive(index === position);
+      });
     }
   }
 
@@ -178,11 +180,11 @@ export class ScInputOtp implements AfterContentInit, ControlValueAccessor {
 
     for (let i = 0; i < arr.length; i++) {
       if (!arr[i].value()) {
-        return { index: i, slot: arr[i] };
+        return i;
       }
     }
 
-    return { index: arr.length - 1, slot: arr[arr.length - 1] };
+    return arr.length - 1;
   }
 
   private handleMultiDigitPaste(text: string, startIndex: number) {
