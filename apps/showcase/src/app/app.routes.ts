@@ -430,6 +430,11 @@ export const appRoutes: Route[] = [
             title: 'Date Picker Page',
           },
           {
+            path: 'date-range-picker',
+            loadComponent: () => import('./pages/date-range-picker-page'),
+            title: 'Date Range Picker Page',
+          },
+          {
             path: 'colors',
             loadComponent: () => import('./pages/colors-page'),
             title: 'Colors Page',
