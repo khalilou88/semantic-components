@@ -42,7 +42,7 @@ import { WeekDayName } from './util';
           'col-start-7': index === 0 && firstDayMonth() === 6,
         }"
         [attr.data-sc-day]="day"
-        [variant]="isSelected(day) ? 'primary' : 'ghost'"
+        [variant]="getVariant(day)"
         (click)="setSelectedDay($event)"
         sc-button
         size="icon"
@@ -97,6 +97,18 @@ export class ScDaySelector {
         b?.nativeElement.focus();
       }
     });
+  }
+
+  getVariant(day: string) {
+    if (this.isSelected(day)) {
+      return 'primary';
+    }
+
+    if (this.isToday(day)) {
+      return 'outline';
+    }
+
+    return 'ghost';
   }
 
   readonly today = input<string>('');
