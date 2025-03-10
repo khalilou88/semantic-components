@@ -77,12 +77,13 @@ interface CalendarDay {
         </button>
       </div>
 
-      <button
+      <div
         class="absolute z-10 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 w-72"
         *ngIf="isCalendarOpen"
         [id]="id + '-calendar'"
         [attr.aria-label]="'Calendar dialog'"
         (click)="onCalendarClick($event)"
+        (keydown)="ff()"
         role="dialog"
         aria-modal="true"
       >
@@ -211,7 +212,7 @@ interface CalendarDay {
             </button>
           </div>
         </div>
-      </button>
+      </div>
 
       <div class="sr-only" *ngIf="selectedDate" aria-live="polite">
         Selected date: {{ selectedDate.toString() }}
@@ -619,5 +620,9 @@ export class ScAccessibleDatepicker implements OnInit, ControlValueAccessor {
 
   f() {
     this.selectDate(Temporal.Now.plainDateISO());
+  }
+
+  ff() {
+    console.log('ff');
   }
 }
