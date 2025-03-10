@@ -233,9 +233,9 @@ export class ScDateRangePicker implements OnInit {
     date: Temporal.PlainDate;
     isCurrentMonth: boolean;
     isToday: boolean;
-    isSelected: boolean | null; //TODO: Fix this type
-    isInRange: boolean | null; //TODO: Fix this type
-    isDisabled: boolean | null; //TODO: Fix this type
+    isSelected: boolean;
+    isInRange: boolean;
+    isDisabled: boolean;
   }> = [];
 
   weekdays: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -343,9 +343,9 @@ export class ScDateRangePicker implements OnInit {
         date: currentDate,
         isCurrentMonth,
         isToday,
-        isSelected,
-        isInRange,
-        isDisabled,
+        isSelected: !!isSelected,
+        isInRange: !!isInRange,
+        isDisabled: !!isDisabled,
       });
 
       currentDate = currentDate.add({ days: 1 });
@@ -372,8 +372,7 @@ export class ScDateRangePicker implements OnInit {
     this.generateCalendarDays();
   }
 
-  //TODO: Fix this type
-  selectDate(date: Temporal.PlainDate, isDisabled: boolean | null): void {
+  selectDate(date: Temporal.PlainDate, isDisabled: boolean): void {
     if (isDisabled) return;
 
     if (!this.isSelectingEndDate) {
