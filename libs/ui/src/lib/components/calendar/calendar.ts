@@ -253,21 +253,33 @@ export class ScCalendar implements OnInit, ControlValueAccessor {
   }
 
   setMonthYear(n: number) {
-    if (n === 1) {
-      if (this.month() < 11) {
-        this.month.update((value) => value + 1);
-      } else {
-        this.month.set(0);
-        this.year.update((value) => value + 1);
+    if (this.view() === 'years') {
+      if (n === 1) {
+        this.year.update((value) => value + 20);
+      }
+
+      if (n === -1) {
+        this.year.update((value) => value - 20);
       }
     }
 
-    if (n === -1) {
-      if (this.month() > 0) {
-        this.month.update((value) => value - 1);
-      } else {
-        this.month.set(11);
-        this.year.update((value) => value - 1);
+    if (this.view() === 'days') {
+      if (n === 1) {
+        if (this.month() < 11) {
+          this.month.update((value) => value + 1);
+        } else {
+          this.month.set(0);
+          this.year.update((value) => value + 1);
+        }
+      }
+
+      if (n === -1) {
+        if (this.month() > 0) {
+          this.month.update((value) => value - 1);
+        } else {
+          this.month.set(11);
+          this.year.update((value) => value - 1);
+        }
       }
     }
   }
