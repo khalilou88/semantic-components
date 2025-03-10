@@ -62,7 +62,7 @@ import { YearSelector } from './year-selector';
               [firstDayMonth]="firstDayMonth()"
               [selectedDay]="value()"
               [focusedDate]="focusedDate()"
-              (selectedDayChange)="setSelectedDay($event)"
+              (selectedDayChange)="setValue($event)"
             />
           }
         }
@@ -104,13 +104,13 @@ export class ScCalendar implements OnInit, ControlValueAccessor {
 
   protected selectYear(year: number) {
     this.year.set(year);
-    this.setSelectedDay('');
+    this.setValue('');
     this.toggleView();
   }
 
   protected selectMonth(monthIndex: number) {
     this.month.set(monthIndex);
-    this.setSelectedDay('');
+    this.setValue('');
     this.toggleView();
   }
 
@@ -183,7 +183,7 @@ export class ScCalendar implements OnInit, ControlValueAccessor {
 
   readonly focusedDate = signal('');
 
-  setSelectedDay(day: string) {
+  protected setValue(day: string) {
     this.value.set(day);
 
     this.onChange(day);
@@ -296,14 +296,14 @@ export class ScCalendar implements OnInit, ControlValueAccessor {
       }
 
       if (newDate) {
-        this.setSelectedDay(newDate);
+        this.setValue(newDate);
       }
 
       return;
     }
     if (newDate) {
       //TODO we need to define active date and selected date
-      this.setSelectedDay(newDate);
+      this.setValue(newDate);
       this.focusedDate.set(newDate);
     }
   }
