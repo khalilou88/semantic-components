@@ -111,7 +111,7 @@ export class ScDaySelector {
     return 'ghost';
   }
 
-  readonly today = input<string>('');
+  readonly today = input.required<string>();
 
   protected isToday(date: string): boolean {
     return date === this.today();

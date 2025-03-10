@@ -67,6 +67,7 @@ import { YearSelector } from './year-selector';
               [firstDayMonth]="firstDayMonth()"
               [selectedDay]="value()"
               [focusedDate]="focusedDate()"
+              [today]="getDateString(today())"
               (selectedDayChange)="setValue($event)"
             />
           }
@@ -129,11 +130,13 @@ export class ScCalendar implements OnInit, ControlValueAccessor {
 
   private readonly localeId = inject(LOCALE_ID);
 
+  readonly today = signal(new Date());
+
   readonly date = computed(() => {
     if (this.value()) {
       return new Date(this.value());
     }
-    return new Date();
+    return this.today();
   });
 
   readonly year = linkedSignal(() => this.date().getFullYear());
