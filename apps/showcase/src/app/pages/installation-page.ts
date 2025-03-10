@@ -25,7 +25,7 @@ import { ScAccessibleDatepicker } from '@semantic-components/ui';
           ariaDescribedBy="event-date-hint"
         ></sc-accessible-datepicker>
 
-        <div class="text-sm text-gray-600 -mt-3" id="event-date-hint">
+        <div class="text-sm text-gray-600" id="event-date-hint">
           Please select the date of your event in MM/DD/YYYY format
         </div>
 
