@@ -1,4 +1,4 @@
-import { NgClass } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,13 +6,14 @@ import {
   ViewEncapsulation,
   computed,
   input,
+  signal,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
 
 @Component({
   selector: 'sc-full-calendar',
-  imports: [NgClass],
+  imports: [CommonModule],
   template: `
     <div class="mx-auto flex size-full max-w-full flex-col items-center px-4">
       <!-- Calendar Controls -->
@@ -111,7 +112,9 @@ export class ScFullCalendar implements OnInit {
   currentDate = new Date();
   currentMonth = this.currentDate.getMonth();
   currentYear = this.currentDate.getFullYear();
-  currentView: 'month' | 'week' | 'day' = 'month';
+
+  readonly currentView = signal<'month' | 'week' | 'day'>('month');
+
   daysInMonth: number[] = [];
   weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   events: { date: string; title: string }[] = [{ date: '2025-01-18', title: 'Sample Event' }];
@@ -121,14 +124,14 @@ export class ScFullCalendar implements OnInit {
   }
 
   generateCalendar() {
-    if (this.currentView === 'month') {
+    if (this.currentView() === 'month') {
       // Generate days for the entire month
       const firstDayOfMonth = new Date(this.currentYear, this.currentMonth, 1).getDay();
       const totalDays = new Date(this.currentYear, this.currentMonth + 1, 0).getDate();
       this.daysInMonth = Array(firstDayOfMonth)
         .fill(null)
         .concat(Array.from({ length: totalDays }, (_, i) => i + 1));
-    } else if (this.currentView === 'week') {
+    } else if (this.currentView() === 'week') {
       // Generate dates for the current week
       const today = new Date();
       const startOfWeek = new Date(today.setDate(today.getDate() - today.getDay()));
@@ -137,7 +140,7 @@ export class ScFullCalendar implements OnInit {
         date.setDate(startOfWeek.getDate() + i);
         return date.getDate();
       });
-    } else if (this.currentView === 'day') {
+    } else if (this.currentView() === 'day') {
       // Show only today
       this.daysInMonth = [this.currentDate.getDate()];
     }
@@ -164,7 +167,7 @@ export class ScFullCalendar implements OnInit {
   }
 
   setView(view: 'month' | 'week' | 'day') {
-    this.currentView = view;
+    this.currentView.set(view);
     this.generateCalendar();
   }
 
