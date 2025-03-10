@@ -48,7 +48,8 @@
     "@semantic-components/supabase": ">=0.0.1",
     "@angular/platform-browser": ">=19.0.0",
     "shiki": ">=3.0.0",
-    "@angular/router": ">=19.0.0"
+    "@angular/router": ">=19.0.0",
+    "@js-temporal/polyfill": ">=0.4.4"
   },
   "sideEffects": false,
   "repository": {

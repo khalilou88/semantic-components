@@ -8,67 +8,170 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { Temporal } from '@js-temporal/polyfill';
 
 @Component({
   selector: 'sc-date-range-picker',
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, FormsModule],
   template: `
-    <div class="bg-white rounded-lg shadow-md p-4 border border-gray-200 w-full max-w-2xl">
-      <form [formGroup]="dateForm">
-        <div class="flex flex-col md:flex-row gap-4 mb-4">
-          <div class="flex-1">
-            <label class="block text-sm font-medium text-gray-700 mb-1" for="startDate">
-              Start Date
-            </label>
-            <input
-              class="w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
-              id="startDate"
-              [ngClass]="{ 'border-red-500 bg-red-50': validationErrors.start }"
-              type="date"
-              formControlName="startDate"
-            />
-            <div class="mt-1 text-sm text-red-600" *ngIf="validationErrors.start">
-              {{ validationErrors.start }}
-            </div>
+    <!-- date-range-picker.component.html -->
+    <div class="relative w-full max-w-md">
+      <!-- Date range display input -->
+      <button
+        class="flex justify-between items-center p-3 border border-gray-300 rounded-md bg-white cursor-pointer hover:border-blue-500 transition-colors"
+        (click)="toggleCalendar()"
+        type="button"
+      >
+        <div class="flex items-center space-x-1">
+          <span class="text-gray-700">
+            {{ selectedStartDate ? formatDate(selectedStartDate) : 'Start date' }}
+          </span>
+          <span class="text-gray-500">to</span>
+          <span class="text-gray-700">
+            {{ selectedEndDate ? formatDate(selectedEndDate) : 'End date' }}
+          </span>
+        </div>
+        <svg
+          class="h-5 w-5 text-gray-500"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+          />
+        </svg>
+      </button>
+
+      <!-- Calendar dropdown -->
+      <div
+        class="absolute mt-1 z-10 bg-white rounded-md shadow-lg border border-gray-200 p-3 w-full md:w-[350px]"
+        *ngIf="showCalendar"
+      >
+        <!-- Header with navigation and dropdown -->
+        <div class="flex justify-between items-center mb-3">
+          <!-- Month/Year selectors -->
+          <div class="flex items-center space-x-1">
+            <select
+              class="p-1 border border-gray-300 rounded text-sm"
+              [ngModel]="currentMonth.month"
+              (ngModelChange)="setMonth($event)"
+            >
+              <option *ngFor="let month of months; let i = index" [value]="i + 1">
+                {{ month }}
+              </option>
+            </select>
+            <select
+              class="p-1 border border-gray-300 rounded text-sm"
+              [ngModel]="currentMonth.year"
+              (ngModelChange)="setYear($event)"
+            >
+              <option *ngFor="let year of years" [value]="year">
+                {{ year }}
+              </option>
+            </select>
           </div>
 
-          <div class="flex-1">
-            <label class="block text-sm font-medium text-gray-700 mb-1" for="endDate">
-              End Date
-            </label>
-            <input
-              class="w-full px-3 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
-              id="endDate"
-              [ngClass]="{ 'border-red-500 bg-red-50': validationErrors.end }"
-              type="date"
-              formControlName="endDate"
-            />
-            <div class="mt-1 text-sm text-red-600" *ngIf="validationErrors.end">
-              {{ validationErrors.end }}
-            </div>
+          <!-- Previous/Next month buttons -->
+          <div class="flex space-x-1">
+            <button class="p-1 rounded hover:bg-gray-100" (click)="prevMonth()" type="button">
+              <svg
+                class="h-5 w-5"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+            </button>
+            <button class="p-1 rounded hover:bg-gray-100" (click)="nextMonth()" type="button">
+              <svg
+                class="h-5 w-5"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </button>
           </div>
         </div>
 
-        <div class="flex flex-wrap gap-2 mb-4">
+        <!-- Calendar grid -->
+        <div class="mb-3">
+          <!-- Weekday headers -->
+          <div class="grid grid-cols-7 mb-1">
+            <div
+              class="text-center text-xs font-medium text-gray-500 py-1"
+              *ngFor="let day of weekdays"
+            >
+              {{ day }}
+            </div>
+          </div>
+
+          <!-- Calendar days -->
+          <div class="grid grid-cols-7">
+            <button
+              class="text-center py-1 relative"
+              *ngFor="let day of calendarDays"
+              [ngClass]="{
+                'text-gray-400': !day.isCurrentMonth,
+                'bg-blue-100': day.isInRange && !day.isSelected,
+                'cursor-pointer hover:bg-gray-100': !day.isDisabled,
+                'cursor-not-allowed opacity-50': day.isDisabled,
+              }"
+              (click)="selectDate(day.date, day.isDisabled)"
+              type="button"
+            >
+              <div
+                class="w-8 h-8 flex items-center justify-center mx-auto rounded-full"
+                [ngClass]="{
+                  'bg-blue-600 text-white': day.isSelected,
+                  'ring-2 ring-blue-600 ring-offset-1': day.isToday && !day.isSelected,
+                }"
+              >
+                {{ day.date.day }}
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Quick selection buttons -->
+        <div class="grid grid-cols-3 gap-2 mb-3">
           <button
-            class="px-3 py-1.5 text-sm bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-md transition-colors border border-gray-300"
+            class="px-2 py-1.5 text-xs bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-md transition-colors border border-gray-300"
             (click)="setLastWeek()"
             type="button"
           >
             Last 7 days
           </button>
           <button
-            class="px-3 py-1.5 text-sm bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-md transition-colors border border-gray-300"
+            class="px-2 py-1.5 text-xs bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-md transition-colors border border-gray-300"
             (click)="setLastMonth()"
             type="button"
           >
             Last month
           </button>
           <button
-            class="px-3 py-1.5 text-sm bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-md transition-colors border border-gray-300"
+            class="px-2 py-1.5 text-xs bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-md transition-colors border border-gray-300"
             (click)="setLastThreeMonths()"
             type="button"
           >
@@ -76,20 +179,38 @@ import { Temporal } from '@js-temporal/polyfill';
           </button>
         </div>
 
-        <div class="flex justify-end">
+        <!-- Status text and buttons -->
+        <div class="text-sm text-gray-500 mb-2">
+          <div *ngIf="isSelectingEndDate && selectedStartDate">
+            <p>Select end date</p>
+          </div>
+          <div *ngIf="!isSelectingEndDate && !selectedEndDate">
+            <p>Select start date</p>
+          </div>
+          <div *ngIf="selectedStartDate && selectedEndDate">
+            <p>{{ formatDate(selectedStartDate) }} to {{ formatDate(selectedEndDate) }}</p>
+          </div>
+        </div>
+
+        <div class="flex justify-end space-x-2">
           <button
-            class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
-            [disabled]="f()"
-            [ngClass]="{
-              'opacity-50 cursor-not-allowed': f(),
-            }"
+            class="px-3 py-1.5 text-sm border border-gray-300 text-gray-700 rounded-md hover:bg-gray-100 transition-colors"
+            (click)="cancelSelection()"
+            type="button"
+          >
+            Cancel
+          </button>
+          <button
+            class="px-3 py-1.5 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+            [disabled]="!selectedStartDate || !selectedEndDate"
+            [ngClass]="{ 'opacity-50 cursor-not-allowed': !selectedStartDate || !selectedEndDate }"
             (click)="applyDateRange()"
             type="button"
           >
             Apply
           </button>
         </div>
-      </form>
+      </div>
     </div>
   `,
   styles: ``,
@@ -106,125 +227,231 @@ export class ScDateRangePicker implements OnInit {
     endDate: Temporal.PlainDate;
   }>();
 
-  dateForm: FormGroup;
-  validationErrors: { start?: string; end?: string } = {};
+  // Calendar state
+  currentMonth: Temporal.PlainYearMonth;
+  calendarDays: Array<{
+    date: Temporal.PlainDate;
+    isCurrentMonth: boolean;
+    isToday: boolean;
+    isSelected: boolean | null; //TODO: Fix this type
+    isInRange: boolean | null; //TODO: Fix this type
+    isDisabled: boolean | null; //TODO: Fix this type
+  }> = [];
 
-  constructor(private readonly fb: FormBuilder) {
-    this.dateForm = this.fb.group({
-      startDate: [''],
-      endDate: [''],
-    });
+  weekdays: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  months: string[] = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+
+  years: number[] = [];
+
+  // Selection state
+  selectedStartDate: Temporal.PlainDate | null = null;
+  selectedEndDate: Temporal.PlainDate | null = null;
+  isSelectingEndDate = false;
+
+  // UI state
+  showCalendar = false;
+  today: Temporal.PlainDate = Temporal.Now.plainDateISO();
+
+  constructor() {
+    this.currentMonth = Temporal.Now.plainDateISO().toPlainYearMonth();
+
+    // Generate selectable years (10 years before and after current year)
+    const currentYear = Temporal.Now.plainDateISO().year;
+    for (let i = currentYear - 10; i <= currentYear + 10; i++) {
+      this.years.push(i);
+    }
   }
 
   ngOnInit(): void {
-    this.dateForm.patchValue({
-      startDate: this.formatDateForInput(this.startDate),
-      endDate: this.formatDateForInput(this.endDate),
-    });
-
-    this.dateForm.valueChanges.subscribe(() => {
-      this.validateDates();
-    });
+    this.selectedStartDate = this.startDate;
+    this.selectedEndDate = this.endDate;
+    this.currentMonth = this.startDate.toPlainYearMonth();
+    this.generateCalendarDays();
   }
 
-  validateDates(): void {
-    this.validationErrors = {};
-    const startDateValue = this.parseDate(this.dateForm.get('startDate')?.value);
-    const endDateValue = this.parseDate(this.dateForm.get('endDate')?.value);
+  toggleCalendar(): void {
+    this.showCalendar = !this.showCalendar;
+    if (this.showCalendar) {
+      // Reset to start date's month when opening calendar
+      this.currentMonth =
+        this.selectedStartDate?.toPlainYearMonth() ||
+        Temporal.Now.plainDateISO().toPlainYearMonth();
+      this.generateCalendarDays();
+    }
+  }
 
-    if (!startDateValue) {
-      this.validationErrors.start = 'Please enter a valid start date';
-      return;
+  generateCalendarDays(): void {
+    this.calendarDays = [];
+
+    const firstOfMonth = Temporal.PlainDate.from({
+      year: this.currentMonth.year,
+      month: this.currentMonth.month,
+      day: 1,
+    });
+
+    const lastOfMonth = firstOfMonth.with({ day: firstOfMonth.daysInMonth });
+
+    // Get the first date to show (might be from previous month)
+    let startingDate = firstOfMonth;
+    const dayOfWeek = firstOfMonth.dayOfWeek % 7; // 0-indexed, Sunday = 0
+    if (dayOfWeek > 0) {
+      startingDate = firstOfMonth.subtract({ days: dayOfWeek });
     }
 
-    if (!endDateValue) {
-      this.validationErrors.end = 'Please enter a valid end date';
-      return;
+    // Calculate the last date to show (might be from next month)
+    const endDate = lastOfMonth.add({ days: 6 - (lastOfMonth.dayOfWeek % 7) });
+
+    // Generate all days for the calendar view
+    let currentDate = startingDate;
+
+    while (Temporal.PlainDate.compare(currentDate, endDate) <= 0) {
+      const isCurrentMonth = currentDate.month === this.currentMonth.month;
+      const isToday = Temporal.PlainDate.compare(currentDate, this.today) === 0;
+
+      const isSelected =
+        (this.selectedStartDate &&
+          Temporal.PlainDate.compare(currentDate, this.selectedStartDate) === 0) ||
+        (this.selectedEndDate &&
+          Temporal.PlainDate.compare(currentDate, this.selectedEndDate) === 0);
+
+      // Check if date is in the selected range
+      const isInRange =
+        this.selectedStartDate &&
+        this.selectedEndDate &&
+        Temporal.PlainDate.compare(currentDate, this.selectedStartDate) >= 0 &&
+        Temporal.PlainDate.compare(currentDate, this.selectedEndDate) <= 0;
+
+      // Check if date is disabled (before min date or after max date)
+      const isDisabled =
+        (this.minDate && Temporal.PlainDate.compare(currentDate, this.minDate) < 0) ||
+        (this.maxDate && Temporal.PlainDate.compare(currentDate, this.maxDate) > 0);
+
+      this.calendarDays.push({
+        date: currentDate,
+        isCurrentMonth,
+        isToday,
+        isSelected,
+        isInRange,
+        isDisabled,
+      });
+
+      currentDate = currentDate.add({ days: 1 });
+    }
+  }
+
+  prevMonth(): void {
+    this.currentMonth = this.currentMonth.subtract({ months: 1 });
+    this.generateCalendarDays();
+  }
+
+  nextMonth(): void {
+    this.currentMonth = this.currentMonth.add({ months: 1 });
+    this.generateCalendarDays();
+  }
+
+  setMonth(month: number): void {
+    this.currentMonth = this.currentMonth.with({ month });
+    this.generateCalendarDays();
+  }
+
+  setYear(year: number): void {
+    this.currentMonth = this.currentMonth.with({ year });
+    this.generateCalendarDays();
+  }
+
+  //TODO: Fix this type
+  selectDate(date: Temporal.PlainDate, isDisabled: boolean | null): void {
+    if (isDisabled) return;
+
+    if (!this.isSelectingEndDate) {
+      // Selecting start date
+      this.selectedStartDate = date;
+      this.selectedEndDate = null;
+      this.isSelectingEndDate = true;
+    } else {
+      // Selecting end date
+      if (Temporal.PlainDate.compare(date, this.selectedStartDate!) < 0) {
+        // If end date is before start date, swap them
+        this.selectedEndDate = this.selectedStartDate;
+        this.selectedStartDate = date;
+      } else {
+        this.selectedEndDate = date;
+      }
+      this.isSelectingEndDate = false;
     }
 
-    if (this.minDate && Temporal.PlainDate.compare(startDateValue, this.minDate) < 0) {
-      this.validationErrors.start = `Date cannot be before ${this.formatDateForInput(this.minDate)}`;
-      return;
-    }
-
-    if (this.maxDate && Temporal.PlainDate.compare(endDateValue, this.maxDate) > 0) {
-      this.validationErrors.end = `Date cannot be after ${this.formatDateForInput(this.maxDate)}`;
-      return;
-    }
-
-    if (Temporal.PlainDate.compare(startDateValue, endDateValue) > 0) {
-      this.validationErrors.end = 'End date must be after start date';
-      return;
-    }
+    this.generateCalendarDays();
   }
 
   applyDateRange(): void {
-    if (Object.keys(this.validationErrors).length > 0) {
-      return;
-    }
-
-    const startDateValue = this.parseDate(this.dateForm.get('startDate')?.value);
-    const endDateValue = this.parseDate(this.dateForm.get('endDate')?.value);
-
-    if (startDateValue && endDateValue) {
+    if (this.selectedStartDate && this.selectedEndDate) {
       this.dateRangeSelected.emit({
-        startDate: startDateValue,
-        endDate: endDateValue,
+        startDate: this.selectedStartDate,
+        endDate: this.selectedEndDate,
       });
+      this.showCalendar = false;
     }
   }
 
-  parseDate(dateString: string): Temporal.PlainDate | null {
-    if (!dateString) return null;
-
-    try {
-      return Temporal.PlainDate.from(dateString);
-    } catch (error) {
-      return null;
-    }
+  cancelSelection(): void {
+    this.showCalendar = false;
+    // Reset to previous selection
+    this.selectedStartDate = this.startDate;
+    this.selectedEndDate = this.endDate;
+    this.isSelectingEndDate = false;
+    this.generateCalendarDays();
   }
 
-  formatDateForInput(date: Temporal.PlainDate): string {
-    if (!date) return '';
-
-    return date.toString();
-  }
-
-  // Utility methods for predefined ranges
+  // Predefined ranges
   setLastWeek(): void {
     const end = Temporal.Now.plainDateISO();
-    const start = end.subtract({ days: 7 });
+    const start = end.subtract({ days: 6 });
 
-    this.dateForm.patchValue({
-      startDate: this.formatDateForInput(start),
-      endDate: this.formatDateForInput(end),
-    });
-    this.validateDates();
+    this.selectedStartDate = start;
+    this.selectedEndDate = end;
+    this.generateCalendarDays();
+    this.applyDateRange();
   }
 
   setLastMonth(): void {
     const end = Temporal.Now.plainDateISO();
     const start = end.subtract({ months: 1 });
 
-    this.dateForm.patchValue({
-      startDate: this.formatDateForInput(start),
-      endDate: this.formatDateForInput(end),
-    });
-    this.validateDates();
+    this.selectedStartDate = start;
+    this.selectedEndDate = end;
+    this.generateCalendarDays();
+    this.applyDateRange();
   }
 
   setLastThreeMonths(): void {
     const end = Temporal.Now.plainDateISO();
     const start = end.subtract({ months: 3 });
 
-    this.dateForm.patchValue({
-      startDate: this.formatDateForInput(start),
-      endDate: this.formatDateForInput(end),
-    });
-    this.validateDates();
+    this.selectedStartDate = start;
+    this.selectedEndDate = end;
+    this.generateCalendarDays();
+    this.applyDateRange();
   }
 
-  f() {
-    return Object.keys(this.validationErrors).length > 0;
+  formatDate(date: Temporal.PlainDate | null): string {
+    if (!date) return '';
+    return date.toLocaleString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    });
   }
 }

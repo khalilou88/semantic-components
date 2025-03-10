@@ -9,20 +9,22 @@ import { ScDateRangePicker } from '@semantic-components/ui';
   imports: [ScDateRangePicker, CommonModule],
   template: `
     <div class="container mx-auto max-w-4xl px-4 py-8">
-      <h1 class="text-2xl font-bold text-gray-800 mb-6">Date Range Picker Example</h1>
+      <h1 class="text-2xl font-bold text-gray-800 mb-6">Date Range Picker with Calendar</h1>
 
-      <sc-date-range-picker
-        [startDate]="defaultStartDate"
-        [endDate]="defaultEndDate"
-        [minDate]="minAllowedDate"
-        [maxDate]="maxAllowedDate"
-        (dateRangeSelected)="onDateRangeSelected($event)"
-      ></sc-date-range-picker>
+      <div class="mb-8">
+        <sc-date-range-picker
+          [startDate]="defaultStartDate"
+          [endDate]="defaultEndDate"
+          [minDate]="minAllowedDate"
+          [maxDate]="maxAllowedDate"
+          (dateRangeSelected)="onDateRangeSelected($event)"
+        ></sc-date-range-picker>
+      </div>
 
-      <div class="mt-8 bg-gray-50 p-4 rounded-md border-l-4 border-blue-500" *ngIf="selectedRange">
+      <div class="bg-gray-50 p-4 rounded-md border-l-4 border-blue-500" *ngIf="selectedRange">
         <h3 class="text-lg font-medium text-gray-800 mb-2">Selected Date Range:</h3>
-        <p class="text-gray-700">Start: {{ formatDate(selectedRange.startDate) }}</p>
-        <p class="text-gray-700">End: {{ formatDate(selectedRange.endDate) }}</p>
+        <p class="text-gray-700">Start Date: {{ formatDate(selectedRange.startDate) }}</p>
+        <p class="text-gray-700">End Date: {{ formatDate(selectedRange.endDate) }}</p>
         <p class="text-gray-700">
           Duration: {{ calculateDuration(selectedRange.startDate, selectedRange.endDate) }} days
         </p>
@@ -65,8 +67,8 @@ export default class DateRangePickerPage {
   }
 
   formatDate(date: Temporal.PlainDate): string {
-    // Format the date in a human-readable format
     return date.toLocaleString('en-US', {
+      weekday: 'short',
       year: 'numeric',
       month: 'long',
       day: 'numeric',
@@ -75,6 +77,6 @@ export default class DateRangePickerPage {
 
   calculateDuration(start: Temporal.PlainDate, end: Temporal.PlainDate): number {
     // Calculate the duration in days using Temporal
-    return start.until(end, { largestUnit: 'days' }).days;
+    return start.until(end, { largestUnit: 'days' }).days + 1; // Include end date
   }
 }
