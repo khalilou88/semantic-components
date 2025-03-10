@@ -80,3 +80,5 @@ export * from './lib/components/swipeable-toast';
 export * from './lib/components/custom-select';
 export * from './lib/components/table-of-contents';
 export * from './lib/components/stepper';
+
+export * from './lib/components/accessible-datepicker/accessible-datepicker';
