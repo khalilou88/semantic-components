@@ -95,6 +95,12 @@ import { LayoutState } from '../services/layout-state';
               </li>
 
               <li sc-sidebar-menu-item>
+                <a routerLink="../components/date-picker" sc-sidebar-menu-link>
+                  <span>Date Picker</span>
+                </a>
+              </li>
+
+              <li sc-sidebar-menu-item>
                 <a routerLink="../components/button" sc-sidebar-menu-link>
                   <span>Button</span>
                 </a>
