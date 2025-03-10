@@ -51,7 +51,11 @@ import { YearSelector } from './year-selector';
       <div sc-card-content>
         @switch (view()) {
           @case ('years') {
-            <sc-year-selector [year]="year()" (yearSelected)="selectYear($event)" />
+            <sc-year-selector
+              [year]="year()"
+              [year2]="year2()"
+              (yearSelected)="selectYear($event)"
+            />
           }
           @case ('months') {
             <sc-month-selector [month]="month()" (monthSelected)="selectMonth($event)" />
@@ -133,6 +137,7 @@ export class ScCalendar implements OnInit, ControlValueAccessor {
   });
 
   readonly year = linkedSignal(() => this.date().getFullYear());
+  readonly year2 = linkedSignal(() => this.year());
 
   readonly month = linkedSignal(() => this.date().getMonth());
 
@@ -256,11 +261,11 @@ export class ScCalendar implements OnInit, ControlValueAccessor {
   setMonthYear(n: number) {
     if (this.view() === 'years') {
       if (n === 1) {
-        this.year.update((value) => value + 20);
+        this.year2.update((value) => value + 20);
       }
 
       if (n === -1) {
-        this.year.update((value) => value - 20);
+        this.year2.update((value) => value - 20);
       }
     }
 

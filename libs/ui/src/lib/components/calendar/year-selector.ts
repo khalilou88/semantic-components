@@ -31,11 +31,12 @@ import {
 })
 export class YearSelector {
   readonly year = input.required<number>();
+  readonly year2 = input.required<number>();
 
   protected readonly years = computed(() => {
     const years: number[] = [];
     // Generate years (current year - 9 to current year + 10)
-    for (let year = this.year() - 9; year <= this.year() + 10; year++) {
+    for (let year = this.year2() - 9; year <= this.year2() + 10; year++) {
       years.push(year);
     }
 
