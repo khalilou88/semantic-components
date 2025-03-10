@@ -17,13 +17,13 @@ import { ScButton } from '../button';
   imports: [SiChevronRightIcon, SiChevronLeftIcon, ScButton],
   template: `
     <button
+      [disabled]="disabled()"
       (click)="monthYearChange.emit(-1)"
       aria-label="Previous month"
       sc-button
       variant="outline"
       type="button"
       size="icon"
-      disabled="disabled()"
     >
       <svg si-chevron-left-icon></svg>
     </button>
