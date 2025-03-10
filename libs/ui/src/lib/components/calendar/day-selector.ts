@@ -98,4 +98,10 @@ export class ScDaySelector {
       }
     });
   }
+
+  readonly today = input<string>('');
+
+  protected isToday(date: string): boolean {
+    return date === this.today();
+  }
 }
