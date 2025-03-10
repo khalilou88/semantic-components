@@ -104,11 +104,13 @@ export class ScCalendar implements OnInit, ControlValueAccessor {
 
   protected selectYear(year: number) {
     this.year.set(year);
+    this.setSelectedDay('');
     this.toggleView();
   }
 
   protected selectMonth(monthIndex: number) {
     this.month.set(monthIndex);
+    this.setSelectedDay('');
     this.toggleView();
   }
 
