@@ -17,7 +17,7 @@ import { ScButton } from '../button';
 import { WeekDayName } from './util';
 
 @Component({
-  selector: 'sc-month-days',
+  selector: 'sc-day-selector',
   imports: [NgClass, ScButton],
   template: `
     @for (weekDayName of weekDaysNames(); track weekDayName.long) {
@@ -52,16 +52,20 @@ import { WeekDayName } from './util';
     }
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScMonthDays {
-  class = input<string>('');
+export class ScDaySelector {
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn('grid grid-cols-7 place-items-center', this.class()));
+  protected readonly class = computed(() =>
+    cn('grid grid-cols-7 place-items-center', this.classInput()),
+  );
 
   weekDaysNames = input.required<WeekDayName[]>();
 

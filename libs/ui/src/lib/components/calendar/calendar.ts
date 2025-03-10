@@ -18,7 +18,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { cn } from '@semantic-components/utils';
 
 import { ScCard, ScCardContent, ScCardHeader } from '../card';
-import { ScMonthDays } from './month-days';
+import { ScDaySelector } from './day-selector';
 import { MonthSelector } from './month-selector';
 import { ScMonthYearHeader } from './month-year-header';
 import { WeekDayName } from './util';
@@ -28,7 +28,6 @@ import { YearSelector } from './year-selector';
   selector: 'sc-calendar',
   imports: [
     ScMonthYearHeader,
-    ScMonthDays,
     ScCard,
     ScCardHeader,
     // ScButton,
@@ -36,6 +35,7 @@ import { YearSelector } from './year-selector';
     ScCardContent,
     MonthSelector,
     YearSelector,
+    ScDaySelector,
   ],
   template: `
     <div sc-card>
@@ -61,7 +61,7 @@ import { YearSelector } from './year-selector';
             <sc-month-selector [month]="month()" (monthSelected)="selectMonth($event)" />
           }
           @default {
-            <sc-month-days
+            <sc-day-selector
               [weekDaysNames]="weekDaysNames()"
               [days]="monthDays()"
               [firstDayMonth]="firstDayMonth()"
