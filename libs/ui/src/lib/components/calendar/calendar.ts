@@ -42,6 +42,7 @@ import { YearSelector } from './year-selector';
       <div sc-card-header>
         <sc-month-year-header
           [monthYear]="monthYear()"
+          [disabled]="view() === 'months'"
           (monthYearChange)="setMonthYear($event)"
           (viewToggled)="toggleView()"
         />

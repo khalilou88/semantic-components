@@ -23,6 +23,7 @@ import { ScButton } from '../button';
       variant="outline"
       type="button"
       size="icon"
+      disabled="disabled()"
     >
       <svg si-chevron-left-icon></svg>
     </button>
@@ -32,6 +33,7 @@ import { ScButton } from '../button';
     </button>
 
     <button
+      [disabled]="disabled()"
       (click)="monthYearChange.emit(1)"
       aria-label="Next month"
       sc-button
@@ -60,4 +62,6 @@ export class ScMonthYearHeader {
   monthYearChange = output<number>();
 
   readonly viewToggled = output<void>();
+
+  readonly disabled = input.required<boolean>();
 }
