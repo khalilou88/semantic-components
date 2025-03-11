@@ -16,7 +16,7 @@ import { CalendarDay } from './types';
   imports: [ScButton],
   template: `
     <div class="grid grid-cols-7 gap-5">
-      @for (day of calendarDays(); track day) {
+      @for (day of calendarDays(); track day.date) {
         <button
           [variant]="getVariant(day)"
           (click)="selectDay(day); $event.stopPropagation()"
