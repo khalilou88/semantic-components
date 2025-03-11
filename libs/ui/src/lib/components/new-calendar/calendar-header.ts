@@ -33,7 +33,7 @@ import { getMonthName } from './utils';
     </button>
 
     <button (click)="viewToggled.emit()" sc-button variant="ghost" type="button">
-      {{ monthName() }}
+      {{ monthName() }} {{ currentMonth().year }}
     </button>
 
     <button
