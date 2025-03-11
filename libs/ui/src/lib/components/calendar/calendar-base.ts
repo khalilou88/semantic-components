@@ -1,8 +1,6 @@
 import {
-  ChangeDetectionStrategy,
-  Component,
+  Directive,
   LOCALE_ID,
-  ViewEncapsulation,
   booleanAttribute,
   computed,
   forwardRef,
@@ -18,66 +16,15 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Temporal } from '@js-temporal/polyfill';
 import { cn } from '@semantic-components/utils';
 
-import { ScCard, ScCardContent, ScCardHeader } from '../card';
-import { ScCalendarHeader } from './calendar-header';
-import { ScDaySelector } from './day-selector';
-import { ScMonthSelector } from './month-selector';
 import { CalendarDay } from './types';
 import { getFirstDayOfWeek, getLocalizedDayNames } from './utils';
 import { ScYearSelector } from './year-selector';
 
-@Component({
-  selector: 'sc-calendar',
-  imports: [
-    ScYearSelector,
-    ScMonthSelector,
-    ScDaySelector,
-    ScCard,
-    ScCardHeader,
-    ScCardContent,
-    ScCalendarHeader,
-  ],
-  template: `
-    <div sc-card>
-      <div sc-card-header>
-        <sc-calendar-header
-          [currentMonth]="currentMonth()"
-          [disabled]="view() === 'months'"
-          (monthYearChange)="setMonthYear($event)"
-          (viewToggled)="toggleView()"
-        />
-      </div>
-      <div sc-card-content>
-        @switch (view()) {
-          @case ('years') {
-            <sc-year-selector [currentYear]="currentYear()" (yearSelected)="selectYear($event)" />
-          }
-          @case ('months') {
-            <sc-month-selector
-              [currentMonth]="currentMonth()"
-              (monthSelected)="selectMonth($event)"
-            />
-          }
-          @default {
-            <sc-day-selector
-              [weekdays]="weekdays"
-              [focusedDate]="focusedDate()"
-              [selectedDate]="value()"
-              [calendarDays]="calendarDays()"
-              (dateSelected)="selectDate($event)"
-            />
-          }
-        }
-      </div>
-    </div>
-  `,
+@Directive({
   host: {
     '[class]': 'class()',
     '(keydown)': 'handleKeydown($event)',
   },
-  styles: ``,
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

@@ -2,17 +2,17 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 
 import { ScCalendarBase } from '../calendar/calendar-base';
 import { ScCalendarHeader } from '../calendar/calendar-header';
-import { ScDaySelector } from '../calendar/day-selector';
 import { ScMonthSelector } from '../calendar/month-selector';
 import { ScYearSelector } from '../calendar/year-selector';
 import { ScCard, ScCardContent, ScCardHeader } from '../card';
+import { ScDaysSelector } from './days-selector';
 
 @Component({
   selector: 'sc-range-calendar',
   imports: [
     ScYearSelector,
     ScMonthSelector,
-    ScDaySelector,
+    ScDaysSelector,
     ScCard,
     ScCardHeader,
     ScCardContent,
@@ -40,7 +40,7 @@ import { ScCard, ScCardContent, ScCardHeader } from '../card';
             />
           }
           @default {
-            <sc-day-selector
+            <sc-days-selector
               [weekdays]="weekdays"
               [focusedDate]="focusedDate()"
               [selectedDate]="value()"
