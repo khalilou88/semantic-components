@@ -26,13 +26,13 @@ import { YearSelector } from './year-selector';
 
     @switch (view()) {
       @case ('years') {
-        <sc-year-selector />
+        <sc-year-selector [currentYear]="currentYear()" />
       }
       @case ('months') {
         <sc-month-selector />
       }
       @default {
-        <sc-day-selector [calendarDays]="calendarDays()" />
+        <sc-day-selector [calendarDays]="calendarDays()" (dateSelected)="selectDate($event)" />
       }
     }
   `,
@@ -65,7 +65,7 @@ export class ScNewCalendar {
     }
   });
 
-  private readonly currentYear = linkedSignal(() => {
+  protected readonly currentYear = linkedSignal(() => {
     if (this.value()) {
       return this.value()!.year;
     } else {
