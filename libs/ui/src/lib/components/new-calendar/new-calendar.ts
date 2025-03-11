@@ -12,28 +12,29 @@ import {
 import { Temporal } from '@js-temporal/polyfill';
 import { cn } from '@semantic-components/utils';
 
-// Interface for calendar day
-interface CalendarDay {
-  date: Temporal.PlainDate;
-  dayOfMonth: number;
-  isInCurrentMonth: boolean;
-  isToday: boolean;
-  isSelected: boolean;
-  isDisabled: boolean;
-}
+import { DaySelector } from './day-selector';
+import { MonthSelector } from './month-selector';
+import { CalendarDay } from './types';
+import { YearSelector } from './year-selector';
 
 @Component({
   selector: 'sc-new-calendar',
-  imports: [],
+  imports: [YearSelector, MonthSelector, DaySelector],
   template: `
     test
     {{ value() }}
 
-    <div class="grid grid-cols-7 gap-5">
-      @for (day of calendarDays(); track day) {
-        {{ day.dayOfMonth }}
+    @switch (view()) {
+      @case ('years') {
+        <sc-year-selector />
       }
-    </div>
+      @case ('months') {
+        <sc-month-selector />
+      }
+      @default {
+        <sc-day-selector [calendarDays]="calendarDays()" />
+      }
+    }
   `,
   host: {
     '[class]': 'class()',
@@ -274,4 +275,6 @@ export class ScNewCalendar {
       this.currentMonth.update((currentMonth) => currentMonth.add({ months: 1 }));
     }
   }
+
+  protected readonly view = signal<'days' | 'years' | 'months'>('days');
 }
