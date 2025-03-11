@@ -19,21 +19,21 @@ import { AnimatedComponent } from './animated-component';
             <span
               class="font-mono font-medium"
               [ngClass]="{
-                'text-gray-500': animatedComponent.state === 'initial',
-                'text-blue-500': animatedComponent.state === 'entering',
-                'text-green-500': animatedComponent.state === 'visible',
-                'text-orange-500': animatedComponent.state === 'exiting',
-                'text-red-500': animatedComponent.state === 'hidden',
+                'text-gray-500': animatedComponent.state() === 'initial',
+                'text-blue-500': animatedComponent.state() === 'entering',
+                'text-green-500': animatedComponent.state() === 'visible',
+                'text-orange-500': animatedComponent.state() === 'exiting',
+                'text-red-500': animatedComponent.state() === 'hidden',
               }"
             >
-              {{ animatedComponent.state }}
+              {{ animatedComponent.state() }}
             </span>
           </p>
 
           <div class="flex flex-wrap gap-2">
             <button
               class="px-3 py-1 bg-green-500 text-white text-sm rounded hover:bg-green-600 transition disabled:opacity-50 disabled:cursor-not-allowed"
-              [disabled]="animatedComponent.state !== 'initial'"
+              [disabled]="animatedComponent.state() !== 'initial'"
               (click)="animatedComponent.enter()"
               title="Only works from 'initial' state"
             >
@@ -42,7 +42,7 @@ import { AnimatedComponent } from './animated-component';
 
             <button
               class="px-3 py-1 bg-red-500 text-white text-sm rounded hover:bg-red-600 transition disabled:opacity-50 disabled:cursor-not-allowed"
-              [disabled]="animatedComponent.state !== 'visible'"
+              [disabled]="animatedComponent.state() !== 'visible'"
               (click)="animatedComponent.exit()"
               title="Only works from 'visible' state"
             >
@@ -52,7 +52,7 @@ import { AnimatedComponent } from './animated-component';
             <button
               class="px-3 py-1 bg-purple-500 text-white text-sm rounded hover:bg-purple-600 transition disabled:opacity-50 disabled:cursor-not-allowed"
               [disabled]="
-                animatedComponent.state !== 'initial' && animatedComponent.state !== 'visible'
+                animatedComponent.state() !== 'initial' && animatedComponent.state() !== 'visible'
               "
               (click)="animatedComponent.toggle()"
               title="Toggles between 'initial' and 'visible' states"
@@ -62,7 +62,7 @@ import { AnimatedComponent } from './animated-component';
 
             <button
               class="px-3 py-1 bg-gray-500 text-white text-sm rounded hover:bg-gray-600 transition disabled:opacity-50 disabled:cursor-not-allowed"
-              [disabled]="animatedComponent.state === 'initial'"
+              [disabled]="animatedComponent.state() === 'initial'"
               (click)="animatedComponent.reset()"
               title="Reset to 'initial' state"
             >
