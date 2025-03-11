@@ -5,10 +5,18 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Temporal } from '@js-temporal/polyfill';
 import { ScAccessibleDatepicker } from '@semantic-components/ui';
 
+import { AnimationDemoComponent } from '../blocks/animation-demo';
+
 @Component({
   selector: 'app-installation-page',
-  imports: [CommonModule, ScAccessibleDatepicker, ReactiveFormsModule],
+  imports: [CommonModule, ScAccessibleDatepicker, ReactiveFormsModule, AnimationDemoComponent],
   template: `
+    <app-animation-demo></app-animation-demo>
+
+    <br />
+    <br />
+    <br />
+
     <div class="max-w-3xl mx-auto p-6">
       <h1 class="text-2xl font-bold text-gray-800 mb-1">Accessible Date Picker</h1>
       <p class="text-gray-600 mb-6">Angular + Temporal API + Tailwind CSS</p>
