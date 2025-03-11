@@ -6,6 +6,5 @@ export interface CalendarDay {
   dayOfMonth: number;
   isInCurrentMonth: boolean;
   isToday: boolean;
-  isSelected: boolean;
   isDisabled: boolean;
 }

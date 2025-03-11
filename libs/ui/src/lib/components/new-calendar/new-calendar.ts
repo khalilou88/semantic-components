@@ -32,7 +32,11 @@ import { YearSelector } from './year-selector';
         <sc-month-selector />
       }
       @default {
-        <sc-day-selector [calendarDays]="calendarDays()" (dateSelected)="selectDate($event)" />
+        <sc-day-selector
+          [selectedDate]="value()"
+          [calendarDays]="calendarDays()"
+          (dateSelected)="selectDate($event)"
+        />
       }
     }
   `,
@@ -105,7 +109,6 @@ export class ScNewCalendar {
         dayOfMonth: day,
         isInCurrentMonth: false,
         isToday: this.isToday(date),
-        isSelected: this.isSelected(date),
         isDisabled: this.isDateDisabled(date),
       });
     }
@@ -118,7 +121,6 @@ export class ScNewCalendar {
         dayOfMonth: day,
         isInCurrentMonth: true,
         isToday: this.isToday(date),
-        isSelected: this.isSelected(date),
         isDisabled: this.isDateDisabled(date),
       });
     }
@@ -134,7 +136,6 @@ export class ScNewCalendar {
         dayOfMonth: day,
         isInCurrentMonth: false,
         isToday: this.isToday(date),
-        isSelected: this.isSelected(date),
         isDisabled: this.isDateDisabled(date),
       });
     }
@@ -146,10 +147,6 @@ export class ScNewCalendar {
   isToday(date: Temporal.PlainDate): boolean {
     const today = Temporal.Now.plainDateISO();
     return date.equals(today);
-  }
-
-  isSelected(date: Temporal.PlainDate): boolean {
-    return this.value() ? date.equals(this.value()!) : false;
   }
 
   isDateDisabled(date: Temporal.PlainDate): boolean {

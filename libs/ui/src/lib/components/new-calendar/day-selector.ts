@@ -36,8 +36,10 @@ export class DaySelector {
   readonly calendarDays = input.required<CalendarDay[]>();
   readonly dateSelected = output<Temporal.PlainDate>();
 
+  readonly selectedDate = input<Temporal.PlainDate>();
+
   protected getVariant(day: CalendarDay) {
-    if (day.isSelected) {
+    if (this.isSelected(day.date)) {
       return 'primary';
     }
 
@@ -50,5 +52,9 @@ export class DaySelector {
 
   protected selectDay(day: CalendarDay) {
     this.dateSelected.emit(day.date);
+  }
+
+  isSelected(date: Temporal.PlainDate): boolean {
+    return this.selectedDate() ? date.equals(this.selectedDate()!) : false;
   }
 }
