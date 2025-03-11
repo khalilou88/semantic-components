@@ -14,6 +14,7 @@ import {
 import { Temporal } from '@js-temporal/polyfill';
 import { cn } from '@semantic-components/utils';
 
+import { ScCard, ScCardContent, ScCardHeader } from '../card';
 import { DaySelector } from './day-selector';
 import { MonthSelector } from './month-selector';
 import { CalendarDay } from './types';
@@ -22,27 +23,29 @@ import { YearSelector } from './year-selector';
 
 @Component({
   selector: 'sc-new-calendar',
-  imports: [YearSelector, MonthSelector, DaySelector],
+  imports: [YearSelector, MonthSelector, DaySelector, ScCard, ScCardHeader, ScCardContent],
   template: `
-    test
-    {{ value() }}
-
-    @switch (view()) {
-      @case ('years') {
-        <sc-year-selector [currentYear]="currentYear()" />
-      }
-      @case ('months') {
-        <sc-month-selector />
-      }
-      @default {
-        <sc-day-selector
-          [focusedDate]="focusedDate()"
-          [selectedDate]="value()"
-          [calendarDays]="calendarDays()"
-          (dateSelected)="selectDate($event)"
-        />
-      }
-    }
+    <div sc-card>
+      <div sc-card-header></div>
+      <div sc-card-content>
+        @switch (view()) {
+          @case ('years') {
+            <sc-year-selector [currentYear]="currentYear()" />
+          }
+          @case ('months') {
+            <sc-month-selector />
+          }
+          @default {
+            <sc-day-selector
+              [focusedDate]="focusedDate()"
+              [selectedDate]="value()"
+              [calendarDays]="calendarDays()"
+              (dateSelected)="selectDate($event)"
+            />
+          }
+        }
+      </div>
+    </div>
   `,
   host: {
     '[class]': 'class()',
