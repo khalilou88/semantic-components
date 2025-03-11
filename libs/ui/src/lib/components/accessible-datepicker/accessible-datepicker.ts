@@ -460,11 +460,34 @@ export class ScAccessibleDatepicker implements OnInit, ControlValueAccessor {
     }
   }
 
-  // Move focus in the calendar grid
+  // Move focus in the calendar grid with support for month navigation
   moveFocus(delta: number): void {
     const newIndex = this.focusedDayIndex + delta;
+
     if (newIndex >= 0 && newIndex < this.calendarDays.length) {
+      // Standard case: new focus position is within current calendar view
       this.focusedDayIndex = newIndex;
+    } else if (newIndex < 0) {
+      // Moving backwards beyond the first day of the calendar view
+      this.prevMonth();
+      // Set focus to the last day of the newly displayed month
+      setTimeout(() => {
+        // Find last day that belongs to the current month
+        for (let i = this.calendarDays.length - 1; i >= 0; i--) {
+          if (this.calendarDays[i].isCurrentMonth) {
+            this.focusedDayIndex = i;
+            break;
+          }
+        }
+      });
+    } else if (newIndex >= this.calendarDays.length) {
+      // Moving forward beyond the last day of the calendar view
+      this.nextMonth();
+      // Set focus to the first day of the newly displayed month
+      setTimeout(() => {
+        // Find first day that belongs to the current month
+        this.focusedDayIndex = this.calendarDays.findIndex((day) => day.isCurrentMonth);
+      });
     }
   }
 
