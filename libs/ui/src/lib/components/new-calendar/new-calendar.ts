@@ -9,24 +9,41 @@ import {
   linkedSignal,
   model,
   signal,
+  viewChild,
 } from '@angular/core';
 
 import { Temporal } from '@js-temporal/polyfill';
 import { cn } from '@semantic-components/utils';
 
 import { ScCard, ScCardContent, ScCardHeader } from '../card';
+import { ScCalendarHeader } from './calendar-header';
 import { DaySelector } from './day-selector';
 import { MonthSelector } from './month-selector';
 import { CalendarDay } from './types';
 import { getFirstDayOfWeek, getLocalizedDayNames } from './utils';
-import { YearSelector } from './year-selector';
+import { ScYearSelector } from './year-selector';
 
 @Component({
   selector: 'sc-new-calendar',
-  imports: [YearSelector, MonthSelector, DaySelector, ScCard, ScCardHeader, ScCardContent],
+  imports: [
+    ScYearSelector,
+    MonthSelector,
+    DaySelector,
+    ScCard,
+    ScCardHeader,
+    ScCardContent,
+    ScCalendarHeader,
+  ],
   template: `
     <div sc-card>
-      <div sc-card-header></div>
+      <div sc-card-header>
+        <sc-calendar-header
+          [currentMonth]="currentMonth()"
+          [disabled]="view() === 'months'"
+          (monthYearChange)="setMonthYear($event)"
+          (viewToggled)="toggleView()"
+        />
+      </div>
       <div sc-card-content>
         @switch (view()) {
           @case ('years') {
@@ -85,7 +102,7 @@ export class ScNewCalendar {
     }
   });
 
-  private readonly currentMonth = linkedSignal(() => {
+  protected readonly currentMonth = linkedSignal(() => {
     if (this.value()) {
       return this.value()!.toPlainYearMonth();
     } else {
@@ -297,9 +314,37 @@ export class ScNewCalendar {
 
   protected readonly view = signal<'days' | 'years' | 'months'>('days');
 
+  protected toggleView(): void {
+    if (this.view() === 'days') {
+      this.view.set('years');
+    } else if (this.view() === 'years') {
+      this.view.set('months');
+    } else {
+      this.view.set('days');
+    }
+  }
+
   weekdays: string[] = [];
 
   constructor() {
     this.weekdays = getLocalizedDayNames(this.localeId);
+  }
+
+  private readonly scYearSelector = viewChild(ScYearSelector);
+
+  setMonthYear(n: number) {
+    if (this.view() === 'years') {
+      this.scYearSelector()?.year.update((value) => value + n * 20);
+    }
+
+    if (this.view() === 'days') {
+      if (n === 1) {
+        this.nextMonth();
+      }
+
+      if (n === -1) {
+        this.prevMonth();
+      }
+    }
   }
 }

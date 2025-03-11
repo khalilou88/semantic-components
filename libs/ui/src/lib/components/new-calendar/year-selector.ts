@@ -29,10 +29,10 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class YearSelector {
+export class ScYearSelector {
   readonly currentYear = input.required<number>();
 
-  private readonly year = linkedSignal(() => {
+  readonly year = linkedSignal(() => {
     return this.currentYear();
   });
 
