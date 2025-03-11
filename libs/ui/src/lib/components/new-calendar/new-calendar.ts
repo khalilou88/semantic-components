@@ -14,6 +14,7 @@ import {
 import { Temporal } from '@js-temporal/polyfill';
 import { cn } from '@semantic-components/utils';
 
+import { getWeekInfo } from '../calendar/util';
 import { DaySelector } from './day-selector';
 import { MonthSelector } from './month-selector';
 import { CalendarDay } from './types';
@@ -107,12 +108,8 @@ export class ScNewCalendar {
     const days: CalendarDay[] = [];
 
     // Get locale-specific week info
-    const firstDayOfWeek =
-      new Intl.DateTimeFormat(this.localeId, { weekday: 'short' })
-        .formatToParts(new Date(2021, 0, 4)) // January 4, 2021 is a Monday
-        .find((part) => part.type === 'weekday')!.value === 'Mon'
-        ? 1
-        : 0; // 1 for Monday, 0 for Sunday
+    const weekInfo = getWeekInfo(this.localeId);
+    const firstDayOfWeek = weekInfo.firstDay; // 1 for Monday in French locale
 
     const firstDayOfMonth = this.currentMonth().toPlainDate({ day: 1 });
 

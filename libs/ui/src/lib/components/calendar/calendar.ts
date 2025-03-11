@@ -21,7 +21,7 @@ import { ScCard, ScCardContent, ScCardHeader } from '../card';
 import { ScDaySelector } from './day-selector';
 import { MonthSelector } from './month-selector';
 import { ScMonthYearHeader } from './month-year-header';
-import { WeekDayName } from './util';
+import { WeekDayName, getFirstDayOfWeek } from './util';
 import { YearSelector } from './year-selector';
 
 @Component({
@@ -233,7 +233,7 @@ export class ScCalendar implements OnInit, ControlValueAccessor {
     const intlLongFormatter = new Intl.DateTimeFormat(this.localeId, { weekday: 'long' });
 
     let k = 0;
-    const firstDayOfWeek = this.getFirstDayOfWeek();
+    const firstDayOfWeek = getFirstDayOfWeek(this.localeId);
     if (firstDayOfWeek === 7) {
       // First day of the week is Sunday
       k = 3; // 3th January 2021 is a Sunday
@@ -253,12 +253,6 @@ export class ScCalendar implements OnInit, ControlValueAccessor {
     }
 
     this.weekDaysNames.set(weekDaysNames);
-  }
-
-  private getFirstDayOfWeek(): number {
-    const locale = new Intl.Locale(this.localeId);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return (locale as any).getWeekInfo().firstDay;
   }
 
   setMonthYear(n: number) {
