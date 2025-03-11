@@ -425,6 +425,11 @@ export const appRoutes: Route[] = [
             title: 'Calendar Page',
           },
           {
+            path: 'range-calendar',
+            loadComponent: () => import('./pages/range-calendar-page'),
+            title: 'Range Calendar Page',
+          },
+          {
             path: 'full-calendar',
             loadComponent: () => import('./pages/full-calendar-page'),
             title: 'Full Calendar Page',
