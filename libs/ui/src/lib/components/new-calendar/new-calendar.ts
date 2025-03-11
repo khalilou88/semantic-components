@@ -17,8 +17,8 @@ import { cn } from '@semantic-components/utils';
 
 import { ScCard, ScCardContent, ScCardHeader } from '../card';
 import { ScCalendarHeader } from './calendar-header';
-import { DaySelector } from './day-selector';
-import { MonthSelector } from './month-selector';
+import { ScDaySelector } from './day-selector';
+import { ScMonthSelector } from './month-selector';
 import { CalendarDay } from './types';
 import { getFirstDayOfWeek, getLocalizedDayNames } from './utils';
 import { ScYearSelector } from './year-selector';
@@ -27,8 +27,8 @@ import { ScYearSelector } from './year-selector';
   selector: 'sc-new-calendar',
   imports: [
     ScYearSelector,
-    MonthSelector,
-    DaySelector,
+    ScMonthSelector,
+    ScDaySelector,
     ScCard,
     ScCardHeader,
     ScCardContent,
@@ -47,10 +47,13 @@ import { ScYearSelector } from './year-selector';
       <div sc-card-content>
         @switch (view()) {
           @case ('years') {
-            <sc-year-selector [currentYear]="currentYear()" />
+            <sc-year-selector [currentYear]="currentYear()" (yearSelected)="selectYear($event)" />
           }
           @case ('months') {
-            <sc-month-selector />
+            <sc-month-selector
+              [currentMonth]="currentMonth()"
+              (monthSelected)="selectMonth($event)"
+            />
           }
           @default {
             <sc-day-selector
@@ -332,7 +335,7 @@ export class ScNewCalendar {
 
   private readonly scYearSelector = viewChild(ScYearSelector);
 
-  setMonthYear(n: number) {
+  protected setMonthYear(n: number) {
     if (this.view() === 'years') {
       this.scYearSelector()?.year.update((value) => value + n * 20);
     }
@@ -346,5 +349,17 @@ export class ScNewCalendar {
         this.prevMonth();
       }
     }
+  }
+
+  protected selectYear(year: number) {
+    this.currentYear.set(year);
+    this.value.set(undefined);
+    this.toggleView();
+  }
+
+  protected selectMonth(month: Temporal.PlainYearMonth) {
+    this.currentMonth.set(month);
+    this.value.set(undefined);
+    this.toggleView();
   }
 }

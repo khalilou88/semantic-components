@@ -39,7 +39,7 @@ import { CalendarDay } from './types';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DaySelector {
+export class ScDaySelector {
   readonly calendarDays = input.required<CalendarDay[]>();
   readonly weekdays = input.required<string[]>();
   readonly dateSelected = output<Temporal.PlainDate>();
