@@ -37,10 +37,15 @@ export class DaySelector {
   readonly dateSelected = output<Temporal.PlainDate>();
 
   readonly selectedDate = input<Temporal.PlainDate>();
+  readonly focusedDate = input<Temporal.PlainDate>();
 
   protected getVariant(day: CalendarDay) {
     if (this.isSelected(day.date)) {
       return 'primary';
+    }
+
+    if (this.isFocused(day.date)) {
+      return 'secondary';
     }
 
     if (day.isToday) {
@@ -56,5 +61,9 @@ export class DaySelector {
 
   isSelected(date: Temporal.PlainDate): boolean {
     return this.selectedDate() ? date.equals(this.selectedDate()!) : false;
+  }
+
+  isFocused(date: Temporal.PlainDate): boolean {
+    return this.focusedDate() ? date.equals(this.focusedDate()!) : false;
   }
 }

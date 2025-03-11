@@ -33,6 +33,7 @@ import { YearSelector } from './year-selector';
       }
       @default {
         <sc-day-selector
+          [focusedDate]="focusedDate()"
           [selectedDate]="value()"
           [calendarDays]="calendarDays()"
           (dateSelected)="selectDate($event)"
@@ -61,7 +62,7 @@ export class ScNewCalendar {
 
   private readonly today = signal(Temporal.Now.plainDateISO());
 
-  private readonly focusedDate = linkedSignal(() => {
+  protected readonly focusedDate = linkedSignal(() => {
     if (this.value()) {
       return this.value();
     } else {
