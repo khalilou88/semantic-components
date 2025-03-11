@@ -353,13 +353,15 @@ export class ScNewCalendar {
 
   protected selectYear(year: number) {
     this.currentYear.set(year);
+    this.currentMonth.update((month) =>
+      Temporal.PlainYearMonth.from({ year: year, month: month.month }),
+    );
     this.value.set(undefined);
     this.toggleView();
   }
 
   protected selectMonth(month: Temporal.PlainYearMonth) {
     this.currentMonth.set(month);
-    this.value.set(undefined);
     this.toggleView();
   }
 }
