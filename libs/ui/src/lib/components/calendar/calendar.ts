@@ -18,10 +18,11 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { cn } from '@semantic-components/utils';
 
 import { ScCard, ScCardContent, ScCardHeader } from '../card';
+import { getFirstDayOfWeek } from '../new-calendar/utils';
 import { ScDaySelector } from './day-selector';
 import { MonthSelector } from './month-selector';
 import { ScMonthYearHeader } from './month-year-header';
-import { WeekDayName, getFirstDayOfWeek } from './util';
+import { WeekDayName } from './util';
 import { YearSelector } from './year-selector';
 
 @Component({

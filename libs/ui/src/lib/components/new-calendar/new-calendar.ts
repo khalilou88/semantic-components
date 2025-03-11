@@ -14,10 +14,10 @@ import {
 import { Temporal } from '@js-temporal/polyfill';
 import { cn } from '@semantic-components/utils';
 
-import { getWeekInfo } from '../calendar/util';
 import { DaySelector } from './day-selector';
 import { MonthSelector } from './month-selector';
 import { CalendarDay } from './types';
+import { getFirstDayOfWeek } from './utils';
 import { YearSelector } from './year-selector';
 
 @Component({
@@ -108,8 +108,7 @@ export class ScNewCalendar {
     const days: CalendarDay[] = [];
 
     // Get locale-specific week info
-    const weekInfo = getWeekInfo(this.localeId);
-    const firstDayOfWeek = weekInfo.firstDay; // 1 for Monday in French locale
+    const firstDayOfWeek = getFirstDayOfWeek(this.localeId);
 
     const firstDayOfMonth = this.currentMonth().toPlainDate({ day: 1 });
 
