@@ -1,8 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  LOCALE_ID,
   ViewEncapsulation,
   computed,
+  inject,
   input,
   linkedSignal,
   model,
@@ -98,21 +100,33 @@ export class ScNewCalendar {
     }),
   );
 
+  private readonly localeId = inject(LOCALE_ID);
+
   // Generate calendar days for the current month view
   protected readonly calendarDays = computed(() => {
     const days: CalendarDay[] = [];
 
+    // Get locale-specific week info
+    const firstDayOfWeek =
+      new Intl.DateTimeFormat(this.localeId, { weekday: 'short' })
+        .formatToParts(new Date(2021, 0, 4)) // January 4, 2021 is a Monday
+        .find((part) => part.type === 'weekday')!.value === 'Mon'
+        ? 1
+        : 0; // 1 for Monday, 0 for Sunday
+
     const firstDayOfMonth = this.currentMonth().toPlainDate({ day: 1 });
 
-    // Get the day of the week for the first day (0-6, Sunday-Saturday)
-    const firstDayOfWeek = firstDayOfMonth.dayOfWeek % 7;
+    // Calculate the day of week adjusted for locale
+    // Convert from 1-7 (Monday-Sunday) to 0-6 for easier array handling
+    const firstOfMonthDayOfWeek = firstDayOfMonth.dayOfWeek % 7;
+    const adjustedFirstDay = (firstOfMonthDayOfWeek - firstDayOfWeek + 7) % 7;
 
     // Add days from previous month to fill the first week
     const prevMonth = this.currentMonth().subtract({ months: 1 });
     const daysInPrevMonth = prevMonth.daysInMonth;
 
-    for (let i = 0; i < firstDayOfWeek; i++) {
-      const day = daysInPrevMonth - firstDayOfWeek + i + 1;
+    for (let i = 0; i < adjustedFirstDay; i++) {
+      const day = daysInPrevMonth - adjustedFirstDay + i + 1;
       const date = prevMonth.toPlainDate({ day });
       days.push({
         date,
@@ -135,19 +149,23 @@ export class ScNewCalendar {
       });
     }
 
-    // Add days from next month to complete the grid (always show 6 weeks)
-    const daysNeeded = 42 - days.length;
-    const nextMonth = this.currentMonth().add({ months: 1 });
+    const a = days.length % 7;
 
-    for (let day = 1; day <= daysNeeded; day++) {
-      const date = nextMonth.toPlainDate({ day });
-      days.push({
-        date,
-        dayOfMonth: day,
-        isInCurrentMonth: false,
-        isToday: this.isToday(date),
-        isDisabled: this.isDateDisabled(date),
-      });
+    if (a > 0) {
+      // Add days from next month to complete the grid
+      const daysNeeded = 7 - a;
+      const nextMonth = this.currentMonth().add({ months: 1 });
+
+      for (let day = 1; day <= daysNeeded; day++) {
+        const date = nextMonth.toPlainDate({ day });
+        days.push({
+          date,
+          dayOfMonth: day,
+          isInCurrentMonth: false,
+          isToday: this.isToday(date),
+          isDisabled: this.isDateDisabled(date),
+        });
+      }
     }
 
     return days;
