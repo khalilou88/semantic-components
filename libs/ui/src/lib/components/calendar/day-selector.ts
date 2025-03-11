@@ -1,119 +1,77 @@
-import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   ViewEncapsulation,
-  computed,
-  effect,
   input,
   output,
-  viewChildren,
 } from '@angular/core';
 
-import { cn } from '@semantic-components/utils';
+import { Temporal } from '@js-temporal/polyfill';
 
-import { ScButton } from '../button';
-import { WeekDayName } from './util';
+import { ScDayButton } from './day-button';
+import { CalendarDay } from './types';
 
 @Component({
   selector: 'sc-day-selector',
-  imports: [NgClass, ScButton],
+  imports: [ScDayButton],
   template: `
-    @for (weekDayName of weekDaysNames(); track weekDayName.long) {
-      <abbr
-        class="size-10 text-center text-muted-foreground"
-        [title]="weekDayName.long"
-        [attr.aria-label]="weekDayName.long"
-      >
-        {{ weekDayName.short }}
-      </abbr>
-    }
+    <div class="grid grid-cols-7 gap-5">
+      @for (weekday of weekdays(); track weekday) {
+        <abbr class="size-10 text-center text-muted-foreground">
+          {{ weekday }}
+        </abbr>
+      }
 
-    @for (day of days(); track $index; let index = $index) {
-      <button
-        [ngClass]="{
-          'col-start-1': index === 0 && firstDayMonth() === 0,
-          'col-start-2': index === 0 && firstDayMonth() === 1,
-          'col-start-3': index === 0 && firstDayMonth() === 2,
-          'col-start-4': index === 0 && firstDayMonth() === 3,
-          'col-start-5': index === 0 && firstDayMonth() === 4,
-          'col-start-6': index === 0 && firstDayMonth() === 5,
-          'col-start-7': index === 0 && firstDayMonth() === 6,
-        }"
-        [attr.data-sc-day]="day"
-        [variant]="getVariant(day)"
-        (click)="setSelectedDay($event)"
-        sc-button
-        size="icon"
-      >
-        {{ day.slice(-2) }}
-      </button>
-    }
+      @for (day of calendarDays(); track day.date) {
+        <button
+          [variant]="getVariant(day)"
+          [isFocused]="isFocused(day.date)"
+          (click)="selectDay(day); $event.stopPropagation()"
+          sc-day-button
+          size="icon"
+        >
+          {{ day.dayOfMonth }}
+        </button>
+      }
+    </div>
   `,
-  host: {
-    '[class]': 'class()',
-  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScDaySelector {
-  readonly classInput = input<string>('', {
-    alias: 'class',
-  });
+  readonly calendarDays = input.required<CalendarDay[]>();
+  readonly weekdays = input.required<string[]>();
+  readonly dateSelected = output<Temporal.PlainDate>();
 
-  protected readonly class = computed(() =>
-    cn('grid grid-cols-7 place-items-center', this.classInput()),
-  );
+  readonly selectedDate = input<Temporal.PlainDate>();
+  readonly focusedDate = input<Temporal.PlainDate>();
 
-  weekDaysNames = input.required<WeekDayName[]>();
-
-  days = input.required<string[]>();
-  firstDayMonth = input.required<number>();
-  selectedDay = input<string>('');
-
-  selectedDayChange = output<string>();
-
-  isSelected(day: string) {
-    return day === this.selectedDay();
-  }
-
-  setSelectedDay(event: Event): void {
-    const target = event.target as HTMLElement;
-    const selectedDay = target.dataset['scDay'] as string;
-    this.selectedDayChange.emit(selectedDay);
-  }
-
-  focusedDate = input<string>('');
-  btns = viewChildren(ScButton, { read: ElementRef });
-
-  constructor() {
-    effect(() => {
-      if (this.focusedDate()) {
-        const b = this.btns().find(
-          (item) => item.nativeElement.getAttribute('data-sc-day') === this.selectedDay(),
-        );
-        b?.nativeElement.focus();
-      }
-    });
-  }
-
-  getVariant(day: string) {
-    if (this.isSelected(day)) {
+  protected getVariant(day: CalendarDay) {
+    if (this.isSelected(day.date)) {
       return 'primary';
     }
 
-    if (this.isToday(day)) {
+    if (this.isFocused(day.date)) {
+      return 'secondary';
+    }
+
+    if (day.isToday) {
       return 'outline';
     }
 
     return 'ghost';
   }
 
-  readonly today = input.required<string>();
+  protected selectDay(day: CalendarDay) {
+    this.dateSelected.emit(day.date);
+  }
 
-  protected isToday(date: string): boolean {
-    return date === this.today();
+  isSelected(date: Temporal.PlainDate): boolean {
+    return this.selectedDate() ? date.equals(this.selectedDate()!) : false;
+  }
+
+  isFocused(date: Temporal.PlainDate): boolean {
+    return this.focusedDate() ? date.equals(this.focusedDate()!) : false;
   }
 }

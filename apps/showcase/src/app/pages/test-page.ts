@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { ScNewCalendar } from '@semantic-components/ui';
+import { ScCalendar } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-test-page',
-  imports: [ScNewCalendar],
+  imports: [ScCalendar],
   template: `
     <div class="m-10">
-      <sc-new-calendar />
+      <sc-calendar />
     </div>
   `,
   styles: ``,

@@ -82,4 +82,3 @@ export * from './lib/components/table-of-contents';
 export * from './lib/components/stepper';
 
 export * from './lib/components/accessible-datepicker/accessible-datepicker';
-export * from './lib/components/new-calendar/new-calendar';

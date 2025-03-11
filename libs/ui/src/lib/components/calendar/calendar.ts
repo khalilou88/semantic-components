@@ -1,10 +1,9 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   LOCALE_ID,
-  OnInit,
   ViewEncapsulation,
+  booleanAttribute,
   computed,
   forwardRef,
   inject,
@@ -12,73 +11,64 @@ import {
   linkedSignal,
   model,
   signal,
+  viewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+import { Temporal } from '@js-temporal/polyfill';
 import { cn } from '@semantic-components/utils';
 
 import { ScCard, ScCardContent, ScCardHeader } from '../card';
-import { getFirstDayOfWeek } from '../new-calendar/utils';
+import { ScCalendarHeader } from './calendar-header';
 import { ScDaySelector } from './day-selector';
-import { MonthSelector } from './month-selector';
-import { ScMonthYearHeader } from './month-year-header';
-import { WeekDayName } from './util';
-import { YearSelector } from './year-selector';
+import { ScMonthSelector } from './month-selector';
+import { CalendarDay } from './types';
+import { getFirstDayOfWeek, getLocalizedDayNames } from './utils';
+import { ScYearSelector } from './year-selector';
 
 @Component({
   selector: 'sc-calendar',
   imports: [
-    ScMonthYearHeader,
+    ScYearSelector,
+    ScMonthSelector,
+    ScDaySelector,
     ScCard,
     ScCardHeader,
-    // ScButton,
-    // ScCardFooter,
     ScCardContent,
-    MonthSelector,
-    YearSelector,
-    ScDaySelector,
+    ScCalendarHeader,
   ],
   template: `
     <div sc-card>
       <div sc-card-header>
-        <sc-month-year-header
-          [monthYear]="monthYear()"
+        <sc-calendar-header
+          [currentMonth]="currentMonth()"
           [disabled]="view() === 'months'"
           (monthYearChange)="setMonthYear($event)"
           (viewToggled)="toggleView()"
         />
       </div>
-
       <div sc-card-content>
         @switch (view()) {
           @case ('years') {
-            <sc-year-selector
-              [year]="year()"
-              [year2]="year2()"
-              (yearSelected)="selectYear($event)"
-            />
+            <sc-year-selector [currentYear]="currentYear()" (yearSelected)="selectYear($event)" />
           }
           @case ('months') {
-            <sc-month-selector [month]="month()" (monthSelected)="selectMonth($event)" />
+            <sc-month-selector
+              [currentMonth]="currentMonth()"
+              (monthSelected)="selectMonth($event)"
+            />
           }
           @default {
             <sc-day-selector
-              [weekDaysNames]="weekDaysNames()"
-              [days]="monthDays()"
-              [firstDayMonth]="firstDayMonth()"
-              [selectedDay]="value()"
+              [weekdays]="weekdays"
               [focusedDate]="focusedDate()"
-              [today]="getDateString(today())"
-              (selectedDayChange)="setValue($event)"
+              [selectedDate]="value()"
+              [calendarDays]="calendarDays()"
+              (dateSelected)="selectDate($event)"
             />
           }
         }
       </div>
-
-      <!--div class="justify-between" sc-card-footer>
-        <button sc-button variant="outline" type="button">Cancel</button>
-        <button sc-button type="button">Done</button>
-      </div-->
     </div>
   `,
   host: {
@@ -96,7 +86,248 @@ import { YearSelector } from './year-selector';
     },
   ],
 })
-export class ScCalendar implements OnInit, ControlValueAccessor {
+export class ScCalendar implements ControlValueAccessor {
+  readonly value = model<Temporal.PlainDate>();
+  readonly minDate = input<Temporal.PlainDate>();
+  readonly maxDate = input<Temporal.PlainDate>();
+
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
+
+  protected readonly class = computed(() => cn('', this.classInput()));
+
+  private readonly today = signal(Temporal.Now.plainDateISO());
+
+  protected readonly focusedDate = linkedSignal(() => {
+    if (this.value()) {
+      return this.value();
+    } else {
+      return this.today();
+    }
+  });
+
+  protected readonly currentYear = linkedSignal(() => {
+    if (this.value()) {
+      return this.value()!.year;
+    } else {
+      return this.today().year;
+    }
+  });
+
+  protected readonly currentMonth = linkedSignal(() => {
+    if (this.value()) {
+      return this.value()!.toPlainYearMonth();
+    } else {
+      return this.today().toPlainYearMonth();
+    }
+  });
+
+  private readonly firstDayOfMonth = computed(() =>
+    this.currentMonth().toPlainDate({
+      day: 1,
+    }),
+  );
+
+  private readonly lastDayOfMonth = computed(() =>
+    this.currentMonth().toPlainDate({
+      day: this.currentMonth().daysInMonth,
+    }),
+  );
+
+  private readonly localeId = inject(LOCALE_ID);
+
+  // Generate calendar days for the current month view
+  protected readonly calendarDays = computed(() => {
+    const days: CalendarDay[] = [];
+
+    // Get locale-specific week info
+    const firstDayOfWeek = getFirstDayOfWeek(this.localeId);
+
+    const firstDayOfMonth = this.currentMonth().toPlainDate({ day: 1 });
+
+    // Calculate the day of week adjusted for locale
+    // Convert from 1-7 (Monday-Sunday) to 0-6 for easier array handling
+    const firstOfMonthDayOfWeek = firstDayOfMonth.dayOfWeek % 7;
+    const adjustedFirstDay = (firstOfMonthDayOfWeek - firstDayOfWeek + 7) % 7;
+
+    // Add days from previous month to fill the first week
+    const prevMonth = this.currentMonth().subtract({ months: 1 });
+    const daysInPrevMonth = prevMonth.daysInMonth;
+
+    for (let i = 0; i < adjustedFirstDay; i++) {
+      const day = daysInPrevMonth - adjustedFirstDay + i + 1;
+      const date = prevMonth.toPlainDate({ day });
+      days.push({
+        date,
+        dayOfMonth: day,
+        isInCurrentMonth: false,
+        isToday: this.isToday(date),
+        isDisabled: this.isDateDisabled(date),
+      });
+    }
+
+    // Add days of current month
+    for (let day = 1; day <= this.currentMonth().daysInMonth; day++) {
+      const date = this.currentMonth().toPlainDate({ day });
+      days.push({
+        date,
+        dayOfMonth: day,
+        isInCurrentMonth: true,
+        isToday: this.isToday(date),
+        isDisabled: this.isDateDisabled(date),
+      });
+    }
+
+    const a = days.length % 7;
+
+    if (a > 0) {
+      // Add days from next month to complete the grid
+      const daysNeeded = 7 - a;
+      const nextMonth = this.currentMonth().add({ months: 1 });
+
+      for (let day = 1; day <= daysNeeded; day++) {
+        const date = nextMonth.toPlainDate({ day });
+        days.push({
+          date,
+          dayOfMonth: day,
+          isInCurrentMonth: false,
+          isToday: this.isToday(date),
+          isDisabled: this.isDateDisabled(date),
+        });
+      }
+    }
+
+    return days;
+  });
+
+  // Helper methods
+  isToday(date: Temporal.PlainDate): boolean {
+    const today = Temporal.Now.plainDateISO();
+    return date.equals(today);
+  }
+
+  isDateDisabled(date: Temporal.PlainDate): boolean {
+    if (this.minDate() && Temporal.PlainDate.compare(date, this.minDate()!) < 0) {
+      return true;
+    }
+    if (this.maxDate() && Temporal.PlainDate.compare(date, this.maxDate()!) > 0) {
+      return true;
+    }
+    return false;
+  }
+
+  selectDate(date: Temporal.PlainDate): void {
+    if (this.isDateDisabled(date)) return;
+
+    this.value.set(date);
+
+    this.onChange(date);
+    this.onTouched();
+  }
+
+  // Move focus in the calendar grid with support for month navigation
+  moveFocus(delta: number): void {
+    let newDate;
+
+    if (Math.sign(delta) === 1) {
+      newDate = this.focusedDate()?.add({ days: delta });
+    }
+
+    if (Math.sign(delta) === -1) {
+      newDate = this.focusedDate()?.subtract({ days: Math.abs(delta) });
+    }
+
+    if (!newDate) {
+      return;
+    }
+
+    if (Temporal.PlainDate.compare(newDate, this.calendarDays()[0].date) < 0) {
+      this.prevMonth();
+    }
+
+    if (
+      Temporal.PlainDate.compare(
+        newDate,
+        this.calendarDays()[this.calendarDays().length - 1].date,
+      ) > 0
+    ) {
+      this.nextMonth();
+    }
+
+    this.focusedDate.set(newDate);
+  }
+
+  handleKeydown(event: KeyboardEvent): void {
+    switch (event.key) {
+      case 'ArrowLeft':
+        this.moveFocus(-1);
+        event.preventDefault();
+        break;
+      case 'ArrowRight':
+        this.moveFocus(1);
+        event.preventDefault();
+        break;
+      case 'ArrowUp':
+        this.moveFocus(-7);
+        event.preventDefault();
+        break;
+      case 'ArrowDown':
+        this.moveFocus(7);
+        event.preventDefault();
+        break;
+      case 'Enter':
+      case ' ':
+        if (
+          Temporal.PlainDate.compare(this.focusedDate()!, this.calendarDays()[0].date) >= 0 &&
+          Temporal.PlainDate.compare(
+            this.focusedDate()!,
+            this.calendarDays()[this.calendarDays().length - 1].date,
+          ) <= 0
+        ) {
+          this.selectDate(this.focusedDate()!);
+          event.preventDefault();
+        }
+        break;
+      case 'Home':
+        // Move to first day of the month
+
+        this.focusedDate.set(this.firstDayOfMonth());
+
+        event.preventDefault();
+        break;
+
+      case 'End':
+        // Move to last day of the month
+        this.focusedDate.set(this.lastDayOfMonth());
+        event.preventDefault();
+        break;
+      case 'PageUp':
+        // Previous month
+        this.prevMonth();
+        event.preventDefault();
+        break;
+      case 'PageDown':
+        // Next month
+        this.nextMonth();
+        event.preventDefault();
+        break;
+    }
+  }
+
+  // Navigation methods
+  prevMonth(): void {
+    if (this.currentMonth()) {
+      this.currentMonth.update((currentMonth) => currentMonth.subtract({ months: 1 }));
+    }
+  }
+
+  nextMonth(): void {
+    if (this.currentMonth()) {
+      this.currentMonth.update((currentMonth) => currentMonth.add({ months: 1 }));
+    }
+  }
+
   protected readonly view = signal<'days' | 'years' | 'months'>('days');
 
   protected toggleView(): void {
@@ -109,107 +340,55 @@ export class ScCalendar implements OnInit, ControlValueAccessor {
     }
   }
 
+  weekdays: string[] = [];
+
+  constructor() {
+    this.weekdays = getLocalizedDayNames(this.localeId);
+  }
+
+  private readonly scYearSelector = viewChild(ScYearSelector);
+
+  protected setMonthYear(n: number) {
+    if (this.view() === 'years') {
+      this.scYearSelector()?.year.update((value) => value + n * 20);
+    }
+
+    if (this.view() === 'days') {
+      if (n === 1) {
+        this.nextMonth();
+      }
+
+      if (n === -1) {
+        this.prevMonth();
+      }
+    }
+  }
+
   protected selectYear(year: number) {
-    this.year.set(year);
-    this.setValue('');
-    this.toggleView();
-  }
-
-  protected selectMonth(monthIndex: number) {
-    this.month.set(monthIndex);
-    this.setValue('');
-    this.toggleView();
-  }
-
-  private readonly changeDetectorRef = inject(ChangeDetectorRef);
-
-  readonly classInput = input<string>('', {
-    alias: 'class',
-  });
-
-  protected readonly class = computed(() => cn('', this.classInput()));
-
-  private readonly localeId = inject(LOCALE_ID);
-
-  readonly today = signal(new Date());
-
-  readonly date = computed(() => {
-    if (this.value()) {
-      return new Date(this.value());
-    }
-    return this.today();
-  });
-
-  readonly year = linkedSignal(() => this.date().getFullYear());
-  readonly year2 = linkedSignal(() => this.year());
-
-  readonly month = linkedSignal(() => this.date().getMonth());
-
-  readonly weekDaysNames = signal<WeekDayName[]>([]);
-
-  readonly monthYear = computed(() => {
-    const options = {
-      month: 'long',
-      year: 'numeric',
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } as any;
-
-    const s = new Intl.DateTimeFormat(this.localeId, options).format(
-      new Date(this.year(), this.month(), 1),
+    this.currentYear.set(year);
+    this.currentMonth.update((month) =>
+      Temporal.PlainYearMonth.from({ year: year, month: month.month }),
     );
-
-    return s;
-  });
-
-  readonly monthDays = computed(() => {
-    // Month in JavaScript is 0-indexed (January is 0, February is 1, etc),
-    // but by using 0 as the day it will give us the last day of the prior
-    // month. So passing in 1 as the month number will return the last day
-    // of January, not February
-    const numOfDays = new Date(this.year(), this.month() + 1, 0).getDate();
-
-    const days = [];
-
-    for (let i = 1; i <= numOfDays; i++) {
-      const date = new Date(this.year(), this.month(), i);
-
-      days.push(this.getDateString(date));
-    }
-
-    return days;
-  });
-
-  readonly firstDayMonth = computed(() => {
-    const date = new Date(this.year(), this.month(), 1);
-    const intlLongFormatter = new Intl.DateTimeFormat(this.localeId, { weekday: 'long' });
-
-    const dayName = intlLongFormatter.format(date);
-    return this.weekDaysNames()
-      .map((e) => e.long)
-      .indexOf(dayName);
-  });
-
-  readonly value = model<string>('');
-
-  readonly focusedDate = signal('');
-
-  protected setValue(day: string) {
-    this.value.set(day);
-
-    this.onChange(day);
-    this.changeDetectorRef.markForCheck();
+    this.value.set(undefined);
+    this.toggleView();
   }
 
+  protected selectMonth(month: Temporal.PlainYearMonth) {
+    this.currentMonth.set(month);
+    this.toggleView();
+  }
+
+  //CVA
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onChange: (value: string) => void = () => {};
+  onChange: (value: Temporal.PlainDate) => void = () => {};
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onTouched: () => void = () => {};
 
-  writeValue(value: string): void {
+  writeValue(value: Temporal.PlainDate): void {
     this.value.set(value);
   }
 
-  registerOnChange(fn: (value: string) => void): void {
+  registerOnChange(fn: (value: Temporal.PlainDate) => void): void {
     this.onChange = fn;
   }
 
@@ -217,121 +396,13 @@ export class ScCalendar implements OnInit, ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  private readonly disabledByCva = signal(false);
+  readonly disabledInput = input<boolean, unknown>(false, {
+    alias: 'disabled',
+    transform: booleanAttribute,
+  });
+  readonly disabled = linkedSignal(() => this.disabledInput());
+
   setDisabledState?(isDisabled: boolean): void {
-    this.disabledByCva.set(isDisabled);
-  }
-
-  ngOnInit() {
-    this.setLocaleDayNames();
-  }
-
-  //https://github.com/angular/angular/issues/57193
-  private setLocaleDayNames() {
-    const weekDaysNames = [];
-    const intlNarrowFormatter = new Intl.DateTimeFormat(this.localeId, { weekday: 'narrow' });
-    const intlShortFormatter = new Intl.DateTimeFormat(this.localeId, { weekday: 'short' });
-    const intlLongFormatter = new Intl.DateTimeFormat(this.localeId, { weekday: 'long' });
-
-    let k = 0;
-    const firstDayOfWeek = getFirstDayOfWeek(this.localeId);
-    if (firstDayOfWeek === 7) {
-      // First day of the week is Sunday
-      k = 3; // 3th January 2021 is a Sunday
-    }
-    if (firstDayOfWeek === 1) {
-      // First day of the week is Monday
-      k = 4; // 4th January 2021 is a Monday
-    }
-
-    for (let i = 0; i < 7; i += 1) {
-      const date = new Date(Date.UTC(2021, 0, i + k));
-      weekDaysNames.push({
-        narrow: intlNarrowFormatter.format(date),
-        short: intlShortFormatter.format(date),
-        long: intlLongFormatter.format(date),
-      });
-    }
-
-    this.weekDaysNames.set(weekDaysNames);
-  }
-
-  setMonthYear(n: number) {
-    if (this.view() === 'years') {
-      if (n === 1) {
-        this.year2.update((value) => value + 20);
-      }
-
-      if (n === -1) {
-        this.year2.update((value) => value - 20);
-      }
-    }
-
-    if (this.view() === 'days') {
-      if (n === 1) {
-        if (this.month() < 11) {
-          this.month.update((value) => value + 1);
-        } else {
-          this.month.set(0);
-          this.year.update((value) => value + 1);
-        }
-      }
-
-      if (n === -1) {
-        if (this.month() > 0) {
-          this.month.update((value) => value - 1);
-        } else {
-          this.month.set(11);
-          this.year.update((value) => value - 1);
-        }
-      }
-    }
-  }
-
-  twoDigits(n: number) {
-    return n.toLocaleString(this.localeId, {
-      minimumIntegerDigits: 2,
-      useGrouping: false,
-    });
-  }
-
-  handleKeydown(event: KeyboardEvent) {
-    const key = event.key;
-    let newDate;
-    if (key === 'ArrowLeft') {
-      newDate = this.addDays(-1);
-    } else if (key === 'ArrowRight') {
-      newDate = this.addDays(+1);
-    } else if (key === 'ArrowUp') {
-      newDate = this.addDays(-7);
-    } else if (key === 'ArrowDown') {
-      newDate = this.addDays(+7);
-    } else if (key === 'Enter') {
-      if (event.target) {
-        newDate = (event.target as HTMLElement).dataset['scDay'];
-      }
-
-      if (newDate) {
-        this.setValue(newDate);
-      }
-
-      return;
-    }
-    if (newDate) {
-      //TODO we need to define active date and selected date
-      this.setValue(newDate);
-      this.focusedDate.set(newDate);
-    }
-  }
-
-  getDateString(date: Date) {
-    return `${date.getFullYear()}-${this.twoDigits(date.getMonth() + 1)}-${this.twoDigits(date.getDate())}`;
-  }
-
-  addDays(days: number) {
-    const date = new Date(this.value());
-    date.setDate(date.getDate() + days);
-
-    return this.getDateString(date);
+    this.disabled.set(isDisabled);
   }
 }
