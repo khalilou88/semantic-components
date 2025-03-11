@@ -187,13 +187,17 @@ export class ScNewCalendar {
       newDate = this.focusedDate()?.subtract({ days: delta });
     }
 
-    if (Temporal.PlainDate.compare(this.focusedDate()!, this.calendarDays()[0].date) < 0) {
+    if (!newDate) {
+      return;
+    }
+
+    if (Temporal.PlainDate.compare(newDate, this.calendarDays()[0].date) < 0) {
       this.prevMonth();
     }
 
     if (
       Temporal.PlainDate.compare(
-        this.focusedDate()!,
+        newDate,
         this.calendarDays()[this.calendarDays().length - 1].date,
       ) > 0
     ) {
