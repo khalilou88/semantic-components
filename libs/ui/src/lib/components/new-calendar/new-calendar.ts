@@ -194,7 +194,7 @@ export class ScNewCalendar {
     if (
       Temporal.PlainDate.compare(
         this.focusedDate()!,
-        this.calendarDays()[this.calendarDays().length].date,
+        this.calendarDays()[this.calendarDays().length - 1].date,
       ) > 0
     ) {
       this.nextMonth();
@@ -227,7 +227,7 @@ export class ScNewCalendar {
           Temporal.PlainDate.compare(this.focusedDate()!, this.calendarDays()[0].date) >= 0 &&
           Temporal.PlainDate.compare(
             this.focusedDate()!,
-            this.calendarDays()[this.calendarDays().length].date,
+            this.calendarDays()[this.calendarDays().length - 1].date,
           ) <= 0
         ) {
           this.selectDate(this.focusedDate()!);
