@@ -3,7 +3,9 @@ import {
   Component,
   LOCALE_ID,
   ViewEncapsulation,
+  booleanAttribute,
   computed,
+  forwardRef,
   inject,
   input,
   linkedSignal,
@@ -11,6 +13,7 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { Temporal } from '@js-temporal/polyfill';
 import { cn } from '@semantic-components/utils';
@@ -75,8 +78,15 @@ import { ScYearSelector } from './year-selector';
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => ScNewCalendar),
+      multi: true,
+    },
+  ],
 })
-export class ScNewCalendar {
+export class ScNewCalendar implements ControlValueAccessor {
   readonly value = model<Temporal.PlainDate>();
   readonly minDate = input<Temporal.PlainDate>();
   readonly maxDate = input<Temporal.PlainDate>();
@@ -211,6 +221,9 @@ export class ScNewCalendar {
     if (this.isDateDisabled(date)) return;
 
     this.value.set(date);
+
+    this.onChange(date);
+    this.onTouched();
   }
 
   // Move focus in the calendar grid with support for month navigation
@@ -363,5 +376,33 @@ export class ScNewCalendar {
   protected selectMonth(month: Temporal.PlainYearMonth) {
     this.currentMonth.set(month);
     this.toggleView();
+  }
+
+  //CVA
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onChange: (value: Temporal.PlainDate) => void = () => {};
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onTouched: () => void = () => {};
+
+  writeValue(value: Temporal.PlainDate): void {
+    this.value.set(value);
+  }
+
+  registerOnChange(fn: (value: Temporal.PlainDate) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  readonly disabledInput = input<boolean, unknown>(false, {
+    alias: 'disabled',
+    transform: booleanAttribute,
+  });
+  readonly disabled = linkedSignal(() => this.disabledInput());
+
+  setDisabledState?(isDisabled: boolean): void {
+    this.disabled.set(isDisabled);
   }
 }
