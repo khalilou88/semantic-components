@@ -184,7 +184,7 @@ export class ScNewCalendar {
     }
 
     if (Math.sign(delta) === -1) {
-      newDate = this.focusedDate()?.subtract({ days: delta });
+      newDate = this.focusedDate()?.subtract({ days: Math.abs(delta) });
     }
 
     if (!newDate) {
