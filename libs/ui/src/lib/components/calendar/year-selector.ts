@@ -14,15 +14,16 @@ import {
   template: `
     <!-- Year selection -->
     <div class="p-2 grid grid-cols-4 gap-1">
-      <button
-        class="p-2 text-sm rounded hover:bg-blue-100"
-        *ngFor="let y of years()"
-        [class.bg-blue-500]="y === year()"
-        [class.text-white]="y === year()"
-        (click)="selectYear(y); $event.stopPropagation()"
-      >
-        {{ y }}
-      </button>
+      @for (y of years(); track y) {
+        <button
+          class="p-2 text-sm rounded hover:bg-blue-100"
+          [class.bg-blue-500]="y === year()"
+          [class.text-white]="y === year()"
+          (click)="selectYear(y); $event.stopPropagation()"
+        >
+          {{ y }}
+        </button>
+      }
     </div>
   `,
   styles: ``,
