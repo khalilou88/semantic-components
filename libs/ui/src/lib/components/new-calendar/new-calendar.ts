@@ -85,14 +85,23 @@ export class ScNewCalendar {
     }
   });
 
+  private readonly firstDayOfMonth = computed(() =>
+    this.currentMonth().toPlainDate({
+      day: 1,
+    }),
+  );
+
+  private readonly lastDayOfMonth = computed(() =>
+    this.currentMonth().toPlainDate({
+      day: this.currentMonth().daysInMonth,
+    }),
+  );
+
   // Generate calendar days for the current month view
   protected readonly calendarDays = computed(() => {
     const days: CalendarDay[] = [];
 
     const firstDayOfMonth = this.currentMonth().toPlainDate({ day: 1 });
-    // const lastDayOfMonth = this.currentMonth().toPlainDate({
-    //   day: this.currentMonth().daysInMonth,
-    // });
 
     // Get the day of the week for the first day (0-6, Sunday-Saturday)
     const firstDayOfWeek = firstDayOfMonth.dayOfWeek % 7;
@@ -226,25 +235,15 @@ export class ScNewCalendar {
         break;
       case 'Home':
         // Move to first day of the month
-        for (let i = 0; i < this.calendarDays().length; i++) {
-          if (this.calendarDays()[i].isInCurrentMonth) {
-            this.focusedDate.set(this.calendarDays()[i].date);
-            break;
-          }
-        }
+
+        this.focusedDate.set(this.firstDayOfMonth());
 
         event.preventDefault();
         break;
 
       case 'End':
         // Move to last day of the month
-        for (let i = this.calendarDays().length - 1; i >= 0; i--) {
-          if (this.calendarDays()[i].isInCurrentMonth) {
-            this.focusedDate.set(this.calendarDays()[i].date);
-            break;
-          }
-        }
-
+        this.focusedDate.set(this.lastDayOfMonth());
         event.preventDefault();
         break;
       case 'PageUp':
