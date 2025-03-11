@@ -18,7 +18,7 @@ import { ScCard, ScCardContent, ScCardHeader } from '../card';
 import { DaySelector } from './day-selector';
 import { MonthSelector } from './month-selector';
 import { CalendarDay } from './types';
-import { getFirstDayOfWeek } from './utils';
+import { getFirstDayOfWeek, getLocalizedDayNames } from './utils';
 import { YearSelector } from './year-selector';
 
 @Component({
@@ -37,6 +37,7 @@ import { YearSelector } from './year-selector';
           }
           @default {
             <sc-day-selector
+              [weekdays]="weekdays"
               [focusedDate]="focusedDate()"
               [selectedDate]="value()"
               [calendarDays]="calendarDays()"
@@ -295,4 +296,10 @@ export class ScNewCalendar {
   }
 
   protected readonly view = signal<'days' | 'years' | 'months'>('days');
+
+  weekdays: string[] = [];
+
+  constructor() {
+    this.weekdays = getLocalizedDayNames(this.localeId);
+  }
 }

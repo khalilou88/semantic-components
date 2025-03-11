@@ -16,6 +16,12 @@ import { CalendarDay } from './types';
   imports: [ScDayButton],
   template: `
     <div class="grid grid-cols-7 gap-5">
+      @for (weekday of weekdays(); track weekday) {
+        <abbr class="size-10 text-center text-muted-foreground">
+          {{ weekday }}
+        </abbr>
+      }
+
       @for (day of calendarDays(); track day.date) {
         <button
           [variant]="getVariant(day)"
@@ -35,6 +41,7 @@ import { CalendarDay } from './types';
 })
 export class DaySelector {
   readonly calendarDays = input.required<CalendarDay[]>();
+  readonly weekdays = input.required<string[]>();
   readonly dateSelected = output<Temporal.PlainDate>();
 
   readonly selectedDate = input<Temporal.PlainDate>();
