@@ -18,7 +18,6 @@ import {
   linkedSignal,
   model,
   signal,
-  viewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -77,9 +76,6 @@ export class ScDatePicker implements ControlValueAccessor {
 
   constructor() {
     afterNextRender(() => {
-      console.log('input');
-      console.log(this.scInput());
-
       this.scDatePickerToggle()?.toggled.subscribe(() => {
         if (this.isOpen()) {
           this.close();
@@ -99,8 +95,7 @@ export class ScDatePicker implements ControlValueAccessor {
     // Focus should already be on the input, but this call is in case the datepicker is opened
     // programmatically. We need to call this even if the datepicker is already open, because
     // the user might be clicking the toggle.
-    //TODO
-    // this._input()?.nativeElement.focus();
+    this.scInput()?.nativeElement.focus();
 
     if (this.isOpen()) {
       return;
@@ -196,13 +191,15 @@ export class ScDatePicker implements ControlValueAccessor {
     this.close();
 
     this.value.set(value);
+
+    console.log(value?.toLocaleString(this.localeId));
+
     this.scInput()?.value.set(value?.toLocaleString(this.localeId) ?? '');
 
     this.onChange(value);
     this.onTouched();
 
-    //TODO fix this
-    //this.input()?.nativeElement.focus();
+    this.scInput()?.nativeElement.focus();
   }
 
   //CVA

@@ -2,6 +2,7 @@ import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   ViewEncapsulation,
   computed,
   inject,
@@ -55,4 +56,10 @@ export class ScInput {
   });
 
   readonly id = linkedSignal(() => this.idInput());
+
+  private readonly host = inject(ElementRef);
+
+  get nativeElement() {
+    return this.host.nativeElement;
+  }
 }
