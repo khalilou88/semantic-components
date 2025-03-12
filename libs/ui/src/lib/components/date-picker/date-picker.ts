@@ -76,6 +76,10 @@ export class ScDatePicker implements ControlValueAccessor {
 
   constructor() {
     afterNextRender(() => {
+      this.scInput()?.value.subscribe((v) => {
+        console.log(v);
+      });
+
       this.scDatePickerToggle()?.toggled.subscribe(() => {
         if (this.isOpen()) {
           this.close();
