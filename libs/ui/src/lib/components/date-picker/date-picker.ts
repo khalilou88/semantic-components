@@ -7,13 +7,17 @@ import {
   Component,
   ElementRef,
   ViewEncapsulation,
+  booleanAttribute,
   computed,
+  forwardRef,
   inject,
   input,
+  linkedSignal,
   model,
   signal,
   viewChild,
 } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { Temporal } from '@js-temporal/polyfill';
 import { cn } from '@semantic-components/utils';
@@ -46,8 +50,15 @@ import { ScDateInput } from './date-input';
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => ScDatePicker),
+      multi: true,
+    },
+  ],
 })
-export class ScDatePicker {
+export class ScDatePicker implements ControlValueAccessor {
   readonly classInput = input<string>('', {
     alias: 'class',
   });
@@ -182,7 +193,38 @@ export class ScDatePicker {
 
     this.value.set(value);
 
+    this.onChange(value);
+    this.onTouched();
+
     //TODO fix this
     //this.input()?.nativeElement.focus();
+  }
+
+  //CVA
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onChange: (value: Temporal.PlainDate) => void = () => {};
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onTouched: () => void = () => {};
+
+  writeValue(value: Temporal.PlainDate): void {
+    this.value.set(value);
+  }
+
+  registerOnChange(fn: (value: Temporal.PlainDate) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  readonly disabledInput = input<boolean, unknown>(false, {
+    alias: 'disabled',
+    transform: booleanAttribute,
+  });
+  readonly disabled = linkedSignal(() => this.disabledInput());
+
+  setDisabledState?(isDisabled: boolean): void {
+    this.disabled.set(isDisabled);
   }
 }
