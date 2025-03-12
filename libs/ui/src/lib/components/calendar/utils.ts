@@ -7,7 +7,7 @@ export function getFirstDayOfWeek(localeId: string): number {
 }
 
 // Format date using Intl
-export function formatDate(date: Temporal.PlainDate, locale: string): string {
+export function formatDate(locale: string, date: Temporal.PlainDate): string {
   // Convert Temporal date to JavaScript Date for Intl compatibility
   const jsDate = new Date(date.year, date.month - 1, date.day);
 

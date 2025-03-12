@@ -6,6 +6,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  LOCALE_ID,
   ViewEncapsulation,
   booleanAttribute,
   computed,
@@ -25,6 +26,7 @@ import { SiCalendarIcon } from '@semantic-icons/lucide-icons';
 
 import { ScButton } from '../button';
 import { ScCalendar } from '../calendar';
+import { formatDate } from '../calendar/utils';
 import { ScInput } from '../input';
 import { ScDateInput } from './date-input';
 
@@ -71,7 +73,11 @@ export class ScDatePicker implements ControlValueAccessor {
   readonly minDate = input<Temporal.PlainDate>();
   readonly maxDate = input<Temporal.PlainDate>();
 
-  protected readonly formatedValue = computed(() => this.value()?.toString() ?? '');
+  private readonly localeId = inject(LOCALE_ID);
+
+  protected readonly formatedValue = computed(() =>
+    this.value() ? formatDate(this.localeId, this.value()!) : '',
+  );
 
   private readonly host = inject(ElementRef);
 
