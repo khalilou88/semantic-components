@@ -26,7 +26,6 @@ import { SiCalendarIcon } from '@semantic-icons/lucide-icons';
 
 import { ScButton } from '../button';
 import { ScCalendar } from '../calendar';
-import { formatDate } from '../calendar/utils';
 import { ScInput } from '../input';
 import { ScDateInput } from './date-input';
 
@@ -76,7 +75,7 @@ export class ScDatePicker implements ControlValueAccessor {
   private readonly localeId = inject(LOCALE_ID);
 
   protected readonly formatedValue = computed(() =>
-    this.value() ? formatDate(this.localeId, this.value()!) : '',
+    this.value() ? (this.value()?.toLocaleString(this.localeId) ?? '') : '',
   );
 
   private readonly host = inject(ElementRef);
