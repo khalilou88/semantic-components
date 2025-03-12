@@ -148,7 +148,13 @@ export default class DatePickerPage {
 
   importCodeSnippet = `import {
     ScDatePicker,
+    ScDatePickerToggle,
   } from '@semantic-components/ui';`;
 
-  templateCodeSnippet = `<sc-date-picker />`;
+  templateCodeSnippet = `<sc-date-picker>
+  <button sc-date-picker-toggle>
+    <svg si-calendar-icon></svg>
+  </button>
+  <input placeholder="Select date" sc-input type="text" />
+</sc-date-picker>`;
 }
