@@ -94,7 +94,7 @@ export class ScDatePicker {
 
     this.isOpen.set(true);
 
-    const overlayRef = this._getOverlayRef();
+    const overlayRef = this.getOverlayRef();
 
     //overlayRef.updateSize({ width: this._overlayOrigin()?.nativeElement.offsetWidth });
 
@@ -117,7 +117,7 @@ export class ScDatePicker {
   }
 
   /** Creates an overlay reference for the datepicker panel. */
-  private _getOverlayRef(): OverlayRef {
+  private getOverlayRef(): OverlayRef {
     if (this.overlayRef) {
       return this.overlayRef;
     }
@@ -173,7 +173,7 @@ export class ScDatePicker {
   }
 
   /** Selects a specific date value. */
-  protected _selectValue(value: string) {
+  protected selectValue(value: string) {
     this.close();
     this.selected.emit(value);
     this.input()?.nativeElement.focus();
