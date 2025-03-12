@@ -8,6 +8,7 @@ import {
 
 import { Temporal } from '@js-temporal/polyfill';
 
+import { isToday } from './calendar-utils';
 import { ScDayButton } from './day-button';
 import { CalendarDay } from './types';
 
@@ -56,7 +57,7 @@ export class ScDaySelector {
       return 'secondary';
     }
 
-    if (day.isToday) {
+    if (isToday(day.date)) {
       return 'outline';
     }
 

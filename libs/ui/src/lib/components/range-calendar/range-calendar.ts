@@ -19,9 +19,9 @@ import { Temporal } from '@js-temporal/polyfill';
 import { cn } from '@semantic-components/utils';
 
 import { ScCalendarHeader } from '../calendar/calendar-header';
+import { generateCalendarDays } from '../calendar/calendar-utils';
 import { ScMonthSelector } from '../calendar/month-selector';
-import { CalendarDay } from '../calendar/types';
-import { getFirstDayOfWeek, getLocalizedDayNames } from '../calendar/utils';
+import { getLocalizedDayNames } from '../calendar/utils';
 import { ScYearSelector } from '../calendar/year-selector';
 import { ScCard, ScCardContent, ScCardHeader } from '../card';
 import { ScDaysSelector } from './days-selector';
@@ -138,69 +138,7 @@ export class ScRangeCalendar implements ControlValueAccessor {
 
   private readonly localeId = inject(LOCALE_ID);
 
-  // Generate calendar days for the current month view
-  protected readonly calendarDays = computed(() => {
-    const days: CalendarDay[] = [];
-
-    // Get locale-specific week info
-    const firstDayOfWeek = getFirstDayOfWeek(this.localeId);
-
-    const firstDayOfMonth = this.currentMonth().toPlainDate({ day: 1 });
-
-    // Calculate the day of week adjusted for locale
-    // Convert from 1-7 (Monday-Sunday) to 0-6 for easier array handling
-    const firstOfMonthDayOfWeek = firstDayOfMonth.dayOfWeek % 7;
-    const adjustedFirstDay = (firstOfMonthDayOfWeek - firstDayOfWeek + 7) % 7;
-
-    // Add days from previous month to fill the first week
-    const prevMonth = this.currentMonth().subtract({ months: 1 });
-    const daysInPrevMonth = prevMonth.daysInMonth;
-
-    for (let i = 0; i < adjustedFirstDay; i++) {
-      const day = daysInPrevMonth - adjustedFirstDay + i + 1;
-      const date = prevMonth.toPlainDate({ day });
-      days.push({
-        date,
-        dayOfMonth: day,
-        isInCurrentMonth: false,
-        isToday: this.isToday(date),
-        isDisabled: this.isDateDisabled(date),
-      });
-    }
-
-    // Add days of current month
-    for (let day = 1; day <= this.currentMonth().daysInMonth; day++) {
-      const date = this.currentMonth().toPlainDate({ day });
-      days.push({
-        date,
-        dayOfMonth: day,
-        isInCurrentMonth: true,
-        isToday: this.isToday(date),
-        isDisabled: this.isDateDisabled(date),
-      });
-    }
-
-    const a = days.length % 7;
-
-    if (a > 0) {
-      // Add days from next month to complete the grid
-      const daysNeeded = 7 - a;
-      const nextMonth = this.currentMonth().add({ months: 1 });
-
-      for (let day = 1; day <= daysNeeded; day++) {
-        const date = nextMonth.toPlainDate({ day });
-        days.push({
-          date,
-          dayOfMonth: day,
-          isInCurrentMonth: false,
-          isToday: this.isToday(date),
-          isDisabled: this.isDateDisabled(date),
-        });
-      }
-    }
-
-    return days;
-  });
+  protected readonly calendarDays = generateCalendarDays(this.localeId, this.currentMonth);
 
   // Helper methods
   isToday(date: Temporal.PlainDate): boolean {
@@ -341,11 +279,7 @@ export class ScRangeCalendar implements ControlValueAccessor {
     }
   }
 
-  weekdays: string[] = [];
-
-  constructor() {
-    this.weekdays = getLocalizedDayNames(this.localeId);
-  }
+  weekdays: string[] = getLocalizedDayNames(this.localeId);
 
   private readonly scYearSelector = viewChild(ScYearSelector);
 

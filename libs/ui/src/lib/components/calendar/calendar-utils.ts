@@ -25,13 +25,14 @@ export function isDateDisabled(
   return false;
 }
 
+// minDate: Signal<Temporal.PlainDate>,
+// maxDate: Signal<Temporal.PlainDate>,
+
 //Remove minDate and maxDate
 // Generate calendar days for the current month
 export function generateCalendarDays(
   localeId: string,
   currentMonth: Signal<Temporal.PlainYearMonth>,
-  minDate: Signal<Temporal.PlainDate>,
-  maxDate: Signal<Temporal.PlainDate>,
 ) {
   return computed(() => {
     const days: CalendarDay[] = [];
@@ -57,8 +58,8 @@ export function generateCalendarDays(
         date,
         dayOfMonth: day,
         isInCurrentMonth: false,
-        isToday: isToday(date),
-        isDisabled: isDateDisabled(minDate, maxDate, date),
+        // isToday: isToday(date),
+        // isDisabled: isDateDisabled(minDate, maxDate, date),
       });
     }
 
@@ -69,8 +70,8 @@ export function generateCalendarDays(
         date,
         dayOfMonth: day,
         isInCurrentMonth: true,
-        isToday: isToday(date),
-        isDisabled: isDateDisabled(minDate, maxDate, date),
+        // isToday: isToday(date),
+        // isDisabled: isDateDisabled(minDate, maxDate, date),
       });
     }
 
@@ -87,8 +88,8 @@ export function generateCalendarDays(
           date,
           dayOfMonth: day,
           isInCurrentMonth: false,
-          isToday: isToday(date),
-          isDisabled: isDateDisabled(minDate, maxDate, date),
+          // isToday: isToday(date),
+          // isDisabled: isDateDisabled(minDate, maxDate, date),
         });
       }
     }
