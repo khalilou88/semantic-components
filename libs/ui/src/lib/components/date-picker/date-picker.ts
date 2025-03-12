@@ -6,13 +6,11 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  OutputEmitterRef,
   ViewEncapsulation,
   computed,
   inject,
   input,
   model,
-  output,
   signal,
   viewChild,
 } from '@angular/core';
@@ -33,7 +31,14 @@ import { ScDateInput } from './date-input';
     <button class="absolute inset-y-0 end-0 pe-4" (click)="open()" sc-button variant="ghost">
       <svg si-calendar-icon></svg>
     </button>
-    <input #input [placeholder]="placeholder()" sc-input scDateInput type="text" />
+    <input
+      #input
+      [placeholder]="placeholder()"
+      [value]="formatedValue()"
+      sc-input
+      scDateInput
+      type="text"
+    />
   `,
   host: {
     '[class]': 'class()',
@@ -55,6 +60,8 @@ export class ScDatePicker {
   readonly minDate = input<Temporal.PlainDate>();
   readonly maxDate = input<Temporal.PlainDate>();
 
+  protected readonly formatedValue = computed(() => this.value()?.toString() ?? '');
+
   private readonly host = inject(ElementRef);
 
   // private readonly injector = inject(Injector);
@@ -67,14 +74,6 @@ export class ScDatePicker {
   // private readonly _overlayOrigin = viewChild<ElementRef<HTMLDivElement>>('overlayOrigin');
   private overlayRef: OverlayRef | null = null;
   private portal: ComponentPortal<unknown> | null = null;
-
-  /** Emits when the datepicker is opened. */
-  readonly opened: OutputEmitterRef<void> = output();
-  /** Emits when the datepicker is closed. */
-  readonly closed: OutputEmitterRef<void> = output();
-
-  /** Emits when the user selects a date. */
-  readonly selected: OutputEmitterRef<string> = output();
 
   /** Opens the datepicker. */
   open(): void {
@@ -102,9 +101,13 @@ export class ScDatePicker {
 
     this.portal ??= new ComponentPortal(ScCalendar);
 
-    overlayRef.attach(this.portal);
+    const componentRef = overlayRef.attach(this.portal);
 
-    this.opened.emit();
+    (componentRef.instance as ScCalendar).value.subscribe((v) => {
+      if (v) {
+        this.selectValue(v);
+      }
+    });
   }
 
   /** Closes the datepicker. */
@@ -112,7 +115,6 @@ export class ScDatePicker {
     if (this.isOpen()) {
       this.isOpen.set(false);
       this.overlayRef?.detach();
-      this.closed.emit();
     }
   }
 
@@ -175,9 +177,12 @@ export class ScDatePicker {
   }
 
   /** Selects a specific date value. */
-  protected selectValue(value: string) {
+  protected selectValue(value: Temporal.PlainDate) {
     this.close();
-    this.selected.emit(value);
-    this.input()?.nativeElement.focus();
+
+    this.value.set(value);
+
+    //TODO fix this
+    //this.input()?.nativeElement.focus();
   }
 }
