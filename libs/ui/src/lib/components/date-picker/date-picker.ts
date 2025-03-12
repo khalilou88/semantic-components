@@ -6,17 +6,18 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  Injector,
   OutputEmitterRef,
   ViewEncapsulation,
   computed,
   inject,
   input,
+  model,
   output,
   signal,
   viewChild,
 } from '@angular/core';
 
+import { Temporal } from '@js-temporal/polyfill';
 import { cn } from '@semantic-components/utils';
 import { SiCalendarIcon } from '@semantic-icons/lucide-icons';
 
@@ -32,23 +33,31 @@ import { ScDateInput } from './date-input';
     <button class="absolute inset-y-0 end-0 pe-4" (click)="open()" sc-button variant="ghost">
       <svg si-calendar-icon></svg>
     </button>
-    <input #input sc-input scDateInput type="text" placeholder="Select date" />
+    <input #input [placeholder]="placeholder()" sc-input scDateInput type="text" />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScDatePicker {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn('flex relative', this.class()));
+  protected readonly class = computed(() => cn('flex relative', this.classInput()));
+
+  readonly placeholder = input<string>('');
+
+  readonly value = model<Temporal.PlainDate>();
+  readonly minDate = input<Temporal.PlainDate>();
+  readonly maxDate = input<Temporal.PlainDate>();
 
   private readonly host = inject(ElementRef);
 
-  private readonly injector = inject(Injector);
+  // private readonly injector = inject(Injector);
 
   private readonly dir = inject(Directionality, { optional: true });
   private readonly overlay = inject(Overlay);

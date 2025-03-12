@@ -80,7 +80,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
                 <div class="overflow-auto" sc-card>
                   <div class="m-10" sc-card-content>
                     <div>{{ settings.dateFormatPattern() }}</div>
-                    <sc-date-picker />
+                    <sc-date-picker placeholder="Select date" />
                   </div>
                 </div>
               </sc-tab-content>
