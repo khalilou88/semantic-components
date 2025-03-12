@@ -48,16 +48,16 @@ export class ScDatePicker {
 
   private readonly host = inject(ElementRef);
 
-  private readonly _injector = inject(Injector);
+  private readonly injector = inject(Injector);
 
-  private readonly _dir = inject(Directionality, { optional: true });
-  private readonly _overlay = inject(Overlay);
+  private readonly dir = inject(Directionality, { optional: true });
+  private readonly overlay = inject(Overlay);
 
-  private readonly _isOpen = signal(false);
-  private readonly _input = viewChild<ElementRef<HTMLInputElement>>('input');
+  private readonly isOpen = signal(false);
+  private readonly input = viewChild<ElementRef<HTMLInputElement>>('input');
   // private readonly _overlayOrigin = viewChild<ElementRef<HTMLDivElement>>('overlayOrigin');
-  private _overlayRef: OverlayRef | null = null;
-  private _portal: ComponentPortal<unknown> | null = null;
+  private overlayRef: OverlayRef | null = null;
+  private portal: ComponentPortal<unknown> | null = null;
 
   /** Emits when the datepicker is opened. */
   readonly opened: OutputEmitterRef<void> = output();
@@ -69,7 +69,7 @@ export class ScDatePicker {
 
   /** Opens the datepicker. */
   open(): void {
-    if (!this._input) {
+    if (!this.input) {
       return;
     }
 
@@ -79,11 +79,11 @@ export class ScDatePicker {
     //TODO
     // this._input()?.nativeElement.focus();
 
-    if (this._isOpen()) {
+    if (this.isOpen()) {
       return;
     }
 
-    this._isOpen.set(true);
+    this.isOpen.set(true);
 
     const overlayRef = this._getOverlayRef();
 
@@ -91,26 +91,26 @@ export class ScDatePicker {
 
     overlayRef.updateSize({ width: 400 });
 
-    this._portal ??= new ComponentPortal(ScCalendar);
+    this.portal ??= new ComponentPortal(ScCalendar);
 
-    overlayRef.attach(this._portal);
+    overlayRef.attach(this.portal);
 
     this.opened.emit();
   }
 
   /** Closes the datepicker. */
   close(): void {
-    if (this._isOpen()) {
-      this._isOpen.set(false);
-      this._overlayRef?.detach();
+    if (this.isOpen()) {
+      this.isOpen.set(false);
+      this.overlayRef?.detach();
       this.closed.emit();
     }
   }
 
   /** Creates an overlay reference for the datepicker panel. */
   private _getOverlayRef(): OverlayRef {
-    if (this._overlayRef) {
-      return this._overlayRef;
+    if (this.overlayRef) {
+      return this.overlayRef;
     }
 
     const _overlayOrigin = this.host;
@@ -118,7 +118,7 @@ export class ScDatePicker {
       throw new Error('_overlayOrigin is undefined');
     }
 
-    const positionStrategy = this._overlay
+    const positionStrategy = this.overlay
       .position()
       .flexibleConnectedTo(_overlayOrigin)
       .withFlexibleDimensions(false)
@@ -140,18 +140,18 @@ export class ScDatePicker {
         },
       ]);
 
-    this._overlayRef = this._overlay.create({
+    this.overlayRef = this.overlay.create({
       positionStrategy,
-      scrollStrategy: this._overlay.scrollStrategies.reposition(),
-      direction: this._dir || 'ltr',
+      scrollStrategy: this.overlay.scrollStrategies.reposition(),
+      direction: this.dir || 'ltr',
       hasBackdrop: false,
     });
 
-    this._overlayRef.keydownEvents().subscribe((event) => {
+    this.overlayRef.keydownEvents().subscribe((event) => {
       console.log(event);
     });
 
-    this._overlayRef.outsidePointerEvents().subscribe((event) => {
+    this.overlayRef.outsidePointerEvents().subscribe((event) => {
       const target = _getEventTarget(event) as HTMLElement;
       const origin = this.host?.nativeElement;
 
@@ -160,13 +160,13 @@ export class ScDatePicker {
       }
     });
 
-    return this._overlayRef;
+    return this.overlayRef;
   }
 
   /** Selects a specific date value. */
   protected _selectValue(value: string) {
     this.close();
     this.selected.emit(value);
-    this._input()?.nativeElement.focus();
+    this.input()?.nativeElement.focus();
   }
 }
