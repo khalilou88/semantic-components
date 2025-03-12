@@ -192,14 +192,14 @@ export class ScDatePicker implements ControlValueAccessor {
 
     this.value.set(value);
 
-    console.log(value?.toLocaleString(this.localeId));
-
-    this.scInput()?.value.set(value?.toLocaleString(this.localeId) ?? '');
-
     this.onChange(value);
     this.onTouched();
 
-    this.scInput()?.nativeElement.focus();
+    const inputElement = this.scInput()?.nativeElement;
+    if (inputElement) {
+      inputElement.value = value?.toLocaleString(this.localeId) ?? '';
+      inputElement.focus();
+    }
   }
 
   //CVA
