@@ -19,6 +19,7 @@ import {
   ScCardContent,
   ScCodeHighlighter,
   ScDatePicker,
+  ScDatePickerToggle,
   ScPageDescription,
   ScPageSubtitle,
   ScPageTitle,
@@ -28,12 +29,14 @@ import {
   ScTabLabel,
   ScTabs,
 } from '@semantic-components/ui';
-import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
+import { SiCalendarIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-date-picker-page',
   imports: [
     ScDatePicker,
+    ScDatePickerToggle,
+    SiCalendarIcon,
     ReactiveFormsModule,
     SiChevronRightIcon,
     ScBreadcrumb,
@@ -80,7 +83,15 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
                 <div class="overflow-auto" sc-card>
                   <div class="m-10" sc-card-content>
                     <div>{{ settings.dateFormatPattern() }}</div>
-                    <sc-date-picker placeholder="Select date" />
+                    <sc-date-picker placeholder="Select date">
+                      <button
+                        class="absolute inset-y-0 end-0 pe-4"
+                        sc-date-picker-toggle
+                        variant="ghost"
+                      >
+                        <svg si-calendar-icon></svg>
+                      </button>
+                    </sc-date-picker>
                   </div>
                 </div>
               </sc-tab-content>

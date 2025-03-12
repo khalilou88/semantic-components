@@ -8,8 +8,10 @@ import {
   ElementRef,
   LOCALE_ID,
   ViewEncapsulation,
+  afterNextRender,
   booleanAttribute,
   computed,
+  contentChild,
   forwardRef,
   inject,
   input,
@@ -22,20 +24,16 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { Temporal } from '@js-temporal/polyfill';
 import { cn } from '@semantic-components/utils';
-import { SiCalendarIcon } from '@semantic-icons/lucide-icons';
 
-import { ScButton } from '../button';
 import { ScCalendar } from '../calendar';
 import { ScInput } from '../input';
 import { ScDateInput } from './date-input';
+import { ScDatePickerToggle } from './date-picker-toggle';
 
 @Component({
   selector: 'sc-date-picker',
-  imports: [ScInput, SiCalendarIcon, ScButton, ScDateInput],
+  imports: [ScInput, ScDateInput],
   template: `
-    <button class="absolute inset-y-0 end-0 pe-4" (click)="open()" sc-button variant="ghost">
-      <svg si-calendar-icon></svg>
-    </button>
     <input
       #input
       [placeholder]="placeholder()"
@@ -44,6 +42,8 @@ import { ScDateInput } from './date-input';
       scDateInput
       type="text"
     />
+
+    <ng-content />
   `,
   host: {
     '[class]': 'class()',
@@ -90,6 +90,20 @@ export class ScDatePicker implements ControlValueAccessor {
   // private readonly _overlayOrigin = viewChild<ElementRef<HTMLDivElement>>('overlayOrigin');
   private overlayRef: OverlayRef | null = null;
   private portal: ComponentPortal<unknown> | null = null;
+
+  readonly scDatePickerToggle = contentChild(ScDatePickerToggle);
+
+  constructor() {
+    afterNextRender(() => {
+      this.scDatePickerToggle()?.toggled.subscribe(() => {
+        if (this.isOpen()) {
+          this.close();
+        } else {
+          this.open();
+        }
+      });
+    });
+  }
 
   /** Opens the datepicker. */
   open(): void {
