@@ -89,9 +89,13 @@ export class ScDaysSelector {
     }
 
     return (
+      // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
       (Temporal.PlainDate.compare(date, this.selectedRange()?.start!) >= 0 &&
+        // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
         Temporal.PlainDate.compare(date, this.selectedRange()?.end!) <= 0) ||
+      // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
       (Temporal.PlainDate.compare(date, this.selectedRange()?.end!) >= 0 &&
+        // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
         Temporal.PlainDate.compare(date, this.selectedRange()?.start!) <= 0)
     );
   }
