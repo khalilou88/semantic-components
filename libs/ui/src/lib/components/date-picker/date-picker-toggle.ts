@@ -1,6 +1,15 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  input,
+  output,
+} from '@angular/core';
 
-import { ScButtonBase } from '../button';
+import { cn } from '@semantic-components/utils';
+
+import { ButtonVariants, ScButtonBase, buttonVariants } from '../button';
 
 @Component({
   selector: 'button[sc-date-picker-toggle]',
@@ -16,6 +25,18 @@ import { ScButtonBase } from '../button';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScDatePickerToggle extends ScButtonBase {
+  override readonly variantInput = input<ButtonVariants['variant']>('ghost', {
+    alias: 'variant',
+  });
+
+  protected override readonly class = computed(() =>
+    cn(
+      buttonVariants({ variant: this.variant(), size: this.size() }),
+      'absolute inset-y-0 end-0 pe-4',
+      this.classInput(),
+    ),
+  );
+
   readonly toggled = output<void>();
 
   protected toggle() {

@@ -84,11 +84,7 @@ import { SiCalendarIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons
                   <div class="m-10" sc-card-content>
                     <div>{{ settings.dateFormatPattern() }}</div>
                     <sc-date-picker placeholder="Select date">
-                      <button
-                        class="absolute inset-y-0 end-0 pe-4"
-                        sc-date-picker-toggle
-                        variant="ghost"
-                      >
+                      <button sc-date-picker-toggle>
                         <svg si-calendar-icon></svg>
                       </button>
                     </sc-date-picker>
