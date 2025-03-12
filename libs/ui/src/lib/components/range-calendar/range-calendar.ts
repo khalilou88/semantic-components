@@ -25,6 +25,7 @@ import { getFirstDayOfWeek, getLocalizedDayNames } from '../calendar/utils';
 import { ScYearSelector } from '../calendar/year-selector';
 import { ScCard, ScCardContent, ScCardHeader } from '../card';
 import { ScDaysSelector } from './days-selector';
+import { ScRange } from './types';
 
 @Component({
   selector: 'sc-range-calendar',
@@ -61,10 +62,9 @@ import { ScDaysSelector } from './days-selector';
           @default {
             <sc-days-selector
               [weekdays]="weekdays"
-              [focusedDate]="focusedDate()"
-              [selectedDate]="value()"
+              [selectedRange]="value()"
               [calendarDays]="calendarDays()"
-              (dateSelected)="selectDate($event)"
+              (rangeSelected)="selectRange($event)"
             />
           }
         }
@@ -73,7 +73,7 @@ import { ScDaysSelector } from './days-selector';
   `,
   host: {
     '[class]': 'class()',
-    '(keydown)': 'handleKeydown($event)',
+    // '(keydown)': 'handleKeydown($event)',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -87,9 +87,7 @@ import { ScDaysSelector } from './days-selector';
   ],
 })
 export class ScRangeCalendar implements ControlValueAccessor {
-  readonly value = model<Temporal.PlainDate>();
-
-  // readonly value = model<Range>();
+  readonly value = model<ScRange>();
 
   readonly minDate = input<Temporal.PlainDate>();
   readonly maxDate = input<Temporal.PlainDate>();
@@ -112,7 +110,7 @@ export class ScRangeCalendar implements ControlValueAccessor {
 
   protected readonly currentYear = linkedSignal(() => {
     if (this.value()) {
-      return this.value()!.year;
+      return this.value()!.start.year;
     } else {
       return this.today().year;
     }
@@ -120,7 +118,7 @@ export class ScRangeCalendar implements ControlValueAccessor {
 
   protected readonly currentMonth = linkedSignal(() => {
     if (this.value()) {
-      return this.value()!.toPlainYearMonth();
+      return this.value()!.start.toPlainYearMonth();
     } else {
       return this.today().toPlainYearMonth();
     }
@@ -210,6 +208,19 @@ export class ScRangeCalendar implements ControlValueAccessor {
     return date.equals(today);
   }
 
+  isDateInRange(date: Temporal.PlainDate): boolean {
+    if (!this.value()?.start || !this.value()?.end) {
+      return false;
+    }
+
+    return (
+      (Temporal.PlainDate.compare(date, this.value()?.start!) >= 0 &&
+        Temporal.PlainDate.compare(date, this.value()?.end!) <= 0) ||
+      (Temporal.PlainDate.compare(date, this.value()?.end!) >= 0 &&
+        Temporal.PlainDate.compare(date, this.value()?.start!) <= 0)
+    );
+  }
+
   isDateDisabled(date: Temporal.PlainDate): boolean {
     if (this.minDate() && Temporal.PlainDate.compare(date, this.minDate()!) < 0) {
       return true;
@@ -220,103 +231,103 @@ export class ScRangeCalendar implements ControlValueAccessor {
     return false;
   }
 
-  selectDate(date: Temporal.PlainDate): void {
-    if (this.isDateDisabled(date)) return;
+  selectRange(range: ScRange): void {
+    // if (this.isDateDisabled(date)) return;
 
-    this.value.set(date);
+    this.value.set(range);
 
-    this.onChange(date);
+    this.onChange(range);
     this.onTouched();
   }
 
   // Move focus in the calendar grid with support for month navigation
-  moveFocus(delta: number): void {
-    let newDate;
+  // moveFocus(delta: number): void {
+  //   let newDate;
 
-    if (Math.sign(delta) === 1) {
-      newDate = this.focusedDate()?.add({ days: delta });
-    }
+  //   if (Math.sign(delta) === 1) {
+  //     newDate = this.focusedDate()?.add({ days: delta });
+  //   }
 
-    if (Math.sign(delta) === -1) {
-      newDate = this.focusedDate()?.subtract({ days: Math.abs(delta) });
-    }
+  //   if (Math.sign(delta) === -1) {
+  //     newDate = this.focusedDate()?.subtract({ days: Math.abs(delta) });
+  //   }
 
-    if (!newDate) {
-      return;
-    }
+  //   if (!newDate) {
+  //     return;
+  //   }
 
-    if (Temporal.PlainDate.compare(newDate, this.calendarDays()[0].date) < 0) {
-      this.prevMonth();
-    }
+  //   if (Temporal.PlainDate.compare(newDate, this.calendarDays()[0].date) < 0) {
+  //     this.prevMonth();
+  //   }
 
-    if (
-      Temporal.PlainDate.compare(
-        newDate,
-        this.calendarDays()[this.calendarDays().length - 1].date,
-      ) > 0
-    ) {
-      this.nextMonth();
-    }
+  //   if (
+  //     Temporal.PlainDate.compare(
+  //       newDate,
+  //       this.calendarDays()[this.calendarDays().length - 1].date,
+  //     ) > 0
+  //   ) {
+  //     this.nextMonth();
+  //   }
 
-    this.focusedDate.set(newDate);
-  }
+  //   this.focusedDate.set(newDate);
+  // }
 
-  handleKeydown(event: KeyboardEvent): void {
-    switch (event.key) {
-      case 'ArrowLeft':
-        this.moveFocus(-1);
-        event.preventDefault();
-        break;
-      case 'ArrowRight':
-        this.moveFocus(1);
-        event.preventDefault();
-        break;
-      case 'ArrowUp':
-        this.moveFocus(-7);
-        event.preventDefault();
-        break;
-      case 'ArrowDown':
-        this.moveFocus(7);
-        event.preventDefault();
-        break;
-      case 'Enter':
-      case ' ':
-        if (
-          Temporal.PlainDate.compare(this.focusedDate()!, this.calendarDays()[0].date) >= 0 &&
-          Temporal.PlainDate.compare(
-            this.focusedDate()!,
-            this.calendarDays()[this.calendarDays().length - 1].date,
-          ) <= 0
-        ) {
-          this.selectDate(this.focusedDate()!);
-          event.preventDefault();
-        }
-        break;
-      case 'Home':
-        // Move to first day of the month
+  // handleKeydown(event: KeyboardEvent): void {
+  //   switch (event.key) {
+  //     case 'ArrowLeft':
+  //       this.moveFocus(-1);
+  //       event.preventDefault();
+  //       break;
+  //     case 'ArrowRight':
+  //       this.moveFocus(1);
+  //       event.preventDefault();
+  //       break;
+  //     case 'ArrowUp':
+  //       this.moveFocus(-7);
+  //       event.preventDefault();
+  //       break;
+  //     case 'ArrowDown':
+  //       this.moveFocus(7);
+  //       event.preventDefault();
+  //       break;
+  //     case 'Enter':
+  //     case ' ':
+  //       if (
+  //         Temporal.PlainDate.compare(this.focusedDate()!, this.calendarDays()[0].date) >= 0 &&
+  //         Temporal.PlainDate.compare(
+  //           this.focusedDate()!,
+  //           this.calendarDays()[this.calendarDays().length - 1].date,
+  //         ) <= 0
+  //       ) {
+  //         this.selectDate(this.focusedDate()!);
+  //         event.preventDefault();
+  //       }
+  //       break;
+  //     case 'Home':
+  //       // Move to first day of the month
 
-        this.focusedDate.set(this.firstDayOfMonth());
+  //       this.focusedDate.set(this.firstDayOfMonth());
 
-        event.preventDefault();
-        break;
+  //       event.preventDefault();
+  //       break;
 
-      case 'End':
-        // Move to last day of the month
-        this.focusedDate.set(this.lastDayOfMonth());
-        event.preventDefault();
-        break;
-      case 'PageUp':
-        // Previous month
-        this.prevMonth();
-        event.preventDefault();
-        break;
-      case 'PageDown':
-        // Next month
-        this.nextMonth();
-        event.preventDefault();
-        break;
-    }
-  }
+  //     case 'End':
+  //       // Move to last day of the month
+  //       this.focusedDate.set(this.lastDayOfMonth());
+  //       event.preventDefault();
+  //       break;
+  //     case 'PageUp':
+  //       // Previous month
+  //       this.prevMonth();
+  //       event.preventDefault();
+  //       break;
+  //     case 'PageDown':
+  //       // Next month
+  //       this.nextMonth();
+  //       event.preventDefault();
+  //       break;
+  //   }
+  // }
 
   // Navigation methods
   prevMonth(): void {
@@ -383,15 +394,15 @@ export class ScRangeCalendar implements ControlValueAccessor {
 
   //CVA
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onChange: (value: Temporal.PlainDate) => void = () => {};
+  onChange: (value: ScRange) => void = () => {};
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onTouched: () => void = () => {};
 
-  writeValue(value: Temporal.PlainDate): void {
+  writeValue(value: ScRange): void {
     this.value.set(value);
   }
 
-  registerOnChange(fn: (value: Temporal.PlainDate) => void): void {
+  registerOnChange(fn: (value: ScRange) => void): void {
     this.onChange = fn;
   }
 

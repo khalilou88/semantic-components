@@ -10,6 +10,7 @@ import { Temporal } from '@js-temporal/polyfill';
 
 import { ScDayButton } from '../calendar/day-button';
 import { CalendarDay } from '../calendar/types';
+import { ScRange } from './types';
 
 @Component({
   selector: 'sc-days-selector',
@@ -42,9 +43,9 @@ import { CalendarDay } from '../calendar/types';
 export class ScDaysSelector {
   readonly calendarDays = input.required<CalendarDay[]>();
   readonly weekdays = input.required<string[]>();
-  readonly dateSelected = output<Temporal.PlainDate>();
+  readonly rangeSelected = output<ScRange>();
 
-  readonly selectedDate = input<Temporal.PlainDate>();
+  readonly selectedRange = input<ScRange>();
   readonly focusedDate = input<Temporal.PlainDate>();
 
   protected getVariant(day: CalendarDay) {
@@ -64,11 +65,18 @@ export class ScDaysSelector {
   }
 
   protected selectDay(day: CalendarDay) {
-    this.dateSelected.emit(day.date);
+    const range = {
+      start: day.date,
+      end: day.date,
+    };
+
+    this.rangeSelected.emit(range);
   }
 
   isSelected(date: Temporal.PlainDate): boolean {
-    return this.selectedDate() ? date.equals(this.selectedDate()!) : false;
+    return this.selectedRange()
+      ? date.equals(this.selectedRange()!.start) || date.equals(this.selectedRange()!.end)
+      : false;
   }
 
   isFocused(date: Temporal.PlainDate): boolean {
