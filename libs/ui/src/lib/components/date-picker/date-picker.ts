@@ -122,14 +122,14 @@ export class ScDatePicker {
       return this.overlayRef;
     }
 
-    const _overlayOrigin = this.host;
-    if (_overlayOrigin === undefined) {
+    const overlayOrigin = this.host;
+    if (overlayOrigin === undefined) {
       throw new Error('_overlayOrigin is undefined');
     }
 
     const positionStrategy = this.overlay
       .position()
-      .flexibleConnectedTo(_overlayOrigin)
+      .flexibleConnectedTo(overlayOrigin)
       .withFlexibleDimensions(false)
       .withPush(false)
       // .withTransformOriginOn('.mat-datepicker-panel')
@@ -157,7 +157,9 @@ export class ScDatePicker {
     });
 
     this.overlayRef.keydownEvents().subscribe((event) => {
-      console.log(event);
+      if (event.key === 'Escape') {
+        this.close();
+      }
     });
 
     this.overlayRef.outsidePointerEvents().subscribe((event) => {
