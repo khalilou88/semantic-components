@@ -27,22 +27,12 @@ import { cn } from '@semantic-components/utils';
 
 import { ScCalendar } from '../calendar';
 import { ScInput } from '../input';
-import { ScDateInput } from './date-input';
 import { ScDatePickerToggle } from './date-picker-toggle';
 
 @Component({
   selector: 'sc-date-picker',
-  imports: [ScInput, ScDateInput],
+  imports: [],
   template: `
-    <input
-      #input
-      [placeholder]="placeholder()"
-      [value]="formatedValue()"
-      sc-input
-      scDateInput
-      type="text"
-    />
-
     <ng-content />
   `,
   host: {
@@ -66,35 +56,30 @@ export class ScDatePicker implements ControlValueAccessor {
 
   protected readonly class = computed(() => cn('flex relative', this.classInput()));
 
-  readonly placeholder = input<string>('');
-
   readonly value = model<Temporal.PlainDate>();
   readonly minDate = input<Temporal.PlainDate>();
   readonly maxDate = input<Temporal.PlainDate>();
 
   private readonly localeId = inject(LOCALE_ID);
 
-  protected readonly formatedValue = computed(() =>
-    this.value() ? (this.value()?.toLocaleString(this.localeId) ?? '') : '',
-  );
-
   private readonly host = inject(ElementRef);
-
-  // private readonly injector = inject(Injector);
 
   private readonly dir = inject(Directionality, { optional: true });
   private readonly overlay = inject(Overlay);
 
   private readonly isOpen = signal(false);
-  private readonly input = viewChild<ElementRef<HTMLInputElement>>('input');
-  // private readonly _overlayOrigin = viewChild<ElementRef<HTMLDivElement>>('overlayOrigin');
+
   private overlayRef: OverlayRef | null = null;
   private portal: ComponentPortal<unknown> | null = null;
 
-  readonly scDatePickerToggle = contentChild(ScDatePickerToggle);
+  private readonly scDatePickerToggle = contentChild(ScDatePickerToggle);
+  private readonly scInput = contentChild(ScInput);
 
   constructor() {
     afterNextRender(() => {
+      console.log('input');
+      console.log(this.scInput());
+
       this.scDatePickerToggle()?.toggled.subscribe(() => {
         if (this.isOpen()) {
           this.close();
@@ -107,7 +92,7 @@ export class ScDatePicker implements ControlValueAccessor {
 
   /** Opens the datepicker. */
   open(): void {
-    if (!this.input) {
+    if (!this.scInput()) {
       return;
     }
 
@@ -211,6 +196,7 @@ export class ScDatePicker implements ControlValueAccessor {
     this.close();
 
     this.value.set(value);
+    this.scInput()?.value.set(value?.toLocaleString(this.localeId) ?? '');
 
     this.onChange(value);
     this.onTouched();

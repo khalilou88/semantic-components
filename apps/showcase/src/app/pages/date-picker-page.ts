@@ -20,6 +20,7 @@ import {
   ScCodeHighlighter,
   ScDatePicker,
   ScDatePickerToggle,
+  ScInput,
   ScPageDescription,
   ScPageSubtitle,
   ScPageTitle,
@@ -37,6 +38,7 @@ import { SiCalendarIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons
     ScDatePicker,
     ScDatePickerToggle,
     SiCalendarIcon,
+    ScInput,
     ReactiveFormsModule,
     SiChevronRightIcon,
     ScBreadcrumb,
@@ -83,10 +85,11 @@ import { SiCalendarIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons
                 <div class="overflow-auto" sc-card>
                   <div class="m-10" sc-card-content>
                     <div>{{ settings.dateFormatPattern() }}</div>
-                    <sc-date-picker placeholder="Select date">
+                    <sc-date-picker>
                       <button sc-date-picker-toggle>
                         <svg si-calendar-icon></svg>
                       </button>
+                      <input placeholder="Select date" sc-input type="text" />
                     </sc-date-picker>
                   </div>
                 </div>
