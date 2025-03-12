@@ -27,7 +27,7 @@ import { ScRange } from './types';
         <button
           [variant]="getVariant(day)"
           [isFocused]="isFocused(day.date)"
-          (click)="selectDay(day); $event.stopPropagation()"
+          (click)="selectDate(day)"
           sc-day-button
           size="icon"
         >
@@ -81,5 +81,22 @@ export class ScDaysSelector {
 
   isFocused(date: Temporal.PlainDate): boolean {
     return this.focusedDate() ? date.equals(this.focusedDate()!) : false;
+  }
+
+  isDateInRange(date: Temporal.PlainDate): boolean {
+    if (!this.selectedRange()?.start || !this.selectedRange()?.end) {
+      return false;
+    }
+
+    return (
+      (Temporal.PlainDate.compare(date, this.selectedRange()?.start!) >= 0 &&
+        Temporal.PlainDate.compare(date, this.selectedRange()?.end!) <= 0) ||
+      (Temporal.PlainDate.compare(date, this.selectedRange()?.end!) >= 0 &&
+        Temporal.PlainDate.compare(date, this.selectedRange()?.start!) <= 0)
+    );
+  }
+
+  selectDate(day: CalendarDay) {
+    console.log('selectDate');
   }
 }

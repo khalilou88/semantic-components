@@ -208,19 +208,6 @@ export class ScRangeCalendar implements ControlValueAccessor {
     return date.equals(today);
   }
 
-  isDateInRange(date: Temporal.PlainDate): boolean {
-    if (!this.value()?.start || !this.value()?.end) {
-      return false;
-    }
-
-    return (
-      (Temporal.PlainDate.compare(date, this.value()?.start!) >= 0 &&
-        Temporal.PlainDate.compare(date, this.value()?.end!) <= 0) ||
-      (Temporal.PlainDate.compare(date, this.value()?.end!) >= 0 &&
-        Temporal.PlainDate.compare(date, this.value()?.start!) <= 0)
-    );
-  }
-
   isDateDisabled(date: Temporal.PlainDate): boolean {
     if (this.minDate() && Temporal.PlainDate.compare(date, this.minDate()!) < 0) {
       return true;
