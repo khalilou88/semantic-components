@@ -1,8 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   ViewEncapsulation,
   computed,
+  inject,
   input,
   model,
 } from '@angular/core';
@@ -20,12 +22,15 @@ import { scInputStyles } from '../input/input';
   host: {
     '[class]': 'class()',
     '[value]': 'value()',
+    '(input)': 'handleInput()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScInputNumber {
+  private readonly hostRef = inject(ElementRef);
+
   readonly classInput = input<string>('', {
     alias: 'class',
   });
@@ -33,4 +38,9 @@ export class ScInputNumber {
   protected readonly class = computed(() => cn(scInputStyles(), this.classInput()));
 
   readonly value = model<number>(0);
+
+  handleInput() {
+    const newValue = this.hostRef.nativeElement.value;
+    this.value.set(newValue);
+  }
 }
