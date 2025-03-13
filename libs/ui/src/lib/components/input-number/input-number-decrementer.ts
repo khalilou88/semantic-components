@@ -21,7 +21,7 @@ export class ScInputNumberDecrementer extends ScButtonBase {
   protected override readonly class = computed(() =>
     cn(
       buttonVariants({ variant: this.variant(), size: this.size() }),
-      'absolute right-10 top-1  size-8',
+      'absolute right-10 top-1 size-8',
       this.classInput(),
     ),
   );
