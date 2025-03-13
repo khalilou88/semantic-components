@@ -1,4 +1,5 @@
 export * from './sidebar';
+export * from './sidebar-content';
 export * from './sidebar-state';
 export * from './sidebar-provider';
 export * from './sidebar-toggler';
