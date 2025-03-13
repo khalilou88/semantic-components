@@ -42,11 +42,11 @@ export class ScInputNumberGroup {
   constructor() {
     afterNextRender(() => {
       this.scInputNumberIncrementer()?.incremented.subscribe(() => {
-        this.scInputNumber()?.value.update((v: number) => v + 1);
+        this.scInputNumber()?.value.update((v: number) => +v + 1);
       });
 
       this.scInputNumberDecrementer()?.decremented.subscribe(() => {
-        this.scInputNumber()?.value.update((v: number) => v - 1);
+        this.scInputNumber()?.value.update((v: number) => +v - 1);
       });
     });
   }
