@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
   computed,
   input,
+  model,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
@@ -18,6 +19,7 @@ import { scInputStyles } from '../input/input';
   `,
   host: {
     '[class]': 'class()',
+    '[value]': 'value()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -29,4 +31,6 @@ export class ScInputNumber {
   });
 
   protected readonly class = computed(() => cn(scInputStyles(), this.classInput()));
+
+  readonly value = model<number>(0);
 }

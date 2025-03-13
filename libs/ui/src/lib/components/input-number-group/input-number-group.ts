@@ -10,6 +10,7 @@ import {
 
 import { cn } from '@semantic-components/utils';
 
+import { ScInputNumber } from '../input-number/input-number';
 import { ScInputNumberDecrementer } from '../input-number/input-number-decrementer';
 import { ScInputNumberIncrementer } from '../input-number/input-number-incrementer';
 
@@ -36,14 +37,16 @@ export class ScInputNumberGroup {
   private readonly scInputNumberIncrementer = contentChild(ScInputNumberIncrementer);
   private readonly scInputNumberDecrementer = contentChild(ScInputNumberDecrementer);
 
+  private readonly scInputNumber = contentChild(ScInputNumber);
+
   constructor() {
     afterNextRender(() => {
       this.scInputNumberIncrementer()?.incremented.subscribe(() => {
-        console.log('incremented');
+        this.scInputNumber()?.value.update((v) => v + 1);
       });
 
       this.scInputNumberDecrementer()?.decremented.subscribe(() => {
-        console.log('decremented');
+        this.scInputNumber()?.value.update((v) => v - 1);
       });
     });
   }
