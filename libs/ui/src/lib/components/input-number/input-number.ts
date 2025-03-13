@@ -22,6 +22,7 @@ import { scInputStyles } from '../input/input';
   host: {
     '[class]': 'class()',
     '[value]': 'value()',
+    '[type]': 'type()',
     '(input)': 'handleInput()',
   },
   styles: ``,
@@ -38,6 +39,7 @@ export class ScInputNumber {
   protected readonly class = computed(() => cn(scInputStyles(), this.classInput()));
 
   readonly value = model<number>(0);
+  readonly type = input<'number'>('number');
 
   handleInput() {
     const newValue = this.hostRef.nativeElement.value;
