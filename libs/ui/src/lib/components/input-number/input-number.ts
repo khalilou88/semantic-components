@@ -8,6 +8,8 @@ import {
 
 import { cn } from '@semantic-components/utils';
 
+import { scInputStyles } from '../input/input';
+
 @Component({
   selector: 'input[sc-input-number]',
   imports: [],
@@ -26,5 +28,5 @@ export class ScInputNumber {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('', this.classInput()));
+  protected readonly class = computed(() => cn(scInputStyles(), this.classInput()));
 }

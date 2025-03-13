@@ -21,7 +21,7 @@ export class ScInputNumberIncrementer extends ScButtonBase {
   protected override readonly class = computed(() =>
     cn(
       buttonVariants({ variant: this.variant(), size: this.size() }),
-      'absolute right-1 top-1 p-1.5 size-6',
+      'absolute right-1 top-1  size-8',
       this.classInput(),
     ),
   );
