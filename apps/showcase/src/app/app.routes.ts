@@ -229,6 +229,11 @@ export const appRoutes: Route[] = [
             title: 'Input Page',
           },
           {
+            path: 'input-number-group',
+            loadComponent: () => import('./pages/input-number-group-page'),
+            title: 'Input Number Group Page',
+          },
+          {
             path: 'input-group',
             loadComponent: () => import('./pages/input-group-page'),
             title: 'Input Group Page',

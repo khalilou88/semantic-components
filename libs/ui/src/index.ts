@@ -12,6 +12,7 @@ export * from './lib/components/theme-toggler';
 export * from './lib/components/link';
 export * from './lib/components/button';
 export * from './lib/components/input';
+export * from './lib/components/input-number-group';
 export * from './lib/components/input-group';
 export * from './lib/components/input-password';
 export * from './lib/components/input-otp';
