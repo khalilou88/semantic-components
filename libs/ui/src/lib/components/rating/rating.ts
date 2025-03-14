@@ -4,6 +4,8 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnChanges,
+  OnInit,
   Output,
   ViewEncapsulation,
 } from '@angular/core';
@@ -15,7 +17,7 @@ import {
     <div class="flex items-center">
       <div class="flex">
         <ng-container *ngFor="let position of positions; let i = index">
-          <div
+          <button
             class="relative"
             (mouseenter)="onHover(position)"
             (mouseleave)="onHover(0)"
@@ -55,7 +57,7 @@ import {
                 />
               </svg>
             </div>
-          </div>
+          </button>
         </ng-container>
       </div>
       <span class="ml-2 text-sm text-gray-600" *ngIf="showRatingValue">
@@ -67,7 +69,7 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScRating {
+export class ScRating implements OnInit, OnChanges {
   @Input() maxRating = 5;
   @Input() rating = 0;
   @Input() interactive = true;
