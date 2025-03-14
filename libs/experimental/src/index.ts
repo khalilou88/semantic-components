@@ -8,3 +8,4 @@ export * from './lib/chat';
 export * from './lib/custom-select';
 export * from './lib/rtl';
 export * from './lib/accessible-datepicker/accessible-datepicker';
+export * from './lib/swipeable-toast';

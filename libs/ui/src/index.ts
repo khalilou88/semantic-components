@@ -77,7 +77,6 @@ export * from './lib/components/color-picker';
 export * from './lib/components/toggle-switch';
 export * from './lib/components/range-slider';
 export * from './lib/components/dual-range-slider';
-export * from './lib/components/swipeable-toast';
 export * from './lib/components/table-of-contents';
 export * from './lib/components/stepper';
 export * from './lib/components/rating';
