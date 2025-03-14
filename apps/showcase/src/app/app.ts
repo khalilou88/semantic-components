@@ -9,6 +9,8 @@ import {
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
+import { ScScrollToTop } from '@semantic-components/ui';
+
 @Component({
   imports: [RouterOutlet],
   selector: 'app-root',
@@ -21,6 +23,8 @@ import { RouterOutlet } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class App implements OnInit {
+  private readonly scrollToTop = inject(ScScrollToTop);
+
   private readonly document = inject<Document>(DOCUMENT);
 
   private readonly classList = signal([
@@ -32,5 +36,6 @@ export class App implements OnInit {
 
   ngOnInit() {
     this.document.body.classList.add(...this.classList());
+    this.scrollToTop.init();
   }
 }
