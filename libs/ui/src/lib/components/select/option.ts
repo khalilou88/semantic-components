@@ -70,8 +70,7 @@ export class ScOption implements Highlightable {
 
   private readonly element = inject<ElementRef<HTMLElement>>(ElementRef);
 
-  /** Gets the host DOM element. */
-  getHostElement(): HTMLElement {
+  get nativeElement() {
     return this.element.nativeElement;
   }
 
