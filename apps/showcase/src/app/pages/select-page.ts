@@ -2,7 +2,8 @@ import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
-import { CustomOption, CustomSelect, ScLabel, ScOption, ScSelect } from '@semantic-components/ui';
+import { CustomOption, CustomSelect } from '@semantic-components/experimental';
+import { ScLabel, ScOption, ScSelect } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-select-page',

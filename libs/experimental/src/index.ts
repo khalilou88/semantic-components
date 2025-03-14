@@ -3,3 +3,8 @@ export * from './lib/prototype1/overlay-example';
 export * from './lib/prototype3/inline-animation';
 export * from './lib/prototype2/animation-demo';
 export * from './lib/prototype5/animated-list';
+export * from './lib/tel-input';
+export * from './lib/chat';
+export * from './lib/custom-select';
+export * from './lib/rtl';
+export * from './lib/accessible-datepicker/accessible-datepicker';

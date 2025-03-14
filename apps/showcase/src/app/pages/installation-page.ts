@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { Temporal } from '@js-temporal/polyfill';
-import { ScAccessibleDatepicker } from '@semantic-components/ui';
+import { ScAccessibleDatepicker } from '@semantic-components/experimental';
 
 import { AnimationDemoComponent } from '../blocks/animation-demo';
 

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { ScRTL } from '@semantic-components/ui';
+import { ScRTL } from '@semantic-components/experimental';
 
 @Component({
   selector: 'app-rtl-page',
