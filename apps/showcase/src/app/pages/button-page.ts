@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  ViewEncapsulation,
+  signal,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import {
@@ -16,6 +22,7 @@ import {
   ScPageDescription,
   ScPageSubtitle,
   ScPageTitle,
+  ScScrollToTop,
   ScTab,
   ScTabContent,
   ScTabLabel,
@@ -392,7 +399,13 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ButtonPage {
+export default class ButtonPage implements OnInit {
+  constructor(private readonly scrollToTop: ScScrollToTop) {}
+
+  ngOnInit() {
+    this.scrollToTop.init();
+  }
+
   class = signal<string>('block w-full');
 
   importCodeSnippet = `import { ScButton } from '@semantic-components/ui';`;
