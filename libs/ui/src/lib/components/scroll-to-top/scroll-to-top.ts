@@ -13,7 +13,7 @@ import { ScScrollToTopButton } from './scroll-to-top-button';
   providedIn: 'root',
 })
 export class ScScrollToTop {
-  destroyRef = inject(DestroyRef);
+  private readonly destroyRef = inject(DestroyRef);
 
   private overlayRef: OverlayRef | null = null;
   private componentRef: ComponentRef<ScScrollToTopButton> | null = null;
