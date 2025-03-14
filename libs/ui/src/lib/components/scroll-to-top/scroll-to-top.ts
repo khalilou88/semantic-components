@@ -35,17 +35,17 @@ export class ScScrollToTop {
   }
 
   private show() {
-    // Create the overlay if it doesn't exist
-    if (!this.overlayRef) {
-      const config = new OverlayConfig({
-        hasBackdrop: false,
-        positionStrategy: this.overlay.position().global().bottom('20px').right('20px'),
-      });
-
-      this.overlayRef = this.overlay.create(config);
-    }
-
     if (!this.componentRef) {
+      // Create the overlay if it doesn't exist
+      if (!this.overlayRef) {
+        const config = new OverlayConfig({
+          hasBackdrop: false,
+          positionStrategy: this.overlay.position().global().bottom('20px').right('20px'),
+        });
+
+        this.overlayRef = this.overlay.create(config);
+      }
+
       const portal = new ComponentPortal(ScScrollToTopContainer, null, this.injector);
       this.componentRef = this.overlayRef.attach(portal);
 
