@@ -224,6 +224,11 @@ export const appRoutes: Route[] = [
             title: 'Form Page',
           },
           {
+            path: 'rating',
+            loadComponent: () => import('./pages/rating-page'),
+            title: 'Rating Page',
+          },
+          {
             path: 'input',
             loadComponent: () => import('./pages/input-page'),
             title: 'Input Page',
