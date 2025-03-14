@@ -6,14 +6,14 @@ import { distinctUntilChanged, throttleTime } from 'rxjs/operators';
 
 import { fromEvent } from 'rxjs';
 
-import { ScScrollToTopComponent } from './scroll-to-top.component';
+import { ScScrollToTopContainer } from './scroll-to-top-container';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ScScrollToTop {
   private overlayRef: OverlayRef | null = null;
-  private componentRef: ComponentRef<ScScrollToTopComponent> | null = null;
+  private componentRef: ComponentRef<ScScrollToTopContainer> | null = null;
   private readonly scrollThreshold = 300;
 
   constructor(
@@ -46,7 +46,7 @@ export class ScScrollToTop {
     }
 
     if (!this.componentRef) {
-      const portal = new ComponentPortal(ScScrollToTopComponent, null, this.injector);
+      const portal = new ComponentPortal(ScScrollToTopContainer, null, this.injector);
       this.componentRef = this.overlayRef.attach(portal);
 
       // Subscribe to the scrollToTop event
@@ -57,19 +57,23 @@ export class ScScrollToTop {
       // Small delay to allow DOM to update before animation
       setTimeout(() => {
         if (this.componentRef) {
-          this.componentRef.instance.state = 'visible';
+          this.componentRef.instance.state.set('visible');
         }
       }, 10);
     } else if (this.componentRef) {
-      this.componentRef.instance.state = 'visible';
+      this.componentRef.instance.state.set('visible');
     }
   }
 
   private hide() {
     if (this.componentRef) {
-      this.componentRef.instance.state = 'hidden';
+      this.componentRef.instance.state.set('hidden');
       this.componentRef.instance.animationDone.subscribe(() => {
-        if (this.overlayRef && this.componentRef && this.componentRef.instance.state === 'hidden') {
+        if (
+          this.overlayRef &&
+          this.componentRef &&
+          this.componentRef.instance.state() === 'hidden'
+        ) {
           this.overlayRef.detach();
           this.componentRef = null;
         }

@@ -2,22 +2,22 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
-  Output,
   ViewEncapsulation,
+  output,
+  signal,
 } from '@angular/core';
 
 export type ButtonState = 'initial' | 'visible' | 'hidden';
 
 @Component({
-  selector: 'app-scroll-to-top',
+  selector: 'sc-scroll-to-top-container',
   imports: [CommonModule],
   template: `
     <button
       class="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-300 ease-out"
       [ngClass]="{
-        'opacity-0 translate-y-5 scale-90': state === 'initial' || state === 'hidden',
-        'opacity-100 translate-y-0 scale-100': state === 'visible',
+        'opacity-0 translate-y-5 scale-90': state() === 'initial' || state() === 'hidden',
+        'opacity-100 translate-y-0 scale-100': state() === 'visible',
       }"
       (click)="onScrollToTop()"
       (transitionend)="onTransitionEnd($event)"
@@ -43,19 +43,19 @@ export type ButtonState = 'initial' | 'visible' | 'hidden';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScScrollToTopComponent {
-  @Output() scrollToTop = new EventEmitter<void>();
-  @Output() animationDone = new EventEmitter<void>();
+export class ScScrollToTopContainer {
+  readonly scrollToTop = output<void>();
+  readonly animationDone = output<void>();
 
-  state: ButtonState = 'initial';
+  readonly state = signal<ButtonState>('initial');
 
-  onScrollToTop() {
+  protected onScrollToTop() {
     this.scrollToTop.emit();
   }
 
-  onTransitionEnd(event: TransitionEvent) {
+  protected onTransitionEnd(event: TransitionEvent) {
     // Only emit when opacity transition ends to avoid multiple emissions
-    if (event.propertyName === 'opacity' && this.state === 'hidden') {
+    if (event.propertyName === 'opacity' && this.state() === 'hidden') {
       this.animationDone.emit();
     }
   }
