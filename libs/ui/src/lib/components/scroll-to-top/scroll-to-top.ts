@@ -7,7 +7,7 @@ import { distinctUntilChanged, throttleTime } from 'rxjs/operators';
 
 import { fromEvent } from 'rxjs';
 
-import { ScScrollToTopButton } from './scroll-to-top-button';
+import { ScScrollToTopButton2 } from './scroll-to-top-button2';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +16,7 @@ export class ScScrollToTop {
   private readonly destroyRef = inject(DestroyRef);
 
   private overlayRef: OverlayRef | null = null;
-  private componentRef: ComponentRef<ScScrollToTopButton> | null = null;
+  private componentRef: ComponentRef<ScScrollToTopButton2> | null = null;
   private readonly scrollThreshold = 300;
 
   constructor(
@@ -49,7 +49,7 @@ export class ScScrollToTop {
         this.overlayRef = this.overlay.create(config);
       }
 
-      const portal = new ComponentPortal(ScScrollToTopButton, null, this.injector);
+      const portal = new ComponentPortal(ScScrollToTopButton2, null, this.injector);
       this.componentRef = this.overlayRef.attach(portal);
 
       // Subscribe to the scrollToTop event

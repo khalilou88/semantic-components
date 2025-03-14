@@ -1,54 +1,54 @@
-import { NgClass } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
-  output,
+  computed,
   signal,
 } from '@angular/core';
 
+import { cn } from '@semantic-components/utils';
 import { SiArrowUpIcon } from '@semantic-icons/lucide-icons';
 
-import { ScButton } from '../button';
-
-export type ButtonState = 'initial' | 'visible' | 'hidden';
+import { ScButtonBase, buttonVariants } from '../button';
 
 @Component({
-  selector: 'sc-scroll-to-top-button',
-  imports: [NgClass, ScButton, SiArrowUpIcon],
+  selector: 'button[sc-scroll-to-top-button]',
+  imports: [CommonModule, SiArrowUpIcon],
   template: `
-    <button
-      class="size-12 rounded-full shadow-lg transition-all duration-300 ease-out"
-      [ngClass]="{
-        'opacity-0 translate-y-5 scale-90': state() === 'initial' || state() === 'hidden',
-        'opacity-100 translate-y-0 scale-100': state() === 'visible',
-      }"
-      (click)="onScrollToTop()"
-      (transitionend)="onTransitionEnd($event)"
-      sc-button
-      aria-label="Scroll to top"
-    >
-      <svg class="size-6" si-arrow-up-icon></svg>
-    </button>
+    <svg class="size-6" si-arrow-up-icon></svg>
   `,
+  host: {
+    '(click)': 'scrollToTop()',
+    '(window:scroll)': 'onWindowScroll()',
+    'aria-label': 'Scroll to top',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScScrollToTopButton {
-  readonly scrollToTop = output<void>();
-  readonly animationDone = output<void>();
+export class ScScrollToTopButton extends ScButtonBase {
+  protected override readonly class = computed(() =>
+    cn(
+      buttonVariants({ variant: this.variant(), size: this.size() }),
+      'fixed bottom-6 right-6 size-12 rounded-full shadow-lg transition-all duration-300 ease-out pointer-events-none',
+      !this.showScrollButton() && 'opacity-0 translate-y-5 scale-90',
+      this.showScrollButton() && 'opacity-100 translate-y-0 scale-100 pointer-events-auto',
+      this.classInput(),
+    ),
+  );
 
-  readonly state = signal<ButtonState>('initial');
+  protected readonly showScrollButton = signal(false);
 
-  protected onScrollToTop() {
-    this.scrollToTop.emit();
+  protected onWindowScroll() {
+    // Show button when page is scrolled down 300px
+    this.showScrollButton.set(window.scrollY > 300);
   }
 
-  protected onTransitionEnd(event: TransitionEvent) {
-    // Only emit when opacity transition ends to avoid multiple emissions
-    if (event.propertyName === 'opacity' && this.state() === 'hidden') {
-      this.animationDone.emit();
-    }
+  protected scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   }
 }
