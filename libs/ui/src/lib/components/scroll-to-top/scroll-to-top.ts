@@ -1,6 +1,7 @@
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { ComponentRef, Injectable, Injector } from '@angular/core';
+import { ComponentRef, DestroyRef, Injectable, Injector, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { distinctUntilChanged, throttleTime } from 'rxjs/operators';
 
@@ -12,6 +13,8 @@ import { ScScrollToTopButton } from './scroll-to-top-button';
   providedIn: 'root',
 })
 export class ScScrollToTop {
+  destroyRef = inject(DestroyRef);
+
   private overlayRef: OverlayRef | null = null;
   private componentRef: ComponentRef<ScScrollToTopButton> | null = null;
   private readonly scrollThreshold = 300;
@@ -24,7 +27,7 @@ export class ScScrollToTop {
   init() {
     // Set up scroll listener
     fromEvent(window, 'scroll')
-      .pipe(throttleTime(100), distinctUntilChanged())
+      .pipe(throttleTime(100), distinctUntilChanged(), takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
         if (window.scrollY > this.scrollThreshold) {
           this.show();
