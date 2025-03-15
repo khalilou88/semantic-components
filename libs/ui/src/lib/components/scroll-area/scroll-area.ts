@@ -14,9 +14,7 @@ import { cn } from '@semantic-components/utils';
   selector: 'div[sc-scroll-area]',
   imports: [CommonModule],
   template: `
-    <div class="h-full w-full">
-      <ng-content />
-    </div>
+    <ng-content />
   `,
   host: {
     '[class]': 'class()',
