@@ -3,6 +3,11 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 
 import { ScScrollArea } from '@semantic-components/ui';
 
+interface Artwork {
+  artist: string;
+  art: string;
+}
+
 @Component({
   selector: 'app-scroll-area-page',
   imports: [CommonModule, ScScrollArea],
@@ -31,9 +36,56 @@ import { ScScrollArea } from '@semantic-components/ui';
         </p>
       </div>
     </div>
+
+    <div class="h-[200px] w-[350px] rounded-md border p-4" sc-scroll-area>
+      Jokester began sneaking into the castle in the middle of the night and leaving jokes all over
+      the place: under the king's pillow, in his soup, even in the royal toilet. The king was
+      furious, but he couldn't seem to stop Jokester. And then, one day, the people of the kingdom
+      discovered that the jokes left by Jokester were so funny that they couldn't help but laugh.
+      And once they started laughing, they couldn't stop.
+    </div>
+
+    <div class="w-96 whitespace-nowrap rounded-md border" sc-scroll-area>
+      <div class="flex w-max space-x-4 p-4">
+        @for (artwork of works; track $index) {
+          <figure class="shrink-0">
+            <div class="overflow-hidden rounded-md">
+              <img
+                class="aspect-[3/4] h-fit w-fit object-cover"
+                [src]="artwork.art"
+                [alt]="'Photo by ' + artwork.artist"
+                width="300"
+                height="400"
+              />
+            </div>
+            <figcaption class="pt-2 text-xs text-muted-foreground">
+              Photo by
+              <span class="font-semibold text-foreground">
+                {{ artwork.artist }}
+              </span>
+            </figcaption>
+          </figure>
+        }
+      </div>
+    </div>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ScrollAreaPage {}
+export default class ScrollAreaPage {
+  works: Artwork[] = [
+    {
+      artist: 'Ornella Binni',
+      art: 'https://images.unsplash.com/photo-1465869185982-5a1a7522cbcb?auto=format&fit=crop&w=300&q=80',
+    },
+    {
+      artist: 'Tom Byrom',
+      art: 'https://images.unsplash.com/photo-1548516173-3cabfa4607e9?auto=format&fit=crop&w=300&q=80',
+    },
+    {
+      artist: 'Vladimir Malyavko',
+      art: 'https://images.unsplash.com/photo-1494337480532-3725c85fd2ab?auto=format&fit=crop&w=300&q=80',
+    },
+  ];
+}
