@@ -14,19 +14,8 @@ import { cn } from '@semantic-components/utils';
   selector: 'div[sc-scroll-area]',
   imports: [CommonModule],
   template: `
-    <div
-      class="overflow-auto scroll-smooth"
-      [ngClass]="[
-        height,
-        width,
-        rounded ? 'rounded-md' : '',
-        bordered ? 'border border-gray-200 dark:border-gray-800' : '',
-        scrollbarClasses,
-      ]"
-    >
-      <div class="h-full w-full">
-        <ng-content />
-      </div>
+    <div class="h-full w-full">
+      <ng-content />
     </div>
   `,
   host: {
@@ -81,7 +70,18 @@ export class ScScrollArea {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('relative', this.classInput()));
+  protected readonly class = computed(() =>
+    cn(
+      'relative',
+      'overflow-auto scroll-smooth',
+      this.height,
+      this.width,
+      this.rounded && 'rounded-md',
+      this.bordered && 'border border-gray-200 dark:border-gray-800',
+      this.scrollbarClasses,
+      this.classInput(),
+    ),
+  );
 
   @Input() height = 'h-64';
   @Input() width = 'w-full';
