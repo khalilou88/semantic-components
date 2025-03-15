@@ -63,7 +63,7 @@ export default class MultiSelectPage {
 
   selectedItems: ScOptionModel[] = [];
   form: FormGroup;
-  submitted: boolean = false;
+  submitted = false;
 
   constructor(private readonly fb: FormBuilder) {
     this.form = this.fb.group({
