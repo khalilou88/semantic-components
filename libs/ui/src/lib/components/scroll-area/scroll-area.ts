@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
@@ -7,6 +8,7 @@ import {
   ViewEncapsulation,
   computed,
   input,
+  signal,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
@@ -21,8 +23,10 @@ import { ScScrollBar } from './scroll-bar';
       <ng-content></ng-content>
     </div>
 
-    <sc-scroll-bar [orientation]="'vertical'" [viewportEl]="viewportEl"></sc-scroll-bar>
-    <sc-scroll-bar [orientation]="'horizontal'" [viewportEl]="viewportEl"></sc-scroll-bar>
+    @if (show()) {
+      <sc-scroll-bar [orientation]="'vertical'" [viewportEl]="viewportEl"></sc-scroll-bar>
+      <sc-scroll-bar [orientation]="'horizontal'" [viewportEl]="viewportEl"></sc-scroll-bar>
+    }
 
     <div class="absolute bottom-0 right-0 h-2.5 w-2.5"></div>
     <!-- Corner element -->
@@ -34,7 +38,7 @@ import { ScScrollBar } from './scroll-bar';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScScrollArea {
+export class ScScrollArea implements AfterViewInit {
   readonly classInput = input<string>('', {
     alias: 'class',
   });
@@ -42,4 +46,11 @@ export class ScScrollArea {
   protected readonly class = computed(() => cn('relative overflow-hidden', this.classInput()));
 
   @ViewChild('viewport') viewportEl!: ElementRef<HTMLDivElement>;
+
+  show = signal(false);
+
+  ngAfterViewInit() {
+    this.show.set(true);
+    console.log(this.viewportEl);
+  }
 }

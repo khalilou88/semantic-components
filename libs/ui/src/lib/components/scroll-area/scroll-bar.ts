@@ -76,6 +76,8 @@ export class ScScrollBar implements AfterViewInit, OnDestroy {
     const viewport =
       this.viewportEl instanceof ElementRef ? this.viewportEl.nativeElement : this.viewportEl;
 
+    console.log(viewport);
+
     if (!viewport) return;
 
     // Update thumb size and position on viewport resize
