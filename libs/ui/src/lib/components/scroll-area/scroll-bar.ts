@@ -8,8 +8,12 @@ import {
   OnDestroy,
   ViewChild,
   ViewEncapsulation,
+  computed,
+  input,
   signal,
 } from '@angular/core';
+
+import { cn } from '@semantic-components/utils';
 
 @Component({
   selector: 'sc-scroll-bar',
@@ -31,11 +35,20 @@ import {
       <div class="relative flex-1 rounded-full bg-border" #thumb></div>
     </div>
   `,
+  host: {
+    '[class]': 'class()',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScScrollBar implements AfterViewInit, OnDestroy {
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
+
+  protected readonly class = computed(() => cn('block', this.classInput()));
+
   @Input() orientation: 'vertical' | 'horizontal' = 'vertical';
   @Input() viewportEl!: ElementRef<HTMLDivElement> | HTMLDivElement;
   @ViewChild('scrollbar') scrollbarEl!: ElementRef<HTMLDivElement>;

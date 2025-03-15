@@ -7,7 +7,7 @@ import { ScScrollArea } from '@semantic-components/ui';
   selector: 'app-scroll-area-page',
   imports: [CommonModule, ScScrollArea],
   template: `
-    <sc-scroll-area class="h-64 w-64">
+    <div class="h-64 w-64" sc-scroll-area>
       <div class="p-4">
         <p>Content that might overflow...</p>
         <p>
@@ -30,7 +30,7 @@ import { ScScrollArea } from '@semantic-components/ui';
           sustainable design.
         </p>
       </div>
-    </sc-scroll-area>
+    </div>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
