@@ -106,7 +106,7 @@ export interface ScOptionModel {
       <!-- Dropdown menu -->
       <div
         class="absolute z-10 mt-1 w-full bg-white border rounded-md shadow-lg max-h-60 overflow-auto"
-        *ngIf="isOpen"
+        *ngIf="isOpen()"
         [attr.id]="listboxId"
         [attr.aria-multiselectable]="true"
         role="listbox"
