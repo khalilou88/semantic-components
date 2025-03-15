@@ -9,6 +9,7 @@ import {
   OnInit,
   Output,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -40,13 +41,13 @@ export interface ScOptionModel {
         [attr.id]="labelId"
         [attr.aria-labelledby]="labelId"
         [attr.aria-controls]="listboxId"
-        [attr.aria-expanded]="isOpen"
+        [attr.aria-expanded]="isOpen()"
         [attr.aria-haspopup]="'listbox'"
         [attr.aria-required]="required"
         [attr.aria-describedby]="descriptionId"
         [attr.aria-activedescendant]="activeDescendant"
-        [class.ring-2]="isOpen"
-        [class.ring-blue-500]="isOpen"
+        [class.ring-2]="isOpen()"
+        [class.ring-blue-500]="isOpen()"
         [class.border-red-500]="showError"
         (click)="toggleDropdown()"
         (keydown)="onKeyDown($event)"
@@ -167,7 +168,7 @@ export class ScMultiSelect implements OnInit {
 
   @Output() selectionChange = new EventEmitter<ScOptionModel[]>();
 
-  isOpen = false;
+  isOpen = signal(false);
   searchText = '';
   filteredOptions: ScOptionModel[] = [];
   focusedIndex = -1;
@@ -195,8 +196,8 @@ export class ScMultiSelect implements OnInit {
   }
 
   toggleDropdown() {
-    this.isOpen = !this.isOpen;
-    if (this.isOpen) {
+    this.isOpen.update((isOpen) => !isOpen);
+    if (this.isOpen()) {
       this.onSearch();
       this.focusedIndex = -1;
 
@@ -255,13 +256,13 @@ export class ScMultiSelect implements OnInit {
       case 'Escape':
         if (this.isOpen) {
           event.preventDefault();
-          this.isOpen = false;
+          this.isOpen.set(false);
           this.elementRef.nativeElement.querySelector('[role="combobox"]').focus();
         }
         break;
 
       case 'ArrowDown':
-        if (this.isOpen) {
+        if (this.isOpen()) {
           event.preventDefault();
           if (this.focusedIndex < this.filteredOptions.length - 1) {
             this.focusedIndex++;
@@ -273,7 +274,7 @@ export class ScMultiSelect implements OnInit {
         break;
 
       case 'ArrowUp':
-        if (this.isOpen) {
+        if (this.isOpen()) {
           event.preventDefault();
           if (this.focusedIndex > 0) {
             this.focusedIndex--;
@@ -283,7 +284,7 @@ export class ScMultiSelect implements OnInit {
         break;
 
       case ' ': // Space
-        if (this.isOpen && this.focusedIndex >= 0) {
+        if (this.isOpen() && this.focusedIndex >= 0) {
           event.preventDefault();
           this.toggleOption(this.filteredOptions[this.focusedIndex]);
         }
@@ -291,12 +292,12 @@ export class ScMultiSelect implements OnInit {
 
       case 'Tab':
         if (this.isOpen) {
-          this.isOpen = false;
+          this.isOpen.set(false);
         }
         break;
 
       case 'Home':
-        if (this.isOpen) {
+        if (this.isOpen()) {
           event.preventDefault();
           this.focusedIndex = 0;
           this.scrollToOption();
@@ -304,7 +305,7 @@ export class ScMultiSelect implements OnInit {
         break;
 
       case 'End':
-        if (this.isOpen) {
+        if (this.isOpen()) {
           event.preventDefault();
           this.focusedIndex = this.filteredOptions.length - 1;
           this.scrollToOption();
@@ -342,7 +343,7 @@ export class ScMultiSelect implements OnInit {
   @HostListener('document:click', ['$event'])
   clickOutside(event: Event) {
     if (!(event.target as HTMLElement).closest('app-multi-select')) {
-      this.isOpen = false;
+      this.isOpen.set(false);
     }
   }
 
