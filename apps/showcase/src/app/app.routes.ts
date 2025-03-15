@@ -2,6 +2,11 @@ import { Route } from '@angular/router';
 
 export const appRoutes: Route[] = [
   {
+    path: 'on-this-page',
+    loadComponent: () => import('./pages/on-this-page-page'),
+    title: 'On-this-page Page',
+  },
+  {
     path: 'test',
     loadComponent: () => import('./pages/test-page'),
     title: 'Test Page',
