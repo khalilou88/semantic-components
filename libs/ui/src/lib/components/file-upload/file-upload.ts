@@ -212,18 +212,18 @@ export class ScFileUpload {
 
   protected readonly class = computed(() => cn('', this.classInput()));
 
-  @Input() acceptedFileTypes: string = '';
-  @Input() maxFileSize: number = 5; // Default max size in MB
-  @Input() multiple: boolean = false;
-  @Input() uploadUrl: string = '/api/upload';
+  @Input() acceptedFileTypes = '';
+  @Input() maxFileSize = 5; // Default max size in MB
+  @Input() multiple = false;
+  @Input() uploadUrl = '/api/upload';
   @Output() uploadComplete = new EventEmitter<any>();
 
   files: File[] = [];
-  isDragging: boolean = false;
-  uploadProgress: number = 0;
-  isUploading: boolean = false;
+  isDragging = false;
+  uploadProgress = 0;
+  isUploading = false;
   uploadError: string | null = null;
-  uploadSuccess: boolean = false;
+  uploadSuccess = false;
 
   constructor(private readonly http: HttpClient) {}
 
