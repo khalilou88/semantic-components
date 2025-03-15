@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-interface Option {
+export interface ScOptionModel {
   id: string | number;
   label: string;
   selected?: boolean;
@@ -157,7 +157,7 @@ interface Option {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScMultiSelect implements OnInit {
-  @Input() options: Option[] = [];
+  @Input() options: ScOptionModel[] = [];
   @Input() placeholder = 'Select options';
   @Input() searchable = true;
   @Input() label = '';
@@ -165,11 +165,11 @@ export class ScMultiSelect implements OnInit {
   @Input() showError = false;
   @Input() errorMessage = 'This field is required';
 
-  @Output() selectionChange = new EventEmitter<Option[]>();
+  @Output() selectionChange = new EventEmitter<ScOptionModel[]>();
 
   isOpen = false;
   searchText = '';
-  filteredOptions: Option[] = [];
+  filteredOptions: ScOptionModel[] = [];
   focusedIndex = -1;
 
   uniqueId: string = 'multiselect-' + Math.random().toString(36).substring(2, 9);
@@ -190,7 +190,7 @@ export class ScMultiSelect implements OnInit {
     this.filteredOptions = [...this.options];
   }
 
-  get selectedOptions(): Option[] {
+  get selectedOptions(): ScOptionModel[] {
     return this.options.filter((option) => option.selected);
   }
 
@@ -210,7 +210,7 @@ export class ScMultiSelect implements OnInit {
     }
   }
 
-  toggleOption(option: Option, event?: Event) {
+  toggleOption(option: ScOptionModel, event?: Event) {
     if (event) {
       event.stopPropagation();
     }
@@ -222,7 +222,7 @@ export class ScMultiSelect implements OnInit {
     this.announceForScreenReader(`${option.label} ${option.selected ? 'selected' : 'unselected'}`);
   }
 
-  isSelected(option: Option): boolean {
+  isSelected(option: ScOptionModel): boolean {
     return option.selected === true;
   }
 
@@ -346,7 +346,7 @@ export class ScMultiSelect implements OnInit {
     }
   }
 
-  f(option: Option) {
+  f(option: ScOptionModel) {
     return 'Remove' + option.label;
   }
 }

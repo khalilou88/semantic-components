@@ -20,6 +20,7 @@ export * from './lib/components/input-otp';
 export * from './lib/components/label';
 export * from './lib/components/textarea';
 export * from './lib/components/select';
+export * from './lib/components/multi-select';
 export * from './lib/components/scroll-to-top';
 export * from './lib/components/progress';
 export * from './lib/components/circular-progress';

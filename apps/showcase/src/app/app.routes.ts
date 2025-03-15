@@ -385,6 +385,11 @@ export const appRoutes: Route[] = [
             title: 'Select Page',
           },
           {
+            path: 'multi-select',
+            loadComponent: () => import('./pages/multi-select-page'),
+            title: 'Multi Select Page',
+          },
+          {
             path: 'dialog',
             loadComponent: () => import('./pages/alert-dialog-page'),
             title: 'Sialog Page',
