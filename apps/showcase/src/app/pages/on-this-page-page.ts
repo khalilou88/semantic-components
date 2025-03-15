@@ -11,6 +11,21 @@ import { ScOnThisPage } from '@semantic-components/ui';
       <main class="flex-1 p-8">
         <h1 class="text-3xl font-bold mt-8 scroll-mt-8" id="introduction">Introduction</h1>
         <p class="mt-4">This is the introduction section of the page...</p>
+        <p class="mt-4">This is the introduction section of the page...</p>
+        <p class="mt-4">This is the introduction section of the page...</p>
+        <p class="mt-4">This is the introduction section of the page...</p>
+        <p class="mt-4">This is the introduction section of the page...</p>
+        <p class="mt-4">This is the introduction section of the page...</p>
+        <p class="mt-4">This is the introduction section of the page...</p>
+        <p class="mt-4">This is the introduction section of the page...</p>
+        <p class="mt-4">This is the introduction section of the page...</p>
+        <p class="mt-4">This is the introduction section of the page...</p>
+        <p class="mt-4">This is the introduction section of the page...</p>
+        <p class="mt-4">This is the introduction section of the page...</p>
+        <p class="mt-4">This is the introduction section of the page...</p>
+        <p class="mt-4">This is the introduction section of the page...</p>
+        <p class="mt-4">This is the introduction section of the page...</p>
+        <p class="mt-4">This is the introduction section of the page...</p>
 
         <h2 class="text-2xl font-bold mt-8 scroll-mt-8" id="getting-started">Getting Started</h2>
         <p class="mt-4">Let's get started with the basics...</p>

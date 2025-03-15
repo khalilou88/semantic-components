@@ -7,6 +7,8 @@ import {
   OnInit,
   Renderer2,
   ViewEncapsulation,
+  linkedSignal,
+  signal,
 } from '@angular/core';
 
 interface NavItem {
@@ -14,7 +16,6 @@ interface NavItem {
   text: string;
   level: number;
   children: NavItem[];
-  isActive: boolean;
 }
 
 @Component({
@@ -27,7 +28,7 @@ interface NavItem {
       <h4 class="text-base font-semibold mb-4 text-gray-800">On This Page</h4>
       <nav>
         <ng-container
-          *ngTemplateOutlet="navTemplate; context: { items: navItems, level: 1 }"
+          *ngTemplateOutlet="navTemplate; context: { items: navItems(), level: 1 }"
         ></ng-container>
       </nav>
     </div>
@@ -38,7 +39,7 @@ interface NavItem {
         <li class="mb-2 text-sm" *ngFor="let item of items">
           <button
             [ngClass]="[
-              item.isActive
+              item.id === activeItem()
                 ? 'text-blue-600 font-medium border-l-2 border-blue-600'
                 : 'text-gray-600 border-l-2 border-transparent',
               'block py-1 transition-all duration-200 ease-in-out cursor-pointer hover:text-blue-600',
@@ -62,9 +63,17 @@ interface NavItem {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScOnThisPage implements OnInit, OnDestroy {
-  navItems: NavItem[] = [];
   private observer: IntersectionObserver | null = null;
   private readonly observedElements: Element[] = [];
+
+  protected readonly navItems = signal<NavItem[]>([]);
+  protected readonly activeItem = linkedSignal(() => {
+    if (this.navItems().length > 0) {
+      return this.navItems()[0].id;
+    }
+
+    return '';
+  });
 
   constructor(
     private readonly el: ElementRef,
@@ -96,7 +105,7 @@ export class ScOnThisPage implements OnInit, OnDestroy {
 
     headings.forEach((heading) => {
       // Get the text content and ID of the heading
-      const text = heading.textContent || '';
+      const text = heading.textContent ?? '';
       let id = heading.getAttribute('id');
 
       // If no ID exists, create one based on the text
@@ -114,7 +123,6 @@ export class ScOnThisPage implements OnInit, OnDestroy {
         text,
         level,
         children: [],
-        isActive: false,
       };
 
       // Add to observation list
@@ -138,7 +146,7 @@ export class ScOnThisPage implements OnInit, OnDestroy {
       }
     });
 
-    this.navItems = rootItems;
+    this.navItems.set(rootItems);
   }
 
   private setupIntersectionObserver(): void {
@@ -152,7 +160,7 @@ export class ScOnThisPage implements OnInit, OnDestroy {
         if (entry.isIntersecting) {
           const id = entry.target.getAttribute('id');
           if (id) {
-            this.setActiveItem(id);
+            this.activeItem.set(id);
           }
         }
       });
@@ -164,39 +172,40 @@ export class ScOnThisPage implements OnInit, OnDestroy {
     });
   }
 
-  private setActiveItem(id: string): void {
-    // Recursive function to set active status
-    const setActive = (items: NavItem[]): boolean => {
-      for (const item of items) {
-        // Reset activity first
-        item.isActive = false;
-
-        // Check if this is the active item
-        if (item.id === id) {
-          item.isActive = true;
-          return true;
-        }
-
-        // Check children
-        if (item.children.length > 0 && setActive(item.children)) {
-          item.isActive = true;
-          return true;
-        }
-      }
-      return false;
-    };
-
-    setActive(this.navItems);
-  }
-
   // Function to get padding based on level
   getPaddingClass(level: number): string {
     const padding = (level - 1) * 4; // 4 = 1rem in Tailwind (multiply by 0.25rem)
-    return `pl-${padding}`;
+
+    if (padding === 0) {
+      return 'pl-0';
+    }
+
+    if (padding === 4) {
+      return 'pl-4';
+    }
+
+    if (padding === 8) {
+      return 'pl-8';
+    }
+
+    if (padding === 12) {
+      return 'pl-12';
+    }
+
+    if (padding === 16) {
+      return 'pl-16';
+    }
+
+    if (padding === 20) {
+      return 'pl-20';
+    }
+
+    return '';
   }
 
   // Function to scroll to a section when nav item is clicked
   scrollToSection(id: string): void {
+    this.activeItem.set(id);
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
