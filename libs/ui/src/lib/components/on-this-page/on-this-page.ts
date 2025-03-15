@@ -36,7 +36,7 @@ interface NavItem {
     <!-- Recursive template for nested navigation -->
     <ng-template #navTemplate let-items="items" let-level="level">
       <ul class="list-none p-0 m-0">
-        <li class="mb-2 text-sm" *ngFor="let item of items">
+        <li class="text-sm" *ngFor="let item of items">
           <button
             [ngClass]="[
               item.id === activeItem()
@@ -82,7 +82,7 @@ export class ScOnThisPage implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initNavItems();
-    this.setupIntersectionObserver();
+    // this.setupIntersectionObserver();
   }
 
   ngOnDestroy(): void {
