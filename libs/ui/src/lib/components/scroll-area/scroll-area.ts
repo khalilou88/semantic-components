@@ -2,10 +2,10 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
   ViewEncapsulation,
   computed,
   input,
+  signal,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
@@ -20,6 +20,8 @@ import { cn } from '@semantic-components/utils';
   `,
   host: {
     '[class]': 'class()',
+    '(mouseover)': 'mouseover()',
+    '(mouseout)': 'mouseout()',
   },
   styles: `
     .scrollbar-custom::-webkit-scrollbar {
@@ -71,19 +73,22 @@ export class ScScrollArea {
   });
 
   protected readonly class = computed(() =>
-    cn('relative', 'overflow-auto scroll-smooth', this.scrollbarClasses, this.classInput()),
+    cn(
+      'relative',
+      'overflow-auto scroll-smooth',
+      this.state() === 'visible' && 'scrollbar-custom',
+      this.state() === 'hidden' && 'scrollbar-hidden',
+      this.classInput(),
+    ),
   );
 
-  @Input() scrollbarStyle: 'default' | 'custom' | 'hidden' = 'custom';
+  private readonly state = signal<'visible' | 'hidden'>('hidden');
 
-  get scrollbarClasses(): string {
-    switch (this.scrollbarStyle) {
-      case 'custom':
-        return 'scrollbar-custom';
-      case 'hidden':
-        return 'scrollbar-hidden';
-      default:
-        return '';
-    }
+  protected mouseover() {
+    this.state.set('visible');
+  }
+
+  protected mouseout() {
+    this.state.set('hidden');
   }
 }
