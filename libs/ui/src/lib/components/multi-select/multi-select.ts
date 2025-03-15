@@ -168,7 +168,7 @@ export class ScMultiSelect implements OnInit {
 
   @Output() selectionChange = new EventEmitter<ScOptionModel[]>();
 
-  isOpen = signal(false);
+  protected readonly isOpen = signal(false);
   searchText = '';
   filteredOptions: ScOptionModel[] = [];
   focusedIndex = -1;
@@ -246,7 +246,7 @@ export class ScMultiSelect implements OnInit {
     switch (event.key) {
       case 'Enter':
         event.preventDefault();
-        if (!this.isOpen) {
+        if (!this.isOpen()) {
           this.toggleDropdown();
         } else if (this.focusedIndex >= 0 && this.focusedIndex < this.filteredOptions.length) {
           this.toggleOption(this.filteredOptions[this.focusedIndex]);
@@ -254,7 +254,7 @@ export class ScMultiSelect implements OnInit {
         break;
 
       case 'Escape':
-        if (this.isOpen) {
+        if (this.isOpen()) {
           event.preventDefault();
           this.isOpen.set(false);
           this.elementRef.nativeElement.querySelector('[role="combobox"]').focus();
@@ -291,7 +291,7 @@ export class ScMultiSelect implements OnInit {
         break;
 
       case 'Tab':
-        if (this.isOpen) {
+        if (this.isOpen()) {
           this.isOpen.set(false);
         }
         break;
