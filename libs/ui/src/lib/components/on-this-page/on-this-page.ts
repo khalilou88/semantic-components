@@ -1,61 +1,58 @@
 import { CommonModule } from '@angular/common';
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   OnDestroy,
   OnInit,
+  Renderer2,
   ViewEncapsulation,
 } from '@angular/core';
 
-// Define interfaces for our heading structure
-interface HeadingNode {
+interface NavItem {
   id: string;
   text: string;
   level: number;
-  children: HeadingNode[];
+  children: NavItem[];
+  isActive: boolean;
 }
 
 @Component({
   selector: 'sc-on-this-page',
   imports: [CommonModule],
   template: `
-    <div class="sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto p-4 w-64">
-      <h3 class="text-sm font-semibold uppercase tracking-wide text-gray-500 mb-4">On this page</h3>
-
-      <nav class="space-y-1">
+    <div
+      class="sticky top-8 max-h-[calc(100vh-2rem)] overflow-y-auto p-4 border-l border-gray-200 w-64"
+    >
+      <h4 class="text-base font-semibold mb-4 text-gray-800">On This Page</h4>
+      <nav>
         <ng-container
-          *ngTemplateOutlet="headingsList; context: { $implicit: hierarchicalHeadings }"
+          *ngTemplateOutlet="navTemplate; context: { items: navItems, level: 1 }"
         ></ng-container>
       </nav>
     </div>
 
-    <!-- Recursive template for nested headings -->
-    <ng-template #headingsList let-headings>
-      <ul class="space-y-2">
-        <li class="text-sm" *ngFor="let heading of headings">
-          <a
-            class="block py-1 transition-colors duration-200 hover:text-blue-600"
-            [attr.href]="'#' + heading.id"
-            [ngClass]="{
-              'text-blue-600 font-medium': activeSection === heading.id,
-              'text-gray-600': activeSection !== heading.id,
-            }"
-            (click)="$event.preventDefault(); scrollToSection(heading.id)"
+    <!-- Recursive template for nested navigation -->
+    <ng-template #navTemplate let-items="items" let-level="level">
+      <ul class="list-none p-0 m-0">
+        <li class="mb-2 text-sm" *ngFor="let item of items">
+          <button
+            [ngClass]="[
+              item.isActive
+                ? 'text-blue-600 font-medium border-l-2 border-blue-600'
+                : 'text-gray-600 border-l-2 border-transparent',
+              'block py-1 transition-all duration-200 ease-in-out cursor-pointer hover:text-blue-600',
+              getPaddingClass(level),
+            ]"
+            (click)="scrollToSection(item.id)"
           >
-            {{ heading.text }}
-          </a>
-
-          <!-- Recursively render children if they exist -->
-          <div
-            class="ml-4 mt-2"
-            *ngIf="heading.children && heading.children.length > 0"
-            [ngClass]="{ block: isSectionActive(heading.id), hidden: !isSectionActive(heading.id) }"
-          >
+            {{ item.text }}
+          </button>
+          <ng-container *ngIf="item.children && item.children.length > 0">
             <ng-container
-              *ngTemplateOutlet="headingsList; context: { $implicit: heading.children }"
+              *ngTemplateOutlet="navTemplate; context: { items: item.children, level: level + 1 }"
             ></ng-container>
-          </div>
+          </ng-container>
         </li>
       </ul>
     </ng-template>
@@ -64,181 +61,145 @@ interface HeadingNode {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScOnThisPage implements OnInit, AfterViewInit, OnDestroy {
-  headings: HeadingNode[] = [];
-
-  // Track active section
-  activeSection: string | null = null;
-
-  // Store observer instances for cleanup
+export class ScOnThisPage implements OnInit, OnDestroy {
+  navItems: NavItem[] = [];
   private observer: IntersectionObserver | null = null;
+  private readonly observedElements: Element[] = [];
 
-  // Hierarchical structure for display
-  hierarchicalHeadings: HeadingNode[] = [];
+  constructor(
+    private readonly el: ElementRef,
+    private readonly renderer: Renderer2,
+  ) {}
 
   ngOnInit(): void {
-    this.detectHeadings();
-
-    // Build hierarchical structure
-    this.buildHierarchy();
-  }
-
-  ngAfterViewInit(): void {
+    this.initNavItems();
     this.setupIntersectionObserver();
   }
 
   ngOnDestroy(): void {
-    // Clean up observer when component is destroyed
     if (this.observer) {
       this.observer.disconnect();
     }
   }
 
-  detectHeadings(): void {
-    // Find all h2, h3 and h4 elements on the page
-    const headingElements = document.querySelectorAll('h2, h3, h4');
+  private initNavItems(): void {
+    // Get all heading elements (h1, h2, h3, etc.) in the main content
+    const headings = document.querySelectorAll(
+      'main h1, main h2, main h3, main h4, main h5, main h6',
+    );
 
-    headingElements.forEach((heading) => {
-      // Ensure the heading has an id, create one if not
-      if (!heading.id) {
-        heading.id = this.generateId(heading.textContent ?? '');
+    // Root-level items array
+    const rootItems: NavItem[] = [];
+
+    // Stack to keep track of parent elements at different levels
+    const stack: NavItem[][] = [rootItems];
+
+    headings.forEach((heading) => {
+      // Get the text content and ID of the heading
+      const text = heading.textContent || '';
+      let id = heading.getAttribute('id');
+
+      // If no ID exists, create one based on the text
+      if (!id) {
+        id = text.toLowerCase().replace(/\s+/g, '-');
+        this.renderer.setAttribute(heading, 'id', id);
       }
 
-      this.headings.push({
-        id: heading.id,
-        text: heading.textContent ?? '',
-        level: parseInt(heading.tagName.charAt(1), 10),
+      // Determine the level (h1 = 1, h2 = 2, etc.)
+      const level = parseInt(heading.tagName.charAt(1));
+
+      // Create a new nav item
+      const newItem: NavItem = {
+        id,
+        text,
+        level,
         children: [],
-      });
-    });
-  }
-
-  // Generate URL-friendly ID from text
-  generateId(text: string): string {
-    return text
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/(^-|-$)/g, '');
-  }
-
-  // Build hierarchical structure from flat headings list
-  buildHierarchy(): void {
-    // Don't process if no headings
-    if (this.headings.length === 0) return;
-
-    // Sort headings by their appearance in the document
-    const sortedHeadings = [...this.headings];
-
-    // Initialize result
-    this.hierarchicalHeadings = [];
-
-    // Keep track of the current parent at each level
-    const parentStack: HeadingNode[] = [];
-
-    // Process each heading
-    sortedHeadings.forEach((heading) => {
-      const newNode: HeadingNode = {
-        id: heading.id,
-        text: heading.text,
-        level: heading.level,
-        children: [],
+        isActive: false,
       };
 
-      // If this is a top-level heading or the stack is empty
-      if (heading.level === 2 || parentStack.length === 0) {
-        this.hierarchicalHeadings.push(newNode);
-        // Clear the stack and add this as the new potential parent
-        parentStack.length = 0;
-        parentStack.push(newNode);
-        return;
+      // Add to observation list
+      this.observedElements.push(heading);
+
+      // Ensure we have enough levels in our stack
+      while (stack.length <= level) {
+        stack.push([]);
       }
 
-      // Find the appropriate parent
-      while (parentStack.length > 0 && parentStack[parentStack.length - 1].level >= heading.level) {
-        parentStack.pop();
-      }
+      // Add this item to the appropriate level in the stack
+      stack[level].push(newItem);
 
-      // If we have a valid parent
-      if (parentStack.length > 0) {
-        parentStack[parentStack.length - 1].children.push(newNode);
+      // If this isn't the top level, add it as a child to the last item of the previous level
+      if (level > 1 && stack[level - 1].length > 0) {
+        const parent = stack[level - 1][stack[level - 1].length - 1];
+        parent.children.push(newItem);
       } else {
-        // No valid parent found, add to root
-        this.hierarchicalHeadings.push(newNode);
+        // Otherwise, it's a top-level item
+        rootItems.push(newItem);
       }
-
-      // Add this as a potential parent for future headings
-      parentStack.push(newNode);
     });
+
+    this.navItems = rootItems;
   }
 
-  // Set up IntersectionObserver to track visible sections
-  setupIntersectionObserver(): void {
-    // Don't run if no headings
-    if (this.headings.length === 0) return;
-
+  private setupIntersectionObserver(): void {
     const options = {
-      rootMargin: '-100px 0px -80% 0px', // Adjust these values to control when a section is considered "active"
+      rootMargin: '-100px 0px -80% 0px',
       threshold: 0,
     };
 
     this.observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        // Get the id of the element
-        const id = entry.target.id;
-
-        // If the element is intersecting (visible)
         if (entry.isIntersecting) {
-          this.activeSection = id;
+          const id = entry.target.getAttribute('id');
+          if (id) {
+            this.setActiveItem(id);
+          }
         }
       });
     }, options);
 
-    // Observe all the heading elements
-    this.headings.forEach((heading) => {
-      const element = document.getElementById(heading.id);
-      if (element) {
-        this.observer!.observe(element);
-      }
+    // Observe all heading elements
+    this.observedElements.forEach((el) => {
+      this.observer?.observe(el);
     });
   }
 
-  // Scroll to section when clicked
+  private setActiveItem(id: string): void {
+    // Recursive function to set active status
+    const setActive = (items: NavItem[]): boolean => {
+      for (const item of items) {
+        // Reset activity first
+        item.isActive = false;
+
+        // Check if this is the active item
+        if (item.id === id) {
+          item.isActive = true;
+          return true;
+        }
+
+        // Check children
+        if (item.children.length > 0 && setActive(item.children)) {
+          item.isActive = true;
+          return true;
+        }
+      }
+      return false;
+    };
+
+    setActive(this.navItems);
+  }
+
+  // Function to get padding based on level
+  getPaddingClass(level: number): string {
+    const padding = (level - 1) * 4; // 4 = 1rem in Tailwind (multiply by 0.25rem)
+    return `pl-${padding}`;
+  }
+
+  // Function to scroll to a section when nav item is clicked
   scrollToSection(id: string): void {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
-      this.activeSection = id;
     }
-  }
-
-  // Helper function to check if a section is active or contains an active child
-  isSectionActive(id: string): boolean {
-    return this.activeSection === id || this.hasActiveChild(id);
-  }
-
-  // Check if a section has an active child
-  hasActiveChild(parentId: string): boolean {
-    // Flat list of all headings - check if any active heading is a child of this one
-    const findChildren = (headings: HeadingNode[]): string[] => {
-      // Get index of parent
-      const parentIndex = headings.findIndex((h) => h.id === parentId);
-      if (parentIndex === -1) return [];
-
-      const parentLevel = headings[parentIndex].level;
-      const result: string[] = [];
-
-      // Look at all headings after parent
-      for (let i = parentIndex + 1; i < headings.length; i++) {
-        const heading = headings[i];
-        // If we encounter another heading at the same or higher level, we're done with this parent's children
-        if (heading.level <= parentLevel) break;
-        result.push(heading.id);
-      }
-
-      return result;
-    };
-
-    const children = findChildren(this.headings);
-    return children.includes(this.activeSection ?? '');
   }
 }
