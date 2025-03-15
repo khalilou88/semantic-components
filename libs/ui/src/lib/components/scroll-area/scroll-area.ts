@@ -23,13 +23,11 @@ import { ScScrollBar } from './scroll-bar';
       <ng-content></ng-content>
     </div>
 
-    @if (show()) {
-      <sc-scroll-bar [orientation]="'vertical'" [viewportEl]="viewportEl"></sc-scroll-bar>
-      <sc-scroll-bar [orientation]="'horizontal'" [viewportEl]="viewportEl"></sc-scroll-bar>
-    }
+    <sc-scroll-bar [viewportElement]="viewport" orientation="vertical"></sc-scroll-bar>
+
+    <sc-scroll-bar [viewportElement]="viewport" orientation="horizontal"></sc-scroll-bar>
 
     <div class="absolute bottom-0 right-0 h-2.5 w-2.5"></div>
-    <!-- Corner element -->
   `,
   host: {
     '[class]': 'class()',
@@ -45,12 +43,12 @@ export class ScScrollArea implements AfterViewInit {
 
   protected readonly class = computed(() => cn('relative overflow-hidden', this.classInput()));
 
-  @ViewChild('viewport') viewportEl!: ElementRef<HTMLDivElement>;
+  @ViewChild('viewport') viewport!: ElementRef<HTMLDivElement>;
 
   show = signal(false);
 
   ngAfterViewInit() {
     this.show.set(true);
-    console.log(this.viewportEl);
+    console.log(this.viewport);
   }
 }
