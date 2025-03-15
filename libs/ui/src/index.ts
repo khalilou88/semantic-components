@@ -81,3 +81,4 @@ export * from './lib/components/dual-range-slider';
 export * from './lib/components/table-of-contents';
 export * from './lib/components/stepper';
 export * from './lib/components/rating';
+export * from './lib/components/on-this-page';
