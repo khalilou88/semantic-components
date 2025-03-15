@@ -7,7 +7,7 @@ import { ScScrollArea } from '@semantic-components/ui';
   selector: 'app-scroll-area-page',
   imports: [CommonModule, ScScrollArea],
   template: `
-    <div [bordered]="true" height="h-80" width="w-96" scrollbarStyle="custom" sc-scroll-area>
+    <div class="h-64 w-full rounded-md border border-gray-200 dark:border-gray-800" sc-scroll-area>
       <div class="p-4">
         <p>Content that might overflow...</p>
         <p>

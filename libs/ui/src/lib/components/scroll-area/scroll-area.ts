@@ -71,23 +71,10 @@ export class ScScrollArea {
   });
 
   protected readonly class = computed(() =>
-    cn(
-      'relative',
-      'overflow-auto scroll-smooth',
-      this.height,
-      this.width,
-      this.rounded && 'rounded-md',
-      this.bordered && 'border border-gray-200 dark:border-gray-800',
-      this.scrollbarClasses,
-      this.classInput(),
-    ),
+    cn('relative', 'overflow-auto scroll-smooth', this.scrollbarClasses, this.classInput()),
   );
 
-  @Input() height = 'h-64';
-  @Input() width = 'w-full';
-  @Input() rounded = true;
-  @Input() bordered = true;
-  @Input() scrollbarStyle: 'default' | 'custom' | 'hidden' = 'default';
+  @Input() scrollbarStyle: 'default' | 'custom' | 'hidden' = 'custom';
 
   get scrollbarClasses(): string {
     switch (this.scrollbarStyle) {
