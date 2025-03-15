@@ -3,7 +3,6 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  Input,
   OnDestroy,
   OnInit,
   ViewEncapsulation,
@@ -66,10 +65,7 @@ interface HeadingNode {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScOnThisPage implements OnInit, AfterViewInit, OnDestroy {
-  @Input() headings: HeadingNode[] = [];
-
-  // Auto-detect headings if not provided
-  @Input() autoDetectHeadings = true;
+  headings: HeadingNode[] = [];
 
   // Track active section
   activeSection: string | null = null;
@@ -81,9 +77,7 @@ export class ScOnThisPage implements OnInit, AfterViewInit, OnDestroy {
   hierarchicalHeadings: HeadingNode[] = [];
 
   ngOnInit(): void {
-    if (this.headings.length === 0 && this.autoDetectHeadings) {
-      this.detectHeadings();
-    }
+    this.detectHeadings();
 
     // Build hierarchical structure
     this.buildHierarchy();
