@@ -440,6 +440,11 @@ export const appRoutes: Route[] = [
             title: 'Progress Page',
           },
           {
+            path: 'circular-progress',
+            loadComponent: () => import('./pages/circular-progress-page'),
+            title: 'Circular Progress Page',
+          },
+          {
             path: 'calendar',
             loadComponent: () => import('./pages/calendar-page'),
             title: 'Calendar Page',
