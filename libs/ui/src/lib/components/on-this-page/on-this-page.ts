@@ -21,7 +21,6 @@ interface HeadingNode {
   selector: 'sc-on-this-page',
   imports: [CommonModule],
   template: `
-    <!-- on-this-page.component.html -->
     <div class="sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto p-4 w-64">
       <h3 class="text-sm font-semibold uppercase tracking-wide text-gray-500 mb-4">On this page</h3>
 
