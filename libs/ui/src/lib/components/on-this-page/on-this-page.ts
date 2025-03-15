@@ -11,6 +11,10 @@ import {
   signal,
 } from '@angular/core';
 
+import { debounceTime, takeUntil } from 'rxjs/operators';
+
+import { Subject, fromEvent } from 'rxjs';
+
 interface NavItem {
   id: string;
   text: string;
@@ -75,6 +79,9 @@ export class ScOnThisPage implements OnInit, OnDestroy {
     return '';
   });
 
+  private readonly destroy$ = new Subject<void>();
+  private isObserving = false;
+
   constructor(
     private readonly el: ElementRef,
     private readonly renderer: Renderer2,
@@ -82,13 +89,16 @@ export class ScOnThisPage implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initNavItems();
-    // this.setupIntersectionObserver();
+    this.initIntersectionObserver();
+    this.setupScrollListener();
   }
 
   ngOnDestroy(): void {
     if (this.observer) {
       this.observer.disconnect();
     }
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   private initNavItems(): void {
@@ -149,29 +159,6 @@ export class ScOnThisPage implements OnInit, OnDestroy {
     this.navItems.set(rootItems);
   }
 
-  private setupIntersectionObserver(): void {
-    const options = {
-      rootMargin: '-100px 0px -80% 0px',
-      threshold: 0,
-    };
-
-    this.observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const id = entry.target.getAttribute('id');
-          if (id) {
-            this.activeItem.set(id);
-          }
-        }
-      });
-    }, options);
-
-    // Observe all heading elements
-    this.observedElements.forEach((el) => {
-      this.observer?.observe(el);
-    });
-  }
-
   // Function to get padding based on level
   getPaddingClass(level: number): string {
     const padding = (level - 1) * 4; // 4 = 1rem in Tailwind (multiply by 0.25rem)
@@ -209,6 +196,63 @@ export class ScOnThisPage implements OnInit, OnDestroy {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  private initIntersectionObserver(): void {
+    const options = {
+      rootMargin: '-100px 0px -80% 0px',
+      threshold: 0,
+    };
+
+    this.observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          if (id) {
+            this.activeItem.set(id);
+          }
+        }
+      });
+    }, options);
+  }
+
+  private setupScrollListener(): void {
+    fromEvent(window, 'scroll')
+      .pipe(
+        debounceTime(50), // Debounce to avoid excessive calculations
+        takeUntil(this.destroy$),
+      )
+      .subscribe(() => {
+        this.startObserving();
+
+        // Stop observing after a short period of inactivity
+        setTimeout(() => {
+          this.stopObserving();
+        }, 200);
+      });
+
+    // Initial check (for cases where content is already in view without scrolling)
+    setTimeout(() => {
+      this.startObserving();
+      setTimeout(() => this.stopObserving(), 200);
+    }, 100);
+  }
+
+  private startObserving(): void {
+    if (!this.isObserving && this.observer) {
+      // Observe all heading elements
+      this.observedElements.forEach((el) => {
+        this.observer?.observe(el);
+      });
+      this.isObserving = true;
+    }
+  }
+
+  private stopObserving(): void {
+    if (this.isObserving && this.observer) {
+      this.observer.disconnect();
+      this.isObserving = false;
     }
   }
 }
