@@ -18,6 +18,7 @@ import { cn } from '@semantic-components/utils';
   `,
   host: {
     '[class]': 'class()',
+    '[class.scrollbar-gutter-stable-both-edges]': 'true',
     '(mouseover)': 'mouseover()',
     '(mouseout)': 'mouseout()',
   },
@@ -60,6 +61,10 @@ import { cn } from '@semantic-components/utils';
     .scrollbar-hidden {
       -ms-overflow-style: none;
       scrollbar-width: none;
+    }
+
+    .scrollbar-gutter-stable-both-edges {
+      scrollbar-gutter: stable both-edges;
     }
   `,
   encapsulation: ViewEncapsulation.None,
