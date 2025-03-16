@@ -57,7 +57,7 @@ export class ScAlertDialog {
 
   protected readonly class = computed(() =>
     cn(
-      'z-50 grid w-full max-w-lg gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 sm:rounded-lg',
+      'z-50 grid w-full max-w-lg gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 sm:rounded-lg',
       this.classInput(),
     ),
   );
