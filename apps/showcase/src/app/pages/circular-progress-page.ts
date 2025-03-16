@@ -135,7 +135,7 @@ export default class CircularProgressPage implements OnInit {
   progress = signal<number>(0);
 
   ngOnInit() {
-    setTimeout(() => this.progress.set(50), 3000);
+    setTimeout(() => this.progress.set(50), 2000);
   }
 
   class = signal<string>('block w-full');
