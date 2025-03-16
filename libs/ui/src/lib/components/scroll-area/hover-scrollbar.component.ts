@@ -75,15 +75,13 @@ import {
   ],
 })
 export class HoverScrollbarComponent implements AfterViewInit, OnChanges {
-  @Input() width: number = 300;
-  @Input() height: number = 200;
-  @Input() border: boolean = true;
+  @Input() width = 300;
+  @Input() height = 200;
+  @Input() border = true;
 
   @ViewChild('contentContainer') contentContainer!: ElementRef;
 
-  isScrollable: boolean = false;
-
-  constructor() {}
+  isScrollable = false;
 
   ngAfterViewInit() {
     this.checkIfScrollable();
