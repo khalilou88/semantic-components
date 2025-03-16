@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { ScScrollArea } from '@semantic-components/ui';
+import { HoverScrollbarComponent, ScScrollArea } from '@semantic-components/ui';
 
 interface Artwork {
   artist: string;
@@ -10,7 +10,7 @@ interface Artwork {
 
 @Component({
   selector: 'app-scroll-area-page',
-  imports: [CommonModule, ScScrollArea],
+  imports: [CommonModule, ScScrollArea, HoverScrollbarComponent],
   template: `
     <div class="h-64 w-full rounded-md border border-gray-200 dark:border-gray-800" sc-scroll-area>
       <div class="p-4">
@@ -68,6 +68,25 @@ interface Artwork {
         }
       </div>
     </div>
+
+    <sc-hover-scrollbar [width]="400" [height]="300" [border]="true">
+      <p>Your content goes here...</p>
+      <p>This content will scroll with a scrollbar visible only on hover.</p>
+      <p>Add as much content as needed to make it scrollable.</p>
+      <p>Your content goes here...</p>
+      <p>This content will scroll with a scrollbar visible only on hover.</p>
+      <p>Add as much content as needed to make it scrollable.</p>
+      <p>Your content goes here...</p>
+      <p>This content will scroll with a scrollbar visible only on hover.</p>
+      <p>Add as much content as needed to make it scrollable.</p>
+      <p>Your content goes here...</p>
+      <p>This content will scroll with a scrollbar visible only on hover.</p>
+      <p>Add as much content as needed to make it scrollable.</p>
+      <p>Your content goes here...</p>
+      <p>This content will scroll with a scrollbar visible only on hover.</p>
+      <p>Add as much content as needed to make it scrollable.</p>
+      <!-- Any content can go here -->
+    </sc-hover-scrollbar>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
