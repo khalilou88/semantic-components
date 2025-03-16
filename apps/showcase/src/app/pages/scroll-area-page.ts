@@ -69,6 +69,16 @@ interface Artwork {
       </div>
     </div>
 
+    <br />
+
+    <sc-hover-scrollbar [width]="400" [height]="300" [border]="true">
+      <p>Your content goes here...</p>
+      <p>This content will scroll with a scrollbar visible only on hover.</p>
+      <p>Add as much content as needed to make it scrollable.</p>
+    </sc-hover-scrollbar>
+
+    <br />
+
     <sc-hover-scrollbar [width]="400" [height]="300" [border]="true">
       <p>Your content goes here...</p>
       <p>This content will scroll with a scrollbar visible only on hover.</p>
@@ -85,8 +95,9 @@ interface Artwork {
       <p>Your content goes here...</p>
       <p>This content will scroll with a scrollbar visible only on hover.</p>
       <p>Add as much content as needed to make it scrollable.</p>
-      <!-- Any content can go here -->
     </sc-hover-scrollbar>
+
+    <br />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,

@@ -1,6 +1,14 @@
 // hover-scrollbar.component.ts
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 
 @Component({
   selector: 'sc-hover-scrollbar',
@@ -17,7 +25,11 @@ import { Component, Input } from '@angular/core';
         height: height + 'px',
       }"
     >
-      <div class="w-full h-full overflow-y-auto p-3 box-border hover-scrollbar">
+      <div
+        class="w-full h-full overflow-y-auto p-3 box-border"
+        #contentContainer
+        [ngClass]="{ 'hover-scrollbar': isScrollable }"
+      >
         <ng-content></ng-content>
       </div>
     </div>
@@ -53,11 +65,50 @@ import { Component, Input } from '@angular/core';
       .hover-scrollbar:hover {
         scrollbar-color: theme('colors.gray.400') transparent;
       }
+
+      /* Hide scrollbar when not scrollable for WebKit */
+      ::-webkit-scrollbar {
+        width: 0px;
+        background: transparent;
+      }
     `,
   ],
 })
-export class HoverScrollbarComponent {
-  @Input() width = 300;
-  @Input() height = 200;
-  @Input() border = true;
+export class HoverScrollbarComponent implements AfterViewInit, OnChanges {
+  @Input() width: number = 300;
+  @Input() height: number = 200;
+  @Input() border: boolean = true;
+
+  @ViewChild('contentContainer') contentContainer!: ElementRef;
+
+  isScrollable: boolean = false;
+
+  constructor() {}
+
+  ngAfterViewInit() {
+    this.checkIfScrollable();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    // When inputs change that might affect scrollability, check again
+    if ((changes['width'] || changes['height']) && this.contentContainer) {
+      setTimeout(() => this.checkIfScrollable(), 0);
+    }
+  }
+
+  checkIfScrollable() {
+    const element = this.contentContainer.nativeElement;
+    this.isScrollable = element.scrollHeight > element.clientHeight;
+
+    // Add a mutation observer to check when content changes
+    const observer = new MutationObserver(() => {
+      this.isScrollable = element.scrollHeight > element.clientHeight;
+    });
+
+    observer.observe(element, {
+      childList: true,
+      subtree: true,
+      characterData: true,
+    });
+  }
 }
