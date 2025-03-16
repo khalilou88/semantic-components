@@ -204,6 +204,12 @@ import { LayoutState } from '../services/layout-state';
                     <span>Circular progress</span>
                   </a>
                 </li>
+
+                <li sc-sidebar-menu-item>
+                  <a routerLink="../components/alert-dialog" sc-sidebar-menu-link>
+                    <span>Alert Dialog</span>
+                  </a>
+                </li>
               </ul>
             </div>
           </sc-sidebar-group>
