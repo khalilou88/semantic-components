@@ -65,7 +65,8 @@
     "motion": "^12.5.0",
     "rxjs": "~7.8.2",
     "shiki": "^3.2.1",
-    "tailwind-merge": "^3.0.2"
+    "tailwind-merge": "^3.0.2",
+    "tw-animate-css": "^1.2.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "19.2.3",
