@@ -147,32 +147,20 @@ interface Artwork {
     </div>
 
     <div class="mb-12">
-      <h2 class="mb-4 text-xl font-medium">Vertical Scrolling</h2>
-      <div class="w-96 whitespace-nowrap rounded-md border">
-        <sc-flexible-scroll-area orientation="horizontal">
-          <div class="flex w-max space-x-4 p-4">
-            @for (artwork of works; track $index) {
-              <figure class="shrink-0">
-                <div class="overflow-hidden rounded-md">
-                  <img
-                    class="aspect-[3/4] h-fit w-fit object-cover"
-                    [src]="artwork.art"
-                    [alt]="'Photo by ' + artwork.artist"
-                    width="300"
-                    height="400"
-                  />
-                </div>
-                <figcaption class="pt-2 text-xs text-muted-foreground">
-                  Photo by
-                  <span class="font-semibold text-foreground">
-                    {{ artwork.artist }}
-                  </span>
-                </figcaption>
-              </figure>
-            }
+      <h2 class="mb-4 text-xl font-medium">horizontal Scrolling</h2>
+
+      <sc-flexible-scroll-area orientation="horizontal">
+        <div
+          class="bg-white rounded-lg shadow-md w-64 h-52 flex-shrink-0 border border-gray-200 hover:border-blue-500 transition-colors duration-200 inline-block"
+          *ngFor="let item of items"
+        >
+          <div class="p-4 h-full flex flex-col">
+            <h3 class="text-lg font-medium text-gray-900 mb-2">{{ item.title }}</h3>
+            <p class="text-sm text-gray-600 flex-grow">{{ item.description }}</p>
+            <div class="mt-4 text-xs text-gray-500">{{ item.category }}</div>
           </div>
-        </sc-flexible-scroll-area>
-      </div>
+        </div>
+      </sc-flexible-scroll-area>
     </div>
   `,
   styles: ``,
@@ -194,4 +182,13 @@ export default class ScrollAreaPage {
       art: 'https://images.unsplash.com/photo-1494337480532-3725c85fd2ab?auto=format&fit=crop&w=300&q=80',
     },
   ];
+
+  // Sample items for horizontal scrolling
+  items = Array(15)
+    .fill(0)
+    .map((_, i) => ({
+      title: `Item ${i + 1}`,
+      description: `This is a description for item ${i + 1}. It contains some sample text to demonstrate the scrolling functionality.`,
+      category: ['Design', 'Development', 'Marketing', 'Research'][i % 4],
+    }));
 }

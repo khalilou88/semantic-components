@@ -1,6 +1,14 @@
 // flexible-scroll-area.component.ts
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 
 @Component({
   selector: 'sc-flexible-scroll-area',
@@ -183,11 +191,11 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
     `,
   ],
 })
-export class FlexibleScrollAreaComponent implements OnInit {
+export class FlexibleScrollAreaComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() orientation: 'vertical' | 'horizontal' = 'vertical';
-  @Input() height: string = '8.5rem';
-  @Input() width: string = '96';
-  @Input() showNavButtons: boolean = true;
+  @Input() height = '8.5rem';
+  @Input() width = '96';
+  @Input() showNavButtons = true;
 
   @ViewChild('viewport') viewportRef!: ElementRef<HTMLDivElement>;
 
