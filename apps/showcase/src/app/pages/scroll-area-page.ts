@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import {
+  FlexibleScrollAreaComponent,
   HoverScrollbarComponent,
   ScScrollArea,
   ScrollAreaComponent,
@@ -14,7 +15,13 @@ interface Artwork {
 
 @Component({
   selector: 'app-scroll-area-page',
-  imports: [CommonModule, ScScrollArea, HoverScrollbarComponent, ScrollAreaComponent],
+  imports: [
+    CommonModule,
+    ScScrollArea,
+    HoverScrollbarComponent,
+    ScrollAreaComponent,
+    FlexibleScrollAreaComponent,
+  ],
   template: `
     <div class="h-64 w-full rounded-md border border-gray-200 dark:border-gray-800" sc-scroll-area>
       <div class="p-4">
@@ -104,6 +111,12 @@ interface Artwork {
     <br />
 
     <sc-scroll-area3 />
+
+    <br />
+    <br />
+    <br />
+
+    <sc-flexible-scroll-area />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,

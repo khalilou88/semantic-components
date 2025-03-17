@@ -1,21 +1,21 @@
 // scroll-area.component.ts
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'sc-scroll-area3',
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="scroll-area-root">
+    <div class="h-[8.5rem] w-96 max-w-[calc(100vw-8rem)] relative">
       <div
-        class="scroll-area-viewport"
+        class="h-full overflow-y-scroll overscroll-contain rounded-md outline outline-1 -outline-offset-1 outline-gray-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-800 scrollbar-hide"
         #viewport
         (scroll)="onScroll()"
         (mouseenter)="isHovering = true"
         (mouseleave)="isHovering = false"
       >
-        <div class="content">
+        <div class="flex flex-col gap-4 py-3 pr-6 pl-4 text-sm leading-[1.375rem] text-gray-900">
           <p>
             Vernacular architecture is building done outside any academic tradition, and without
             professional guidance. It is not a particular architectural movement or style, but
@@ -37,9 +37,12 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
           </p>
         </div>
       </div>
-      <div class="scroll-area-scrollbar" [class.visible]="isScrolling || isHovering">
+      <div
+        class="absolute top-0 right-1 w-1 h-[calc(100%-0.5rem)] my-1 rounded-full bg-gray-200 opacity-0 transition-opacity delay-300"
+        [ngClass]="{ 'opacity-100 delay-0 duration-75': isScrolling || isHovering }"
+      >
         <div
-          class="scroll-area-thumb"
+          class="absolute w-full rounded-full bg-gray-500 cursor-pointer"
           #thumb
           [style.height.%]="thumbHeight"
           [style.top.%]="thumbTop"
@@ -50,76 +53,20 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
   `,
   styles: [
     `
-      .scroll-area-root {
-        height: 8.5rem;
-        width: 24rem;
-        max-width: calc(100vw - 8rem);
-        position: relative;
-      }
-
-      .scroll-area-viewport {
-        height: 100%;
-        overflow-y: scroll;
-        overscroll-behavior: contain;
-        border-radius: 0.375rem;
-        outline: 1px solid #e5e7eb;
-        outline-offset: -1px;
-        /* Hide default scrollbar for Chrome, Safari and Opera */
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-      }
-
-      /* Hide default scrollbar for IE, Edge and Firefox */
-      .scroll-area-viewport::-webkit-scrollbar {
+      /* Hide default scrollbar for Chrome, Safari and Opera */
+      .scrollbar-hide::-webkit-scrollbar {
         display: none;
       }
 
-      .scroll-area-viewport:focus-visible {
-        outline-width: 2px;
-        outline-color: #1e40af;
-      }
-
-      .content {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        padding: 0.75rem 1.5rem 0.75rem 1rem;
-        font-size: 0.875rem;
-        line-height: 1.375rem;
-        color: #111827;
-      }
-
-      .scroll-area-scrollbar {
-        position: absolute;
-        top: 0;
-        right: 0.25rem;
-        width: 0.25rem;
-        height: calc(100% - 1rem);
-        margin: 0.5rem 0;
-        border-radius: 9999px;
-        background-color: #e5e7eb;
-        opacity: 0;
-        transition: opacity 0.3s;
-        transition-delay: 0.3s;
-      }
-
-      .scroll-area-scrollbar.visible {
-        opacity: 1;
-        transition-delay: 0s;
-        transition-duration: 0.075s;
-      }
-
-      .scroll-area-thumb {
-        position: absolute;
-        width: 100%;
-        border-radius: 9999px;
-        background-color: #6b7280;
-        cursor: pointer;
+      /* Hide default scrollbar for IE, Edge and Firefox */
+      .scrollbar-hide {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
       }
     `,
   ],
 })
-export class ScrollAreaComponent {
+export class ScrollAreaComponent implements OnDestroy, AfterViewInit {
   @ViewChild('viewport') viewportRef!: ElementRef<HTMLDivElement>;
   @ViewChild('thumb') thumbRef!: ElementRef<HTMLDivElement>;
 
