@@ -9,5 +9,10 @@
     "@angular/common": "^19.2.0",
     "@angular/core": "^19.2.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/khalilou88/semantic-components",
+    "directory": "libs/logging"
+  }
 }
