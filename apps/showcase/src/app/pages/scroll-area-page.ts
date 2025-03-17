@@ -117,6 +117,8 @@ interface Artwork {
     <br />
 
     <sc-flexible-scroll-area />
+
+    <sc-flexible-scroll-area orientation="horizontal" />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,

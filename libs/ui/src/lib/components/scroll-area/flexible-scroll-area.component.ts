@@ -45,7 +45,7 @@ import {
           <!-- Cards for horizontal scrolling -->
           <ng-container *ngIf="orientation === 'horizontal'">
             <div
-              class="bg-white rounded-lg shadow-md w-64 h-52 flex-shrink-0 border border-gray-200 hover:border-blue-500 transition-colors duration-200"
+              class="bg-white rounded-lg shadow-md w-64 h-52 flex-shrink-0 border border-gray-200 hover:border-blue-500 transition-colors duration-200 inline-block"
               *ngFor="let item of items"
             >
               <div class="p-4 h-full flex flex-col">
