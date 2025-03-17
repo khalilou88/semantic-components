@@ -1,6 +1,10 @@
 {
   "name": "@semantic-components/logging",
   "version": "0.0.1",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "peerDependencies": {
     "@angular/common": "^19.2.0",
     "@angular/core": "^19.2.0"
