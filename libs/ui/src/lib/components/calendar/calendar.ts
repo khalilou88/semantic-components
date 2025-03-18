@@ -21,6 +21,7 @@ import { cn } from '@semantic-components/utils';
 import { ScCard, ScCardContent, ScCardHeader } from '../card';
 import { ScCalendarHeader } from './calendar-header';
 import { generateCalendarDays } from './calendar-utils';
+import { CalendarService } from './calendar.service';
 import { ScDaySelector } from './day-selector';
 import { ScMonthSelector } from './month-selector';
 import { View } from './types';
@@ -42,7 +43,6 @@ import { ScYearSelector } from './year-selector';
     <div sc-card>
       <div sc-card-header>
         <sc-calendar-header
-          [currentYear]="currentYear()"
           [currentMonth]="currentMonth()"
           [view]="view()"
           (monthYearChange)="setMonthYear($event)"
@@ -86,6 +86,7 @@ import { ScYearSelector } from './year-selector';
       useExisting: forwardRef(() => ScCalendar),
       multi: true,
     },
+    CalendarService,
   ],
 })
 export class ScCalendar implements ControlValueAccessor {

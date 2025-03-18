@@ -42,7 +42,6 @@ import { ScRange } from './types';
     <div sc-card>
       <div sc-card-header>
         <sc-calendar-header
-          [currentYear]="currentYear()"
           [currentMonth]="currentMonth()"
           [view]="view()"
           (monthYearChange)="setMonthYear($event)"

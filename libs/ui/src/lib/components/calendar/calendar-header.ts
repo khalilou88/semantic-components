@@ -19,7 +19,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 
 import { ScButton } from '../button';
-import { firstYear, lastYear } from './calendar-utils';
+import { CalendarService } from './calendar.service';
 import { View } from './types';
 import { getMonthName } from './utils';
 
@@ -77,6 +77,8 @@ import { getMonthName } from './utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCalendarHeader {
+  private readonly calendarService = inject(CalendarService);
+
   readonly classInput = input<string>('', {
     alias: 'class',
   });
@@ -92,13 +94,11 @@ export class ScCalendarHeader {
 
   readonly currentMonth = input.required<Temporal.PlainYearMonth>();
 
-  readonly currentYear = input.required<number>();
-
   readonly view = input.required<View>();
 
-  protected readonly firstYear = firstYear(this.currentYear);
+  protected readonly firstYear = computed(() => this.calendarService.firstYear());
 
-  protected readonly lastYear = lastYear(this.currentYear);
+  protected readonly lastYear = computed(() => this.calendarService.lastYear());
 
   readonly monthYearChange = output<number>();
   readonly viewToggled = output<void>();

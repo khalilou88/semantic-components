@@ -3,6 +3,8 @@ import {
   Component,
   ViewEncapsulation,
   computed,
+  effect,
+  inject,
   input,
   linkedSignal,
   output,
@@ -10,7 +12,7 @@ import {
 
 import { cn } from '@semantic-components/utils';
 
-import { firstYear, lastYear } from './calendar-utils';
+import { CalendarService } from './calendar.service';
 
 @Component({
   selector: 'sc-year-selector',
@@ -47,9 +49,9 @@ export class ScYearSelector {
     return this.currentYear();
   });
 
-  private readonly firstYear = firstYear(this.year);
+  private readonly firstYear = computed(() => this.calendarService.firstYear());
 
-  private readonly lastYear = lastYear(this.year);
+  private readonly lastYear = computed(() => this.calendarService.lastYear());
 
   protected readonly years = computed(() => {
     const years: number[] = [];
@@ -65,5 +67,15 @@ export class ScYearSelector {
 
   protected selectYear(year: number): void {
     this.yearSelected.emit(year);
+  }
+
+  private readonly calendarService = inject(CalendarService);
+
+  constructor() {
+    effect(() => {
+      this.calendarService.firstYear.set(this.year() - 9);
+
+      this.calendarService.lastYear.set(this.year() + 10);
+    });
   }
 }
