@@ -16,7 +16,7 @@ import { CalendarDay } from './types';
   selector: 'sc-day-selector',
   imports: [ScDayButton],
   template: `
-    <div class="grid grid-cols-7 gap-5">
+    <div class="grid grid-cols-7 gap-1">
       @for (weekday of weekdays(); track weekday) {
         <abbr class="size-10 text-center text-muted-foreground">
           {{ weekday }}
