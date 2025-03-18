@@ -17,12 +17,11 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { ScCard, ScCardContent, ScCardHeader } from '@semantic-components/ui';
 import { cn } from '@semantic-components/utils';
-import { getFirstDayOfWeek } from 'libs/ui/src/lib/components/calendar/utils';
 
 import { ScDaySelector } from './day-selector';
 import { MonthSelector } from './month-selector';
 import { ScMonthYearHeader } from './month-year-header';
-import { WeekDayName } from './util';
+import { WeekDayName, getFirstDayOfWeek } from './util';
 import { YearSelector } from './year-selector';
 
 @Component({
