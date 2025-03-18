@@ -48,7 +48,7 @@ import { getMonthName } from './utils';
     }
 
     @if (view() === 'months') {
-      <div>{{ monthName() }} {{ currentYear() }}</div>
+      <div>{{ monthName() }} {{ previewYear() }}</div>
     }
 
     @if (view() === 'years') {
@@ -98,7 +98,7 @@ export class ScCalendarHeader {
 
   readonly currentMonth = input.required<Temporal.PlainYearMonth>();
 
-  readonly currentYear = input.required<number>();
+  readonly previewYear = computed(() => this.calendarService.previewYear());
 
   readonly view = input.required<View>();
 

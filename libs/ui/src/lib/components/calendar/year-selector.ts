@@ -66,6 +66,7 @@ export class ScYearSelector {
   readonly yearSelected = output<number>();
 
   protected selectYear(year: number): void {
+    this.calendarService.previewYear.set(year);
     this.yearSelected.emit(year);
   }
 
