@@ -110,6 +110,7 @@ export class ScCalendar implements ControlValueAccessor {
     }
   });
 
+  //if date is in the current month else focus first date of the month
   protected readonly focusedDate = linkedSignal(() => {
     return this.date();
   });
@@ -196,6 +197,28 @@ export class ScCalendar implements ControlValueAccessor {
   }
 
   handleKeydown(event: KeyboardEvent): void {
+    if (this.view() === 'days') {
+      this.handleKeydown1(event);
+    }
+
+    if (this.view() === 'years') {
+      this.handleKeydown2(event);
+    }
+
+    if (this.view() === 'months') {
+      this.handleKeydown3(event);
+    }
+  }
+
+  handleKeydown2(event: KeyboardEvent): void {
+    console.log(event);
+  }
+
+  handleKeydown3(event: KeyboardEvent): void {
+    console.log(event);
+  }
+
+  handleKeydown1(event: KeyboardEvent): void {
     switch (event.key) {
       case 'ArrowLeft':
         this.moveFocus(-1);
