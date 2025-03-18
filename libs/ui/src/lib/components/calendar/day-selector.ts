@@ -2,11 +2,13 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  computed,
   input,
   output,
 } from '@angular/core';
 
 import { Temporal } from '@js-temporal/polyfill';
+import { cn } from '@semantic-components/utils';
 
 import { isToday } from './calendar-utils';
 import { ScDayButton } from './day-button';
@@ -16,26 +18,27 @@ import { CalendarDay } from './types';
   selector: 'sc-day-selector',
   imports: [ScDayButton],
   template: `
-    <div class="grid grid-cols-7 gap-px">
-      @for (weekday of weekdays(); track weekday) {
-        <abbr class="size-10 text-center text-muted-foreground">
-          {{ weekday }}
-        </abbr>
-      }
+    @for (weekday of weekdays(); track weekday) {
+      <abbr class="size-10 text-center text-muted-foreground">
+        {{ weekday }}
+      </abbr>
+    }
 
-      @for (day of calendarDays(); track day.date) {
-        <button
-          [variant]="getVariant(day)"
-          [isFocused]="isFocused(day.date)"
-          (click)="selectDay(day); $event.stopPropagation()"
-          sc-day-button
-          size="icon"
-        >
-          {{ day.dayOfMonth }}
-        </button>
-      }
-    </div>
+    @for (day of calendarDays(); track day.date) {
+      <button
+        [variant]="getVariant(day)"
+        [isFocused]="isFocused(day.date)"
+        (click)="selectDay(day); $event.stopPropagation()"
+        sc-day-button
+        size="icon"
+      >
+        {{ day.dayOfMonth }}
+      </button>
+    }
   `,
+  host: {
+    '[class]': 'class()',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -47,6 +50,12 @@ export class ScDaySelector {
 
   readonly selectedDate = input<Temporal.PlainDate>();
   readonly focusedDate = input<Temporal.PlainDate>();
+
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
+
+  protected readonly class = computed(() => cn('grid grid-cols-7 gap-px', this.classInput()));
 
   protected getVariant(day: CalendarDay) {
     if (this.isSelected(day.date)) {
