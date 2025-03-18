@@ -40,11 +40,15 @@ import { getMonthName } from './utils';
       </button>
     }
 
-    @if (view() !== 'years') {
+    @if (view() === 'days') {
       <button (click)="viewToggled.emit()" sc-button variant="ghost" type="button">
         {{ monthName() }} {{ currentMonth().year }}
         <svg si-chevron-down-icon></svg>
       </button>
+    }
+
+    @if (view() === 'months') {
+      <div>{{ monthName() }} {{ currentYear() }}</div>
     }
 
     @if (view() === 'years') {
@@ -93,6 +97,8 @@ export class ScCalendarHeader {
   );
 
   readonly currentMonth = input.required<Temporal.PlainYearMonth>();
+
+  readonly currentYear = input.required<number>();
 
   readonly view = input.required<View>();
 
