@@ -11,14 +11,18 @@ import {
 
 import { Temporal } from '@js-temporal/polyfill';
 import { cn } from '@semantic-components/utils';
-import { SiChevronLeftIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';
+import {
+  SiArrowDownIcon,
+  SiChevronLeftIcon,
+  SiChevronRightIcon,
+} from '@semantic-icons/lucide-icons';
 
 import { ScButton } from '../button';
 import { getMonthName } from './utils';
 
 @Component({
   selector: 'sc-calendar-header',
-  imports: [SiChevronRightIcon, SiChevronLeftIcon, ScButton],
+  imports: [SiChevronRightIcon, SiChevronLeftIcon, ScButton, SiArrowDownIcon],
   template: `
     <button
       [disabled]="disabled()"
@@ -34,6 +38,7 @@ import { getMonthName } from './utils';
 
     <button (click)="viewToggled.emit()" sc-button variant="ghost" type="button">
       {{ monthName() }} {{ currentMonth().year }}
+      <svg si-arrow-down-icon></svg>
     </button>
 
     <button
