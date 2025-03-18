@@ -69,7 +69,14 @@ export class ScCalendarHeader {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('flex justify-between', this.classInput()));
+  protected readonly class = computed(() =>
+    cn(
+      'flex',
+      this.view() === 'months' && 'justify-center',
+      this.view() !== 'months' && 'justify-between',
+      this.classInput(),
+    ),
+  );
 
   readonly currentMonth = input.required<Temporal.PlainYearMonth>();
 
