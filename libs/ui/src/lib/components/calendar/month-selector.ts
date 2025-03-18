@@ -12,18 +12,18 @@ import {
 import { Temporal } from '@js-temporal/polyfill';
 import { cn } from '@semantic-components/utils';
 
+import { ScButton } from '../button';
 import { getLocalizedMonthNames } from './utils';
 
 @Component({
   selector: 'sc-month-selector',
-  imports: [],
+  imports: [ScButton],
   template: `
     @for (m of months; track m; let i = $index) {
       <button
-        class="p-2 text-sm rounded hover:bg-blue-100"
-        [class.bg-blue-500]="i === currentMonth().month - 1"
-        [class.text-white]="i === currentMonth().month - 1"
+        [variant]="getVariant(i)"
         (click)="selectMonth(i); $event.stopPropagation()"
+        sc-button
       >
         {{ m }}
       </button>
@@ -59,5 +59,21 @@ export class ScMonthSelector {
     this.monthSelected.emit(
       Temporal.PlainYearMonth.from({ year: this.currentMonth().year, month: monthIndex + 1 }),
     );
+  }
+
+  protected getVariant(i: number) {
+    if (i === this.currentMonth().month - 1) {
+      return 'primary';
+    }
+
+    // if (this.isFocused(day.date)) {
+    //   return 'secondary';
+    // }
+
+    // if (isToday(day.date)) {
+    //   return 'outline';
+    // }
+
+    return 'ghost';
   }
 }

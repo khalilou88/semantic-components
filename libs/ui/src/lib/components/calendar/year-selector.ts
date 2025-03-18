@@ -12,19 +12,15 @@ import {
 
 import { cn } from '@semantic-components/utils';
 
+import { ScButton } from '../button';
 import { CalendarService } from './calendar.service';
 
 @Component({
   selector: 'sc-year-selector',
-  imports: [],
+  imports: [ScButton],
   template: `
     @for (y of years(); track y) {
-      <button
-        class="p-2 text-sm rounded hover:bg-blue-100"
-        [class.bg-blue-500]="y === currentYear()"
-        [class.text-white]="y === currentYear()"
-        (click)="selectYear(y); $event.stopPropagation()"
-      >
+      <button [variant]="getVariant(y)" (click)="selectYear(y); $event.stopPropagation()" sc-button>
         {{ y }}
       </button>
     }
@@ -77,5 +73,21 @@ export class ScYearSelector {
 
       this.calendarService.lastYear.set(this.year() + 10);
     });
+  }
+
+  protected getVariant(y: number) {
+    if (y === this.currentYear()) {
+      return 'primary';
+    }
+
+    // if (this.isFocused(day.date)) {
+    //   return 'secondary';
+    // }
+
+    // if (isToday(day.date)) {
+    //   return 'outline';
+    // }
+
+    return 'ghost';
   }
 }
