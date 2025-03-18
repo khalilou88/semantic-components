@@ -15,6 +15,7 @@ import {
   SiChevronDownIcon,
   SiChevronLeftIcon,
   SiChevronRightIcon,
+  SiMinusIcon,
 } from '@semantic-icons/lucide-icons';
 
 import { ScButton } from '../button';
@@ -24,7 +25,7 @@ import { getMonthName } from './utils';
 
 @Component({
   selector: 'sc-calendar-header',
-  imports: [SiChevronRightIcon, SiChevronLeftIcon, ScButton, SiChevronDownIcon],
+  imports: [SiChevronRightIcon, SiChevronLeftIcon, ScButton, SiChevronDownIcon, SiMinusIcon],
   template: `
     @if (view() !== 'months') {
       <button
@@ -47,9 +48,11 @@ import { getMonthName } from './utils';
     }
 
     @if (view() === 'years') {
-      {{ firstYear() }}
-      <svg si-minus-icon></svg>
-      {{ lastYear() }}
+      <div class="flex items-center">
+        {{ firstYear() }}
+        <svg class="size-4" si-minus-icon></svg>
+        {{ lastYear() }}
+      </div>
     }
 
     @if (view() !== 'months') {
