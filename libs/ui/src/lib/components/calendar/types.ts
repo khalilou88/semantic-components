@@ -6,3 +6,5 @@ export interface CalendarDay {
   dayOfMonth: number;
   isInCurrentMonth: boolean;
 }
+
+export type View = 'days' | 'years' | 'months';

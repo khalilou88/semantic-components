@@ -18,41 +18,44 @@ import {
 } from '@semantic-icons/lucide-icons';
 
 import { ScButton } from '../button';
+import { View } from './types';
 import { getMonthName } from './utils';
 
 @Component({
   selector: 'sc-calendar-header',
   imports: [SiChevronRightIcon, SiChevronLeftIcon, ScButton, SiChevronDownIcon],
   template: `
-    <button
-      [disabled]="disabled()"
-      (click)="monthYearChange.emit(-1)"
-      aria-label="Previous month"
-      sc-button
-      variant="outline"
-      type="button"
-      size="icon"
-    >
-      <svg si-chevron-left-icon></svg>
-    </button>
+    @if (view() !== 'months') {
+      <button
+        (click)="monthYearChange.emit(-1)"
+        aria-label="Previous month"
+        sc-button
+        variant="outline"
+        type="button"
+        size="icon"
+      >
+        <svg si-chevron-left-icon></svg>
+      </button>
+    }
 
     <button (click)="viewToggled.emit()" sc-button variant="ghost" type="button">
       {{ monthName() }} {{ currentMonth().year }}
       <svg si-chevron-down-icon></svg>
     </button>
 
-    <button
-      [disabled]="disabled()"
-      (click)="monthYearChange.emit(1)"
-      aria-label="Next month"
-      sc-button
-      variant="outline"
-      type="button"
-      size="icon"
-      type="button"
-    >
-      <svg si-chevron-right-icon></svg>
-    </button>
+    @if (view() !== 'months') {
+      <button
+        (click)="monthYearChange.emit(1)"
+        aria-label="Next month"
+        sc-button
+        variant="outline"
+        type="button"
+        size="icon"
+        type="button"
+      >
+        <svg si-chevron-right-icon></svg>
+      </button>
+    }
   `,
   host: {
     '[class]': 'class()',
@@ -69,7 +72,8 @@ export class ScCalendarHeader {
   protected readonly class = computed(() => cn('flex justify-between', this.classInput()));
 
   readonly currentMonth = input.required<Temporal.PlainYearMonth>();
-  readonly disabled = input.required<boolean>();
+
+  readonly view = input.required<View>();
 
   readonly monthYearChange = output<number>();
   readonly viewToggled = output<void>();

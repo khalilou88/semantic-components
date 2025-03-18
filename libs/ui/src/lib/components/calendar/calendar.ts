@@ -23,6 +23,7 @@ import { ScCalendarHeader } from './calendar-header';
 import { generateCalendarDays } from './calendar-utils';
 import { ScDaySelector } from './day-selector';
 import { ScMonthSelector } from './month-selector';
+import { View } from './types';
 import { getLocalizedDayNames } from './utils';
 import { ScYearSelector } from './year-selector';
 
@@ -42,7 +43,7 @@ import { ScYearSelector } from './year-selector';
       <div sc-card-header>
         <sc-calendar-header
           [currentMonth]="currentMonth()"
-          [disabled]="view() === 'months'"
+          [view]="view()"
           (monthYearChange)="setMonthYear($event)"
           (viewToggled)="toggleView()"
         />
@@ -266,7 +267,7 @@ export class ScCalendar implements ControlValueAccessor {
     }
   }
 
-  protected readonly view = signal<'days' | 'years' | 'months'>('days');
+  protected readonly view = signal<View>('days');
 
   protected toggleView(): void {
     if (this.view() === 'days') {
