@@ -64,7 +64,7 @@ import { ScYearSelector } from './year-selector';
             <sc-day-selector
               [weekdays]="weekdays"
               [focusedDate]="focusedDate()"
-              [selectedDate]="value()"
+              [selectedDate]="date()"
               [calendarDays]="calendarDays()"
               (dateSelected)="selectDate($event)"
             />
@@ -91,8 +91,8 @@ import { ScYearSelector } from './year-selector';
 })
 export class ScCalendar implements ControlValueAccessor {
   readonly value = model<Temporal.PlainDate>();
-  readonly minDate = input<Temporal.PlainDate>();
-  readonly maxDate = input<Temporal.PlainDate>();
+  readonly min = input<Temporal.PlainDate>();
+  readonly max = input<Temporal.PlainDate>();
 
   readonly classInput = input<string>('', {
     alias: 'class',
@@ -102,7 +102,7 @@ export class ScCalendar implements ControlValueAccessor {
 
   private readonly today = signal(Temporal.Now.plainDateISO());
 
-  protected readonly focusedDate = linkedSignal(() => {
+  protected readonly date = computed(() => {
     if (this.value()) {
       return this.value();
     } else {
@@ -110,20 +110,16 @@ export class ScCalendar implements ControlValueAccessor {
     }
   });
 
+  protected readonly focusedDate = linkedSignal(() => {
+    return this.date();
+  });
+
   protected readonly currentYear = linkedSignal(() => {
-    if (this.value()) {
-      return this.value()!.year;
-    } else {
-      return this.today().year;
-    }
+    return this.date()!.year;
   });
 
   protected readonly currentMonth = linkedSignal(() => {
-    if (this.value()) {
-      return this.value()!.toPlainYearMonth();
-    } else {
-      return this.today().toPlainYearMonth();
-    }
+    return this.date()!.toPlainYearMonth();
   });
 
   private readonly firstDayOfMonth = computed(() =>
@@ -149,10 +145,10 @@ export class ScCalendar implements ControlValueAccessor {
   }
 
   isDateDisabled(date: Temporal.PlainDate): boolean {
-    if (this.minDate() && Temporal.PlainDate.compare(date, this.minDate()!) < 0) {
+    if (this.min() && Temporal.PlainDate.compare(date, this.min()!) < 0) {
       return true;
     }
-    if (this.maxDate() && Temporal.PlainDate.compare(date, this.maxDate()!) > 0) {
+    if (this.max() && Temporal.PlainDate.compare(date, this.max()!) > 0) {
       return true;
     }
     return false;
@@ -306,7 +302,6 @@ export class ScCalendar implements ControlValueAccessor {
     this.currentMonth.update((month) =>
       Temporal.PlainYearMonth.from({ year: year, month: month.month }),
     );
-    this.value.set(undefined);
     this.toggleView();
   }
 
