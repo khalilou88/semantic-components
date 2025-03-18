@@ -19,13 +19,13 @@ import { getLocalizedMonthNames } from './utils';
   selector: 'sc-month-selector',
   imports: [ScButton],
   template: `
-    @for (m of months; track m; let i = $index) {
+    @for (month of months; track $index; let i = $index) {
       <button
         [variant]="getVariant(i)"
         (click)="selectMonth(i); $event.stopPropagation()"
         sc-button
       >
-        {{ m }}
+        {{ month }}
       </button>
     }
   `,

@@ -11,7 +11,6 @@ import {
   linkedSignal,
   model,
   signal,
-  viewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -51,7 +50,11 @@ import { ScRange } from './types';
       <div sc-card-content>
         @switch (view()) {
           @case ('years') {
-            <sc-year-selector [currentYear]="currentYear()" (yearSelected)="selectYear($event)" />
+            <sc-year-selector
+              [currentYear]="currentYear()"
+              [previewYear]="previewYear()"
+              (yearSelected)="selectYear($event)"
+            />
           }
           @case ('months') {
             <sc-month-selector
@@ -114,6 +117,10 @@ export class ScRangeCalendar implements ControlValueAccessor {
     } else {
       return this.today().year;
     }
+  });
+
+  protected readonly previewYear = linkedSignal(() => {
+    return this.currentYear();
   });
 
   protected readonly currentMonth = linkedSignal(() => {
@@ -281,11 +288,9 @@ export class ScRangeCalendar implements ControlValueAccessor {
 
   weekdays: string[] = getLocalizedDayNames(this.localeId);
 
-  private readonly scYearSelector = viewChild(ScYearSelector);
-
   protected setMonthYear(n: number) {
     if (this.view() === 'years') {
-      this.scYearSelector()?.year.update((value) => value + n * 20);
+      this.previewYear.update((value) => value + n * 20);
     }
 
     if (this.view() === 'days') {

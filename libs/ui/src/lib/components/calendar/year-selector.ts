@@ -6,7 +6,6 @@ import {
   effect,
   inject,
   input,
-  linkedSignal,
   output,
 } from '@angular/core';
 
@@ -19,9 +18,13 @@ import { CalendarService } from './calendar.service';
   selector: 'sc-year-selector',
   imports: [ScButton],
   template: `
-    @for (y of years(); track y) {
-      <button [variant]="getVariant(y)" (click)="selectYear(y); $event.stopPropagation()" sc-button>
-        {{ y }}
+    @for (year of years(); track $index) {
+      <button
+        [variant]="getVariant(year)"
+        (click)="selectYear(year); $event.stopPropagation()"
+        sc-button
+      >
+        {{ year }}
       </button>
     }
   `,
@@ -41,9 +44,7 @@ export class ScYearSelector {
 
   readonly currentYear = input.required<number>();
 
-  readonly year = linkedSignal(() => {
-    return this.currentYear();
-  });
+  readonly previewYear = input.required<number>();
 
   private readonly firstYear = computed(() => this.calendarService.firstYear());
 
@@ -69,9 +70,9 @@ export class ScYearSelector {
 
   constructor() {
     effect(() => {
-      this.calendarService.firstYear.set(this.year() - 9);
+      this.calendarService.firstYear.set(this.previewYear() - 9);
 
-      this.calendarService.lastYear.set(this.year() + 10);
+      this.calendarService.lastYear.set(this.previewYear() + 10);
     });
   }
 
