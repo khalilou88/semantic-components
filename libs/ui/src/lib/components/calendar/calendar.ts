@@ -42,6 +42,7 @@ import { ScYearSelector } from './year-selector';
     <div sc-card>
       <div sc-card-header>
         <sc-calendar-header
+          [currentYear]="currentYear()"
           [currentMonth]="currentMonth()"
           [view]="view()"
           (monthYearChange)="setMonthYear($event)"

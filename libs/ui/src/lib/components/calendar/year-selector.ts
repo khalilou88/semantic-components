@@ -10,6 +10,8 @@ import {
 
 import { cn } from '@semantic-components/utils';
 
+import { firstYear, lastYear } from './calendar-utils';
+
 @Component({
   selector: 'sc-year-selector',
   imports: [],
@@ -45,10 +47,14 @@ export class ScYearSelector {
     return this.currentYear();
   });
 
+  private readonly firstYear = firstYear(this.year);
+
+  private readonly lastYear = lastYear(this.year);
+
   protected readonly years = computed(() => {
     const years: number[] = [];
-    // Generate years (current year - 9 to current year + 10)
-    for (let year = this.year() - 9; year <= this.year() + 10; year++) {
+
+    for (let year = this.firstYear(); year <= this.lastYear(); year++) {
       years.push(year);
     }
 

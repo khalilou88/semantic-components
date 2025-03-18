@@ -18,6 +18,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 
 import { ScButton } from '../button';
+import { firstYear, lastYear } from './calendar-utils';
 import { View } from './types';
 import { getMonthName } from './utils';
 
@@ -38,10 +39,18 @@ import { getMonthName } from './utils';
       </button>
     }
 
-    <button (click)="viewToggled.emit()" sc-button variant="ghost" type="button">
-      {{ monthName() }} {{ currentMonth().year }}
-      <svg si-chevron-down-icon></svg>
-    </button>
+    @if (view() !== 'years') {
+      <button (click)="viewToggled.emit()" sc-button variant="ghost" type="button">
+        {{ monthName() }} {{ currentMonth().year }}
+        <svg si-chevron-down-icon></svg>
+      </button>
+    }
+
+    @if (view() === 'years') {
+      {{ firstYear() }}
+      <svg si-minus-icon></svg>
+      {{ lastYear() }}
+    }
 
     @if (view() !== 'months') {
       <button
@@ -80,7 +89,13 @@ export class ScCalendarHeader {
 
   readonly currentMonth = input.required<Temporal.PlainYearMonth>();
 
+  readonly currentYear = input.required<number>();
+
   readonly view = input.required<View>();
+
+  protected readonly firstYear = firstYear(this.currentYear);
+
+  protected readonly lastYear = lastYear(this.currentYear);
 
   readonly monthYearChange = output<number>();
   readonly viewToggled = output<void>();

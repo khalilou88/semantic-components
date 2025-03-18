@@ -11,6 +11,14 @@ export function isToday(date: Temporal.PlainDate): boolean {
   return date.equals(today);
 }
 
+export function firstYear(year: Signal<number>) {
+  return computed(() => year() - 9);
+}
+
+export function lastYear(year: Signal<number>) {
+  return computed(() => year() + 10);
+}
+
 export function isDateDisabled(
   minDate: Signal<Temporal.PlainDate>,
   maxDate: Signal<Temporal.PlainDate>,
