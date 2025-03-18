@@ -25,7 +25,7 @@ import { getLocalizedMonthNames } from './utils';
         [class.text-white]="i === currentMonth().month - 1"
         (click)="selectMonth(i); $event.stopPropagation()"
       >
-        {{ m.substr(0, 3) }}
+        {{ m }}
       </button>
     }
   `,
