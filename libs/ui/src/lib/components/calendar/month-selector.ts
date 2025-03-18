@@ -16,7 +16,7 @@ import { getLocalizedMonthNames } from './utils';
   selector: 'sc-month-selector',
   imports: [],
   template: `
-    <div class="p-2 grid grid-cols-3 gap-1">
+    <div class="grid grid-cols-3 gap-1 w-full">
       @for (m of months; track m; let i = $index) {
         <button
           class="p-2 text-sm rounded hover:bg-blue-100"

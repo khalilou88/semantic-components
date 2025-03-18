@@ -12,7 +12,7 @@ import {
   selector: 'sc-year-selector',
   imports: [],
   template: `
-    <div class="p-2 grid grid-cols-4 gap-1">
+    <div class="grid grid-cols-4 gap-1 w-full">
       @for (y of years(); track y) {
         <button
           class="p-2 text-sm rounded hover:bg-blue-100"
