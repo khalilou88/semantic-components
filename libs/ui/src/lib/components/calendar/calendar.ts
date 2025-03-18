@@ -95,7 +95,7 @@ export class ScCalendar implements ControlValueAccessor {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('block w-96', this.classInput()));
+  protected readonly class = computed(() => cn('block w-84', this.classInput()));
 
   private readonly today = signal(Temporal.Now.plainDateISO());
 
