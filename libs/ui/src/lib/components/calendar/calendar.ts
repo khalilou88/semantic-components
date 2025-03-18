@@ -110,9 +110,16 @@ export class ScCalendar implements ControlValueAccessor {
     }
   });
 
-  //if date is in the current month else focus first date of the month
+  //if date is in the current month else focus first date of the current month
   protected readonly focusedDate = linkedSignal(() => {
-    return this.date();
+    if (
+      this.date()?.year === this.currentMonth().year &&
+      this.date()?.month === this.currentMonth().month
+    ) {
+      return this.date();
+    }
+
+    return new Temporal.PlainDate(this.currentMonth().year, this.currentMonth().month, 1);
   });
 
   protected readonly currentYear = linkedSignal(() => {
