@@ -1,4 +1,3 @@
-import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   ChangeDetectorRef,
   Directive,
@@ -10,6 +9,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 
+import { IdGenerator } from './id-generator';
 import { SC_RE_CAPTCHA_V2_SITE_KEY } from './re-captcha-config';
 import { ScReCaptchaService } from './re-captcha.service';
 
@@ -26,7 +26,7 @@ type ErrorCallbackFn = () => void;
   },
 })
 export class ScReCaptchaBase implements OnInit, ControlValueAccessor {
-  private readonly id = inject(_IdGenerator).getId('sc-re-captcha-');
+  private readonly id = inject(IdGenerator).getId('sc-re-captcha-');
   protected widgetId = '';
 
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
