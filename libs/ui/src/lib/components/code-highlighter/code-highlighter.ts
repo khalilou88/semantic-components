@@ -37,7 +37,7 @@ export class ScCodeHighlighter {
   private readonly sanitizer = inject(DomSanitizer);
 
   readonly code = input.required<string>();
-  readonly language = input<'angular-html' | 'typescript'>('angular-html');
+  readonly language = input<'angular-html' | 'typescript' | 'shellscript'>('angular-html');
   readonly theme = input(defaultThemes.light);
 
   protected readonly highlightedCode = signal<SafeHtml>('');

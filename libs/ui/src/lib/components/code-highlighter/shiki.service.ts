@@ -17,7 +17,7 @@ export class ShikiService {
     if (!this.highlighter) {
       this.highlighter = await createHighlighter({
         themes: [defaultThemes.light],
-        langs: ['angular-html', 'typescript'], //TODO provider langs and themes
+        langs: ['angular-html', 'typescript', 'shellscript'], //TODO provider langs and themes
       });
     }
     return this.highlighter;

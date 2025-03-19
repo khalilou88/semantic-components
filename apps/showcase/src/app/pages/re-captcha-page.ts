@@ -81,9 +81,9 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
           Effortless integration of Google reCAPTCHA with Angular applications.
         </p>
 
-        <h2 id="usage" sc-page-subtitle>Usage</h2>
+        <h2 id="usage" sc-page-subtitle>Installation</h2>
 
-        <sc-code-highlighter class="mt-2" [code]="importCodeSnippet" language="typescript" />
+        <sc-code-highlighter class="mt-2" [code]="importCodeSnippet" language="shellscript" />
 
         <h2 class="mb-5" id="examples" sc-page-subtitle>Examples</h2>
 
