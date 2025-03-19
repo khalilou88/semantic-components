@@ -104,6 +104,12 @@ import { LayoutState } from '../services/layout-state';
                 </li>
 
                 <li sc-sidebar-menu-item>
+                  <a routerLink="../components/re-captcha" sc-sidebar-menu-link>
+                    <span>ReCaptcha</span>
+                  </a>
+                </li>
+
+                <li sc-sidebar-menu-item>
                   <a routerLink="../components/button" sc-sidebar-menu-link>
                     <span>Button</span>
                   </a>
