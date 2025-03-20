@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  ViewEncapsulation,
+  signal,
+  viewChild,
+} from '@angular/core';
 
 @Component({
   selector: 'app-page',
@@ -199,6 +206,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@
                   <svg
                     class="h-4 w-4"
                     id="volume-icon"
+                    [class.hidden]="isMuted()"
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
                     height="24"
@@ -214,8 +222,9 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@
                     <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
                   </svg>
                   <svg
-                    class="h-4 w-4 hidden"
+                    class="h-4 w-4"
                     id="mute-icon"
+                    [class.hidden]="!isMuted()"
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
                     height="24"
@@ -231,7 +240,15 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@
                     <line x1="17" y1="9" x2="23" y2="15"></line>
                   </svg>
                 </button>
-                <input class="flex-1" id="volume" type="range" min="0" max="100" value="75" />
+                <input
+                  class="flex-1"
+                  id="volume"
+                  #volumeSlider
+                  type="range"
+                  min="0"
+                  max="100"
+                  value="75"
+                />
               </div>
 
               <!-- Shuffle Button -->
@@ -472,4 +489,17 @@ export default class Page {
   // Volume mute/unmute functionality
   isMuted = signal(false);
   previousVolume = 75;
+
+  volumeSlider = viewChild.required<ElementRef<HTMLInputElement>>('volumeSlider');
+
+  handleVolumeBtnClick() {
+    this.isMuted.update((isMuted) => !isMuted);
+
+    if (this.isMuted()) {
+      this.previousVolume = +this.volumeSlider().nativeElement.value;
+      this.volumeSlider().nativeElement.value = '0';
+    } else {
+      this.volumeSlider().nativeElement.value = `${this.previousVolume}`;
+    }
+  }
 }
