@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
 
 @Component({
   selector: 'app-page',
@@ -84,10 +84,12 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
               <button
                 class="bg-primary text-primary-foreground rounded-full p-3 hover:bg-primary/90 transition-colors"
                 id="play-pause-btn"
+                (click)="toggle()"
               >
                 <svg
                   class="h-6 w-6"
                   id="play-icon"
+                  [class.hidden]="isPlaying()"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
@@ -101,8 +103,9 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   <polygon points="5 3 19 12 5 21 5 3"></polygon>
                 </svg>
                 <svg
-                  class="h-6 w-6 hidden"
+                  class="h-6 w-6"
                   id="pause-icon"
+                  [class.hidden]="!isPlaying()"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
@@ -262,7 +265,11 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
           <div class="border-t border-border p-4">
             <div class="flex items-center justify-between">
               <div class="flex items-center space-x-3">
-                <div class="flex items-end h-6 space-x-1 py-1" id="equalizer">
+                <div
+                  class="flex items-end h-6 space-x-1 py-1"
+                  id="equalizer"
+                  [class.paused]="!isPlaying()"
+                >
                   <div class="w-1 bg-primary rounded-full equalizer-1"></div>
                   <div class="w-1 bg-primary rounded-full equalizer-2"></div>
                   <div class="w-1 bg-primary rounded-full equalizer-3"></div>
@@ -454,4 +461,15 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class Page {}
+export default class Page {
+  // Play/Pause toggle functionality
+  isPlaying = signal(false);
+
+  toggle() {
+    this.isPlaying.update((isPlaying) => !isPlaying);
+  }
+
+  // Volume mute/unmute functionality
+  isMuted = signal(false);
+  previousVolume = 75;
+}
