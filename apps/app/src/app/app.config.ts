@@ -1,5 +1,9 @@
 import { provideHttpClient } from '@angular/common/http';
-import { APP_INITIALIZER, ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import {
+  APP_INITIALIZER,
+  ApplicationConfig,
+  provideExperimentalZonelessChangeDetection,
+} from '@angular/core';
 import { Router, Routes, provideRouter, withRouterConfig } from '@angular/router';
 
 import { DocumentationRoutesService } from './documentation/documentation-routes.service';
@@ -12,7 +16,7 @@ const initialRoutes: Routes = [
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideExperimentalZonelessChangeDetection(),
     // provideRouter(appRoutes),
     provideHttpClient(),
     {
