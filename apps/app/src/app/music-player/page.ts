@@ -411,7 +411,7 @@ import {
     }
 
     input[type='range']::-webkit-slider-runnable-track {
-      background: hsl(var(--muted));
+      background: var(--color-muted);
       border-radius: 0.25rem;
       height: 0.25rem;
     }
@@ -420,7 +420,7 @@ import {
       -webkit-appearance: none;
       appearance: none;
       margin-top: -0.375rem;
-      background-color: hsl(var(--primary));
+      background-color: var(--color-primary);
       border-radius: 50%;
       height: 1rem;
       width: 1rem;
@@ -431,7 +431,7 @@ import {
     }
 
     input[type='range']:focus::-webkit-slider-thumb {
-      box-shadow: 0 0 0 3px hsla(var(--ring) / 0.3);
+      box-shadow: 0 0 0 3px oklch(var(--color-ring) / 0.3);
     }
 
     /* Animation for equalizer */
