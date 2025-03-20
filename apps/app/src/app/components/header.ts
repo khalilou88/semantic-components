@@ -25,7 +25,7 @@ import { ScThemeToggler } from '@semantic-components/ui';
               d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3"
             ></path>
           </svg>
-          <span class="hidden font-bold sm:inline-block">shadcn</span>
+          <span class="hidden font-bold sm:inline-block">Semantic Components</span>
         </a>
         <nav class="flex items-center space-x-6 text-sm font-medium">
           <a class="transition-colors hover:text-foreground/80 text-foreground/60" href="#">Docs</a>
