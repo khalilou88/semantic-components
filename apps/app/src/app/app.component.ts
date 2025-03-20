@@ -6,12 +6,12 @@ import { ScThemeToggler } from '@semantic-components/ui';
   imports: [ScThemeToggler],
   selector: 'app-root',
   template: `
-    <div class="flex min-h-screen flex-col">
+    <div class="flex min-h-screen flex-col max-w-screen-2xl mx-auto">
       <!-- Navigation -->
       <header
         class="sticky top-0 z-40 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
       >
-        <div class="container flex h-14 max-w-screen-2xl items-center">
+        <div class="flex h-14 items-center px-4">
           <div class="mr-4 flex">
             <a class="mr-6 flex items-center space-x-2" href="#">
               <svg
