@@ -183,8 +183,11 @@ import {
             <div class="flex items-center justify-between pt-2">
               <!-- Repeat Button -->
               <button
-                class="rounded-full p-2 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
+                class="rounded-full p-2 hover:bg-muted hover:text-foreground transition-colors"
                 id="repeat-btn"
+                [class.text-primary]="repeat()"
+                [class.text-muted-foreground]="!repeat()"
+                (click)="repeatBtnToggle()"
               >
                 <svg
                   class="h-5 w-5"
@@ -261,8 +264,11 @@ import {
 
               <!-- Shuffle Button -->
               <button
-                class="rounded-full p-2 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
+                class="rounded-full p-2 hover:bg-muted hover:text-foreground transition-colors"
                 id="shuffle-btn"
+                [class.text-primary]="shuffle()"
+                [class.text-muted-foreground]="!shuffle()"
+                (click)="shuffleBtnToggle()"
               >
                 <svg
                   class="h-5 w-5"
@@ -509,6 +515,16 @@ export default class Page {
     } else {
       this.volumeSlider().nativeElement.value = `${this.previousVolume}`;
     }
+  }
+
+  repeat = signal(false);
+  repeatBtnToggle() {
+    this.repeat.update((repeat) => !repeat);
+  }
+
+  shuffle = signal(false);
+  shuffleBtnToggle() {
+    this.shuffle.update((shuffle) => !shuffle);
   }
 
   // Progress bar update simulation (would be replaced with actual audio player logic)
