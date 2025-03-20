@@ -40,7 +40,15 @@ import {
                 <span id="current-time">1:24</span>
                 <span id="total-time">3:45</span>
               </div>
-              <input class="w-full" id="progress" type="range" min="0" max="100" value="37" />
+              <input
+                class="w-full"
+                id="progress"
+                #progress
+                type="range"
+                min="0"
+                max="100"
+                value="37"
+              />
             </div>
 
             <!-- Main Controls -->
@@ -502,4 +510,26 @@ export default class Page {
       this.volumeSlider().nativeElement.value = `${this.previousVolume}`;
     }
   }
+
+  // Progress bar update simulation (would be replaced with actual audio player logic)
+  progressBar = viewChild.required<ElementRef<HTMLInputElement>>('progress');
+  currentTimeDisplay = signal('1:24');
+
+  // Just for demo purposes - in real implementation this would be tied to audio events
+  progressInterval: any;
+  // f() {
+  //   if (this.isPlaying()) {
+  //     this.progressInterval = setInterval(() => {
+  //       if (progressBar.value < 100) {
+  //         progressBar.value = parseInt(progressBar.value) + 1;
+  //         updateTimeDisplay();
+  //       } else {
+  //         clearInterval(this.progressInterval);
+  //         playPauseBtn.click(); // Auto-pause when finished
+  //       }
+  //     }, 1000); // Update every second
+  //   } else {
+  //     clearInterval(this.progressInterval);
+  //   }
+  // }
 }
