@@ -1,96 +1,20 @@
 import { Component, signal } from '@angular/core';
 
-import { ScThemeToggler } from '@semantic-components/ui';
+import { Footer } from './components/footer';
+import { Header } from './components/header';
+import { Sidebar } from './components/sidebar';
 
 @Component({
-  imports: [ScThemeToggler],
+  imports: [Header, Sidebar, Footer],
   selector: 'app-root',
   template: `
     <div class="flex min-h-screen flex-col max-w-screen-2xl mx-auto">
       <!-- Navigation -->
+
       <header
         class="sticky top-0 z-40 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
       >
-        <div class="flex h-14 items-center px-4">
-          <div class="mr-4 flex">
-            <a class="mr-6 flex items-center space-x-2" href="#">
-              <svg
-                class="h-6 w-6"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3"
-                ></path>
-              </svg>
-              <span class="hidden font-bold sm:inline-block">shadcn</span>
-            </a>
-            <nav class="flex items-center space-x-6 text-sm font-medium">
-              <a class="transition-colors hover:text-foreground/80 text-foreground/60" href="#">
-                Docs
-              </a>
-              <a class="transition-colors hover:text-foreground/80 text-foreground" href="#">
-                Components
-              </a>
-              <a class="transition-colors hover:text-foreground/80 text-foreground/60" href="#">
-                Examples
-              </a>
-              <a class="transition-colors hover:text-foreground/80 text-foreground/60" href="#">
-                Themes
-              </a>
-            </nav>
-          </div>
-
-          <div class="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-            <div class="w-full flex-1 md:w-auto md:flex-none">
-              <div class="relative">
-                <svg
-                  class="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <circle cx="11" cy="11" r="8"></circle>
-                  <path d="m21 21-4.3-4.3"></path>
-                </svg>
-                <input
-                  class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 pl-8 sm:w-[200px] md:w-[250px] lg:w-[300px]"
-                  type="search"
-                  placeholder="Search documentation..."
-                />
-              </div>
-            </div>
-
-            <nav class="flex items-center">
-              <a
-                class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2 mr-1"
-                href="#"
-              >
-                GitHub
-              </a>
-              <button
-                class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2"
-              >
-                Login
-              </button>
-
-              <sc-theme-toggler />
-            </nav>
-          </div>
-        </div>
+        <app-header />
       </header>
 
       <div class="flex-1 flex">
@@ -98,78 +22,7 @@ import { ScThemeToggler } from '@semantic-components/ui';
         <div
           class="hidden md:flex border-r border-border/40 w-[240px] flex-shrink-0 md:sticky md:top-14 md:h-[calc(100vh-56px)] md:overflow-y-auto"
         >
-          <div class="w-full py-6 px-4">
-            <div class="mb-4">
-              <h3 class="px-2 mb-2 text-lg font-semibold">Getting Started</h3>
-              <div class="space-y-1">
-                <a
-                  class="flex items-center rounded-md px-2 py-1.5 text-sm font-medium bg-accent text-accent-foreground"
-                  href="#"
-                >
-                  Introduction
-                </a>
-                <a
-                  class="flex items-center rounded-md px-2 py-1.5 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                  href="#"
-                >
-                  Installation
-                </a>
-                <a
-                  class="flex items-center rounded-md px-2 py-1.5 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                  href="#"
-                >
-                  Typography
-                </a>
-              </div>
-            </div>
-            <div class="mb-4">
-              <h3 class="px-2 mb-2 text-lg font-semibold">Components</h3>
-              <div class="space-y-1">
-                <a
-                  class="flex items-center rounded-md px-2 py-1.5 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                  href="#"
-                >
-                  Accordion
-                </a>
-                <a
-                  class="flex items-center rounded-md px-2 py-1.5 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                  href="#"
-                >
-                  Alert
-                </a>
-                <a
-                  class="flex items-center rounded-md px-2 py-1.5 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                  href="#"
-                >
-                  Button
-                </a>
-                <a
-                  class="flex items-center rounded-md px-2 py-1.5 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                  href="#"
-                >
-                  Card
-                </a>
-                <a
-                  class="flex items-center rounded-md px-2 py-1.5 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                  href="#"
-                >
-                  Dialog
-                </a>
-                <a
-                  class="flex items-center rounded-md px-2 py-1.5 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                  href="#"
-                >
-                  Dropdown Menu
-                </a>
-                <a
-                  class="flex items-center rounded-md px-2 py-1.5 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                  href="#"
-                >
-                  Form
-                </a>
-              </div>
-            </div>
-          </div>
+          <app-sidebar />
         </div>
 
         <!-- Main Content -->
@@ -508,14 +361,7 @@ npm install &#64;radix-ui/react-icons tailwindcss-animate class-variance-authori
 
       <!-- Footer -->
       <footer class="py-6 md:px-8 md:py-0 border-t border-border/40">
-        <div class="container flex flex-col items-center justify-between gap-4 md:h-16 md:flex-row">
-          <p class="text-sm text-muted-foreground">© 2025 shadcn UI. All rights reserved.</p>
-          <div class="flex items-center gap-4">
-            <a class="text-sm text-muted-foreground hover:text-foreground" href="#">Docs</a>
-            <a class="text-sm text-muted-foreground hover:text-foreground" href="#">GitHub</a>
-            <a class="text-sm text-muted-foreground hover:text-foreground" href="#">Twitter</a>
-          </div>
-        </div>
+        <app-footer />
       </footer>
     </div>
   `,
