@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
+
+import { ScThemeToggler } from '@semantic-components/ui';
 
 @Component({
-  imports: [],
+  imports: [ScThemeToggler],
   selector: 'app-root',
   template: `
     <div class="flex min-h-screen flex-col">
@@ -84,6 +86,8 @@ import { Component } from '@angular/core';
               >
                 Login
               </button>
+
+              <sc-theme-toggler />
             </nav>
           </div>
         </div>
@@ -517,4 +521,6 @@ npm install &#64;radix-ui/react-icons tailwindcss-animate class-variance-authori
   `,
   styles: '',
 })
-export class AppComponent {}
+export class AppComponent {
+  protected readonly class = signal('min-h-screen bg-background text-foreground');
+}
