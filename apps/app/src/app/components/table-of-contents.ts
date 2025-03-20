@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
@@ -56,14 +56,12 @@ import { TocItem, TocService } from '../toc/toc.service';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TableOfContents implements OnInit {
+export class TableOfContents {
   tocItems$: Observable<TocItem[]>;
 
   constructor(private readonly tocService: TocService) {
     this.tocItems$ = this.tocService.tocItems$;
   }
-
-  ngOnInit(): void {}
 
   scrollToHeading(id: string): void {
     this.tocService.scrollToHeading(id);

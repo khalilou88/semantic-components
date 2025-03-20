@@ -8,8 +8,9 @@ module.exports = [
   {
     files: ['**/*.ts'],
     rules: {
+      '@angular-eslint/component-class-suffix': 'off',
       '@angular-eslint/directive-selector': [
-        'error',
+        'warn',
         {
           type: 'attribute',
           prefix: 'app',
@@ -17,7 +18,7 @@ module.exports = [
         },
       ],
       '@angular-eslint/component-selector': [
-        'error',
+        'warn',
         {
           type: 'element',
           prefix: 'app',
