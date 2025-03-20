@@ -1,16 +1,17 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
-import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 import { Observable, map, switchMap } from 'rxjs';
 
 import { DocumentationRoutesService } from './documentation-routes.service';
+import { PageData, Sitemap } from './documentation.types';
 
 @Component({
   selector: 'app-documentation',
   standalone: true,
-  imports: [NgIf, NgFor, AsyncPipe, RouterLink, RouterOutlet],
+  imports: [NgIf, NgFor, AsyncPipe, RouterLink],
   template: `
     <div class="flex h-screen bg-gray-50">
       <!-- Sidebar -->
@@ -53,6 +54,19 @@ import { DocumentationRoutesService } from './documentation-routes.service';
                   <path
                     fillRule="evenodd"
                     d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <svg
+                  class="h-5 w-5"
+                  *ngIf="section.icon === 'help-circle'"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
                     clipRule="evenodd"
                   />
                 </svg>
@@ -115,6 +129,12 @@ import { DocumentationRoutesService } from './documentation-routes.service';
             >
               Draft
             </span>
+            <span
+              class="px-2 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-800"
+              *ngIf="pageData.status === 'archived'"
+            >
+              Archived
+            </span>
           </div>
 
           <div class="mb-6 text-gray-600">
@@ -136,16 +156,18 @@ export class DocumentationComponent implements OnInit {
   private http = inject(HttpClient);
   private docRoutesService = inject(DocumentationRoutesService);
 
-  sitemap$ = this.docRoutesService.sitemap$;
+  sitemap$: Observable<Sitemap | null> = this.docRoutesService.sitemap$;
 
-  pageData$ = this.route.data;
+  pageData$: Observable<PageData> = this.route.data as Observable<PageData>;
 
-  content$ = this.route.url.pipe(
+  content$: Observable<string> = this.route.url.pipe(
     map((segments) => '/' + segments.map((segment) => segment.path).join('/')),
     switchMap((path) => this.fetchContent(path)),
   );
 
-  ngOnInit() {}
+  ngOnInit(): void {
+    // Additional initialization if needed
+  }
 
   private fetchContent(path: string): Observable<string> {
     return this.http.get(`/assets/content${path}.md`, { responseType: 'text' }).pipe(
