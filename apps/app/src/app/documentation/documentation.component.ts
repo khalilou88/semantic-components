@@ -167,6 +167,7 @@ export class DocumentationComponent implements OnInit {
 
   ngOnInit(): void {
     // Additional initialization if needed
+    console.log('ngOnInit');
   }
 
   private fetchContent(path: string): Observable<string> {
