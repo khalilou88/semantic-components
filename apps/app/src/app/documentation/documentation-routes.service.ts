@@ -17,12 +17,12 @@ interface SitemapResponse {
   providedIn: 'root',
 })
 export class DocumentationRoutesService {
-  private sitemapSubject = new BehaviorSubject<Sitemap | null>(null);
+  private readonly sitemapSubject = new BehaviorSubject<Sitemap | null>(null);
   public sitemap$ = this.sitemapSubject.asObservable();
 
   constructor(
-    private http: HttpClient,
-    private router: Router,
+    private readonly http: HttpClient,
+    private readonly router: Router,
   ) {}
 
   async loadRoutes(): Promise<Route[]> {

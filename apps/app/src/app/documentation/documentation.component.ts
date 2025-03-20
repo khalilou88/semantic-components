@@ -152,9 +152,9 @@ import { PageData, Sitemap } from './documentation.types';
   `,
 })
 export class DocumentationComponent implements OnInit {
-  private route = inject(ActivatedRoute);
-  private http = inject(HttpClient);
-  private docRoutesService = inject(DocumentationRoutesService);
+  private readonly route = inject(ActivatedRoute);
+  private readonly http = inject(HttpClient);
+  private readonly docRoutesService = inject(DocumentationRoutesService);
 
   sitemap$: Observable<Sitemap | null> = this.docRoutesService.sitemap$;
 
