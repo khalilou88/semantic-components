@@ -37,7 +37,7 @@ import {
             <!-- Progress Bar -->
             <div class="space-y-1">
               <div class="flex justify-between text-xs text-muted-foreground">
-                <span id="current-time">1:24</span>
+                <span id="current-time">{{ currentTimeDisplay() }}</span>
                 <span id="total-time">3:45</span>
               </div>
               <input
@@ -532,4 +532,14 @@ export default class Page {
   //     clearInterval(this.progressInterval);
   //   }
   // }
+
+  updateTimeDisplay() {
+    const totalSeconds = 225; // 3:45 in seconds
+    const currentSeconds = Math.floor(
+      (+this.progressBar().nativeElement.value / 100) * totalSeconds,
+    );
+    const minutes = Math.floor(currentSeconds / 60);
+    const seconds = currentSeconds % 60;
+    this.currentTimeDisplay.set(`${minutes}:${seconds.toString().padStart(2, '0')}`);
+  }
 }
