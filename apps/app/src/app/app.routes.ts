@@ -6,6 +6,11 @@ export const appRoutes: Route[] = [
     loadComponent: () => import('./introduction/page'),
     title: 'Introduction Page',
   },
+  {
+    path: 'music-player',
+    loadComponent: () => import('./music-player/page'),
+    title: 'Music Player Page',
+  },
   { path: '', redirectTo: '/introduction', pathMatch: 'full' },
   {
     // Wildcard route for a 404 page
