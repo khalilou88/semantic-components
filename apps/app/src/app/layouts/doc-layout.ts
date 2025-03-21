@@ -6,7 +6,7 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 
 import { ScLink } from '@semantic-components/ui';
 import { SiChevronLeftIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';
@@ -145,7 +145,11 @@ export default class DocLayout {
   currentPath = signal('');
 
   constructor(private readonly router: Router) {
-    this.currentPath.set(this.router.url);
+    router.events.forEach((event) => {
+      if (event instanceof NavigationEnd) {
+        this.currentPath.set(this.router.url);
+      }
+    });
   }
 
   pageInfo = computed<Page | undefined>(() => {
