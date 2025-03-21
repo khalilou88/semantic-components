@@ -1,4 +1,5 @@
 // import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import {
   // APP_INITIALIZER,
   ApplicationConfig,
@@ -21,7 +22,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideExperimentalZonelessChangeDetection(),
     provideRouter(appRoutes),
-    //   provideHttpClient(),
+    provideHttpClient(),
     //   {
     //     provide: APP_INITIALIZER,
     //     useFactory: (docRoutesService: DocumentationRoutesService, router: Router) => {

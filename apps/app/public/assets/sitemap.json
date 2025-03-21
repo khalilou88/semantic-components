@@ -1,179 +1,58 @@
 {
   "sitemap": {
-    "title": "Product Documentation",
+    "title": "Documentation",
     "baseUrl": "/docs",
     "sections": [
       {
         "id": "getting-started",
         "title": "Getting Started",
-        "icon": "rocket",
         "description": "Quick start guides and installation instructions",
         "pages": [
           {
             "id": "introduction",
             "title": "Introduction",
             "path": "/getting-started/introduction",
-            "description": "Overview of the product and its features",
-            "status": "published",
-            "lastUpdated": "2025-03-01"
+            "description": "Overview of the product and its features"
           },
           {
             "id": "installation",
             "title": "Installation",
             "path": "/getting-started/installation",
-            "description": "How to install and set up the product",
-            "status": "published",
-            "lastUpdated": "2025-03-05"
+            "description": "How to install and set up the product"
           },
           {
-            "id": "quick-start",
-            "title": "Quick Start Guide",
-            "path": "/getting-started/quick-start",
-            "description": "Get up and running in minutes",
-            "status": "published",
-            "lastUpdated": "2025-03-10"
+            "id": "typography",
+            "title": "Typography",
+            "path": "/getting-started/typography",
+            "description": "Styles for headings, paragraphs, lists...etc"
           }
         ]
       },
       {
-        "id": "core-concepts",
-        "title": "Core Concepts",
-        "icon": "lightbulb",
-        "description": "Fundamental concepts and architecture",
-        "pages": [
-          {
-            "id": "architecture",
-            "title": "Architecture",
-            "path": "/core-concepts/architecture",
-            "description": "Overview of the system architecture",
-            "status": "published",
-            "lastUpdated": "2025-02-15"
-          },
-          {
-            "id": "data-model",
-            "title": "Data Model",
-            "path": "/core-concepts/data-model",
-            "description": "Understanding the data structures",
-            "status": "published",
-            "lastUpdated": "2025-02-20"
-          },
-          {
-            "id": "authentication",
-            "title": "Authentication",
-            "path": "/core-concepts/authentication",
-            "description": "User authentication and authorization",
-            "status": "published",
-            "lastUpdated": "2025-02-25"
-          }
-        ]
-      },
-      {
-        "id": "guides",
-        "title": "Guides",
-        "icon": "book",
+        "id": "components",
+        "title": "Components",
         "description": "Step-by-step tutorials and how-to guides",
         "pages": [
           {
-            "id": "user-management",
-            "title": "User Management",
-            "path": "/guides/user-management",
-            "description": "Managing users and permissions",
-            "status": "published",
-            "lastUpdated": "2025-01-15"
+            "id": "accordion",
+            "title": "Accordion",
+            "path": "/components/accordion",
+            "description": "A vertically stacked set of interactive headings that each reveal a section of content."
           },
           {
-            "id": "data-import",
-            "title": "Data Import",
-            "path": "/guides/data-import",
-            "description": "Importing data from external sources",
-            "status": "published",
-            "lastUpdated": "2025-01-20"
+            "id": "alert",
+            "title": "Alert",
+            "path": "/components/alert",
+            "description": "Displays a callout for user attention."
           },
           {
-            "id": "customization",
-            "title": "Customization",
-            "path": "/guides/customization",
-            "description": "Customizing the product to your needs",
-            "status": "draft",
-            "lastUpdated": "2025-03-18"
-          }
-        ]
-      },
-      {
-        "id": "api-reference",
-        "title": "API Reference",
-        "icon": "code",
-        "description": "Detailed API documentation",
-        "pages": [
-          {
-            "id": "rest-api",
-            "title": "REST API",
-            "path": "/api-reference/rest-api",
-            "description": "REST API endpoints and usage",
-            "status": "published",
-            "lastUpdated": "2025-02-10"
-          },
-          {
-            "id": "graphql-api",
-            "title": "GraphQL API",
-            "path": "/api-reference/graphql-api",
-            "description": "GraphQL schema and queries",
-            "status": "published",
-            "lastUpdated": "2025-02-12"
-          },
-          {
-            "id": "webhooks",
-            "title": "Webhooks",
-            "path": "/api-reference/webhooks",
-            "description": "Setting up and using webhooks",
-            "status": "published",
-            "lastUpdated": "2025-02-14"
-          }
-        ]
-      },
-      {
-        "id": "troubleshooting",
-        "title": "Troubleshooting",
-        "icon": "help-circle",
-        "description": "Common issues and solutions",
-        "pages": [
-          {
-            "id": "common-issues",
-            "title": "Common Issues",
-            "path": "/troubleshooting/common-issues",
-            "description": "Frequently encountered problems and solutions",
-            "status": "published",
-            "lastUpdated": "2025-03-15"
-          },
-          {
-            "id": "faq",
-            "title": "FAQ",
-            "path": "/troubleshooting/faq",
-            "description": "Frequently asked questions",
-            "status": "published",
-            "lastUpdated": "2025-03-16"
-          },
-          {
-            "id": "support",
-            "title": "Getting Support",
-            "path": "/troubleshooting/support",
-            "description": "How to get help when you need it",
-            "status": "published",
-            "lastUpdated": "2025-03-17"
+            "id": "button",
+            "title": "Button",
+            "path": "/components/button",
+            "description": "Displays a button or a component that looks like a button."
           }
         ]
       }
-    ],
-    "metaData": {
-      "version": "1.0.0",
-      "lastUpdated": "2025-03-20",
-      "searchable": true,
-      "contributors": [
-        {
-          "name": "Documentation Team",
-          "email": "docs@example.com"
-        }
-      ]
-    }
+    ]
   }
 }
