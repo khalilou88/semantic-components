@@ -7,13 +7,14 @@ import {
   inject,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { RouterLink } from '@angular/router';
 
 import { DocumentationRoutesService } from '../documentation/documentation-routes.service';
 import { Sitemap } from '../documentation/documentation.types';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [],
+  imports: [RouterLink],
   template: `
     <div class="w-full py-6 px-4">
       @if (sitemap()?.sections) {
@@ -24,8 +25,9 @@ import { Sitemap } from '../documentation/documentation.types';
             <div class="space-y-1">
               @for (page of section.pages; track page.id) {
                 <a
-                  class="flex items-center rounded-md px-2 py-1.5 text-sm font-medium bg-accent text-accent-foreground"
-                  href="#"
+                  class="flex items-center rounded-md px-2 py-1.5 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                  [routerLink]="[page.path]"
+                  routerLinkActive="bg-accent"
                 >
                   {{ page.title }}
                 </a>

@@ -11,7 +11,7 @@ export const appRoutes: Route[] = [
     loadComponent: () => import('./layouts/doc-layout'),
     children: [
       {
-        path: 'introduction',
+        path: 'getting-started/introduction',
         loadComponent: () => import('./introduction/page'),
         title: 'Introduction Page',
       },
