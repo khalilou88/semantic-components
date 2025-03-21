@@ -6,7 +6,7 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 
 import { ScLink } from '@semantic-components/ui';
 import { SiChevronLeftIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';
@@ -18,7 +18,15 @@ import { SitemapLoader } from '../sitemap';
 
 @Component({
   selector: 'app-doc-layout',
-  imports: [Sidebar, RouterOutlet, TableOfContents, ScLink, SiChevronLeftIcon, SiChevronRightIcon],
+  imports: [
+    Sidebar,
+    RouterOutlet,
+    TableOfContents,
+    ScLink,
+    SiChevronLeftIcon,
+    SiChevronRightIcon,
+    RouterLink,
+  ],
   template: `
     <div class="flex-1 flex">
       <!-- Sidebar -->
@@ -102,25 +110,33 @@ import { SitemapLoader } from '../sitemap';
               <!-- Introduction -->
               <div class="space-y-2">
                 <h1 class="scroll-m-20 text-4xl font-bold tracking-tight">
-                  {{ pageInfo()?.title }}
+                  {{ pageInfo()?.current?.title }}
                 </h1>
                 <p class="text-xl text-muted-foreground">
-                  {{ pageInfo()?.description }}
+                  {{ pageInfo()?.current?.description }}
                 </p>
               </div>
 
               <router-outlet />
 
               <div class="mt-8 flex justify-between">
-                <a sc-link variant="ghost">
-                  <svg si-chevron-left-icon></svg>
-                  <span>Previous</span>
-                </a>
+                <div>
+                  @if (pageInfo()?.previous) {
+                    <a [routerLink]="[pageInfo()?.previous?.path]" sc-link variant="ghost">
+                      <svg si-chevron-left-icon></svg>
+                      <span>{{ pageInfo()?.previous?.title }}</span>
+                    </a>
+                  }
+                </div>
 
-                <a sc-link variant="ghost">
-                  <span>Next</span>
-                  <svg si-chevron-right-icon></svg>
-                </a>
+                <div>
+                  @if (pageInfo()?.next) {
+                    <a [routerLink]="[pageInfo()?.next?.path]" sc-link variant="ghost">
+                      <span>{{ pageInfo()?.next?.title }}</span>
+                      <svg si-chevron-right-icon></svg>
+                    </a>
+                  }
+                </div>
               </div>
             </div>
           </div>
@@ -152,7 +168,29 @@ export default class DocLayout {
     });
   }
 
-  pageInfo = computed<Page | undefined>(() => {
-    return this.sitemapLoader.pages().find((p) => p.path === this.currentPath());
+  pageInfo = computed<PageInfo | undefined>(() => {
+    const p: PageInfo = { current: undefined, previous: undefined, next: undefined };
+
+    for (let index = 0; index < this.sitemapLoader.pages().length; index++) {
+      if (this.sitemapLoader.pages()[index].path === this.currentPath()) {
+        p.current = this.sitemapLoader.pages()[index];
+
+        if (index > 0) {
+          p.previous = this.sitemapLoader.pages()[index - 1];
+        }
+
+        if (index < this.sitemapLoader.pages().length) {
+          p.next = this.sitemapLoader.pages()[index + 1];
+        }
+      }
+    }
+
+    return p;
   });
+}
+
+interface PageInfo {
+  current: Page | undefined;
+  previous: Page | undefined;
+  next: Page | undefined;
 }
