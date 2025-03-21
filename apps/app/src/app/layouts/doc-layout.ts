@@ -1,12 +1,15 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
+import { ScLink } from '@semantic-components/ui';
+import { SiChevronLeftIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';
+
 import { Sidebar } from '../components/sidebar';
 import { TableOfContents } from '../components/table-of-contents';
 
 @Component({
   selector: 'app-doc-layout',
-  imports: [Sidebar, RouterOutlet, TableOfContents],
+  imports: [Sidebar, RouterOutlet, TableOfContents, ScLink, SiChevronLeftIcon, SiChevronRightIcon],
   template: `
     <div class="flex-1 flex">
       <!-- Sidebar -->
@@ -96,6 +99,18 @@ import { TableOfContents } from '../components/table-of-contents';
               </div>
 
               <router-outlet />
+
+              <div class="mt-8 flex justify-between">
+                <a sc-link variant="ghost">
+                  <svg si-chevron-left-icon></svg>
+                  <span>Previous</span>
+                </a>
+
+                <a sc-link variant="ghost">
+                  <span>Next</span>
+                  <svg si-chevron-right-icon></svg>
+                </a>
+              </div>
             </div>
           </div>
 
