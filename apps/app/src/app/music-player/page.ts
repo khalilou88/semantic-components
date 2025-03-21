@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   ViewEncapsulation,
+  effect,
   signal,
   viewChild,
 } from '@angular/core';
@@ -533,21 +534,24 @@ export default class Page {
 
   // Just for demo purposes - in real implementation this would be tied to audio events
   progressInterval: any;
-  // f() {
-  //   if (this.isPlaying()) {
-  //     this.progressInterval = setInterval(() => {
-  //       if (progressBar.value < 100) {
-  //         progressBar.value = parseInt(progressBar.value) + 1;
-  //         updateTimeDisplay();
-  //       } else {
-  //         clearInterval(this.progressInterval);
-  //         playPauseBtn.click(); // Auto-pause when finished
-  //       }
-  //     }, 1000); // Update every second
-  //   } else {
-  //     clearInterval(this.progressInterval);
-  //   }
-  // }
+
+  constructor() {
+    effect(() => {
+      if (this.isPlaying()) {
+        this.progressInterval = setInterval(() => {
+          if (+this.progressBar().nativeElement.value < 100) {
+            this.progressBar().nativeElement.value = `${parseInt(this.progressBar().nativeElement.value) + 1}`;
+            this.updateTimeDisplay();
+          } else {
+            clearInterval(this.progressInterval);
+            this.isPlaying.set(false); // Auto-pause when finished
+          }
+        }, 1000); // Update every second
+      } else {
+        clearInterval(this.progressInterval);
+      }
+    });
+  }
 
   updateTimeDisplay() {
     const totalSeconds = 225; // 3:45 in seconds
