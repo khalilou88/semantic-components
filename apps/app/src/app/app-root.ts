@@ -1,13 +1,11 @@
-import { Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { Footer } from './components/footer';
 import { Header } from './components/header';
-import { Sidebar } from './components/sidebar';
-import { TableOfContents } from './components/table-of-contents';
 
 @Component({
-  imports: [Header, Sidebar, Footer, RouterOutlet, TableOfContents],
+  imports: [Header, Footer, RouterOutlet],
   selector: 'app-root',
   template: `
     <div class="flex min-h-screen flex-col max-w-screen-2xl mx-auto h-full">
@@ -29,7 +27,12 @@ import { TableOfContents } from './components/table-of-contents';
       </footer>
     </div>
   `,
+  host: {
+    '[class]': 'class()',
+  },
   styles: '',
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppRoot {
   protected readonly class = signal('min-h-screen bg-background text-foreground');

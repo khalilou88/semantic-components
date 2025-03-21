@@ -1,14 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-import { Footer } from '../components/footer';
-import { Header } from '../components/header';
 import { Sidebar } from '../components/sidebar';
 import { TableOfContents } from '../components/table-of-contents';
 
 @Component({
   selector: 'app-doc-layout',
-  imports: [Header, Sidebar, Footer, RouterOutlet, TableOfContents],
+  imports: [Sidebar, RouterOutlet, TableOfContents],
   template: `
     <div class="flex-1 flex">
       <!-- Sidebar -->
