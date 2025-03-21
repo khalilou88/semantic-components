@@ -16,6 +16,11 @@ export const appRoutes: Route[] = [
         title: 'Introduction Page',
       },
       {
+        path: 'getting-started/typography',
+        loadComponent: () => import('./docs/getting-started/typography/page'),
+        title: 'Typography Page',
+      },
+      {
         path: 'components/button',
         loadComponent: () => import('./docs/components/button/page'),
         title: 'Button Page',
