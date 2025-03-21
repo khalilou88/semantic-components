@@ -13,7 +13,7 @@ import { SiChevronLeftIcon, SiChevronRightIcon } from '@semantic-icons/lucide-ic
 
 import { Sidebar } from '../components/sidebar';
 import { TableOfContents } from '../components/table-of-contents';
-import { Page } from '../documentation/documentation.types';
+import { PageInfo } from '../documentation/documentation.types';
 import { SitemapLoader } from '../sitemap';
 
 @Component({
@@ -187,10 +187,4 @@ export default class DocLayout {
 
     return p;
   });
-}
-
-interface PageInfo {
-  current: Page | undefined;
-  previous: Page | undefined;
-  next: Page | undefined;
 }

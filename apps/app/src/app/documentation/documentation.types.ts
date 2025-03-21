@@ -4,6 +4,12 @@ export interface SitemapResponse {
   sitemap: Sitemap;
 }
 
+export interface PageInfo {
+  current: Page | undefined;
+  previous: Page | undefined;
+  next: Page | undefined;
+}
+
 /**
  * Represents a page within the documentation
  */
