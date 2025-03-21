@@ -16,9 +16,24 @@ export const appRoutes: Route[] = [
         title: 'Introduction Page',
       },
       {
+        path: 'getting-started/installation',
+        loadComponent: () => import('./docs/getting-started/installation/page'),
+        title: 'Installation Page',
+      },
+      {
         path: 'getting-started/typography',
         loadComponent: () => import('./docs/getting-started/typography/page'),
         title: 'Typography Page',
+      },
+      {
+        path: 'components/accordion',
+        loadComponent: () => import('./docs/components/accordion/page'),
+        title: 'Accordion Page',
+      },
+      {
+        path: 'components/alert',
+        loadComponent: () => import('./docs/components/alert/page'),
+        title: 'Alert Page',
       },
       {
         path: 'components/button',

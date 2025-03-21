@@ -6,7 +6,7 @@
       {
         "id": "getting-started",
         "title": "Getting Started",
-        "description": "Quick start guides and installation instructions",
+        "description": "Quick start guides and installation instructions.",
         "pages": [
           {
             "id": "introduction",
@@ -17,14 +17,14 @@
           {
             "id": "installation",
             "title": "Installation",
-            "path": "/getting-started/installation",
-            "description": "How to install and set up the product"
+            "path": "/docs/getting-started/installation",
+            "description": "How to install and set up Semantic Components."
           },
           {
             "id": "typography",
             "title": "Typography",
-            "path": "/getting-started/typography",
-            "description": "Styles for headings, paragraphs, lists...etc"
+            "path": "/docs/getting-started/typography",
+            "description": "Styles for headings, paragraphs, lists...etc."
           }
         ]
       },
@@ -36,13 +36,13 @@
           {
             "id": "accordion",
             "title": "Accordion",
-            "path": "/components/accordion",
+            "path": "/docs/components/accordion",
             "description": "A vertically stacked set of interactive headings that each reveal a section of content."
           },
           {
             "id": "alert",
             "title": "Alert",
-            "path": "/components/alert",
+            "path": "/docs/components/alert",
             "description": "Displays a callout for user attention."
           },
           {
