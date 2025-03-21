@@ -122,7 +122,5 @@ export class Sidebar implements OnInit {
 
   ngOnInit() {
     this.docRoutesService.loadRoutes();
-
-    console.log(this.sitemap);
   }
 }
