@@ -10,7 +10,6 @@ import { Header } from './components/header';
   template: `
     <div class="flex min-h-screen flex-col max-w-screen-2xl mx-auto h-full">
       <!-- Navigation -->
-
       <header
         class="sticky top-0 z-40 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
       >
