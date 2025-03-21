@@ -7,11 +7,7 @@ import { map } from 'rxjs/operators';
 import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
 
 import { DocumentationComponent } from './documentation.component';
-import { PageData, Section, Sitemap } from './documentation.types';
-
-interface SitemapResponse {
-  sitemap: Sitemap;
-}
+import { PageData, Section, Sitemap, SitemapResponse } from './documentation.types';
 
 @Injectable({
   providedIn: 'root',

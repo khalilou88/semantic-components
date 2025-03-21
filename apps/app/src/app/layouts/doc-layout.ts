@@ -1,11 +1,20 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  inject,
+  signal,
+} from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
 
 import { ScLink } from '@semantic-components/ui';
 import { SiChevronLeftIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 
 import { Sidebar } from '../components/sidebar';
 import { TableOfContents } from '../components/table-of-contents';
+import { Page } from '../documentation/documentation.types';
+import { SitemapLoader } from '../sitemap';
 
 @Component({
   selector: 'app-doc-layout',
@@ -92,9 +101,11 @@ import { TableOfContents } from '../components/table-of-contents';
             <div class="mx-auto max-w-3xl space-y-10">
               <!-- Introduction -->
               <div class="space-y-2">
-                <h1 class="scroll-m-20 text-4xl font-bold tracking-tight">Introduction</h1>
+                <h1 class="scroll-m-20 text-4xl font-bold tracking-tight">
+                  {{ pageInfo()?.title }}
+                </h1>
                 <p class="text-xl text-muted-foreground">
-                  Beautifully designed components built with Radix UI and Tailwind CSS.
+                  {{ pageInfo()?.description }}
                 </p>
               </div>
 
@@ -128,4 +139,16 @@ import { TableOfContents } from '../components/table-of-contents';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class DocLayout {}
+export default class DocLayout {
+  readonly sitemapLoader = inject(SitemapLoader);
+
+  currentPath = signal('');
+
+  constructor(private readonly router: Router) {
+    this.currentPath.set(this.router.url);
+  }
+
+  pageInfo = computed<Page | undefined>(() => {
+    return this.sitemapLoader.pages().find((p) => p.path === this.currentPath());
+  });
+}

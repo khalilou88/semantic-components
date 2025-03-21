@@ -1,5 +1,9 @@
 // types/documentation.types.ts
 
+export interface SitemapResponse {
+  sitemap: Sitemap;
+}
+
 /**
  * Represents a page within the documentation
  */
