@@ -2,14 +2,25 @@ import { Route } from '@angular/router';
 
 export const appRoutes: Route[] = [
   {
-    path: 'introduction',
-    loadComponent: () => import('./introduction/page'),
-    title: 'Introduction Page',
+    path: 'landing',
+    loadComponent: () => import('./landing/page'),
+    title: 'Landing Page',
   },
   {
-    path: 'music-player',
-    loadComponent: () => import('./music-player/page'),
-    title: 'Music Player Page',
+    path: 'docs',
+    loadComponent: () => import('./layouts/doc-layout'),
+    children: [
+      {
+        path: 'introduction',
+        loadComponent: () => import('./introduction/page'),
+        title: 'Introduction Page',
+      },
+      {
+        path: 'music-player',
+        loadComponent: () => import('./music-player/page'),
+        title: 'Music Player Page',
+      },
+    ],
   },
   { path: '', redirectTo: '/introduction', pathMatch: 'full' },
   {
