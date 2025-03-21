@@ -8,8 +8,8 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 
-import { TocHeadingDirective } from '../toc/toc-heading.directive';
-import { TocItem, TocService } from '../toc/toc.service';
+import { TocHeadingDirective } from '../../../toc/toc-heading.directive';
+import { TocItem, TocService } from '../../../toc/toc.service';
 
 @Component({
   selector: 'app-page',

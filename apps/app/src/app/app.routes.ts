@@ -12,8 +12,13 @@ export const appRoutes: Route[] = [
     children: [
       {
         path: 'getting-started/introduction',
-        loadComponent: () => import('./introduction/page'),
+        loadComponent: () => import('./docs/getting-started/introduction/page'),
         title: 'Introduction Page',
+      },
+      {
+        path: 'components/button',
+        loadComponent: () => import('./docs/components/button/page'),
+        title: 'Button Page',
       },
       {
         path: 'music-player',
