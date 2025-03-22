@@ -2,10 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Highlighter, createHighlighter } from 'shiki';
 
-export const availableThemes = {
-  light: 'github-light',
-  dark: 'github-dark',
-};
+import { LangType, ThemeType, langsArray, themesArray } from './types';
 
 @Injectable({
   providedIn: 'root',
@@ -16,14 +13,14 @@ export class ShikiService {
   async initializeHighlighter() {
     if (!this.highlighter) {
       this.highlighter = await createHighlighter({
-        themes: [availableThemes.light, availableThemes.dark],
-        langs: ['angular-ts', 'angular-html', 'typescript', 'shellscript'], //TODO provider langs and themes
+        themes: [...themesArray],
+        langs: [...langsArray],
       });
     }
     return this.highlighter;
   }
 
-  async highlightCode(code: string, language: string, theme: string) {
+  async highlightCode(code: string, language: LangType, theme: ThemeType) {
     const highlighter = await this.initializeHighlighter();
     return highlighter.codeToHtml(code, {
       lang: language,

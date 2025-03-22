@@ -16,7 +16,8 @@ import { SiCopyIcon } from '@semantic-icons/lucide-icons';
 
 import { ScButton } from '../button';
 import { ScTheme } from '../theme-toggler/theme';
-import { ShikiService, availableThemes } from './shiki.service';
+import { ShikiService } from './shiki.service';
+import { LangType, ThemeType } from './types';
 
 @Component({
   selector: 'sc-code-highlighter',
@@ -37,6 +38,8 @@ import { ShikiService, availableThemes } from './shiki.service';
 })
 export class ScCodeHighlighter {
   private readonly themeService = inject(ScTheme);
+  private readonly shikiService = inject(ShikiService);
+  private readonly sanitizer = inject(DomSanitizer);
 
   readonly classInput = input<string>('', {
     alias: 'class',
@@ -46,28 +49,24 @@ export class ScCodeHighlighter {
     cn('block relative overflow-hidden', this.classInput()),
   );
 
-  private readonly shikiService = inject(ShikiService);
-  private readonly sanitizer = inject(DomSanitizer);
-
   readonly code = input.required<string>();
-  readonly language = input<'angular-ts' | 'angular-html' | 'typescript' | 'shellscript'>(
-    'angular-html',
-  );
 
-  readonly themeInput = input<string>('', {
-    alias: 'class',
+  readonly language = input<LangType>('angular-html');
+
+  readonly themeInput = input<ThemeType | undefined>(undefined, {
+    alias: 'theme',
   });
 
-  readonly theme = computed(() => {
+  readonly theme = computed<ThemeType>(() => {
     if (this.themeInput()) {
-      return this.themeInput();
+      return this.themeInput()!;
     }
 
     if (this.themeService.isDarkMode()) {
-      return availableThemes.dark;
+      return 'github-dark';
     }
 
-    return availableThemes.light;
+    return 'github-light';
   });
 
   protected readonly highlightedCode = signal<SafeHtml>('');
