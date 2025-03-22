@@ -7,9 +7,9 @@ import { Injectable, afterNextRender, computed, inject, signal } from '@angular/
 export class ScTheme {
   private readonly document = inject<Document>(DOCUMENT);
 
-  private readonly isDarkMode2 = signal<boolean>(false);
+  private readonly isDarkModeSignal = signal<boolean>(false);
 
-  readonly isDarkMode = computed(() => this.isDarkMode2());
+  readonly isDarkMode = computed(() => this.isDarkModeSignal());
 
   constructor() {
     afterNextRender(() => {
@@ -23,11 +23,11 @@ export class ScTheme {
     const savedTheme = localStorage.getItem('theme');
 
     if (savedTheme) {
-      this.isDarkMode2.set(savedTheme === 'dark');
+      this.isDarkModeSignal.set(savedTheme === 'dark');
     } else {
       // If no saved preference, check system preference
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      this.isDarkMode2.set(prefersDark);
+      this.isDarkModeSignal.set(prefersDark);
     }
 
     // Apply the theme
@@ -35,7 +35,7 @@ export class ScTheme {
   }
 
   toggleTheme(): void {
-    this.isDarkMode2.update((t) => !t);
+    this.isDarkModeSignal.update((t) => !t);
     this.applyTheme(this.isDarkMode());
     localStorage.setItem('theme', this.isDarkMode() ? 'dark' : 'light');
   }
