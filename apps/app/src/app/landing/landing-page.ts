@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
-import { ScButton } from '@semantic-components/ui';
+import { ScLink } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-landing-page',
-  imports: [ScButton],
+  imports: [ScLink, RouterLink],
   template: `
     <!-- Hero Section -->
     <section class="py-20 px-4">
@@ -15,8 +16,12 @@ import { ScButton } from '@semantic-components/ui';
           interfaces quickly and efficiently.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <button [size]="'lg'" sc-button>Get Started</button>
-          <button [size]="'lg'" [variant]="'outline'" sc-button>View Documentation</button>
+          <a size="lg" variant="primary" sc-link routerLink="/docs/getting-started/introduction">
+            Get Started
+          </a>
+          <a size="lg" variant="outline" sc-link routerLink="/docs/components/accordion">
+            Browse components
+          </a>
         </div>
       </div>
     </section>
