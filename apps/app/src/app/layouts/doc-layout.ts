@@ -13,8 +13,8 @@ import { SiChevronLeftIcon, SiChevronRightIcon } from '@semantic-icons/lucide-ic
 
 import { Sidebar } from '../components/sidebar';
 import { TableOfContents } from '../components/table-of-contents';
-import { PageInfo } from '../documentation/documentation.types';
-import { SitemapLoader } from '../sitemap';
+import { SitemapLoader } from '../core/sitemap';
+import { PageInfo } from '../core/types';
 
 @Component({
   selector: 'app-doc-layout',

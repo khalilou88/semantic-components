@@ -3,7 +3,7 @@ import { Injectable, computed, inject, signal } from '@angular/core';
 
 import { firstValueFrom } from 'rxjs';
 
-import { Page, Sitemap, SitemapResponse } from './documentation/documentation.types';
+import { Page, Sitemap, SitemapResponse } from './types';
 
 @Injectable({
   providedIn: 'root',
