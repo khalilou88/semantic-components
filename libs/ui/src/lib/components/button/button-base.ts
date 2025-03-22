@@ -34,6 +34,7 @@ export type ButtonVariants = VariantProps<typeof buttonVariants>;
 @Directive({
   host: {
     '[class]': 'class()',
+    '[type]': 'type()',
     '[attr.data-disabled]': 'disabled()',
   },
 })
@@ -62,4 +63,6 @@ export class ScButtonBase {
   });
 
   protected readonly disabled = linkedSignal<boolean>(() => this.disabledInput());
+
+  readonly type = input<'submit' | 'reset' | 'button'>('button');
 }
