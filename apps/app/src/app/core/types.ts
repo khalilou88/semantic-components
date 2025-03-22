@@ -1,5 +1,3 @@
-// types/documentation.types.ts
-
 export interface SitemapResponse {
   sitemap: Sitemap;
 }
@@ -22,10 +20,6 @@ export interface Page {
   path: string;
   /** Brief description of the page content */
   description: string;
-  /** Current publication status */
-  status: 'draft' | 'published' | 'archived';
-  /** ISO date string of last update */
-  lastUpdated: string;
 }
 
 /**
@@ -36,8 +30,6 @@ export interface Section {
   id: string;
   /** Section title to display in navigation */
   title: string;
-  /** Icon identifier to display next to section title */
-  icon: 'rocket' | 'book' | 'code' | 'lightbulb' | 'help-circle' | string;
   /** Brief description of the section */
   description?: string;
   /** Pages contained within this section */
@@ -87,8 +79,4 @@ export interface PageData {
   section: string;
   /** Section ID this page belongs to */
   sectionId: string;
-  /** ISO date string of last update */
-  lastUpdated: string;
-  /** Current publication status */
-  status: 'draft' | 'published' | 'archived';
 }
