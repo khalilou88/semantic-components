@@ -16,7 +16,7 @@ import { TocItem, TocService } from './toc/toc.service';
           <li [style.padding-left.px]="(item.level - minLevel) * indentation">
             <a
               class="text-muted-foreground hover:text-foreground"
-              [class.active]="item.isActive"
+              [class.underline]="item.isActive"
               (click)="scrollTo(item.id)"
               href="javascript:void(0)"
             >
