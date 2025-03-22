@@ -1,3 +1,4 @@
+import { ClipboardModule } from '@angular/cdk/clipboard';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -16,12 +17,13 @@ import { ShikiService, defaultThemes } from './shiki.service';
 
 @Component({
   selector: 'sc-code-highlighter',
-  imports: [],
+  imports: [ClipboardModule],
   template: `
     <div [innerHTML]="highlightedCode()"></div>
 
     <button
       class="absolute top-2 right-2 inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-secondary hover:text-secondary-foreground h-6 w-6"
+      [cdkCopyToClipboard]="code()"
     >
       <svg
         class="h-4 w-4"
