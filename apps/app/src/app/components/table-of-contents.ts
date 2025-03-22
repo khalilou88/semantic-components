@@ -1,5 +1,11 @@
 import { CommonModule, JsonPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
 
 import { Observable } from 'rxjs';
 
@@ -33,12 +39,12 @@ import { TocItem, TocService } from './toc/toc.service';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TableOfContents {
-  @Input() title: string = 'Table of Contents';
-  @Input() indentation: number = 12; // Pixels to indent each level
+export class TableOfContents implements OnInit {
+  @Input() title = 'Table of Contents';
+  @Input() indentation = 12; // Pixels to indent each level
 
   tocItems$: Observable<TocItem[]>;
-  minLevel: number = 1;
+  minLevel = 1;
 
   constructor(private readonly tocService: TocService) {
     this.tocItems$ = this.tocService.tocItems;

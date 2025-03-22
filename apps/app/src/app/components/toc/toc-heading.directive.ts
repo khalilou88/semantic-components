@@ -8,11 +8,11 @@ import { TocService } from './toc.service';
   selector: '[tocHeading]',
 })
 export class TocHeadingDirective implements OnInit, AfterViewInit, OnDestroy {
-  @Input() appTocHeading: string = ''; // Optional custom text
+  @Input() appTocHeading = ''; // Optional custom text
 
   private element: HTMLElement;
-  private level: number = 0;
-  private id: string = '';
+  private level = 0;
+  private id = '';
   private scrollSubscription: Subscription | null = null;
   private intersectionObserver: IntersectionObserver | null = null;
 
