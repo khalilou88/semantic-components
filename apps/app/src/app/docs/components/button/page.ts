@@ -10,6 +10,7 @@ import { PreviewCodeTabs } from '../../../components/preview-code-tabs/preview-c
   template: `
     <app-preview-code-tabs title="Buttons">
       <div class="flex flex-wrap gap-2">
+        <!-- Primary Button -->
         <button sc-button variant="primary">Primary</button>
 
         <!-- Secondary Button -->
