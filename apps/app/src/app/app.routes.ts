@@ -40,11 +40,6 @@ export const appRoutes: Route[] = [
         loadComponent: () => import('./docs/components/button/button-page'),
         title: 'Button Page',
       },
-      {
-        path: 'music-player',
-        loadComponent: () => import('./music-player/page'),
-        title: 'Music Player Page',
-      },
     ],
   },
   { path: '', redirectTo: '/landing', pathMatch: 'full' },
