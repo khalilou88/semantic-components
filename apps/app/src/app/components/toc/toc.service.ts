@@ -84,7 +84,7 @@ export class TocService {
       // Calculate offset to account for fixed headers
       const offset = 80; // Adjust based on your header height
       const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
+      const offsetPosition = elementPosition + window.scrollY - offset;
 
       window.scrollTo({
         top: offsetPosition,

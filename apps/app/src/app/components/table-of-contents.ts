@@ -1,4 +1,4 @@
-import { CommonModule, JsonPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -13,7 +13,7 @@ import { TocItem, TocService } from './toc/toc.service';
 
 @Component({
   selector: 'app-table-of-contents',
-  imports: [CommonModule, JsonPipe],
+  imports: [CommonModule],
   template: `
     <div class="mb-4">
       <h4 class="text-sm font-medium">On This Page</h4>
@@ -32,8 +32,6 @@ import { TocItem, TocService } from './toc/toc.service';
         }
       </ul>
     </div>
-
-    {{ tocItems$ | async | json }}
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
