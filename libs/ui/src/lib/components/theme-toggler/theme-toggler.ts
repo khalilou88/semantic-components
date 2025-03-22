@@ -9,27 +9,17 @@ import {
 import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
 
 import { ScButton } from '../button';
-import { ScTooltip } from '../tooltip';
 import { ScTheme } from './theme';
 
 @Component({
   selector: 'sc-theme-toggler',
-  imports: [SiMoonIcon, SiSunIcon, ScTooltip, ScButton],
+  imports: [SiMoonIcon, SiSunIcon, ScButton],
   template: `
-    <button
-      [scTooltip]="message()"
-      (click)="toggleTheme()"
-      sc-button
-      variant="outline"
-      size="icon"
-      type="button"
-    >
-      @if (theme.value() === 'light') {
-        <svg si-moon-icon></svg>
-      }
-
-      @if (theme.value() === 'dark') {
+    <button (click)="toggleTheme()" sc-button variant="outline" size="icon" type="button">
+      @if (isDarkMode()) {
         <svg si-sun-icon></svg>
+      } @else {
+        <svg si-moon-icon></svg>
       }
     </button>
   `,
@@ -38,21 +28,11 @@ import { ScTheme } from './theme';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScThemeToggler {
-  theme = inject(ScTheme);
+  private readonly themeService = inject(ScTheme);
 
-  message = computed(() => {
-    if (this.theme.value() === 'light') {
-      return 'Toggle dark mode';
-    }
+  protected readonly isDarkMode = computed(() => this.themeService.isDarkMode());
 
-    return 'Toggle light mode';
-  });
-
-  toggleTheme() {
-    if (this.theme.value() === 'light') {
-      this.theme.value.set('dark');
-    } else {
-      this.theme.value.set('light');
-    }
+  protected toggleTheme() {
+    this.themeService.toggleTheme();
   }
 }

@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Injectable, afterNextRender, effect, inject, signal } from '@angular/core';
+import { Injectable, afterNextRender, computed, inject, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
@@ -7,31 +7,41 @@ import { Injectable, afterNextRender, effect, inject, signal } from '@angular/co
 export class ScTheme {
   private readonly document = inject<Document>(DOCUMENT);
 
-  value = signal<'light' | 'dark' | undefined>(undefined);
+  private readonly isDarkMode2 = signal<boolean>(false);
+
+  readonly isDarkMode = computed(() => this.isDarkMode2());
 
   constructor() {
-    effect(() => {
-      if (this.value() !== undefined) {
-        localStorage['theme'] = this.value();
-      }
-
-      // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-      this.document.documentElement.classList.toggle('dark', this.value() === 'dark');
+    afterNextRender(() => {
+      // Initialize theme from localStorage or system preference
+      this.initializeTheme();
     });
   }
 
-  init() {
-    afterNextRender(() => {
-      const localStorageTheme = localStorage['theme'];
-      const isDarkMode =
-        localStorageTheme === 'dark' ||
-        (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  private initializeTheme(): void {
+    // Check if user has a saved preference
+    const savedTheme = localStorage.getItem('theme');
 
-      if (isDarkMode) {
-        this.value.set('dark');
-      } else {
-        this.value.set('light');
-      }
-    });
+    if (savedTheme) {
+      this.isDarkMode2.set(savedTheme === 'dark');
+    } else {
+      // If no saved preference, check system preference
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      this.isDarkMode2.set(prefersDark);
+    }
+
+    // Apply the theme
+    this.applyTheme(this.isDarkMode());
+  }
+
+  toggleTheme(): void {
+    this.isDarkMode2.update((t) => !t);
+    this.applyTheme(this.isDarkMode());
+    localStorage.setItem('theme', this.isDarkMode() ? 'dark' : 'light');
+  }
+
+  private applyTheme(isDark: boolean): void {
+    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+    this.document.documentElement.classList.toggle('dark', isDark);
   }
 }
