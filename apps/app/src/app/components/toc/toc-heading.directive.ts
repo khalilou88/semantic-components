@@ -1,4 +1,3 @@
-// toc-heading.directive.ts
 import { Directive, ElementRef, Input } from '@angular/core';
 
 import { TocService } from './toc.service';

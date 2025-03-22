@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 
 import { Observable } from 'rxjs';
 
-import { TocItem, TocService } from '../toc/toc.service';
+import { TocItem, TocService } from './toc/toc.service';
 
 @Component({
   selector: 'app-table-of-contents',
