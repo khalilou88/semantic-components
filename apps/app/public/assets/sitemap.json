@@ -50,6 +50,12 @@
             "title": "Button",
             "path": "/docs/components/button",
             "description": "Displays a button or a component that looks like a button."
+          },
+          {
+            "id": "editor",
+            "title": "Editor",
+            "path": "/docs/components/editor",
+            "description": "An editor using Tiptap."
           }
         ]
       }

@@ -40,6 +40,11 @@ export const appRoutes: Route[] = [
         loadComponent: () => import('./docs/components/button/button-page'),
         title: 'Button Page',
       },
+      {
+        path: 'components/editor',
+        loadComponent: () => import('./docs/components/editor/editor-page'),
+        title: 'Editor Page',
+      },
     ],
   },
   { path: '', redirectTo: '/landing', pathMatch: 'full' },
