@@ -1,8 +1,16 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  input,
+  signal,
+} from '@angular/core';
+
+import { ScCodeHighlighter } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-preview-code-tabs',
-  imports: [],
+  imports: [ScCodeHighlighter],
   template: `
     <div class="space-y-4">
       @if (title()) {
@@ -12,26 +20,41 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@a
         <div class="flex border-b border-border">
           <button
             class="px-4 py-2 text-sm font-medium transition-all border-b-2 border-primary data-[state=inactive]:border-transparent data-[state=inactive]:text-muted-foreground"
-            data-state="active"
+            [attr.data-state]="activeTab() === 'tab1' ? 'active' : 'inactive'"
+            (click)="activeTab.set('tab1')"
             data-tab="tab1"
           >
             Preview
           </button>
           <button
             class="px-4 py-2 text-sm font-medium transition-all border-b-2 border-transparent data-[state=active]:border-primary text-muted-foreground data-[state=active]:text-foreground"
-            data-state="inactive"
+            [attr.data-state]="activeTab() === 'tab2' ? 'active' : 'inactive'"
+            (click)="activeTab.set('tab2')"
             data-tab="tab2"
           >
             Code
           </button>
         </div>
-        <div class="py-4 data-[state=inactive]:hidden" data-state="active" data-tab-content="tab1">
-          <div class="relative">
-            <pre
-              class="text-sm overflow-x-auto rounded-lg border bg-background px-4 py-3 font-mono text-card-foreground whitespace-pre-wrap break-words"
-            >
+        <div
+          class="py-4 data-[state=inactive]:hidden"
+          [attr.data-state]="activeTab() === 'tab1' ? 'active' : 'inactive'"
+          data-tab-content="tab1"
+        >
+          <div class="bg-card text-card-foreground rounded-lg border border-border shadow-sm p-6">
             <ng-content />
-          </pre>
+          </div>
+        </div>
+        <div
+          class="py-4 data-[state=inactive]:hidden"
+          [attr.data-state]="activeTab() === 'tab2' ? 'active' : 'inactive'"
+          data-tab-content="tab2"
+        >
+          <div class="relative">
+            <div
+              class="bg-card text-card-foreground rounded-lg border border-border shadow-sm p-6 overflow-x-auto"
+            >
+              <sc-code-highlighter [code]="code()" language="angular-ts" />
+            </div>
             <button
               class="absolute top-2 right-2 inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-secondary hover:text-secondary-foreground h-6 w-6"
             >
@@ -53,9 +76,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@a
             </button>
           </div>
         </div>
-        <div class="p-4 data-[state=inactive]:hidden" data-state="inactive" data-tab-content="tab2">
-          <p>This is the Password tab content.</p>
-        </div>
       </div>
     </div>
   `,
@@ -65,4 +85,8 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@a
 })
 export class PreviewCodeTabs {
   readonly title = input<string>('');
+
+  readonly code = input<string>('');
+
+  readonly activeTab = signal<'tab1' | 'tab2'>('tab1');
 }
