@@ -63,5 +63,5 @@ export class PreviewCodeTabs {
 
   readonly code = input<string>('');
 
-  readonly activeTab = signal<'tab1' | 'tab2'>('tab1');
+  protected readonly activeTab = signal<'tab1' | 'tab2'>('tab1');
 }

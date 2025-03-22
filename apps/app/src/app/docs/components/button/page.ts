@@ -145,6 +145,5 @@ export class ScCheckboxItem implements OnInit {
       this.checked.set(this.cdkOption.isSelected());
     });
   }
-}
-  `;
+}`;
 }
