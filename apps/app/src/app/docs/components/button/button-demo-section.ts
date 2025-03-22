@@ -7,7 +7,7 @@ import { ButtonDemo } from './button-demo';
   selector: 'app-button-demo-section',
   imports: [PreviewCodeTabs, ButtonDemo],
   template: `
-    <app-preview-code-tabs [code]="code" title="Variants">
+    <app-preview-code-tabs [code]="code" title="Variants" level="3">
       <app-button-demo />
     </app-preview-code-tabs>
   `,

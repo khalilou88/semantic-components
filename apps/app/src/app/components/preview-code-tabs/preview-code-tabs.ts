@@ -8,13 +8,21 @@ import {
 
 import { ScCodeHighlighter } from '@semantic-components/ui';
 
+import { TocHeadingDirective } from '../toc/toc-heading.directive';
+
 @Component({
   selector: 'app-preview-code-tabs',
-  imports: [ScCodeHighlighter],
+  imports: [ScCodeHighlighter, TocHeadingDirective],
   template: `
     <div class="space-y-4">
       @if (title()) {
-        <h2 class="text-lg font-semibold">{{ title() }}</h2>
+        @if (level() === '2') {
+          <h2 class="text-lg font-semibold" tocHeading>{{ title() }}</h2>
+        }
+
+        @if (level() === '3') {
+          <h3 class="text-lg font-semibold" tocHeading>{{ title() }}</h3>
+        }
       }
       <div class="w-full">
         <div class="flex border-b border-border">
@@ -60,6 +68,8 @@ import { ScCodeHighlighter } from '@semantic-components/ui';
 })
 export class PreviewCodeTabs {
   readonly title = input<string>('');
+
+  readonly level = input<'2' | '3'>('2');
 
   readonly code = input<string>('');
 

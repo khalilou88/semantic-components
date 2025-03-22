@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { CommonModule, JsonPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
@@ -7,48 +7,53 @@ import { TocItem, TocService } from './toc/toc.service';
 
 @Component({
   selector: 'app-table-of-contents',
-  imports: [CommonModule],
+  imports: [CommonModule, JsonPipe],
   template: `
     <div class="mb-4">
       <h4 class="text-sm font-medium">On This Page</h4>
       <ul class="mt-2 space-y-2 text-sm">
-        <ng-container
-          *ngTemplateOutlet="tocTemplate; context: { items: tocItems$ | async, level: 1 }"
-        ></ng-container>
+        @for (item of tocItems$ | async; track $index) {
+          <li [style.padding-left.px]="(item.level - minLevel) * indentation">
+            <a
+              class="text-muted-foreground hover:text-foreground"
+              [class.active]="item.isActive"
+              (click)="scrollTo(item.id)"
+              href="javascript:void(0)"
+            >
+              {{ item.text }}
+            </a>
+          </li>
+        }
       </ul>
     </div>
 
-    <ng-template #tocTemplate let-items="items" let-level="level">
-      <ng-container *ngFor="let item of items">
-        <li>
-          <a
-            class="text-muted-foreground hover:text-foreground"
-            (click)="scrollToHeading(item.id)"
-            href="javascript:void(0)"
-          >
-            {{ item.text }}
-          </a>
-          <ul class="mt-2 space-y-2 text-sm" *ngIf="item.children.length > 0">
-            <ng-container
-              *ngTemplateOutlet="tocTemplate; context: { items: item.children, level: level + 1 }"
-            ></ng-container>
-          </ul>
-        </li>
-      </ng-container>
-    </ng-template>
+    {{ tocItems$ | async | json }}
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableOfContents {
+  @Input() title: string = 'Table of Contents';
+  @Input() indentation: number = 12; // Pixels to indent each level
+
   tocItems$: Observable<TocItem[]>;
+  minLevel: number = 1;
 
   constructor(private readonly tocService: TocService) {
-    this.tocItems$ = this.tocService.tocItems$;
+    this.tocItems$ = this.tocService.tocItems;
   }
 
-  scrollToHeading(id: string): void {
+  ngOnInit(): void {
+    // Calculate the minimum heading level to properly indent items
+    this.tocService.tocItems.subscribe((items) => {
+      if (items.length > 0) {
+        this.minLevel = Math.min(...items.map((item) => item.level));
+      }
+    });
+  }
+
+  scrollTo(id: string): void {
     this.tocService.scrollToHeading(id);
   }
 }

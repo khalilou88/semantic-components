@@ -1,13 +1,15 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { TocHeadingDirective } from '../../../components/toc/toc-heading.directive';
+
 @Component({
   selector: 'app-introduction-page',
-  imports: [],
+  imports: [TocHeadingDirective],
   template: `
     <div class="space-y-6">
       <div class="flex items-center justify-between">
         <div class="space-y-1">
-          <h2 class="text-2xl font-semibold tracking-tight">Key Features</h2>
+          <h2 class="text-2xl font-semibold tracking-tight" tocHeading>Key Features</h2>
           <p class="text-muted-foreground">Everything you need to build your UI.</p>
         </div>
       </div>
@@ -102,7 +104,9 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 
       <div class="space-y-6">
         <div class="space-y-3">
-          <h3 class="text-xl font-semibold tracking-tight">Install the following dependencies:</h3>
+          <h3 class="text-xl font-semibold tracking-tight" tocHeading>
+            Install the following dependencies:
+          </h3>
 
           <div class="relative">
             <pre
@@ -310,7 +314,7 @@ npm install &#64;radix-ui/react-icons tailwindcss-animate class-variance-authori
 
       <div class="space-y-6">
         <div class="space-y-3">
-          <h3 class="text-xl font-semibold tracking-tight">Install the following dependencies:</h3>
+          <h3 class="text-xl font-semibold tracking-tight" tocHeading>Abc:</h3>
 
           <div class="relative">
             <pre
