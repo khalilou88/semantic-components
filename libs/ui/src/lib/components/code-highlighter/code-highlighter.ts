@@ -15,6 +15,7 @@ import { cn } from '@semantic-components/utils';
 import { SiCopyIcon } from '@semantic-icons/lucide-icons';
 
 import { ScButton } from '../button';
+import { ScTheme } from '../theme-toggler/theme';
 import { ShikiService, availableThemes } from './shiki.service';
 
 @Component({
@@ -35,6 +36,8 @@ import { ShikiService, availableThemes } from './shiki.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCodeHighlighter {
+  private readonly themeService = inject(ScTheme);
+
   readonly classInput = input<string>('', {
     alias: 'class',
   });
@@ -50,7 +53,22 @@ export class ScCodeHighlighter {
   readonly language = input<'angular-ts' | 'angular-html' | 'typescript' | 'shellscript'>(
     'angular-html',
   );
-  readonly theme = input(availableThemes.light);
+
+  readonly themeInput = input<string>('', {
+    alias: 'class',
+  });
+
+  readonly theme = computed(() => {
+    if (this.themeInput()) {
+      return this.themeInput();
+    }
+
+    if (this.themeService.isDarkMode()) {
+      return availableThemes.dark;
+    }
+
+    return availableThemes.light;
+  });
 
   protected readonly highlightedCode = signal<SafeHtml>('');
 
