@@ -3,7 +3,7 @@ import { Route } from '@angular/router';
 export const appRoutes: Route[] = [
   {
     path: 'landing',
-    loadComponent: () => import('./landing/page'),
+    loadComponent: () => import('./landing/landing-page'),
     title: 'Landing Page',
   },
   {
@@ -51,7 +51,7 @@ export const appRoutes: Route[] = [
   {
     // Wildcard route for a 404 page
     path: '**',
-    loadComponent: () => import('./landing/page'),
+    loadComponent: () => import('./landing/landing-page'),
     title: '404 Not Found Page',
   },
 ];

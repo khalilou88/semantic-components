@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { ScButton } from '@semantic-components/ui';
 
 @Component({
-  selector: 'app-page',
+  selector: 'app-landing-page',
   imports: [ScButton],
   template: `
     <!-- Hero Section -->
@@ -25,4 +25,4 @@ import { ScButton } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class Page {}
+export default class LandingPage {}
