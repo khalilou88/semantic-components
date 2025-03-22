@@ -12,7 +12,7 @@ import { TocHeadingDirective } from '../../../components/toc/toc-heading.directi
 import { TocItem, TocService } from '../../../components/toc/toc.service';
 
 @Component({
-  selector: 'app-page',
+  selector: 'app-introduction-page',
   imports: [TocHeadingDirective],
   template: `
     <div class="space-y-6">
@@ -438,7 +438,7 @@ npm install &#64;radix-ui/react-icons tailwindcss-animate class-variance-authori
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class Page implements AfterViewInit, OnDestroy {
+export default class IntroductionPage implements AfterViewInit, OnDestroy {
   @ViewChildren(TocHeadingDirective) headings!: QueryList<TocHeadingDirective>;
 
   constructor(private readonly tocService: TocService) {}

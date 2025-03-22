@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'app-page',
+  selector: 'app-typography-page',
   imports: [],
   template: `
     <div class="bg-background text-foreground font-sans leading-7 max-w-3xl mx-auto p-6">
@@ -123,7 +123,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class Page {
+export default class TypographyPage {
   code = `// This is a code block
 function greet() {
   console.log("Hello, Tailwind Typography!");

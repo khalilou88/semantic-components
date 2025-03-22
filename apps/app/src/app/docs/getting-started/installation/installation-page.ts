@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'app-page',
+  selector: 'app-installation-page',
   imports: [],
   template: `
     <p>page works!</p>
@@ -10,4 +10,4 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class Page {}
+export default class InstallationPage {}

@@ -12,27 +12,27 @@ export const appRoutes: Route[] = [
     children: [
       {
         path: 'getting-started/introduction',
-        loadComponent: () => import('./docs/getting-started/introduction/page'),
+        loadComponent: () => import('./docs/getting-started/introduction/introduction-page'),
         title: 'Introduction Page',
       },
       {
         path: 'getting-started/installation',
-        loadComponent: () => import('./docs/getting-started/installation/page'),
+        loadComponent: () => import('./docs/getting-started/installation/installation-page'),
         title: 'Installation Page',
       },
       {
         path: 'getting-started/typography',
-        loadComponent: () => import('./docs/getting-started/typography/page'),
+        loadComponent: () => import('./docs/getting-started/typography/typography-page'),
         title: 'Typography Page',
       },
       {
         path: 'components/accordion',
-        loadComponent: () => import('./docs/components/accordion/page'),
+        loadComponent: () => import('./docs/components/accordion/accordion-page'),
         title: 'Accordion Page',
       },
       {
         path: 'components/alert',
-        loadComponent: () => import('./docs/components/alert/page'),
+        loadComponent: () => import('./docs/components/alert/alert-page'),
         title: 'Alert Page',
       },
       {
