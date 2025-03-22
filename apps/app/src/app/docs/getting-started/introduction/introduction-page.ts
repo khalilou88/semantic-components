@@ -1,24 +1,13 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  QueryList,
-  ViewChildren,
-  ViewEncapsulation,
-} from '@angular/core';
-
-import { TocHeadingDirective } from '../../../components/toc/toc-heading.directive';
-import { TocItem, TocService } from '../../../components/toc/toc.service';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-introduction-page',
-  imports: [TocHeadingDirective],
+  imports: [],
   template: `
     <div class="space-y-6">
       <div class="flex items-center justify-between">
         <div class="space-y-1">
-          <h2 class="text-2xl font-semibold tracking-tight" tocHeading>Key Features</h2>
+          <h2 class="text-2xl font-semibold tracking-tight">Key Features</h2>
           <p class="text-muted-foreground">Everything you need to build your UI.</p>
         </div>
       </div>
@@ -43,7 +32,7 @@ import { TocItem, TocService } from '../../../components/toc/toc.service';
                 <path d="m9 18 6-6-6-6"></path>
               </svg>
             </div>
-            <h3 class="text-lg font-medium" tocHeading>Accessible</h3>
+            <h3 class="text-lg font-medium">Accessible</h3>
           </div>
           <p class="mt-2 text-sm text-muted-foreground">
             All components follow WAI-ARIA guidelines.
@@ -70,7 +59,7 @@ import { TocItem, TocService } from '../../../components/toc/toc.service';
                 <line x1="2" x2="5" y1="22" y2="19"></line>
               </svg>
             </div>
-            <h3 class="text-lg font-medium" tocHeading>Themeable</h3>
+            <h3 class="text-lg font-medium">Themeable</h3>
           </div>
           <p class="mt-2 text-sm text-muted-foreground">
             Themed with CSS variables for easy customization.
@@ -113,9 +102,7 @@ import { TocItem, TocService } from '../../../components/toc/toc.service';
 
       <div class="space-y-6">
         <div class="space-y-3">
-          <h3 class="text-xl font-semibold tracking-tight" tocHeading>
-            Install the following dependencies:
-          </h3>
+          <h3 class="text-xl font-semibold tracking-tight">Install the following dependencies:</h3>
 
           <div class="relative">
             <pre
@@ -438,81 +425,4 @@ npm install &#64;radix-ui/react-icons tailwindcss-animate class-variance-authori
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class IntroductionPage implements AfterViewInit, OnDestroy {
-  @ViewChildren(TocHeadingDirective) headings!: QueryList<TocHeadingDirective>;
-
-  constructor(private readonly tocService: TocService) {}
-
-  ngAfterViewInit(): void {
-    // Use setTimeout to avoid ExpressionChangedAfterItHasBeenCheckedError
-    setTimeout(() => {
-      this.buildToc();
-    });
-
-    // Listen for changes in the headings
-    this.headings.changes.subscribe(() => {
-      this.buildToc();
-    });
-  }
-
-  ngOnDestroy(): void {
-    // Clear TOC items when component is destroyed
-    this.tocService.updateTocItems([]);
-  }
-
-  private buildToc(): void {
-    const tocItems: TocItem[] = [];
-
-    // Process the headings
-    this.headings.forEach((heading) => {
-      const element = heading.element;
-      const level = heading.level;
-      const text = heading.text;
-
-      // Generate ID if none exists
-      if (!element.id) {
-        element.id = this.generateId(text);
-      }
-
-      const tocItem: TocItem = {
-        id: element.id,
-        level: level,
-        text: text,
-        children: [],
-      };
-
-      // Add to the hierarchical structure
-      this.addToHierarchy(tocItems, tocItem, level);
-    });
-
-    // Update the TOC service with the new items
-    this.tocService.updateTocItems(tocItems);
-  }
-
-  private addToHierarchy(items: TocItem[], newItem: TocItem, level: number): void {
-    if (items.length === 0 || level === 1) {
-      // First item or H1 level always goes to the root
-      items.push(newItem);
-      return;
-    }
-
-    const lastItem = items[items.length - 1];
-
-    if (lastItem.level < level) {
-      // New item is a child of the last item
-      this.addToHierarchy(lastItem.children, newItem, level);
-    } else {
-      // New item is a sibling of the last item
-      items.push(newItem);
-    }
-  }
-
-  private generateId(text: string): string {
-    return text
-      .toLowerCase()
-      .replace(/[^\w\s-]/g, '') // Remove special characters
-      .replace(/\s+/g, '-') // Replace spaces with hyphens
-      .replace(/-+/g, '-') // Replace multiple hyphens with single hyphen
-      .trim();
-  }
-}
+export default class IntroductionPage {}
