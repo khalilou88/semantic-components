@@ -8,7 +8,7 @@ import { PreviewCodeTabs } from '../../../components/preview-code-tabs/preview-c
   selector: 'app-page',
   imports: [PreviewCodeTabs, ScButton],
   template: `
-    <app-preview-code-tabs>
+    <app-preview-code-tabs title="Buttons">
       <div class="flex flex-wrap gap-2">
         <button sc-button variant="primary">Primary</button>
 

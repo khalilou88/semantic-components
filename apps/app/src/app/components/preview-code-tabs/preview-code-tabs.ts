@@ -1,11 +1,13 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
 
 @Component({
   selector: 'app-preview-code-tabs',
   imports: [],
   template: `
     <div class="space-y-4">
-      <h2 class="text-lg font-semibold">Tabs</h2>
+      @if (title()) {
+        <h2 class="text-lg font-semibold">{{ title() }}</h2>
+      }
       <div class="w-full">
         <div class="flex border-b border-border">
           <button
@@ -61,4 +63,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PreviewCodeTabs {}
+export class PreviewCodeTabs {
+  readonly title = input<string>('');
+}
