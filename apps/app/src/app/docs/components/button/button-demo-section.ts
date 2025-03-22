@@ -4,7 +4,7 @@ import { PreviewCodeTabs } from '../../../components/preview-code-tabs/preview-c
 import { ButtonDemo } from './button-demo';
 
 @Component({
-  selector: 'app-page',
+  selector: 'app-button-demo-section',
   imports: [PreviewCodeTabs, ButtonDemo],
   template: `
     <app-preview-code-tabs [code]="code" title="Variants">
@@ -15,8 +15,8 @@ import { ButtonDemo } from './button-demo';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class Page {
-  code = `import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+export class ButtonDemoSection {
+  protected readonly code = `import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
   
 import { ScButton } from '@semantic-components/ui';
 
@@ -24,23 +24,25 @@ import { ScButton } from '@semantic-components/ui';
   selector: 'app-button-demo',
   imports: [ScButton],
   template: \`
-    <!-- Primary Button -->
-    <button sc-button variant="primary">Primary</button>
+    <div class="flex flex-wrap gap-2 content-center h-96">
+      <!-- Primary Button -->
+      <button sc-button variant="primary">Primary</button>
 
-    <!-- Secondary Button -->
-    <button sc-button variant="secondary">Secondary</button>
+      <!-- Secondary Button -->
+      <button sc-button variant="secondary">Secondary</button>
 
-    <!-- Destructive Button -->
-    <button sc-button variant="destructive">Destructive</button>
+      <!-- Destructive Button -->
+      <button sc-button variant="destructive">Destructive</button>
 
-    <!-- Outline Button -->
-    <button sc-button variant="outline">Outline</button>
+      <!-- Outline Button -->
+      <button sc-button variant="outline">Outline</button>
 
-    <!-- Ghost Button -->
-    <button sc-button variant="ghost">Ghost</button>
+      <!-- Ghost Button -->
+      <button sc-button variant="ghost">Ghost</button>
 
-    <!-- Link Button -->
-    <button sc-button variant="link">Link</button>
+      <!-- Link Button -->
+      <button sc-button variant="link">Link</button>
+    </div>
   \`,
   styles: \`\`,
   encapsulation: ViewEncapsulation.None,

@@ -37,7 +37,7 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'components/button',
-        loadComponent: () => import('./docs/components/button/page'),
+        loadComponent: () => import('./docs/components/button/button-page'),
         title: 'Button Page',
       },
       {
