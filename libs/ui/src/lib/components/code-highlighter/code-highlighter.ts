@@ -15,7 +15,7 @@ import { cn } from '@semantic-components/utils';
 import { SiCopyIcon } from '@semantic-icons/lucide-icons';
 
 import { ScButton } from '../button';
-import { ShikiService, defaultThemes } from './shiki.service';
+import { ShikiService, availableThemes } from './shiki.service';
 
 @Component({
   selector: 'sc-code-highlighter',
@@ -50,7 +50,7 @@ export class ScCodeHighlighter {
   readonly language = input<'angular-ts' | 'angular-html' | 'typescript' | 'shellscript'>(
     'angular-html',
   );
-  readonly theme = input(defaultThemes.light);
+  readonly theme = input(availableThemes.light);
 
   protected readonly highlightedCode = signal<SafeHtml>('');
 
