@@ -23,11 +23,11 @@ export class ShikiService {
     return this.highlighter;
   }
 
-  async highlightCode(code: string, language: string) {
+  async highlightCode(code: string, language: string, theme: string) {
     const highlighter = await this.initializeHighlighter();
     return highlighter.codeToHtml(code, {
       lang: language,
-      theme: availableThemes.light,
+      theme: theme,
     });
   }
 }

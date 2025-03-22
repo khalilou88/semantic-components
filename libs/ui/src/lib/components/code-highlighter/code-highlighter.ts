@@ -56,7 +56,11 @@ export class ScCodeHighlighter {
 
   constructor() {
     effect(async () => {
-      const highlighted = await this.shikiService.highlightCode(this.code(), this.language());
+      const highlighted = await this.shikiService.highlightCode(
+        this.code(),
+        this.language(),
+        this.theme(),
+      );
       this.highlightedCode.set(this.sanitizer.bypassSecurityTrustHtml(highlighted));
     });
   }
