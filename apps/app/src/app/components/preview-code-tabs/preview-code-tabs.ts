@@ -40,7 +40,7 @@ import { ScCodeHighlighter } from '@semantic-components/ui';
           [attr.data-state]="activeTab() === 'tab1' ? 'active' : 'inactive'"
           data-tab-content="tab1"
         >
-          <div class="bg-card text-card-foreground rounded-md border border-border p-6">
+          <div class="bg-card text-card-foreground rounded-md border border-border p-6 h-full">
             <ng-content />
           </div>
         </div>
