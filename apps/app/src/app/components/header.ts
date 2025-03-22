@@ -1,10 +1,12 @@
+import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 import { ScThemeToggler } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-header',
-  imports: [ScThemeToggler],
+  imports: [ScThemeToggler, RouterLink, RouterLinkActive, NgClass],
   template: `
     <div class="flex h-14 items-center px-4">
       <div class="mr-4 flex">
@@ -25,18 +27,26 @@ import { ScThemeToggler } from '@semantic-components/ui';
               d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3"
             ></path>
           </svg>
-          <span class="hidden font-bold sm:inline-block">Semantic Components</span>
+          <span class="hidden font-bold sm:inline-block" routerLink="/">Semantic Components</span>
         </a>
         <nav class="flex items-center space-x-6 text-sm font-medium">
-          <a class="transition-colors hover:text-foreground/80 text-foreground/60" href="#">Docs</a>
-          <a class="transition-colors hover:text-foreground/80 text-foreground" href="#">
+          <a
+            class="transition-colors hover:text-foreground/80"
+            #link1="routerLinkActive"
+            [ngClass]="link1.isActive ? 'text-foreground' : 'text-foreground/60'"
+            routerLink="/docs/getting-started/introduction"
+            routerLinkActive=""
+          >
+            Docs
+          </a>
+          <a
+            class="transition-colors hover:text-foreground/80"
+            #link2="routerLinkActive"
+            [ngClass]="link2.isActive ? 'text-foreground' : 'text-foreground/60'"
+            routerLink="/docs/components/accordion"
+            routerLinkActive=""
+          >
             Components
-          </a>
-          <a class="transition-colors hover:text-foreground/80 text-foreground/60" href="#">
-            Examples
-          </a>
-          <a class="transition-colors hover:text-foreground/80 text-foreground/60" href="#">
-            Themes
           </a>
         </nav>
       </div>

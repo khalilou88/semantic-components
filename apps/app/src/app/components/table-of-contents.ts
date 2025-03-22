@@ -12,27 +12,6 @@ import { TocItem, TocService } from './toc/toc.service';
     <div class="mb-4">
       <h4 class="text-sm font-medium">On This Page</h4>
       <ul class="mt-2 space-y-2 text-sm">
-        <li>
-          <a class="text-muted-foreground hover:text-foreground" href="#">Introduction</a>
-        </li>
-        <li>
-          <a class="text-muted-foreground hover:text-foreground" href="#">Key Features</a>
-        </li>
-        <li>
-          <a class="text-muted-foreground hover:text-foreground" href="#">Installation</a>
-        </li>
-        <li>
-          <a class="text-muted-foreground hover:text-foreground" href="#">Usage</a>
-        </li>
-        <li>
-          <a class="text-muted-foreground hover:text-foreground" href="#">Component Preview</a>
-        </li>
-      </ul>
-    </div>
-
-    <div class="toc-container">
-      <h2 class="toc-title">Table of Contents</h2>
-      <ul class="toc-list">
         <ng-container
           *ngTemplateOutlet="tocTemplate; context: { items: tocItems$ | async, level: 1 }"
         ></ng-container>
@@ -41,9 +20,15 @@ import { TocItem, TocService } from './toc/toc.service';
 
     <ng-template #tocTemplate let-items="items" let-level="level">
       <ng-container *ngFor="let item of items">
-        <li class="toc-item level-{{ item.level }}">
-          <a (click)="scrollToHeading(item.id)" href="javascript:void(0)">{{ item.text }}</a>
-          <ul class="toc-sublist" *ngIf="item.children.length > 0">
+        <li>
+          <a
+            class="text-muted-foreground hover:text-foreground"
+            (click)="scrollToHeading(item.id)"
+            href="javascript:void(0)"
+          >
+            {{ item.text }}
+          </a>
+          <ul class="mt-2 space-y-2 text-sm" *ngIf="item.children.length > 0">
             <ng-container
               *ngTemplateOutlet="tocTemplate; context: { items: item.children, level: level + 1 }"
             ></ng-container>
