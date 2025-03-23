@@ -10,19 +10,20 @@ import { ScCheckbox, ScCheckboxGroup, ScCheckboxItem } from '@semantic-component
   template: `
     <form [formGroup]="toppingsForm">
       <sc-checkbox-group formControlName="toppings">
+        <div class="font-medium">Toppings</div>
+
         @for (topping of toppingsArray; track topping) {
           <label sc-checkbox-item>
             <input [value]="topping" sc-checkbox />
-            {{ topping }}
+            <span class="text-sm font-normal">{{ topping }}</span>
           </label>
         }
       </sc-checkbox-group>
     </form>
 
-    <br />
-    <br />
-    <br />
-    {{ toppingsForm.value | json }}
+    <div class="mt-10">
+      {{ toppingsForm.value | json }}
+    </div>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
