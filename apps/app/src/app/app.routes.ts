@@ -91,6 +91,11 @@ export const appRoutes: Route[] = [
         title: 'Checkbox Page',
       },
       {
+        path: 'components/checkbox-group',
+        loadComponent: () => import('./docs/components/checkbox-group/checkbox-group-page'),
+        title: 'Checkbox Group Page',
+      },
+      {
         path: 'components/date-picker',
         loadComponent: () => import('./docs/components/date-picker/date-picker-page'),
         title: 'Date Picker Page',

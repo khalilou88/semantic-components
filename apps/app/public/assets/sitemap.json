@@ -112,6 +112,12 @@
             "description": "A control that allows the user to toggle between checked and not checked."
           },
           {
+            "id": "checkbox-group",
+            "title": "Checkbox Group",
+            "path": "/docs/components/checkbox-group",
+            "description": "Provides shared state to a series of checkboxes."
+          },
+          {
             "id": "date-picker",
             "title": "Date Picker",
             "path": "/docs/components/date-picker",
