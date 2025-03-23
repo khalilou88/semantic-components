@@ -4,8 +4,10 @@ import {
   ViewEncapsulation,
   computed,
   inject,
+  input,
 } from '@angular/core';
 
+import { cn } from '@semantic-components/utils';
 import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
 
 import { ScButton } from '../button';
@@ -23,11 +25,20 @@ import { ScTheme } from './theme';
       }
     </button>
   `,
+  host: {
+    '[class]': 'class()',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScThemeToggler {
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
+
+  protected readonly class = computed(() => cn('', this.classInput()));
+
   private readonly themeService = inject(ScTheme);
 
   protected readonly isDarkMode = computed(() => this.themeService.isDarkMode());

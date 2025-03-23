@@ -10,7 +10,7 @@ import { ScThemeToggler } from '@semantic-components/ui';
   template: `
     <div class="flex h-14 items-center px-4">
       <div class="mr-4 flex">
-        <a class="mr-6 flex items-center space-x-2" href="#">
+        <a class="mr-6 flex items-center space-x-2" routerLink="/">
           <svg
             class="h-6 w-6"
             xmlns="http://www.w3.org/2000/svg"
@@ -27,7 +27,7 @@ import { ScThemeToggler } from '@semantic-components/ui';
               d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3"
             ></path>
           </svg>
-          <span class="hidden font-bold sm:inline-block" routerLink="/">Semantic Components</span>
+          <span class="hidden font-bold sm:inline-block">Semantic Components</span>
         </a>
         <nav class="flex items-center space-x-6 text-sm font-medium">
           <a
@@ -52,7 +52,7 @@ import { ScThemeToggler } from '@semantic-components/ui';
       </div>
 
       <div class="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-        <div class="w-full flex-1 md:w-auto md:flex-none">
+        <!--div class="w-full flex-1 md:w-auto md:flex-none">
           <div class="relative">
             <svg
               class="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground"
@@ -75,20 +75,16 @@ import { ScThemeToggler } from '@semantic-components/ui';
               placeholder="Search documentation..."
             />
           </div>
-        </div>
+        </div-->
 
         <nav class="flex items-center">
           <a
             class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2 mr-1"
-            href="#"
+            href="https://github.com/khalilou88/semantic-components"
+            target="_blank"
           >
             GitHub
           </a>
-          <button
-            class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2"
-          >
-            Login
-          </button>
 
           <sc-theme-toggler />
         </nav>
