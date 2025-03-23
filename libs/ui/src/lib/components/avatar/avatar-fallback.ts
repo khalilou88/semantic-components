@@ -15,16 +15,18 @@ import { cn } from '@semantic-components/utils';
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScAvatarFallback {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() =>
-    cn('flex h-full w-full items-center justify-center rounded-full bg-muted', this.class()),
+  protected readonly class = computed(() =>
+    cn('flex h-full w-full items-center justify-center rounded-full bg-muted', this.classInput()),
   );
 }

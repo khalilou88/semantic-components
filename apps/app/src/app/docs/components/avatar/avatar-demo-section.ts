@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { AvatarDemoSection } from './avatar-demo-section';
+import { AvatarDemo } from './avatar-demo';
 
 @Component({
-  selector: 'app-avatar-page',
-  imports: [AvatarDemoSection],
+  selector: 'app-avatar-demo-section',
+  imports: [AvatarDemo],
   template: `
-    <app-avatar-demo-section />
+    <app-avatar-demo />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class AvatarPage {}
+export class AvatarDemoSection {}

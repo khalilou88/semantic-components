@@ -16,7 +16,7 @@ import { cn } from '@semantic-components/utils';
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
     '(load)': 'handleLoad()',
     '(error)': 'handleError()',
   },
@@ -25,24 +25,26 @@ import { cn } from '@semantic-components/utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScAvatarImage {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() =>
+  protected readonly class = computed(() =>
     cn(
       'aspect-square h-full w-full',
       this.state() === 'loading' && 'invisible h-0 w-0',
       this.state() === 'error' && 'hidden',
-      this.class(),
+      this.classInput(),
     ),
   );
 
-  state = signal<'loading' | 'loaded' | 'error'>('loading');
+  private readonly state = signal<'loading' | 'loaded' | 'error'>('loading');
 
-  handleLoad() {
+  protected handleLoad() {
     this.state.set('loaded');
   }
 
-  handleError() {
+  protected handleError() {
     this.state.set('error');
   }
 }

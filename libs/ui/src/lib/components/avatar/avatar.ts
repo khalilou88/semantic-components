@@ -8,31 +8,25 @@ import {
 
 import { cn } from '@semantic-components/utils';
 
-import { ScAvatarFallback } from './avatar-fallback';
-import { ScAvatarImage } from './avatar-image';
-
 @Component({
   selector: 'sc-avatar',
-  imports: [ScAvatarImage, ScAvatarFallback],
+  imports: [],
   template: `
-    <img [alt]="alt()" [src]="src()" sc-avatar-image />
-    <div sc-avatar-fallback>{{ fallback() }}</div>
+    <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScAvatar {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() =>
-    cn('relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full', this.class()),
+  protected readonly class = computed(() =>
+    cn('relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full', this.classInput()),
   );
-
-  src = input.required<string>();
-  alt = input<string>('');
-  fallback = input<string>('');
 }
