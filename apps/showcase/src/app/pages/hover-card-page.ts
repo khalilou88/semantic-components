@@ -1,11 +1,24 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { ScAvatar, ScButton, ScHoverCardTriggerFor } from '@semantic-components/ui';
+import {
+  ScAvatar,
+  ScAvatarFallback,
+  ScAvatarImage,
+  ScButton,
+  ScHoverCardTriggerFor,
+} from '@semantic-components/ui';
 import { SiCalendarDaysIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-hover-card-page',
-  imports: [ScButton, ScHoverCardTriggerFor, SiCalendarDaysIcon, ScAvatar],
+  imports: [
+    ScButton,
+    ScHoverCardTriggerFor,
+    SiCalendarDaysIcon,
+    ScAvatar,
+    ScAvatarImage,
+    ScAvatarFallback,
+  ],
   template: `
     <div class="m-10">
       <button [scHoverCardTriggerFor]="templateForHoverCardTrigger" sc-button variant="link">
@@ -14,7 +27,11 @@ import { SiCalendarDaysIcon } from '@semantic-icons/lucide-icons';
 
       <ng-template #templateForHoverCardTrigger>
         <div class="flex justify-between space-x-4">
-          <sc-avatar src="https://github.com/vercel.png" fallback="VC" />
+          <sc-avatar>
+            <img src="https://github.com/vercel.png" alt="" sc-avatar-image />
+            <div sc-avatar-fallback>VC</div>
+          </sc-avatar>
+
           <div class="space-y-1">
             <h4 class="text-sm font-semibold">&#64;nextjs</h4>
             <p class="text-sm">The React Framework – created and maintained by &#64;vercel.</p>
