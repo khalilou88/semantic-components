@@ -61,9 +61,19 @@ export const appRoutes: Route[] = [
         title: 'Badge Page',
       },
       {
+        path: 'components/breadcrumb',
+        loadComponent: () => import('./docs/components/breadcrumb/breadcrumb-page'),
+        title: 'Breadcrumb Page',
+      },
+      {
         path: 'components/calendar',
         loadComponent: () => import('./docs/components/calendar/calendar-page'),
         title: 'Calendar Page',
+      },
+      {
+        path: 'components/card',
+        loadComponent: () => import('./docs/components/card/card-page'),
+        title: 'Card Page',
       },
       {
         path: 'components/date-picker',

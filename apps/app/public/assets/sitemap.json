@@ -70,6 +70,12 @@
             "description": "Displays a badge or a component that looks like a badge."
           },
           {
+            "id": "breadcrumb",
+            "title": "Breadcrumb",
+            "path": "/docs/components/breadcrumb",
+            "description": "Displays the path to the current resource using a hierarchy of links."
+          },
+          {
             "id": "button",
             "title": "Button",
             "path": "/docs/components/button",
@@ -80,6 +86,12 @@
             "title": "Calendar",
             "path": "/docs/components/calendar",
             "description": "A date field component that allows users to enter and edit date."
+          },
+          {
+            "id": "card",
+            "title": "Card",
+            "path": "/docs/components/card",
+            "description": "Displays a card with header, content, and footer."
           },
           {
             "id": "date-picker",
