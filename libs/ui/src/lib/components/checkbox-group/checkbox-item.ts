@@ -27,6 +27,4 @@ export class ScCheckboxItem {
   });
 
   protected readonly class = computed(() => cn('flex items-center gap-2', this.classInput()));
-
-  readonly value = input.required<string>();
 }

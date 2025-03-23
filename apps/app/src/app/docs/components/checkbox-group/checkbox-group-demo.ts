@@ -11,7 +11,7 @@ import { ScCheckbox2, ScCheckboxGroup, ScCheckboxItem } from '@semantic-componen
     <form [formGroup]="toppingsForm">
       <sc-checkbox-group formControlName="toppings">
         @for (topping of toppingsArray; track topping) {
-          <label [value]="topping" sc-checkbox-item>
+          <label sc-checkbox-item>
             <input sc-checkbox2 />
             {{ topping }}
           </label>

@@ -24,6 +24,7 @@ import { cn } from '@semantic-components/utils';
   `,
   host: {
     '[id]': 'id()',
+    '[type]': 'type()',
     '[class]': 'class()',
   },
   styles: ``,
