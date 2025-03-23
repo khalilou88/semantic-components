@@ -60,40 +60,39 @@ export class ScCheckbox2 {
     cn(
       //Base styles
       'appearance-none', //removes default browser styling
-      'w-6 h-6', //sets width and height (24px)
-      'border-2 border-gray-300', //adds border
-      'rounded', //adds border radius
-      'bg-white', //sets background color
+      'size-4', //sets width and height (20px)
+      'shrink-0',
+      'border border-primary', //adds border
+      'rounded-sm', //adds border radius
+      'shadow',
+      // 'bg-white', //sets background color
       'cursor-pointer',
       'outline-none',
       'transition-all duration-200', //adds smooth transitions
 
       //Interactive states
-      'hover:border-gray-600', //darkens border on hover
-      'focus:border-blue-500', //changes border color on focus
-      'focus:ring-2 focus:ring-blue-500/20', //adds focus ring
+      'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
 
       //Checked state
-      'checked:bg-blue-500 checked:border-blue-500', //changes background and border when checked
-      'checked:hover:bg-blue-600 checked:hover:border-blue-600', //darker blue on hover when checked
+      'checked:bg-primary',
+      'checked:text-primary-foreground',
       // Applies SVG background image when checked
       '[&:checked]:bg-[image:var(--checkbox-checked-bg)]',
       'checked:bg-no-repeat', // Prevents background image from repeating
       'checked:bg-center', // Centers the background image
       'checked:bg-contain', // Scales image to fit while maintaining aspect ratio
 
-      //indeterminate
-      'indeterminate:bg-blue-500 indeterminate:border-blue-500', //changes background and border when checked
-      'indeterminate:hover:bg-blue-600 indeterminate:hover:border-blue-600', //darker blue on hover when checked
+      //Indeterminate state
+      'indeterminate:bg-primary',
+      'indeterminate:text-primary-foreground',
       '[&:indeterminate]:bg-[image:var(--checkbox-indeterminate-bg)]',
       'indeterminate:bg-no-repeat', // Prevents background image from repeating
       'indeterminate:bg-center', // Centers the background image
       'indeterminate:bg-contain', // Scales image to fit while maintaining aspect ratio
 
       //Disabled state
-      'disabled:bg-gray-100 disabled:border-gray-300', //styles for disabled state
+      'disabled:opacity-50', //styles for disabled state
       'disabled:cursor-not-allowed', //changes cursor
-      'disabled:checked:bg-gray-300 disabled:checked:border-gray-300', //styles for checked and disabled
 
       this.classInput(),
     ),
