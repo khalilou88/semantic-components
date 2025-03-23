@@ -52,6 +52,12 @@
             "description": "Displays a button or a component that looks like a button."
           },
           {
+            "id": "calendar",
+            "title": "Calendar",
+            "path": "/docs/components/calendar",
+            "description": "A date field component that allows users to enter and edit date."
+          },
+          {
             "id": "date-picker",
             "title": "Date Picker",
             "path": "/docs/components/date-picker",
