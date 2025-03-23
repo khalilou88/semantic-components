@@ -14,7 +14,7 @@ import {
 import { cn } from '@semantic-components/utils';
 
 import { ScLabel } from '../label';
-import { ScCheckbox } from './checkbox';
+import { ScCheckbox1 } from './checkbox1';
 
 @Component({
   selector: 'sc-checkbox-field',
@@ -59,7 +59,7 @@ export class ScCheckboxField {
 
   readonly scLabel = contentChild(ScLabel);
 
-  readonly scCheckbox = contentChild(ScCheckbox);
+  readonly scCheckbox = contentChild(ScCheckbox1);
 
   constructor() {
     afterNextRender(() => {

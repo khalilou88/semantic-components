@@ -1,110 +1,107 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   ElementRef,
   ViewEncapsulation,
+  afterRenderEffect,
   booleanAttribute,
   computed,
-  effect,
-  forwardRef,
   inject,
   input,
   linkedSignal,
   output,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { cn } from '@semantic-components/utils';
-import { SiCheckIcon, SiMinusIcon } from '@semantic-icons/lucide-icons';
+
+export interface ScCheckboxChange {
+  checked: boolean;
+  value: string;
+}
 
 @Component({
-  selector: 'sc-checkbox',
-  imports: [SiCheckIcon, SiMinusIcon],
+  selector: 'input[sc-checkbox]',
+  imports: [],
   template: `
-    <input
-      [id]="id()"
-      [attr.aria-label]="ariaLabel()"
-      [class]="checkboxClass()"
-      [disabled]="disabled()"
-      [checked]="checked()"
-      [attr.aria-checked]="checked()"
-      [attr.data-state]="state()"
-      (change)="onInteractionEvent($event)"
-      (click)="toggle()"
-      data-slot="control"
-      type="checkbox"
-    />
-
-    @if (indeterminate()) {
-      <svg [class]="svgClass()" si-minus-icon></svg>
-    } @else if (checked()) {
-      <svg [class]="svgClass()" si-check-icon></svg>
-    }
+    <ng-content />
   `,
   host: {
+    '[id]': 'id()',
+    '[type]': 'type()',
     '[class]': 'class()',
+    '[checked]': 'checked()',
+    '(click)': 'handleClick($event)',
+    'data-slot': 'control',
   },
-  styles: ``,
+  styles: `
+    :root {
+      --checkbox-checked-bg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='lucide lucide-check'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+      --checkbox-indeterminate-bg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='lucide lucide-minus'%3E%3Cpath d='M5 12h14'/%3E%3C/svg%3E");
+    }
+  `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ScCheckbox),
-      multi: true,
-    },
-  ],
 })
-export class ScCheckbox implements ControlValueAccessor {
+export class ScCheckbox {
+  private readonly hostRef = inject(ElementRef);
+
   readonly idInput = input<string>(inject(_IdGenerator).getId('sc-checkbox-'), {
     alias: 'id',
   });
-
   readonly id = linkedSignal(() => this.idInput());
 
-  private readonly hostRef = inject(ElementRef);
-  private readonly changeDetectorRef = inject(ChangeDetectorRef);
+  readonly type = input<'checkbox'>('checkbox');
 
   readonly classInput = input<string>('', {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('relative block size-4', this.classInput()));
-
-  //TODO add this to class
-  protected readonly checkboxClass = computed(() =>
+  protected readonly class = computed(() =>
     cn(
-      'peer appearance-none absolute top-0 left-0 size-full shrink-0 cursor-pointer rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground data-[state=indeterminate]:bg-primary data-[state=indeterminate]:text-primary-foreground',
+      //Base styles
+      'appearance-none', //removes default browser styling
+      'size-4', //sets width and height (20px)
+      'shrink-0',
+      'border border-primary', //adds border
+      'rounded-sm', //adds border radius
+      'shadow',
+      // 'bg-white', //sets background color
+      'cursor-pointer',
+      'outline-none',
+      'transition-all duration-200', //adds smooth transitions
+
+      //Interactive states
+      'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
+
+      //Checked state
+      'checked:bg-primary',
+      'checked:text-primary-foreground',
+      // Applies SVG background image when checked
+      '[&:checked]:bg-[image:var(--checkbox-checked-bg)]',
+      'checked:bg-no-repeat', // Prevents background image from repeating
+      'checked:bg-center', // Centers the background image
+      'checked:bg-contain', // Scales image to fit while maintaining aspect ratio
+
+      //Indeterminate state
+      'indeterminate:bg-primary',
+      'indeterminate:text-primary-foreground',
+      '[&:indeterminate]:bg-[image:var(--checkbox-indeterminate-bg)]',
+      'indeterminate:bg-no-repeat', // Prevents background image from repeating
+      'indeterminate:bg-center', // Centers the background image
+      'indeterminate:bg-contain', // Scales image to fit while maintaining aspect ratio
+
+      //Disabled state
+      'disabled:opacity-50', //styles for disabled state
+      'disabled:cursor-not-allowed', //changes cursor
+
+      this.classInput(),
     ),
   );
 
-  //TODO add this to class
-  protected readonly svgClass = computed(() =>
-    cn(
-      'absolute top-0 left-0 size-full outline-none cursor-pointer pointer-events-none text-primary-foreground',
-    ),
-  );
-
-  // readonly labelClassInput = input<string>('', {
-  //   alias: 'labelClass',
-  // });
-
-  // protected readonly labelClass = computed(() =>
-  //   cn(
-  //     'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
-  //     this.labelClassInput(),
-  //   ),
-  // );
-
-  readonly ariaLabel = input<string | null>(null, { alias: 'aria-label' });
-
-  readonly indeterminateInput = input<boolean, unknown>(false, {
-    alias: 'indeterminate',
+  readonly indeterminate = input<boolean, unknown>(false, {
     transform: booleanAttribute,
   });
-  protected readonly indeterminate = linkedSignal(() => this.indeterminateInput());
 
   readonly checkedInput = input<boolean, unknown>(false, {
     alias: 'checked',
@@ -113,75 +110,23 @@ export class ScCheckbox implements ControlValueAccessor {
   protected readonly checked = linkedSignal(() => this.checkedInput());
   readonly checkedChange = output<boolean>();
 
-  readonly disabledInput = input<boolean, unknown>(false, {
-    alias: 'disabled',
+  readonly value = input<string>('');
+  readonly change = output<ScCheckboxChange>();
+
+  readonly disabled = input<boolean, unknown>(false, {
     transform: booleanAttribute,
-  });
-  protected readonly disabled = linkedSignal(() => this.disabledInput());
-
-  protected readonly state = computed<'indeterminate' | 'checked' | 'unchecked'>(() => {
-    if (this.indeterminate()) {
-      return 'indeterminate';
-    }
-
-    if (this.checked()) {
-      return 'checked';
-    }
-
-    return 'unchecked';
   });
 
   constructor() {
-    effect(() => {
+    afterRenderEffect(() => {
       this.hostRef.nativeElement.indeterminate = this.indeterminate();
     });
-
-    effect(() => {
-      this.checkedChange.emit(this.checked());
-    });
   }
 
-  protected toggle() {
-    if (this.disabled()) {
-      return;
-    }
-
-    const v = !this.checked();
-    this.checked.set(v);
-
-    if (this.indeterminate()) {
-      this.indeterminate.set(false);
-    }
-
-    this.onChange(v);
-    this.changeDetectorRef.markForCheck();
-  }
-
-  writeValue(checked: boolean): void {
-    this.checked.set(checked);
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onChange: any = () => {};
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onTouch: any = () => {};
-
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouch = fn;
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-    this.disabled.set(isDisabled);
-  }
-
-  protected onInteractionEvent(event: Event) {
-    // We always have to stop propagation on the change event.
-    // Otherwise the change event, from the input element, will bubble up and
-    // emit its event object to the `change` output.
-    event.stopPropagation();
+  protected handleClick(event: MouseEvent): void {
+    this.checked.update((checked: boolean) => !checked);
+    this.checkedChange.emit(this.checked());
+    this.change.emit({ checked: this.checked(), value: this.value() });
+    event.preventDefault();
   }
 }

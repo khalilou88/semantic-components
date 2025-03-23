@@ -17,7 +17,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { cn } from '@semantic-components/utils';
 
-import { ScCheckbox2, ScCheckboxChange } from '../checkbox/checkbox2';
+import { ScCheckbox, ScCheckboxChange } from '../checkbox/checkbox';
 
 @Component({
   selector: 'sc-checkbox-group',
@@ -56,7 +56,7 @@ export class ScCheckboxGroup implements AfterContentInit, ControlValueAccessor {
 
   readonly value = model<string[]>([]);
 
-  readonly checkboxes = contentChildren(ScCheckbox2, { descendants: true });
+  readonly checkboxes = contentChildren(ScCheckbox, { descendants: true });
 
   ngAfterContentInit() {
     this.checkboxes().forEach((checkbox) => {

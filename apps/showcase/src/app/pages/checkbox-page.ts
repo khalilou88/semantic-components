@@ -13,7 +13,7 @@ import {
   ScCard,
   ScCardContent,
   ScCheckbox,
-  ScCheckbox2,
+  ScCheckbox1,
   ScCheckboxContainer,
   ScCheckboxField,
   ScCodeHighlighter,
@@ -33,7 +33,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
   selector: 'app-checkbox-page',
   imports: [
     ScCheckbox,
-    ScCheckbox2,
+    ScCheckbox1,
     ReactiveFormsModule,
     ScButton,
     ScCheckboxField,
@@ -88,7 +88,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
                 <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
                     <sc-checkbox-field>
-                      <sc-checkbox></sc-checkbox>
+                      <sc-checkbox1></sc-checkbox1>
                       <label sc-label>Accept terms and conditions</label>
                     </sc-checkbox-field>
                   </div>
@@ -123,7 +123,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
                 <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
                     <sc-checkbox-field>
-                      <sc-checkbox></sc-checkbox>
+                      <sc-checkbox1></sc-checkbox1>
                       <label sc-label>Accept terms and conditions</label>
                       <p sc-description>You agree to our Terms of Service and Privacy Policy.</p>
                     </sc-checkbox-field>
@@ -155,7 +155,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
                 <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
                     <sc-checkbox-field>
-                      <sc-checkbox disabled />
+                      <sc-checkbox1 disabled />
                       <label sc-label>Accept terms and conditions</label>
                     </sc-checkbox-field>
                   </div>
@@ -187,7 +187,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
                   <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
                     <form class="space-y-6">
                       <label sc-checkbox-container>
-                        <sc-checkbox checked />
+                        <sc-checkbox1 checked />
                         <div class="grid gap-1.5 font-normal">
                           <p class="text-sm leading-none font-medium">Enable notifications</p>
                           <p class="text-muted-foreground text-sm">
@@ -224,11 +224,11 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
-                    <input sc-checkbox2 type="checkbox" />
+                    <input type="checkbox" />
 
-                    <input sc-checkbox2 type="checkbox" checked />
+                    <input sc-checkbox type="checkbox" checked />
 
-                    <input indeterminate sc-checkbox2 type="checkbox" />
+                    <input indeterminate sc-checkbox type="checkbox" />
                   </div>
                 </div>
               </sc-tab-content>
