@@ -19,6 +19,7 @@ import { cn } from '@semantic-components/utils';
     '[class]': 'class()',
     '(load)': 'handleLoad()',
     '(error)': 'handleError()',
+    'data-slot': 'avatar-image',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -31,8 +32,8 @@ export class ScAvatarImage {
 
   protected readonly class = computed(() =>
     cn(
-      'aspect-square h-full w-full',
-      this.state() === 'loading' && 'invisible h-0 w-0',
+      'aspect-square size-full',
+      this.state() === 'loading' && 'invisible size-0',
       this.state() === 'error' && 'hidden',
       this.classInput(),
     ),

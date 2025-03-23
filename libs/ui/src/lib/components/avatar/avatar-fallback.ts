@@ -16,6 +16,7 @@ import { cn } from '@semantic-components/utils';
   `,
   host: {
     '[class]': 'class()',
+    'data-slot': 'avatar-fallback',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -27,6 +28,6 @@ export class ScAvatarFallback {
   });
 
   protected readonly class = computed(() =>
-    cn('flex h-full w-full items-center justify-center rounded-full bg-muted', this.classInput()),
+    cn('bg-muted flex size-full items-center justify-center rounded-full', this.classInput()),
   );
 }

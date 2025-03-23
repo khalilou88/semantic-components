@@ -16,6 +16,7 @@ import { cn } from '@semantic-components/utils';
   `,
   host: {
     '[class]': 'class()',
+    'data-slot': 'avatar',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -27,6 +28,6 @@ export class ScAvatar {
   });
 
   protected readonly class = computed(() =>
-    cn('relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full', this.classInput()),
+    cn('relative flex size-8 shrink-0 overflow-hidden rounded-full', this.classInput()),
   );
 }
