@@ -25,6 +25,7 @@ import {
   ScEditorBold,
   ScEditorBulletList,
   ScEditorCode,
+  ScEditorContent,
   ScEditorGroup,
   ScEditorHighlight,
   ScEditorHorizontalRule,
@@ -46,6 +47,7 @@ import {
   selector: 'app-editor-demo',
   imports: [
     ScEditor,
+    ScEditorContent,
     ScEditorUndo,
     ScEditorRedo,
     ScEditorHighlight,
@@ -84,8 +86,6 @@ import {
             <sc-editor-text-align-left />
             <sc-editor-text-align-center />
             <sc-editor-text-align-right />
-          </sc-editor-group>
-          <sc-editor-group>
             <sc-separator class="h-5" orientation="vertical" />
             <sc-editor-bullet-list />
             <sc-editor-ordered-list />
@@ -96,6 +96,7 @@ import {
             <sc-editor-code />
           </sc-editor-group>
         </sc-editor-toolbar>
+        <sc-editor-content />
       </sc-editor>
     </form>
   \`,
@@ -118,6 +119,5 @@ export class EditorDemo {
   </p>
   \`),
   });
-}
-`;
+}`;
 }
