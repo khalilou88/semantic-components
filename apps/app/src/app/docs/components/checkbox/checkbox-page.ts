@@ -10,9 +10,11 @@ import { CheckboxWithTextSection } from './checkbox-with-text-section';
   template: `
     <app-checkbox-demo-section />
 
-    <app-checkbox-with-text-section />
+    <h2 class="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight my-10">Examples</h2>
 
-    <app-checkbox-disabled-section />
+    <app-checkbox-with-text-section title="With text" level="3" />
+
+    <app-checkbox-disabled-section title="Disabled State" level="3" />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
