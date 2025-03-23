@@ -7,7 +7,6 @@ import {
   afterRenderEffect,
   booleanAttribute,
   computed,
-  effect,
   inject,
   input,
   linkedSignal,
@@ -15,6 +14,11 @@ import {
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
+
+export interface ScCheckboxChange {
+  checked: boolean;
+  value: string;
+}
 
 @Component({
   selector: 'input[sc-checkbox2]',
@@ -26,6 +30,8 @@ import { cn } from '@semantic-components/utils';
     '[id]': 'id()',
     '[type]': 'type()',
     '[class]': 'class()',
+    '[checked]': 'checked()',
+    '(click)': 'handleClick($event)',
   },
   styles: `
     :root {
@@ -104,6 +110,9 @@ export class ScCheckbox2 {
   protected readonly checked = linkedSignal(() => this.checkedInput());
   readonly checkedChange = output<boolean>();
 
+  readonly value = input<string>('');
+  readonly change = output<ScCheckboxChange>();
+
   readonly disabled = input<boolean, unknown>(false, {
     transform: booleanAttribute,
   });
@@ -112,9 +121,12 @@ export class ScCheckbox2 {
     afterRenderEffect(() => {
       this.hostRef.nativeElement.indeterminate = this.indeterminate();
     });
+  }
 
-    effect(() => {
-      this.checkedChange.emit(this.checked());
-    });
+  protected handleClick(event: MouseEvent): void {
+    this.checked.update((checked: boolean) => !checked);
+    this.checkedChange.emit(this.checked());
+    this.change.emit({ checked: this.checked(), value: this.value() });
+    event.preventDefault();
   }
 }

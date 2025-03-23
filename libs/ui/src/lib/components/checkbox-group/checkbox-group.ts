@@ -1,10 +1,14 @@
 import {
+  AfterContentInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ViewEncapsulation,
   booleanAttribute,
   computed,
+  contentChildren,
   forwardRef,
+  inject,
   input,
   linkedSignal,
   model,
@@ -12,6 +16,8 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { cn } from '@semantic-components/utils';
+
+import { ScCheckbox2, ScCheckboxChange } from '../checkbox/checkbox2';
 
 @Component({
   selector: 'sc-checkbox-group',
@@ -33,7 +39,9 @@ import { cn } from '@semantic-components/utils';
     },
   ],
 })
-export class ScCheckboxGroup implements ControlValueAccessor {
+export class ScCheckboxGroup implements AfterContentInit, ControlValueAccessor {
+  private readonly changeDetectorRef = inject(ChangeDetectorRef);
+
   readonly classInput = input<string>('', {
     alias: 'class',
   });
@@ -46,7 +54,30 @@ export class ScCheckboxGroup implements ControlValueAccessor {
   });
   readonly disabled = linkedSignal(() => this.disabledInput());
 
-  readonly value = model<unknown>(undefined);
+  readonly value = model<string[]>([]);
+
+  readonly checkboxes = contentChildren(ScCheckbox2, { descendants: true });
+
+  ngAfterContentInit() {
+    this.checkboxes().forEach((checkbox) => {
+      checkbox.change.subscribe((c: ScCheckboxChange) => {
+        let values = this.value();
+        if (c.checked) {
+          values = [...values, c.value];
+        } else {
+          values = values.filter((v) => v !== c.value);
+        }
+        this.setValue(values);
+      });
+    });
+  }
+
+  private setValue(value: string[]) {
+    this.value.set(value);
+
+    this.onChange(value);
+    this.changeDetectorRef.markForCheck();
+  }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   private onChange: (value: any) => void = () => {};
