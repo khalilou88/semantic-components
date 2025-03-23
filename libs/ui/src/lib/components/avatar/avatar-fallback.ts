@@ -28,6 +28,6 @@ export class ScAvatarFallback {
   });
 
   protected readonly class = computed(() =>
-    cn('bg-muted flex size-full items-center justify-center rounded-full', this.classInput()),
+    cn('flex size-full items-center justify-center bg-muted uppercase', this.classInput()),
   );
 }

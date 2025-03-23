@@ -28,6 +28,9 @@ export class ScAvatar {
   });
 
   protected readonly class = computed(() =>
-    cn('relative flex size-8 shrink-0 overflow-hidden rounded-full', this.classInput()),
+    cn(
+      'relative size-8 inline-flex items-center justify-center overflow-hidden rounded-full',
+      this.classInput(),
+    ),
   );
 }

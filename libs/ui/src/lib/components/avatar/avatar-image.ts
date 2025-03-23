@@ -32,9 +32,9 @@ export class ScAvatarImage {
 
   protected readonly class = computed(() =>
     cn(
-      'aspect-square size-full',
-      this.state() === 'loading' && 'invisible size-0',
-      this.state() === 'error' && 'hidden',
+      'absolute inset-0 h-full w-full object-cover transition-opacity duration-200 z-10',
+      this.state() === 'loaded' && 'opacity-100',
+      (this.state() === 'loading' || this.state() === 'error') && 'opacity-0',
       this.classInput(),
     ),
   );
