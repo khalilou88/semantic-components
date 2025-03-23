@@ -99,9 +99,11 @@ export class ScCheckbox {
     ),
   );
 
-  readonly indeterminate = input<boolean, unknown>(false, {
+  readonly indeterminateInput = input<boolean, unknown>(false, {
+    alias: 'indeterminate',
     transform: booleanAttribute,
   });
+  private readonly indeterminate = linkedSignal(() => this.indeterminateInput());
 
   readonly checkedInput = input<boolean, unknown>(false, {
     alias: 'checked',
@@ -124,6 +126,10 @@ export class ScCheckbox {
   }
 
   protected handleClick(event: MouseEvent): void {
+    if (this.indeterminate()) {
+      this.indeterminate.set(false);
+    }
+
     this.checked.update((checked: boolean) => !checked);
     this.checkedChange.emit(this.checked());
     this.change.emit({ checked: this.checked(), value: this.value() });

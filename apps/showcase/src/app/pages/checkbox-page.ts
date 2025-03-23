@@ -224,7 +224,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
-                    <input type="checkbox" />
+                    <input sc-checkbox />
 
                     <input sc-checkbox type="checkbox" checked />
 
