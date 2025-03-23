@@ -56,6 +56,12 @@
             "title": "Editor",
             "path": "/docs/components/editor",
             "description": "An editor using Tiptap."
+          },
+          {
+            "id": "table",
+            "title": "Table",
+            "path": "/docs/components/table",
+            "description": "A responsive table component."
           }
         ]
       }

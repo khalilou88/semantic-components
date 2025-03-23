@@ -45,6 +45,11 @@ export const appRoutes: Route[] = [
         loadComponent: () => import('./docs/components/editor/editor-page'),
         title: 'Editor Page',
       },
+      {
+        path: 'components/table',
+        loadComponent: () => import('./docs/components/table/table-page'),
+        title: 'Table Page',
+      },
     ],
   },
   { path: '', redirectTo: '/landing', pathMatch: 'full' },
