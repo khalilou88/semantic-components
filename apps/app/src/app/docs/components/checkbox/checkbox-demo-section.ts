@@ -21,36 +21,27 @@ export class CheckboxDemoSection {
   readonly level = input<'2' | '3'>('2');
 
   protected readonly code = `import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-  
-import { ScButton } from '@semantic-components/ui';
+
+import { ScCheckbox, ScLabel } from '@semantic-components/ui';
 
 @Component({
-  selector: 'app-button-demo',
-  imports: [ScButton],
+  selector: 'app-checkbox-demo',
+  imports: [ScCheckbox, ScLabel],
   template: \`
-    <div class="flex flex-wrap gap-2 content-center h-96">
-      <!-- Primary Button -->
-      <button sc-button variant="primary">Primary</button>
-
-      <!-- Secondary Button -->
-      <button sc-button variant="secondary">Secondary</button>
-
-      <!-- Destructive Button -->
-      <button sc-button variant="destructive">Destructive</button>
-
-      <!-- Outline Button -->
-      <button sc-button variant="outline">Outline</button>
-
-      <!-- Ghost Button -->
-      <button sc-button variant="ghost">Ghost</button>
-
-      <!-- Link Button -->
-      <button sc-button variant="link">Link</button>
+    <div class="flex items-center space-x-2">
+      <input id="terms" sc-checkbox />
+      <label
+        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+        for="terms"
+        sc-label
+      >
+        Accept terms and conditions
+      </label>
     </div>
   \`,
   styles: \`\`,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ButtonDemo {}`;
+export class CheckboxDemo {}`;
 }
