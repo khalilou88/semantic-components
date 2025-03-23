@@ -11,7 +11,9 @@ import { cn } from '@semantic-components/utils';
 @Component({
   selector: 'label[sc-checkbox-item]',
   imports: [],
-  template: ``,
+  template: `
+    <ng-content />
+  `,
   host: {
     '[class]': 'class()',
   },
