@@ -86,6 +86,11 @@ export const appRoutes: Route[] = [
         title: 'Chart Page',
       },
       {
+        path: 'components/checkbox',
+        loadComponent: () => import('./docs/components/checkbox/checkbox-page'),
+        title: 'Checkbox Page',
+      },
+      {
         path: 'components/date-picker',
         loadComponent: () => import('./docs/components/date-picker/date-picker-page'),
         title: 'Date Picker Page',
