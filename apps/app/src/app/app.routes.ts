@@ -76,6 +76,11 @@ export const appRoutes: Route[] = [
         title: 'Card Page',
       },
       {
+        path: 'components/carousel',
+        loadComponent: () => import('./docs/components/carousel/carousel-page'),
+        title: 'Carousel Page',
+      },
+      {
         path: 'components/date-picker',
         loadComponent: () => import('./docs/components/date-picker/date-picker-page'),
         title: 'Date Picker Page',

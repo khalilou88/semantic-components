@@ -94,6 +94,12 @@
             "description": "Displays a card with header, content, and footer."
           },
           {
+            "id": "carousel",
+            "title": "Carousel",
+            "path": "/docs/components/carousel",
+            "description": "A carousel with motion and swipe built using Embla."
+          },
+          {
             "id": "date-picker",
             "title": "Date Picker",
             "path": "/docs/components/date-picker",
