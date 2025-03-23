@@ -17,6 +17,7 @@ import {
   ScEditorBold,
   ScEditorBulletList,
   ScEditorCode,
+  ScEditorContent,
   ScEditorGroup,
   ScEditorHighlight,
   ScEditorHorizontalRule,
@@ -55,6 +56,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
   selector: 'app-editor-page',
   imports: [
     ScEditor,
+    ScEditorContent,
     ReactiveFormsModule,
     SiChevronRightIcon,
     ScBreadcrumb,
@@ -103,6 +105,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
     ScEditorTextAlignRight,
     ScEditorTextAlignLeft,
     ScEditorTextAlignCenter,
+    ScEditorContent,
   ],
   template: `
     <div class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px] px-4">
@@ -172,6 +175,8 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
                             <sc-extension-table />
                           </sc-editor-group-->
                         </sc-editor-toolbar>
+
+                        <sc-editor-content />
                       </sc-editor>
                     </form>
                   </div>
