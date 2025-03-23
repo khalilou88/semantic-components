@@ -36,8 +36,10 @@ export interface ScCheckboxChange {
   },
   styles: `
     :root {
-      --checkbox-checked-bg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='lucide lucide-check'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
-      --checkbox-indeterminate-bg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='lucide lucide-minus'%3E%3Cpath d='M5 12h14'/%3E%3C/svg%3E");
+      --checkbox-checked-bg-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='lucide lucide-check'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+      --checkbox-checked-bg-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='lucide lucide-check'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+      --checkbox-indeterminate-bg-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='lucide lucide-minus'%3E%3Cpath d='M5 12h14'/%3E%3C/svg%3E");
+      --checkbox-indeterminate-bg-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='lucide lucide-minus'%3E%3Cpath d='M5 12h14'/%3E%3C/svg%3E");
     }
   `,
   encapsulation: ViewEncapsulation.None,
@@ -79,7 +81,8 @@ export class ScCheckbox {
       'checked:bg-primary',
       'checked:text-primary-foreground',
       // Applies SVG background image when checked
-      '[&:checked]:bg-[image:var(--checkbox-checked-bg)]',
+      '[&:checked]:bg-[image:var(--checkbox-checked-bg-light)]',
+      'dark:[&:checked]:bg-[image:var(--checkbox-checked-bg-dark)]',
       'checked:bg-no-repeat', // Prevents background image from repeating
       'checked:bg-center', // Centers the background image
       'checked:bg-contain', // Scales image to fit while maintaining aspect ratio
@@ -87,7 +90,8 @@ export class ScCheckbox {
       //Indeterminate state
       'indeterminate:bg-primary',
       'indeterminate:text-primary-foreground',
-      '[&:indeterminate]:bg-[image:var(--checkbox-indeterminate-bg)]',
+      '[&:indeterminate]:bg-[image:var(--checkbox-indeterminate-bg-light)]',
+      'dark:[&:indeterminate]:bg-[image:var(--checkbox-indeterminate-bg-dark)]',
       'indeterminate:bg-no-repeat', // Prevents background image from repeating
       'indeterminate:bg-center', // Centers the background image
       'indeterminate:bg-contain', // Scales image to fit while maintaining aspect ratio
