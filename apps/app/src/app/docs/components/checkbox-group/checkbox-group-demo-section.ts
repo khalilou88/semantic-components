@@ -16,28 +16,42 @@ import { CheckboxGroupDemo } from './checkbox-group-demo';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckboxGroupDemoSection {
-  protected readonly code = `import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+  protected readonly code = `import { JsonPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
-import { ScCheckbox, ScLabel } from '@semantic-components/ui';
+import { ScCheckbox, ScCheckboxGroup, ScCheckboxItem } from '@semantic-components/ui';
 
 @Component({
-  selector: 'app-checkbox-demo',
-  imports: [ScCheckbox, ScLabel],
+  selector: 'app-checkbox-group-demo',
+  imports: [ScCheckboxGroup, ScCheckboxItem, ReactiveFormsModule, JsonPipe, ScCheckbox],
   template: \`
-    <div class="flex items-center space-x-2">
-      <input id="terms" sc-checkbox />
-      <label
-        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-        for="terms"
-        sc-label
-      >
-        Accept terms and conditions
-      </label>
+    <form [formGroup]="toppingsForm">
+      <sc-checkbox-group formControlName="toppings">
+        <div class="font-medium">Toppings</div>
+
+        @for (topping of toppingsArray; track topping) {
+          <label sc-checkbox-item>
+            <input [value]="topping" sc-checkbox />
+            <span class="text-sm font-normal">{{ topping }}</span>
+          </label>
+        }
+      </sc-checkbox-group>
+    </form>
+
+    <div class="mt-10">
+      {{ toppingsForm.value | json }}
     </div>
   \`,
   styles: \`\`,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CheckboxDemo {}`;
+export class CheckboxGroupDemo {
+  toppingsArray = ['Extra Cheese', 'Mushrooms', 'Pepperoni', 'Sausage'];
+
+  toppingsForm = new FormGroup({
+    toppings: new FormControl([]),
+  });
+}`;
 }
