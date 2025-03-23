@@ -96,7 +96,7 @@ import { Chart, registerables } from 'chart.js';
 
         <h2 id="usage" sc-page-subtitle>Usage</h2>
 
-        <!--sc-code-highlighter class="mt-2" [code]="importCodeSnippet" language="typescript" /-->
+        <!--sc-code-highlighter class="mt-2" [code]="importCodeSnippet" language="angular-ts" /-->
 
         <!--sc-code-highlighter class="mt-2" [code]="templateCodeSnippet" /-->
       </div>

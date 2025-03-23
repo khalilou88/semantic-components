@@ -51,7 +51,7 @@ export class ScCodeHighlighter {
 
   readonly code = input.required<string>();
 
-  readonly language = input<LangType>('angular-html');
+  readonly language = input.required<LangType>();
 
   readonly themeInput = input<ThemeType | undefined>(undefined, {
     alias: 'theme',

@@ -68,9 +68,9 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
 
         <h2 id="usage" sc-page-subtitle>Usage</h2>
 
-        <sc-code-highlighter class="mt-2" [code]="importCodeSnippet" language="typescript" />
+        <sc-code-highlighter class="mt-2" [code]="importCodeSnippet" language="angular-ts" />
 
-        <sc-code-highlighter class="mt-2" [code]="templateCodeSnippet" />
+        <sc-code-highlighter class="mt-2" [code]="templateCodeSnippet" language="angular-html" />
 
         <h2 class="mb-5" id="examples" sc-page-subtitle>Examples</h2>
 
@@ -97,7 +97,7 @@ import { SiChevronRightIcon, SiLoaderCircleIcon } from '@semantic-icons/lucide-i
             <sc-tab>
               <sc-tab-label>Code</sc-tab-label>
               <sc-tab-content>
-                <sc-code-highlighter [code]="templateCodeSnippet" />
+                <sc-code-highlighter [code]="templateCodeSnippet" language="angular-html" />
               </sc-tab-content>
             </sc-tab>
           </sc-tabs>
