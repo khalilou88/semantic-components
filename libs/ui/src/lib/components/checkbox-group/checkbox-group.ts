@@ -80,12 +80,12 @@ export class ScCheckboxGroup implements AfterContentInit, ControlValueAccessor {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  private onChange: (value: any) => void = () => {};
+  private onChange: (value: string[]) => void = () => {};
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   private onTouched: () => void = () => {};
 
-  writeValue(obj: any): void {
-    this.value.set(obj);
+  writeValue(value: string[]): void {
+    this.value.set(value);
   }
 
   registerOnChange(fn: any): void {
