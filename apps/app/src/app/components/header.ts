@@ -52,8 +52,8 @@ import { ScThemeToggler } from '@semantic-components/ui';
       </div>
 
       <div class="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-        <!--div class="w-full flex-1 md:w-auto md:flex-none">
-          <div class="relative">
+        <div class="w-full flex-1 md:w-auto md:flex-none">
+          <!--div class="relative">
             <svg
               class="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground"
               xmlns="http://www.w3.org/2000/svg"
@@ -74,8 +74,8 @@ import { ScThemeToggler } from '@semantic-components/ui';
               type="search"
               placeholder="Search documentation..."
             />
-          </div>
-        </div-->
+          </div-->
+        </div>
 
         <nav class="flex items-center">
           <a
