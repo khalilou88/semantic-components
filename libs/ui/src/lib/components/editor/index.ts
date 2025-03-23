@@ -1,4 +1,5 @@
 export * from './editor';
+export * from './editor-content';
 export * from './actions/editor-blockquote';
 export * from './actions/editor-bold';
 export * from './actions/editor-bullet-list';

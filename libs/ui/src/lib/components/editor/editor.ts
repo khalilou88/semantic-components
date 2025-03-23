@@ -2,15 +2,14 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  ElementRef,
   ViewEncapsulation,
   afterNextRender,
   computed,
+  contentChild,
   forwardRef,
   inject,
   input,
   signal,
-  viewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -21,6 +20,7 @@ import Heading from '@tiptap/extension-heading';
 import Paragraph from '@tiptap/extension-paragraph';
 import Text from '@tiptap/extension-text';
 
+import { ScEditorContent } from './editor-content';
 import { ScExtensions } from './extensions/extensions';
 
 @Component({
@@ -28,7 +28,6 @@ import { ScExtensions } from './extensions/extensions';
   imports: [],
   template: `
     <ng-content />
-    <div class="p-4 min-h-[200px]" #editorDiv></div>
   `,
   host: {
     '[class]': 'class()',
@@ -48,7 +47,7 @@ import { ScExtensions } from './extensions/extensions';
 export class ScEditor implements ControlValueAccessor {
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
 
-  readonly editorDiv = viewChild.required<ElementRef>('editorDiv');
+  readonly editorContent = contentChild.required(ScEditorContent);
 
   readonly value = signal('');
 
@@ -203,7 +202,7 @@ export class ScEditor implements ControlValueAccessor {
     }
 
     this.editor = new Editor({
-      element: this.editorDiv().nativeElement,
+      element: this.editorContent().nativeElement,
       extensions: extensions,
       content: this.value(),
       editable: this.isEditable(),

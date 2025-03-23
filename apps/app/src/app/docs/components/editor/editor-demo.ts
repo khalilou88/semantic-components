@@ -7,6 +7,7 @@ import {
   ScEditorBold,
   ScEditorBulletList,
   ScEditorCode,
+  ScEditorContent,
   ScEditorGroup,
   ScEditorHighlight,
   ScEditorHorizontalRule,
@@ -28,6 +29,7 @@ import {
   selector: 'app-editor-demo',
   imports: [
     ScEditor,
+    ScEditorContent,
     ScEditorUndo,
     ScEditorRedo,
     ScEditorHighlight,
@@ -76,6 +78,7 @@ import {
             <sc-editor-code />
           </sc-editor-group>
         </sc-editor-toolbar>
+        <sc-editor-content />
       </sc-editor>
     </form>
   `,
