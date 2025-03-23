@@ -21,7 +21,6 @@ import Heading from '@tiptap/extension-heading';
 import Paragraph from '@tiptap/extension-paragraph';
 import Text from '@tiptap/extension-text';
 
-import { scArticleClasses } from '../typography';
 import { ScExtensions } from './extensions/extensions';
 
 @Component({
@@ -29,17 +28,10 @@ import { ScExtensions } from './extensions/extensions';
   imports: [],
   template: `
     <ng-content />
-
-    <div class="rounded-b-lg bg-white px-4 py-2 dark:bg-gray-800">
-      <label class="sr-only" for="wysiwyg-example">Publish post</label>
-      <div
-        class="block w-full border-0 bg-white px-0 text-sm text-gray-800 focus:ring-0 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-400"
-        #editorDiv
-      ></div>
-    </div>
+    <div class="p-4 min-h-[200px]" #editorDiv></div>
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -54,37 +46,30 @@ import { ScExtensions } from './extensions/extensions';
   ],
 })
 export class ScEditor implements ControlValueAccessor {
-  private readonly _cdr = inject(ChangeDetectorRef);
+  private readonly changeDetectorRef = inject(ChangeDetectorRef);
 
   readonly editorDiv = viewChild.required<ElementRef>('editorDiv');
 
-  _value = signal('');
+  readonly value = signal('');
 
-  _isEditable = signal(true);
+  readonly isEditable = signal(true);
 
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  //TODO change styles
-  classes = computed(() =>
-    cn(
-      'block w-full rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-600 dark:bg-gray-700',
-      this.class(),
-    ),
-  );
-
-  editorClass = input<string>('');
-  editorClasses = computed(() =>
-    cn('mx-auto focus:outline-none', scArticleClasses(), this.editorClass()),
+  protected readonly class = computed(() =>
+    cn('block border rounded-md dark:border-gray-700', this.classInput()),
   );
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  _onChange: (value: string) => void = () => {};
+  onChange: (value: string) => void = () => {};
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  _onTouched: () => void = () => {};
+  onTouched: () => void = () => {};
 
   editor!: Editor;
 
-  extensions = inject(ScExtensions);
+  readonly extensions = inject(ScExtensions);
 
   constructor() {
     afterNextRender(() => {
@@ -220,11 +205,11 @@ export class ScEditor implements ControlValueAccessor {
     this.editor = new Editor({
       element: this.editorDiv().nativeElement,
       extensions: extensions,
-      content: this._value(),
-      editable: this._isEditable(),
+      content: this.value(),
+      editable: this.isEditable(),
       editorProps: {
         attributes: {
-          class: this.editorClasses(),
+          class: 'prose dark:prose-invert focus:outline-none max-w-full',
         },
       },
     });
@@ -234,29 +219,29 @@ export class ScEditor implements ControlValueAccessor {
     });
 
     this.editor.on('blur', () => {
-      this._onTouched();
+      this.onTouched();
     });
   }
 
   writeValue(value: string): void {
-    this._value.set(value);
+    this.value.set(value);
   }
 
   registerOnChange(fn: (value: string) => void): void {
-    this._onChange = fn;
+    this.onChange = fn;
   }
 
   registerOnTouched(fn: () => void): void {
-    this._onTouched = fn;
+    this.onTouched = fn;
   }
 
   setDisabledState?(isDisabled: boolean): void {
-    this._isEditable.set(!isDisabled);
+    this.isEditable.set(!isDisabled);
   }
 
   setHtmlContent(htmlContent: string) {
-    this._value.set(htmlContent);
-    this._onChange(htmlContent);
-    this._cdr.markForCheck();
+    this.value.set(htmlContent);
+    this.onChange(htmlContent);
+    this.changeDetectorRef.markForCheck();
   }
 }

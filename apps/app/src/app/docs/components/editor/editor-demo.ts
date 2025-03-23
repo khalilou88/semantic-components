@@ -66,8 +66,6 @@ import {
             <sc-editor-text-align-left />
             <sc-editor-text-align-center />
             <sc-editor-text-align-right />
-          </sc-editor-group>
-          <sc-editor-group>
             <sc-separator class="h-5" orientation="vertical" />
             <sc-editor-bullet-list />
             <sc-editor-ordered-list />

@@ -9,24 +9,19 @@ import {
 import { cn } from '@semantic-components/utils';
 
 @Component({
-  selector: 'sc-editor-group',
+  selector: 'sc-editor-content',
   imports: [],
   template: `
-    <ng-content />
+    <p>editor-content works!</p>
   `,
-  host: {
-    '[class]': 'class()',
-  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScEditorGroup {
+export class EditorContent {
   readonly classInput = input<string>('', {
     alias: 'class',
   });
 
-  protected readonly class = computed(() =>
-    cn('flex flex-wrap items-center gap-1', this.classInput()),
-  );
+  protected readonly class = computed(() => cn('block p-4 min-h-[200px]', this.classInput()));
 }

@@ -15,15 +15,18 @@ import { cn } from '@semantic-components/utils';
     <ng-content />
   `,
   host: {
-    '[class]': '_class()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScEditorToolbar {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  //TODO change styles to fit shadcn
-  _class = computed(() => cn('block border-b px-3 py-1 dark:border-gray-600', this.class()));
+  protected readonly class = computed(() =>
+    cn('flex items-center justify-between border-b p-2 dark:border-gray-700', this.classInput()),
+  );
 }
