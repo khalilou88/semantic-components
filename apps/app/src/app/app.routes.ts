@@ -106,6 +106,11 @@ export const appRoutes: Route[] = [
         title: 'Date Picker Page',
       },
       {
+        path: 'components/dialog',
+        loadComponent: () => import('./docs/components/dialog/dialog-page'),
+        title: 'Dialog Page',
+      },
+      {
         path: 'components/editor',
         loadComponent: () => import('./docs/components/editor/editor-page'),
         title: 'Editor Page',

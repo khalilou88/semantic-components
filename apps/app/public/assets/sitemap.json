@@ -130,6 +130,12 @@
             "description": "A date picker component."
           },
           {
+            "id": "dialog",
+            "title": "Dialog",
+            "path": "/docs/components/dialog",
+            "description": "A window overlaid on either the primary window or another dialog window, rendering the content underneath inert."
+          },
+          {
             "id": "editor",
             "title": "Editor",
             "path": "/docs/components/editor",
