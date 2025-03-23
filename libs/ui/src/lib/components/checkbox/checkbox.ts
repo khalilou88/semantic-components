@@ -60,6 +60,7 @@ export class ScCheckbox {
   protected readonly class = computed(() =>
     cn(
       //Base styles
+      'peer',
       'appearance-none', //removes default browser styling
       'size-4', //sets width and height (16px)
       'shrink-0',
