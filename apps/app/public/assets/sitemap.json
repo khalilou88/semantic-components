@@ -64,6 +64,12 @@
             "description": "An image element with a fallback for representing the user."
           },
           {
+            "id": "badge",
+            "title": "Badge",
+            "path": "/docs/components/badge",
+            "description": "Displays a badge or a component that looks like a badge."
+          },
+          {
             "id": "button",
             "title": "Button",
             "path": "/docs/components/button",

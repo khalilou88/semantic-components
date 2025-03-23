@@ -56,6 +56,11 @@ export const appRoutes: Route[] = [
         title: 'Button Page',
       },
       {
+        path: 'components/badge',
+        loadComponent: () => import('./docs/components/badge/badge-page'),
+        title: 'Badge Page',
+      },
+      {
         path: 'components/calendar',
         loadComponent: () => import('./docs/components/calendar/calendar-page'),
         title: 'Calendar Page',
