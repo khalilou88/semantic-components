@@ -58,6 +58,12 @@
             "description": "Displays content within a desired ratio."
           },
           {
+            "id": "avatar",
+            "title": "Avatar",
+            "path": "/docs/components/avatar",
+            "description": "An image element with a fallback for representing the user."
+          },
+          {
             "id": "button",
             "title": "Button",
             "path": "/docs/components/button",

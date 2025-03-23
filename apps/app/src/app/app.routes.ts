@@ -46,6 +46,11 @@ export const appRoutes: Route[] = [
         title: 'Aspect Ratio Page',
       },
       {
+        path: 'components/avatar',
+        loadComponent: () => import('./docs/components/avatar/avatar-page'),
+        title: 'Avatar Page',
+      },
+      {
         path: 'components/button',
         loadComponent: () => import('./docs/components/button/button-page'),
         title: 'Button Page',
