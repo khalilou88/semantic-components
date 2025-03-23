@@ -1,10 +1,15 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { AlertDemoSection } from './alert-demo-section';
+import { AlertDestructiveDemoSection } from './alert-destructive-demo-section';
+
 @Component({
   selector: 'app-alert-page',
-  imports: [],
+  imports: [AlertDemoSection, AlertDestructiveDemoSection],
   template: `
-    <p>page works!</p>
+    <app-alert-demo-section />
+
+    <app-alert-destructive-demo-section />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
