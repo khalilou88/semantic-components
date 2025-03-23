@@ -38,11 +38,11 @@ export class ScEditorItalic {
     this.extensions.italic.set(true);
   }
 
-  get editor() {
+  private get editor() {
     return this.parent.editor;
   }
 
-  toggleItalic() {
+  protected toggleItalic() {
     this.editor.chain().focus().toggleItalic().run();
   }
 }

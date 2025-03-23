@@ -38,11 +38,11 @@ export class ScEditorBulletList {
     this.extensions.bulletList.set(true);
   }
 
-  get editor() {
+  private get editor() {
     return this.parent.editor;
   }
 
-  toggleBulletList() {
+  protected toggleBulletList() {
     this.editor.chain().focus().toggleBulletList().run();
   }
 }

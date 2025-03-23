@@ -38,11 +38,11 @@ export class ScEditorOrderedList {
     this.extensions.orderedList.set(true);
   }
 
-  get editor() {
+  private get editor() {
     return this.parent.editor;
   }
 
-  toggleOrderedList() {
+  protected toggleOrderedList() {
     this.editor.chain().focus().toggleOrderedList().run();
   }
 }
