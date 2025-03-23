@@ -46,6 +46,18 @@
             "description": "Displays a callout for user attention."
           },
           {
+            "id": "alert-dialog",
+            "title": "Alert Dialog",
+            "path": "/docs/components/alert-dialog",
+            "description": "A modal dialog that interrupts the user with important content and expects a response."
+          },
+          {
+            "id": "aspect-ratio",
+            "title": "Aspect Ratio",
+            "path": "/docs/components/aspect-ratio",
+            "description": "Displays content within a desired ratio."
+          },
+          {
             "id": "button",
             "title": "Button",
             "path": "/docs/components/button",

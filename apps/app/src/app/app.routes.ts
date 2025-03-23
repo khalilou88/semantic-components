@@ -36,6 +36,16 @@ export const appRoutes: Route[] = [
         title: 'Alert Page',
       },
       {
+        path: 'components/alert-dialog',
+        loadComponent: () => import('./docs/components/alert-dialog/alert-dialog-page'),
+        title: 'Alert Dialog Page',
+      },
+      {
+        path: 'components/aspect-ratio',
+        loadComponent: () => import('./docs/components/aspect-ratio/aspect-ratio-page'),
+        title: 'Aspect Ratio Page',
+      },
+      {
         path: 'components/button',
         loadComponent: () => import('./docs/components/button/button-page'),
         title: 'Button Page',
