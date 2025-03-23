@@ -20,7 +20,7 @@ import { ScLink } from '@semantic-components/ui';
             Get Started
           </a>
           <a size="lg" variant="outline" sc-link routerLink="/docs/components/accordion">
-            Browse components
+            Browse Components
           </a>
         </div>
       </div>
