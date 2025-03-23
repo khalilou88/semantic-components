@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { CheckboxDemoSection } from './checkbox-demo-section';
+import { CheckboxDemo } from './checkbox-demo';
 
 @Component({
-  selector: 'app-checkbox-page',
-  imports: [CheckboxDemoSection],
+  selector: 'app-checkbox-demo-section',
+  imports: [CheckboxDemo],
   template: `
-    <app-checkbox-demo-section />
+    <app-checkbox-demo />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class CheckboxPage {}
+export class CheckboxDemoSection {}

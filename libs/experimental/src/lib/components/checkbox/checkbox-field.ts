@@ -11,9 +11,9 @@ import {
   signal,
 } from '@angular/core';
 
+import { ScLabel } from '@semantic-components/ui';
 import { cn } from '@semantic-components/utils';
 
-import { ScLabel } from '../label';
 import { ScCheckbox1 } from './checkbox1';
 
 @Component({

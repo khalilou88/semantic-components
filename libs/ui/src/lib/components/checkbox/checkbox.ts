@@ -61,7 +61,7 @@ export class ScCheckbox {
     cn(
       //Base styles
       'appearance-none', //removes default browser styling
-      'size-4', //sets width and height (20px)
+      'size-4', //sets width and height (16px)
       'shrink-0',
       'border border-primary', //adds border
       'rounded-sm', //adds border radius

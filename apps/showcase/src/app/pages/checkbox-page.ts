@@ -3,6 +3,11 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
 import {
+  ScCheckbox1,
+  ScCheckboxContainer,
+  ScCheckboxField,
+} from '@semantic-components/experimental';
+import {
   ScBreadcrumb,
   ScBreadcrumbItem,
   ScBreadcrumbLink,
@@ -13,9 +18,6 @@ import {
   ScCard,
   ScCardContent,
   ScCheckbox,
-  ScCheckbox1,
-  ScCheckboxContainer,
-  ScCheckboxField,
   ScCodeHighlighter,
   ScDescription,
   ScLabel,
