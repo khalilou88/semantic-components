@@ -5,7 +5,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ScCheckboxGroup, ScCheckboxItem } from '@semantic-components/ui';
 
 @Component({
-  selector: 'app-checkbox-group-page',
+  selector: 'app-checkbox-group-demo',
   imports: [ScCheckboxGroup, ScCheckboxItem, ReactiveFormsModule, JsonPipe],
   template: `
     <form [formGroup]="toppingsForm">
@@ -27,7 +27,7 @@ import { ScCheckboxGroup, ScCheckboxItem } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class CheckboxGroupPage {
+export class CheckboxGroupDemo {
   toppingsArray = ['Extra Cheese', 'Mushrooms', 'Pepperoni', 'Sausage'];
 
   toppingsForm = new FormGroup({
