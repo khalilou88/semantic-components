@@ -96,6 +96,11 @@ export const appRoutes: Route[] = [
         title: 'Checkbox Group Page',
       },
       {
+        path: 'components/collapsible',
+        loadComponent: () => import('./docs/components/collapsible/collapsible-page'),
+        title: 'Collapsible Page',
+      },
+      {
         path: 'components/date-picker',
         loadComponent: () => import('./docs/components/date-picker/date-picker-page'),
         title: 'Date Picker Page',

@@ -118,6 +118,12 @@
             "description": "Provides shared state to a series of checkboxes."
           },
           {
+            "id": "collapsible",
+            "title": "Collapsible",
+            "path": "/docs/components/collapsible",
+            "description": "An interactive component which expands/collapses a panel."
+          },
+          {
             "id": "date-picker",
             "title": "Date Picker",
             "path": "/docs/components/date-picker",
