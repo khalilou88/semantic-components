@@ -2,16 +2,17 @@ import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
-import { ScCheckboxGroup, ScCheckboxItem } from '@semantic-components/ui';
+import { ScCheckbox2, ScCheckboxGroup, ScCheckboxItem } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-checkbox-group-demo',
-  imports: [ScCheckboxGroup, ScCheckboxItem, ReactiveFormsModule, JsonPipe],
+  imports: [ScCheckboxGroup, ScCheckboxItem, ReactiveFormsModule, JsonPipe, ScCheckbox2],
   template: `
     <form [formGroup]="toppingsForm">
       <sc-checkbox-group formControlName="toppings">
         @for (topping of toppingsArray; track topping) {
           <label [value]="topping" sc-checkbox-item>
+            <input sc-checkbox2 />
             {{ topping }}
           </label>
         }

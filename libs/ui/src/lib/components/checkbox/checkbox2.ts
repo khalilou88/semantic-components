@@ -38,7 +38,7 @@ export class ScCheckbox2 {
   });
   readonly id = linkedSignal(() => this.idInput());
 
-  readonly type = input.required<'checkbox'>();
+  readonly type = input<'checkbox'>('checkbox');
 
   readonly classInput = input<string>('', {
     alias: 'class',
