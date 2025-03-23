@@ -49,6 +49,12 @@ export class ScHeading {
   });
 
   protected readonly class = computed(() =>
-    cn(scHeadingVariants({ level: this.level() }), this.classInput()),
+    cn(
+      scHeadingVariants({ level: this.level() }),
+      this.underline() && 'border-b',
+      this.classInput(),
+    ),
   );
+
+  readonly underline = input(false);
 }
