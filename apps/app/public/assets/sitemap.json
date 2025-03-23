@@ -52,6 +52,12 @@
             "description": "Displays a button or a component that looks like a button."
           },
           {
+            "id": "date-picker",
+            "title": "Date Picker",
+            "path": "/docs/components/date-picker",
+            "description": "A date picker component."
+          },
+          {
             "id": "editor",
             "title": "Editor",
             "path": "/docs/components/editor",
