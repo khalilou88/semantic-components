@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
 
 import { PreviewCodeTabs } from '../../../components/preview-code-tabs/preview-code-tabs';
 import { ButtonDemo } from './button-demo';
@@ -7,7 +7,7 @@ import { ButtonDemo } from './button-demo';
   selector: 'app-button-demo-section',
   imports: [PreviewCodeTabs, ButtonDemo],
   template: `
-    <app-preview-code-tabs [code]="code" title="Variants" level="3">
+    <app-preview-code-tabs [code]="code" [title]="title()" [level]="level()">
       <app-button-demo />
     </app-preview-code-tabs>
   `,
@@ -16,6 +16,10 @@ import { ButtonDemo } from './button-demo';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonDemoSection {
+  readonly title = input<string>('');
+
+  readonly level = input<'2' | '3'>('2');
+
   protected readonly code = `import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
   
 import { ScButton } from '@semantic-components/ui';
