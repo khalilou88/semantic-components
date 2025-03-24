@@ -31,7 +31,7 @@ import { SiChevronsUpDownIcon } from '@semantic-icons/lucide-icons';
       <div class="rounded-md border px-4 py-3 font-mono text-sm">&#64;radix-ui/primitives</div>
       <sc-collapsible-content class="mt-2 space-y-2">
         <div class="rounded-md border px-4 py-3 font-mono text-sm">&#64;radix-ui/colors</div>
-        <div class="rounded-md border px-4 py-3 font-mono text-sm">&#64;stitches/react</div>
+        <div class="mt-2 rounded-md border px-4 py-3 font-mono text-sm">&#64;stitches/react</div>
       </sc-collapsible-content>
     </sc-collapsible>
   `,
