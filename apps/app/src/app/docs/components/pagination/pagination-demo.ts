@@ -33,7 +33,7 @@ import {
   ],
   template: `
     <sc-paginator
-      #pp="scPaginator"
+      #paginator="scPaginator"
       [currentPage]="currentPage()"
       [pageSize]="pageSize()"
       [totalSize]="totalSize()"
@@ -51,7 +51,7 @@ import {
             </a>
           </li>
 
-          @for (page of pp.pageRanges(); track $index) {
+          @for (page of paginator.pageRanges(); track $index) {
             <li>
               @if (page === '...') {
                 <span sc-pagination-ellipsis>
