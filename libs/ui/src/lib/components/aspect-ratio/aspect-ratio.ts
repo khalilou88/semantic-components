@@ -9,7 +9,7 @@ import {
 import { cn } from '@semantic-components/utils';
 
 @Component({
-  selector: 'div[sc-aspect-ratio]',
+  selector: 'sc-aspect-ratio',
   imports: [],
   template: `
     <div class="absolute inset-0">
@@ -18,7 +18,7 @@ import { cn } from '@semantic-components/utils';
   `,
   host: {
     '[class]': 'class()',
-    '[style.paddingBottom]': 'calculatePadding()',
+    '[style.paddingBottom]': 'padding()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -27,13 +27,15 @@ import { cn } from '@semantic-components/utils';
 export class ScAspectRatio {
   readonly ratio = input<number>(1);
 
+  protected padding = computed(() => {
+    return `${(1 / this.ratio()) * 100}%`;
+  });
+
   readonly classInput = input<string>('', {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('relative w-full', this.classInput()));
-
-  calculatePadding(): string {
-    return `${(1 / this.ratio()) * 100}%`;
-  }
+  protected readonly class = computed(() =>
+    cn('relative w-full overflow-hidden', this.classInput()),
+  );
 }

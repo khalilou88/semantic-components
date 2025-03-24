@@ -1,13 +1,15 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { AspectRatioDemo } from './aspect-ratio-demo';
+
 @Component({
-  selector: 'app-aspect-ratio-page',
-  imports: [],
+  selector: 'app-aspect-ratio-demo-section',
+  imports: [AspectRatioDemo],
   template: `
-    <div class="m-10"></div>
+    <app-aspect-ratio-demo />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class AspectRatioPage {}
+export class AspectRatioDemoSection {}
