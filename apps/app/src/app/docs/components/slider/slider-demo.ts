@@ -9,7 +9,7 @@ import { ScSlider } from '@semantic-components/ui';
   imports: [ScSlider, ReactiveFormsModule, JsonPipe],
   template: `
     <form [formGroup]="sliderForm">
-      <input sc-slider type="range" formControlName="range" />
+      <input sc-slider formControlName="slider" />
     </form>
 
     <div class="mt-10">
@@ -22,6 +22,6 @@ import { ScSlider } from '@semantic-components/ui';
 })
 export class SliderDemo {
   sliderForm = new FormGroup({
-    range: new FormControl(20),
+    slider: new FormControl(20),
   });
 }

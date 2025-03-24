@@ -21,6 +21,7 @@ import { cn } from '@semantic-components/utils';
   `,
   host: {
     '[class]': 'class()',
+    '[type]': 'type()',
     '(input)': 'handleInput($event)',
   },
   styles: ``,
@@ -49,7 +50,7 @@ export class ScSlider {
   readonly min = input<number>(0);
   readonly max = input<number>(100);
 
-  readonly type = input.required<'range'>();
+  readonly type = input<'range'>('range');
 
   constructor() {
     effect(() => {
