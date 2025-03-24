@@ -34,7 +34,8 @@ export class ScAvatarImage {
     cn(
       'absolute inset-0 h-full w-full object-cover transition-opacity duration-200 z-10',
       this.state() === 'loaded' && 'opacity-100',
-      (this.state() === 'loading' || this.state() === 'error') && 'opacity-0',
+      this.state() === 'loading' && 'opacity-0',
+      this.state() === 'error' && 'hidden',
       this.classInput(),
     ),
   );
