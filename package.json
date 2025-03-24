@@ -104,7 +104,7 @@
     "angular-eslint": "19.2.0",
     "autoprefixer": "^10.4.21",
     "eslint": "^9.23.0",
-    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-playwright": "^2.2.0",
     "husky": "^9.1.7",
     "jest": "^29.7.0",
