@@ -55,7 +55,7 @@ export class ScSlider {
   constructor() {
     effect(() => {
       const progress = (this.value() / this.max()) * 100;
-      this.host.nativeElement.style.background = `linear-gradient(to right, hsl(var(--primary)) ${progress}%, #ccc ${progress}%)`;
+      this.host.nativeElement.style.background = `linear-gradient(to right, var(--primary) ${progress}%, #ccc ${progress}%)`;
     });
 
     afterNextRender(() => {
