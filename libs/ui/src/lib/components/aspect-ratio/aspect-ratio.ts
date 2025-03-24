@@ -36,6 +36,6 @@ export class ScAspectRatio {
   });
 
   protected readonly class = computed(() =>
-    cn('relative w-full overflow-hidden', this.classInput()),
+    cn('block relative w-full overflow-hidden', this.classInput()),
   );
 }
