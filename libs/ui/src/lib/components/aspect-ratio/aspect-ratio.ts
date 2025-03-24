@@ -27,7 +27,7 @@ import { cn } from '@semantic-components/utils';
 export class ScAspectRatio {
   readonly ratio = input<number>(1);
 
-  protected padding = computed(() => {
+  protected readonly padding = computed(() => {
     return `${(1 / this.ratio()) * 100}%`;
   });
 
