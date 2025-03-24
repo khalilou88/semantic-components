@@ -21,7 +21,6 @@ import { SiChevronsUpDownIcon } from '@semantic-icons/lucide-icons';
     <sc-collapsible class="w-[350px] space-y-2">
       <div class="flex items-center justify-between space-x-4 px-4">
         <h4 class="text-sm font-semibold">&#64;peduarte starred 3 repositories</h4>
-
         <button class="w-9 p-0" sc-collapsible-toggle sc-button variant="ghost" size="sm">
           <svg class="size-4" si-chevrons-up-down-icon></svg>
           <span class="sr-only">Toggle</span>

@@ -21,36 +21,43 @@ export class CollapsibleDemoSection {
   readonly level = input<'2' | '3'>('2');
 
   protected readonly code = `import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-  
-import { ScButton } from '@semantic-components/ui';
+
+import {
+  ScButton,
+  ScCollapsible,
+  ScCollapsibleContent,
+  ScCollapsibleToggle,
+} from '@semantic-components/ui';
+import { SiChevronsUpDownIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-button-demo',
-  imports: [ScButton],
+  selector: 'app-collapsible-demo',
+  imports: [
+    ScCollapsible,
+    ScCollapsibleToggle,
+    ScCollapsibleContent,
+    SiChevronsUpDownIcon,
+    ScButton,
+  ],
   template: \`
-    <div class="flex flex-wrap gap-2 content-center h-96">
-      <!-- Primary Button -->
-      <button sc-button variant="primary">Primary</button>
-
-      <!-- Secondary Button -->
-      <button sc-button variant="secondary">Secondary</button>
-
-      <!-- Destructive Button -->
-      <button sc-button variant="destructive">Destructive</button>
-
-      <!-- Outline Button -->
-      <button sc-button variant="outline">Outline</button>
-
-      <!-- Ghost Button -->
-      <button sc-button variant="ghost">Ghost</button>
-
-      <!-- Link Button -->
-      <button sc-button variant="link">Link</button>
-    </div>
+    <sc-collapsible class="w-[350px] space-y-2">
+      <div class="flex items-center justify-between space-x-4 px-4">
+        <h4 class="text-sm font-semibold">&#64;peduarte starred 3 repositories</h4>
+        <button class="w-9 p-0" sc-collapsible-toggle sc-button variant="ghost" size="sm">
+          <svg class="size-4" si-chevrons-up-down-icon></svg>
+          <span class="sr-only">Toggle</span>
+        </button>
+      </div>
+      <div class="rounded-md border px-4 py-3 font-mono text-sm">&#64;radix-ui/primitives</div>
+      <sc-collapsible-content class="mt-2 space-y-2">
+        <div class="rounded-md border px-4 py-3 font-mono text-sm">&#64;radix-ui/colors</div>
+        <div class="mt-2 rounded-md border px-4 py-3 font-mono text-sm">&#64;stitches/react</div>
+      </sc-collapsible-content>
+    </sc-collapsible>
   \`,
   styles: \`\`,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ButtonDemo {}`;
+export class CollapsibleDemo {}`;
 }
