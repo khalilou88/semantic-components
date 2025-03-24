@@ -56,9 +56,9 @@ export class ScCollapsibleContent {
 
   private readonly state = inject(ScCollapsibleState);
 
-  readonly open = computed(() => this.state.open());
+  private readonly open = computed(() => this.state.open());
 
-  readonly contentShown = toSignal(
+  protected readonly contentShown = toSignal(
     toObservable(this.open).pipe(
       switchMap((open) =>
         open
