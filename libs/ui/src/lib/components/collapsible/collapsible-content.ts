@@ -31,6 +31,7 @@ import { ScCollapsibleState } from './collapsible-state';
     }
   `,
   host: {
+    role: 'region',
     '[class]': 'class()',
   },
   styles: ``,
