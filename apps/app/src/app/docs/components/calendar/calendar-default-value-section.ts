@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { CalendarDemo } from './calendar-demo';
+import { CalendarDefaultValue } from './calendar-default-value';
 
 @Component({
-  selector: 'app-calendar-demo-section',
-  imports: [CalendarDemo],
+  selector: 'app-calendar-default-value-section',
+  imports: [CalendarDefaultValue],
   template: `
-    <app-calendar-demo />
+    <app-calendar-default-value />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CalendarDemoSection {}
+export class CalendarDefaultValueSection {}

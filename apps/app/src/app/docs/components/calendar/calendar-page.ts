@@ -1,10 +1,15 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { CalendarDefaultValueSection } from './calendar-default-value-section';
+import { CalendarDemoSection } from './calendar-demo-section';
+
 @Component({
   selector: 'app-calendar-page',
-  imports: [],
+  imports: [CalendarDemoSection, CalendarDefaultValueSection],
   template: `
-    <p>calendar-page works!</p>
+    <app-calendar-demo-section />
+
+    <app-calendar-default-value-section />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,

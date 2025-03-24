@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
+import { Temporal } from '@js-temporal/polyfill';
 import { ScCalendar } from '@semantic-components/ui';
 
 @Component({
-  selector: 'app-calendar-demo',
+  selector: 'app-calendar-default-value',
   imports: [ScCalendar, ReactiveFormsModule],
   template: `
     <form [formGroup]="calendarForm">
@@ -15,8 +16,8 @@ import { ScCalendar } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CalendarDemo {
+export class CalendarDefaultValue {
   calendarForm = new FormGroup({
-    date: new FormControl(''),
+    date: new FormControl(Temporal.PlainDate.from('1988-06-25')),
   });
 }
