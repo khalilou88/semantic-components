@@ -9,20 +9,22 @@ import {
 import { cn } from '@semantic-components/utils';
 
 @Component({
-  selector: 'h3[sc-accordion-header]',
+  selector: 'sc-accordion-header',
   imports: [],
   template: `
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScAccordionHeader {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn('flex', this.class()));
+  protected readonly class = computed(() => cn('flex', this.classInput()));
 }

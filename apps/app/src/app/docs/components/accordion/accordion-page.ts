@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { AccordionDemoSection } from './accordion-demo-section';
+
 @Component({
   selector: 'app-accordion-page',
-  imports: [],
+  imports: [AccordionDemoSection],
   template: `
-    <p>page works!</p>
+    <app-accordion-demo-section />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,

@@ -9,25 +9,32 @@ import {
 import { cn } from '@semantic-components/utils';
 
 @Component({
-  selector: 'button[sc-accordion-trigger]',
+  selector: 'sc-accordion-toggle',
   imports: [],
   template: `
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
+    '(click)': 'toggle()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScAccordionTrigger {
-  class = input<string>('');
+export class ScAccordionToggle {
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() =>
+  protected readonly class = computed(() =>
     cn(
       'flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180',
-      this.class(),
+      this.classInput(),
     ),
   );
+
+  protected toggle() {
+    console.log('tttttt');
+  }
 }

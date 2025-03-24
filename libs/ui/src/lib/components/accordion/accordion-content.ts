@@ -12,24 +12,24 @@ import { cn } from '@semantic-components/utils';
   selector: 'sc-accordion-content',
   imports: [],
   template: `
-    <div class="pb-4 pt-0">
-      <ng-content />
-    </div>
+    <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScAccordionContent {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() =>
+  protected readonly class = computed(() =>
     cn(
-      'overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down',
-      this.class(),
+      'block overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down',
+      this.classInput(),
     ),
   );
 }

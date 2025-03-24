@@ -18,14 +18,16 @@ import { cn } from '@semantic-components/utils';
     </cdk-accordion>
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScAccordion {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn('', this.class()));
+  protected readonly class = computed(() => cn('block', this.classInput()));
 }
