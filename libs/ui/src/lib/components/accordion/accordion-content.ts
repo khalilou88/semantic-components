@@ -3,10 +3,13 @@ import {
   Component,
   ViewEncapsulation,
   computed,
+  inject,
   input,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
+
+import { ScAccordionItemState } from './accordion-item-state';
 
 @Component({
   selector: 'sc-accordion-content',
@@ -16,12 +19,17 @@ import { cn } from '@semantic-components/utils';
   `,
   host: {
     '[class]': 'class()',
+    '[attr.data-state]': 'state()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScAccordionContent {
+  private readonly scAccordionItemState = inject(ScAccordionItemState);
+
+  protected readonly state = computed(() => this.scAccordionItemState.state());
+
   readonly classInput = input<string>('', {
     alias: 'class',
   });

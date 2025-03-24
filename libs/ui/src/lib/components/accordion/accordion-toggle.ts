@@ -10,6 +10,7 @@ import {
 import { cn } from '@semantic-components/utils';
 
 import { ScAccordionItem } from './accordion-item';
+import { ScAccordionItemState } from './accordion-item-state';
 
 @Component({
   selector: 'sc-accordion-toggle',
@@ -20,12 +21,19 @@ import { ScAccordionItem } from './accordion-item';
   host: {
     '[class]': 'class()',
     '(click)': 'toggle()',
+    '[attr.data-state]': 'state()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScAccordionToggle {
+  private readonly scAccordionItem = inject(ScAccordionItem);
+
+  private readonly scAccordionItemState = inject(ScAccordionItemState);
+
+  protected readonly state = computed(() => this.scAccordionItemState.state());
+
   readonly classInput = input<string>('', {
     alias: 'class',
   });
@@ -36,8 +44,6 @@ export class ScAccordionToggle {
       this.classInput(),
     ),
   );
-
-  private readonly scAccordionItem = inject(ScAccordionItem);
 
   protected toggle() {
     this.scAccordionItem.toggle();
