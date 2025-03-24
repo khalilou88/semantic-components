@@ -18,7 +18,7 @@ import { ScPageEvent } from './page-event';
 import { DEFAULT_PAGE_SIZE, PaginatorService } from './paginator.service';
 
 @Component({
-  selector: 'div[sc-paginator]',
+  selector: 'sc-paginator',
   exportAs: 'scPaginator',
   imports: [ReactiveFormsModule],
   template: `
@@ -39,7 +39,7 @@ export class ScPaginator implements OnInit {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('', this.classInput()));
+  protected readonly class = computed(() => cn('block', this.classInput()));
 
   /** The one-based page index of the displayed list of items. Defaulted to 1. */
   readonly currentPage = input<number>(1);

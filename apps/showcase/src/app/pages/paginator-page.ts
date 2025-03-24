@@ -102,7 +102,7 @@ import {
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
-                    <div
+                    <sc-paginator
                       #pp="scPaginator"
                       [currentPage]="currentPage()"
                       [pageSize]="pageSize()"
@@ -110,7 +110,6 @@ import {
                       (pageChanged)="setPageEvent($event)"
                       paginationActiveLinkVariant="outline"
                       paginationLinkVariant="ghost"
-                      sc-paginator
                     >
                       <nav sc-pagination>
                         <ul sc-pagination-list>
@@ -146,7 +145,7 @@ import {
                           </li>
                         </ul>
                       </nav>
-                    </div>
+                    </sc-paginator>
                   </div>
                 </div>
               </sc-tab-content>
@@ -178,7 +177,7 @@ import {
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
-                    <div
+                    <sc-paginator
                       #p="scPaginator"
                       [currentPage]="currentPage()"
                       [pageSize]="pageSize()"
@@ -186,7 +185,6 @@ import {
                       (pageChanged)="setPageEvent($event)"
                       paginationActiveLinkVariant="secondary"
                       paginationLinkVariant="outline"
-                      sc-paginator
                     >
                       <nav class="" sc-pagination>
                         <ul sc-pagination-list>
@@ -234,7 +232,7 @@ import {
                           </li>
                         </ul>
                       </nav>
-                    </div>
+                    </sc-paginator>
                   </div>
                 </div>
               </sc-tab-content>
@@ -262,7 +260,7 @@ import {
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
-                    <div
+                    <sc-paginator
                       class="flex justify-between"
                       #p="scPaginator"
                       [currentPage]="currentPage()"
@@ -324,7 +322,7 @@ import {
                           </li>
                         </ul>
                       </nav>
-                    </div>
+                    </sc-paginator>
                   </div>
                 </div>
               </sc-tab-content>
@@ -352,7 +350,7 @@ import {
               <sc-tab-content>
                 <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
-                    <div
+                    <sc-paginator
                       #pag="scPaginator"
                       [currentPage]="currentPage()"
                       [pageSize]="pageSize()"
@@ -360,7 +358,6 @@ import {
                       (pageChanged)="setPageEvent($event)"
                       paginationActiveLinkVariant="secondary"
                       paginationLinkVariant="outline"
-                      sc-paginator
                     >
                       <div class="flex w-full items-center justify-center text-sm font-medium">
                         Showing
@@ -368,7 +365,7 @@ import {
                         of
                         {{ pag.totalSize() }}
                       </div>
-                    </div>
+                    </sc-paginator>
                   </div>
                 </div>
               </sc-tab-content>

@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { PaginationDemoSection } from './pagination-demo-section';
+
 @Component({
   selector: 'app-pagination-page',
-  imports: [],
+  imports: [PaginationDemoSection],
   template: `
-    <p>pagination-page works!</p>
+    <app-pagination-demo-section />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
