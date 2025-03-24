@@ -1,3 +1,3 @@
 export * from './collapsible';
-export * from './collapsible-trigger';
+export * from './collapsible-toggle';
 export * from './collapsible-content';
