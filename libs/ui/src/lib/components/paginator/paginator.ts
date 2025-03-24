@@ -110,7 +110,7 @@ export class ScPaginator implements OnInit {
   }
 
   //https://gist.github.com/kottenator/9d936eb3e4e3c3e02598#gistcomment-3238804
-  pageRanges = computed<(number | '...')[]>(() => {
+  pages = computed<(number | '...')[]>(() => {
     const totalPages = this.paginatorService.numberOfPages();
 
     if (totalPages < 7) {

@@ -51,7 +51,7 @@ import {
             </a>
           </li>
 
-          @for (page of paginator.pageRanges(); track $index) {
+          @for (page of paginator.pages(); track $index) {
             <li>
               @if (page === '...') {
                 <span sc-pagination-ellipsis>

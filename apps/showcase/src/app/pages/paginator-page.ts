@@ -121,7 +121,7 @@ import {
                             </a>
                           </li>
 
-                          @for (page of pp.pageRanges(); track $index) {
+                          @for (page of pp.pages(); track $index) {
                             <li>
                               @if (page === '...') {
                                 <span sc-pagination-ellipsis>
@@ -202,7 +202,7 @@ import {
                             </a>
                           </li>
 
-                          @for (page of p.pageRanges(); track $index) {
+                          @for (page of p.pages(); track $index) {
                             <li>
                               @if (page === '...') {
                                 <span sc-pagination-ellipsis>
@@ -292,7 +292,7 @@ import {
                             </a>
                           </li>
 
-                          @for (page of p.pageRanges(); track $index) {
+                          @for (page of p.pages(); track $index) {
                             <li>
                               @if (page === '...') {
                                 <span sc-pagination-ellipsis>
@@ -500,7 +500,7 @@ export default class PaginatorPage {
         </a>
       </li>
 
-      @for (page of paginator.pageRanges(); track $index) {
+      @for (page of paginator.pages(); track $index) {
         <li>
           @if (page === '...') {
             <span sc-pagination-ellipsis>
