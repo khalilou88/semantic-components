@@ -1,4 +1,4 @@
-import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { CdkAccordion, CdkAccordionModule } from '@angular/cdk/accordion';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -13,9 +13,7 @@ import { cn } from '@semantic-components/utils';
   selector: 'sc-accordion',
   imports: [CdkAccordionModule],
   template: `
-    <cdk-accordion>
-      <ng-content />
-    </cdk-accordion>
+    <ng-content />
   `,
   host: {
     '[class]': 'class()',
@@ -23,6 +21,7 @@ import { cn } from '@semantic-components/utils';
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  hostDirectives: [CdkAccordion],
 })
 export class ScAccordion {
   readonly classInput = input<string>('', {

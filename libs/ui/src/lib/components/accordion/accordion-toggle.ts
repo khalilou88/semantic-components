@@ -3,10 +3,13 @@ import {
   Component,
   ViewEncapsulation,
   computed,
+  inject,
   input,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
+
+import { ScAccordionItem } from './accordion-item';
 
 @Component({
   selector: 'sc-accordion-toggle',
@@ -34,7 +37,9 @@ export class ScAccordionToggle {
     ),
   );
 
+  private readonly scAccordionItem = inject(ScAccordionItem);
+
   protected toggle() {
-    console.log('tttttt');
+    this.scAccordionItem.toggle();
   }
 }
