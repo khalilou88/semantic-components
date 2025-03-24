@@ -18,7 +18,7 @@ import { ScAccordionItemState } from './accordion-item-state';
   imports: [],
   template: `
     <ng-content select="sc-accordion-header" />
-    @if (cdkAccordionItem.expanded) {
+    @if (open()) {
       <ng-content select="sc-accordion-content" />
     }
   `,
@@ -33,6 +33,8 @@ import { ScAccordionItemState } from './accordion-item-state';
 })
 export class ScAccordionItem implements OnInit {
   private readonly scAccordionItemState = inject(ScAccordionItemState);
+
+  protected readonly open = computed(() => this.scAccordionItemState.open());
 
   readonly classInput = input<string>('', {
     alias: 'class',
@@ -52,7 +54,7 @@ export class ScAccordionItem implements OnInit {
     });
 
     this.cdkAccordionItem.closed.subscribe(() => {
-      this.scAccordionItemState.open.set(false);
+      this.scAccordionItemState.state.set('closed');
     });
   }
 }

@@ -19,6 +19,7 @@ import { ScAccordionItemState } from './accordion-item-state';
   `,
   host: {
     '[class]': 'class()',
+    '(animationend)': 'handleAnimationEnd($event)',
     '[attr.data-state]': 'state()',
   },
   styles: ``,
@@ -40,4 +41,10 @@ export class ScAccordionContent {
       this.classInput(),
     ),
   );
+
+  protected handleAnimationEnd(event: AnimationEvent): void {
+    if (event.animationName === 'accordion-up') {
+      this.scAccordionItemState.open.set(false);
+    }
+  }
 }
