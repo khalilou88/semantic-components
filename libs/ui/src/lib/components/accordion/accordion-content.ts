@@ -43,7 +43,7 @@ export class ScAccordionContent {
   );
 
   protected handleAnimationEnd(event: AnimationEvent): void {
-    if (event.animationName === 'accordion-up') {
+    if (event.target === event.currentTarget && event.animationName === 'accordion-up') {
       this.scAccordionItemState.open.set(false);
     }
   }
