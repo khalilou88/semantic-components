@@ -7,7 +7,7 @@ import { ScAvatar, ScAvatarFallback, ScAvatarImage } from '@semantic-components/
   imports: [ScAvatar, ScAvatarImage, ScAvatarFallback],
   template: `
     <sc-avatar>
-      <img src="https://github.com/shadcn.png" alt="@shadcn" sc-avatar-image />
+      <img src="https://github.com/sha9dcn.png" alt="@shadcn" sc-avatar-image />
       <div sc-avatar-fallback>CN</div>
     </sc-avatar>
   `,
