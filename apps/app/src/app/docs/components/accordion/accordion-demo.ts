@@ -31,7 +31,9 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             ></svg>
           </sc-accordion-toggle>
         </sc-accordion-header>
-        <sc-accordion-content>Yes. It adheres to the WAI-ARIA design pattern.</sc-accordion-content>
+        <sc-accordion-content>
+          <div class="pb-4 pt-0">Yes. It adheres to the WAI-ARIA design pattern.</div>
+        </sc-accordion-content>
       </sc-accordion-item>
       <sc-accordion-item>
         <sc-accordion-header>
@@ -44,7 +46,9 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           </sc-accordion-toggle>
         </sc-accordion-header>
         <sc-accordion-content>
-          Yes. It comes with default styles that matches the other components&apos; aesthetic.
+          <div class="pb-4 pt-0">
+            Yes. It comes with default styles that matches the other components&apos; aesthetic.
+          </div>
         </sc-accordion-content>
       </sc-accordion-item>
       <sc-accordion-item>
@@ -58,7 +62,9 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           </sc-accordion-toggle>
         </sc-accordion-header>
         <sc-accordion-content>
-          Yes. It&apos;s animated by default, but you can disable it if you prefer.
+          <div class="pb-4 pt-0">
+            Yes. It&apos;s animated by default, but you can disable it if you prefer.
+          </div>
         </sc-accordion-content>
       </sc-accordion-item>
     </sc-accordion>
