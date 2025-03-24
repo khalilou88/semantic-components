@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 
 @Injectable()
 export class ScCollapsibleState implements OnDestroy {
-  isToggled = new Subject<void>();
+  readonly isToggled = new Subject<void>();
 
   ngOnDestroy(): void {
     this.isToggled.complete();

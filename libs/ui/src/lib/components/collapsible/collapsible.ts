@@ -29,7 +29,7 @@ import { ScCollapsibleState } from './collapsible-state';
     </cdk-accordion>
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -39,9 +39,11 @@ import { ScCollapsibleState } from './collapsible-state';
 export class ScCollapsible {
   state = inject(ScCollapsibleState);
 
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn('block', this.class()));
+  protected readonly class = computed(() => cn('block', this.classInput()));
 
   accordionItem = viewChild.required<CdkAccordionItem>('accordionItem');
 

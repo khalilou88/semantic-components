@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { CollapsibleDemoSection } from './collapsible-demo-section';
+import { CollapsibleDemo } from './collapsible-demo';
 
 @Component({
-  selector: 'app-collapsible-page',
-  imports: [CollapsibleDemoSection],
+  selector: 'app-collapsible-demo-section',
+  imports: [CollapsibleDemo],
   template: `
-    <app-collapsible-demo-section />
+    <app-collapsible-demo />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class CollapsiblePage {}
+export class CollapsibleDemoSection {}

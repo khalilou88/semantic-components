@@ -18,7 +18,7 @@ import { ScCollapsibleState } from './collapsible-state';
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
     '(click)': 'toggle()',
   },
   styles: ``,
@@ -26,13 +26,15 @@ import { ScCollapsibleState } from './collapsible-state';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCollapsibleTrigger {
-  state = inject(ScCollapsibleState);
+  private readonly state = inject(ScCollapsibleState);
 
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn('block', this.class()));
+  protected readonly class = computed(() => cn('block', this.classInput()));
 
-  toggle() {
+  protected toggle() {
     this.state.isToggled.next();
   }
 }
