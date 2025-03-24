@@ -116,6 +116,11 @@ export const appRoutes: Route[] = [
         title: 'Editor Page',
       },
       {
+        path: 'components/slider',
+        loadComponent: () => import('./docs/components/slider/slider-page'),
+        title: 'Slider Page',
+      },
+      {
         path: 'components/table',
         loadComponent: () => import('./docs/components/table/table-page'),
         title: 'Table Page',

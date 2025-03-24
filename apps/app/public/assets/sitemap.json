@@ -142,6 +142,12 @@
             "description": "An editor using Tiptap."
           },
           {
+            "id": "slider",
+            "title": "Slider",
+            "path": "/docs/components/slider",
+            "description": "An input where the user selects a value from within a given range."
+          },
+          {
             "id": "table",
             "title": "Table",
             "path": "/docs/components/table",
