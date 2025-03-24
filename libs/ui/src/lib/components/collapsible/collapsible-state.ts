@@ -1,12 +1,6 @@
-import { Injectable, OnDestroy } from '@angular/core';
-
-import { Subject } from 'rxjs';
+import { Injectable, signal } from '@angular/core';
 
 @Injectable()
-export class ScCollapsibleState implements OnDestroy {
-  readonly isToggled = new Subject<void>();
-
-  ngOnDestroy(): void {
-    this.isToggled.complete();
-  }
+export class ScCollapsibleState {
+  readonly open = signal(false);
 }

@@ -35,6 +35,6 @@ export class ScCollapsibleTrigger {
   protected readonly class = computed(() => cn('block', this.classInput()));
 
   protected toggle() {
-    this.state.isToggled.next();
+    this.state.open.update((open) => !open);
   }
 }
