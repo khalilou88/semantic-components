@@ -6,7 +6,6 @@ import {
   computed,
   inject,
   input,
-  signal,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
@@ -15,6 +14,7 @@ import { ScButton } from '../button';
 import { ScAlertDialogDescription } from './alert-dialog-description';
 import { ScAlertDialogFooter } from './alert-dialog-footer';
 import { ScAlertDialogHeader } from './alert-dialog-header';
+import { ScAlertDialogManager } from './alert-dialog-manager';
 import { ScAlertDialogTitle } from './alert-dialog-title';
 
 @Component({
@@ -35,15 +35,18 @@ import { ScAlertDialogTitle } from './alert-dialog-title';
       </p>
     </div>
 
+    {{ state() }}
+
     <div sc-alert-dialog-footer>
-      <button class="mt-2 sm:mt-0" (click)="dialogRef.close(false)" variant="outline" sc-button>
+      <button class="mt-2 sm:mt-0" (click)="close(false)" variant="outline" sc-button>
         Cancel
       </button>
-      <button (click)="dialogRef.close(true)" sc-button>{{ data.action }}</button>
+      <button (click)="close(true)" sc-button>{{ data.action }}</button>
     </div>
   `,
   host: {
     '[class]': 'class()',
+    '(animationend)': 'handleAnimationEnd($event)',
     '[attr.data-state]': 'state()',
   },
   styles: ``,
@@ -62,13 +65,28 @@ export class ScAlertDialog {
     ),
   );
 
-  //TODO make this working
-  readonly state = signal<'open' | 'closed'>('closed');
+  private readonly dialogRef = inject(DialogRef);
+  protected readonly data = inject(DIALOG_DATA);
 
-  readonly dialogRef = inject(DialogRef);
-  readonly data = inject(DIALOG_DATA);
+  private readonly scAlertDialogManager = inject(ScAlertDialogManager);
+
+  protected readonly state = computed(() => this.scAlertDialogManager.state());
 
   constructor() {
     this.dialogRef.disableClose = true;
+  }
+
+  private response = false;
+
+  protected handleAnimationEnd(event: AnimationEvent): void {
+    console.log(event);
+    if (event.target === event.currentTarget) {
+      this.dialogRef.close(this.response);
+    }
+  }
+
+  protected close(response: boolean) {
+    this.scAlertDialogManager.state.set('closed');
+    this.response = response;
   }
 }

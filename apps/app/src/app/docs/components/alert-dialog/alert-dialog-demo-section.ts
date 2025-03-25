@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { AlertDialogDemoSection } from './alert-dialog-demo-section';
+import { AlertDialogDemo } from './alert-dialog-demo';
 
 @Component({
-  selector: 'app-alert-dialog-page',
-  imports: [AlertDialogDemoSection],
+  selector: 'app-alert-dialog-demo-section',
+  imports: [AlertDialogDemo],
   template: `
-    <app-alert-dialog-demo-section />
+    <app-alert-dialog-demo />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class AlertDialogPage {}
+export class AlertDialogDemoSection {}
