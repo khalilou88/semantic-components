@@ -7,8 +7,8 @@ import { SheetSideSection } from './sheet-side-section';
   selector: 'app-sheet-page',
   imports: [SheetDemoSection, SheetSideSection],
   template: `
-    <app-sheet-side-section />
     <app-sheet-demo-section />
+    <app-sheet-side-section />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
