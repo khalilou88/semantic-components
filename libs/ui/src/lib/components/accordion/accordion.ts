@@ -18,11 +18,7 @@ import { cn } from '@semantic-components/utils';
   host: {
     '[class]': 'class()',
   },
-  styles: `
-    :root {
-      interpolate-size: allow-keywords;
-    }
-  `,
+  styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   hostDirectives: [CdkAccordion],
