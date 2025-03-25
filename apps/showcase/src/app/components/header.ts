@@ -11,7 +11,7 @@ import {
   viewChild,
 } from '@angular/core';
 
-import { ScButton, ScSheetTrigger, ScThemeToggler } from '@semantic-components/ui';
+import { ScButton, ScSheetManager, ScThemeToggler } from '@semantic-components/ui';
 import { cn } from '@semantic-components/utils';
 import { SiGithubIcon, SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 
@@ -156,7 +156,7 @@ import { LayoutState } from '../services/layout-state';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Header implements AfterViewChecked {
-  sidebarState = inject(ScSheetTrigger);
+  sidebarState = inject(ScSheetManager);
 
   class = input<string>('');
 

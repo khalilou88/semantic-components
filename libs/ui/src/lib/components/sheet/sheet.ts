@@ -10,7 +10,7 @@ import {
 import { cn } from '@semantic-components/utils';
 import { VariantProps, cva } from 'class-variance-authority';
 
-import { ScSheetTrigger } from './sheet-trigger';
+import { ScSheetManager } from './sheet-manager';
 
 const sheetVariants = cva(
   'relative z-50 gap-4 bg-background p-6 shadow-lg transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-500 data-[state=open]:animate-in data-[state=closed]:animate-out',
@@ -49,14 +49,14 @@ export type SheetVariants = VariantProps<typeof sheetVariants>;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSheet {
-  private readonly scSheetTrigger = inject(ScSheetTrigger);
+  private readonly scSheetManager = inject(ScSheetManager);
 
   readonly state = computed<'open' | 'closed'>(() => {
-    return this.scSheetTrigger.state();
+    return this.scSheetManager.state();
   });
 
   readonly side = computed<'top' | 'bottom' | 'left' | 'right'>(() => {
-    return this.scSheetTrigger.side();
+    return this.scSheetManager.side();
   });
 
   readonly classInput = input<string>('', {
@@ -69,7 +69,7 @@ export class ScSheet {
 
   protected handleAnimationEnd(event: AnimationEvent): void {
     if (event.target === event.currentTarget && event.animationName === 'exit') {
-      this.scSheetTrigger.close();
+      this.scSheetManager.close();
     }
   }
 }

@@ -9,7 +9,7 @@ import {
 
 import { cn } from '@semantic-components/utils';
 
-import { ScSheetTrigger } from './sheet-trigger';
+import { ScSheetManager } from './sheet-manager';
 
 @Component({
   selector: 'button[sc-sheet-close]',
@@ -27,10 +27,10 @@ import { ScSheetTrigger } from './sheet-trigger';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSheetClose {
-  private readonly scSheetTrigger = inject(ScSheetTrigger);
+  private readonly scSheetManager = inject(ScSheetManager);
 
   readonly state = computed<'open' | 'closed'>(() => {
-    return this.scSheetTrigger.state();
+    return this.scSheetManager.state();
   });
 
   readonly classInput = input<string>('', {
@@ -45,6 +45,6 @@ export class ScSheetClose {
   );
 
   protected close() {
-    this.scSheetTrigger.state.set('closed');
+    this.scSheetManager.state.set('closed');
   }
 }

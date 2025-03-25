@@ -15,7 +15,7 @@ import {
 
 import { cn } from '@semantic-components/utils';
 
-import { ScSheetConfig, ScSheetTrigger } from '../sheet';
+import { ScSheetConfig, ScSheetManager } from '../sheet';
 import { ScSidebarMobile } from './sidebar-mobile';
 import { ScSidebarState } from './sidebar-state';
 
@@ -129,7 +129,7 @@ export class ScSidebar {
     });
   }
 
-  private readonly scSheetTrigger = inject(ScSheetTrigger);
+  private readonly scSheetTrigger = inject(ScSheetManager);
 
   readonly sheetRef = viewChild.required<TemplateRef<unknown>>('sc_sidebar_mobile_content');
 

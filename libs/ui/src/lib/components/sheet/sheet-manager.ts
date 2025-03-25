@@ -1,4 +1,4 @@
-import { Overlay, OverlayConfig, OverlayContainer, OverlayRef } from '@angular/cdk/overlay';
+import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ComponentRef, Injectable, TemplateRef, inject, linkedSignal, signal } from '@angular/core';
 
@@ -8,8 +8,8 @@ import { ScSheetContainer } from './sheet-container';
 @Injectable({
   providedIn: 'root',
 })
-export class ScSheetTrigger {
-  private readonly overlayContainer = inject(OverlayContainer);
+export class ScSheetManager {
+  // private readonly overlayContainer = inject(OverlayContainer);
   private readonly overlay = inject(Overlay);
   private overlayRef!: OverlayRef;
 

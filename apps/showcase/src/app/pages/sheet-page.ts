@@ -32,7 +32,7 @@ import {
   ScSheet,
   ScSheetClose,
   ScSheetConfig,
-  ScSheetTrigger,
+  ScSheetManager,
   ScTab,
   ScTabContent,
   ScTabLabel,
@@ -233,7 +233,7 @@ export default class SheetPage {
   </div>
 </ng-template>`;
 
-  scSheetTrigger = inject(ScSheetTrigger);
+  scSheetTrigger = inject(ScSheetManager);
 
   sheetRef = viewChild.required<TemplateRef<unknown>>('sheet');
 

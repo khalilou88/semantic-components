@@ -18,7 +18,7 @@ import {
   ScSheet,
   ScSheetClose,
   ScSheetConfig,
-  ScSheetTrigger,
+  ScSheetManager,
 } from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
@@ -77,11 +77,16 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SheetSide {
-  scSheetTrigger = inject(ScSheetTrigger);
+  private readonly scSheetManager = inject(ScSheetManager);
 
-  sheetRef = viewChild.required<TemplateRef<unknown>>('sheet');
+  private readonly sheetRef = viewChild.required<TemplateRef<unknown>>('sheet');
 
-  SHEET_SIDES: ('top' | 'bottom' | 'left' | 'right')[] = ['top', 'right', 'bottom', 'left'];
+  readonly SHEET_SIDES: ('top' | 'bottom' | 'left' | 'right')[] = [
+    'top',
+    'right',
+    'bottom',
+    'left',
+  ];
 
   openSheet(side: 'top' | 'bottom' | 'left' | 'right') {
     const config = new ScSheetConfig();
@@ -95,6 +100,6 @@ export class SheetSide {
       config.height = '300';
     }
 
-    this.scSheetTrigger.open(this.sheetRef(), config);
+    this.scSheetManager.open(this.sheetRef(), config);
   }
 }
