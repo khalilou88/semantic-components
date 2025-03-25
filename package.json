@@ -92,7 +92,7 @@
     "@semantic-icons/nx-generators": "^0.43.0",
     "@swc-node/register": "~1.10.10",
     "@swc/cli": "^0.6.0",
-    "@swc/core": "~1.11.12",
+    "@swc/core": "~1.11.13",
     "@swc/helpers": "~0.5.15",
     "@tailwindcss/typography": "^0.5.16",
     "tw-animate-css": "^1.2.4",
