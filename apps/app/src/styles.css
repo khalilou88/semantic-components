@@ -42,11 +42,6 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-
-  --radix-accordion-content-height: var(--radix-collapsible-content-height);
-  --radix-accordion-content-width: var(--radix-collapsible-content-width);
-  --radix-collapsible-content-height: 36px;
-  --radix-collapsible-content-width: 413.4583435058594px;
 }
 
 .dark {
@@ -127,13 +122,13 @@
       height: 0;
     }
     100% {
-      height: var(--radix-accordion-content-height);
+      height: height;
     }
   }
 
   @keyframes accordion-up {
     0% {
-      height: var(--radix-accordion-content-height);
+      height: height;
     }
     100% {
       height: 0;
