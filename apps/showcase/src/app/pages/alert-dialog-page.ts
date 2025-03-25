@@ -9,7 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
 import {
-  ScAlertDialogTrigger,
+  ScAlertDialogManager,
   ScBreadcrumb,
   ScBreadcrumbItem,
   ScBreadcrumbLink,
@@ -132,7 +132,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class AlertDialogPage {
-  scAlertDialogTrigger = inject(ScAlertDialogTrigger);
+  scAlertDialogTrigger = inject(ScAlertDialogManager);
 
   class = signal<string>('block w-full');
 
