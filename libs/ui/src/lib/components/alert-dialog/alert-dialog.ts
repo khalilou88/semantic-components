@@ -35,8 +35,6 @@ import { ScAlertDialogTitle } from './alert-dialog-title';
       </p>
     </div>
 
-    {{ state() }}
-
     <div sc-alert-dialog-footer>
       <button class="mt-2 sm:mt-0" (click)="close(false)" variant="outline" sc-button>
         Cancel
