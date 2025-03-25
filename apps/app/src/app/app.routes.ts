@@ -121,6 +121,11 @@ export const appRoutes: Route[] = [
         title: 'Pagination Page',
       },
       {
+        path: 'components/sheet',
+        loadComponent: () => import('./docs/components/sheet/sheet-page'),
+        title: 'Sheet Page',
+      },
+      {
         path: 'components/slider',
         loadComponent: () => import('./docs/components/slider/slider-page'),
         title: 'Slider Page',

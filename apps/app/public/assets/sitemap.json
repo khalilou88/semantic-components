@@ -148,6 +148,12 @@
             "description": "Pagination with page navigation, next and previous links."
           },
           {
+            "id": "sheet",
+            "title": "Sheet",
+            "path": "/docs/components/sheet",
+            "description": "Extends the Dialog component to display content that complements the main content of the screen."
+          },
+          {
             "id": "slider",
             "title": "Slider",
             "path": "/docs/components/slider",
