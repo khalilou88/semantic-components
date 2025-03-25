@@ -6,7 +6,9 @@ import { ScAlertDialogManager, ScButton } from '@semantic-components/ui';
   selector: 'app-alert-dialog-demo',
   imports: [ScButton],
   template: `
-    <button (click)="deleteAccount()" sc-button variant="secondary">Delete My account</button>
+    <div class="flex items-center justify-center">
+      <button (click)="deleteAccount()" sc-button variant="secondary">Show Dialog</button>
+    </div>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
