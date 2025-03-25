@@ -151,7 +151,6 @@
 html,
 body {
   height: 100%;
-  interpolate-size: allow-keywords;
 }
 
 pre.shiki {
