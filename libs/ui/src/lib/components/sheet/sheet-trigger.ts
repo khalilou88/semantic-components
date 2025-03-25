@@ -1,6 +1,14 @@
 import { Overlay, OverlayConfig, OverlayContainer, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { ComponentRef, Injectable, TemplateRef, effect, inject, signal } from '@angular/core';
+import {
+  ComponentRef,
+  Injectable,
+  TemplateRef,
+  effect,
+  inject,
+  linkedSignal,
+  signal,
+} from '@angular/core';
 
 import { scOverlayClasses } from '../overlay';
 import { ScSheetConfig } from './sheet-config';
@@ -14,7 +22,10 @@ export class ScSheetTrigger {
   private readonly overlay = inject(Overlay);
   private overlayRef!: OverlayRef;
 
-  readonly state = signal<'open' | 'closed'>('closed');
+  readonly isOpen = signal(false);
+
+  readonly state = linkedSignal(() => (this.isOpen() ? 'open' : 'closed'));
+
   readonly side = signal<'top' | 'bottom' | 'left' | 'right'>('right');
 
   constructor() {
@@ -47,13 +58,13 @@ export class ScSheetTrigger {
 
     scSheetRef.instance.templateRef.set(templateRef);
 
-    this.overlayRef.backdropClick().subscribe(() => this.close());
+    this.overlayRef.backdropClick().subscribe(() => this.state.set('closed'));
   }
 
   close() {
     if (this.overlayRef?.hasAttached()) {
       this.overlayRef?.detach();
-      this.state.set('closed');
+      this.isOpen.set(false);
     }
   }
 

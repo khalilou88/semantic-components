@@ -42,6 +42,7 @@ export type SheetVariants = VariantProps<typeof sheetVariants>;
   host: {
     '[class]': 'class()',
     '[attr.data-state]': 'state()',
+    '(animationend)': 'handleAnimationEnd($event)',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -65,4 +66,10 @@ export class ScSheet {
   protected readonly class = computed(() =>
     cn(sheetVariants({ side: this.side() }), this.classInput()),
   );
+
+  protected handleAnimationEnd(event: AnimationEvent): void {
+    if (event.target === event.currentTarget && event.animationName === 'exit') {
+      this.scSheetTrigger.close();
+    }
+  }
 }

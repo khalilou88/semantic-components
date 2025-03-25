@@ -19,6 +19,7 @@ import { ScSheetTrigger } from './sheet-trigger';
   `,
   host: {
     '[class]': 'class()',
+    '[attr.data-state]': 'state()',
     '(click)': 'close()',
   },
   styles: ``,
@@ -27,6 +28,10 @@ import { ScSheetTrigger } from './sheet-trigger';
 })
 export class ScSheetClose {
   private readonly scSheetTrigger = inject(ScSheetTrigger);
+
+  readonly state = computed<'open' | 'closed'>(() => {
+    return this.scSheetTrigger.state();
+  });
 
   readonly classInput = input<string>('', {
     alias: 'class',
@@ -40,6 +45,6 @@ export class ScSheetClose {
   );
 
   protected close() {
-    this.scSheetTrigger.close();
+    this.scSheetTrigger.state.set('closed');
   }
 }

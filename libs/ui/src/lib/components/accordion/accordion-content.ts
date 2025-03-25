@@ -19,8 +19,8 @@ import { ScAccordionItemState } from './accordion-item-state';
   `,
   host: {
     '[class]': 'class()',
-    '(animationend)': 'handleAnimationEnd($event)',
     '[attr.data-state]': 'state()',
+    '(animationend)': 'handleAnimationEnd($event)',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
