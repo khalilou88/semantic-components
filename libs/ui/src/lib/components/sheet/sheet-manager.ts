@@ -1,6 +1,14 @@
-import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
+import { Overlay, OverlayConfig, OverlayContainer, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { ComponentRef, Injectable, TemplateRef, inject, linkedSignal, signal } from '@angular/core';
+import {
+  ComponentRef,
+  Injectable,
+  TemplateRef,
+  effect,
+  inject,
+  linkedSignal,
+  signal,
+} from '@angular/core';
 
 import { ScSheetConfig } from './sheet-config';
 import { ScSheetContainer } from './sheet-container';
@@ -9,7 +17,7 @@ import { ScSheetContainer } from './sheet-container';
   providedIn: 'root',
 })
 export class ScSheetManager {
-  // private readonly overlayContainer = inject(OverlayContainer);
+  private readonly overlayContainer = inject(OverlayContainer);
   private readonly overlay = inject(Overlay);
   private overlayRef!: OverlayRef;
 
@@ -20,9 +28,14 @@ export class ScSheetManager {
   readonly side = signal<'top' | 'bottom' | 'left' | 'right'>('right');
 
   constructor() {
-    // effect(() => {
-    //   this.overlayContainer.getContainerElement().setAttribute('data-state', this.state());
-    // });
+    effect(() => {
+      const overlayDarkBackdrop = this.overlayContainer
+        .getContainerElement()
+        .querySelector('.cdk-overlay-dark-backdrop');
+      if (overlayDarkBackdrop) {
+        overlayDarkBackdrop.setAttribute('data-state', this.state());
+      }
+    });
   }
 
   open(templateRef: TemplateRef<unknown>, config: ScSheetConfig) {
@@ -41,8 +54,6 @@ export class ScSheetManager {
 
     scSheetRef.instance.templateRef.set(templateRef);
 
-    // this.overlayContainer.getContainerElement().classList.add(...scOverlayClasses());
-
     this.overlayRef.backdropClick().subscribe(() => this.state.set('closed'));
   }
 
@@ -51,8 +62,6 @@ export class ScSheetManager {
       this.overlayRef?.detach();
       this.isOpen.set(false);
     }
-
-    // this.overlayContainer.getContainerElement().classList.remove(...scOverlayClasses());
   }
 
   private getOverlayConfig(config: ScSheetConfig): OverlayConfig {
