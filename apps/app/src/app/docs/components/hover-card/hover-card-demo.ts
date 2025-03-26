@@ -26,7 +26,7 @@ import { SiCalendarDaysIcon } from '@semantic-icons/lucide-icons';
 
     <ng-template #templateForHoverCardTrigger>
       <div class="flex justify-between space-x-4">
-        <sc-avatar>
+        <sc-avatar class="shrink-0">
           <img src="https://github.com/vercel.png" alt="" sc-avatar-image />
           <div sc-avatar-fallback>VC</div>
         </sc-avatar>
