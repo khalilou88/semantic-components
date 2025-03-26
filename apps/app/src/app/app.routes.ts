@@ -135,6 +135,11 @@ export const appRoutes: Route[] = [
         loadComponent: () => import('./docs/components/table/table-page'),
         title: 'Table Page',
       },
+      {
+        path: 'components/tooltip',
+        loadComponent: () => import('./docs/components/tooltip/tooltip-page'),
+        title: 'Tooltip Page',
+      },
     ],
   },
   { path: '', redirectTo: '/landing', pathMatch: 'full' },
