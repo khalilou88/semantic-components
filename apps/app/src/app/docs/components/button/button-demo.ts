@@ -6,7 +6,7 @@ import { ScButton } from '@semantic-components/ui';
   selector: 'app-button-demo',
   imports: [ScButton],
   template: `
-    <div class="flex flex-wrap gap-2 content-center h-96">
+    <div class="flex flex-wrap gap-2 content-center">
       <!-- Primary Button -->
       <button sc-button variant="primary">Primary</button>
 
