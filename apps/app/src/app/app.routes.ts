@@ -121,6 +121,11 @@ export const appRoutes: Route[] = [
         title: 'Pagination Page',
       },
       {
+        path: 'components/separator',
+        loadComponent: () => import('./docs/components/separator/separator-page'),
+        title: 'Separator Page',
+      },
+      {
         path: 'components/sheet',
         loadComponent: () => import('./docs/components/sheet/sheet-page'),
         title: 'Sheet Page',

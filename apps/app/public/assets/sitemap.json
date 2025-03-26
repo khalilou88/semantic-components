@@ -148,6 +148,12 @@
             "description": "Pagination with page navigation, next and previous links."
           },
           {
+            "id": "separator",
+            "title": "Separator",
+            "path": "/docs/components/separator",
+            "description": "Visually or semantically separates content."
+          },
+          {
             "id": "sheet",
             "title": "Sheet",
             "path": "/docs/components/sheet",
