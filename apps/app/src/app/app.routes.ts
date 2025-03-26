@@ -126,6 +126,11 @@ export const appRoutes: Route[] = [
         title: 'Sheet Page',
       },
       {
+        path: 'components/skeleton',
+        loadComponent: () => import('./docs/components/skeleton/skeleton-page'),
+        title: 'Skeleton Page',
+      },
+      {
         path: 'components/slider',
         loadComponent: () => import('./docs/components/slider/slider-page'),
         title: 'Slider Page',

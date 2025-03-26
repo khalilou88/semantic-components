@@ -154,6 +154,12 @@
             "description": "Extends the Dialog component to display content that complements the main content of the screen."
           },
           {
+            "id": "skeleton",
+            "title": "Skeleton",
+            "path": "/docs/components/skeleton",
+            "description": "Use to show a placeholder while content is loading."
+          },
+          {
             "id": "slider",
             "title": "Slider",
             "path": "/docs/components/slider",

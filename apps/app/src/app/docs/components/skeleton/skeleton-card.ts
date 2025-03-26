@@ -3,11 +3,11 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { ScSkeleton } from '@semantic-components/ui';
 
 @Component({
-  selector: 'app-skeleton-page',
+  selector: 'app-skeleton-card',
   imports: [ScSkeleton],
   template: `
-    <div class="flex items-center space-x-4">
-      <sc-skeleton class="size-12 rounded-full" />
+    <div class="flex flex-col space-y-3">
+      <sc-skeleton class="h-[125px] w-[250px] rounded-xl" />
       <div class="space-y-2">
         <sc-skeleton class="h-4 w-[250px]" />
         <sc-skeleton class="h-4 w-[200px]" />
@@ -18,4 +18,4 @@ import { ScSkeleton } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class SkeletonPage {}
+export class SkeletonCard {}

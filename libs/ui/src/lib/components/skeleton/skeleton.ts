@@ -9,20 +9,24 @@ import {
 import { cn } from '@semantic-components/utils';
 
 @Component({
-  selector: 'div[sc-skeleton]',
+  selector: 'sc-skeleton',
   imports: [],
   template: `
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSkeleton {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn('animate-pulse rounded-md bg-muted', this.class()));
+  protected readonly class = computed(() =>
+    cn('block animate-pulse rounded-md bg-muted', this.classInput()),
+  );
 }
