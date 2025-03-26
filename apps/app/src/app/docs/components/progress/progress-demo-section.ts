@@ -20,37 +20,31 @@ export class ProgressDemoSection {
 
   readonly level = input<'2' | '3'>('2');
 
-  protected readonly code = `import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-  
-import { ScButton } from '@semantic-components/ui';
+  protected readonly code = `import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  ViewEncapsulation,
+  signal,
+} from '@angular/core';
+
+import { ScProgress } from '@semantic-components/ui';
 
 @Component({
-  selector: 'app-button-demo',
-  imports: [ScButton],
+  selector: 'app-progress-demo',
+  imports: [ScProgress],
   template: \`
-    <div class="flex flex-wrap gap-2 content-center">
-      <!-- Primary Button -->
-      <button sc-button variant="primary">Primary</button>
-
-      <!-- Secondary Button -->
-      <button sc-button variant="secondary">Secondary</button>
-
-      <!-- Destructive Button -->
-      <button sc-button variant="destructive">Destructive</button>
-
-      <!-- Outline Button -->
-      <button sc-button variant="outline">Outline</button>
-
-      <!-- Ghost Button -->
-      <button sc-button variant="ghost">Ghost</button>
-
-      <!-- Link Button -->
-      <button sc-button variant="link">Link</button>
-    </div>
+    <sc-progress class="w-[60%]" [value]="progress()" />
   \`,
   styles: \`\`,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ButtonDemo {}`;
+export class ProgressDemo implements OnInit {
+  protected readonly progress = signal<number>(0);
+
+  ngOnInit() {
+    setTimeout(() => this.progress.set(77), 1000);
+  }
+}`;
 }
