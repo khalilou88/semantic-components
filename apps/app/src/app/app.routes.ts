@@ -126,6 +126,11 @@ export const appRoutes: Route[] = [
         title: 'Pagination Page',
       },
       {
+        path: 'components/progress',
+        loadComponent: () => import('./docs/components/progress/progress-page'),
+        title: 'Progress Page',
+      },
+      {
         path: 'components/separator',
         loadComponent: () => import('./docs/components/separator/separator-page'),
         title: 'Separator Page',
