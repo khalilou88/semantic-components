@@ -53,6 +53,9 @@ export class ScHoverCardTriggerFor implements OnDestroy {
     if (this.overlayRef === null) {
       const positionStrategy = this.getPositionStrategy();
       this.overlayRef = this.overlay.create({ positionStrategy });
+
+      //TODO: add option to change this
+      this.overlayRef.updateSize({ width: 320 });
     }
 
     const componentPortal = new ComponentPortal(ScHoverCard, this.viewContainer);
