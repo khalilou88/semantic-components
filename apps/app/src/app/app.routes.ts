@@ -116,6 +116,11 @@ export const appRoutes: Route[] = [
         title: 'Editor Page',
       },
       {
+        path: 'components/hover-card',
+        loadComponent: () => import('./docs/components/hover-card/hover-card-page'),
+        title: 'Hover Card Page',
+      },
+      {
         path: 'components/pagination',
         loadComponent: () => import('./docs/components/pagination/pagination-page'),
         title: 'Pagination Page',

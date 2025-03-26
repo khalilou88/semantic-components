@@ -142,6 +142,12 @@
             "description": "An editor using Tiptap."
           },
           {
+            "id": "hover-card",
+            "title": "Hover Card",
+            "path": "/docs/components/hover-card",
+            "description": "For sighted users to preview content available behind a link."
+          },
+          {
             "id": "pagination",
             "title": "Pagination",
             "path": "/docs/components/pagination",

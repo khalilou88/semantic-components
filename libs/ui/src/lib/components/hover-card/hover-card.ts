@@ -20,6 +20,7 @@ import { cn } from '@semantic-components/utils';
   `,
   host: {
     '[class]': 'class()',
+    // '[attr.data-state]': 'state()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
