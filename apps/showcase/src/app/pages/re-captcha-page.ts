@@ -159,7 +159,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
                 <div class="overflow-auto" sc-card>
                   <div class="m-10 flex gap-2 p-0 items-center justify-center" sc-card-content>
                     <form id="demo-form" action="?" method="POST">
-                      <button [callback]="myCallback" sc-invisible-re-captcha>
+                      <button [callback]="myCallback" sc-invisible-re-captcha sc-button>
                         Click me to execute Invisible reCAPTCHA
                       </button>
                     </form>

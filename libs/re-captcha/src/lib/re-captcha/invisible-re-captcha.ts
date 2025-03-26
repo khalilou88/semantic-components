@@ -1,30 +1,13 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  ViewEncapsulation,
-  forwardRef,
-  inject,
-  input,
-  signal,
-} from '@angular/core';
+import { Directive, ElementRef, forwardRef, inject, input, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { ScReCaptchaBase } from './re-captcha-base';
 
 declare let grecaptcha: any;
 
-@Component({
+@Directive({
   selector: 'div[sc-invisible-re-captcha], button[sc-invisible-re-captcha]',
   exportAs: 'scInvisibleReCaptcha',
-  imports: [],
-  template: `
-    <ng-content />
-  `,
-  styles: ``,
-  host: {},
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

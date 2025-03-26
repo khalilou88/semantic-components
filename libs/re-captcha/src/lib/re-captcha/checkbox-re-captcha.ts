@@ -1,25 +1,11 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  forwardRef,
-  input,
-} from '@angular/core';
+import { Directive, forwardRef, input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { ScReCaptchaBase } from './re-captcha-base';
 
-@Component({
+@Directive({
   selector: 'div[sc-checkbox-re-captcha]',
   exportAs: 'scCheckboxReCaptcha',
-  imports: [],
-  template: `
-    <ng-content />
-  `,
-  styles: ``,
-  host: {},
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
