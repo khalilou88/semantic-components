@@ -72,15 +72,15 @@ export class ScHoverCardTriggerFor implements OnDestroy {
       .withPositions([
         {
           originX: 'center',
-          originY: 'top',
-          overlayX: 'center',
-          overlayY: 'bottom',
-        },
-        {
-          originX: 'center',
           originY: 'bottom',
           overlayX: 'center',
           overlayY: 'top',
+        },
+        {
+          originX: 'center',
+          originY: 'top',
+          overlayX: 'center',
+          overlayY: 'bottom',
         },
       ]);
   }
