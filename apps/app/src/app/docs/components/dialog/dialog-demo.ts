@@ -1,15 +1,13 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { DialogDemoSection } from './dialog-demo-section';
-
 @Component({
-  selector: 'app-dialog-page',
-  imports: [DialogDemoSection],
+  selector: 'app-dialog-demo',
+  imports: [],
   template: `
-    <app-dialog-demo-section />
+    <p>dialog-demo works!</p>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class DialogPage {}
+export class DialogDemo {}
