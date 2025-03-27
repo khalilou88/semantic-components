@@ -190,6 +190,12 @@
             "description": "A responsive table component."
           },
           {
+            "id": "toggle",
+            "title": "Toggle",
+            "path": "/docs/components/toggle",
+            "description": "A two-state button that can be either on or off."
+          },
+          {
             "id": "tooltip",
             "title": "Tooltip",
             "path": "/docs/components/tooltip",
