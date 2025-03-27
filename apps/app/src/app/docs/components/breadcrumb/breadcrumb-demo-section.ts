@@ -30,8 +30,11 @@ import {
   ScBreadcrumbList,
   ScBreadcrumbPage,
   ScBreadcrumbSeparator,
+  ScMenu,
+  ScMenuItem,
+  ScMenuTriggerFor,
 } from '@semantic-components/ui';
-import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
+import { SiChevronRightIcon, SiEllipsisIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-breadcrumb-demo',
@@ -44,6 +47,10 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
     ScBreadcrumbSeparator,
     SiChevronRightIcon,
     ScBreadcrumbEllipsis,
+    SiEllipsisIcon,
+    ScMenu,
+    ScMenuItem,
+    ScMenuTriggerFor,
   ],
   template: \`
     <nav sc-breadcrumb>
@@ -52,7 +59,12 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 
         <li sc-breadcrumb-separator><svg si-chevron-right-icon></svg></li>
 
-        <li sc-breadcrumb-item><span sc-breadcrumb-ellipsis></span></li>
+        <li sc-breadcrumb-item>
+          <button [scMenuTriggerFor]="menu" sc-breadcrumb-ellipsis>
+            <svg class="size-4" si-ellipsis-icon></svg>
+            <span class="sr-only">More</span>
+          </button>
+        </li>
 
         <li sc-breadcrumb-separator><svg si-chevron-right-icon></svg></li>
 
@@ -64,6 +76,22 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
         </li>
       </ol>
     </nav>
+
+    <ng-template #menu>
+      <div sc-menu>
+        <button sc-menu-item>
+          <span>Documentation</span>
+        </button>
+
+        <button sc-menu-item>
+          <span>Themes</span>
+        </button>
+
+        <button sc-menu-item>
+          <span>GitHub</span>
+        </button>
+      </div>
+    </ng-template>
   \`,
   styles: \`\`,
   encapsulation: ViewEncapsulation.None,

@@ -9,7 +9,7 @@ import {
 import { cn } from '@semantic-components/utils';
 
 @Component({
-  selector: 'span[sc-breadcrumb-ellipsis]',
+  selector: 'span[sc-breadcrumb-ellipsis], button[sc-breadcrumb-ellipsis]',
   imports: [],
   template: `
     <ng-content />
