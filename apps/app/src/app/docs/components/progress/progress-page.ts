@@ -9,7 +9,7 @@ import { ProgressIndeterminateStateSection } from './progress-indeterminate-stat
   template: `
     <app-progress-demo-section />
 
-    <app-progress-indeterminate-state-section />
+    <app-progress-indeterminate-state-section title="Indeterminate state" />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
