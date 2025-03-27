@@ -69,6 +69,9 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
       </sc-accordion-item>
     </sc-accordion>
   `,
+  host: {
+    class: 'block w-full',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
