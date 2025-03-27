@@ -18,6 +18,8 @@ import {
   ScDialogHeader,
   ScDialogManager,
   ScDialogTitle,
+  ScInput,
+  ScLabel,
 } from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
@@ -35,6 +37,8 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     SiXIcon,
     ScDialogContent,
     ScButton,
+    ScLabel,
+    ScInput,
   ],
   template: `
     <button (click)="openDialog()" sc-button variant="secondary">Open dialog</button>
@@ -53,6 +57,17 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
             <p sc-dialog-description>
               Make changes to your profile here. Click save when you're done.
             </p>
+          </div>
+
+          <div class="grid gap-4 py-4">
+            <div class="grid grid-cols-4 items-center gap-4">
+              <label class="text-right" sc-label for="name">Name</label>
+              <input class="col-span-3" id="name" sc-input value="Pedro Duarte" />
+            </div>
+            <div class="grid grid-cols-4 items-center gap-4">
+              <label class="text-right" sc-label for="username">Username</label>
+              <input class="col-span-3" id="username" sc-input value="@peduarte" />
+            </div>
           </div>
 
           <div sc-dialog-footer>
