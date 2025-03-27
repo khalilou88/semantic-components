@@ -196,6 +196,12 @@
             "description": "A two-state button that can be either on or off."
           },
           {
+            "id": "toggle-group",
+            "title": "Toggle Group",
+            "path": "/docs/components/toggle-group",
+            "description": "A set of two-state buttons that can be toggled on or off."
+          },
+          {
             "id": "tooltip",
             "title": "Tooltip",
             "path": "/docs/components/tooltip",

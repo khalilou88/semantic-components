@@ -9,7 +9,7 @@ import {
 import { cn } from '@semantic-components/utils';
 
 @Component({
-  selector: 'sc-toggle-item',
+  selector: 'button[sc-toggle-item]',
   imports: [],
   template: `
     <ng-content />
@@ -29,4 +29,6 @@ export class ScToggleItem {
   protected readonly class = computed(() =>
     cn('flex items-center justify-center gap-1', this.classInput()),
   );
+
+  readonly value = input<string>();
 }
