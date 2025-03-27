@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { BadgeDemoSection } from './badge-demo-section';
+
 @Component({
   selector: 'app-badge-page',
-  imports: [],
+  imports: [BadgeDemoSection],
   template: `
-    <p>badge-page works!</p>
+    <app-badge-demo-section />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
