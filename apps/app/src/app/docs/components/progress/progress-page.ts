@@ -1,12 +1,15 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import { ProgressDemoSection } from './progress-demo-section';
+import { ProgressIndeterminateStateSection } from './progress-indeterminate-state-section';
 
 @Component({
   selector: 'app-progress-page',
-  imports: [ProgressDemoSection],
+  imports: [ProgressDemoSection, ProgressIndeterminateStateSection],
   template: `
     <app-progress-demo-section />
+
+    <app-progress-indeterminate-state-section />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
