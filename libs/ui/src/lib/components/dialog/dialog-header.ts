@@ -15,14 +15,18 @@ import { cn } from '@semantic-components/utils';
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScDialogHeader {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn(' flex flex-col space-y-1.5 text-center sm:text-left', this.class()));
+  protected readonly class = computed(() =>
+    cn(' flex flex-col space-y-1.5 text-center sm:text-left', this.classInput()),
+  );
 }

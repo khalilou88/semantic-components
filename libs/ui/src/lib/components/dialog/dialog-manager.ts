@@ -39,4 +39,8 @@ export class ScDialogManager {
       this.isOpen.set(false);
     });
   }
+
+  close() {
+    console.log('close');
+  }
 }
