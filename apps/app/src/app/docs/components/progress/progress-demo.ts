@@ -12,8 +12,11 @@ import { ScProgress } from '@semantic-components/ui';
   selector: 'app-progress-demo',
   imports: [ScProgress],
   template: `
-    <sc-progress class="w-[60%]" [value]="progress()" />
+    <sc-progress [value]="progress()" />
   `,
+  host: {
+    class: 'block w-full',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

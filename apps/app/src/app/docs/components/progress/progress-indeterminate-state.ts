@@ -8,6 +8,9 @@ import { ScProgress } from '@semantic-components/ui';
   template: `
     <sc-progress mode="indeterminate" />
   `,
+  host: {
+    class: 'block w-full',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
