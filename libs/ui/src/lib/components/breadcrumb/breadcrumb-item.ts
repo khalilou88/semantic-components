@@ -15,14 +15,18 @@ import { cn } from '@semantic-components/utils';
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScBreadcrumbItem {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn('inline-flex items-center gap-1.5', this.class()));
+  protected readonly class = computed(() =>
+    cn('inline-flex items-center gap-1.5', this.classInput()),
+  );
 }

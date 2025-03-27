@@ -17,14 +17,16 @@ import { cn } from '@semantic-components/utils';
   host: {
     role: 'presentation',
     '[attr.aria-hidden]': 'true',
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScBreadcrumbSeparator {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn('[&_svg]:w-3.5 [&_svg]:h-3.5', this.class()));
+  protected readonly class = computed(() => cn('[&_svg]:w-3.5 [&_svg]:h-3.5', this.classInput()));
 }

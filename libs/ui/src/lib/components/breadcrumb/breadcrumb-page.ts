@@ -18,14 +18,16 @@ import { cn } from '@semantic-components/utils';
     role: 'link',
     '[attr.aria-disabled]': 'true',
     '[attr.aria-current]': '"page"',
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScBreadcrumbPage {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn('font-normal text-foreground', this.class()));
+  protected readonly class = computed(() => cn('font-normal text-foreground', this.classInput()));
 }
