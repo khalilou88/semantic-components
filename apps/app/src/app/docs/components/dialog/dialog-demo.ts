@@ -1,24 +1,32 @@
-import { Dialog, DialogModule } from '@angular/cdk/dialog';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  TemplateRef,
+  ViewEncapsulation,
+  inject,
+  viewChild,
+} from '@angular/core';
 
-import { ScButton, ScDialog } from '@semantic-components/ui';
+import { ScButton, ScDialogManager } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-dialog-demo',
-  imports: [DialogModule, ScButton],
+  imports: [ScButton],
   template: `
     <button (click)="openDialog()" sc-button variant="secondary">Open dialog</button>
+
+    <ng-template #dialog>Test</ng-template>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DialogDemo {
-  dialog = inject(Dialog);
+  dialogManger = inject(ScDialogManager);
+
+  private readonly dialogRef = viewChild.required<TemplateRef<unknown>>('dialog');
 
   openDialog() {
-    this.dialog.open(ScDialog, {
-      minWidth: '300px',
-    });
+    this.dialogManger.open(this.dialogRef());
   }
 }
