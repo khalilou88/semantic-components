@@ -49,7 +49,9 @@ import { TocHeadingDirective } from '../toc/toc-heading.directive';
           data-tab-content="tab1"
         >
           <div class="bg-card text-card-foreground rounded-md border border-border p-6 h-full">
-            <ng-content />
+            <div class="flex items-center justify-center min-h-96">
+              <ng-content />
+            </div>
           </div>
         </div>
         <div
