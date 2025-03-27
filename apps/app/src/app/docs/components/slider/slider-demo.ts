@@ -16,6 +16,9 @@ import { ScSlider } from '@semantic-components/ui';
       {{ sliderForm.value | json }}
     </div>
   `,
+  host: {
+    class: 'block w-full',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
