@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { CarouselDemoSection } from './carousel-demo-section';
+
 @Component({
   selector: 'app-carousel-page',
-  imports: [],
+  imports: [CarouselDemoSection],
   template: `
-    <p>carousel-page works!</p>
+    <app-carousel-demo-section />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
