@@ -17,6 +17,9 @@ import { ScAspectRatio } from '@semantic-components/ui';
       />
     </sc-aspect-ratio>
   `,
+  host: {
+    class: 'block w-full',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
