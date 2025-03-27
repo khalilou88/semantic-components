@@ -36,7 +36,7 @@ export class ScProgress {
 
   protected readonly class = computed(() =>
     cn(
-      'block relative h-4 w-full overflow-hidden rounded-full bg-secondary',
+      'block relative h-2 w-full overflow-hidden rounded-full bg-primary/20',
       '[&>[data-slot=indicator]]:size-full [&>[data-slot=indicator]]:flex-1 [&>[data-slot=indicator]]:bg-primary [&>[data-slot=indicator]]:transition-all',
       this.mode() === 'indeterminate' &&
         '[&>[data-slot=indicator]]:animate-progress [&>[data-slot=indicator]]:origin-left',
