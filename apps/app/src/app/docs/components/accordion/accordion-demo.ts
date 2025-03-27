@@ -70,7 +70,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     </sc-accordion>
   `,
   host: {
-    class: 'block w-full',
+    class: 'block w-80',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,

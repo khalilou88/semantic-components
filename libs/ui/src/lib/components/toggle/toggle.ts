@@ -39,20 +39,22 @@ type ToggleVariants = VariantProps<typeof toggleVariants>;
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScToggle {
-  variant = input<ToggleVariants['variant']>('default');
+  readonly variant = input<ToggleVariants['variant']>('default');
 
-  size = input<ToggleVariants['size']>('default');
+  readonly size = input<ToggleVariants['size']>('default');
 
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() =>
-    cn(toggleVariants({ variant: this.variant(), size: this.size() }), this.class()),
+  protected readonly class = computed(() =>
+    cn(toggleVariants({ variant: this.variant(), size: this.size() }), this.classInput()),
   );
 }

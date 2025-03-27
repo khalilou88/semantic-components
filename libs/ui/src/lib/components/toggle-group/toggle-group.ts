@@ -15,16 +15,20 @@ import { cn } from '@semantic-components/utils';
     <ng-content />
   `,
   host: {
-    '[class]': '_class()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScToggleGroup {
-  type = input<'single' | 'multiple'>('single');
+  readonly type = input<'single' | 'multiple'>('single');
 
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  _class = computed(() => cn('flex items-center justify-center gap-1', this.class()));
+  protected readonly class = computed(() =>
+    cn('flex items-center justify-center gap-1', this.classInput()),
+  );
 }
