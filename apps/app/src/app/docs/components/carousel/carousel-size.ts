@@ -11,10 +11,9 @@ import {
   ScCarouselPrevious,
 } from '@semantic-components/ui';
 import { SiArrowLeftIcon, SiArrowRightIcon } from '@semantic-icons/lucide-icons';
-import { EmblaOptionsType } from 'embla-carousel';
 
 @Component({
-  selector: 'app-carousel-orientation',
+  selector: 'app-carousel-size',
   imports: [
     ScCarousel,
     ScCarouselContainer,
@@ -28,14 +27,14 @@ import { EmblaOptionsType } from 'embla-carousel';
     ScCardContent,
   ],
   template: `
-    <div class="w-full max-w-xs mt-10" sc-carousel-container>
-      <div class="w-full" [options]="options" orientation="vertical" sc-carousel>
-        <div class="-mt-1 h-[200px]" sc-carousel-items>
+    <div class="w-full max-w-xs" sc-carousel-container>
+      <div class="w-full" sc-carousel>
+        <div sc-carousel-items>
           @for (item of items; track $index) {
-            <div class="pt-1 md:basis-1/2" sc-carousel-item>
+            <div class="md:basis-1/2 lg:basis-1/3" sc-carousel-item>
               <div class="p-1">
                 <div sc-card>
-                  <div class="flex items-center justify-center p-6" sc-card-content>
+                  <div class="flex aspect-square items-center justify-center p-6" sc-card-content>
                     <span class="text-4xl font-semibold">{{ item }}</span>
                   </div>
                 </div>
@@ -59,8 +58,6 @@ import { EmblaOptionsType } from 'embla-carousel';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CarouselOrientation {
+export class CarouselSize {
   items = Array.from({ length: 5 }, (_, i) => i + 1);
-
-  options: EmblaOptionsType = { align: 'start' };
 }
