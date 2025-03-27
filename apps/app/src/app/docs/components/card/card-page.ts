@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { CardDemoSection } from './card-demo-section';
+
 @Component({
   selector: 'app-card-page',
-  imports: [],
+  imports: [CardDemoSection],
   template: `
-    <p>card-page works!</p>
+    <app-card-demo-section />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
