@@ -117,6 +117,20 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
+  @keyframes progress {
+    0% {
+      transform: translateX(0) scaleX(0);
+    }
+    40% {
+      transform: translateX(0) scaleX(0.4);
+    }
+    100% {
+      transform: translateX(100%) scaleX(0.5);
+    }
+  }
+
+  --animate-progress: progress 1s infinite linear;
+
   @keyframes accordion-down {
     0% {
       height: 0;
