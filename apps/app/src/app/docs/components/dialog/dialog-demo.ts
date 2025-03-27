@@ -1,3 +1,4 @@
+import { DialogModule } from '@angular/cdk/dialog';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -7,26 +8,70 @@ import {
   viewChild,
 } from '@angular/core';
 
-import { ScButton, ScDialogManager } from '@semantic-components/ui';
+import {
+  ScButton,
+  ScDialog,
+  ScDialogClose,
+  ScDialogContent,
+  ScDialogDescription,
+  ScDialogFooter,
+  ScDialogHeader,
+  ScDialogManager,
+  ScDialogTitle,
+} from '@semantic-components/ui';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-dialog-demo',
-  imports: [ScButton],
+  imports: [
+    DialogModule,
+    ScButton,
+    ScDialog,
+    ScDialogHeader,
+    ScDialogTitle,
+    ScDialogDescription,
+    ScDialogFooter,
+    ScDialogClose,
+    SiXIcon,
+    ScDialogContent,
+    ScButton,
+  ],
   template: `
     <button (click)="openDialog()" sc-button variant="secondary">Open dialog</button>
 
-    <ng-template #dialog>Test</ng-template>
+    <ng-template #dialog>
+      <div sc-dialog>
+        <div sc-dialog-content>
+          <button sc-dialog-close>
+            <svg class="size-4" si-x-icon></svg>
+            <span class="sr-only">Close</span>
+          </button>
+
+          <div sc-dialog-header>
+            <h2 sc-dialog-title>Edit profile</h2>
+
+            <p sc-dialog-description>
+              Make changes to your profile here. Click save when you're done.
+            </p>
+          </div>
+
+          <div sc-dialog-footer>
+            <button sc-button type="submit">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </ng-template>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DialogDemo {
-  dialogManger = inject(ScDialogManager);
+  private readonly dialogManger = inject(ScDialogManager);
 
   private readonly dialogRef = viewChild.required<TemplateRef<unknown>>('dialog');
 
-  openDialog() {
+  protected openDialog() {
     this.dialogManger.open(this.dialogRef());
   }
 }

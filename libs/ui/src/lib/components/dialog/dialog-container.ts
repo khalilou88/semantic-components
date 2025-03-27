@@ -1,4 +1,4 @@
-import { DIALOG_DATA } from '@angular/cdk/dialog';
+import { DIALOG_DATA, DialogModule } from '@angular/cdk/dialog';
 import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -14,7 +14,7 @@ import { cn } from '@semantic-components/utils';
 
 @Component({
   selector: 'sc-dialog-container',
-  imports: [NgTemplateOutlet],
+  imports: [DialogModule, NgTemplateOutlet],
   template: `
     @if (data.templateRef) {
       <ng-container *ngTemplateOutlet="data.templateRef" />

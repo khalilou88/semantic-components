@@ -16,12 +16,15 @@ import { cn } from '@semantic-components/utils';
   `,
   host: {
     '[class]': 'classes()',
+    // '(click)': 'dialogRef.close()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScDialogClose {
+  // dialogRef = inject(DialogRef);
+
   class = input<string>('');
 
   classes = computed(() =>
