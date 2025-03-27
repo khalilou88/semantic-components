@@ -16,15 +16,14 @@ import { CheckboxGroupDemo } from './checkbox-group-demo';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckboxGroupDemoSection {
-  protected readonly code = `import { JsonPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+  protected readonly code = `import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import { ScCheckbox, ScCheckboxGroup, ScCheckboxItem } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-checkbox-group-demo',
-  imports: [ScCheckboxGroup, ScCheckboxItem, ReactiveFormsModule, JsonPipe, ScCheckbox],
+  imports: [ScCheckboxGroup, ScCheckboxItem, ReactiveFormsModule, ScCheckbox],
   template: \`
     <form [formGroup]="toppingsForm">
       <sc-checkbox-group formControlName="toppings">
@@ -38,10 +37,6 @@ import { ScCheckbox, ScCheckboxGroup, ScCheckboxItem } from '@semantic-component
         }
       </sc-checkbox-group>
     </form>
-
-    <div class="mt-10">
-      {{ toppingsForm.value | json }}
-    </div>
   \`,
   styles: \`\`,
   encapsulation: ViewEncapsulation.None,
