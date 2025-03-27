@@ -9,7 +9,7 @@ import {
   ScBreadcrumbPage,
   ScBreadcrumbSeparator,
 } from '@semantic-components/ui';
-import { SiSlashIcon } from '@semantic-icons/lucide-icons';
+import { SiEllipsisIcon, SiSlashIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-breadcrumb-custom-separator',
@@ -22,6 +22,7 @@ import { SiSlashIcon } from '@semantic-icons/lucide-icons';
     ScBreadcrumbSeparator,
     SiSlashIcon,
     ScBreadcrumbEllipsis,
+    SiEllipsisIcon,
   ],
   template: `
     <nav sc-breadcrumb>
@@ -30,7 +31,12 @@ import { SiSlashIcon } from '@semantic-icons/lucide-icons';
 
         <li sc-breadcrumb-separator><svg si-slash-icon></svg></li>
 
-        <li sc-breadcrumb-item><span sc-breadcrumb-ellipsis></span></li>
+        <li sc-breadcrumb-item>
+          <span sc-breadcrumb-ellipsis>
+            <svg class="size-4" si-ellipsis-icon></svg>
+            <span class="sr-only">More</span>
+          </span>
+        </li>
 
         <li sc-breadcrumb-separator><svg si-slash-icon></svg></li>
 

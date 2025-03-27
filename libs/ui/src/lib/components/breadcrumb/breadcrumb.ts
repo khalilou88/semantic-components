@@ -15,22 +15,22 @@ import { cn } from '@semantic-components/utils';
     <ng-content />
   `,
   host: {
-    '[attr.aria-label]': 'ariaLabel',
-    '[class]': 'classes()',
+    '[attr.aria-label]': '"breadcrumb"',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScBreadcrumb {
-  ariaLabel = 'breadcrumb';
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  class = input<string>('');
-
-  classes = computed(() =>
+  protected readonly class = computed(() =>
     cn(
       'flex flex-wrap items-center gap-1.5 break-words text-sm text-muted-foreground sm:gap-2.5',
-      this.class(),
+      this.classInput(),
     ),
   );
 }

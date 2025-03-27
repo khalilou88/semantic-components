@@ -9,7 +9,7 @@ import {
   ScBreadcrumbPage,
   ScBreadcrumbSeparator,
 } from '@semantic-components/ui';
-import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
+import { SiChevronRightIcon, SiEllipsisIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-breadcrumb-page',
@@ -22,6 +22,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
     ScBreadcrumbSeparator,
     SiChevronRightIcon,
     ScBreadcrumbEllipsis,
+    SiEllipsisIcon,
   ],
   template: `
     <div class="space-y-2">
@@ -49,7 +50,12 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 
         <li sc-breadcrumb-separator><svg si-chevron-right-icon></svg></li>
 
-        <li sc-breadcrumb-item><span sc-breadcrumb-ellipsis></span></li>
+        <li sc-breadcrumb-item>
+          <span sc-breadcrumb-ellipsis>
+            <svg class="size-4" si-ellipsis-icon></svg>
+            <span class="sr-only">More</span>
+          </span>
+        </li>
 
         <li sc-breadcrumb-separator><svg si-chevron-right-icon></svg></li>
 
