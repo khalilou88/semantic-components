@@ -19,9 +19,7 @@ import {
   selector: 'app-toast-simple',
   imports: [ScToastDescription, ScToast, ScToastContent, ScButton, ScButton],
   template: `
-    <button (click)="showToast()" sc-button type="button" variant="outline">
-      Show Simple Toast
-    </button>
+    <button (click)="showToast()" sc-button type="button" variant="outline">Show Toast</button>
 
     <ng-template #toastTemplate>
       <div sc-toast>
