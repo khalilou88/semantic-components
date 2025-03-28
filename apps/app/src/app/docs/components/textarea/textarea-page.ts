@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import { TextareaDemoSection } from './textarea-demo-section';
+import { TextareaDisabledSection } from './textarea-disabled-section';
 import { TextareaFormSection } from './textarea-form-section';
 import { TextareaWithButtonSection } from './textarea-with-button-section';
 import { TextareaWithLabelSection } from './textarea-with-label-section';
@@ -10,6 +11,7 @@ import { TextareaWithTextSection } from './textarea-with-text-section';
   selector: 'app-textarea-page',
   imports: [
     TextareaDemoSection,
+    TextareaDisabledSection,
     TextareaWithLabelSection,
     TextareaWithTextSection,
     TextareaWithButtonSection,
@@ -19,6 +21,8 @@ import { TextareaWithTextSection } from './textarea-with-text-section';
     <app-textarea-demo-section />
 
     <app-textarea-demo-section title="Default" />
+
+    <app-textarea-disabled-section title="Disabled" />
 
     <app-textarea-with-label-section title="With Label" />
 
