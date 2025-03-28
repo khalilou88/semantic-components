@@ -151,6 +151,11 @@ export const appRoutes: Route[] = [
         title: 'Slider Page',
       },
       {
+        path: 'components/switch',
+        loadComponent: () => import('./docs/components/switch/switch-page'),
+        title: 'Switch Page',
+      },
+      {
         path: 'components/table',
         loadComponent: () => import('./docs/components/table/table-page'),
         title: 'Table Page',

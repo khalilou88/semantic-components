@@ -184,6 +184,12 @@
             "description": "An input where the user selects a value from within a given range."
           },
           {
+            "id": "switch",
+            "title": "Switch",
+            "path": "/docs/components/switch",
+            "description": "A control that allows the user to toggle between checked and not checked."
+          },
+          {
             "id": "table",
             "title": "Table",
             "path": "/docs/components/table",
