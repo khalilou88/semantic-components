@@ -1,79 +1,104 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  TemplateRef,
+  ViewEncapsulation,
+  inject,
+  viewChild,
+} from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+
+import {
+  ScButton,
+  ScLabel,
+  ScTextarea,
+  ScToast,
+  ScToastContent,
+  ScToastDescription,
+  ScToastTitle,
+  Toaster,
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-textarea-form',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    ScButton,
+    ScTextarea,
+    ScLabel,
+    ScToastDescription,
+    ScToastTitle,
+    ScToast,
+    ScToastContent,
+  ],
   template: `
-    <div class="container mx-auto max-w-md p-4">
-      <form class="space-y-4" [formGroup]="bioForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label class="block text-sm font-medium mb-2" for="bio">Bio</label>
-          <textarea
-            class="w-full p-2 border rounded resize-none"
-            id="bio"
-            formControlName="bio"
-            placeholder="Tell us a little bit about yourself"
-            rows="4"
-          ></textarea>
+    <form class=" space-y-6" [formGroup]="bioForm" (ngSubmit)="onSubmit()">
+      <div class="">
+        <label sc-label for="bio">Bio</label>
+        <textarea
+          class="resize-none"
+          id="bio"
+          sc-textarea
+          formControlName="bio"
+          placeholder="Tell us a little bit about yourself"
+          rows="4"
+        ></textarea>
 
-          <!-- Error Messages -->
-          <div
-            class="text-red-500 text-sm mt-1"
-            *ngIf="
-              bioForm.get('bio')?.invalid &&
-              (bioForm.get('bio')?.dirty || bioForm.get('bio')?.touched)
-            "
-          >
-            <div *ngIf="bioForm.get('bio')?.errors?.['required']">Bio is required.</div>
-            <div *ngIf="bioForm.get('bio')?.errors?.['minlength']">
-              Bio must be at least 10 characters.
-            </div>
-            <div *ngIf="bioForm.get('bio')?.errors?.['maxlength']">
-              Bio must not be longer than 160 characters.
-            </div>
+        <!-- Error Messages -->
+        <div
+          class="text-red-500 text-sm mt-1"
+          *ngIf="
+            bioForm.get('bio')?.invalid &&
+            (bioForm.get('bio')?.dirty || bioForm.get('bio')?.touched)
+          "
+        >
+          <div *ngIf="bioForm.get('bio')?.errors?.['required']">Bio is required.</div>
+          <div *ngIf="bioForm.get('bio')?.errors?.['minlength']">
+            Bio must be at least 10 characters.
           </div>
-
-          <p class="text-sm text-gray-500 mt-1">
-            You can
-            <span class="font-semibold">&#64;mention</span>
-            other users and organizations.
-          </p>
+          <div *ngIf="bioForm.get('bio')?.errors?.['maxlength']">
+            Bio must not be longer than 160 characters.
+          </div>
         </div>
 
-        <button
-          class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 disabled:bg-gray-300"
-          [disabled]="bioForm.invalid"
-          type="submit"
-        >
-          Submit
-        </button>
-      </form>
+        <p class="text-sm text-gray-500 mt-1">
+          You can
+          <span class="font-semibold">&#64;mention</span>
+          other users and organizations.
+        </p>
+      </div>
 
-      <!-- Submission Result Modal -->
-      <div
-        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
-        *ngIf="submissionResult"
-      >
-        <div class="bg-white p-6 rounded-lg max-w-md w-full">
-          <h2 class="text-xl font-bold mb-4">Submission Result</h2>
-          <pre class="bg-gray-100 p-4 rounded">{{ submissionResult }}</pre>
-          <button class="mt-4 w-full bg-blue-500 text-white p-2 rounded" (click)="closeModal()">
-            Close
-          </button>
+      <button [disabled]="bioForm.invalid" sc-button type="submit">Submit</button>
+    </form>
+
+    <ng-template #toastTemplate>
+      <div sc-toast>
+        <div sc-toast-content>
+          <h2 sc-toast-title>You submitted the following values:</h2>
+
+          <div sc-toast-description>
+            <pre
+              class="mt-2 w-[340px] rounded-md bg-slate-950 p-4"
+            ><code class="text-white">{{ submissionResult }}</code></pre>
+          </div>
         </div>
       </div>
-    </div>
+    </ng-template>
   `,
   host: {
-    class: 'block w-full',
+    class: 'block w-2/3',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextareaForm {
+  private readonly toaster = inject(Toaster);
+
+  private readonly toastTemplate = viewChild.required<TemplateRef<unknown>>('toastTemplate');
+
   bioForm: FormGroup;
   submissionResult: string | null = null;
 
@@ -87,10 +112,12 @@ export class TextareaForm {
     if (this.bioForm.valid) {
       // Simulate submission result
       this.submissionResult = JSON.stringify(this.bioForm.value, null, 2);
+
+      this.showToast();
     }
   }
 
-  closeModal() {
-    this.submissionResult = null;
+  private showToast() {
+    this.toaster.show(this.toastTemplate());
   }
 }
