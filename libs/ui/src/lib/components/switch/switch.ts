@@ -37,7 +37,10 @@ export class ScSwitch {
   protected readonly class = computed(() =>
     cn(
       'appearance-none',
-      'w-11 h-6 relative cursor-pointer inline-block',
+      'w-9 h-5',
+      'relative',
+      'cursor-pointer',
+      'inline-block',
       'focus:outline-0',
       'border-0',
       'focus:ring-offset-transparent',
@@ -45,18 +48,16 @@ export class ScSwitch {
       'focus-within:ring-0',
       'focus:shadow-none',
 
-      'relative', // Make sure positioning context is established
-
       // Use the new pseudo-element syntax if it changed
       '[&::after]:absolute [&::before]:absolute',
       '[&::after]:top-0 [&::before]:top-0',
       '[&::after]:block [&::before]:inline-block',
       '[&::before]:rounded-full [&::after]:rounded-full',
 
-      "[&::after]:content-[''] [&::after]:w-5 [&::after]:h-5 [&::after]:mt-0.5 [&::after]:ml-0.5",
+      "[&::after]:content-[''] [&::after]:w-4 [&::after]:h-4 [&::after]:mt-0.5 [&::after]:ml-0.5",
       '[&::after]:shadow-md [&::after]:duration-100',
 
-      "[&::before]:content-[''] [&::before]:w-10 [&::before]:h-full",
+      "[&::before]:content-[''] [&::before]:w-9 [&::before]:h-full",
       '[&::before]:shadow-[inset_0_0_#000]',
 
       '[&::after]:bg-white dark:[&::after]:bg-gray-50',
