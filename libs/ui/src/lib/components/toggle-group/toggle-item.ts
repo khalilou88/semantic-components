@@ -16,9 +16,7 @@ import { ScToggleBase, toggleVariants } from '../toggle/toggle-base';
   template: `
     <ng-content />
   `,
-  host: {
-    '[class]': 'class()',
-  },
+  host: {},
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -28,6 +26,7 @@ export class ScToggleItem extends ScToggleBase {
     cn(
       toggleVariants({ variant: this.variant(), size: this.size() }),
       'flex items-center justify-center gap-1',
+      this.active() && 'bg-accent text-accent-foreground',
       this.classInput(),
     ),
   );

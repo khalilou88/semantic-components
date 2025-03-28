@@ -8,9 +8,7 @@ import { ScToggleBase } from './toggle-base';
   template: `
     <ng-content />
   `,
-  host: {
-    '[class]': 'class()',
-  },
+  host: {},
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

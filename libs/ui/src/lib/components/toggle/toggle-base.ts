@@ -1,4 +1,4 @@
-import { Directive, computed, input } from '@angular/core';
+import { Directive, computed, input, signal } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
 import { VariantProps, cva } from 'class-variance-authority';
@@ -26,7 +26,12 @@ export const toggleVariants = cva(
 
 type ToggleVariants = VariantProps<typeof toggleVariants>;
 
-@Directive()
+@Directive({
+  host: {
+    '[class]': 'class()',
+    '(click)': 'toggle()',
+  },
+})
 export class ScToggleBase {
   readonly variant = input<ToggleVariants['variant']>('default');
 
@@ -37,6 +42,16 @@ export class ScToggleBase {
   });
 
   protected readonly class = computed(() =>
-    cn(toggleVariants({ variant: this.variant(), size: this.size() }), this.classInput()),
+    cn(
+      toggleVariants({ variant: this.variant(), size: this.size() }),
+      this.active() && 'bg-accent text-accent-foreground',
+      this.classInput(),
+    ),
   );
+
+  readonly active = signal(false);
+
+  protected toggle() {
+    this.active.update((active) => !active);
+  }
 }
