@@ -141,6 +141,11 @@ export const appRoutes: Route[] = [
         title: 'Pagination Page',
       },
       {
+        path: 'components/popover',
+        loadComponent: () => import('./docs/components/popover/popover-page'),
+        title: 'Popover Page',
+      },
+      {
         path: 'components/progress',
         loadComponent: () => import('./docs/components/progress/progress-page'),
         title: 'Progress Page',

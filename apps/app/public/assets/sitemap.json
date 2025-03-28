@@ -172,6 +172,12 @@
             "description": "Pagination with page navigation, next and previous links."
           },
           {
+            "id": "popover",
+            "title": "Popover",
+            "path": "/docs/components/popover",
+            "description": "Displays rich content in a portal, triggered by a button."
+          },
+          {
             "id": "progress",
             "title": "Progress",
             "path": "/docs/components/progress",
