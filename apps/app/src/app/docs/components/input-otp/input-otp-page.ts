@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { InputOtpDemoSection } from './input-otp-demo-section';
+
 @Component({
   selector: 'app-input-otp-page',
-  imports: [],
+  imports: [InputOtpDemoSection],
   template: `
-    <p>input-otp-page works!</p>
+    <app-input-otp-demo-section />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
