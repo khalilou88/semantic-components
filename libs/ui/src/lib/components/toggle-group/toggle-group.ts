@@ -31,4 +31,6 @@ export class ScToggleGroup {
   protected readonly class = computed(() =>
     cn('flex items-center justify-center gap-1', this.classInput()),
   );
+
+  readonly value = input<string[]>([]);
 }
