@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { ToastDemoSection } from './toast-demo-section';
+
 @Component({
   selector: 'app-toast-page',
-  imports: [],
+  imports: [ToastDemoSection],
   template: `
-    <p>toast-page works!</p>
+    <app-toast-demo-section />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
