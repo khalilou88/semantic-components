@@ -190,6 +190,12 @@
             "description": "A responsive table component."
           },
           {
+            "id": "tabs",
+            "title": "Tabs",
+            "path": "/docs/components/tabs",
+            "description": "A set of layered sections of content—known as tab panels—that are displayed one at a time."
+          },
+          {
             "id": "textarea",
             "title": "Textarea",
             "path": "/docs/components/textarea",

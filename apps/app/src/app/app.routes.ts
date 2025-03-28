@@ -156,6 +156,11 @@ export const appRoutes: Route[] = [
         title: 'Table Page',
       },
       {
+        path: 'components/tabs',
+        loadComponent: () => import('./docs/components/tabs/tabs-page'),
+        title: 'Tabs Page',
+      },
+      {
         path: 'components/textarea',
         loadComponent: () => import('./docs/components/textarea/textarea-page'),
         title: 'Textarea Page',
