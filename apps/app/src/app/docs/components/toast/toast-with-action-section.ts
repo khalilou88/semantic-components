@@ -1,15 +1,24 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
 
+import { PreviewCodeTabs } from '../../../components/preview-code-tabs/preview-code-tabs';
 import { ToastWithAction } from './toast-with-action';
 
 @Component({
   selector: 'app-toast-with-action-section',
-  imports: [ToastWithAction],
+  imports: [PreviewCodeTabs, ToastWithAction],
   template: `
-    <app-toast-with-action />
+    <app-preview-code-tabs [code]="code" [title]="title()" [level]="level()">
+      <app-toast-with-action />
+    </app-preview-code-tabs>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ToastWithActionSection {}
+export class ToastWithActionSection {
+  readonly title = input<string>('');
+
+  readonly level = input<'2' | '3'>('2');
+
+  protected readonly code = ``;
+}
