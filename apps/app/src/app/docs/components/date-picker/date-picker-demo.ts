@@ -15,9 +15,7 @@ import { SiCalendarIcon } from '@semantic-icons/lucide-icons';
       <input placeholder="Select date" sc-input type="text" />
     </sc-date-picker>
   `,
-  host: {
-    class: 'block w-full',
-  },
+  host: {},
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
