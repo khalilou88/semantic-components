@@ -126,6 +126,11 @@ export const appRoutes: Route[] = [
         title: 'Input Page',
       },
       {
+        path: 'components/input-otp',
+        loadComponent: () => import('./docs/components/input-otp/input-otp-page'),
+        title: 'Input OTP Page',
+      },
+      {
         path: 'components/pagination',
         loadComponent: () => import('./docs/components/pagination/pagination-page'),
         title: 'Pagination Page',
