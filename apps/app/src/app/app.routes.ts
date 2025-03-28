@@ -131,6 +131,11 @@ export const appRoutes: Route[] = [
         title: 'Progress Page',
       },
       {
+        path: 'components/select',
+        loadComponent: () => import('./docs/components/select/select-page'),
+        title: 'Select Page',
+      },
+      {
         path: 'components/separator',
         loadComponent: () => import('./docs/components/separator/separator-page'),
         title: 'Separator Page',

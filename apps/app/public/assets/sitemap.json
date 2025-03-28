@@ -160,6 +160,12 @@
             "description": "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar."
           },
           {
+            "id": "select",
+            "title": "Select",
+            "path": "/docs/components/select",
+            "description": "Displays a list of options for the user to pick from—triggered by a button."
+          },
+          {
             "id": "separator",
             "title": "Separator",
             "path": "/docs/components/separator",
