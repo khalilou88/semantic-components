@@ -8,6 +8,8 @@ import {
 
 import { cn } from '@semantic-components/utils';
 
+import { ScToggleBase, toggleVariants } from '../toggle/toggle-base';
+
 @Component({
   selector: 'button[sc-toggle-item]',
   imports: [],
@@ -21,13 +23,13 @@ import { cn } from '@semantic-components/utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScToggleItem {
-  readonly classInput = input<string>('', {
-    alias: 'class',
-  });
-
-  protected readonly class = computed(() =>
-    cn('flex items-center justify-center gap-1', this.classInput()),
+export class ScToggleItem extends ScToggleBase {
+  protected override readonly class = computed(() =>
+    cn(
+      toggleVariants({ variant: this.variant(), size: this.size() }),
+      'flex items-center justify-center gap-1',
+      this.classInput(),
+    ),
   );
 
   readonly value = input<string>();
