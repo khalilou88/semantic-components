@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { TextareaDemoSection } from './textarea-demo-section';
+
 @Component({
   selector: 'app-textarea-page',
-  imports: [],
+  imports: [TextareaDemoSection],
   template: `
-    <p>textarea-page works!</p>
+    <app-textarea-demo-section />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
