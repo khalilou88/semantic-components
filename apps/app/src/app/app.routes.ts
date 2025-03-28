@@ -121,6 +121,11 @@ export const appRoutes: Route[] = [
         title: 'Hover Card Page',
       },
       {
+        path: 'components/input',
+        loadComponent: () => import('./docs/components/input/input-page'),
+        title: 'Input Page',
+      },
+      {
         path: 'components/pagination',
         loadComponent: () => import('./docs/components/pagination/pagination-page'),
         title: 'Pagination Page',

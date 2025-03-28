@@ -148,6 +148,12 @@
             "description": "For sighted users to preview content available behind a link."
           },
           {
+            "id": "input",
+            "title": "Input",
+            "path": "/docs/components/input",
+            "description": "Displays a form input field or a component that looks like an input field."
+          },
+          {
             "id": "pagination",
             "title": "Pagination",
             "path": "/docs/components/pagination",
