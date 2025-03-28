@@ -56,6 +56,9 @@ import {
       </table>
     </div>
   `,
+  host: {
+    class: 'block w-full',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
