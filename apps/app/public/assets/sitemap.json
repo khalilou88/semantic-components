@@ -190,6 +190,12 @@
             "description": "A responsive table component."
           },
           {
+            "id": "toast",
+            "title": "Toast",
+            "path": "/docs/components/toast",
+            "description": "A succinct message that is displayed temporarily."
+          },
+          {
             "id": "toggle",
             "title": "Toggle",
             "path": "/docs/components/toggle",
