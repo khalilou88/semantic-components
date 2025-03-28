@@ -124,6 +124,12 @@
             "description": "An interactive component which expands/collapses a panel."
           },
           {
+            "id": "combobox",
+            "title": "Combobox",
+            "path": "/docs/components/combobox",
+            "description": "Autocomplete input and command palette with a list of suggestions."
+          },
+          {
             "id": "date-picker",
             "title": "Date Picker",
             "path": "/docs/components/date-picker",

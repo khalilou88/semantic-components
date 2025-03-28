@@ -101,6 +101,11 @@ export const appRoutes: Route[] = [
         title: 'Collapsible Page',
       },
       {
+        path: 'components/combobox',
+        loadComponent: () => import('./docs/components/combobox/combobox-page'),
+        title: 'Combobox Page',
+      },
+      {
         path: 'components/date-picker',
         loadComponent: () => import('./docs/components/date-picker/date-picker-page'),
         title: 'Date Picker Page',
