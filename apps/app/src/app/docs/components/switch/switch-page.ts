@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { SwitchDemoSection } from './switch-demo-section';
+
 @Component({
   selector: 'app-switch-page',
-  imports: [],
+  imports: [SwitchDemoSection],
   template: `
-    <p>switch-page works!</p>
+    <app-switch-demo-section />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
