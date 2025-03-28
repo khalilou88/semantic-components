@@ -9,7 +9,6 @@
 @import 'tw-animate-css';
 
 @plugin '@tailwindcss/typography';
-@plugin 'tailwindcss-animate';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
