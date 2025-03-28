@@ -6,6 +6,9 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   template: `
     <p>textarea-with-label works!</p>
   `,
+  host: {
+    class: 'block w-full',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
