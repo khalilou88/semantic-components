@@ -136,6 +136,11 @@ export const appRoutes: Route[] = [
         title: 'Input OTP Page',
       },
       {
+        path: 'components/label',
+        loadComponent: () => import('./docs/components/label/label-page'),
+        title: 'Label Page',
+      },
+      {
         path: 'components/pagination',
         loadComponent: () => import('./docs/components/pagination/pagination-page'),
         title: 'Pagination Page',

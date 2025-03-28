@@ -166,6 +166,12 @@
             "description": "Accessible one-time password component with copy paste functionality."
           },
           {
+            "id": "label",
+            "title": "Label",
+            "path": "/docs/components/label",
+            "description": "Renders an accessible label associated with controls."
+          },
+          {
             "id": "pagination",
             "title": "Pagination",
             "path": "/docs/components/pagination",
