@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { TabsDemoSection } from './tabs-demo-section';
+
 @Component({
   selector: 'app-tabs-page',
-  imports: [],
+  imports: [TabsDemoSection],
   template: `
-    <p>tabs-page works!</p>
+    <app-tabs-demo-section />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
