@@ -1,10 +1,15 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { ScLabel, ScTextarea } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-textarea-with-label',
-  imports: [],
+  imports: [ScLabel, ScTextarea],
   template: `
-    <p>textarea-with-label works!</p>
+    <div class="grid w-full gap-1.5">
+      <label sc-label for="message">Your message</label>
+      <textarea id="message" sc-textarea placeholder="Type your message here."></textarea>
+    </div>
   `,
   host: {
     class: 'block w-full',
