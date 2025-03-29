@@ -11,6 +11,10 @@ export class ScTheme {
 
   readonly isDarkMode = computed(() => this.isDarkModeSignal());
 
+  readonly theme = computed<'light' | 'dark'>(() => {
+    return this.isDarkMode() ? 'dark' : 'light';
+  });
+
   constructor() {
     afterNextRender(() => {
       // Initialize theme from localStorage or system preference
@@ -37,7 +41,7 @@ export class ScTheme {
   toggleTheme(): void {
     this.isDarkModeSignal.update((t) => !t);
     this.applyTheme(this.isDarkMode());
-    localStorage.setItem('theme', this.isDarkMode() ? 'dark' : 'light');
+    localStorage.setItem('theme', this.theme());
   }
 
   private applyTheme(isDark: boolean): void {
