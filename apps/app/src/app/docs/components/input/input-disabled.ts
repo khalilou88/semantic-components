@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { ScInput } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-input-disabled',
-  imports: [],
+  imports: [ScInput],
   template: `
-    <p>input-disabled works!</p>
+    <input sc-input disabled type="email" placeholder="Email" />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
