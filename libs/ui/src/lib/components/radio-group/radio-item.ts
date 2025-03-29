@@ -16,6 +16,7 @@ import { cn } from '@semantic-components/utils';
   `,
   host: {
     '[class]': 'class()',
+    'data-slot': 'radio-item',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,

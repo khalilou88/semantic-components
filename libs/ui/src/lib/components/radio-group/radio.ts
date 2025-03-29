@@ -2,11 +2,15 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  booleanAttribute,
   computed,
+  inject,
   input,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
+
+import { ScRadioGroup } from './radio-group';
 
 @Component({
   selector: 'input[sc-radio]',
@@ -16,7 +20,12 @@ import { cn } from '@semantic-components/utils';
   `,
   host: {
     '[class]': 'class()',
+    '[name]': 'name()',
+    '[disabled]': 'disabled()',
+    '[value]': 'value()',
+    '[checked]': 'checked()',
     '[type]': 'type()',
+    '(click)': 'select()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -42,4 +51,30 @@ export class ScRadio {
   );
 
   readonly type = input<'radio'>('radio');
+
+  private readonly scRadioGroup = inject(ScRadioGroup);
+
+  protected readonly name = computed(() => {
+    return this.scRadioGroup.name();
+  });
+
+  readonly disabledInput = input<boolean, unknown>(false, {
+    alias: 'disabled',
+    transform: booleanAttribute,
+  });
+  readonly disabled = computed(() => this.disabledInput() || this.scRadioGroup.disabled());
+
+  readonly value = input.required<string>();
+
+  protected readonly checked = computed(() => {
+    return this.value() === this.scRadioGroup.value();
+  });
+
+  protected select() {
+    if (this.disabled()) {
+      return;
+    }
+
+    this.scRadioGroup.setValue(this.value());
+  }
 }

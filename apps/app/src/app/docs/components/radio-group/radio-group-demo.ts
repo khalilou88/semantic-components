@@ -9,7 +9,7 @@ import { ScLabel, ScRadio, ScRadioGroup, ScRadioItem } from '@semantic-component
   imports: [ScRadioGroup, ScRadioItem, ScRadio, ReactiveFormsModule, JsonPipe, ScLabel],
   template: `
     <form [formGroup]="radioGroupForm">
-      <sc-radio-group value="comfortable" formControlName="radio">
+      <sc-radio-group value="comfortable" formControlName="radio" name="radio-group">
         <sc-radio-item>
           <input id="r1" sc-radio value="default" />
           <label for="r1" sc-label>Default radio</label>
