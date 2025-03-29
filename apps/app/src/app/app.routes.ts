@@ -106,6 +106,11 @@ export const appRoutes: Route[] = [
         title: 'Combobox Page',
       },
       {
+        path: 'components/context-menu',
+        loadComponent: () => import('./docs/components/context-menu/context-menu-page'),
+        title: 'Context Menu Page',
+      },
+      {
         path: 'components/date-picker',
         loadComponent: () => import('./docs/components/date-picker/date-picker-page'),
         title: 'Date Picker Page',
