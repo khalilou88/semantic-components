@@ -156,6 +156,11 @@ export const appRoutes: Route[] = [
         title: 'Progress Page',
       },
       {
+        path: 'components/radio-group',
+        loadComponent: () => import('./docs/components/radio-group/radio-group-page'),
+        title: 'Radio Group Page',
+      },
+      {
         path: 'components/select',
         loadComponent: () => import('./docs/components/select/select-page'),
         title: 'Select Page',

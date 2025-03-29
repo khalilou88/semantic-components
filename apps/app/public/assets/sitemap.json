@@ -190,6 +190,12 @@
             "description": "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar."
           },
           {
+            "id": "radio-group",
+            "title": "Radio Group",
+            "path": "/docs/components/radio-group",
+            "description": "A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time."
+          },
+          {
             "id": "select",
             "title": "Select",
             "path": "/docs/components/select",
