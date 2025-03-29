@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   selector: 'app-radio-group-form',
   imports: [],
   template: `
-    <p>radio-group-form works!</p>
+    <p>Coming soon</p>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,

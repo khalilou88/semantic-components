@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   selector: 'app-combobox-demo',
   imports: [],
   template: `
-    <p>Comming soon</p>
+    <p>Coming soon</p>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
