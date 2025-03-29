@@ -23,6 +23,7 @@ import { cn } from '@semantic-components/utils';
   `,
   host: {
     '[class]': 'class()',
+    'data-slot': 'radio-group',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
