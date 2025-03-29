@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { InputDemo } from './input-demo';
+
 @Component({
   selector: 'app-input-demo-section',
-  imports: [],
+  imports: [InputDemo],
   template: `
-    <p>input-demo-section works!</p>
+    <app-input-demo />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
