@@ -20,6 +20,8 @@ import { InputWithLabelSection } from './input-with-label-section';
   template: `
     <app-input-demo-section />
 
+    <app-input-demo-section title="Default" />
+
     <app-input-file-section title="File" />
 
     <app-input-disabled-section title="Disabled" />
