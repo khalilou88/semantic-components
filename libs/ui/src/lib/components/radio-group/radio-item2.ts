@@ -48,7 +48,7 @@ import { ScRadioGroup } from './radio-group';
 export class ScRadioItem2 {
   protected readonly id = signal<string>(inject(_IdGenerator).getId('sc-radio-item-'));
 
-  private readonly scRadioGroup = inject(ScRadioGroup, { host: true });
+  private readonly scRadioGroup = inject(ScRadioGroup);
 
   protected readonly name = computed(() => {
     return this.scRadioGroup.name();

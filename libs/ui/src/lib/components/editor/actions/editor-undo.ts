@@ -30,7 +30,7 @@ import { ScExtensions } from '../extensions/extensions';
 export class ScEditorUndo {
   ariaLabel = 'Undo';
 
-  private readonly parent = inject(ScEditor, { host: true });
+  private readonly parent = inject(ScEditor);
 
   extensions = inject(ScExtensions);
 

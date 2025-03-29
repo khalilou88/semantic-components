@@ -158,7 +158,7 @@ import { ScExtensions } from './extensions';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScExtensionFontFamily {
-  private readonly parent = inject(ScEditor, { host: true });
+  private readonly parent = inject(ScEditor);
 
   extensions = inject(ScExtensions);
 

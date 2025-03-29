@@ -40,7 +40,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
   ],
 })
 export class ScMenuCheckboxItem {
-  private readonly _cdkMenuItemCheckbox = inject(CdkMenuItemCheckbox, { host: true });
+  private readonly _cdkMenuItemCheckbox = inject(CdkMenuItemCheckbox);
 
   class = input<string>('');
 

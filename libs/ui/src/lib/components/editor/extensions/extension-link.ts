@@ -41,7 +41,7 @@ import { ScExtensions } from './extensions';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScExtensionLink {
-  private readonly parent = inject(ScEditor, { host: true });
+  private readonly parent = inject(ScEditor);
   dialog = inject(Dialog);
 
   extensions = inject(ScExtensions);

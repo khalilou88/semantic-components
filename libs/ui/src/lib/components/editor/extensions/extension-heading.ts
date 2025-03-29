@@ -213,7 +213,7 @@ import { ScEditor } from '../editor';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScExtensionHeading {
-  private readonly parent = inject(ScEditor, { host: true });
+  private readonly parent = inject(ScEditor);
 
   get editor() {
     return this.parent.editor;

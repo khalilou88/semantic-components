@@ -74,7 +74,7 @@ import { ScEditor } from '../editor';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScEditorParagraph {
-  private readonly parent = inject(ScEditor, { host: true });
+  private readonly parent = inject(ScEditor);
 
   get editor() {
     return this.parent.editor;

@@ -75,7 +75,7 @@ import { ScExtensions } from './extensions';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScExtensionColor {
-  private readonly parent = inject(ScEditor, { host: true });
+  private readonly parent = inject(ScEditor);
 
   extensions = inject(ScExtensions);
 

@@ -56,7 +56,7 @@ export class ScOption implements Highlightable {
     ),
   );
 
-  private readonly scSelect = inject(ScSelect, { host: true });
+  private readonly scSelect = inject(ScSelect);
 
   protected isSelected = computed(() => this.value() === this.scSelect.value());
 

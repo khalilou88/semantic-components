@@ -38,7 +38,7 @@ export class ScEditorBold {
     alias: 'aria-label',
   });
 
-  private readonly parent = inject(ScEditor, { host: true });
+  private readonly parent = inject(ScEditor);
 
   private readonly extensions = inject(ScExtensions);
 

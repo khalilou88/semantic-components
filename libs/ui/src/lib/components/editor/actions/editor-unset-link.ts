@@ -31,7 +31,7 @@ import { ScExtensions } from '../extensions/extensions';
 export class ScEditorUnsetLink {
   ariaLabel = 'Unset Link';
 
-  private readonly parent = inject(ScEditor, { host: true });
+  private readonly parent = inject(ScEditor);
   dialog = inject(Dialog);
 
   extensions = inject(ScExtensions);

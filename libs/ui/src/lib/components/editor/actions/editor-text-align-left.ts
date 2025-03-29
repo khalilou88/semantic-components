@@ -30,7 +30,7 @@ import { ScExtensions } from '../extensions/extensions';
 export class ScEditorTextAlignLeft {
   ariaLabel = 'Align left';
 
-  private readonly parent = inject(ScEditor, { host: true });
+  private readonly parent = inject(ScEditor);
 
   extensions = inject(ScExtensions);
 
