@@ -1,10 +1,15 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { ScInput, ScLabel } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-input-with-label',
-  imports: [],
+  imports: [ScInput, ScLabel],
   template: `
-    <p>input-with-label works!</p>
+    <div class="grid w-full max-w-sm items-center gap-1.5">
+      <label sc-label htmlFor="email">Email</label>
+      <input id="email" sc-input type="email" placeholder="Email" />
+    </div>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
