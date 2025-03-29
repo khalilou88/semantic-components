@@ -176,6 +176,11 @@ export const appRoutes: Route[] = [
         title: 'Radio Group Page',
       },
       {
+        path: 'components/re-captcha',
+        loadComponent: () => import('./docs/components/re-captcha/re-captcha-page'),
+        title: 'reCAPTCHA Page',
+      },
+      {
         path: 'components/select',
         loadComponent: () => import('./docs/components/select/select-page'),
         title: 'Select Page',

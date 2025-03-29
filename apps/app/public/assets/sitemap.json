@@ -214,6 +214,12 @@
             "description": "A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time."
           },
           {
+            "id": "re-captcha",
+            "title": "reCAPTCHA",
+            "path": "/docs/components/re-captcha",
+            "description": "Effortless integration of Google reCAPTCHA with Angular applications."
+          },
+          {
             "id": "select",
             "title": "Select",
             "path": "/docs/components/select",
