@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { InputWithLabel } from './input-with-label';
+
 @Component({
   selector: 'app-input-with-label-section',
-  imports: [],
+  imports: [InputWithLabel],
   template: `
-    <p>input-with-label-section works!</p>
+    <app-input-with-label />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
