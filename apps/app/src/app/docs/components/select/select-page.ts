@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { SelectDemoSection } from './select-demo-section';
+
 @Component({
   selector: 'app-select-page',
-  imports: [],
+  imports: [SelectDemoSection],
   template: `
-    <p>select-page works!</p>
+    <app-select-demo-section />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
