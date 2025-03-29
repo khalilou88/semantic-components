@@ -1,3 +1,4 @@
+import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,6 +7,7 @@ import {
   computed,
   inject,
   input,
+  linkedSignal,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
@@ -20,6 +22,7 @@ import { ScRadioGroup } from './radio-group';
   `,
   host: {
     '[class]': 'class()',
+    '[id]': 'id()',
     '[name]': 'name()',
     '[disabled]': 'disabled()',
     '[value]': 'value()',
@@ -65,6 +68,12 @@ export class ScRadio {
   readonly disabled = computed(() => this.disabledInput() || this.scRadioGroup.disabled());
 
   readonly value = input.required<string>();
+
+  readonly idInput = input<string>(inject(_IdGenerator).getId('sc-radio-'), {
+    alias: 'id',
+  });
+
+  readonly id = linkedSignal(() => this.idInput());
 
   protected readonly checked = computed(() => {
     return this.value() === this.scRadioGroup.value();

@@ -1,4 +1,3 @@
-import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
@@ -6,33 +5,25 @@ import { ScLabel, ScRadio, ScRadioGroup, ScRadioItem } from '@semantic-component
 
 @Component({
   selector: 'app-radio-group-demo',
-  imports: [ScRadioGroup, ScRadioItem, ScRadio, ReactiveFormsModule, JsonPipe, ScLabel],
+  imports: [ScRadioGroup, ScRadioItem, ScRadio, ReactiveFormsModule, ScLabel],
   template: `
     <form [formGroup]="radioGroupForm">
       <sc-radio-group value="comfortable" formControlName="radio" name="radio-group">
         <sc-radio-item>
-          <input id="r1" sc-radio value="default" />
-          <label for="r1" sc-label>Default radio</label>
+          <input sc-radio value="default" />
+          <label sc-label>Default radio</label>
         </sc-radio-item>
 
         <sc-radio-item>
-          <input id="r2" value="comfortable" sc-radio />
-          <label for="r2" sc-label>Comfortable</label>
+          <input value="comfortable" sc-radio />
+          <label sc-label>Comfortable</label>
         </sc-radio-item>
 
         <sc-radio-item>
-          <input id="r3" value="compact" sc-radio />
-          <label for="r3" sc-label>Compact</label>
+          <input value="compact" sc-radio />
+          <label sc-label>Compact</label>
         </sc-radio-item>
       </sc-radio-group>
-
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-
-      {{ radioGroupForm.value | json }}
     </form>
   `,
   styles: ``,
