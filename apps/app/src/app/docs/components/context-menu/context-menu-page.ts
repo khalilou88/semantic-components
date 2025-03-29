@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { ContextMenuDemoSection } from './context-menu-demo-section';
+
 @Component({
   selector: 'app-context-menu-page',
-  imports: [],
+  imports: [ContextMenuDemoSection],
   template: `
-    <p>context-menu-page works!</p>
+    <app-context-menu-demo-section />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
