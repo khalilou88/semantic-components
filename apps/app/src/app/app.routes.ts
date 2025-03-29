@@ -146,6 +146,11 @@ export const appRoutes: Route[] = [
         title: 'Label Page',
       },
       {
+        path: 'components/menu',
+        loadComponent: () => import('./docs/components/menu/menu-page'),
+        title: 'Menu Page',
+      },
+      {
         path: 'components/pagination',
         loadComponent: () => import('./docs/components/pagination/pagination-page'),
         title: 'Pagination Page',

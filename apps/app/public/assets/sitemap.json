@@ -178,6 +178,12 @@
             "description": "Renders an accessible label associated with controls."
           },
           {
+            "id": "menu",
+            "title": "Menu",
+            "path": "/docs/components/menu",
+            "description": "Displays a menu to the user — such as a set of actions or functions — triggered by a button."
+          },
+          {
             "id": "pagination",
             "title": "Pagination",
             "path": "/docs/components/pagination",
