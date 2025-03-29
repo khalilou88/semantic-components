@@ -31,7 +31,7 @@ import { ScRadioGroup, ScRadioItem } from '@semantic-components/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RadioGroupDemo {
-  radioGroupForm = new FormGroup({
+  readonly radioGroupForm = new FormGroup({
     radio: new FormControl('compact'),
   });
 }
