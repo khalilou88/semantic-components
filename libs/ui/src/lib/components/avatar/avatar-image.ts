@@ -3,11 +3,13 @@ import {
   Component,
   ViewEncapsulation,
   computed,
+  inject,
   input,
-  signal,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
+
+import { AvatarState } from './avatar-state';
 
 @Component({
   selector: 'img[sc-avatar-image]',
@@ -26,6 +28,8 @@ import { cn } from '@semantic-components/utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScAvatarImage {
+  readonly avatarState = inject(AvatarState);
+
   readonly classInput = input<string>('', {
     alias: 'class',
   });
@@ -33,20 +37,18 @@ export class ScAvatarImage {
   protected readonly class = computed(() =>
     cn(
       'absolute inset-0 h-full w-full object-cover transition-opacity duration-200 z-10',
-      this.state() === 'loaded' && 'opacity-100',
-      this.state() === 'loading' && 'opacity-0',
-      this.state() === 'error' && 'hidden',
+      this.avatarState.state() === 'loaded' && 'opacity-100',
+      this.avatarState.state() === 'loading' && 'opacity-0',
+      this.avatarState.state() === 'error' && 'hidden',
       this.classInput(),
     ),
   );
 
-  private readonly state = signal<'loading' | 'loaded' | 'error'>('loading');
-
   protected handleLoad() {
-    this.state.set('loaded');
+    this.avatarState.state.set('loaded');
   }
 
   protected handleError() {
-    this.state.set('error');
+    this.avatarState.state.set('error');
   }
 }

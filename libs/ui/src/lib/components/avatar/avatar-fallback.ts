@@ -3,10 +3,13 @@ import {
   Component,
   ViewEncapsulation,
   computed,
+  inject,
   input,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
+
+import { AvatarState } from './avatar-state';
 
 @Component({
   selector: 'div[sc-avatar-fallback]',
@@ -23,11 +26,17 @@ import { cn } from '@semantic-components/utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScAvatarFallback {
+  readonly avatarState = inject(AvatarState);
+
   readonly classInput = input<string>('', {
     alias: 'class',
   });
 
   protected readonly class = computed(() =>
-    cn('flex size-full items-center justify-center bg-muted uppercase', this.classInput()),
+    cn(
+      'absolute inset-0 flex size-full items-center justify-center bg-muted uppercase',
+      this.avatarState.state() === 'loaded' && 'hidden',
+      this.classInput(),
+    ),
   );
 }

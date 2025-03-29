@@ -8,6 +8,8 @@ import {
 
 import { cn } from '@semantic-components/utils';
 
+import { AvatarState } from './avatar-state';
+
 @Component({
   selector: 'sc-avatar',
   imports: [],
@@ -21,6 +23,7 @@ import { cn } from '@semantic-components/utils';
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [AvatarState],
 })
 export class ScAvatar {
   readonly classInput = input<string>('', {
