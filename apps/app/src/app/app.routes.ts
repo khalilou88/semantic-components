@@ -151,6 +151,11 @@ export const appRoutes: Route[] = [
         title: 'Menu Page',
       },
       {
+        path: 'components/menu-bar',
+        loadComponent: () => import('./docs/components/menu-bar/menu-bar-page'),
+        title: 'Menu Bar Page',
+      },
+      {
         path: 'components/pagination',
         loadComponent: () => import('./docs/components/pagination/pagination-page'),
         title: 'Pagination Page',

@@ -184,6 +184,12 @@
             "description": "Displays a menu to the user — such as a set of actions or functions — triggered by a button."
           },
           {
+            "id": "menu-bar",
+            "title": "Menu Bar",
+            "path": "/docs/components/menu-bar",
+            "description": "A visually persistent menu common in desktop applications that provides quick access to a consistent set of commands."
+          },
+          {
             "id": "pagination",
             "title": "Pagination",
             "path": "/docs/components/pagination",
