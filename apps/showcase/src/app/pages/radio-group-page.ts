@@ -2,19 +2,19 @@ import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
-import { ScRadioGroup, ScRadioItem } from '@semantic-components/ui';
+import { ScRadioGroup, ScRadioItem2 } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-radio-group-page',
-  imports: [ScRadioGroup, ScRadioItem, ReactiveFormsModule, JsonPipe],
+  imports: [ScRadioGroup, ScRadioItem2, ReactiveFormsModule, JsonPipe],
   template: `
     <form [formGroup]="radioGroupForm">
       <sc-radio-group value="comfortable" formControlName="radio">
-        <sc-radio-item id="r1" value="default">Default radio</sc-radio-item>
+        <sc-radio-item2 id="r1" value="default">Default radio</sc-radio-item2>
 
-        <sc-radio-item id="r2" value="comfortable">Comfortable</sc-radio-item>
+        <sc-radio-item2 id="r2" value="comfortable">Comfortable</sc-radio-item2>
 
-        <sc-radio-item id="r3" value="compact">Compact</sc-radio-item>
+        <sc-radio-item2 id="r3" value="compact">Compact</sc-radio-item2>
       </sc-radio-group>
     </form>
 
