@@ -1,4 +1,4 @@
-import { Directive, ElementRef, forwardRef, inject, input, signal } from '@angular/core';
+import { Directive, forwardRef, input, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { ScReCaptchaBase } from './re-captcha-base';
@@ -17,8 +17,6 @@ declare let grecaptcha: any;
   ],
 })
 export class ScInvisibleReCaptcha extends ScReCaptchaBase implements ControlValueAccessor {
-  private readonly hostRef = inject(ElementRef);
-
   readonly badge = input<'bottomright' | 'bottomleft' | 'inline'>('bottomright');
 
   private readonly size = signal<'invisible'>('invisible');
