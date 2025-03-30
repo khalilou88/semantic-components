@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 
 import { ScCheckboxReCaptcha } from '@semantic-components/re-captcha';
-import { ScTheme } from 'libs/ui/src/lib/components/theme-toggler/theme';
+import { ScTheme } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-re-captcha-demo',
