@@ -65,7 +65,7 @@ export class ScReCaptchaBase implements OnInit, OnDestroy, ControlValueAccessor 
   private readonly value = signal<string | null>(null);
   private readonly disabledByCva = signal(false);
 
-  scriptLoaded: boolean = false;
+  scriptLoaded = false;
   private readonly router = inject(Router);
   private readonly recaptchaContainer = inject(ElementRef);
   private readonly subscriptions: Subscription[] = [];
