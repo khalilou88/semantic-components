@@ -1,13 +1,22 @@
 import {
+  AfterViewInit,
   ChangeDetectorRef,
   Directive,
+  ElementRef,
+  OnDestroy,
   OnInit,
   computed,
   inject,
   input,
+  output,
   signal,
 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
+import { NavigationStart, Router } from '@angular/router';
+
+import { filter } from 'rxjs/operators';
+
+import { Subscription } from 'rxjs';
 
 import { IdGenerator } from './id-generator';
 import { SC_RE_CAPTCHA_V2_SITE_KEY } from './re-captcha-config';
@@ -25,7 +34,7 @@ type ErrorCallbackFn = () => void;
     '[class.g-recaptcha]': 'true',
   },
 })
-export class ScReCaptchaBase implements OnInit, ControlValueAccessor {
+export class ScReCaptchaBase implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor {
   private readonly id = inject(IdGenerator).getId('sc-re-captcha-');
   protected widgetId = '';
 
@@ -59,8 +68,77 @@ export class ScReCaptchaBase implements OnInit, ControlValueAccessor {
   private readonly value = signal<string | null>(null);
   private readonly disabledByCva = signal(false);
 
-  ngOnInit() {
-    this.scReCaptchaService.scReCaptchas.push(this);
+  scriptLoaded: boolean = false;
+  private readonly router = inject(Router);
+  private readonly recaptchaContainer = inject(ElementRef);
+  private readonly subscriptions: Subscription[] = [];
+
+  scriptLoadError = output<void>();
+
+  ngOnInit(): void {
+    // this.registerCallbacks();
+    this.loadRecaptcha();
+
+    // Listen for route changes to reset reCAPTCHA if needed
+    const routerSub = this.router.events
+      .pipe(filter((event) => event instanceof NavigationStart))
+      .subscribe(() => {
+        // After route change completes, check if we need to re-render
+        setTimeout(() => {
+          if (this.scriptLoaded && this.recaptchaContainer && !this.isWidgetRendered()) {
+            this.render();
+          }
+        }, 0);
+      });
+
+    this.subscriptions.push(routerSub);
+  }
+
+  ngAfterViewInit(): void {
+    // If script is already loaded, render the widget
+    if (this.scriptLoaded && this.recaptchaContainer) {
+      this.render();
+    }
+  }
+
+  ngOnDestroy(): void {
+    // Clean up all subscriptions
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
+  }
+
+  // Check if widget is actually rendered in the DOM
+  private isWidgetRendered(): boolean {
+    if (!this.recaptchaContainer?.nativeElement) {
+      return false;
+    }
+
+    // Check if iframe exists inside the container (reCAPTCHA creates an iframe when rendered)
+    return this.recaptchaContainer.nativeElement.querySelector('iframe') !== null;
+  }
+
+  private loadRecaptcha(): void {
+    const scriptSub = this.scReCaptchaService
+      .loadScript('onRecaptchaLoaded')
+      .subscribe((loaded) => {
+        this.scriptLoaded = loaded;
+
+        if (!loaded) {
+          this.scriptLoadError.emit();
+          return;
+        }
+
+        // If callbacks aren't registered yet, do it now
+        // if (!this.callbacksRegistered) {
+        //   this.registerCallbacks();
+        // }
+
+        // If container is available (view initialized), render widget
+        if (this.recaptchaContainer) {
+          setTimeout(() => this.render(), 0);
+        }
+      });
+
+    this.subscriptions.push(scriptSub);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
