@@ -11,9 +11,7 @@ import {
   signal,
 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
-import { NavigationStart, Router } from '@angular/router';
-
-import { filter } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 
@@ -77,20 +75,6 @@ export class ScReCaptchaBase implements OnInit, OnDestroy, ControlValueAccessor 
   ngOnInit(): void {
     // this.registerCallbacks();
     this.loadRecaptcha();
-
-    // Listen for route changes to reset reCAPTCHA if needed
-    const routerSub = this.router.events
-      .pipe(filter((event) => event instanceof NavigationStart))
-      .subscribe(() => {
-        // After route change completes, check if we need to re-render
-        setTimeout(() => {
-          if (this.scriptLoaded && this.recaptchaContainer && !this.isWidgetRendered()) {
-            this.render();
-          }
-        }, 0);
-      });
-
-    this.subscriptions.push(routerSub);
   }
 
   ngOnDestroy(): void {
