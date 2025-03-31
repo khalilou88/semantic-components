@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   ChangeDetectorRef,
   Directive,
   ElementRef,
@@ -34,7 +33,7 @@ type ErrorCallbackFn = () => void;
     '[class.g-recaptcha]': 'true',
   },
 })
-export class ScReCaptchaBase implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor {
+export class ScReCaptchaBase implements OnInit, OnDestroy, ControlValueAccessor {
   private readonly id = inject(IdGenerator).getId('sc-re-captcha-');
   protected widgetId = '';
 
@@ -94,13 +93,6 @@ export class ScReCaptchaBase implements OnInit, OnDestroy, AfterViewInit, Contro
     this.subscriptions.push(routerSub);
   }
 
-  ngAfterViewInit(): void {
-    // If script is already loaded, render the widget
-    if (this.scriptLoaded && this.recaptchaContainer) {
-      this.render();
-    }
-  }
-
   ngOnDestroy(): void {
     // Clean up all subscriptions
     this.subscriptions.forEach((sub) => sub.unsubscribe());
@@ -117,26 +109,24 @@ export class ScReCaptchaBase implements OnInit, OnDestroy, AfterViewInit, Contro
   }
 
   private loadRecaptcha(): void {
-    const scriptSub = this.scReCaptchaService
-      .loadScript('onRecaptchaLoaded')
-      .subscribe((loaded) => {
-        this.scriptLoaded = loaded;
+    const scriptSub = this.scReCaptchaService.loadScript().subscribe((loaded) => {
+      this.scriptLoaded = loaded;
 
-        if (!loaded) {
-          this.scriptLoadError.emit();
-          return;
-        }
+      if (!loaded) {
+        this.scriptLoadError.emit();
+        return;
+      }
 
-        // If callbacks aren't registered yet, do it now
-        // if (!this.callbacksRegistered) {
-        //   this.registerCallbacks();
-        // }
+      // If callbacks aren't registered yet, do it now
+      // if (!this.callbacksRegistered) {
+      //   this.registerCallbacks();
+      // }
 
-        // If container is available (view initialized), render widget
-        if (this.recaptchaContainer) {
-          setTimeout(() => this.render(), 0);
-        }
-      });
+      // If container is available (view initialized), render widget
+      if (this.recaptchaContainer) {
+        setTimeout(() => this.render(), 0);
+      }
+    });
 
     this.subscriptions.push(scriptSub);
   }
