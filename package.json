@@ -52,7 +52,7 @@
     "@tiptap/extension-table-row": "^2.11.6",
     "@tiptap/extension-text": "^2.11.7",
     "@tiptap/extension-text-align": "^2.11.6",
-    "@tiptap/extension-text-style": "^2.11.6",
+    "@tiptap/extension-text-style": "^2.11.7",
     "@tiptap/extension-underline": "^2.11.7",
     "@tiptap/extension-youtube": "^2.11.6",
     "@tiptap/pm": "^2.11.7",
