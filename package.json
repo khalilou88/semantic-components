@@ -38,7 +38,7 @@
     "@tiptap/extension-heading": "^2.11.7",
     "@tiptap/extension-highlight": "^2.11.7",
     "@tiptap/extension-history": "^2.11.6",
-    "@tiptap/extension-horizontal-rule": "^2.11.6",
+    "@tiptap/extension-horizontal-rule": "^2.11.7",
     "@tiptap/extension-image": "^2.11.7",
     "@tiptap/extension-italic": "^2.11.6",
     "@tiptap/extension-link": "^2.11.7",
