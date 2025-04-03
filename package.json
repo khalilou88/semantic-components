@@ -61,7 +61,7 @@
     "clsx": "^2.1.1",
     "embla-carousel": "^8.5.2",
     "embla-carousel-autoplay": "^8.5.2",
-    "express": "~4.21.2",
+    "express": "~5.1.0",
     "motion": "^12.6.2",
     "rxjs": "~7.8.2",
     "shiki": "^3.2.1",
