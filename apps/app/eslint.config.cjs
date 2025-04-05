@@ -8,6 +8,7 @@ module.exports = [
   {
     files: ['**/*.ts'],
     rules: {
+      '@angular-eslint/no-input-rename': ['warn'],
       '@angular-eslint/component-class-suffix': 'off',
       '@angular-eslint/directive-selector': [
         'warn',
