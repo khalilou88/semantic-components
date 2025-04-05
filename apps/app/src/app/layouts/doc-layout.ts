@@ -11,8 +11,14 @@ import {
 } from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 
-import { ScLink, ScSheetConfig, ScSheetManager } from '@semantic-components/ui';
-import { SiChevronLeftIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';
+import {
+  ScLink,
+  ScSheet,
+  ScSheetClose,
+  ScSheetConfig,
+  ScSheetManager,
+} from '@semantic-components/ui';
+import { SiChevronLeftIcon, SiChevronRightIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 
 import { Sidebar } from '../components/sidebar';
 import { TableOfContents } from '../components/table-of-contents';
@@ -30,6 +36,9 @@ import { PageInfo } from '../core/types';
     SiChevronRightIcon,
     RouterLink,
     NgTemplateOutlet,
+    ScSheet,
+    ScSheetClose,
+    SiXIcon,
   ],
   template: `
     <div class="flex-1 flex">
@@ -37,11 +46,21 @@ import { PageInfo } from '../core/types';
       <div
         class="hidden md:flex border-r border-border/40 w-[240px] flex-shrink-0 md:sticky md:top-14 md:h-[calc(100vh-56px)] md:overflow-y-auto"
       >
-        <ng-template #sheet>
+        <ng-template #sidebar>
           <app-sidebar />
         </ng-template>
-        <ng-container *ngTemplateOutlet="sheetRef()" />
+        <ng-container *ngTemplateOutlet="sidebarRef()" />
       </div>
+
+      <ng-template #sheet>
+        <div sc-sheet>
+          <button sc-sheet-close>
+            <svg class="size-4" si-x-icon></svg>
+            <span class="sr-only">Close</span>
+          </button>
+          <ng-container *ngTemplateOutlet="sidebarRef()" />
+        </div>
+      </ng-template>
 
       <!-- Main Content -->
       <main class="flex-1 overflow-auto">
@@ -197,6 +216,8 @@ export default class DocLayout {
   });
 
   private readonly scSheetManager = inject(ScSheetManager);
+
+  protected readonly sidebarRef = viewChild.required<TemplateRef<unknown>>('sidebar');
 
   protected readonly sheetRef = viewChild.required<TemplateRef<unknown>>('sheet');
 
