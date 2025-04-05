@@ -2,11 +2,17 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 
 import { CheckboxDemoSection } from './checkbox-demo-section';
 import { CheckboxDisabledSection } from './checkbox-disabled-section';
+import { CheckboxIndeterminateSection } from './checkbox-indeterminate-section';
 import { CheckboxWithTextSection } from './checkbox-with-text-section';
 
 @Component({
   selector: 'app-checkbox-page',
-  imports: [CheckboxDemoSection, CheckboxWithTextSection, CheckboxDisabledSection],
+  imports: [
+    CheckboxDemoSection,
+    CheckboxWithTextSection,
+    CheckboxDisabledSection,
+    CheckboxIndeterminateSection,
+  ],
   template: `
     <app-checkbox-demo-section />
 
@@ -15,6 +21,8 @@ import { CheckboxWithTextSection } from './checkbox-with-text-section';
     <app-checkbox-with-text-section title="With text" level="3" />
 
     <app-checkbox-disabled-section title="Disabled State" level="3" />
+
+    <app-checkbox-indeterminate-section title="Indeterminate State" level="3" />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
