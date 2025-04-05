@@ -4,8 +4,11 @@ import {
   ViewEncapsulation,
   computed,
   inject,
+  input,
 } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+
+import { cn } from '@semantic-components/utils';
 
 import { SitemapLoader } from '../core/sitemap';
 
@@ -34,6 +37,9 @@ import { SitemapLoader } from '../core/sitemap';
       }
     </div>
   `,
+  host: {
+    '[class]': 'class()',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -42,4 +48,10 @@ export class Sidebar {
   private readonly sitemapLoader = inject(SitemapLoader);
 
   protected readonly sections = computed(() => this.sitemapLoader.sitemap()?.sections);
+
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
+
+  protected readonly class = computed(() => cn('block size-full', this.classInput()));
 }
