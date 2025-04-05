@@ -36,10 +36,8 @@ export interface ScCheckboxChange {
   },
   styles: `
     :root {
-      --checkbox-checked-bg-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='lucide lucide-check'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
-      --checkbox-checked-bg-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='lucide lucide-check'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
-      --checkbox-indeterminate-bg-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='lucide lucide-minus'%3E%3Cpath d='M5 12h14'/%3E%3C/svg%3E");
-      --checkbox-indeterminate-bg-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='lucide lucide-minus'%3E%3Cpath d='M5 12h14'/%3E%3C/svg%3E");
+      --check-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+      --minus-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14'/%3E%3C/svg%3E");
     }
   `,
   encapsulation: ViewEncapsulation.None,
@@ -69,7 +67,6 @@ export class ScCheckbox {
       'border border-primary', //adds border
       'rounded-sm', //adds border radius
       'shadow',
-      // 'bg-white', //sets background color
       'cursor-pointer',
       'outline-none',
       'transition-all duration-200', //adds smooth transitions
@@ -78,23 +75,20 @@ export class ScCheckbox {
       'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
 
       //Checked state
-      'checked:bg-primary',
-      'checked:text-primary-foreground',
-      // Applies SVG background image when checked
-      '[&:checked]:bg-[image:var(--checkbox-checked-bg-light)]',
-      'dark:[&:checked]:bg-[image:var(--checkbox-checked-bg-dark)]',
-      'checked:bg-no-repeat', // Prevents background image from repeating
-      'checked:bg-center', // Centers the background image
-      'checked:bg-contain', // Scales image to fit while maintaining aspect ratio
+      'checked:bg-primary checked:relative',
+      'checked:after:content-[""] checked:after:absolute checked:after:inset-0 checked:after:bg-primary-foreground',
+      'checked:after:mask-[image:var(--check-svg)]',
+      'checked:after:mask-no-repeat',
+      'checked:after:mask-center',
+      'checked:after:mask-contain',
 
       //Indeterminate state
-      'indeterminate:bg-primary',
-      'indeterminate:text-primary-foreground',
-      '[&:indeterminate]:bg-[image:var(--checkbox-indeterminate-bg-light)]',
-      'dark:[&:indeterminate]:bg-[image:var(--checkbox-indeterminate-bg-dark)]',
-      'indeterminate:bg-no-repeat', // Prevents background image from repeating
-      'indeterminate:bg-center', // Centers the background image
-      'indeterminate:bg-contain', // Scales image to fit while maintaining aspect ratio
+      'indeterminate:bg-primary indeterminate:relative',
+      'indeterminate:after:content-[""] indeterminate:after:absolute indeterminate:after:inset-0 indeterminate:after:bg-primary-foreground',
+      'indeterminate:after:mask-[image:var(--minus-svg)]',
+      'indeterminate:after:mask-no-repeat',
+      'indeterminate:after:mask-center',
+      'indeterminate:after:mask-contain',
 
       //Disabled state
       'disabled:opacity-50', //styles for disabled state
