@@ -1,6 +1,8 @@
+import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  TemplateRef,
   ViewEncapsulation,
   computed,
   input,
@@ -10,9 +12,11 @@ import { cn } from '@semantic-components/utils';
 
 @Component({
   selector: 'div[sc-tab-panel]',
-  imports: [],
+  imports: [NgTemplateOutlet],
   template: `
     <ng-content />
+
+    <ng-container [ngTemplateOutlet]="tabTemplateRef"></ng-container>
   `,
   host: {
     '[class]': 'class()',
@@ -32,4 +36,6 @@ export class ScTabPanel {
       this.classInput(),
     ),
   );
+
+  tabTemplateRef!: TemplateRef<any>;
 }
