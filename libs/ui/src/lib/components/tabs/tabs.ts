@@ -1,12 +1,17 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ContentChildren,
+  Input,
+  QueryList,
   ViewEncapsulation,
   computed,
   input,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
+
+import { ScTabContent } from './tab-content';
 
 @Component({
   selector: 'div[sc-tabs]',
@@ -27,4 +32,7 @@ export class ScTabs {
   });
 
   protected readonly class = computed(() => cn('', this.classInput()));
+
+  @Input() value: string = '';
+  @ContentChildren(ScTabContent, { descendants: true }) tabContents!: QueryList<ScTabContent>;
 }

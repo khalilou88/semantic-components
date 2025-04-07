@@ -36,14 +36,14 @@ import {
     ScButton,
   ],
   template: `
-    <div class="w-[400px]" sc-tabs>
+    <div class="w-[400px]" sc-tabs value="account">
       <div class="grid w-full grid-cols-2" sc-tab-list>
-        <button sc-tab>Account</button>
-        <button sc-tab>Password</button>
+        <button value="account" sc-tab>Account</button>
+        <button value="password" sc-tab>Password</button>
       </div>
 
       <div sc-tab-panel>
-        <sc-tab-content>
+        <ng-template scTabContent="account">
           <div sc-card>
             <div sc-card-header>
               <h2 sc-card-title>Account</h2>
@@ -66,9 +66,9 @@ import {
               <button sc-button type="submit">Save changes</button>
             </div>
           </div>
-        </sc-tab-content>
+        </ng-template>
 
-        <sc-tab-content>
+        <ng-template scTabContent="password">
           <div sc-card>
             <div sc-card-header>
               <h2 sc-card-title>Password</h2>
@@ -90,7 +90,7 @@ import {
               <button sc-button>Save password</button>
             </div>
           </div>
-        </sc-tab-content>
+        </ng-template>
       </div>
     </div>
   `,

@@ -1,12 +1,16 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  Input,
   ViewEncapsulation,
   computed,
+  inject,
   input,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
+
+import { ScTabs } from './tabs';
 
 @Component({
   selector: 'button[sc-tab]',
@@ -16,6 +20,7 @@ import { cn } from '@semantic-components/utils';
   `,
   host: {
     '[class]': 'class()',
+    '[attr.data-state]': "active() ? 'active' : ''",
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -32,4 +37,12 @@ export class ScTab {
       this.classInput(),
     ),
   );
+
+  @Input() value: string = '';
+
+  private readonly parent = inject(ScTabs);
+
+  active() {
+    return this.value === this.parent.value;
+  }
 }
