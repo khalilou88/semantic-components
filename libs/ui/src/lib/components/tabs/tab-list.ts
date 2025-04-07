@@ -9,7 +9,7 @@ import {
 import { cn } from '@semantic-components/utils';
 
 @Component({
-  selector: 'sc-tab-list',
+  selector: 'div[sc-tab-list]',
   imports: [],
   template: `
     <ng-content />

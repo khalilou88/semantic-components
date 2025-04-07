@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { ScTab, ScTabContent, ScTabLabel, ScTabs } from '@semantic-components/experimental';
 import {
   ScButton,
   ScCard,
@@ -11,14 +10,20 @@ import {
   ScCardTitle,
   ScInput,
   ScLabel,
+  ScTab,
+  ScTabContent,
+  ScTabList,
+  ScTabPanel,
+  ScTabs,
 } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-tabs-demo',
   imports: [
     ScTabs,
+    ScTabList,
     ScTab,
-    ScTabLabel,
+    ScTabPanel,
     ScTabContent,
     ScCard,
     ScCardHeader,
@@ -31,9 +36,13 @@ import {
     ScButton,
   ],
   template: `
-    <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
-      <sc-tab>
-        <sc-tab-label>Account</sc-tab-label>
+    <div class="w-[400px]" sc-tabs>
+      <div class="grid w-full grid-cols-2" sc-tab-list>
+        <button sc-tab>Account</button>
+        <button sc-tab>Password</button>
+      </div>
+
+      <div sc-tab-panel>
         <sc-tab-content>
           <div sc-card>
             <div sc-card-header>
@@ -58,10 +67,7 @@ import {
             </div>
           </div>
         </sc-tab-content>
-      </sc-tab>
 
-      <sc-tab>
-        <sc-tab-label>Password</sc-tab-label>
         <sc-tab-content>
           <div sc-card>
             <div sc-card-header>
@@ -85,8 +91,8 @@ import {
             </div>
           </div>
         </sc-tab-content>
-      </sc-tab>
-    </sc-tabs>
+      </div>
+    </div>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
