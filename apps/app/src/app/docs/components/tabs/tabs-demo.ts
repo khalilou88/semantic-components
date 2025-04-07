@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { ScTab, ScTabContent, ScTabLabel, ScTabs } from '@semantic-components/experimental';
 import {
   ScButton,
   ScCard,
@@ -10,10 +11,6 @@ import {
   ScCardTitle,
   ScInput,
   ScLabel,
-  ScTab,
-  ScTabContent,
-  ScTabLabel,
-  ScTabs,
 } from '@semantic-components/ui';
 
 @Component({

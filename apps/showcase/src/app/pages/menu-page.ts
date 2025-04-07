@@ -2,6 +2,7 @@ import { CdkMenuModule } from '@angular/cdk/menu';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+import { ScTab, ScTabContent, ScTabLabel, ScTabs } from '@semantic-components/experimental';
 import {
   ScBreadcrumb,
   ScBreadcrumbItem,
@@ -27,10 +28,6 @@ import {
   ScPageDescription,
   ScPageSubtitle,
   ScPageTitle,
-  ScTab,
-  ScTabContent,
-  ScTabLabel,
-  ScTabs,
 } from '@semantic-components/ui';
 import {
   SiChevronRightIcon,

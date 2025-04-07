@@ -10,3 +10,4 @@ export * from './lib/rtl';
 export * from './lib/accessible-datepicker/accessible-datepicker';
 export * from './lib/swipeable-toast';
 export * from './lib/components/checkbox';
+export * from './lib/components/tabs';

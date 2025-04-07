@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
+import { ScTab, ScTabContent, ScTabLabel, ScTabs } from '@semantic-components/experimental';
 import {
   ScCheckboxReCaptcha,
   ScInvisibleReCaptcha,
@@ -27,10 +28,6 @@ import {
   ScPageDescription,
   ScPageSubtitle,
   ScPageTitle,
-  ScTab,
-  ScTabContent,
-  ScTabLabel,
-  ScTabs,
 } from '@semantic-components/ui';
 import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 

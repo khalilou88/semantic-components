@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+import { ScTab, ScTabContent, ScTabLabel, ScTabs } from '@semantic-components/experimental';
 import {
   ScBreadcrumb,
   ScBreadcrumbItem,
@@ -21,10 +22,6 @@ import {
   ScPageDescription,
   ScPageSubtitle,
   ScPageTitle,
-  ScTab,
-  ScTabContent,
-  ScTabLabel,
-  ScTabs,
 } from '@semantic-components/ui';
 import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 import { Chart, registerables } from 'chart.js';

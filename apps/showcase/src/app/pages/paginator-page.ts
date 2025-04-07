@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+import { ScTab, ScTabContent, ScTabLabel, ScTabs } from '@semantic-components/experimental';
 import {
   ScBreadcrumb,
   ScBreadcrumbItem,
@@ -26,10 +27,6 @@ import {
   ScPaginationNext,
   ScPaginationPrevious,
   ScPaginator,
-  ScTab,
-  ScTabContent,
-  ScTabLabel,
-  ScTabs,
 } from '@semantic-components/ui';
 import {
   SiChevronLeftIcon,

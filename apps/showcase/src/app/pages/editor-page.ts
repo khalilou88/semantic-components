@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
+import { ScTab, ScTabContent, ScTabLabel, ScTabs } from '@semantic-components/experimental';
 import {
   ScBreadcrumb,
   ScBreadcrumbItem,
@@ -45,10 +46,6 @@ import {
   ScPageSubtitle,
   ScPageTitle,
   ScSeparator,
-  ScTab,
-  ScTabContent,
-  ScTabLabel,
-  ScTabs,
 } from '@semantic-components/ui';
 import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 

@@ -8,6 +8,7 @@ import {
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
+import { ScTab, ScTabContent, ScTabLabel, ScTabs } from '@semantic-components/experimental';
 import {
   ScAlertDialogManager,
   ScBreadcrumb,
@@ -23,10 +24,6 @@ import {
   ScPageDescription,
   ScPageSubtitle,
   ScPageTitle,
-  ScTab,
-  ScTabContent,
-  ScTabLabel,
-  ScTabs,
 } from '@semantic-components/ui';
 import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 
