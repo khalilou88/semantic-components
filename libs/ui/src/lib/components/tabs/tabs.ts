@@ -1,17 +1,16 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ContentChildren,
-  Input,
-  QueryList,
   ViewEncapsulation,
   computed,
+  effect,
+  inject,
   input,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
 
-import { ScTabContent } from './tab-content';
+import { ScTabsService } from './tabs.service';
 
 @Component({
   selector: 'div[sc-tabs]',
@@ -25,6 +24,7 @@ import { ScTabContent } from './tab-content';
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [ScTabsService],
 })
 export class ScTabs {
   readonly classInput = input<string>('', {
@@ -33,6 +33,16 @@ export class ScTabs {
 
   protected readonly class = computed(() => cn('', this.classInput()));
 
-  @Input() value = '';
-  @ContentChildren(ScTabContent, { descendants: true }) tabContents!: QueryList<ScTabContent>;
+  readonly value = input.required<string>();
+
+  private readonly scTabsService = inject(ScTabsService);
+
+  constructor() {
+    effect(() => {
+      const v = this.value();
+      if (v) {
+        this.scTabsService.activeTabId.set(v);
+      }
+    });
+  }
 }

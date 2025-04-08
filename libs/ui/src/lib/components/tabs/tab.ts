@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
   ViewEncapsulation,
   computed,
   inject,
@@ -10,7 +9,7 @@ import {
 
 import { cn } from '@semantic-components/utils';
 
-import { ScTabs } from './tabs';
+import { ScTabsService } from './tabs.service';
 
 @Component({
   selector: 'button[sc-tab]',
@@ -20,7 +19,8 @@ import { ScTabs } from './tabs';
   `,
   host: {
     '[class]': 'class()',
-    '[attr.data-state]': "active() ? 'active' : ''",
+    '[attr.data-state]': "isActive() ? 'active' : ''",
+    '(click)': 'selectTab()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -38,11 +38,13 @@ export class ScTab {
     ),
   );
 
-  @Input() value = '';
+  readonly value = input.required<string>();
 
-  private readonly parent = inject(ScTabs);
+  private readonly scTabsService = inject(ScTabsService);
 
-  active() {
-    return this.value === this.parent.value;
+  protected readonly isActive = computed(() => this.value() === this.scTabsService.activeTabId());
+
+  protected selectTab() {
+    this.scTabsService.activeTabId.set(this.value());
   }
 }
