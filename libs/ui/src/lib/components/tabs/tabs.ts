@@ -33,6 +33,6 @@ export class ScTabs {
 
   protected readonly class = computed(() => cn('', this.classInput()));
 
-  @Input() value: string = '';
+  @Input() value = '';
   @ContentChildren(ScTabContent, { descendants: true }) tabContents!: QueryList<ScTabContent>;
 }

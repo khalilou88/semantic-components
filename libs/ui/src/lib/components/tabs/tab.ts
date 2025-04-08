@@ -38,7 +38,7 @@ export class ScTab {
     ),
   );
 
-  @Input() value: string = '';
+  @Input() value = '';
 
   private readonly parent = inject(ScTabs);
 
