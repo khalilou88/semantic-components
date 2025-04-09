@@ -20,7 +20,7 @@ import { ScTabsService } from './tabs.service';
   imports: [NgTemplateOutlet],
   template: `
     @for (tabDirective of tabDirectives; track $index) {
-      @if (tabDirective.tabId === activeTabId()) {
+      @if (tabDirective.tabId() === activeTabId()) {
         <ng-container [ngTemplateOutlet]="tabDirective.templateRef"></ng-container>
       }
     }

@@ -4,10 +4,10 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  Input,
   OnChanges,
   SimpleChanges,
   ViewChild,
+  input,
 } from '@angular/core';
 
 @Component({
@@ -18,11 +18,11 @@ import {
     <div
       class="relative mx-auto"
       [ngClass]="{
-        'border border-gray-300': border,
+        'border border-gray-300': border(),
       }"
       [ngStyle]="{
-        width: width + 'px',
-        height: height + 'px',
+        width: width() + 'px',
+        height: height() + 'px',
       }"
     >
       <div
@@ -75,9 +75,9 @@ import {
   ],
 })
 export class HoverScrollbarComponent implements AfterViewInit, OnChanges {
-  @Input() width = 300;
-  @Input() height = 200;
-  @Input() border = true;
+  readonly width = input(300);
+  readonly height = input(200);
+  readonly border = input(true);
 
   @ViewChild('contentContainer') contentContainer!: ElementRef;
 

@@ -6,10 +6,10 @@ import {
   Component,
   ContentChildren,
   EventEmitter,
-  Input,
   Output,
   QueryList,
   ViewEncapsulation,
+  input,
 } from '@angular/core';
 
 import { ScOption } from './option';
@@ -60,8 +60,8 @@ import { ScOption } from './option';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSelect implements AfterContentInit {
-  @Input() placeholder = 'Select an option';
-  @Input() displayWith: (value: any) => string = (value) => value?.toString() || '';
+  readonly placeholder = input('Select an option');
+  readonly displayWith = input<(value: any) => string>((value) => value?.toString() || '');
 
   @Output() selectionChange = new EventEmitter<any>();
 
@@ -74,7 +74,9 @@ export class ScSelect implements AfterContentInit {
   private keyManager!: ActiveDescendantKeyManager<ScOption>;
 
   get displayValue(): string {
-    return this.selectedValue !== null ? this.displayWith(this.selectedValue) : this.placeholder;
+    return this.selectedValue !== null
+      ? this.displayWith()(this.selectedValue)
+      : this.placeholder();
   }
 
   ngAfterContentInit() {
@@ -98,7 +100,7 @@ export class ScSelect implements AfterContentInit {
     const element = option['elementRef']?.nativeElement;
     if (element) {
       element.addEventListener('click', () => {
-        this.selectOption(option.value, option.label, index);
+        this.selectOption(option.value(), option.label(), index);
       });
     }
   }
@@ -130,7 +132,7 @@ export class ScSelect implements AfterContentInit {
         if (this.selectedValue !== null) {
           const selectedIndex = this.options
             .toArray()
-            .findIndex((option) => option.value === this.selectedValue);
+            .findIndex((option) => option.value() === this.selectedValue);
           if (selectedIndex !== -1) {
             this.keyManager.setActiveItem(selectedIndex);
           }
@@ -160,7 +162,7 @@ export class ScSelect implements AfterContentInit {
         const activeItem = this.keyManager?.activeItem;
         const activeIndex = this.keyManager?.activeItemIndex;
         if (activeItem && activeIndex !== null && activeIndex !== -1) {
-          this.selectOption(activeItem.value, activeItem.label, activeIndex);
+          this.selectOption(activeItem.value(), activeItem.label(), activeIndex);
           event.preventDefault();
         }
       }

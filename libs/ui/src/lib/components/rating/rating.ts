@@ -8,6 +8,7 @@ import {
   OnInit,
   Output,
   ViewEncapsulation,
+  input,
 } from '@angular/core';
 
 @Component({
@@ -46,7 +47,7 @@ import {
             <!-- Hover effect overlay -->
             <div
               class="absolute top-0 left-0"
-              *ngIf="interactive && hoverRating >= position"
+              *ngIf="interactive() && hoverRating >= position"
               [style.width]="
                 isHalfValue(hoverRating) && Math.ceil(hoverRating) === position ? '50%' : '100%'
               "
@@ -60,7 +61,7 @@ import {
           </button>
         </ng-container>
       </div>
-      <span class="ml-2 text-sm text-gray-600" *ngIf="showRatingValue">
+      <span class="ml-2 text-sm text-gray-600" *ngIf="showRatingValue()">
         {{ rating.toFixed(1) }}
       </span>
     </div>
@@ -70,11 +71,11 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScRating implements OnInit, OnChanges {
-  @Input() maxRating = 5;
+  readonly maxRating = input(5);
   @Input() rating = 0;
-  @Input() interactive = true;
-  @Input() showRatingValue = false;
-  @Input() allowHalfStars = true;
+  readonly interactive = input(true);
+  readonly showRatingValue = input(false);
+  readonly allowHalfStars = input(true);
   @Output() ratingChange = new EventEmitter<number>();
 
   positions: number[] = [];
@@ -90,17 +91,17 @@ export class ScRating implements OnInit, OnChanges {
   }
 
   generatePositions() {
-    this.positions = Array.from({ length: this.maxRating }, (_, i) => i + 1);
+    this.positions = Array.from({ length: this.maxRating() }, (_, i) => i + 1);
   }
 
   onHover(position: number) {
-    if (!this.interactive) return;
+    if (!this.interactive()) return;
     this.hoverRating = position;
   }
 
   onRate(position: number) {
-    if (!this.interactive) return;
-    if (this.rating === position && this.allowHalfStars) {
+    if (!this.interactive()) return;
+    if (this.rating === position && this.allowHalfStars()) {
       // If clicking the same star, toggle between whole and half star
       this.rating = position - 0.5;
     } else {

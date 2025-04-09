@@ -57,7 +57,7 @@ import { cn } from '@semantic-components/utils';
               ? 'Accepted file types: ' + acceptedFileTypes
               : 'Any file type accepted'
           }}
-          (Max: {{ maxFileSize }}MB)
+          (Max: {{ maxFileSize() }}MB)
         </p>
 
         <!-- Hidden file input -->
@@ -65,7 +65,7 @@ import { cn } from '@semantic-components/utils';
           class="hidden"
           #fileInput
           [accept]="acceptedFileTypes"
-          [multiple]="multiple"
+          [multiple]="multiple()"
           (change)="onFileSelected($event)"
           type="file"
         />
@@ -75,7 +75,7 @@ import { cn } from '@semantic-components/utils';
           (click)="fileInput.click()"
           type="button"
         >
-          Select File{{ multiple ? 's' : '' }}
+          Select File{{ multiple() ? 's' : '' }}
         </button>
       </div>
 
@@ -213,9 +213,9 @@ export class ScFileUpload {
   protected readonly class = computed(() => cn('', this.classInput()));
 
   @Input() acceptedFileTypes = '';
-  @Input() maxFileSize = 5; // Default max size in MB
-  @Input() multiple = false;
-  @Input() uploadUrl = '/api/upload';
+  readonly maxFileSize = input(5); // Default max size in MB
+  readonly multiple = input(false);
+  readonly uploadUrl = input('/api/upload');
   @Output() uploadComplete = new EventEmitter<any>();
 
   files: File[] = [];
@@ -280,13 +280,15 @@ export class ScFileUpload {
     }
 
     // Validate file size
-    const oversizedFiles = filesArray.filter((file) => file.size > this.maxFileSize * 1024 * 1024);
+    const oversizedFiles = filesArray.filter(
+      (file) => file.size > this.maxFileSize() * 1024 * 1024,
+    );
     if (oversizedFiles.length > 0) {
-      this.uploadError = `File(s) exceed the ${this.maxFileSize}MB limit: ${oversizedFiles.map((f) => f.name).join(', ')}`;
+      this.uploadError = `File(s) exceed the ${this.maxFileSize()}MB limit: ${oversizedFiles.map((f) => f.name).join(', ')}`;
       return;
     }
 
-    if (this.multiple) {
+    if (this.multiple()) {
       this.files = [...this.files, ...filesArray];
     } else {
       this.files = [filesArray[0]];
@@ -306,7 +308,7 @@ export class ScFileUpload {
     });
 
     this.http
-      .post(this.uploadUrl, formData, {
+      .post(this.uploadUrl(), formData, {
         reportProgress: true,
         observe: 'events',
       })

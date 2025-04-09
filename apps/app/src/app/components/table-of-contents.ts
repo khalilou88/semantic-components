@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
   OnInit,
   ViewEncapsulation,
+  input,
 } from '@angular/core';
 
 import { Observable } from 'rxjs';
@@ -19,7 +19,7 @@ import { TocItem, TocService } from './toc/toc.service';
       <h4 class="text-sm font-medium">On This Page</h4>
       <ul class="mt-2 space-y-2 text-sm">
         @for (item of tocItems$ | async; track $index) {
-          <li [style.padding-left.px]="(item.level - minLevel) * indentation">
+          <li [style.padding-left.px]="(item.level - minLevel) * indentation()">
             <a
               class="text-muted-foreground hover:text-foreground"
               [class.underline]="item.isActive"
@@ -38,8 +38,8 @@ import { TocItem, TocService } from './toc/toc.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableOfContents implements OnInit {
-  @Input() title = 'Table of Contents';
-  @Input() indentation = 12; // Pixels to indent each level
+  readonly title = input('Table of Contents');
+  readonly indentation = input(12); // Pixels to indent each level
 
   tocItems$: Observable<TocItem[]>;
   minLevel = 1;

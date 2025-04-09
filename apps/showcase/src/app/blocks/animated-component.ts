@@ -4,10 +4,10 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  Input,
   OnDestroy,
   OnInit,
   ViewChild,
+  input,
   signal,
 } from '@angular/core';
 
@@ -36,8 +36,8 @@ export type State = 'initial' | 'entering' | 'visible' | 'exiting' | 'hidden';
   `,
 })
 export class AnimatedComponent implements OnInit, AfterViewInit, OnDestroy {
-  @Input() initialState: State = 'initial';
-  @Input() autoAnimate = false;
+  readonly initialState = input<State>('initial');
+  readonly autoAnimate = input(false);
 
   @ViewChild('animatedElement') animatedElement!: ElementRef;
 
@@ -45,11 +45,11 @@ export class AnimatedComponent implements OnInit, AfterViewInit, OnDestroy {
   private transitionEndHandler: ((event: TransitionEvent) => void) | null = null;
 
   ngOnInit(): void {
-    this.state.set(this.initialState);
+    this.state.set(this.initialState());
   }
 
   ngAfterViewInit(): void {
-    if (this.autoAnimate && this.state() === 'initial') {
+    if (this.autoAnimate() && this.state() === 'initial') {
       // Use setTimeout to avoid ExpressionChangedAfterItHasBeenCheckedError
       setTimeout(() => this.enter(), 0);
     }

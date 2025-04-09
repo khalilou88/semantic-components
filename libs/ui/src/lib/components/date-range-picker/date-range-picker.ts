@@ -3,10 +3,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  Input,
   OnInit,
   Output,
   ViewEncapsulation,
+  input,
 } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -218,10 +218,10 @@ import { Temporal } from '@js-temporal/polyfill';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScDateRangePicker implements OnInit {
-  @Input() startDate: Temporal.PlainDate = Temporal.Now.plainDateISO();
-  @Input() endDate: Temporal.PlainDate = Temporal.Now.plainDateISO();
-  @Input() minDate: Temporal.PlainDate | null = null;
-  @Input() maxDate: Temporal.PlainDate | null = null;
+  readonly startDate = input<Temporal.PlainDate>(Temporal.Now.plainDateISO());
+  readonly endDate = input<Temporal.PlainDate>(Temporal.Now.plainDateISO());
+  readonly minDate = input<Temporal.PlainDate | null>(null);
+  readonly maxDate = input<Temporal.PlainDate | null>(null);
   @Output() dateRangeSelected = new EventEmitter<{
     startDate: Temporal.PlainDate;
     endDate: Temporal.PlainDate;
@@ -276,9 +276,9 @@ export class ScDateRangePicker implements OnInit {
   }
 
   ngOnInit(): void {
-    this.selectedStartDate = this.startDate;
-    this.selectedEndDate = this.endDate;
-    this.currentMonth = this.startDate.toPlainYearMonth();
+    this.selectedStartDate = this.startDate();
+    this.selectedEndDate = this.endDate();
+    this.currentMonth = this.startDate().toPlainYearMonth();
     this.generateCalendarDays();
   }
 
@@ -335,9 +335,11 @@ export class ScDateRangePicker implements OnInit {
         Temporal.PlainDate.compare(currentDate, this.selectedEndDate) <= 0;
 
       // Check if date is disabled (before min date or after max date)
+      const minDate = this.minDate();
+      const maxDate = this.maxDate();
       const isDisabled =
-        (this.minDate && Temporal.PlainDate.compare(currentDate, this.minDate) < 0) ||
-        (this.maxDate && Temporal.PlainDate.compare(currentDate, this.maxDate) > 0);
+        (minDate && Temporal.PlainDate.compare(currentDate, minDate) < 0) ||
+        (maxDate && Temporal.PlainDate.compare(currentDate, maxDate) > 0);
 
       this.calendarDays.push({
         date: currentDate,
@@ -408,8 +410,8 @@ export class ScDateRangePicker implements OnInit {
   cancelSelection(): void {
     this.showCalendar = false;
     // Reset to previous selection
-    this.selectedStartDate = this.startDate;
-    this.selectedEndDate = this.endDate;
+    this.selectedStartDate = this.startDate();
+    this.selectedEndDate = this.endDate();
     this.isSelectingEndDate = false;
     this.generateCalendarDays();
   }

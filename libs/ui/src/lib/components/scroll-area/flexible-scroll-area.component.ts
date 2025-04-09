@@ -8,6 +8,7 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
+  input,
 } from '@angular/core';
 
 @Component({
@@ -78,7 +79,7 @@ import {
       </div>
 
       <!-- Navigation buttons for horizontal scrolling -->
-      <ng-container *ngIf="orientation === 'horizontal' && showNavButtons">
+      <ng-container *ngIf="orientation === 'horizontal' && showNavButtons()">
         <button
           class="absolute top-1/2 left-2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full shadow-md p-2 opacity-0 transition-opacity duration-200"
           [ngClass]="{ 'opacity-100': isHovering && canScrollStart }"
@@ -127,7 +128,7 @@ import {
       </ng-container>
 
       <!-- Navigation buttons for vertical scrolling -->
-      <ng-container *ngIf="orientation === 'vertical' && showNavButtons">
+      <ng-container *ngIf="orientation === 'vertical' && showNavButtons()">
         <button
           class="absolute top-2 left-1/2 -translate-x-1/2 bg-white/80 hover:bg-white rounded-full shadow-md p-2 opacity-0 transition-opacity duration-200"
           [ngClass]="{ 'opacity-100': isHovering && canScrollStart }"
@@ -193,9 +194,9 @@ import {
 })
 export class FlexibleScrollAreaComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() orientation: 'vertical' | 'horizontal' = 'vertical';
-  @Input() height = '8.5rem';
-  @Input() width = '96';
-  @Input() showNavButtons = true;
+  readonly height = input('8.5rem');
+  readonly width = input('96');
+  readonly showNavButtons = input(true);
 
   @ViewChild('viewport') viewportRef!: ElementRef<HTMLDivElement>;
 

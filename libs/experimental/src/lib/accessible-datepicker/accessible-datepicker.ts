@@ -4,11 +4,11 @@ import {
   Component,
   EventEmitter,
   HostListener,
-  Input,
   OnInit,
   Output,
   ViewEncapsulation,
   forwardRef,
+  input,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -29,24 +29,24 @@ interface CalendarDay {
   imports: [CommonModule],
   template: `
     <div class="relative w-full max-w-xs" [class.opacity-60]="isDisabled">
-      <label class="block text-sm font-medium text-gray-700 mb-1" [for]="id">
-        {{ label }}
-        <span class="text-red-500 ml-1" *ngIf="required">*</span>
+      <label class="block text-sm font-medium text-gray-700 mb-1" [for]="id()">
+        {{ label() }}
+        <span class="text-red-500 ml-1" *ngIf="required()">*</span>
       </label>
 
       <div class="relative">
         <input
           class="w-full pl-4 pr-10 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          [id]="id"
+          [id]="id()"
           [value]="dateInputValue"
-          [placeholder]="placeholder"
-          [required]="required"
+          [placeholder]="placeholder()"
+          [required]="required()"
           [disabled]="isDisabled"
-          [attr.aria-label]="ariaLabel"
-          [attr.aria-required]="required"
-          [attr.aria-describedby]="ariaDescribedBy"
+          [attr.aria-label]="ariaLabel()"
+          [attr.aria-required]="required()"
+          [attr.aria-describedby]="ariaDescribedBy()"
           [attr.aria-expanded]="isCalendarOpen"
-          [attr.aria-owns]="isCalendarOpen ? id + '-calendar' : null"
+          [attr.aria-owns]="isCalendarOpen ? id() + '-calendar' : null"
           (input)="onInputChange($event)"
           (click)="toggleCalendar()"
           (focus)="markAsTouched()"
@@ -80,7 +80,7 @@ interface CalendarDay {
       <div
         class="absolute z-10 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 w-72"
         *ngIf="isCalendarOpen"
-        [id]="id + '-calendar'"
+        [id]="id() + '-calendar'"
         [attr.aria-label]="'Calendar dialog'"
         (click)="onCalendarClick($event)"
         (keydown)="ff()"
@@ -231,14 +231,14 @@ interface CalendarDay {
   ],
 })
 export class ScAccessibleDatepicker implements OnInit, ControlValueAccessor {
-  @Input() label = 'Select date';
-  @Input() placeholder = 'MM/DD/YYYY';
-  @Input() minDate?: Temporal.PlainDate;
-  @Input() maxDate?: Temporal.PlainDate;
-  @Input() required = false;
-  @Input() id = 'accessible-datepicker';
-  @Input() ariaLabel = 'Date picker';
-  @Input() ariaDescribedBy = '';
+  readonly label = input('Select date');
+  readonly placeholder = input('MM/DD/YYYY');
+  readonly minDate = input<Temporal.PlainDate>();
+  readonly maxDate = input<Temporal.PlainDate>();
+  readonly required = input(false);
+  readonly id = input('accessible-datepicker');
+  readonly ariaLabel = input('Date picker');
+  readonly ariaDescribedBy = input('');
   @Output() dateChange = new EventEmitter<Temporal.PlainDate>();
 
   isCalendarOpen = false;
@@ -362,10 +362,12 @@ export class ScAccessibleDatepicker implements OnInit, ControlValueAccessor {
   }
 
   isDateDisabled(date: Temporal.PlainDate): boolean {
-    if (this.minDate && Temporal.PlainDate.compare(date, this.minDate) < 0) {
+    const minDate = this.minDate();
+    if (minDate && Temporal.PlainDate.compare(date, minDate) < 0) {
       return true;
     }
-    if (this.maxDate && Temporal.PlainDate.compare(date, this.maxDate) > 0) {
+    const maxDate = this.maxDate();
+    if (maxDate && Temporal.PlainDate.compare(date, maxDate) > 0) {
       return true;
     }
     return false;

@@ -2,8 +2,8 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  Input,
   ViewEncapsulation,
+  input,
 } from '@angular/core';
 
 @Component({
@@ -27,8 +27,8 @@ import {
 export class ScOption {
   constructor(public elementRef: ElementRef) {}
 
-  @Input() value: any;
-  @Input() label!: string;
+  readonly value = input<any>();
+  readonly label = input.required<string>();
   active = false;
 
   setActiveStyles(): void {
@@ -40,6 +40,6 @@ export class ScOption {
   }
 
   getLabel(): string {
-    return this.label ?? '';
+    return this.label() ?? '';
   }
 }

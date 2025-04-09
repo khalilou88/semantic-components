@@ -9,6 +9,7 @@ import {
   OnInit,
   Output,
   ViewEncapsulation,
+  input,
   signal,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -31,7 +32,7 @@ export interface ScOptionModel {
         [attr.for]="labelId"
       >
         {{ label }}
-        <span class="text-red-500" *ngIf="required">*</span>
+        <span class="text-red-500" *ngIf="required()">*</span>
       </label>
 
       <!-- Selected items display -->
@@ -43,12 +44,12 @@ export interface ScOptionModel {
         [attr.aria-controls]="listboxId"
         [attr.aria-expanded]="isOpen()"
         [attr.aria-haspopup]="'listbox'"
-        [attr.aria-required]="required"
+        [attr.aria-required]="required()"
         [attr.aria-describedby]="descriptionId"
         [attr.aria-activedescendant]="activeDescendant"
         [class.ring-2]="isOpen()"
         [class.ring-blue-500]="isOpen()"
-        [class.border-red-500]="showError"
+        [class.border-red-500]="showError()"
         (click)="toggleDropdown()"
         (keydown)="onKeyDown($event)"
         role="combobox"
@@ -70,7 +71,7 @@ export interface ScOptionModel {
         </div>
 
         <div class="text-gray-400" *ngIf="selectedOptions.length === 0">
-          {{ placeholder }}
+          {{ placeholder() }}
         </div>
 
         <div class="ml-auto">
@@ -99,7 +100,7 @@ export interface ScOptionModel {
       </div>
 
       <!-- Error message -->
-      <div class="text-sm text-red-500 mt-1" *ngIf="showError && errorMessage">
+      <div class="text-sm text-red-500 mt-1" *ngIf="showError() && errorMessage">
         {{ errorMessage }}
       </div>
 
@@ -111,7 +112,7 @@ export interface ScOptionModel {
         [attr.aria-multiselectable]="true"
         role="listbox"
       >
-        <div class="sticky top-0 bg-white p-2 border-b" *ngIf="searchable">
+        <div class="sticky top-0 bg-white p-2 border-b" *ngIf="searchable()">
           <input
             class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             #searchInput
@@ -158,12 +159,12 @@ export interface ScOptionModel {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScMultiSelect implements OnInit {
-  @Input() options: ScOptionModel[] = [];
-  @Input() placeholder = 'Select options';
-  @Input() searchable = true;
+  readonly options = input<ScOptionModel[]>([]);
+  readonly placeholder = input('Select options');
+  readonly searchable = input(true);
   @Input() label = '';
-  @Input() required = false;
-  @Input() showError = false;
+  readonly required = input(false);
+  readonly showError = input(false);
   @Input() errorMessage = 'This field is required';
 
   @Output() selectionChange = new EventEmitter<ScOptionModel[]>();
@@ -188,11 +189,11 @@ export class ScMultiSelect implements OnInit {
   constructor(private readonly elementRef: ElementRef) {}
 
   ngOnInit() {
-    this.filteredOptions = [...this.options];
+    this.filteredOptions = [...this.options()];
   }
 
   get selectedOptions(): ScOptionModel[] {
-    return this.options.filter((option) => option.selected);
+    return this.options().filter((option) => option.selected);
   }
 
   toggleDropdown() {
@@ -204,7 +205,7 @@ export class ScMultiSelect implements OnInit {
       // Focus search input if searchable
       setTimeout(() => {
         const searchInput = this.elementRef.nativeElement.querySelector('input[type="text"]');
-        if (searchInput && this.searchable) {
+        if (searchInput && this.searchable()) {
           searchInput.focus();
         }
       });
@@ -229,12 +230,12 @@ export class ScMultiSelect implements OnInit {
 
   onSearch() {
     if (!this.searchText.trim()) {
-      this.filteredOptions = [...this.options];
+      this.filteredOptions = [...this.options()];
       return;
     }
 
     const searchLower = this.searchText.toLowerCase();
-    this.filteredOptions = this.options.filter((option) =>
+    this.filteredOptions = this.options().filter((option) =>
       option.label.toLowerCase().includes(searchLower),
     );
 
