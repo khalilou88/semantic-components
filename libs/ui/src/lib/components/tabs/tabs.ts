@@ -3,6 +3,7 @@ import {
   Component,
   ViewEncapsulation,
   computed,
+  contentChildren,
   effect,
   inject,
   input,
@@ -10,6 +11,7 @@ import {
 
 import { cn } from '@semantic-components/utils';
 
+import { ScTab } from './tab';
 import { ScTabsService } from './tabs.service';
 
 @Component({
@@ -37,11 +39,15 @@ export class ScTabs {
 
   private readonly scTabsService = inject(ScTabsService);
 
+  readonly tabs = contentChildren(ScTab, { descendants: true });
+
   constructor() {
     effect(() => {
       const v = this.value();
       if (v) {
         this.scTabsService.activeTabId.set(v);
+      } else {
+        this.scTabsService.activeTabId.set(this.tabs()[0].value());
       }
     });
   }
