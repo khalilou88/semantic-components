@@ -1,6 +1,6 @@
 // scroll-area.component.ts
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, viewChild } from '@angular/core';
 
 @Component({
   selector: 'sc-scroll-area3',
@@ -67,8 +67,8 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@ang
   ],
 })
 export class ScrollAreaComponent implements OnDestroy, AfterViewInit {
-  @ViewChild('viewport') viewportRef!: ElementRef<HTMLDivElement>;
-  @ViewChild('thumb') thumbRef!: ElementRef<HTMLDivElement>;
+  readonly viewportRef = viewChild.required<ElementRef<HTMLDivElement>>('viewport');
+  readonly thumbRef = viewChild.required<ElementRef<HTMLDivElement>>('thumb');
 
   isScrolling = false;
   isHovering = false;
@@ -106,7 +106,7 @@ export class ScrollAreaComponent implements OnDestroy, AfterViewInit {
   }
 
   updateThumb() {
-    const viewport = this.viewportRef.nativeElement;
+    const viewport = this.viewportRef().nativeElement;
     const scrollHeight = viewport.scrollHeight;
     const clientHeight = viewport.clientHeight;
 
@@ -120,14 +120,14 @@ export class ScrollAreaComponent implements OnDestroy, AfterViewInit {
   startDragging(event: MouseEvent) {
     this.isDragging = true;
     this.startY = event.clientY;
-    this.startScrollTop = this.viewportRef.nativeElement.scrollTop;
+    this.startScrollTop = this.viewportRef().nativeElement.scrollTop;
     event.preventDefault();
   }
 
   onMouseMove(event: MouseEvent) {
     if (!this.isDragging) return;
 
-    const viewport = this.viewportRef.nativeElement;
+    const viewport = this.viewportRef().nativeElement;
     const deltaY = event.clientY - this.startY;
     const scrollbarHeight = viewport.clientHeight;
     const scrollContentHeight = viewport.scrollHeight;

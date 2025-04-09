@@ -19,12 +19,12 @@ import {
   OnDestroy,
   QueryList,
   TemplateRef,
-  ViewChild,
   ViewContainerRef,
   ViewEncapsulation,
   inject,
   input,
   output,
+  viewChild,
 } from '@angular/core';
 
 import { filter, takeUntil } from 'rxjs/operators';
@@ -93,11 +93,11 @@ export class CustomSelect implements AfterContentInit, OnDestroy, AfterViewInit 
 
   @ContentChildren(CustomOption) optionComponents!: QueryList<CustomOption>;
 
-  @ViewChild('trigger') trigger!: CdkOverlayOrigin;
+  readonly trigger = viewChild.required<CdkOverlayOrigin>('trigger');
 
-  @ViewChild('optionsTemplate') optionsTemplate!: TemplateRef<unknown>;
+  readonly optionsTemplate = viewChild.required<TemplateRef<unknown>>('optionsTemplate');
 
-  @ViewChild('optionsTemplate', { read: ElementRef }) optionsElement!: ElementRef;
+  readonly optionsElement = viewChild.required('optionsTemplate', { read: ElementRef });
 
   selectedOption: CustomOption | null = null;
   isOpen = false;
@@ -177,7 +177,7 @@ export class CustomSelect implements AfterContentInit, OnDestroy, AfterViewInit 
 
     const positionStrategy = this.overlay
       .position()
-      .flexibleConnectedTo(this.trigger.elementRef)
+      .flexibleConnectedTo(this.trigger().elementRef)
       .withPositions([
         {
           originX: 'start',
@@ -208,7 +208,7 @@ export class CustomSelect implements AfterContentInit, OnDestroy, AfterViewInit 
 
     this.overlayRef.backdropClick().subscribe(() => this.closeDropdown());
 
-    const portal = new TemplatePortal(this.optionsTemplate, this.viewContainerRef);
+    const portal = new TemplatePortal(this.optionsTemplate(), this.viewContainerRef);
     this.overlayRef.attach(portal);
 
     // Update current index

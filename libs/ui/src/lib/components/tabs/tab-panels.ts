@@ -2,10 +2,9 @@ import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  ContentChildren,
-  QueryList,
   ViewEncapsulation,
   computed,
+  contentChildren,
   inject,
   input,
 } from '@angular/core';
@@ -19,9 +18,9 @@ import { ScTabsService } from './tabs.service';
   selector: 'div[sc-tab-panels]',
   imports: [NgTemplateOutlet],
   template: `
-    @for (tabDirective of tabDirectives; track $index) {
-      @if (tabDirective.tabId() === activeTabId()) {
-        <ng-container [ngTemplateOutlet]="tabDirective.templateRef"></ng-container>
+    @for (tabPanelContent of tabPanelContents(); track tabPanelContent.tabId()) {
+      @if (tabPanelContent.tabId() === activeTabId()) {
+        <ng-container [ngTemplateOutlet]="tabPanelContent.templateRef"></ng-container>
       }
     }
   `,
@@ -48,5 +47,5 @@ export class ScTabPanels {
 
   protected readonly activeTabId = computed(() => this.scTabsService.activeTabId());
 
-  @ContentChildren(ScTabPanelContent) tabDirectives!: QueryList<ScTabPanelContent>;
+  protected readonly tabPanelContents = contentChildren(ScTabPanelContent);
 }

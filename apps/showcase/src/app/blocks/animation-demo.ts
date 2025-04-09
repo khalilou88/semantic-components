@@ -1,6 +1,6 @@
 // animation-demo.component.ts
 import { CommonModule } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
+import { Component, viewChild } from '@angular/core';
 
 import { AnimatedComponent } from './animated-component';
 
@@ -99,5 +99,5 @@ initial ──enter()──→ entering ─────────→ visible �
   `,
 })
 export class AnimationDemoComponent {
-  @ViewChild('animatedComponent') animatedComponent!: AnimatedComponent;
+  readonly animatedComponent = viewChild.required<AnimatedComponent>('animatedComponent');
 }

@@ -1,6 +1,6 @@
 // horizontal-scroll-area.component.ts
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, viewChild } from '@angular/core';
 
 @Component({
   selector: 'sc-horizontal-scroll-area',
@@ -105,8 +105,8 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@ang
   ],
 })
 export class HorizontalScrollAreaComponent implements OnDestroy, AfterViewInit {
-  @ViewChild('viewport') viewportRef!: ElementRef<HTMLDivElement>;
-  @ViewChild('thumb') thumbRef!: ElementRef<HTMLDivElement>;
+  readonly viewportRef = viewChild.required<ElementRef<HTMLDivElement>>('viewport');
+  readonly thumbRef = viewChild.required<ElementRef<HTMLDivElement>>('thumb');
 
   isScrolling = false;
   isHovering = false;
@@ -158,7 +158,7 @@ export class HorizontalScrollAreaComponent implements OnDestroy, AfterViewInit {
   }
 
   updateThumb() {
-    const viewport = this.viewportRef.nativeElement;
+    const viewport = this.viewportRef().nativeElement;
     const scrollWidth = viewport.scrollWidth;
     const clientWidth = viewport.clientWidth;
 
@@ -170,7 +170,7 @@ export class HorizontalScrollAreaComponent implements OnDestroy, AfterViewInit {
   }
 
   updateScrollButtonsState() {
-    const viewport = this.viewportRef.nativeElement;
+    const viewport = this.viewportRef().nativeElement;
     this.canScrollLeft = viewport.scrollLeft > 0;
     this.canScrollRight = viewport.scrollLeft < viewport.scrollWidth - viewport.clientWidth;
   }
@@ -178,14 +178,14 @@ export class HorizontalScrollAreaComponent implements OnDestroy, AfterViewInit {
   startDragging(event: MouseEvent) {
     this.isDragging = true;
     this.startX = event.clientX;
-    this.startScrollLeft = this.viewportRef.nativeElement.scrollLeft;
+    this.startScrollLeft = this.viewportRef().nativeElement.scrollLeft;
     event.preventDefault();
   }
 
   onMouseMove(event: MouseEvent) {
     if (!this.isDragging) return;
 
-    const viewport = this.viewportRef.nativeElement;
+    const viewport = this.viewportRef().nativeElement;
     const deltaX = event.clientX - this.startX;
     const scrollbarWidth = viewport.clientWidth;
     const scrollContentWidth = viewport.scrollWidth;
@@ -204,12 +204,12 @@ export class HorizontalScrollAreaComponent implements OnDestroy, AfterViewInit {
   }
 
   scrollLeft() {
-    const viewport = this.viewportRef.nativeElement;
+    const viewport = this.viewportRef().nativeElement;
     viewport.scrollBy({ left: -300, behavior: 'smooth' });
   }
 
   scrollRight() {
-    const viewport = this.viewportRef.nativeElement;
+    const viewport = this.viewportRef().nativeElement;
     viewport.scrollBy({ left: 300, behavior: 'smooth' });
   }
 }

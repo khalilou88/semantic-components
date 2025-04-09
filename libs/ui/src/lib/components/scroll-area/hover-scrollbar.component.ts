@@ -6,8 +6,8 @@ import {
   ElementRef,
   OnChanges,
   SimpleChanges,
-  ViewChild,
   input,
+  viewChild,
 } from '@angular/core';
 
 @Component({
@@ -79,7 +79,7 @@ export class HoverScrollbarComponent implements AfterViewInit, OnChanges {
   readonly height = input(200);
   readonly border = input(true);
 
-  @ViewChild('contentContainer') contentContainer!: ElementRef;
+  readonly contentContainer = viewChild.required<ElementRef>('contentContainer');
 
   isScrollable = false;
 
@@ -89,13 +89,13 @@ export class HoverScrollbarComponent implements AfterViewInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     // When inputs change that might affect scrollability, check again
-    if ((changes['width'] || changes['height']) && this.contentContainer) {
+    if ((changes['width'] || changes['height']) && this.contentContainer()) {
       setTimeout(() => this.checkIfScrollable(), 0);
     }
   }
 
   checkIfScrollable() {
-    const element = this.contentContainer.nativeElement;
+    const element = this.contentContainer().nativeElement;
     this.isScrollable = element.scrollHeight > element.clientHeight;
 
     // Add a mutation observer to check when content changes

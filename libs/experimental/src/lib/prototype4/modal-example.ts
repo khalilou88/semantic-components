@@ -5,10 +5,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   TemplateRef,
-  ViewChild,
   ViewContainerRef,
   ViewEncapsulation,
   inject,
+  viewChild,
 } from '@angular/core';
 
 @Component({
@@ -63,7 +63,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ModalExample {
-  @ViewChild('modalTemplate') modalTemplate!: TemplateRef<any>;
+  readonly modalTemplate = viewChild.required<TemplateRef<any>>('modalTemplate');
   overlayRef: OverlayRef | null = null;
   isExiting = false;
 
@@ -85,7 +85,7 @@ export class ModalExample {
       hasBackdrop: false, // We're handling our own backdrop in the template
     });
 
-    const portal = new TemplatePortal(this.modalTemplate, this.viewContainerRef);
+    const portal = new TemplatePortal(this.modalTemplate(), this.viewContainerRef);
     this.overlayRef.attach(portal);
   }
 

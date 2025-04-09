@@ -7,8 +7,8 @@ import {
   Input,
   OnDestroy,
   OnInit,
-  ViewChild,
   input,
+  viewChild,
 } from '@angular/core';
 
 @Component({
@@ -198,7 +198,7 @@ export class FlexibleScrollAreaComponent implements OnInit, OnDestroy, AfterView
   readonly width = input('96');
   readonly showNavButtons = input(true);
 
-  @ViewChild('viewport') viewportRef!: ElementRef<HTMLDivElement>;
+  readonly viewportRef = viewChild.required<ElementRef<HTMLDivElement>>('viewport');
 
   isScrolling = false;
   isHovering = false;
@@ -247,7 +247,7 @@ export class FlexibleScrollAreaComponent implements OnInit, OnDestroy, AfterView
   }
 
   updateThumb() {
-    const viewport = this.viewportRef.nativeElement;
+    const viewport = this.viewportRef().nativeElement;
 
     if (this.orientation === 'vertical') {
       const scrollHeight = viewport.scrollHeight;
@@ -273,7 +273,7 @@ export class FlexibleScrollAreaComponent implements OnInit, OnDestroy, AfterView
   }
 
   updateScrollButtonsState() {
-    const viewport = this.viewportRef.nativeElement;
+    const viewport = this.viewportRef().nativeElement;
 
     if (this.orientation === 'vertical') {
       this.canScrollStart = viewport.scrollTop > 0;
@@ -289,10 +289,10 @@ export class FlexibleScrollAreaComponent implements OnInit, OnDestroy, AfterView
 
     if (this.orientation === 'vertical') {
       this.startPoint = event.clientY;
-      this.startScrollPosition = this.viewportRef.nativeElement.scrollTop;
+      this.startScrollPosition = this.viewportRef().nativeElement.scrollTop;
     } else {
       this.startPoint = event.clientX;
-      this.startScrollPosition = this.viewportRef.nativeElement.scrollLeft;
+      this.startScrollPosition = this.viewportRef().nativeElement.scrollLeft;
     }
 
     event.preventDefault();
@@ -301,7 +301,7 @@ export class FlexibleScrollAreaComponent implements OnInit, OnDestroy, AfterView
   onMouseMove(event: MouseEvent) {
     if (!this.isDragging) return;
 
-    const viewport = this.viewportRef.nativeElement;
+    const viewport = this.viewportRef().nativeElement;
 
     if (this.orientation === 'vertical') {
       const deltaY = event.clientY - this.startPoint;
@@ -333,7 +333,7 @@ export class FlexibleScrollAreaComponent implements OnInit, OnDestroy, AfterView
   }
 
   scrollPrev() {
-    const viewport = this.viewportRef.nativeElement;
+    const viewport = this.viewportRef().nativeElement;
 
     if (this.orientation === 'vertical') {
       viewport.scrollBy({ top: -200, behavior: 'smooth' });
@@ -343,7 +343,7 @@ export class FlexibleScrollAreaComponent implements OnInit, OnDestroy, AfterView
   }
 
   scrollNext() {
-    const viewport = this.viewportRef.nativeElement;
+    const viewport = this.viewportRef().nativeElement;
 
     if (this.orientation === 'vertical') {
       viewport.scrollBy({ top: 200, behavior: 'smooth' });

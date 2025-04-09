@@ -6,9 +6,9 @@ import {
   ElementRef,
   OnDestroy,
   OnInit,
-  ViewChild,
   input,
   signal,
+  viewChild,
 } from '@angular/core';
 
 export type State = 'initial' | 'entering' | 'visible' | 'exiting' | 'hidden';
@@ -39,7 +39,7 @@ export class AnimatedComponent implements OnInit, AfterViewInit, OnDestroy {
   readonly initialState = input<State>('initial');
   readonly autoAnimate = input(false);
 
-  @ViewChild('animatedElement') animatedElement!: ElementRef;
+  readonly animatedElement = viewChild.required<ElementRef>('animatedElement');
 
   state = signal<State>('initial');
   private transitionEndHandler: ((event: TransitionEvent) => void) | null = null;
@@ -62,7 +62,8 @@ export class AnimatedComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   setupTransitionEndListener(): void {
-    if (this.animatedElement?.nativeElement) {
+    const animatedElement = this.animatedElement();
+    if (animatedElement?.nativeElement) {
       this.transitionEndHandler = (event: TransitionEvent) => {
         // Only react to opacity transition end to avoid multiple events
         if (event.propertyName === 'opacity') {
@@ -70,19 +71,14 @@ export class AnimatedComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       };
 
-      this.animatedElement.nativeElement.addEventListener(
-        'transitionend',
-        this.transitionEndHandler,
-      );
+      animatedElement.nativeElement.addEventListener('transitionend', this.transitionEndHandler);
     }
   }
 
   removeTransitionEndListener(): void {
-    if (this.animatedElement?.nativeElement && this.transitionEndHandler) {
-      this.animatedElement.nativeElement.removeEventListener(
-        'transitionend',
-        this.transitionEndHandler,
-      );
+    const animatedElement = this.animatedElement();
+    if (animatedElement?.nativeElement && this.transitionEndHandler) {
+      animatedElement.nativeElement.removeEventListener('transitionend', this.transitionEndHandler);
       this.transitionEndHandler = null;
     }
   }
@@ -99,8 +95,9 @@ export class AnimatedComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.state() === 'initial') {
       this.state.set('entering');
       // Force a reflow to ensure the transition happens
-      if (this.animatedElement?.nativeElement) {
-        void this.animatedElement.nativeElement.offsetHeight;
+      const animatedElement = this.animatedElement();
+      if (animatedElement?.nativeElement) {
+        void animatedElement.nativeElement.offsetHeight;
       }
       // Use requestAnimationFrame to ensure the CSS transition takes effect
       requestAnimationFrame(() => {
