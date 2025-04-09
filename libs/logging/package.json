@@ -6,8 +6,7 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@angular/common": "^19.2.0",
-    "@angular/core": "^19.2.0"
+    "@angular/core": ">=19.0.0"
   },
   "sideEffects": false,
   "repository": {
