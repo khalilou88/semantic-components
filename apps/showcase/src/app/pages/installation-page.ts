@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -15,7 +14,7 @@ import { AnimationDemoComponent } from '../blocks/animation-demo';
 
 @Component({
   selector: 'app-installation-page',
-  imports: [CommonModule, ScAccessibleDatepicker, ReactiveFormsModule, AnimationDemoComponent],
+  imports: [ScAccessibleDatepicker, ReactiveFormsModule, AnimationDemoComponent],
   template: `
     <app-animation-demo></app-animation-demo>
 
@@ -43,22 +42,16 @@ import { AnimationDemoComponent } from '../blocks/animation-demo';
           Please select the date of your event in MM/DD/YYYY format
         </div>
 
-        <div
-          class="text-red-500 text-sm"
-          *ngIf="form.get('eventDate')?.touched && form.get('eventDate')?.errors?.['required']"
-          role="alert"
-        >
-          Event date is required
-        </div>
+        @if (form.get('eventDate')?.touched && form.get('eventDate')?.errors?.['required']) {
+          <div class="text-red-500 text-sm" role="alert">Event date is required</div>
+        }
 
-        <div
-          class="bg-gray-50 p-4 border-l-4 border-blue-500 rounded-md"
-          *ngIf="selectedDateInfo"
-          aria-live="polite"
-        >
-          <h3 class="text-lg font-medium text-gray-800 mb-2">Selected Date Information</h3>
-          <pre class="whitespace-pre-wrap text-sm text-gray-700">{{ selectedDateInfo }}</pre>
-        </div>
+        @if (selectedDateInfo) {
+          <div class="bg-gray-50 p-4 border-l-4 border-blue-500 rounded-md" aria-live="polite">
+            <h3 class="text-lg font-medium text-gray-800 mb-2">Selected Date Information</h3>
+            <pre class="whitespace-pre-wrap text-sm text-gray-700">{{ selectedDateInfo }}</pre>
+          </div>
+        }
 
         <button
           class="px-4 py-2 text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"

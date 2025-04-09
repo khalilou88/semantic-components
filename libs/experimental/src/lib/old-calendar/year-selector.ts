@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -10,7 +9,7 @@ import {
 
 @Component({
   selector: 'sc-year-selector',
-  imports: [CommonModule],
+  imports: [],
   template: `
     <!-- Year selection -->
     <div class="p-2 grid grid-cols-4 gap-1">

@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -23,18 +22,18 @@ export interface ScOptionModel {
 
 @Component({
   selector: 'sc-multi-select',
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   template: `
     <div class="relative w-full">
       <!-- Label for screen readers -->
-      <label
-        class="block text-sm font-medium text-gray-700 mb-1"
-        *ngIf="label"
-        [attr.for]="labelId"
-      >
-        {{ label }}
-        <span class="text-red-500" *ngIf="required()">*</span>
-      </label>
+      @if (label) {
+        <label class="block text-sm font-medium text-gray-700 mb-1" [attr.for]="labelId">
+          {{ label }}
+          @if (required()) {
+            <span class="text-red-500">*</span>
+          }
+        </label>
+      }
 
       <!-- Selected items display -->
       <div
@@ -56,24 +55,25 @@ export interface ScOptionModel {
         role="combobox"
         tabindex="0"
       >
-        <div
-          class="flex items-center bg-blue-100 text-blue-800 px-2 py-1 rounded-md text-sm"
-          *ngFor="let option of selectedOptions"
-        >
-          {{ option.label }}
-          <button
-            class="ml-1 text-blue-500 hover:text-blue-700"
-            [attr.aria-label]="f(option)"
-            (click)="toggleOption(option, $event)"
-            type="button"
-          >
-            &times;
-          </button>
-        </div>
+        @for (option of selectedOptions; track option) {
+          <div class="flex items-center bg-blue-100 text-blue-800 px-2 py-1 rounded-md text-sm">
+            {{ option.label }}
+            <button
+              class="ml-1 text-blue-500 hover:text-blue-700"
+              [attr.aria-label]="f(option)"
+              (click)="toggleOption(option, $event)"
+              type="button"
+            >
+              &times;
+            </button>
+          </div>
+        }
 
-        <div class="text-gray-400" *ngIf="selectedOptions.length === 0">
-          {{ placeholder() }}
-        </div>
+        @if (selectedOptions.length === 0) {
+          <div class="text-gray-400">
+            {{ placeholder() }}
+          </div>
+        }
 
         <div class="ml-auto">
           <svg
@@ -101,58 +101,62 @@ export interface ScOptionModel {
       </div>
 
       <!-- Error message -->
-      <div class="text-sm text-red-500 mt-1" *ngIf="showError() && errorMessage">
-        {{ errorMessage }}
-      </div>
+      @if (showError() && errorMessage) {
+        <div class="text-sm text-red-500 mt-1">
+          {{ errorMessage }}
+        </div>
+      }
 
       <!-- Dropdown menu -->
-      <div
-        class="absolute z-10 mt-1 w-full bg-white border rounded-md shadow-lg max-h-60 overflow-auto"
-        *ngIf="isOpen()"
-        [attr.id]="listboxId"
-        [attr.aria-multiselectable]="true"
-        role="listbox"
-      >
-        <div class="sticky top-0 bg-white p-2 border-b" *ngIf="searchable()">
-          <input
-            class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            #searchInput
-            [(ngModel)]="searchText"
-            (input)="onSearch()"
-            (click)="$event.stopPropagation()"
-            type="text"
-            placeholder="Search..."
-            aria-label="Search options"
-          />
-        </div>
-
-        <div class="py-1">
-          <button
-            class="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"
-            *ngFor="let option of filteredOptions; let i = index"
-            [attr.id]="'option-' + option.id"
-            [attr.aria-selected]="isSelected(option)"
-            [class.bg-gray-100]="focusedIndex === i"
-            (click)="toggleOption(option, $event)"
-            (mouseenter)="focusedIndex = i"
-            role="option"
-          >
-            <input
-              class="h-4 w-4 text-blue-600 rounded focus:ring-blue-500"
-              [checked]="isSelected(option)"
-              (click)="$event.stopPropagation()"
-              type="checkbox"
-              aria-hidden="true"
-              tabindex="-1"
-            />
-            <span class="ml-2">{{ option.label }}</span>
-          </button>
-
-          <div class="px-4 py-2 text-gray-500" *ngIf="filteredOptions.length === 0" role="status">
-            No results found
+      @if (isOpen()) {
+        <div
+          class="absolute z-10 mt-1 w-full bg-white border rounded-md shadow-lg max-h-60 overflow-auto"
+          [attr.id]="listboxId"
+          [attr.aria-multiselectable]="true"
+          role="listbox"
+        >
+          @if (searchable()) {
+            <div class="sticky top-0 bg-white p-2 border-b">
+              <input
+                class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                #searchInput
+                [(ngModel)]="searchText"
+                (input)="onSearch()"
+                (click)="$event.stopPropagation()"
+                type="text"
+                placeholder="Search..."
+                aria-label="Search options"
+              />
+            </div>
+          }
+          <div class="py-1">
+            @for (option of filteredOptions; track option; let i = $index) {
+              <button
+                class="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                [attr.id]="'option-' + option.id"
+                [attr.aria-selected]="isSelected(option)"
+                [class.bg-gray-100]="focusedIndex === i"
+                (click)="toggleOption(option, $event)"
+                (mouseenter)="focusedIndex = i"
+                role="option"
+              >
+                <input
+                  class="h-4 w-4 text-blue-600 rounded focus:ring-blue-500"
+                  [checked]="isSelected(option)"
+                  (click)="$event.stopPropagation()"
+                  type="checkbox"
+                  aria-hidden="true"
+                  tabindex="-1"
+                />
+                <span class="ml-2">{{ option.label }}</span>
+              </button>
+            }
+            @if (filteredOptions.length === 0) {
+              <div class="px-4 py-2 text-gray-500" role="status">No results found</div>
+            }
           </div>
         </div>
-      </div>
+      }
     </div>
   `,
   styles: ``,

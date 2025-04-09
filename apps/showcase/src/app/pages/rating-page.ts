@@ -1,11 +1,10 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import { ScRating } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-rating-page',
-  imports: [ScRating, CommonModule],
+  imports: [ScRating],
   template: `
     <div class="max-w-2xl mx-auto p-6">
       <h2 class="text-2xl font-bold text-gray-800 mb-6">Star Rating Component with Half Stars</h2>
@@ -31,14 +30,16 @@ import { ScRating } from '@semantic-components/ui';
       <div class="bg-white shadow rounded-lg p-6 mb-6">
         <h3 class="text-lg font-medium text-gray-900 mb-2">Display Only Ratings</h3>
         <div class="space-y-4">
-          <div class="flex items-center" *ngFor="let item of presetRatings">
-            <span class="w-20 text-gray-700">{{ item.label }}:</span>
-            <sc-rating
-              [rating]="item.value"
-              [interactive]="false"
-              [showRatingValue]="true"
-            ></sc-rating>
-          </div>
+          @for (item of presetRatings; track item) {
+            <div class="flex items-center">
+              <span class="w-20 text-gray-700">{{ item.label }}:</span>
+              <sc-rating
+                [rating]="item.value"
+                [interactive]="false"
+                [showRatingValue]="true"
+              ></sc-rating>
+            </div>
+          }
         </div>
       </div>
     </div>

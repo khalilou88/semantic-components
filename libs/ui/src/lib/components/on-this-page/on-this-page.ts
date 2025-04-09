@@ -41,25 +41,27 @@ interface NavItem {
     <!-- Recursive template for nested navigation -->
     <ng-template #navTemplate let-items="items" let-level="level">
       <ul class="list-none p-0 m-0">
-        <li class="text-sm" *ngFor="let item of items">
-          <button
-            [ngClass]="[
-              item.id === activeItem()
-                ? 'text-blue-600 font-medium border-l-2 border-blue-600'
-                : 'text-gray-600 border-l-2 border-transparent',
-              'block py-1 transition-all duration-200 ease-in-out cursor-pointer hover:text-blue-600',
-              getPaddingClass(level),
-            ]"
-            (click)="scrollToSection(item.id)"
-          >
-            {{ item.text }}
-          </button>
-          <ng-container *ngIf="item.children && item.children.length > 0">
-            <ng-container
-              *ngTemplateOutlet="navTemplate; context: { items: item.children, level: level + 1 }"
-            ></ng-container>
-          </ng-container>
-        </li>
+        @for (item of items; track item) {
+          <li class="text-sm">
+            <button
+              [ngClass]="[
+                item.id === activeItem()
+                  ? 'text-blue-600 font-medium border-l-2 border-blue-600'
+                  : 'text-gray-600 border-l-2 border-transparent',
+                'block py-1 transition-all duration-200 ease-in-out cursor-pointer hover:text-blue-600',
+                getPaddingClass(level),
+              ]"
+              (click)="scrollToSection(item.id)"
+            >
+              {{ item.text }}
+            </button>
+            @if (item.children && item.children.length > 0) {
+              <ng-container
+                *ngTemplateOutlet="navTemplate; context: { items: item.children, level: level + 1 }"
+              ></ng-container>
+            }
+          </li>
+        }
       </ul>
     </ng-template>
   `,

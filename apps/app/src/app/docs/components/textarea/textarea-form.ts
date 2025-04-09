@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -23,7 +22,6 @@ import {
 @Component({
   selector: 'app-textarea-form',
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     ScButton,
     ScTextarea,
@@ -47,21 +45,21 @@ import {
         ></textarea>
 
         <!-- Error Messages -->
-        <div
-          class="text-red-500 text-sm mt-1"
-          *ngIf="
-            bioForm.get('bio')?.invalid &&
-            (bioForm.get('bio')?.dirty || bioForm.get('bio')?.touched)
-          "
-        >
-          <div *ngIf="bioForm.get('bio')?.errors?.['required']">Bio is required.</div>
-          <div *ngIf="bioForm.get('bio')?.errors?.['minlength']">
-            Bio must be at least 10 characters.
+        @if (
+          bioForm.get('bio')?.invalid && (bioForm.get('bio')?.dirty || bioForm.get('bio')?.touched)
+        ) {
+          <div class="text-red-500 text-sm mt-1">
+            @if (bioForm.get('bio')?.errors?.['required']) {
+              <div>Bio is required.</div>
+            }
+            @if (bioForm.get('bio')?.errors?.['minlength']) {
+              <div>Bio must be at least 10 characters.</div>
+            }
+            @if (bioForm.get('bio')?.errors?.['maxlength']) {
+              <div>Bio must not be longer than 160 characters.</div>
+            }
           </div>
-          <div *ngIf="bioForm.get('bio')?.errors?.['maxlength']">
-            Bio must not be longer than 160 characters.
-          </div>
-        </div>
+        }
 
         <p class="text-sm text-gray-500 mt-1">
           You can

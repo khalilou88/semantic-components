@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import {
   ChangeDetectionStrategy,
@@ -18,7 +17,7 @@ import { cn } from '@semantic-components/utils';
 
 @Component({
   selector: 'sc-file-upload',
-  imports: [CommonModule],
+  imports: [],
   template: `
     <div class="w-full">
       <!-- Drag & Drop area -->
@@ -81,40 +80,94 @@ import { cn } from '@semantic-components/utils';
       </div>
 
       <!-- File list -->
-      <div class="mt-6" *ngIf="files.length > 0">
-        <h3 class="text-sm font-medium text-gray-700">Selected Files</h3>
-        <ul class="mt-3 divide-y divide-gray-200">
-          <li
-            class="py-3 flex justify-between items-center"
-            *ngFor="let file of files; let i = index"
-          >
-            <div class="flex items-center">
-              <svg
-                class="h-5 w-5 text-gray-400"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                />
-              </svg>
-              <div class="ml-3">
-                <p class="text-sm font-medium text-gray-900 truncate max-w-xs">{{ file.name }}</p>
-                <p class="text-xs text-gray-500">{{ formatFileSize(file.size) }}</p>
+      @if (files.length > 0) {
+        <div class="mt-6">
+          <h3 class="text-sm font-medium text-gray-700">Selected Files</h3>
+          <ul class="mt-3 divide-y divide-gray-200">
+            @for (file of files; track file; let i = $index) {
+              <li class="py-3 flex justify-between items-center">
+                <div class="flex items-center">
+                  <svg
+                    class="h-5 w-5 text-gray-400"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                    />
+                  </svg>
+                  <div class="ml-3">
+                    <p class="text-sm font-medium text-gray-900 truncate max-w-xs">
+                      {{ file.name }}
+                    </p>
+                    <p class="text-xs text-gray-500">{{ formatFileSize(file.size) }}</p>
+                  </div>
+                </div>
+                <button
+                  class="ml-2 text-red-600 hover:text-red-800"
+                  (click)="removeFile(i)"
+                  type="button"
+                >
+                  <svg
+                    class="h-5 w-5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                    />
+                  </svg>
+                </button>
+              </li>
+            }
+          </ul>
+          <!-- Upload progress -->
+          @if (isUploading) {
+            <div class="mt-4">
+              <div class="flex justify-between mb-1">
+                <span class="text-xs font-medium text-blue-700">Uploading...</span>
+                <span class="text-xs font-medium text-blue-700">{{ uploadProgress }}%</span>
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-2">
+                <div class="bg-blue-600 h-2 rounded-full" [style.width.%]="uploadProgress"></div>
               </div>
             </div>
+          }
+          <!-- Error message -->
+          @if (uploadError) {
+            <div class="mt-4 text-sm text-red-600">
+              {{ uploadError }}
+            </div>
+          }
+          <!-- Success message -->
+          @if (uploadSuccess) {
+            <div class="mt-4 text-sm text-green-600">Files uploaded successfully!</div>
+          }
+          <!-- Action buttons -->
+          <div class="mt-4 flex gap-2">
             <button
-              class="ml-2 text-red-600 hover:text-red-800"
-              (click)="removeFile(i)"
+              class="inline-flex items-center px-4 py-2 text-sm font-medium text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              [disabled]="isUploading || files.length === 0"
+              [class]="
+                isUploading || files.length === 0
+                  ? 'bg-blue-300 cursor-not-allowed'
+                  : 'bg-blue-600 hover:bg-blue-700'
+              "
+              (click)="uploadFiles()"
               type="button"
             >
               <svg
-                class="h-5 w-5"
+                class="h-4 w-4 mr-2"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -124,79 +177,27 @@ import { cn } from '@semantic-components/utils';
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
                 />
               </svg>
+              Upload
             </button>
-          </li>
-        </ul>
-
-        <!-- Upload progress -->
-        <div class="mt-4" *ngIf="isUploading">
-          <div class="flex justify-between mb-1">
-            <span class="text-xs font-medium text-blue-700">Uploading...</span>
-            <span class="text-xs font-medium text-blue-700">{{ uploadProgress }}%</span>
-          </div>
-          <div class="w-full bg-gray-200 rounded-full h-2">
-            <div class="bg-blue-600 h-2 rounded-full" [style.width.%]="uploadProgress"></div>
-          </div>
-        </div>
-
-        <!-- Error message -->
-        <div class="mt-4 text-sm text-red-600" *ngIf="uploadError">
-          {{ uploadError }}
-        </div>
-
-        <!-- Success message -->
-        <div class="mt-4 text-sm text-green-600" *ngIf="uploadSuccess">
-          Files uploaded successfully!
-        </div>
-
-        <!-- Action buttons -->
-        <div class="mt-4 flex gap-2">
-          <button
-            class="inline-flex items-center px-4 py-2 text-sm font-medium text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-            [disabled]="isUploading || files.length === 0"
-            [class]="
-              isUploading || files.length === 0
-                ? 'bg-blue-300 cursor-not-allowed'
-                : 'bg-blue-600 hover:bg-blue-700'
-            "
-            (click)="uploadFiles()"
-            type="button"
-          >
-            <svg
-              class="h-4 w-4 mr-2"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+            <button
+              class="inline-flex items-center px-4 py-2 text-sm font-medium text-white rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+              [disabled]="isUploading || files.length === 0"
+              [class]="
+                isUploading || files.length === 0
+                  ? 'bg-gray-300 cursor-not-allowed'
+                  : 'bg-gray-600 hover:bg-gray-700'
+              "
+              (click)="clearFiles()"
+              type="button"
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-              />
-            </svg>
-            Upload
-          </button>
-
-          <button
-            class="inline-flex items-center px-4 py-2 text-sm font-medium text-white rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
-            [disabled]="isUploading || files.length === 0"
-            [class]="
-              isUploading || files.length === 0
-                ? 'bg-gray-300 cursor-not-allowed'
-                : 'bg-gray-600 hover:bg-gray-700'
-            "
-            (click)="clearFiles()"
-            type="button"
-          >
-            Clear
-          </button>
+              Clear
+            </button>
+          </div>
         </div>
-      </div>
+      }
     </div>
   `,
   host: {

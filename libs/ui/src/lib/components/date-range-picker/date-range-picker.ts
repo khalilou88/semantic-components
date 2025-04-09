@@ -50,167 +50,174 @@ import { Temporal } from '@js-temporal/polyfill';
       </button>
 
       <!-- Calendar dropdown -->
-      <div
-        class="absolute mt-1 z-10 bg-white rounded-md shadow-lg border border-gray-200 p-3 w-full md:w-[350px]"
-        *ngIf="showCalendar"
-      >
-        <!-- Header with navigation and dropdown -->
-        <div class="flex justify-between items-center mb-3">
-          <!-- Month/Year selectors -->
-          <div class="flex items-center space-x-1">
-            <select
-              class="p-1 border border-gray-300 rounded text-sm"
-              [ngModel]="currentMonth.month"
-              (ngModelChange)="setMonth($event)"
-            >
-              <option *ngFor="let month of months; let i = index" [value]="i + 1">
-                {{ month }}
-              </option>
-            </select>
-            <select
-              class="p-1 border border-gray-300 rounded text-sm"
-              [ngModel]="currentMonth.year"
-              (ngModelChange)="setYear($event)"
-            >
-              <option *ngFor="let year of years" [value]="year">
-                {{ year }}
-              </option>
-            </select>
-          </div>
-
-          <!-- Previous/Next month buttons -->
-          <div class="flex space-x-1">
-            <button class="p-1 rounded hover:bg-gray-100" (click)="prevMonth()" type="button">
-              <svg
-                class="h-5 w-5"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+      @if (showCalendar) {
+        <div
+          class="absolute mt-1 z-10 bg-white rounded-md shadow-lg border border-gray-200 p-3 w-full md:w-[350px]"
+        >
+          <!-- Header with navigation and dropdown -->
+          <div class="flex justify-between items-center mb-3">
+            <!-- Month/Year selectors -->
+            <div class="flex items-center space-x-1">
+              <select
+                class="p-1 border border-gray-300 rounded text-sm"
+                [ngModel]="currentMonth.month"
+                (ngModelChange)="setMonth($event)"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-            </button>
-            <button class="p-1 rounded hover:bg-gray-100" (click)="nextMonth()" type="button">
-              <svg
-                class="h-5 w-5"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+                @for (month of months; track month; let i = $index) {
+                  <option [value]="i + 1">
+                    {{ month }}
+                  </option>
+                }
+              </select>
+              <select
+                class="p-1 border border-gray-300 rounded text-sm"
+                [ngModel]="currentMonth.year"
+                (ngModelChange)="setYear($event)"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        <!-- Calendar grid -->
-        <div class="mb-3">
-          <!-- Weekday headers -->
-          <div class="grid grid-cols-7 mb-1">
-            <div
-              class="text-center text-xs font-medium text-gray-500 py-1"
-              *ngFor="let day of weekdays"
-            >
-              {{ day }}
+                @for (year of years; track year) {
+                  <option [value]="year">
+                    {{ year }}
+                  </option>
+                }
+              </select>
+            </div>
+            <!-- Previous/Next month buttons -->
+            <div class="flex space-x-1">
+              <button class="p-1 rounded hover:bg-gray-100" (click)="prevMonth()" type="button">
+                <svg
+                  class="h-5 w-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+              </button>
+              <button class="p-1 rounded hover:bg-gray-100" (click)="nextMonth()" type="button">
+                <svg
+                  class="h-5 w-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
             </div>
           </div>
-
-          <!-- Calendar days -->
-          <div class="grid grid-cols-7">
+          <!-- Calendar grid -->
+          <div class="mb-3">
+            <!-- Weekday headers -->
+            <div class="grid grid-cols-7 mb-1">
+              @for (day of weekdays; track day) {
+                <div class="text-center text-xs font-medium text-gray-500 py-1">
+                  {{ day }}
+                </div>
+              }
+            </div>
+            <!-- Calendar days -->
+            <div class="grid grid-cols-7">
+              @for (day of calendarDays; track day) {
+                <button
+                  class="text-center py-1 relative"
+                  [ngClass]="{
+                    'text-gray-400': !day.isCurrentMonth,
+                    'bg-blue-100': day.isInRange && !day.isSelected,
+                    'cursor-pointer hover:bg-gray-100': !day.isDisabled,
+                    'cursor-not-allowed opacity-50': day.isDisabled,
+                  }"
+                  (click)="selectDate(day.date, day.isDisabled)"
+                  type="button"
+                >
+                  <div
+                    class="w-8 h-8 flex items-center justify-center mx-auto rounded-full"
+                    [ngClass]="{
+                      'bg-blue-600 text-white': day.isSelected,
+                      'ring-2 ring-blue-600 ring-offset-1': day.isToday && !day.isSelected,
+                    }"
+                  >
+                    {{ day.date.day }}
+                  </div>
+                </button>
+              }
+            </div>
+          </div>
+          <!-- Quick selection buttons -->
+          <div class="grid grid-cols-3 gap-2 mb-3">
             <button
-              class="text-center py-1 relative"
-              *ngFor="let day of calendarDays"
-              [ngClass]="{
-                'text-gray-400': !day.isCurrentMonth,
-                'bg-blue-100': day.isInRange && !day.isSelected,
-                'cursor-pointer hover:bg-gray-100': !day.isDisabled,
-                'cursor-not-allowed opacity-50': day.isDisabled,
-              }"
-              (click)="selectDate(day.date, day.isDisabled)"
+              class="px-2 py-1.5 text-xs bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-md transition-colors border border-gray-300"
+              (click)="setLastWeek()"
               type="button"
             >
-              <div
-                class="w-8 h-8 flex items-center justify-center mx-auto rounded-full"
-                [ngClass]="{
-                  'bg-blue-600 text-white': day.isSelected,
-                  'ring-2 ring-blue-600 ring-offset-1': day.isToday && !day.isSelected,
-                }"
-              >
-                {{ day.date.day }}
+              Last 7 days
+            </button>
+            <button
+              class="px-2 py-1.5 text-xs bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-md transition-colors border border-gray-300"
+              (click)="setLastMonth()"
+              type="button"
+            >
+              Last month
+            </button>
+            <button
+              class="px-2 py-1.5 text-xs bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-md transition-colors border border-gray-300"
+              (click)="setLastThreeMonths()"
+              type="button"
+            >
+              Last 3 months
+            </button>
+          </div>
+          <!-- Status text and buttons -->
+          <div class="text-sm text-gray-500 mb-2">
+            @if (isSelectingEndDate && selectedStartDate) {
+              <div>
+                <p>Select end date</p>
               </div>
+            }
+            @if (!isSelectingEndDate && !selectedEndDate) {
+              <div>
+                <p>Select start date</p>
+              </div>
+            }
+            @if (selectedStartDate && selectedEndDate) {
+              <div>
+                <p>{{ formatDate(selectedStartDate) }} to {{ formatDate(selectedEndDate) }}</p>
+              </div>
+            }
+          </div>
+          <div class="flex justify-end space-x-2">
+            <button
+              class="px-3 py-1.5 text-sm border border-gray-300 text-gray-700 rounded-md hover:bg-gray-100 transition-colors"
+              (click)="cancelSelection()"
+              type="button"
+            >
+              Cancel
+            </button>
+            <button
+              class="px-3 py-1.5 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+              [disabled]="!selectedStartDate || !selectedEndDate"
+              [ngClass]="{
+                'opacity-50 cursor-not-allowed': !selectedStartDate || !selectedEndDate,
+              }"
+              (click)="applyDateRange()"
+              type="button"
+            >
+              Apply
             </button>
           </div>
         </div>
-
-        <!-- Quick selection buttons -->
-        <div class="grid grid-cols-3 gap-2 mb-3">
-          <button
-            class="px-2 py-1.5 text-xs bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-md transition-colors border border-gray-300"
-            (click)="setLastWeek()"
-            type="button"
-          >
-            Last 7 days
-          </button>
-          <button
-            class="px-2 py-1.5 text-xs bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-md transition-colors border border-gray-300"
-            (click)="setLastMonth()"
-            type="button"
-          >
-            Last month
-          </button>
-          <button
-            class="px-2 py-1.5 text-xs bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-md transition-colors border border-gray-300"
-            (click)="setLastThreeMonths()"
-            type="button"
-          >
-            Last 3 months
-          </button>
-        </div>
-
-        <!-- Status text and buttons -->
-        <div class="text-sm text-gray-500 mb-2">
-          <div *ngIf="isSelectingEndDate && selectedStartDate">
-            <p>Select end date</p>
-          </div>
-          <div *ngIf="!isSelectingEndDate && !selectedEndDate">
-            <p>Select start date</p>
-          </div>
-          <div *ngIf="selectedStartDate && selectedEndDate">
-            <p>{{ formatDate(selectedStartDate) }} to {{ formatDate(selectedEndDate) }}</p>
-          </div>
-        </div>
-
-        <div class="flex justify-end space-x-2">
-          <button
-            class="px-3 py-1.5 text-sm border border-gray-300 text-gray-700 rounded-md hover:bg-gray-100 transition-colors"
-            (click)="cancelSelection()"
-            type="button"
-          >
-            Cancel
-          </button>
-          <button
-            class="px-3 py-1.5 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
-            [disabled]="!selectedStartDate || !selectedEndDate"
-            [ngClass]="{ 'opacity-50 cursor-not-allowed': !selectedStartDate || !selectedEndDate }"
-            (click)="applyDateRange()"
-            type="button"
-          >
-            Apply
-          </button>
-        </div>
-      </div>
+      }
     </div>
   `,
   styles: ``,

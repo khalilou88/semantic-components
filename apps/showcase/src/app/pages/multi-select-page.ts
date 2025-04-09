@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -6,7 +5,7 @@ import { ScMultiSelect, ScOptionModel } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-multi-select-page',
-  imports: [ScMultiSelect, ReactiveFormsModule, CommonModule],
+  imports: [ScMultiSelect, ReactiveFormsModule],
   template: `
     <div class="m-10">
       <div class="p-6 max-w-md mx-auto">
@@ -37,10 +36,16 @@ import { ScMultiSelect, ScOptionModel } from '@semantic-components/ui';
 
         <div class="mt-4" aria-live="polite">
           <h2 class="font-semibold">Selected items:</h2>
-          <p class="text-gray-500" *ngIf="selectedItems.length === 0">No items selected</p>
-          <ul class="list-disc pl-5" *ngIf="selectedItems.length > 0">
-            <li *ngFor="let item of selectedItems">{{ item.label }}</li>
-          </ul>
+          @if (selectedItems.length === 0) {
+            <p class="text-gray-500">No items selected</p>
+          }
+          @if (selectedItems.length > 0) {
+            <ul class="list-disc pl-5">
+              @for (item of selectedItems; track item) {
+                <li>{{ item.label }}</li>
+              }
+            </ul>
+          }
         </div>
       </div>
     </div>

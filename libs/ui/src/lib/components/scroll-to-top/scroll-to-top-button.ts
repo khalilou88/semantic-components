@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -14,7 +13,7 @@ import { ScButtonBase, buttonVariants } from '../button';
 
 @Component({
   selector: 'button[sc-scroll-to-top-button]',
-  imports: [CommonModule, SiArrowUpIcon],
+  imports: [SiArrowUpIcon],
   template: `
     <svg class="size-6" si-arrow-up-icon></svg>
   `,

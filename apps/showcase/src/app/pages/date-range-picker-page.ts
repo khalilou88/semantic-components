@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import { Temporal } from '@js-temporal/polyfill';
@@ -6,7 +5,7 @@ import { ScDateRangePicker } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-date-range-picker-page',
-  imports: [ScDateRangePicker, CommonModule],
+  imports: [ScDateRangePicker],
   template: `
     <div class="container mx-auto max-w-4xl px-4 py-8">
       <h1 class="text-2xl font-bold text-gray-800 mb-6">Date Range Picker with Calendar</h1>
@@ -21,14 +20,16 @@ import { ScDateRangePicker } from '@semantic-components/ui';
         ></sc-date-range-picker>
       </div>
 
-      <div class="bg-gray-50 p-4 rounded-md border-l-4 border-blue-500" *ngIf="selectedRange">
-        <h3 class="text-lg font-medium text-gray-800 mb-2">Selected Date Range:</h3>
-        <p class="text-gray-700">Start Date: {{ formatDate(selectedRange.startDate) }}</p>
-        <p class="text-gray-700">End Date: {{ formatDate(selectedRange.endDate) }}</p>
-        <p class="text-gray-700">
-          Duration: {{ calculateDuration(selectedRange.startDate, selectedRange.endDate) }} days
-        </p>
-      </div>
+      @if (selectedRange) {
+        <div class="bg-gray-50 p-4 rounded-md border-l-4 border-blue-500">
+          <h3 class="text-lg font-medium text-gray-800 mb-2">Selected Date Range:</h3>
+          <p class="text-gray-700">Start Date: {{ formatDate(selectedRange.startDate) }}</p>
+          <p class="text-gray-700">End Date: {{ formatDate(selectedRange.endDate) }}</p>
+          <p class="text-gray-700">
+            Duration: {{ calculateDuration(selectedRange.startDate, selectedRange.endDate) }} days
+          </p>
+        </div>
+      }
     </div>
   `,
   styles: ``,

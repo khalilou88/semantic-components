@@ -1,26 +1,23 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'lib-inline-animation',
-  imports: [CommonModule],
+  imports: [],
   template: `
     <div class="space-y-4">
-      <div
-        *ngFor="let item of items; let i = index"
-        [class]="getItemClasses(i)"
-        (transitionend)="onTransitionEnd(i)"
-      >
-        <div class="flex justify-between items-center p-4 bg-white rounded-lg shadow">
-          <span>{{ item.text }}</span>
-          <button
-            class="ml-4 p-2 text-red-500 hover:text-red-700 transition-colors"
-            (click)="removeItem(i)"
-          >
-            Remove
-          </button>
+      @for (item of items; track item; let i = $index) {
+        <div [class]="getItemClasses(i)" (transitionend)="onTransitionEnd(i)">
+          <div class="flex justify-between items-center p-4 bg-white rounded-lg shadow">
+            <span>{{ item.text }}</span>
+            <button
+              class="ml-4 p-2 text-red-500 hover:text-red-700 transition-colors"
+              (click)="removeItem(i)"
+            >
+              Remove
+            </button>
+          </div>
         </div>
-      </div>
+      }
       <button
         class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors"
         (click)="addItem()"

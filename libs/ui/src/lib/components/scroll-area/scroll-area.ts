@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -12,7 +11,7 @@ import { cn } from '@semantic-components/utils';
 
 @Component({
   selector: 'div[sc-scroll-area]',
-  imports: [CommonModule],
+  imports: [],
   template: `
     <ng-content />
   `,

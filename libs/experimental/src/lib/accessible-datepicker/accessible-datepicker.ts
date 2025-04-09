@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -26,12 +25,14 @@ interface CalendarDay {
 
 @Component({
   selector: 'sc-accessible-datepicker',
-  imports: [CommonModule],
+  imports: [],
   template: `
     <div class="relative w-full max-w-xs" [class.opacity-60]="isDisabled">
       <label class="block text-sm font-medium text-gray-700 mb-1" [for]="id()">
         {{ label() }}
-        <span class="text-red-500 ml-1" *ngIf="required()">*</span>
+        @if (required()) {
+          <span class="text-red-500 ml-1">*</span>
+        }
       </label>
 
       <div class="relative">
@@ -77,146 +78,144 @@ interface CalendarDay {
         </button>
       </div>
 
-      <div
-        class="absolute z-10 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 w-72"
-        *ngIf="isCalendarOpen"
-        [id]="id() + '-calendar'"
-        [attr.aria-label]="'Calendar dialog'"
-        (click)="onCalendarClick($event)"
-        (keydown)="ff()"
-        role="dialog"
-        aria-modal="true"
-      >
-        <div class="p-2">
-          <div class="flex items-center justify-between mb-2">
-            <button
-              class="p-1 hover:bg-gray-100 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-              (click)="prevMonth()"
-              type="button"
-              aria-label="Previous month"
-            >
-              <svg
-                class="h-5 w-5"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+      @if (isCalendarOpen) {
+        <div
+          class="absolute z-10 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 w-72"
+          [id]="id() + '-calendar'"
+          [attr.aria-label]="'Calendar dialog'"
+          (click)="onCalendarClick($event)"
+          (keydown)="ff()"
+          role="dialog"
+          aria-modal="true"
+        >
+          <div class="p-2">
+            <div class="flex items-center justify-between mb-2">
+              <button
+                class="p-1 hover:bg-gray-100 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                (click)="prevMonth()"
+                type="button"
+                aria-label="Previous month"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-            </button>
-
-            <div class="flex space-x-2">
-              <select
-                class="py-1 pl-2 pr-6 border border-gray-300 rounded-md bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                [value]="currentMonth?.month"
-                (change)="onMonthChange($event)"
-                aria-label="Select month"
+                <svg
+                  class="h-5 w-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+              </button>
+              <div class="flex space-x-2">
+                <select
+                  class="py-1 pl-2 pr-6 border border-gray-300 rounded-md bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  [value]="currentMonth?.month"
+                  (change)="onMonthChange($event)"
+                  aria-label="Select month"
+                >
+                  @for (monthName of months; track monthName; let i = $index) {
+                    <option [value]="i + 1">
+                      {{ monthName }}
+                    </option>
+                  }
+                </select>
+                <select
+                  class="py-1 pl-2 pr-6 border border-gray-300 rounded-md bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  [value]="currentMonth?.year"
+                  (change)="onYearChange($event)"
+                  aria-label="Select year"
+                >
+                  @for (year of years; track year) {
+                    <option [value]="year">
+                      {{ year }}
+                    </option>
+                  }
+                </select>
+              </div>
+              <button
+                class="p-1 hover:bg-gray-100 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                (click)="nextMonth()"
+                type="button"
+                aria-label="Next month"
               >
-                <option *ngFor="let monthName of months; let i = index" [value]="i + 1">
-                  {{ monthName }}
-                </option>
-              </select>
-
-              <select
-                class="py-1 pl-2 pr-6 border border-gray-300 rounded-md bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                [value]="currentMonth?.year"
-                (change)="onYearChange($event)"
-                aria-label="Select year"
-              >
-                <option *ngFor="let year of years" [value]="year">
-                  {{ year }}
-                </option>
-              </select>
+                <svg
+                  class="h-5 w-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
             </div>
-
-            <button
-              class="p-1 hover:bg-gray-100 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-              (click)="nextMonth()"
-              type="button"
-              aria-label="Next month"
-            >
-              <svg
-                class="h-5 w-5"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </button>
-          </div>
-
-          <div class="grid grid-cols-7 gap-0">
-            <div
-              class="h-8 flex items-center justify-center text-xs font-medium text-gray-700"
-              *ngFor="let day of weekdays"
-            >
-              {{ day }}
+            <div class="grid grid-cols-7 gap-0">
+              @for (day of weekdays; track day) {
+                <div class="h-8 flex items-center justify-center text-xs font-medium text-gray-700">
+                  {{ day }}
+                </div>
+              }
+              @for (day of calendarDays; track day; let i = $index) {
+                <button
+                  class="h-8 w-8 mx-auto flex items-center justify-center text-sm rounded-full"
+                  [class.text-gray-400]="!day.isCurrentMonth"
+                  [class.ring-1]="day.isToday && !day.isSelected"
+                  [class.ring-blue-500]="day.isToday && !day.isSelected"
+                  [class.bg-blue-500]="day.isSelected"
+                  [class.text-white]="day.isSelected"
+                  [class.hover:bg-gray-100]="!day.isSelected && !day.isDisabled"
+                  [class.text-gray-300]="day.isDisabled"
+                  [class.cursor-pointer]="!day.isDisabled"
+                  [class.cursor-not-allowed]="day.isDisabled"
+                  [class.ring-2]="i === focusedDayIndex"
+                  [class.ring-blue-400]="i === focusedDayIndex"
+                  [class.ring-offset-1]="i === focusedDayIndex"
+                  [attr.aria-selected]="day.isSelected"
+                  [attr.aria-disabled]="day.isDisabled"
+                  [attr.aria-current]="day.isToday ? 'date' : null"
+                  [attr.tabindex]="i === focusedDayIndex ? 0 : -1"
+                  (click)="selectDate(day.date)"
+                  role="gridcell"
+                >
+                  {{ day.dayOfMonth }}
+                </button>
+              }
             </div>
-
-            <button
-              class="h-8 w-8 mx-auto flex items-center justify-center text-sm rounded-full"
-              *ngFor="let day of calendarDays; let i = index"
-              [class.text-gray-400]="!day.isCurrentMonth"
-              [class.ring-1]="day.isToday && !day.isSelected"
-              [class.ring-blue-500]="day.isToday && !day.isSelected"
-              [class.bg-blue-500]="day.isSelected"
-              [class.text-white]="day.isSelected"
-              [class.hover:bg-gray-100]="!day.isSelected && !day.isDisabled"
-              [class.text-gray-300]="day.isDisabled"
-              [class.cursor-pointer]="!day.isDisabled"
-              [class.cursor-not-allowed]="day.isDisabled"
-              [class.ring-2]="i === focusedDayIndex"
-              [class.ring-blue-400]="i === focusedDayIndex"
-              [class.ring-offset-1]="i === focusedDayIndex"
-              [attr.aria-selected]="day.isSelected"
-              [attr.aria-disabled]="day.isDisabled"
-              [attr.aria-current]="day.isToday ? 'date' : null"
-              [attr.tabindex]="i === focusedDayIndex ? 0 : -1"
-              (click)="selectDate(day.date)"
-              role="gridcell"
-            >
-              {{ day.dayOfMonth }}
-            </button>
-          </div>
-
-          <div class="mt-2 flex justify-between">
-            <button
-              class="px-3 py-1 text-sm text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
-              (click)="f()"
-              type="button"
-              aria-label="Select today"
-            >
-              Today
-            </button>
-
-            <button
-              class="px-3 py-1 text-sm text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
-              (click)="closeCalendar()"
-              type="button"
-              aria-label="Close calendar"
-            >
-              Close
-            </button>
+            <div class="mt-2 flex justify-between">
+              <button
+                class="px-3 py-1 text-sm text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
+                (click)="f()"
+                type="button"
+                aria-label="Select today"
+              >
+                Today
+              </button>
+              <button
+                class="px-3 py-1 text-sm text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
+                (click)="closeCalendar()"
+                type="button"
+                aria-label="Close calendar"
+              >
+                Close
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      }
 
-      <div class="sr-only" *ngIf="selectedDate" aria-live="polite">
-        Selected date: {{ selectedDate.toString() }}
-      </div>
+      @if (selectedDate) {
+        <div class="sr-only" aria-live="polite">Selected date: {{ selectedDate.toString() }}</div>
+      }
     </div>
   `,
   styles: ``,

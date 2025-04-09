@@ -49,37 +49,39 @@ import {
       </div>
 
       <!-- Custom scrollbar for vertical orientation -->
-      <div
-        class="absolute top-0 right-1 w-1 h-[calc(100%-0.5rem)] my-1 rounded-full bg-gray-200 opacity-0 transition-opacity delay-300"
-        *ngIf="orientation === 'vertical'"
-        [ngClass]="{ 'opacity-100 delay-0 duration-75': isScrolling || isHovering }"
-      >
+      @if (orientation === 'vertical') {
         <div
-          class="absolute w-full rounded-full bg-gray-500 cursor-pointer"
-          #verticalThumb
-          [style.height.%]="thumbSize"
-          [style.top.%]="thumbPosition"
-          (mousedown)="startDragging($event)"
-        ></div>
-      </div>
+          class="absolute top-0 right-1 w-1 h-[calc(100%-0.5rem)] my-1 rounded-full bg-gray-200 opacity-0 transition-opacity delay-300"
+          [ngClass]="{ 'opacity-100 delay-0 duration-75': isScrolling || isHovering }"
+        >
+          <div
+            class="absolute w-full rounded-full bg-gray-500 cursor-pointer"
+            #verticalThumb
+            [style.height.%]="thumbSize"
+            [style.top.%]="thumbPosition"
+            (mousedown)="startDragging($event)"
+          ></div>
+        </div>
+      }
 
       <!-- Custom scrollbar for horizontal orientation -->
-      <div
-        class="absolute bottom-0 left-0 right-4 h-1 mx-2 rounded-full bg-gray-200 opacity-0 transition-opacity delay-300"
-        *ngIf="orientation === 'horizontal'"
-        [ngClass]="{ 'opacity-100 delay-0 duration-75': isScrolling || isHovering }"
-      >
+      @if (orientation === 'horizontal') {
         <div
-          class="absolute h-full rounded-full bg-gray-500 cursor-pointer"
-          #horizontalThumb
-          [style.width.%]="thumbSize"
-          [style.left.%]="thumbPosition"
-          (mousedown)="startDragging($event)"
-        ></div>
-      </div>
+          class="absolute bottom-0 left-0 right-4 h-1 mx-2 rounded-full bg-gray-200 opacity-0 transition-opacity delay-300"
+          [ngClass]="{ 'opacity-100 delay-0 duration-75': isScrolling || isHovering }"
+        >
+          <div
+            class="absolute h-full rounded-full bg-gray-500 cursor-pointer"
+            #horizontalThumb
+            [style.width.%]="thumbSize"
+            [style.left.%]="thumbPosition"
+            (mousedown)="startDragging($event)"
+          ></div>
+        </div>
+      }
 
       <!-- Navigation buttons for horizontal scrolling -->
-      <ng-container *ngIf="orientation === 'horizontal' && showNavButtons()">
+      @if (orientation === 'horizontal' && showNavButtons()) {
         <button
           class="absolute top-1/2 left-2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full shadow-md p-2 opacity-0 transition-opacity duration-200"
           [ngClass]="{ 'opacity-100': isHovering && canScrollStart }"
@@ -102,7 +104,6 @@ import {
             />
           </svg>
         </button>
-
         <button
           class="absolute top-1/2 right-2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full shadow-md p-2 opacity-0 transition-opacity duration-200"
           [ngClass]="{ 'opacity-100': isHovering && canScrollEnd }"
@@ -125,10 +126,10 @@ import {
             />
           </svg>
         </button>
-      </ng-container>
+      }
 
       <!-- Navigation buttons for vertical scrolling -->
-      <ng-container *ngIf="orientation === 'vertical' && showNavButtons()">
+      @if (orientation === 'vertical' && showNavButtons()) {
         <button
           class="absolute top-2 left-1/2 -translate-x-1/2 bg-white/80 hover:bg-white rounded-full shadow-md p-2 opacity-0 transition-opacity duration-200"
           [ngClass]="{ 'opacity-100': isHovering && canScrollStart }"
@@ -151,7 +152,6 @@ import {
             />
           </svg>
         </button>
-
         <button
           class="absolute bottom-2 left-1/2 -translate-x-1/2 bg-white/80 hover:bg-white rounded-full shadow-md p-2 opacity-0 transition-opacity duration-200"
           [ngClass]="{ 'opacity-100': isHovering && canScrollEnd }"
@@ -174,7 +174,7 @@ import {
             />
           </svg>
         </button>
-      </ng-container>
+      }
     </div>
   `,
   styles: [

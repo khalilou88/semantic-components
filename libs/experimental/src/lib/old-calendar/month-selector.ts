@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -9,19 +8,20 @@ import {
 
 @Component({
   selector: 'sc-month-selector',
-  imports: [CommonModule],
+  imports: [],
   template: `
     <!-- Month selection -->
     <div class="p-2 grid grid-cols-3 gap-1">
-      <button
-        class="p-2 text-sm rounded hover:bg-blue-100"
-        *ngFor="let m of months; let i = index"
-        [class.bg-blue-500]="i === month()"
-        [class.text-white]="i === month()"
-        (click)="selectMonth(i); $event.stopPropagation()"
-      >
-        {{ m.substr(0, 3) }}
-      </button>
+      @for (m of months; track m; let i = $index) {
+        <button
+          class="p-2 text-sm rounded hover:bg-blue-100"
+          [class.bg-blue-500]="i === month()"
+          [class.text-white]="i === month()"
+          (click)="selectMonth(i); $event.stopPropagation()"
+        >
+          {{ m.substr(0, 3) }}
+        </button>
+      }
     </div>
   `,
   styles: ``,

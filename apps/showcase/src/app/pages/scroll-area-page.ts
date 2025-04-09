@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import {
@@ -16,7 +15,6 @@ interface Artwork {
 @Component({
   selector: 'app-scroll-area-page',
   imports: [
-    CommonModule,
     ScScrollArea,
     HoverScrollbarComponent,
     ScrollAreaComponent,
@@ -150,16 +148,17 @@ interface Artwork {
       <h2 class="mb-4 text-xl font-medium">horizontal Scrolling</h2>
 
       <sc-flexible-scroll-area orientation="horizontal">
-        <div
-          class="bg-white rounded-lg shadow-md w-64 h-52 flex-shrink-0 border border-gray-200 hover:border-blue-500 transition-colors duration-200 inline-block"
-          *ngFor="let item of items"
-        >
-          <div class="p-4 h-full flex flex-col">
-            <h3 class="text-lg font-medium text-gray-900 mb-2">{{ item.title }}</h3>
-            <p class="text-sm text-gray-600 flex-grow">{{ item.description }}</p>
-            <div class="mt-4 text-xs text-gray-500">{{ item.category }}</div>
+        @for (item of items; track item) {
+          <div
+            class="bg-white rounded-lg shadow-md w-64 h-52 flex-shrink-0 border border-gray-200 hover:border-blue-500 transition-colors duration-200 inline-block"
+          >
+            <div class="p-4 h-full flex flex-col">
+              <h3 class="text-lg font-medium text-gray-900 mb-2">{{ item.title }}</h3>
+              <p class="text-sm text-gray-600 flex-grow">{{ item.description }}</p>
+              <div class="mt-4 text-xs text-gray-500">{{ item.category }}</div>
+            </div>
           </div>
-        </div>
+        }
       </sc-flexible-scroll-area>
     </div>
   `,

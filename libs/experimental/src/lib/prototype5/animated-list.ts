@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 interface AnimatedItem {
@@ -9,36 +8,37 @@ interface AnimatedItem {
 
 @Component({
   selector: 'lib-animated-list',
-  imports: [CommonModule],
+  imports: [],
   template: `
     <div class="p-6 max-w-md mx-auto">
       <h2 class="text-xl font-bold mb-4">Animated List</h2>
 
       <div class="mb-4 space-y-2">
-        <div
-          *ngFor="let item of visibleItems; trackBy: trackById"
-          [class]="
-            'transform transition-all duration-300 ease-in-out overflow-hidden ' +
-            (item.state === 'entering'
-              ? 'opacity-0 -translate-x-4 max-h-0'
-              : item.state === 'visible'
-                ? 'opacity-100 translate-x-0 max-h-20'
-                : item.state === 'exiting'
-                  ? 'opacity-0 translate-x-4 max-h-0'
-                  : '')
-          "
-          (transitionend)="onTransitionEnd(item)"
-        >
-          <div class="flex justify-between items-center p-3 bg-white rounded shadow">
-            <span>{{ item.text }}</span>
-            <button
-              class="ml-4 p-1 text-red-500 hover:text-red-700 transition-colors"
-              (click)="removeItem(item.id)"
-            >
-              Remove
-            </button>
+        @for (item of visibleItems; track trackById($index, item)) {
+          <div
+            [class]="
+              'transform transition-all duration-300 ease-in-out overflow-hidden ' +
+              (item.state === 'entering'
+                ? 'opacity-0 -translate-x-4 max-h-0'
+                : item.state === 'visible'
+                  ? 'opacity-100 translate-x-0 max-h-20'
+                  : item.state === 'exiting'
+                    ? 'opacity-0 translate-x-4 max-h-0'
+                    : '')
+            "
+            (transitionend)="onTransitionEnd(item)"
+          >
+            <div class="flex justify-between items-center p-3 bg-white rounded shadow">
+              <span>{{ item.text }}</span>
+              <button
+                class="ml-4 p-1 text-red-500 hover:text-red-700 transition-colors"
+                (click)="removeItem(item.id)"
+              >
+                Remove
+              </button>
+            </div>
           </div>
-        </div>
+        }
       </div>
 
       <div class="flex space-x-3">

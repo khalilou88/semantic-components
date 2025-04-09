@@ -1,5 +1,4 @@
 import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
-import { CommonModule } from '@angular/common';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
@@ -16,7 +15,7 @@ import { ScOption } from './option';
 
 @Component({
   selector: 'lib-select',
-  imports: [CommonModule],
+  imports: [],
   template: `
     <div class="relative w-full max-w-xs">
       <div
@@ -46,13 +45,14 @@ import { ScOption } from './option';
         </svg>
       </div>
 
-      <div
-        class="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto focus:outline-none"
-        *ngIf="isOpen"
-        role="listbox"
-      >
-        <ng-content></ng-content>
-      </div>
+      @if (isOpen) {
+        <div
+          class="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto focus:outline-none"
+          role="listbox"
+        >
+          <ng-content></ng-content>
+        </div>
+      }
     </div>
   `,
   styles: ``,

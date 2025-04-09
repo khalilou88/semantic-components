@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -13,11 +12,11 @@ import {
 
 @Component({
   selector: 'sc-rating',
-  imports: [CommonModule],
+  imports: [],
   template: `
     <div class="flex items-center">
       <div class="flex">
-        <ng-container *ngFor="let position of positions; let i = index">
+        @for (position of positions; track position; let i = $index) {
           <button
             class="relative"
             (mouseenter)="onHover(position)"
@@ -30,40 +29,42 @@ import {
                 d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
               />
             </svg>
-
             <!-- Left half star (for 0.5 increments) -->
-            <div
-              class="absolute top-0 left-0 overflow-hidden"
-              *ngIf="isHalfOrFullStar(position)"
-              [style.width]="isHalfStar(position) ? '50%' : '100%'"
-            >
-              <svg class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
-                <path
-                  d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                />
-              </svg>
-            </div>
-
+            @if (isHalfOrFullStar(position)) {
+              <div
+                class="absolute top-0 left-0 overflow-hidden"
+                [style.width]="isHalfStar(position) ? '50%' : '100%'"
+              >
+                <svg class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                  />
+                </svg>
+              </div>
+            }
             <!-- Hover effect overlay -->
-            <div
-              class="absolute top-0 left-0"
-              *ngIf="interactive() && hoverRating >= position"
-              [style.width]="
-                isHalfValue(hoverRating) && Math.ceil(hoverRating) === position ? '50%' : '100%'
-              "
-            >
-              <svg class="w-6 h-6 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
-                <path
-                  d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                />
-              </svg>
-            </div>
+            @if (interactive() && hoverRating >= position) {
+              <div
+                class="absolute top-0 left-0"
+                [style.width]="
+                  isHalfValue(hoverRating) && Math.ceil(hoverRating) === position ? '50%' : '100%'
+                "
+              >
+                <svg class="w-6 h-6 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                  />
+                </svg>
+              </div>
+            }
           </button>
-        </ng-container>
+        }
       </div>
-      <span class="ml-2 text-sm text-gray-600" *ngIf="showRatingValue()">
-        {{ rating.toFixed(1) }}
-      </span>
+      @if (showRatingValue()) {
+        <span class="ml-2 text-sm text-gray-600">
+          {{ rating.toFixed(1) }}
+        </span>
+      }
     </div>
   `,
   styles: ``,

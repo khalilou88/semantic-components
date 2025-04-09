@@ -19,16 +19,17 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, viewChild } from '@ang
         <!-- Content container -->
         <div class="flex flex-row gap-4 p-4 min-w-max">
           <!-- Cards -->
-          <div
-            class="bg-white rounded-lg shadow-md w-64 h-52 flex-shrink-0 border border-gray-200 hover:border-blue-500 transition-colors duration-200"
-            *ngFor="let item of items"
-          >
-            <div class="p-4 h-full flex flex-col">
-              <h3 class="text-lg font-medium text-gray-900 mb-2">{{ item.title }}</h3>
-              <p class="text-sm text-gray-600 flex-grow">{{ item.description }}</p>
-              <div class="mt-4 text-xs text-gray-500">{{ item.category }}</div>
+          @for (item of items; track item) {
+            <div
+              class="bg-white rounded-lg shadow-md w-64 h-52 flex-shrink-0 border border-gray-200 hover:border-blue-500 transition-colors duration-200"
+            >
+              <div class="p-4 h-full flex flex-col">
+                <h3 class="text-lg font-medium text-gray-900 mb-2">{{ item.title }}</h3>
+                <p class="text-sm text-gray-600 flex-grow">{{ item.description }}</p>
+                <div class="mt-4 text-xs text-gray-500">{{ item.category }}</div>
+              </div>
             </div>
-          </div>
+          }
         </div>
       </div>
 
