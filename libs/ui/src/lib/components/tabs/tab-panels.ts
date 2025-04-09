@@ -20,7 +20,13 @@ import { ScTabsService } from './tabs.service';
   template: `
     @for (tabPanelContent of tabPanelContents(); track tabPanelContent.tabId()) {
       @if (tabPanelContent.tabId() === activeTabId()) {
-        <ng-container [ngTemplateOutlet]="tabPanelContent.templateRef"></ng-container>
+        <div
+          [attr.id]="'tabpanel-' + tabPanelContent.tabId()"
+          [attr.aria-labelledby]="'tab-' + tabPanelContent.tabId()"
+          role="tabpanel"
+        >
+          <ng-container [ngTemplateOutlet]="tabPanelContent.templateRef"></ng-container>
+        </div>
       }
     }
   `,

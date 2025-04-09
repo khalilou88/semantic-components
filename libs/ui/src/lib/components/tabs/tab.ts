@@ -18,8 +18,12 @@ import { ScTabsService } from './tabs.service';
     <ng-content />
   `,
   host: {
+    role: 'tab',
     '[class]': 'class()',
     '[attr.data-state]': "isActive() ? 'active' : ''",
+    '[attr.aria-selected]': 'isActive()',
+    '[attr.aria-controls]': "'tabpanel-' + value()",
+    '[attr.tabindex]': 'isActive() ? 0 : -1',
     '(click)': 'selectTab()',
   },
   styles: ``,
