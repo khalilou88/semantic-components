@@ -19,6 +19,7 @@ import { ScTabsService } from './tabs.service';
   `,
   host: {
     role: 'tab',
+    '[attr.id]': "'tab-' + value()",
     '[class]': 'class()',
     '[attr.data-state]': "isActive() ? 'active' : ''",
     '[attr.aria-selected]': 'isActive()',
