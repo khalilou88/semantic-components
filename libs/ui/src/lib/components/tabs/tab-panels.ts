@@ -16,7 +16,7 @@ import { ScTabContent } from './tab-content';
 import { ScTabsService } from './tabs.service';
 
 @Component({
-  selector: 'div[sc-tab-panel]',
+  selector: 'div[sc-tab-panels]',
   imports: [NgTemplateOutlet],
   template: `
     @for (tabDirective of tabDirectives; track $index) {
@@ -32,7 +32,7 @@ import { ScTabsService } from './tabs.service';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScTabPanel {
+export class ScTabPanels {
   readonly classInput = input<string>('', {
     alias: 'class',
   });
