@@ -1,10 +1,10 @@
 import { Directive, Input, TemplateRef } from '@angular/core';
 
 @Directive({
-  selector: '[scTabContent]',
+  selector: '[scTabPanelContent]',
 })
-export class ScTabContent {
-  @Input('scTabContent') tabId!: string;
+export class ScTabPanelContent {
+  @Input('scTabPanelContent') tabId!: string;
 
   constructor(public templateRef: TemplateRef<any>) {}
 }

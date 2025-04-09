@@ -11,8 +11,8 @@ import {
   ScInput,
   ScLabel,
   ScTab,
-  ScTabContent,
   ScTabList,
+  ScTabPanelContent,
   ScTabPanels,
   ScTabs,
 } from '@semantic-components/ui';
@@ -24,7 +24,7 @@ import {
     ScTabList,
     ScTab,
     ScTabPanels,
-    ScTabContent,
+    ScTabPanelContent,
     ScCard,
     ScCardHeader,
     ScCardTitle,
@@ -43,7 +43,7 @@ import {
       </div>
 
       <div sc-tab-panels>
-        <ng-template scTabContent="account">
+        <ng-template scTabPanelContent="account">
           <div sc-card>
             <div sc-card-header>
               <h2 sc-card-title>Account</h2>
@@ -68,7 +68,7 @@ import {
           </div>
         </ng-template>
 
-        <ng-template scTabContent="password">
+        <ng-template scTabPanelContent="password">
           <div sc-card>
             <div sc-card-header>
               <h2 sc-card-title>Password</h2>

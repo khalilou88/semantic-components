@@ -12,7 +12,7 @@ import {
 
 import { cn } from '@semantic-components/utils';
 
-import { ScTabContent } from './tab-content';
+import { ScTabPanelContent } from './tab-panel-content';
 import { ScTabsService } from './tabs.service';
 
 @Component({
@@ -48,5 +48,5 @@ export class ScTabPanels {
 
   protected readonly activeTabId = computed(() => this.scTabsService.activeTabId());
 
-  @ContentChildren(ScTabContent) tabDirectives!: QueryList<ScTabContent>;
+  @ContentChildren(ScTabPanelContent) tabDirectives!: QueryList<ScTabPanelContent>;
 }
