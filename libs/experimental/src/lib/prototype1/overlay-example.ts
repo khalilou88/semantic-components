@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
 import { AnimatedOverlayService } from './service';
 
@@ -23,9 +23,9 @@ import { AnimatedOverlayService } from './service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OverlayExample {
-  result: boolean | null = null;
+  private readonly animatedOverlay = inject(AnimatedOverlayService);
 
-  constructor(private readonly animatedOverlay: AnimatedOverlayService) {}
+  result: boolean | null = null;
 
   async openDialog() {
     this.result = await this.animatedOverlay.open({

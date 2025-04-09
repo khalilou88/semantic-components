@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
@@ -79,11 +79,13 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputForm {
+  private readonly fb = inject(FormBuilder);
+
   form: FormGroup;
   showToast = false;
   submittedData: any = null;
 
-  constructor(private readonly fb: FormBuilder) {
+  constructor() {
     this.form = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(2)]],
     });

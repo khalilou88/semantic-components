@@ -95,6 +95,8 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextareaForm {
+  private readonly fb = inject(FormBuilder);
+
   private readonly toaster = inject(Toaster);
 
   private readonly toastTemplate = viewChild.required<TemplateRef<unknown>>('toastTemplate');
@@ -102,7 +104,7 @@ export class TextareaForm {
   bioForm: FormGroup;
   submissionResult: string | null = null;
 
-  constructor(private readonly fb: FormBuilder) {
+  constructor() {
     this.bioForm = this.fb.group({
       bio: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(160)]],
     });

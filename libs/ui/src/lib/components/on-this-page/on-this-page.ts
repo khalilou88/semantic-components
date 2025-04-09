@@ -7,6 +7,7 @@ import {
   OnInit,
   Renderer2,
   ViewEncapsulation,
+  inject,
   linkedSignal,
   signal,
 } from '@angular/core';
@@ -67,6 +68,9 @@ interface NavItem {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScOnThisPage implements OnInit, OnDestroy {
+  private readonly el = inject(ElementRef);
+  private readonly renderer = inject(Renderer2);
+
   private observer: IntersectionObserver | null = null;
   private readonly observedElements: Element[] = [];
 
@@ -81,11 +85,6 @@ export class ScOnThisPage implements OnInit, OnDestroy {
 
   private readonly destroy$ = new Subject<void>();
   private isObserving = false;
-
-  constructor(
-    private readonly el: ElementRef,
-    private readonly renderer: Renderer2,
-  ) {}
 
   ngOnInit(): void {
     this.initNavItems();

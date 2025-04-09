@@ -1,10 +1,10 @@
-import { Directive, TemplateRef, input } from '@angular/core';
+import { Directive, TemplateRef, inject, input } from '@angular/core';
 
 @Directive({
   selector: '[scTabPanelContent]',
 })
 export class ScTabPanelContent {
-  readonly tabId = input.required<string>({ alias: 'scTabPanelContent' });
+  readonly templateRef = inject<TemplateRef<any>>(TemplateRef);
 
-  constructor(public templateRef: TemplateRef<any>) {}
+  readonly tabId = input.required<string>({ alias: 'scTabPanelContent' });
 }

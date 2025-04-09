@@ -13,16 +13,14 @@ import { ScScrollToTopButton2 } from './scroll-to-top-button2';
   providedIn: 'root',
 })
 export class ScScrollToTop {
+  private readonly overlay = inject(Overlay);
+  private readonly injector = inject(Injector);
+
   private readonly destroyRef = inject(DestroyRef);
 
   private overlayRef: OverlayRef | null = null;
   private componentRef: ComponentRef<ScScrollToTopButton2> | null = null;
   private readonly scrollThreshold = 300;
-
-  constructor(
-    private readonly overlay: Overlay,
-    private readonly injector: Injector,
-  ) {}
 
   init() {
     // Set up scroll listener

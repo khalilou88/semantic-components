@@ -183,11 +183,15 @@ import { PageInfo } from '../core/types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class DocLayout {
+  private readonly router = inject(Router);
+
   readonly sitemapLoader = inject(SitemapLoader);
 
   currentPath = signal('');
 
-  constructor(private readonly router: Router) {
+  constructor() {
+    const router = this.router;
+
     router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
         this.currentPath.set(this.router.url);

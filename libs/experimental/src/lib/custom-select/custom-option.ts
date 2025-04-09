@@ -6,6 +6,7 @@ import {
   HostListener,
   Output,
   ViewEncapsulation,
+  inject,
   input,
 } from '@angular/core';
 
@@ -35,6 +36,8 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomOption {
+  elementRef = inject(ElementRef);
+
   readonly value = input<any>();
   readonly disabled = input(false);
 
@@ -43,8 +46,6 @@ export class CustomOption {
   isActive = false;
   isFocused = false;
   dropdownOpen = false;
-
-  constructor(public elementRef: ElementRef) {}
 
   get label(): string {
     return this.elementRef.nativeElement.textContent.trim();

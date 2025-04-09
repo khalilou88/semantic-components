@@ -9,6 +9,7 @@ import {
   OnInit,
   Output,
   ViewEncapsulation,
+  inject,
   input,
   signal,
 } from '@angular/core';
@@ -159,6 +160,8 @@ export interface ScOptionModel {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScMultiSelect implements OnInit {
+  private readonly elementRef = inject(ElementRef);
+
   readonly options = input<ScOptionModel[]>([]);
   readonly placeholder = input('Select options');
   readonly searchable = input(true);
@@ -185,8 +188,6 @@ export class ScMultiSelect implements OnInit {
     }
     return null;
   }
-
-  constructor(private readonly elementRef: ElementRef) {}
 
   ngOnInit() {
     this.filteredOptions = [...this.options()];

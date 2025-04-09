@@ -1,4 +1,4 @@
-import { AfterViewInit, Directive, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, OnDestroy, OnInit, inject } from '@angular/core';
 
 import { Subscription } from 'rxjs';
 
@@ -8,16 +8,18 @@ import { TocService } from './toc.service';
   selector: '[tocHeading]',
 })
 export class TocHeadingDirective implements OnInit, AfterViewInit, OnDestroy {
+  private readonly el = inject(ElementRef);
+  private readonly tocService = inject(TocService);
+
   private readonly element: HTMLElement;
   private level = 0;
   private id = '';
   private readonly scrollSubscription: Subscription | null = null;
   private intersectionObserver: IntersectionObserver | null = null;
 
-  constructor(
-    private readonly el: ElementRef,
-    private readonly tocService: TocService,
-  ) {
+  constructor() {
+    const el = this.el;
+
     this.element = el.nativeElement;
   }
 

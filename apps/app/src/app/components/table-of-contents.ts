@@ -4,6 +4,7 @@ import {
   Component,
   OnInit,
   ViewEncapsulation,
+  inject,
   input,
 } from '@angular/core';
 
@@ -38,13 +39,15 @@ import { TocItem, TocService } from './toc/toc.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableOfContents implements OnInit {
+  private readonly tocService = inject(TocService);
+
   readonly title = input('Table of Contents');
   readonly indentation = input(12); // Pixels to indent each level
 
   tocItems$: Observable<TocItem[]>;
   minLevel = 1;
 
-  constructor(private readonly tocService: TocService) {
+  constructor() {
     this.tocItems$ = this.tocService.tocItems;
   }
 

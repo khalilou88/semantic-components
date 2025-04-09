@@ -6,6 +6,7 @@ import {
   ElementRef,
   OnDestroy,
   ViewEncapsulation,
+  inject,
   signal,
 } from '@angular/core';
 
@@ -57,11 +58,11 @@ export interface ScSection {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScTableOfContents implements AfterViewInit, OnDestroy {
+  private readonly elementRef = inject(ElementRef);
+
   sections = signal<ScSection[]>([]);
   activeSection = signal('');
   private observer: IntersectionObserver | null = null;
-
-  constructor(private readonly elementRef: ElementRef) {}
 
   ngAfterViewInit(): void {
     // After the view is initialized, find all sections

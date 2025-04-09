@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   ViewEncapsulation,
+  inject,
   input,
 } from '@angular/core';
 
@@ -25,7 +26,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScOption {
-  constructor(public elementRef: ElementRef) {}
+  elementRef = inject(ElementRef);
 
   readonly value = input<any>();
   readonly label = input.required<string>();

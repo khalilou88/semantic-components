@@ -1,6 +1,6 @@
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { ComponentRef, Injectable } from '@angular/core';
+import { ComponentRef, Injectable, inject } from '@angular/core';
 
 import { AnimatedContent } from './animated';
 
@@ -8,11 +8,11 @@ import { AnimatedContent } from './animated';
   providedIn: 'root',
 })
 export class AnimatedOverlayService {
+  private readonly overlay = inject(Overlay);
+
   private overlayRef: OverlayRef | null = null;
 
   componentRef!: ComponentRef<AnimatedContent>;
-
-  constructor(private readonly overlay: Overlay) {}
 
   async open(config: { title: string; content: string }): Promise<boolean> {
     return new Promise<boolean>((resolve) => {

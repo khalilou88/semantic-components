@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { ScStep, ScStepper } from '@semantic-components/ui';
@@ -113,10 +113,12 @@ import { ScStep, ScStepper } from '@semantic-components/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class StepperPage {
+  private readonly fb = inject(FormBuilder);
+
   personalForm: FormGroup;
   addressForm: FormGroup;
 
-  constructor(private readonly fb: FormBuilder) {
+  constructor() {
     this.personalForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],

@@ -21,6 +21,8 @@ declare global {
   providedIn: 'root',
 })
 export class ScReCaptchaService {
+  private readonly zone = inject(NgZone);
+
   private readonly v3SiteKey = inject<string>(SC_RE_CAPTCHA_V3_SITE_KEY, { optional: true });
   private readonly languageCode = inject<string>(SC_RE_CAPTCHA_LANGUAGE_CODE, { optional: true });
 
@@ -31,7 +33,7 @@ export class ScReCaptchaService {
   private readonly scriptStatus$ = new BehaviorSubject<boolean | null>(null);
   private scriptLoading = false;
 
-  constructor(private readonly zone: NgZone) {
+  constructor() {
     // Check if script already exists on page load
     this.checkScriptExists();
   }

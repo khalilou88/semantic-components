@@ -84,6 +84,10 @@ import { CustomOption } from './custom-option';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomSelect implements AfterContentInit, OnDestroy, AfterViewInit {
+  private readonly overlay = inject(Overlay);
+  private readonly viewportRuler = inject(ViewportRuler);
+  private readonly elementRef = inject(ElementRef);
+
   readonly placeholder = input('Select an option');
   @Input() value: any = null;
 
@@ -108,12 +112,6 @@ export class CustomSelect implements AfterContentInit, OnDestroy, AfterViewInit 
   private currentIndex = -1;
 
   private readonly viewContainerRef = inject(ViewContainerRef);
-
-  constructor(
-    private readonly overlay: Overlay,
-    private readonly viewportRuler: ViewportRuler,
-    private readonly elementRef: ElementRef,
-  ) {}
 
   ngAfterContentInit() {
     // Update when options change (useful for dynamic options)

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { ScMultiSelect, ScOptionModel } from '@semantic-components/ui';
@@ -50,6 +50,8 @@ import { ScMultiSelect, ScOptionModel } from '@semantic-components/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class MultiSelectPage {
+  private readonly fb = inject(FormBuilder);
+
   options: ScOptionModel[] = [
     { id: 1, label: 'Apple' },
     { id: 2, label: 'Banana' },
@@ -65,7 +67,7 @@ export default class MultiSelectPage {
   form: FormGroup;
   submitted = false;
 
-  constructor(private readonly fb: FormBuilder) {
+  constructor() {
     this.form = this.fb.group({
       fruitsSelected: [false, Validators.requiredTrue],
     });

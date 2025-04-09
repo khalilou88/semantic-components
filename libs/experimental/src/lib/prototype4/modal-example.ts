@@ -63,13 +63,13 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ModalExample {
+  private readonly overlay = inject(Overlay);
+
   readonly modalTemplate = viewChild.required<TemplateRef<any>>('modalTemplate');
   overlayRef: OverlayRef | null = null;
   isExiting = false;
 
   private readonly viewContainerRef = inject(ViewContainerRef);
-
-  constructor(private readonly overlay: Overlay) {}
 
   openModal() {
     this.isExiting = false;

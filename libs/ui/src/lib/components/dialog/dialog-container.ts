@@ -3,10 +3,10 @@ import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  Inject,
   TemplateRef,
   ViewEncapsulation,
   computed,
+  inject,
   input,
 } from '@angular/core';
 
@@ -28,11 +28,13 @@ import { cn } from '@semantic-components/utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScDialogContainer {
+  data = inject<{
+    templateRef: TemplateRef<unknown>;
+  }>(DIALOG_DATA);
+
   readonly classInput = input<string>('', {
     alias: 'class',
   });
 
   protected readonly class = computed(() => cn('block size-full', this.classInput()));
-
-  constructor(@Inject(DIALOG_DATA) public data: { templateRef: TemplateRef<unknown> }) {}
 }

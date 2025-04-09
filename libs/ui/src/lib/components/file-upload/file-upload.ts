@@ -8,6 +8,7 @@ import {
   Output,
   ViewEncapsulation,
   computed,
+  inject,
   input,
 } from '@angular/core';
 
@@ -206,6 +207,8 @@ import { cn } from '@semantic-components/utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScFileUpload {
+  private readonly http = inject(HttpClient);
+
   readonly classInput = input<string>('', {
     alias: 'class',
   });
@@ -224,8 +227,6 @@ export class ScFileUpload {
   isUploading = false;
   uploadError: string | null = null;
   uploadSuccess = false;
-
-  constructor(private readonly http: HttpClient) {}
 
   onFileSelected(event: any): void {
     this.resetStatus();

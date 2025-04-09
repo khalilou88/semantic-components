@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  ViewEncapsulation,
+  inject,
+} from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { Temporal } from '@js-temporal/polyfill';
@@ -74,6 +80,8 @@ import { AnimationDemoComponent } from '../blocks/animation-demo';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class InstallationPage implements OnInit {
+  private readonly fb = inject(FormBuilder);
+
   form: FormGroup;
   selectedDateInfo = '';
 
@@ -81,7 +89,7 @@ export default class InstallationPage implements OnInit {
   minDate = Temporal.Now.plainDateISO().subtract({ years: 1 });
   maxDate = Temporal.Now.plainDateISO().add({ years: 2 });
 
-  constructor(private readonly fb: FormBuilder) {
+  constructor() {
     this.form = this.fb.group({
       eventDate: [null, Validators.required],
     });

@@ -8,6 +8,7 @@ import {
   OnInit,
   Output,
   ViewEncapsulation,
+  inject,
   signal,
 } from '@angular/core';
 
@@ -50,17 +51,15 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AnimatedContent implements OnInit {
+  private readonly el = inject(ElementRef);
+  private readonly ngZone = inject(NgZone);
+
   @Input() title = 'Dialog Title';
   @Input() content = 'Dialog content goes here.';
   @Output() confirm = new EventEmitter<void>();
   @Output() cancel = new EventEmitter<void>();
 
   animationState = signal<'entering' | 'visible' | 'exiting'>('entering');
-
-  constructor(
-    private readonly el: ElementRef,
-    private readonly ngZone: NgZone,
-  ) {}
 
   ngOnInit() {
     // Start with entering animation, then transition to visible
