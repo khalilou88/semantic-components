@@ -3,6 +3,9 @@ import { Directive, input } from '@angular/core';
 
 @Directive({
   selector: '[scMenuTriggerFor]',
+  host: {
+    '[attr.aria-haspopup]': 'true',
+  },
   hostDirectives: [
     {
       directive: CdkMenuTrigger,
@@ -11,5 +14,5 @@ import { Directive, input } from '@angular/core';
   ],
 })
 export class ScMenuTriggerFor {
-  scMenuTriggerFor = input.required();
+  readonly scMenuTriggerFor = input.required();
 }
