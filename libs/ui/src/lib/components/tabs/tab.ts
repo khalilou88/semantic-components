@@ -78,7 +78,7 @@ export class ScTab {
         newIndex = (currentIndex + 1) % this.scTabsService.tabs().length;
         this.scTabsService.activeTab.set({
           id: this.scTabsService.tabs()[newIndex].value(),
-          focus: false,
+          focus: true,
         });
         event.preventDefault();
         break;
@@ -87,21 +87,21 @@ export class ScTab {
           (currentIndex - 1 + this.scTabsService.tabs().length) % this.scTabsService.tabs().length;
         this.scTabsService.activeTab.set({
           id: this.scTabsService.tabs()[newIndex].value(),
-          focus: false,
+          focus: true,
         });
         event.preventDefault();
         break;
       case 'Home':
         this.scTabsService.activeTab.set({
           id: this.scTabsService.tabs()[0].value(),
-          focus: false,
+          focus: true,
         });
         event.preventDefault();
         break;
       case 'End':
         this.scTabsService.activeTab.set({
           id: this.scTabsService.tabs()[this.scTabsService.tabs().length - 1].value(),
-          focus: false,
+          focus: true,
         });
         event.preventDefault();
         break;
