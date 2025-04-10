@@ -1,16 +1,43 @@
 import { NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 import { ScThemeToggler } from '@semantic-components/ui';
+
+import { AppStateService } from '../app-state.service';
 
 @Component({
   selector: 'app-header',
   imports: [ScThemeToggler, RouterLink, RouterLinkActive, NgClass],
   template: `
-    <div class="flex h-14 items-center px-4">
-      <div class="mr-4 flex">
-        <a class="mr-6 flex items-center space-x-2" routerLink="/">
+    <div class="flex h-14 items-center px-4 justify-between">
+      <div class="md:hidden">
+        <!-- Mobile Menu Toggle -->
+        <button
+          class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2"
+          (click)="toggleMobileMenu()"
+        >
+          <svg
+            class="h-4 w-4"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="4" x2="20" y1="12" y2="12"></line>
+            <line x1="4" x2="20" y1="6" y2="6"></line>
+            <line x1="4" x2="20" y1="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="md:mr-4 flex">
+        <a class="md:mr-6 flex items-center md:space-x-2" routerLink="/">
           <svg
             class="h-6 w-6"
             xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +56,7 @@ import { ScThemeToggler } from '@semantic-components/ui';
           </svg>
           <span class="hidden font-bold sm:inline-block">Semantic Components</span>
         </a>
-        <nav class="flex items-center space-x-6 text-sm font-medium">
+        <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
           <a
             class="transition-colors hover:text-foreground/80"
             #link1="routerLinkActive"
@@ -51,7 +78,7 @@ import { ScThemeToggler } from '@semantic-components/ui';
         </nav>
       </div>
 
-      <div class="flex flex-1 items-center justify-between space-x-2 md:justify-end">
+      <div class="flex md:flex-1 items-center justify-between space-x-2 md:justify-end">
         <div class="w-full flex-1 md:w-auto md:flex-none">
           <!--div class="relative">
             <svg
@@ -95,4 +122,22 @@ import { ScThemeToggler } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Header {}
+export class Header {
+  private readonly appStateService = inject(AppStateService);
+
+  protected toggleMobileMenu() {
+    this.appStateService.mobileMenu.update((v) => !v);
+  }
+
+  private readonly router = inject(Router);
+
+  constructor() {
+    this.router.events.forEach((event) => {
+      if (event instanceof NavigationEnd) {
+        if (this.appStateService.mobileMenu()) {
+          this.appStateService.mobileMenu.set(false);
+        }
+      }
+    });
+  }
+}

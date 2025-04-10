@@ -5,6 +5,7 @@ import {
   TemplateRef,
   ViewEncapsulation,
   computed,
+  effect,
   inject,
   signal,
   viewChild,
@@ -20,6 +21,7 @@ import {
 } from '@semantic-components/ui';
 import { SiChevronLeftIcon, SiChevronRightIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 
+import { AppStateService } from '../app-state.service';
 import { Sidebar } from '../components/sidebar';
 import { TableOfContents } from '../components/table-of-contents';
 import { SitemapLoader } from '../core/sitemap';
@@ -64,72 +66,6 @@ import { PageInfo } from '../core/types';
 
       <!-- Main Content -->
       <main class="flex-1 overflow-auto">
-        <!-- Mobile Menu Toggle -->
-        <div class="flex md:hidden items-center justify-between p-4 border-b border-border/40">
-          <button
-            class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2"
-            (click)="openSheet()"
-          >
-            <svg
-              class="h-4 w-4 mr-2"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <line x1="4" x2="20" y1="12" y2="12"></line>
-              <line x1="4" x2="20" y1="6" y2="6"></line>
-              <line x1="4" x2="20" y1="18" y2="18"></line>
-            </svg>
-            Menu
-          </button>
-          <div class="flex items-center space-x-2">
-            <!--button
-              class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9"
-            >
-              <svg
-                class="h-5 w-5"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <circle cx="11" cy="11" r="8"></circle>
-                <path d="m21 21-4.3-4.3"></path>
-              </svg>
-            </button-->
-            <!--button
-              class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9"
-            >
-              <svg
-                class="h-5 w-5"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M12 3v18"></path>
-                <rect width="18" height="18" x="3" y="3" rx="2"></rect>
-              </svg>
-            </button-->
-          </div>
-        </div>
-
         <!-- Table of Contents & Content -->
         <div class="flex flex-col lg:flex-row">
           <div class="flex-1 px-4 pt-6 pb-8 lg:px-8">
@@ -189,16 +125,25 @@ export default class DocLayout {
 
   currentPath = signal('');
 
-  constructor() {
-    const router = this.router;
+  private readonly appStateService = inject(AppStateService);
 
-    router.events.forEach((event) => {
+  constructor() {
+    this.router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
         this.currentPath.set(this.router.url);
+      }
+    });
 
-        if (this.scSheetManager.isOpen()) {
-          this.scSheetManager.close();
-        }
+    effect(() => {
+      const a = this.appStateService.mobileMenu();
+      const b = this.scSheetManager.isOpen();
+
+      if (a && !b) {
+        this.openSheet();
+      }
+
+      if (!a && b) {
+        this.scSheetManager.close();
       }
     });
   }
@@ -229,7 +174,7 @@ export default class DocLayout {
 
   protected readonly sheetRef = viewChild.required<TemplateRef<unknown>>('sheet');
 
-  openSheet() {
+  private openSheet() {
     const config = new ScSheetConfig();
     config.side = 'left';
     config.width = '300';
