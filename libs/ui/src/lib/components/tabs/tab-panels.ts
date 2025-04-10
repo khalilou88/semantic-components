@@ -23,6 +23,7 @@ import { ScTabsService } from './tabs.service';
         <div
           [attr.id]="'tabpanel-' + tabPanelContent.tabId()"
           [attr.aria-labelledby]="'tab-' + tabPanelContent.tabId()"
+          tabindex="0"
           role="tabpanel"
         >
           <ng-container [ngTemplateOutlet]="tabPanelContent.templateRef"></ng-container>
