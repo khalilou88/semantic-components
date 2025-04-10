@@ -23,7 +23,7 @@ import { ScTabsService } from './tabs.service';
     role: 'tab',
     '[attr.id]': "'tab-' + value()",
     '[class]': 'class()',
-    '[attr.data-state]': "isActive() ? 'active' : ''",
+    '[attr.data-state]': "isActive() ? 'active' : 'inactive'",
     '[attr.aria-selected]': 'isActive()',
     '[attr.aria-controls]': "'tab-panel-' + value()",
     '[attr.tabindex]': 'isActive() ? 0 : -1',
