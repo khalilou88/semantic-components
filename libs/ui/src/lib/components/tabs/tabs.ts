@@ -54,6 +54,7 @@ export class ScTabs {
       } else {
         this.scTabsService.activeTabId.set(this.tabs()[0].value());
       }
+      this.scTabsService.focusTabId.set('');
     });
   }
 }

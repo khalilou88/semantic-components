@@ -65,6 +65,7 @@ export class ScTab {
 
   protected selectTab() {
     this.scTabsService.activeTabId.set(this.value());
+    this.scTabsService.focusTabId.set('');
   }
 
   onKeydown(event: KeyboardEvent) {
@@ -76,21 +77,21 @@ export class ScTab {
     switch (event.key) {
       case 'ArrowRight':
         newIndex = (currentIndex + 1) % this.scTabsService.tabs().length;
-        this.scTabsService.activeTabId.set(this.scTabsService.tabs()[newIndex].value());
+        this.scTabsService.focusTabId.set(this.scTabsService.tabs()[newIndex].value());
         event.preventDefault();
         break;
       case 'ArrowLeft':
         newIndex =
           (currentIndex - 1 + this.scTabsService.tabs().length) % this.scTabsService.tabs().length;
-        this.scTabsService.activeTabId.set(this.scTabsService.tabs()[newIndex].value());
+        this.scTabsService.focusTabId.set(this.scTabsService.tabs()[newIndex].value());
         event.preventDefault();
         break;
       case 'Home':
-        this.scTabsService.activeTabId.set(this.scTabsService.tabs()[0].value());
+        this.scTabsService.focusTabId.set(this.scTabsService.tabs()[0].value());
         event.preventDefault();
         break;
       case 'End':
-        this.scTabsService.activeTabId.set(
+        this.scTabsService.focusTabId.set(
           this.scTabsService.tabs()[this.scTabsService.tabs().length - 1].value(),
         );
         event.preventDefault();

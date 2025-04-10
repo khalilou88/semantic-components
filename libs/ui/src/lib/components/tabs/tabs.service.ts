@@ -4,9 +4,9 @@ import { ScTab } from './tab';
 
 @Injectable()
 export class ScTabsService {
-  readonly activeTabId = signal<string>('');
+  readonly focusTabId = signal<string>('');
 
-  readonly focusTabId = linkedSignal(() => this.activeTabId());
+  readonly activeTabId = linkedSignal(() => this.focusTabId());
 
   readonly tabs = signal<readonly ScTab[]>([]);
 }
