@@ -25,7 +25,7 @@ import { ScTabsService } from './tabs.service';
     '[class]': 'class()',
     '[attr.data-state]': "isActive() ? 'active' : ''",
     '[attr.aria-selected]': 'isActive()',
-    '[attr.aria-controls]': "'tabpanel-' + value()",
+    '[attr.aria-controls]': "'tab-panel-' + value()",
     '[attr.tabindex]': 'isActive() ? 0 : -1',
     '(click)': 'selectTab()',
     '(keydown)': 'onKeydown($event)',

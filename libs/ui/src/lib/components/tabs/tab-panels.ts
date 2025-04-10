@@ -21,7 +21,7 @@ import { ScTabsService } from './tabs.service';
     @for (tabPanelContent of tabPanelContents(); track tabPanelContent.tabId()) {
       @if (tabPanelContent.tabId() === activeTabId()) {
         <div
-          [attr.id]="'tabpanel-' + tabPanelContent.tabId()"
+          [attr.id]="'tab-panel-' + tabPanelContent.tabId()"
           [attr.aria-labelledby]="'tab-' + tabPanelContent.tabId()"
           tabindex="0"
           role="tabpanel"
