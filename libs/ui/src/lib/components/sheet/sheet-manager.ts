@@ -39,7 +39,7 @@ export class ScSheetManager {
   }
 
   open(templateRef: TemplateRef<unknown>, config: ScSheetConfig) {
-    this.state.set('open');
+    this.isOpen.set(true);
     this.side.set(config.side);
 
     const overlayConfig = this.getOverlayConfig(config);
