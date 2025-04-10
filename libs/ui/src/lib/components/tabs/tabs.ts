@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  afterNextRender,
   computed,
   contentChildren,
   effect,
@@ -42,6 +43,10 @@ export class ScTabs {
   readonly tabs = contentChildren(ScTab, { descendants: true });
 
   constructor() {
+    afterNextRender(() => {
+      this.scTabsService.tabs.set(this.tabs());
+    });
+
     effect(() => {
       const v = this.value();
       if (v) {
