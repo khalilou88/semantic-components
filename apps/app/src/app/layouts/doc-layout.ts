@@ -195,6 +195,10 @@ export default class DocLayout {
     router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
         this.currentPath.set(this.router.url);
+
+        if (this.scSheetManager.isOpen()) {
+          this.scSheetManager.close();
+        }
       }
     });
   }
