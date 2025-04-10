@@ -19,7 +19,8 @@
           {
             "glob": "**/*",
             "input": "apps/app/public"
-          }
+          },
+          "apps/app/src/_redirects"
         ],
         "styles": ["apps/app/src/styles.css"],
         "scripts": []
