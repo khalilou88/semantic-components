@@ -52,7 +52,7 @@ export class ScTabPanels {
 
   private readonly scTabsService = inject(ScTabsService);
 
-  protected readonly activeTabId = computed(() => this.scTabsService.activeTabId());
+  protected readonly activeTabId = computed(() => this.scTabsService.activeTab()?.id);
 
   protected readonly tabPanelContents = contentChildren(ScTabPanelContent);
 }

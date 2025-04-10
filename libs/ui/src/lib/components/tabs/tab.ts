@@ -50,22 +50,21 @@ export class ScTab {
 
   private readonly scTabsService = inject(ScTabsService);
 
-  protected readonly isActive = computed(() => this.value() === this.scTabsService.activeTabId());
+  protected readonly isActive = computed(() => this.value() === this.scTabsService.activeTab()?.id);
 
   private readonly host = inject(ElementRef);
 
   constructor() {
     effect(() => {
-      const v = this.scTabsService.focusTabId();
-      if (v && v === this.value()) {
+      const activeTab = this.scTabsService.activeTab();
+      if (activeTab && activeTab.focus && activeTab.id === this.value()) {
         this.host.nativeElement.focus();
       }
     });
   }
 
   protected selectTab() {
-    this.scTabsService.activeTabId.set(this.value());
-    this.scTabsService.focusTabId.set('');
+    this.scTabsService.activeTab.set({ id: this.value() });
   }
 
   onKeydown(event: KeyboardEvent) {
@@ -77,23 +76,33 @@ export class ScTab {
     switch (event.key) {
       case 'ArrowRight':
         newIndex = (currentIndex + 1) % this.scTabsService.tabs().length;
-        this.scTabsService.focusTabId.set(this.scTabsService.tabs()[newIndex].value());
+        this.scTabsService.activeTab.set({
+          id: this.scTabsService.tabs()[newIndex].value(),
+          focus: false,
+        });
         event.preventDefault();
         break;
       case 'ArrowLeft':
         newIndex =
           (currentIndex - 1 + this.scTabsService.tabs().length) % this.scTabsService.tabs().length;
-        this.scTabsService.focusTabId.set(this.scTabsService.tabs()[newIndex].value());
+        this.scTabsService.activeTab.set({
+          id: this.scTabsService.tabs()[newIndex].value(),
+          focus: false,
+        });
         event.preventDefault();
         break;
       case 'Home':
-        this.scTabsService.focusTabId.set(this.scTabsService.tabs()[0].value());
+        this.scTabsService.activeTab.set({
+          id: this.scTabsService.tabs()[0].value(),
+          focus: false,
+        });
         event.preventDefault();
         break;
       case 'End':
-        this.scTabsService.focusTabId.set(
-          this.scTabsService.tabs()[this.scTabsService.tabs().length - 1].value(),
-        );
+        this.scTabsService.activeTab.set({
+          id: this.scTabsService.tabs()[this.scTabsService.tabs().length - 1].value(),
+          focus: false,
+        });
         event.preventDefault();
         break;
     }

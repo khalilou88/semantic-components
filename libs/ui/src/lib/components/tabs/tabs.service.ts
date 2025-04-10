@@ -1,12 +1,14 @@
-import { Injectable, linkedSignal, signal } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 
 import { ScTab } from './tab';
 
+export interface ScActiveTab {
+  id: string;
+  focus?: boolean;
+}
+
 @Injectable()
 export class ScTabsService {
-  readonly focusTabId = signal<string>('');
-
-  readonly activeTabId = linkedSignal(() => this.focusTabId());
-
   readonly tabs = signal<readonly ScTab[]>([]);
+  readonly activeTab = signal<ScActiveTab | null>(null);
 }

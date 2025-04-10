@@ -50,11 +50,10 @@ export class ScTabs {
     effect(() => {
       const v = this.value();
       if (v) {
-        this.scTabsService.activeTabId.set(v);
+        this.scTabsService.activeTab.set({ id: v });
       } else {
-        this.scTabsService.activeTabId.set(this.tabs()[0].value());
+        this.scTabsService.activeTab.set({ id: this.tabs()[0].value() });
       }
-      this.scTabsService.focusTabId.set('');
     });
   }
 }
