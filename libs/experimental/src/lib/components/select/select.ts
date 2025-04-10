@@ -23,7 +23,7 @@ import { ScOption } from './option';
         [attr.aria-expanded]="isOpen"
         [attr.aria-activedescendant]="activeItemId"
         (click)="toggle()"
-        (keydown)="onKeyDown($event)"
+        (keydown)="onKeydown($event)"
         role="combobox"
         aria-haspopup="listbox"
         tabindex="0"
@@ -141,7 +141,7 @@ export class ScSelect implements AfterContentInit {
     }
   }
 
-  onKeyDown(event: KeyboardEvent) {
+  onKeydown(event: KeyboardEvent) {
     if (!this.isOpen) {
       if (
         event.key === 'ArrowDown' ||

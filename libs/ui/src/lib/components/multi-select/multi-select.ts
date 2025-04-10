@@ -51,7 +51,7 @@ export interface ScOptionModel {
         [class.ring-blue-500]="isOpen()"
         [class.border-red-500]="showError()"
         (click)="toggleDropdown()"
-        (keydown)="onKeyDown($event)"
+        (keydown)="onKeydown($event)"
         role="combobox"
         tabindex="0"
       >
@@ -248,7 +248,7 @@ export class ScMultiSelect implements OnInit {
     this.focusedIndex = this.filteredOptions.length > 0 ? 0 : -1;
   }
 
-  onKeyDown(event: KeyboardEvent) {
+  onKeydown(event: KeyboardEvent) {
     switch (event.key) {
       case 'Enter':
         event.preventDefault();

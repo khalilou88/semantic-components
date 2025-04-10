@@ -27,7 +27,7 @@ const numeric_regex = /\D/g;
       [readonly]="!isActive()"
       [value]="value()"
       (input)="onInput($event)"
-      (keydown)="onKeyDown($event)"
+      (keydown)="onKeydown($event)"
       (focus)="onFocus()"
       (blur)="onBlur()"
       (paste)="onPaste($event)"
@@ -100,7 +100,7 @@ export class ScInputOTPSlot {
     }
   }
 
-  protected onKeyDown(event: KeyboardEvent) {
+  protected onKeydown(event: KeyboardEvent) {
     // Handle backspace key when input is empty
     if (event.key === 'Backspace' && !this.value()) {
       event.preventDefault();

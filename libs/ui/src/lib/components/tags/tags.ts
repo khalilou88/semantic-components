@@ -53,7 +53,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
             #tagInput
             [formControl]="tagControl"
             [placeholder]="tags().length === 0 ? placeholder() : ''"
-            (keydown)="onKeyDown($event)"
+            (keydown)="onKeydown($event)"
             (blur)="addTag()"
           />
         </div>
@@ -92,7 +92,7 @@ export class ScTags {
   tagControl = new FormControl('');
   error = '';
 
-  onKeyDown(event: KeyboardEvent): void {
+  onKeydown(event: KeyboardEvent): void {
     // Check for Enter key or Comma
     if (event.key === 'Enter' || event.key === ',') {
       event.preventDefault(); // Prevent the comma from being typed

@@ -41,7 +41,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
           [attr.aria-haspopup]="'listbox'"
           (focus)="onFocus()"
           (blur)="onBlur()"
-          (keydown)="onKeyDown($event)"
+          (keydown)="onKeydown($event)"
           type="text"
           role="combobox"
         />
@@ -50,7 +50,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
         <button
           class="absolute inset-y-0 right-0 flex items-center px-2"
           [attr.aria-label]="isOpen ? 'Close options' : 'Open options'"
-          (keydown)="onButtonKeyDown($event)"
+          (keydown)="onButtonKeydown($event)"
           (click)="handleButtonInteraction($event)"
           type="button"
           tabindex="0"
@@ -84,7 +84,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
                   [attr.aria-selected]="i === activeIndex"
                   [class.bg-blue-100]="i === activeIndex"
                   (click)="handleOptionClick($event, option)"
-                  (keydown)="onOptionKeyDown($event, option)"
+                  (keydown)="onOptionKeydown($event, option)"
                   (mouseenter)="setActiveIndex(i)"
                   role="option"
                   tabindex="0"
@@ -157,7 +157,7 @@ export class ScCombobox implements OnInit {
     this.toggleDropdown();
   }
 
-  onButtonKeyDown(event: KeyboardEvent) {
+  onButtonKeydown(event: KeyboardEvent) {
     switch (event.key) {
       case ' ':
       case 'Enter':
@@ -175,7 +175,7 @@ export class ScCombobox implements OnInit {
     this.selectOption(option);
   }
 
-  onOptionKeyDown(event: KeyboardEvent, option: any) {
+  onOptionKeydown(event: KeyboardEvent, option: any) {
     switch (event.key) {
       case ' ':
       case 'Enter':
@@ -269,7 +269,7 @@ export class ScCombobox implements OnInit {
     return typeof option === 'object' ? option[this.labelKey()] : option.toString();
   }
 
-  onKeyDown(event: KeyboardEvent) {
+  onKeydown(event: KeyboardEvent) {
     switch (event.key) {
       case 'ArrowDown':
         event.preventDefault();

@@ -41,7 +41,7 @@ import { CustomOption } from './custom-option';
       class="flex justify-between items-center px-3 py-2 border border-gray-300 rounded cursor-pointer bg-white min-w-[120px] relative focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
       #trigger="cdkOverlayOrigin"
       (click)="toggleDropdown()"
-      (keydown)="onKeyDown($event)"
+      (keydown)="onKeydown($event)"
       cdkOverlayOrigin
       tabindex="0"
     >
@@ -274,7 +274,7 @@ export class CustomSelect implements AfterContentInit, OnDestroy, AfterViewInit 
     return options.findIndex((option) => option === this.selectedOption);
   }
 
-  onKeyDown(event: KeyboardEvent) {
+  onKeydown(event: KeyboardEvent) {
     const options = this.optionComponents.toArray();
     const optionsCount = options.length;
 

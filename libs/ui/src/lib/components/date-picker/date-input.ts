@@ -3,7 +3,7 @@ import { Directive, ElementRef, inject } from '@angular/core';
 @Directive({
   selector: '[scDateInput]',
   host: {
-    '(keydown)': 'onKeyDown($event)',
+    '(keydown)': 'onKeydown($event)',
   },
 })
 export class ScDateInput {
@@ -40,7 +40,7 @@ export class ScDateInput {
 
   previousKey = '';
 
-  onKeyDown(event: KeyboardEvent) {
+  onKeydown(event: KeyboardEvent) {
     if (
       event.key === 'Backspace' ||
       event.key === 'Delete' ||
