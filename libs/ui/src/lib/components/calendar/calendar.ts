@@ -172,7 +172,7 @@ export class ScCalendar implements ControlValueAccessor {
   }
 
   // Move focus in the calendar grid with support for month navigation
-  moveFocus(delta: number): void {
+  private moveFocus(delta: number): void {
     let newDate;
 
     if (Math.sign(delta) === 1) {
