@@ -7,6 +7,12 @@ export const appRoutes: Route[] = [
     title: 'Tabs Demo Page',
   },
   {
+    path: 'calendar-demo',
+    loadComponent: () =>
+      import('./docs/components/calendar/calendar-demo').then((m) => m.CalendarDemo),
+    title: 'Calendar Demo Page',
+  },
+  {
     path: 'calendar-default-value',
     loadComponent: () =>
       import('./docs/components/calendar/calendar-default-value').then(
