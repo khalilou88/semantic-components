@@ -12,7 +12,7 @@ import { cn } from '@semantic-components/utils';
 
 import { isToday } from './calendar-utils';
 import { ScDayButton } from './day-button';
-import { CalendarDay } from './types';
+import { CalendarDay, ScActiveDate } from './types';
 
 @Component({
   selector: 'sc-day-selector',
@@ -49,7 +49,7 @@ export class ScDaySelector {
   readonly dateSelected = output<Temporal.PlainDate>();
 
   readonly selectedDate = input<Temporal.PlainDate>();
-  readonly focusedDate = input<Temporal.PlainDate>();
+  readonly activeDate = input.required<ScActiveDate>();
 
   readonly classInput = input<string>('', {
     alias: 'class',
@@ -62,7 +62,7 @@ export class ScDaySelector {
       return 'primary';
     }
 
-    if (this.isFocused(day.date)) {
+    if (this.isActive(day.date)) {
       return 'secondary';
     }
 
@@ -77,11 +77,15 @@ export class ScDaySelector {
     this.dateSelected.emit(day.date);
   }
 
-  isSelected(date: Temporal.PlainDate): boolean {
+  private isSelected(date: Temporal.PlainDate): boolean {
     return this.selectedDate() ? date.equals(this.selectedDate()!) : false;
   }
 
-  isFocused(date: Temporal.PlainDate): boolean {
-    return this.focusedDate() ? date.equals(this.focusedDate()!) : false;
+  private isActive(date: Temporal.PlainDate): boolean {
+    return this.activeDate() ? date.equals(this.activeDate().value) : false;
+  }
+
+  protected isFocused(date: Temporal.PlainDate): boolean {
+    return this.isActive(date) && !!this.activeDate()?.focus;
   }
 }
