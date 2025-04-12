@@ -7,6 +7,14 @@ export const appRoutes: Route[] = [
     title: 'Tabs Demo Page',
   },
   {
+    path: 'calendar-default-value',
+    loadComponent: () =>
+      import('./docs/components/calendar/calendar-default-value').then(
+        (m) => m.CalendarDefaultValue,
+      ),
+    title: 'Calendar Default Value Page',
+  },
+  {
     path: '',
     loadComponent: () => import('./layouts/stacked-layout'),
     children: [
