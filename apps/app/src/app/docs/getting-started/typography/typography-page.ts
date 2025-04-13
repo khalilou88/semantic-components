@@ -8,16 +8,14 @@ import { ScHeading } from '@semantic-components/ui';
   template: `
     <section>
       <h2 class="scroll-m-20 pb-2 mt-10" [underline]="true" sc-heading level="2">Headings</h2>
-      <h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mt-6">Heading 1</h1>
-      <h2 class="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight mt-10">Heading 2</h2>
-      <h3 class="scroll-m-20 text-2xl font-semibold tracking-tight mt-8">Heading 3</h3>
-      <h4 class="scroll-m-20 text-xl font-semibold tracking-tight mt-6">Heading 4</h4>
+      <h1 class="scroll-m-20 pb-4 mt-6" [underline]="true" sc-heading level="1">Heading 1</h1>
+      <h2 class="scroll-m-20 pb-2 mt-10" [underline]="true" sc-heading level="2">Heading 2</h2>
+      <h3 class="scroll-m-20 pb-1 mt-8" [underline]="true" sc-heading level="3">Heading 3</h3>
+      <h4 class="scroll-m-20 pb-0.5 mt-6" [underline]="true" sc-heading level="4">Heading 4</h4>
     </section>
 
     <section>
-      <h2 class="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mt-10">
-        Paragraphs
-      </h2>
+      <h2 class="scroll-m-20 pb-2 mt-10" [underline]="true" sc-heading level="2">Paragraphs</h2>
       <p class="leading-7 [&:not(:first-child)]:mt-6">
         This is a standard paragraph with default styling. The paragraph has proper line height and
         spacing to ensure readability across your application.
