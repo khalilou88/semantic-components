@@ -66,10 +66,15 @@ import { ScYearSelector } from './year-selector';
           @default {
             <sc-day-selector
               [weekdays]="weekdays"
-              [focusedDate]="focusedDate()"
               [selectedDate]="value()"
               [calendarDays]="calendarDays()"
+              [date]="date()"
+              [currentMonth]="currentMonth()"
+              [firstDayOfMonth]="firstDayOfMonth()"
+              [lastDayOfMonth]="lastDayOfMonth()"
               (dateSelected)="setValue($event)"
+              (nextMonth)="nextMonth()"
+              (prevMonth)="prevMonth()"
             />
           }
         }
@@ -78,7 +83,6 @@ import { ScYearSelector } from './year-selector';
   `,
   host: {
     '[class]': 'class()',
-    '(keydown)': 'handleKeydown($event)',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -106,14 +110,13 @@ export class ScCalendar implements ControlValueAccessor {
   private readonly today = signal(Temporal.Now.plainDateISO());
 
   protected readonly date = computed(() => {
-    if (this.value()) {
-      return this.value();
+    const v = this.value();
+    if (v) {
+      return v;
     } else {
       return this.today();
     }
   });
-
-  protected readonly focusedDate = signal<Temporal.PlainDate | undefined>(undefined);
 
   protected readonly currentYear = linkedSignal(() => {
     return this.date()!.year;
@@ -127,13 +130,13 @@ export class ScCalendar implements ControlValueAccessor {
     return this.date()!.toPlainYearMonth();
   });
 
-  private readonly firstDayOfMonth = computed(() =>
+  protected readonly firstDayOfMonth = computed(() =>
     this.currentMonth().toPlainDate({
       day: 1,
     }),
   );
 
-  private readonly lastDayOfMonth = computed(() =>
+  protected readonly lastDayOfMonth = computed(() =>
     this.currentMonth().toPlainDate({
       day: this.currentMonth().daysInMonth,
     }),
@@ -168,140 +171,14 @@ export class ScCalendar implements ControlValueAccessor {
     this.onTouched();
   }
 
-  // Move focus in the calendar grid with support for month navigation
-  private moveFocus(delta: number): void {
-    // if date is in the current month else focus first date of the current month
-    if (this.focusedDate() === undefined) {
-      if (
-        this.date()?.year === this.currentMonth().year &&
-        this.date()?.month === this.currentMonth().month
-      ) {
-        this.focusedDate.set(this.date());
-        return;
-      }
-      this.focusedDate.set(
-        new Temporal.PlainDate(this.currentMonth().year, this.currentMonth().month, 1),
-      );
-      return;
-    }
-
-    let newDate;
-
-    if (Math.sign(delta) === 1) {
-      newDate = this.focusedDate()?.add({ days: delta });
-    }
-
-    if (Math.sign(delta) === -1) {
-      newDate = this.focusedDate()?.subtract({ days: Math.abs(delta) });
-    }
-
-    if (!newDate) {
-      return;
-    }
-
-    if (Temporal.PlainDate.compare(newDate, this.calendarDays()[0].date) < 0) {
-      this.prevMonth();
-    }
-
-    if (
-      Temporal.PlainDate.compare(
-        newDate,
-        this.calendarDays()[this.calendarDays().length - 1].date,
-      ) > 0
-    ) {
-      this.nextMonth();
-    }
-
-    this.focusedDate.set(newDate);
-  }
-
-  handleKeydown(event: KeyboardEvent): void {
-    if (this.view() === 'days') {
-      this.handleKeydown1(event);
-    }
-
-    if (this.view() === 'years') {
-      this.handleKeydown2(event);
-    }
-
-    if (this.view() === 'months') {
-      this.handleKeydown3(event);
-    }
-  }
-
-  handleKeydown2(event: KeyboardEvent): void {
-    console.log(event);
-  }
-
-  handleKeydown3(event: KeyboardEvent): void {
-    console.log(event);
-  }
-
-  handleKeydown1(event: KeyboardEvent): void {
-    switch (event.key) {
-      case 'ArrowLeft':
-        this.moveFocus(-1);
-        event.preventDefault();
-        break;
-      case 'ArrowRight':
-        this.moveFocus(1);
-        event.preventDefault();
-        break;
-      case 'ArrowUp':
-        this.moveFocus(-7);
-        event.preventDefault();
-        break;
-      case 'ArrowDown':
-        this.moveFocus(7);
-        event.preventDefault();
-        break;
-      case 'Enter':
-      case ' ':
-        if (
-          Temporal.PlainDate.compare(this.focusedDate()!, this.calendarDays()[0].date) >= 0 &&
-          Temporal.PlainDate.compare(
-            this.focusedDate()!,
-            this.calendarDays()[this.calendarDays().length - 1].date,
-          ) <= 0
-        ) {
-          this.setValue(this.focusedDate()!);
-          event.preventDefault();
-        }
-        break;
-      case 'Home':
-        // Move to first day of the month
-
-        this.focusedDate.set(this.firstDayOfMonth());
-
-        event.preventDefault();
-        break;
-
-      case 'End':
-        // Move to last day of the month
-        this.focusedDate.set(this.lastDayOfMonth());
-        event.preventDefault();
-        break;
-      case 'PageUp':
-        // Previous month
-        this.prevMonth();
-        event.preventDefault();
-        break;
-      case 'PageDown':
-        // Next month
-        this.nextMonth();
-        event.preventDefault();
-        break;
-    }
-  }
-
   // Navigation methods
-  prevMonth(): void {
+  protected prevMonth(): void {
     if (this.currentMonth()) {
       this.currentMonth.update((currentMonth) => currentMonth.subtract({ months: 1 }));
     }
   }
 
-  nextMonth(): void {
+  protected nextMonth(): void {
     if (this.currentMonth()) {
       this.currentMonth.update((currentMonth) => currentMonth.add({ months: 1 }));
     }
