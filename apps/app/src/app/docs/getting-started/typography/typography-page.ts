@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-typography-page',
-  imports: [],
+  imports: [ScHeading],
   template: `
     <section>
-      <h2 class="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mt-10">
-        Headings
-      </h2>
+      <h2 class="scroll-m-20 pb-2 mt-10" [underline]="true" sc-heading level="2">Headings</h2>
       <h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mt-6">Heading 1</h1>
       <h2 class="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight mt-10">Heading 2</h2>
       <h3 class="scroll-m-20 text-2xl font-semibold tracking-tight mt-8">Heading 3</h3>

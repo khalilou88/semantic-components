@@ -12,10 +12,10 @@ import { VariantProps, cva } from 'class-variance-authority';
 const scHeadingVariants = cva('', {
   variants: {
     level: {
-      '1': 'scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl',
-      '2': 'scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0',
-      '3': 'scroll-m-20 text-2xl font-semibold tracking-tight',
-      '4': 'scroll-m-20 text-xl font-semibold tracking-tight',
+      '1': 'text-4xl lg:text-5xl font-extrabold tracking-tight',
+      '2': 'text-3xl font-semibold tracking-tight',
+      '3': 'text-2xl font-semibold tracking-tight',
+      '4': 'text-xl font-semibold tracking-tight',
       '5': '',
       '6': '',
     },
