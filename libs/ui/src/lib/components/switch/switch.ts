@@ -60,7 +60,7 @@ export class ScSwitch {
       "[&::before]:content-[''] [&::before]:w-9 [&::before]:h-full",
       '[&::before]:shadow-[inset_0_0_#000]',
 
-      '[&::after]:bg-white dark:[&::after]:bg-gray-50',
+      '[&::after]:bg-background',
       '[&::before]:bg-gray-300 dark:[&::before]:bg-gray-600',
       '[&:checked]:[&::before]:bg-primary dark:[&:checked]:[&::before]:bg-primary',
       '[&:checked]:[&::after]:duration-300 [&:checked]:[&::after]:translate-x-4',
