@@ -36,11 +36,14 @@ export class ScSwitch {
 
   protected readonly class = computed(() =>
     cn(
+      // Basic appearance and structure
       'appearance-none',
       'w-9 h-5',
       'relative',
       'cursor-pointer',
       'inline-block',
+
+      // Focus state handling
       'focus:outline-0',
       'border-0',
       'focus:ring-offset-transparent',
@@ -54,20 +57,31 @@ export class ScSwitch {
       '[&::after]:block [&::before]:inline-block',
       '[&::before]:rounded-full [&::after]:rounded-full',
 
-      "[&::after]:content-[''] [&::after]:w-4 [&::after]:h-4 [&::after]:mt-0.5 [&::after]:ml-0.5",
-      '[&::after]:shadow-md [&::after]:duration-100',
-
-      "[&::before]:content-[''] [&::before]:w-9 [&::before]:h-full",
-      '[&::before]:shadow-[inset_0_0_#000]',
-
+      // After element (toggle knob)
+      "[&::after]:content-['']",
+      '[&::after]:w-4 [&::after]:h-4',
+      '[&::after]:mt-0.5 [&::after]:ml-0.5',
+      '[&::after]:shadow-md',
+      '[&::after]:duration-100',
       '[&::after]:bg-background',
-      '[&::before]:bg-input',
-      '[&:checked]:[&::before]:bg-primary',
-      '[&:checked]:[&::after]:duration-300 [&:checked]:[&::after]:translate-x-4',
 
-      '[&:disabled]:[&::after]:bg-opacity-75 [&:disabled]:cursor-not-allowed',
+      // Before element (track)
+      "[&::before]:content-['']",
+      '[&::before]:w-9 [&::before]:h-full',
+      '[&::before]:shadow-[inset_0_0_#000]',
+      '[&::before]:bg-input',
+
+      // Checked state
+      '[&:checked]:[&::before]:bg-primary',
+      '[&:checked]:[&::after]:duration-300',
+      '[&:checked]:[&::after]:translate-x-4',
+
+      // Disabled state
+      '[&:disabled]:[&::after]:bg-opacity-75',
+      '[&:disabled]:cursor-not-allowed',
       '[&:disabled]:checked:[&::before]:bg-opacity-40',
 
+      // Custom classes
       this.classInput(),
     ),
   );
