@@ -21,7 +21,7 @@ import { cn } from '@semantic-components/utils';
   `,
   host: {
     '[id]': 'id()',
-    type: 'checkbox',
+    '[type]': 'type()',
     '[checked]': 'checked()',
     '[class]': 'class()',
   },
@@ -89,4 +89,6 @@ export class ScSwitch {
     transform: booleanAttribute,
   });
   protected readonly disabled = linkedSignal(() => this.disabledInput());
+
+  readonly type = input<'checkbox'>('checkbox');
 }
