@@ -8,3 +8,8 @@ export interface CalendarDay {
 }
 
 export type View = 'days' | 'years' | 'months';
+
+export interface ScActiveDate {
+  value: Temporal.PlainDate;
+  hasFocus: boolean;
+}

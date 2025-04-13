@@ -13,7 +13,7 @@ import { cn } from '@semantic-components/utils';
 
 import { isToday } from './calendar-utils';
 import { ScDayButton } from './day-button';
-import { CalendarDay } from './types';
+import { CalendarDay, ScActiveDate } from './types';
 
 @Component({
   selector: 'sc-day-selector',
@@ -28,8 +28,8 @@ import { CalendarDay } from './types';
     @for (day of calendarDays(); track day.date) {
       <button
         [variant]="getVariant(day)"
-        [isFocused]="isFocused(day.date)"
-        [tabindex]="isFocused(day.date) ? 0 : -1"
+        [hasFocus]="hasFocus(day.date)"
+        [tabindex]="isActive(day.date) ? 0 : -1"
         (click)="selectDay(day)"
         sc-day-button
         size="icon"
@@ -54,15 +54,18 @@ export class ScDaySelector {
   readonly dateSelected = output<Temporal.PlainDate>();
 
   //if date is in the current month else focus first date of the current month
-  protected readonly focusedDate = linkedSignal(() => {
+  protected readonly activeDate = linkedSignal<ScActiveDate>(() => {
     if (
       this.date()?.year === this.currentMonth().year &&
       this.date()?.month === this.currentMonth().month
     ) {
-      return this.date();
+      return { value: this.date(), hasFocus: false };
     }
 
-    return new Temporal.PlainDate(this.currentMonth().year, this.currentMonth().month, 1);
+    return {
+      value: new Temporal.PlainDate(this.currentMonth().year, this.currentMonth().month, 1),
+      hasFocus: false,
+    };
   });
 
   readonly classInput = input<string>('', {
@@ -84,7 +87,7 @@ export class ScDaySelector {
       return 'primary';
     }
 
-    if (this.isFocused(day.date)) {
+    if (this.isActive(day.date)) {
       return 'secondary';
     }
 
@@ -99,12 +102,16 @@ export class ScDaySelector {
     this.dateSelected.emit(day.date);
   }
 
-  isSelected(date: Temporal.PlainDate): boolean {
+  private isSelected(date: Temporal.PlainDate): boolean {
     return this.selectedDate() ? date.equals(this.selectedDate()!) : false;
   }
 
-  isFocused(date: Temporal.PlainDate): boolean {
-    return this.focusedDate() ? date.equals(this.focusedDate()) : false;
+  protected isActive(date: Temporal.PlainDate): boolean {
+    return date.equals(this.activeDate().value);
+  }
+
+  protected hasFocus(date: Temporal.PlainDate): boolean {
+    return this.isActive(date) && this.activeDate().hasFocus;
   }
 
   handleKeydown(event: KeyboardEvent): void {
@@ -128,27 +135,27 @@ export class ScDaySelector {
       case 'Enter':
       case ' ':
         if (
-          Temporal.PlainDate.compare(this.focusedDate(), this.calendarDays()[0].date) >= 0 &&
+          Temporal.PlainDate.compare(this.activeDate().value, this.calendarDays()[0].date) >= 0 &&
           Temporal.PlainDate.compare(
-            this.focusedDate(),
+            this.activeDate().value,
             this.calendarDays()[this.calendarDays().length - 1].date,
           ) <= 0
         ) {
-          this.dateSelected.emit(this.focusedDate());
+          this.dateSelected.emit(this.activeDate().value);
           event.preventDefault();
         }
         break;
       case 'Home':
         // Move to first day of the month
 
-        this.focusedDate.set(this.firstDayOfMonth());
+        this.activeDate.set({ value: this.firstDayOfMonth(), hasFocus: true });
 
         event.preventDefault();
         break;
 
       case 'End':
         // Move to last day of the month
-        this.focusedDate.set(this.lastDayOfMonth());
+        this.activeDate.set({ value: this.lastDayOfMonth(), hasFocus: true });
         event.preventDefault();
         break;
       case 'PageUp':
@@ -169,11 +176,11 @@ export class ScDaySelector {
     let newDate;
 
     if (Math.sign(delta) === 1) {
-      newDate = this.focusedDate()?.add({ days: delta });
+      newDate = this.activeDate().value.add({ days: delta });
     }
 
     if (Math.sign(delta) === -1) {
-      newDate = this.focusedDate()?.subtract({ days: Math.abs(delta) });
+      newDate = this.activeDate().value.subtract({ days: Math.abs(delta) });
     }
 
     if (!newDate) {
@@ -193,6 +200,14 @@ export class ScDaySelector {
       this.nextMonth.emit();
     }
 
-    this.focusedDate.set(newDate);
+    this.activeDate.set({ value: newDate, hasFocus: true });
+  }
+
+  handleBlur() {
+    this.activeDate.set({ value: this.activeDate().value, hasFocus: false });
+  }
+
+  handleFocus() {
+    this.activeDate.set({ value: this.activeDate().value, hasFocus: true });
   }
 }

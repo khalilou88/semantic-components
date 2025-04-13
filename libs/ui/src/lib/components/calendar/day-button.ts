@@ -23,12 +23,12 @@ import { ScButtonBase } from '../button';
 export class ScDayButton extends ScButtonBase {
   private readonly host = inject(ElementRef);
 
-  readonly isFocused = input.required<boolean>();
+  readonly hasFocus = input.required<boolean>();
 
   constructor() {
     super();
     effect(() => {
-      if (this.isFocused()) {
+      if (this.hasFocus()) {
         this.host.nativeElement.focus();
       }
     });
