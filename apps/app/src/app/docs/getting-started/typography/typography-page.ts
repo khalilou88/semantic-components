@@ -43,7 +43,12 @@ import { ScHeading } from '@semantic-components/ui';
     </section>
 
     <section>
-      <h2 class="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mt-10">
+      <h2
+        class="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mt-10"
+        [underline]="true"
+        sc-heading
+        level="2"
+      >
         Blockquote
       </h2>
       <blockquote class="border-l-2 pl-6 italic mt-6">
@@ -56,8 +61,8 @@ import { ScHeading } from '@semantic-components/ui';
     </section>
 
     <section>
-      <h2 class="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mt-10">Lists</h2>
-      <h3 class="scroll-m-20 text-2xl font-semibold tracking-tight mt-8">Unordered List</h3>
+      <h2 class="scroll-m-20 pb-2 mt-10" [underline]="true" sc-heading level="2">Lists</h2>
+      <h3 class="scroll-m-20 mt-8" sc-heading level="3">Unordered List</h3>
       <ul class="my-6 ml-6 list-disc [&>li]:mt-2">
         <li>Clean, consistent typography</li>
         <li>Responsive design principles</li>
@@ -65,7 +70,7 @@ import { ScHeading } from '@semantic-components/ui';
         <li>Proper spacing and hierarchy</li>
       </ul>
 
-      <h3 class="scroll-m-20 text-2xl font-semibold tracking-tight mt-8">Ordered List</h3>
+      <h3 class="scroll-m-20 mt-8" sc-heading level="3">Ordered List</h3>
       <ol class="my-6 ml-6 list-decimal [&>li]:mt-2">
         <li>Define your typography system</li>
         <li>Implement base Tailwind configuration</li>
@@ -73,28 +78,9 @@ import { ScHeading } from '@semantic-components/ui';
         <li>Enjoy the clean, professional design</li>
       </ol>
     </section>
-
-    <section>
-      <h2 class="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mt-10">Code</h2>
-      <p class="leading-7 mt-6">
-        Inline code can be styled with
-        <code class="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm">
-          font-mono
-        </code>
-        classes.
-      </p>
-      <pre class="bg-muted p-4 rounded-md overflow-x-auto mt-6">
-<code class="text-sm font-mono">{{code}}</code>
-      </pre>
-    </section>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class TypographyPage {
-  code = `// This is a code block
-function greet() {
-  console.log("Hello, Tailwind Typography!");
-}`;
-}
+export default class TypographyPage {}
