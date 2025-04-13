@@ -4,14 +4,13 @@ import {
   Component,
   TemplateRef,
   ViewEncapsulation,
-  afterRenderEffect,
   computed,
   effect,
   inject,
   signal,
   viewChild,
 } from '@angular/core';
-import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 import {
   ScLink,
@@ -124,16 +123,12 @@ export default class DocLayout {
 
   readonly sitemapLoader = inject(SitemapLoader);
 
-  currentPath = signal('');
+  readonly currentPath = signal('');
 
   private readonly appStateService = inject(AppStateService);
 
   constructor() {
-    this.router.events.forEach((event) => {
-      if (event instanceof NavigationEnd) {
-        this.currentPath.set(this.router.url);
-      }
-    });
+    this.currentPath.set(this.router.url);
 
     effect(() => {
       const a = this.appStateService.mobileMenu();
@@ -144,12 +139,6 @@ export default class DocLayout {
 
       if (!a) {
         this.scSheetManager.close();
-      }
-    });
-
-    afterRenderEffect(() => {
-      if (!this.currentPath()) {
-        this.router.navigateByUrl('/');
       }
     });
   }
