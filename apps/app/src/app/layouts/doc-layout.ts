@@ -4,6 +4,7 @@ import {
   Component,
   TemplateRef,
   ViewEncapsulation,
+  afterRenderEffect,
   computed,
   effect,
   inject,
@@ -143,6 +144,12 @@ export default class DocLayout {
 
       if (!a) {
         this.scSheetManager.close();
+      }
+    });
+
+    afterRenderEffect(() => {
+      if (!this.currentPath()) {
+        this.router.navigateByUrl('/');
       }
     });
   }
