@@ -53,19 +53,8 @@ export class ScDaySelector {
   readonly selectedDate = input<Temporal.PlainDate>();
   readonly dateSelected = output<Temporal.PlainDate>();
 
-  //if date is in the current month else focus first date of the current month
   protected readonly activeDate = linkedSignal<ScActiveDate>(() => {
-    if (
-      this.date()?.year === this.currentMonth().year &&
-      this.date()?.month === this.currentMonth().month
-    ) {
-      return { value: this.date(), hasFocus: false };
-    }
-
-    return {
-      value: new Temporal.PlainDate(this.currentMonth().year, this.currentMonth().month, 1),
-      hasFocus: false,
-    };
+    return { value: this.date(), hasFocus: false };
   });
 
   readonly classInput = input<string>('', {
@@ -161,11 +150,26 @@ export class ScDaySelector {
       case 'PageUp':
         // Previous month
         this.prevMonth.emit();
+
+        //TOOO maybe calcute the date instead of using firstDayOfMonth
+        this.activeDate.set({
+          value: this.firstDayOfMonth(),
+          hasFocus: true,
+        });
+
         event.preventDefault();
         break;
       case 'PageDown':
         // Next month
+
         this.nextMonth.emit();
+
+        //TOOO maybe calcute the date instead of using firstDayOfMonth
+        this.activeDate.set({
+          value: this.firstDayOfMonth(),
+          hasFocus: true,
+        });
+
         event.preventDefault();
         break;
     }
