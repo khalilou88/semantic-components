@@ -29,8 +29,7 @@ import { CalendarDay } from './types';
       <button
         [variant]="getVariant(day)"
         [isFocused]="isFocused(day.date)"
-        (keydown)="handleKeydown($event)"
-        (click)="selectDay(day); $event.stopPropagation()"
+        (click)="selectDay(day)"
         sc-day-button
         size="icon"
       >
@@ -40,6 +39,7 @@ import { CalendarDay } from './types';
   `,
   host: {
     '[class]': 'class()',
+    '(keydown)': 'handleKeydown($event)',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
