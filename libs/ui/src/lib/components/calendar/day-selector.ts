@@ -54,7 +54,7 @@ export class ScDaySelector {
   readonly dateSelected = output<Temporal.PlainDate>();
 
   protected readonly activeDate = linkedSignal<ScActiveDate>(() => {
-    return { value: this.date(), hasFocus: false };
+    return { value: this.date(), hasFocus: true };
   });
 
   readonly classInput = input<string>('', {
