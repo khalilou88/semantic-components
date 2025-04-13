@@ -61,7 +61,7 @@ export class ScSwitch {
       '[&::before]:shadow-[inset_0_0_#000]',
 
       '[&::after]:bg-background',
-      '[&::before]:bg-gray-300 dark:[&::before]:bg-gray-600',
+      '[&::before]:bg-input',
       '[&:checked]:[&::before]:bg-primary',
       '[&:checked]:[&::after]:duration-300 [&:checked]:[&::after]:translate-x-4',
 
