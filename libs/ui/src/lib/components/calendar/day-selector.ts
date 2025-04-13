@@ -4,8 +4,8 @@ import {
   ViewEncapsulation,
   computed,
   input,
+  linkedSignal,
   output,
-  signal,
 } from '@angular/core';
 
 import { Temporal } from '@js-temporal/polyfill';
@@ -29,6 +29,7 @@ import { CalendarDay } from './types';
       <button
         [variant]="getVariant(day)"
         [isFocused]="isFocused(day.date)"
+        [tabindex]="isFocused(day.date) ? 0 : -1"
         (click)="selectDay(day)"
         sc-day-button
         size="icon"
@@ -52,7 +53,17 @@ export class ScDaySelector {
   readonly selectedDate = input<Temporal.PlainDate>();
   readonly dateSelected = output<Temporal.PlainDate>();
 
-  protected readonly focusedDate = signal<Temporal.PlainDate | undefined>(undefined);
+  //if date is in the current month else focus first date of the current month
+  protected readonly focusedDate = linkedSignal(() => {
+    if (
+      this.date()?.year === this.currentMonth().year &&
+      this.date()?.month === this.currentMonth().month
+    ) {
+      return this.date();
+    }
+
+    return new Temporal.PlainDate(this.currentMonth().year, this.currentMonth().month, 1);
+  });
 
   readonly classInput = input<string>('', {
     alias: 'class',
@@ -93,7 +104,7 @@ export class ScDaySelector {
   }
 
   isFocused(date: Temporal.PlainDate): boolean {
-    return this.focusedDate() ? date.equals(this.focusedDate()!) : false;
+    return this.focusedDate() ? date.equals(this.focusedDate()) : false;
   }
 
   handleKeydown(event: KeyboardEvent): void {
@@ -117,13 +128,13 @@ export class ScDaySelector {
       case 'Enter':
       case ' ':
         if (
-          Temporal.PlainDate.compare(this.focusedDate()!, this.calendarDays()[0].date) >= 0 &&
+          Temporal.PlainDate.compare(this.focusedDate(), this.calendarDays()[0].date) >= 0 &&
           Temporal.PlainDate.compare(
-            this.focusedDate()!,
+            this.focusedDate(),
             this.calendarDays()[this.calendarDays().length - 1].date,
           ) <= 0
         ) {
-          this.dateSelected.emit(this.focusedDate()!);
+          this.dateSelected.emit(this.focusedDate());
           event.preventDefault();
         }
         break;
@@ -155,21 +166,6 @@ export class ScDaySelector {
 
   // Move focus in the calendar grid with support for month navigation
   private moveFocus(delta: number): void {
-    // if date is in the current month else focus first date of the current month
-    if (this.focusedDate() === undefined) {
-      if (
-        this.date()?.year === this.currentMonth().year &&
-        this.date()?.month === this.currentMonth().month
-      ) {
-        this.focusedDate.set(this.date());
-        return;
-      }
-      this.focusedDate.set(
-        new Temporal.PlainDate(this.currentMonth().year, this.currentMonth().month, 1),
-      );
-      return;
-    }
-
     let newDate;
 
     if (Math.sign(delta) === 1) {
