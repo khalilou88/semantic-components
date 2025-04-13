@@ -36,22 +36,24 @@ export class ScSwitch {
 
   protected readonly class = computed(() =>
     cn(
-      // Basic appearance and structure
+      // Base styling
       'appearance-none',
       'w-9 h-5',
       'relative',
       'cursor-pointer',
       'inline-block',
+      'transition-colors duration-200',
 
-      // Focus state handling
+      // Focus handling
       'focus:outline-0',
       'border-0',
       'focus:ring-offset-transparent',
       'focus:ring-transparent',
       'focus-within:ring-0',
       'focus:shadow-none',
+      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
 
-      // Use the new pseudo-element syntax if it changed
+      // Pseudo-element positioning
       '[&::after]:absolute [&::before]:absolute',
       '[&::after]:top-0 [&::before]:top-0',
       '[&::after]:block [&::before]:inline-block',
@@ -62,14 +64,20 @@ export class ScSwitch {
       '[&::after]:w-4 [&::after]:h-4',
       '[&::after]:mt-0.5 [&::after]:ml-0.5',
       '[&::after]:shadow-md',
-      '[&::after]:duration-100',
+      '[&::after]:duration-200',
       '[&::after]:bg-background',
+      '[&::after]:transition-transform',
 
       // Before element (track)
       "[&::before]:content-['']",
       '[&::before]:w-9 [&::before]:h-full',
       '[&::before]:shadow-[inset_0_0_#000]',
       '[&::before]:bg-input',
+      '[&::before]:transition-colors [&::before]:duration-200',
+
+      // Hover state
+      'hover:[&::before]:bg-input/90',
+      'hover:[&:checked]:[&::before]:bg-primary/90',
 
       // Checked state
       '[&:checked]:[&::before]:bg-primary',
@@ -80,6 +88,7 @@ export class ScSwitch {
       '[&:disabled]:[&::after]:bg-opacity-75',
       '[&:disabled]:cursor-not-allowed',
       '[&:disabled]:checked:[&::before]:bg-opacity-40',
+      '[&:disabled]:[&::before]:bg-muted/50',
 
       // Custom classes
       this.classInput(),
