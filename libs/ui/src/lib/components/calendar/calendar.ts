@@ -23,7 +23,7 @@ import { generateCalendarDays } from './calendar-utils';
 import { CalendarService } from './calendar.service';
 import { ScDaySelector } from './day-selector';
 import { ScMonthSelector } from './month-selector';
-import { ScActiveDate, View } from './types';
+import { View } from './types';
 import { getLocalizedDayNames } from './utils';
 import { ScYearSelector } from './year-selector';
 
@@ -66,7 +66,7 @@ import { ScYearSelector } from './year-selector';
           @default {
             <sc-day-selector
               [weekdays]="weekdays"
-              [activeDate]="activeDate()"
+              [focusedDate]="focusedDate()"
               [selectedDate]="value()"
               [calendarDays]="calendarDays()"
               (dateSelected)="selectDate($event)"
@@ -105,21 +105,28 @@ export class ScCalendar implements ControlValueAccessor {
 
   private readonly today = signal(Temporal.Now.plainDateISO());
 
-  protected readonly date = computed<Temporal.PlainDate>(() => {
-    const v = this.value();
-    if (v) {
-      return v;
+  protected readonly date = computed(() => {
+    if (this.value()) {
+      return this.value();
     } else {
       return this.today();
     }
   });
 
-  protected readonly activeDate = linkedSignal<ScActiveDate>(() => {
-    return { value: this.date(), focus: true };
+  //if date is in the current month else focus first date of the current month
+  protected readonly focusedDate = linkedSignal(() => {
+    if (
+      this.date()?.year === this.currentMonth().year &&
+      this.date()?.month === this.currentMonth().month
+    ) {
+      return this.date();
+    }
+
+    return new Temporal.PlainDate(this.currentMonth().year, this.currentMonth().month, 1);
   });
 
   protected readonly currentYear = linkedSignal(() => {
-    return this.date().year;
+    return this.date()!.year;
   });
 
   protected readonly previewYear = linkedSignal(() => {
@@ -127,7 +134,7 @@ export class ScCalendar implements ControlValueAccessor {
   });
 
   protected readonly currentMonth = linkedSignal(() => {
-    return this.date().toPlainYearMonth();
+    return this.date()!.toPlainYearMonth();
   });
 
   private readonly firstDayOfMonth = computed(() =>
@@ -176,11 +183,11 @@ export class ScCalendar implements ControlValueAccessor {
     let newDate;
 
     if (Math.sign(delta) === 1) {
-      newDate = this.activeDate()?.value.add({ days: delta });
+      newDate = this.focusedDate()?.add({ days: delta });
     }
 
     if (Math.sign(delta) === -1) {
-      newDate = this.activeDate()?.value.subtract({ days: Math.abs(delta) });
+      newDate = this.focusedDate()?.subtract({ days: Math.abs(delta) });
     }
 
     if (!newDate) {
@@ -200,7 +207,7 @@ export class ScCalendar implements ControlValueAccessor {
       this.nextMonth();
     }
 
-    this.activeDate.set({ value: newDate, focus: true });
+    this.focusedDate.set(newDate);
   }
 
   handleKeydown(event: KeyboardEvent): void {
@@ -246,27 +253,27 @@ export class ScCalendar implements ControlValueAccessor {
       case 'Enter':
       case ' ':
         if (
-          Temporal.PlainDate.compare(this.activeDate().value, this.calendarDays()[0].date) >= 0 &&
+          Temporal.PlainDate.compare(this.focusedDate()!, this.calendarDays()[0].date) >= 0 &&
           Temporal.PlainDate.compare(
-            this.activeDate().value,
+            this.focusedDate()!,
             this.calendarDays()[this.calendarDays().length - 1].date,
           ) <= 0
         ) {
-          this.selectDate(this.activeDate().value);
+          this.selectDate(this.focusedDate()!);
           event.preventDefault();
         }
         break;
       case 'Home':
         // Move to first day of the month
 
-        this.activeDate.set({ value: this.firstDayOfMonth(), focus: true });
+        this.focusedDate.set(this.firstDayOfMonth());
 
         event.preventDefault();
         break;
 
       case 'End':
         // Move to last day of the month
-        this.activeDate.set({ value: this.lastDayOfMonth(), focus: true });
+        this.focusedDate.set(this.lastDayOfMonth());
         event.preventDefault();
         break;
       case 'PageUp':
