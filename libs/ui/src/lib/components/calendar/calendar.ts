@@ -69,7 +69,7 @@ import { ScYearSelector } from './year-selector';
               [focusedDate]="focusedDate()"
               [selectedDate]="value()"
               [calendarDays]="calendarDays()"
-              (dateSelected)="selectDate($event)"
+              (dateSelected)="setValue($event)"
             />
           }
         }
@@ -113,17 +113,7 @@ export class ScCalendar implements ControlValueAccessor {
     }
   });
 
-  //if date is in the current month else focus first date of the current month
-  protected readonly focusedDate = linkedSignal(() => {
-    if (
-      this.date()?.year === this.currentMonth().year &&
-      this.date()?.month === this.currentMonth().month
-    ) {
-      return this.date();
-    }
-
-    return new Temporal.PlainDate(this.currentMonth().year, this.currentMonth().month, 1);
-  });
+  protected readonly focusedDate = signal<Temporal.PlainDate | undefined>(undefined);
 
   protected readonly currentYear = linkedSignal(() => {
     return this.date()!.year;
@@ -169,7 +159,7 @@ export class ScCalendar implements ControlValueAccessor {
     return false;
   }
 
-  selectDate(date: Temporal.PlainDate): void {
+  protected setValue(date: Temporal.PlainDate): void {
     if (this.isDateDisabled(date)) return;
 
     this.value.set(date);
@@ -180,6 +170,21 @@ export class ScCalendar implements ControlValueAccessor {
 
   // Move focus in the calendar grid with support for month navigation
   private moveFocus(delta: number): void {
+    // if date is in the current month else focus first date of the current month
+    if (this.focusedDate() === undefined) {
+      if (
+        this.date()?.year === this.currentMonth().year &&
+        this.date()?.month === this.currentMonth().month
+      ) {
+        this.focusedDate.set(this.date());
+        return;
+      }
+      this.focusedDate.set(
+        new Temporal.PlainDate(this.currentMonth().year, this.currentMonth().month, 1),
+      );
+      return;
+    }
+
     let newDate;
 
     if (Math.sign(delta) === 1) {
@@ -259,7 +264,7 @@ export class ScCalendar implements ControlValueAccessor {
             this.calendarDays()[this.calendarDays().length - 1].date,
           ) <= 0
         ) {
-          this.selectDate(this.focusedDate()!);
+          this.setValue(this.focusedDate()!);
           event.preventDefault();
         }
         break;
