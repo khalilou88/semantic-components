@@ -27,7 +27,7 @@ import { ScRange } from './types';
       @for (day of calendarDays(); track day.date) {
         <button
           [variant]="getVariant(day)"
-          [isFocused]="isFocused(day.date)"
+          [hasFocus]="isFocused(day.date)"
           (click)="selectDate(day)"
           sc-day-button
           size="icon"
