@@ -4,13 +4,14 @@ import {
   Component,
   TemplateRef,
   ViewEncapsulation,
+  afterRenderEffect,
   computed,
   effect,
   inject,
   signal,
   viewChild,
 } from '@angular/core';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 
 import {
   ScLink,
@@ -128,7 +129,11 @@ export default class DocLayout {
   private readonly appStateService = inject(AppStateService);
 
   constructor() {
-    this.currentPath.set(this.router.url);
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.currentPath.set(this.router.url);
+      }
+    });
 
     effect(() => {
       const a = this.appStateService.mobileMenu();
@@ -139,6 +144,12 @@ export default class DocLayout {
 
       if (!a) {
         this.scSheetManager.close();
+      }
+    });
+
+    afterRenderEffect(() => {
+      if (!this.currentPath()) {
+        this.currentPath.set(this.router.url);
       }
     });
   }
