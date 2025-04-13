@@ -206,12 +206,4 @@ export class ScDaySelector {
 
     this.activeDate.set({ value: newDate, hasFocus: true });
   }
-
-  handleBlur() {
-    this.activeDate.set({ value: this.activeDate().value, hasFocus: false });
-  }
-
-  handleFocus() {
-    this.activeDate.set({ value: this.activeDate().value, hasFocus: true });
-  }
 }
