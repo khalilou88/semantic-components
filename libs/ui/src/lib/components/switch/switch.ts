@@ -62,7 +62,7 @@ export class ScSwitch {
 
       '[&::after]:bg-background',
       '[&::before]:bg-gray-300 dark:[&::before]:bg-gray-600',
-      '[&:checked]:[&::before]:bg-primary dark:[&:checked]:[&::before]:bg-primary',
+      '[&:checked]:[&::before]:bg-primary',
       '[&:checked]:[&::after]:duration-300 [&:checked]:[&::after]:translate-x-4',
 
       '[&:disabled]:[&::after]:bg-opacity-75 [&:disabled]:cursor-not-allowed',
