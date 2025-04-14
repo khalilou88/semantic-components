@@ -31,7 +31,6 @@ export * from './lib/components/toggle-group';
 export * from './lib/components/dialog';
 export * from './lib/components/alert';
 export * from './lib/components/alert-dialog';
-export * from './lib/components/confirmation-dialog';
 export * from './lib/components/badge';
 export * from './lib/components/scroll-area';
 export * from './lib/components/card';

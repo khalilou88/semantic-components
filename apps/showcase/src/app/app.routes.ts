@@ -89,11 +89,6 @@ export const appRoutes: Route[] = [
             title: 'Alert Dialog Page',
           },
           {
-            path: 'confirmation-dialog',
-            loadComponent: () => import('./pages/confirmation-dialog-page'),
-            title: 'Confirmation Dialog Page',
-          },
-          {
             path: 'combobox',
             loadComponent: () => import('./pages/combobox-page'),
             title: 'Combobox Page',
