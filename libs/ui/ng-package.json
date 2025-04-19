@@ -5,7 +5,7 @@
     {
       "input": "./src/lib/styles",
       "glob": "**/*.css",
-      "output": "./styles"
+      "output": "."
     }
   ],
   "lib": {
