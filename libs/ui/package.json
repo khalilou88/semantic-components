@@ -55,5 +55,10 @@
     "type": "git",
     "url": "https://github.com/khalilou88/semantic-components",
     "directory": "libs/ui"
+  },
+  "exports": {
+    "./styles.css": {
+      "style": "./styles.css"
+    }
   }
 }
