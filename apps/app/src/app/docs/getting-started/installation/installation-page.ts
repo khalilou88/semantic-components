@@ -11,8 +11,8 @@ import { TocHeadingDirective } from '../../../components/toc/toc-heading.directi
     <div class="space-y-6">
       <div class="flex items-center justify-between">
         <div class="space-y-1">
-          <h2 class="text-2xl font-semibold tracking-tight" tocHeading>Installation</h2>
-          <p class="text-muted-foreground">Start by installing this packages.</p>
+          <h2 class="text-2xl font-semibold tracking-tight" tocHeading>Dependencies</h2>
+          <p class="text-muted-foreground">Install the following dependencies.</p>
         </div>
       </div>
 
