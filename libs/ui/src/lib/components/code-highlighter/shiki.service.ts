@@ -11,12 +11,10 @@ export class ShikiService {
   private highlighter: Highlighter | null = null;
 
   async initializeHighlighter() {
-    if (!this.highlighter) {
-      this.highlighter = await createHighlighter({
-        themes: [...themesArray],
-        langs: [...langsArray],
-      });
-    }
+    this.highlighter ??= await createHighlighter({
+      themes: [...themesArray],
+      langs: [...langsArray],
+    });
     return this.highlighter;
   }
 

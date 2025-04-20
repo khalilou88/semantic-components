@@ -1,23 +1,25 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { ScCodeHighlighter } from '@semantic-components/ui';
+
+import { TocHeadingDirective } from '../../../components/toc/toc-heading.directive';
+
 @Component({
   selector: 'app-installation-page',
-  imports: [],
+  imports: [ScCodeHighlighter, TocHeadingDirective],
   template: `
-    <div class="bg-primary">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        style="stroke: var(--primary-foreground)"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path d="M20 6 9 17l-5-5" />
-      </svg>
+    <div class="space-y-6">
+      <div class="flex items-center justify-between">
+        <div class="space-y-1">
+          <h2 class="text-2xl font-semibold tracking-tight" tocHeading>Installation</h2>
+          <p class="text-muted-foreground">Start by installing this packages.</p>
+        </div>
+      </div>
+
+      <sc-code-highlighter
+        code="npm install @semantic-components/ui @semantic-components/utils @semantic-icons/lucide-icons tw-animate-css class-variance-authority clsx tailwind-merge"
+        language="shellscript"
+      />
     </div>
   `,
   styles: ``,
