@@ -99,7 +99,7 @@
     "@types/express": "5.0.1",
     "@types/jest": "^29.5.14",
     "@types/node": "22.15.2",
-    "@typescript-eslint/utils": "^8.31.0",
+    "@typescript-eslint/utils": "^8.31.1",
     "angular-eslint": "19.2.0",
     "autoprefixer": "^10.4.21",
     "eslint": "^9.25.1",
