@@ -12,7 +12,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
       </header>
 
       <!-- Main content -->
-      <main class="flex-grow p-6 bg-gray-50">
+      <main class="grow p-6 bg-gray-50">
         <div class="max-w-3xl mx-auto">
           <h2 class="text-xl font-semibold mb-4">
             How to Create a Sticky Footer with Tailwind CSS
@@ -57,7 +57,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   - Ensures minimum height of 100vh
                 </li>
                 <li>
-                  <code>flex-grow</code>
+                  <code>grow</code>
                   or
                   <code>flex-1</code>
                   - Makes main content expand
@@ -70,7 +70,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
             <pre class="bg-gray-800 text-gray-100 p-4 rounded-md overflow-x-auto">
 &lt;div class="flex flex-col min-h-screen"&gt;
   &lt;header&gt;...&lt;/header&gt;
-  &lt;main class="flex-grow"&gt;...&lt;/main&gt;
+  &lt;main class="grow"&gt;...&lt;/main&gt;
   &lt;footer&gt;...&lt;/footer&gt;
 &lt;/div&gt;</pre
             >
@@ -86,7 +86,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
               <p class="text-yellow-700">
                 <strong>Note:</strong>
                 The
-                <code>flex-grow</code>
+                <code>grow</code>
                 class is essential - without it, the footer won't stay at the bottom when content is
                 minimal.
               </p>

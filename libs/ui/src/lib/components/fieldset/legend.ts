@@ -29,7 +29,7 @@ export class ScLegend {
 
   protected readonly class = computed(() =>
     cn(
-      'text-base/6 font-semibold text-zinc-950 data-[disabled]:opacity-50 sm:text-sm/6 dark:text-white',
+      'text-base/6 font-semibold text-zinc-950 data-disabled:opacity-50 sm:text-sm/6 dark:text-white',
       this.classInput(),
     ),
   );

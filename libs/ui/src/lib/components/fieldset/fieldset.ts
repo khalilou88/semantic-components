@@ -28,6 +28,6 @@ export class ScFieldset {
   });
 
   protected readonly class = computed(() =>
-    cn('[&>*+[data-slot=control]]:mt-6 [&>[data-slot=text]]:mt-1', this.classInput()),
+    cn('[&>*+[data-slot=control]]:mt-6 *:data-[slot=text]:mt-1', this.classInput()),
   );
 }

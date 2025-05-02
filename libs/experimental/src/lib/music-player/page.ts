@@ -25,7 +25,7 @@ import {
               alt="Album Cover"
             />
             <div
-              class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-4"
+              class="absolute inset-0 bg-linear-to-t from-black/70 to-transparent flex flex-col justify-end p-4"
             >
               <span class="text-white/80 text-sm">Now Playing</span>
               <h2 class="text-white text-xl font-bold">Midnight Reverie</h2>

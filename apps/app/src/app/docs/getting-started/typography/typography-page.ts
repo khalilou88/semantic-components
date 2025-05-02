@@ -16,11 +16,11 @@ import { ScHeading } from '@semantic-components/ui';
 
     <section>
       <h2 class="scroll-m-20 pb-2 mt-10" [underline]="true" sc-heading level="2">Paragraphs</h2>
-      <p class="leading-7 [&:not(:first-child)]:mt-6">
+      <p class="leading-7 not-first:mt-6">
         This is a standard paragraph with default styling. The paragraph has proper line height and
         spacing to ensure readability across your application.
       </p>
-      <p class="leading-7 [&:not(:first-child)]:mt-6">
+      <p class="leading-7 not-first:mt-6">
         Second paragraphs and beyond have additional top margin to create proper spacing between
         content blocks.
       </p>

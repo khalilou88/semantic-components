@@ -77,18 +77,18 @@ export class ScSwitch {
 
       // Hover state
       'hover:[&::before]:bg-input/90',
-      'hover:[&:checked]:[&::before]:bg-primary/90',
+      'hover:checked:[&::before]:bg-primary/90',
 
       // Checked state
-      '[&:checked]:[&::before]:bg-primary',
-      '[&:checked]:[&::after]:duration-300',
-      '[&:checked]:[&::after]:translate-x-4',
+      'checked:[&::before]:bg-primary',
+      'checked:[&::after]:duration-300',
+      'checked:[&::after]:translate-x-4',
 
       // Disabled state
-      '[&:disabled]:[&::after]:bg-opacity-75',
-      '[&:disabled]:cursor-not-allowed',
-      '[&:disabled]:checked:[&::before]:bg-opacity-40',
-      '[&:disabled]:[&::before]:bg-muted/50',
+      'disabled:[&::after]:bg-opacity-75',
+      'disabled:cursor-not-allowed',
+      'disabled:checked:[&::before]:bg-opacity-40',
+      'disabled:[&::before]:bg-muted/50',
 
       // Custom classes
       this.classInput(),

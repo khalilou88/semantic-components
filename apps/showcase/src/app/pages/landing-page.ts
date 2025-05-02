@@ -19,7 +19,7 @@ import { SiArrowRightIcon, SiGithubIcon } from '@semantic-icons/lucide-icons';
             </a>
           </div>
           <h1
-            class="animate-appear relative z-10 inline-block bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-4xl font-semibold leading-tight text-transparent drop-shadow-2xl sm:text-6xl sm:leading-tight md:text-8xl md:leading-tight"
+            class="animate-appear relative z-10 inline-block bg-linear-to-r from-foreground to-muted-foreground bg-clip-text text-4xl font-semibold leading-tight text-transparent drop-shadow-2xl sm:text-6xl sm:leading-tight md:text-8xl md:leading-tight"
           >
             Build your next angular app even faster.
           </h1>

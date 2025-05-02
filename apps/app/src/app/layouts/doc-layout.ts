@@ -47,7 +47,7 @@ import { PageInfo } from '../core/types';
     <div class="flex-1 flex">
       <!-- Sidebar -->
       <div
-        class="hidden md:flex border-r border-border/40 w-[240px] flex-shrink-0 md:sticky md:top-14 md:h-[calc(100vh-56px)] md:overflow-y-auto"
+        class="hidden md:flex border-r border-border/40 w-[240px] shrink-0 md:sticky md:top-14 md:h-[calc(100vh-56px)] md:overflow-y-auto"
       >
         <ng-template #sidebar>
           <app-sidebar />
@@ -107,7 +107,7 @@ import { PageInfo } from '../core/types';
 
           <!-- Table of Contents -->
           <div
-            class="hidden lg:block sticky top-14 h-[calc(100vh-56px)] w-[240px] flex-shrink-0 overflow-y-auto py-6 pl-8 pr-4"
+            class="hidden lg:block sticky top-14 h-[calc(100vh-56px)] w-[240px] shrink-0 overflow-y-auto py-6 pl-8 pr-4"
           >
             <app-table-of-contents />
           </div>

@@ -143,18 +143,18 @@ export class ScInputPassword implements OnInit {
   protected readonly progressClass = computed(() =>
     cn(
       'mb-4 mt-3 h-1 w-full overflow-hidden rounded-full bg-border',
-      '[&>[data-slot=indicator]]:h-full [&>[data-slot=indicator]]:transition-all [&>[data-slot=indicator]]:duration-500 [&>[data-slot=indicator]]:ease-out',
+      '*:data-[slot=indicator]:h-full *:data-[slot=indicator]:transition-all *:data-[slot=indicator]:duration-500 *:data-[slot=indicator]:ease-out',
       this.strengthColor(),
     ),
   );
 
   readonly strengthColor = computed(() => {
     const score = this.strengthScore();
-    if (score === 0) return '[&>[data-slot=indicator]]:bg-border';
-    if (score <= 1) return '[&>[data-slot=indicator]]:bg-red-500';
-    if (score <= 2) return '[&>[data-slot=indicator]]:bg-orange-500';
-    if (score === 3) return '[&>[data-slot=indicator]]:bg-amber-500';
-    return '[&>[data-slot=indicator]]:bg-emerald-500';
+    if (score === 0) return '*:data-[slot=indicator]:bg-border';
+    if (score <= 1) return '*:data-[slot=indicator]:bg-red-500';
+    if (score <= 2) return '*:data-[slot=indicator]:bg-orange-500';
+    if (score === 3) return '*:data-[slot=indicator]:bg-amber-500';
+    return '*:data-[slot=indicator]:bg-emerald-500';
   });
 
   readonly strengthText = computed(() => {

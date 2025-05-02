@@ -60,7 +60,7 @@ interface Artwork {
           <figure class="shrink-0">
             <div class="overflow-hidden rounded-md">
               <img
-                class="aspect-[3/4] h-fit w-fit object-cover"
+                class="aspect-3/4 h-fit w-fit object-cover"
                 [src]="artwork.art"
                 [alt]="'Photo by ' + artwork.artist"
                 width="300"
@@ -150,11 +150,11 @@ interface Artwork {
       <sc-flexible-scroll-area orientation="horizontal">
         @for (item of items; track item) {
           <div
-            class="bg-white rounded-lg shadow-md w-64 h-52 flex-shrink-0 border border-gray-200 hover:border-blue-500 transition-colors duration-200 inline-block"
+            class="bg-white rounded-lg shadow-md w-64 h-52 shrink-0 border border-gray-200 hover:border-blue-500 transition-colors duration-200 inline-block"
           >
             <div class="p-4 h-full flex flex-col">
               <h3 class="text-lg font-medium text-gray-900 mb-2">{{ item.title }}</h3>
-              <p class="text-sm text-gray-600 flex-grow">{{ item.description }}</p>
+              <p class="text-sm text-gray-600 grow">{{ item.description }}</p>
               <div class="mt-4 text-xs text-gray-500">{{ item.category }}</div>
             </div>
           </div>

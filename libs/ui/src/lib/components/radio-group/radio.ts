@@ -50,7 +50,7 @@ export class ScRadio {
       "[&::before]:content-['']",
       '[&::before]:absolute [&::before]:top-1/2 [&::before]:left-1/2 [&::before]:-translate-x-1/2 [&::before]:-translate-y-1/2 [&::before]:size-2.5 [&::before]:rounded-full [&::before]:bg-primary [&::before]:opacity-0 [&::before]:transform [&::before]:scale-0 [&::before]:transition-all [&::before]:duration-200',
 
-      '[&:checked]:[&::before]:opacity-100 [&:checked]:[&::before]:scale-100',
+      'checked:[&::before]:opacity-100 checked:[&::before]:scale-100',
 
       this.classInput(),
     ),

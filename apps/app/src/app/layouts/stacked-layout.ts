@@ -8,15 +8,15 @@ import { Header } from '../components/header';
   selector: 'app-stacked-layout',
   imports: [RouterOutlet, Header, Footer],
   template: `
-    <div class="flex min-h-screen flex-col max-w-screen-2xl mx-auto h-full">
+    <div class="flex min-h-screen flex-col max-w-(--breakpoint-2xl) mx-auto h-full">
       <!-- Navigation -->
       <header
-        class="sticky top-0 z-40 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+        class="sticky top-0 z-40 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60"
       >
         <app-header />
       </header>
 
-      <main class="flex-grow">
+      <main class="grow">
         <router-outlet />
       </main>
 

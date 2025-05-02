@@ -48,7 +48,7 @@ import {
           <!-- Connector line between steps -->
           @if (!last) {
             <div
-              class="flex-grow mx-4 h-0.5 mt-5"
+              class="grow mx-4 h-0.5 mt-5"
               [ngClass]="{ 'bg-blue-600': selectedIndex > i, 'bg-gray-200': selectedIndex <= i }"
             ></div>
           }
@@ -69,7 +69,7 @@ import {
               Previous
             </button>
           }
-          <div class="flex-grow"></div>
+          <div class="grow"></div>
           @if (selectedIndex < steps.length - 1) {
             <button
               class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-200"

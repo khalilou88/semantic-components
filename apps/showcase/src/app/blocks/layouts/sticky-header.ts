@@ -14,7 +14,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
       </header>
 
       <!-- Main content -->
-      <main class="flex-grow p-6">
+      <main class="grow p-6">
         <div class="max-w-3xl mx-auto">
           <h2 class="text-xl font-semibold mb-4">
             How to Create a Sticky Header with Normal Footer
@@ -57,7 +57,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                   - Creates the basic layout structure
                 </li>
                 <li>
-                  <code>flex-grow</code>
+                  <code>grow</code>
                   or
                   <code>flex-1</code>
                   - Makes main content expand
@@ -83,7 +83,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                 <li>No special positioning classes - behaves like a normal element</li>
                 <li>
                   Will appear at the bottom due to
-                  <code>flex-grow</code>
+                  <code>grow</code>
                   on the main content
                 </li>
               </ul>
@@ -94,7 +94,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
             <pre class="bg-gray-800 text-gray-100 p-4 rounded-md overflow-x-auto">
 &lt;div class="flex flex-col min-h-screen"&gt;
   &lt;header class="sticky top-0 z-10"&gt;...&lt;/header&gt;
-  &lt;main class="flex-grow"&gt;...&lt;/main&gt;
+  &lt;main class="grow"&gt;...&lt;/main&gt;
   &lt;footer&gt;...&lt;/footer&gt;
 &lt;/div&gt;</pre
             >

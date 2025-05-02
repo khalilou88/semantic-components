@@ -21,11 +21,11 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, viewChild } from '@ang
           <!-- Cards -->
           @for (item of items; track item) {
             <div
-              class="bg-white rounded-lg shadow-md w-64 h-52 flex-shrink-0 border border-gray-200 hover:border-blue-500 transition-colors duration-200"
+              class="bg-white rounded-lg shadow-md w-64 h-52 shrink-0 border border-gray-200 hover:border-blue-500 transition-colors duration-200"
             >
               <div class="p-4 h-full flex flex-col">
                 <h3 class="text-lg font-medium text-gray-900 mb-2">{{ item.title }}</h3>
-                <p class="text-sm text-gray-600 flex-grow">{{ item.description }}</p>
+                <p class="text-sm text-gray-600 grow">{{ item.description }}</p>
                 <div class="mt-4 text-xs text-gray-500">{{ item.category }}</div>
               </div>
             </div>

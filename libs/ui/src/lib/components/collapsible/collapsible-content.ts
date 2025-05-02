@@ -45,7 +45,7 @@ export class ScCollapsibleContent {
 
   protected readonly class = computed(() =>
     cn(
-      'grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] ease-[ease-in-out] duration-[var(--duration,300ms)]',
+      'grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] ease-[ease-in-out] duration-(--duration,300ms)',
       this.open() && 'grid-rows-[1fr] opacity-100',
       this.classInput(),
     ),

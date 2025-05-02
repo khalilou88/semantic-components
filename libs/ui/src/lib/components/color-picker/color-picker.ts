@@ -33,7 +33,7 @@ import { FormsModule } from '@angular/forms';
           <div class="flex items-center space-x-4">
             <label class="w-16 text-sm font-medium text-gray-700" for="label_12">Red:</label>
             <input
-              class="flex-grow h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-red-500"
+              class="grow h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-red-500"
               id="label_12"
               [(ngModel)]="red"
               (ngModelChange)="updateColor()"
@@ -48,7 +48,7 @@ import { FormsModule } from '@angular/forms';
           <div class="flex items-center space-x-4">
             <label class="w-16 text-sm font-medium text-gray-700" for="label_121">Green:</label>
             <input
-              class="flex-grow h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-green-500"
+              class="grow h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-green-500"
               id="label_121"
               [(ngModel)]="green"
               (ngModelChange)="updateColor()"
@@ -63,7 +63,7 @@ import { FormsModule } from '@angular/forms';
           <div class="flex items-center space-x-4">
             <label class="w-16 text-sm font-medium text-gray-700" for="label_126">Blue:</label>
             <input
-              class="flex-grow h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-500"
+              class="grow h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-500"
               id="label_126"
               [(ngModel)]="blue"
               (ngModelChange)="updateColor()"
