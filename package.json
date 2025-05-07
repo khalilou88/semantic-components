@@ -32,7 +32,7 @@
     "@tiptap/extension-bullet-list": "^2.11.9",
     "@tiptap/extension-code": "^2.11.9",
     "@tiptap/extension-code-block": "^2.12.0",
-    "@tiptap/extension-color": "^2.11.9",
+    "@tiptap/extension-color": "^2.12.0",
     "@tiptap/extension-document": "^2.12.0",
     "@tiptap/extension-font-family": "^2.11.9",
     "@tiptap/extension-heading": "^2.11.9",
