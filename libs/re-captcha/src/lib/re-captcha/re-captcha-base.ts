@@ -1,16 +1,13 @@
 import {
   ChangeDetectorRef,
   Directive,
-  ElementRef,
   afterNextRender,
   computed,
   inject,
   input,
-  output,
   signal,
 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
-import { Router } from '@angular/router';
 
 import { IdGenerator } from './id-generator';
 import { SC_RE_CAPTCHA_V2_SITE_KEY } from './re-captcha-config';
@@ -62,48 +59,15 @@ export class ScReCaptchaBase implements ControlValueAccessor {
   private readonly value = signal<string | null>(null);
   private readonly disabledByCva = signal(false);
 
-  scriptLoaded = false;
-  private readonly router = inject(Router);
-  private readonly recaptchaContainer = inject(ElementRef);
-
-  scriptLoadError = output<void>();
-
   constructor() {
     afterNextRender(() => {
-      // this.registerCallbacks();
-      this.loadRecaptcha();
+      this.loadAndRender();
     });
   }
 
-  // Check if widget is actually rendered in the DOM
-  private isWidgetRendered(): boolean {
-    if (!this.recaptchaContainer?.nativeElement) {
-      return false;
-    }
-
-    // Check if iframe exists inside the container (reCAPTCHA creates an iframe when rendered)
-    return this.recaptchaContainer.nativeElement.querySelector('iframe') !== null;
-  }
-
-  private async loadRecaptcha(): Promise<void> {
-    try {
-      // Use the Promise-based approach instead of Observable
-      const loaded = await this.scReCaptchaService.loadScript();
-      this.scriptLoaded = loaded;
-
-      // If we get here, the script loaded successfully
-
-      // If container is available (view initialized), render widget
-      if (this.recaptchaContainer) {
-        // Use setTimeout to ensure render happens in the next tick
-        setTimeout(() => this.render(), 0);
-      }
-    } catch (error) {
-      // Handle the error case
-      this.scriptLoaded = false;
-      this.scriptLoadError.emit();
-      console.error('Failed to load reCAPTCHA script:', error);
-    }
+  private async loadAndRender(): Promise<void> {
+    await this.scReCaptchaService.loadScript();
+    this.render();
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
