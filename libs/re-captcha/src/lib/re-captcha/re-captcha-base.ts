@@ -57,7 +57,6 @@ export class ScReCaptchaBase implements ControlValueAccessor {
   });
 
   private readonly value = signal<string | null>(null);
-  private readonly disabledByCva = signal(false);
 
   constructor() {
     afterNextRender(async () => {
@@ -69,13 +68,17 @@ export class ScReCaptchaBase implements ControlValueAccessor {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   render() {}
 
-  protected renderWidget(themeOrBadge: string, themeOrBadgeValue: string, size: string) {
+  protected renderWidget(
+    themeOrBadge: 'theme' | 'badge',
+    themeOrBadgeValue: 'dark' | 'light' | 'bottomright' | 'bottomleft' | 'inline',
+    sizeOrInvisible: 'normal' | 'compact' | 'invisible',
+  ) {
     this.widgetId = grecaptcha.render(
       this.id,
       {
         sitekey: this.siteKey(),
         [themeOrBadge]: themeOrBadgeValue,
-        size: size,
+        size: sizeOrInvisible,
         tabindex: this.tabindex(),
         callback: this.callback() ? this.callback() : this.defaultCallback.bind(this),
         'expired-callback': this.expiredCallback()
@@ -131,9 +134,5 @@ export class ScReCaptchaBase implements ControlValueAccessor {
 
   registerOnTouched(fn: any): void {
     this.onTouch = fn;
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-    this.disabledByCva.set(isDisabled);
   }
 }
