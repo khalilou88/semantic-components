@@ -133,7 +133,7 @@ export class ScReCaptchaService {
    * Check repeatedly if grecaptcha is available
    * @param attempts Number of attempts to check
    */
-  private checkGrecaptchaAvailability(attempts: number = 10): void {
+  private checkGrecaptchaAvailability(attempts = 10): void {
     if (window['grecaptcha'] && typeof window['grecaptcha'].render === 'function') {
       this.scriptLoading = false;
       this.scriptStatus$.next(true);
