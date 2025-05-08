@@ -1,19 +1,13 @@
 import {
   ChangeDetectorRef,
   Directive,
-  ElementRef,
-  OnDestroy,
   afterNextRender,
   computed,
   inject,
   input,
-  output,
   signal,
 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
-import { Router } from '@angular/router';
-
-import { Subscription } from 'rxjs';
 
 import { IdGenerator } from './id-generator';
 import { SC_RE_CAPTCHA_V2_SITE_KEY } from './re-captcha-config';
@@ -31,7 +25,7 @@ type ErrorCallbackFn = () => void;
     '[class.g-recaptcha]': 'true',
   },
 })
-export class ScReCaptchaBase implements OnDestroy, ControlValueAccessor {
+export class ScReCaptchaBase implements ControlValueAccessor {
   private readonly id = inject(IdGenerator).getId('sc-re-captcha-');
   protected widgetId = '';
 
@@ -65,56 +59,15 @@ export class ScReCaptchaBase implements OnDestroy, ControlValueAccessor {
   private readonly value = signal<string | null>(null);
   private readonly disabledByCva = signal(false);
 
-  scriptLoaded = false;
-  private readonly router = inject(Router);
-  private readonly recaptchaContainer = inject(ElementRef);
-  private readonly subscriptions: Subscription[] = [];
-
-  scriptLoadError = output<void>();
-
   constructor() {
     afterNextRender(() => {
-      // this.registerCallbacks();
-      this.loadRecaptcha();
+      this.loadAndRender();
     });
   }
 
-  ngOnDestroy(): void {
-    // Clean up all subscriptions
-    this.subscriptions.forEach((sub) => sub.unsubscribe());
-  }
-
-  // Check if widget is actually rendered in the DOM
-  private isWidgetRendered(): boolean {
-    if (!this.recaptchaContainer?.nativeElement) {
-      return false;
-    }
-
-    // Check if iframe exists inside the container (reCAPTCHA creates an iframe when rendered)
-    return this.recaptchaContainer.nativeElement.querySelector('iframe') !== null;
-  }
-
-  private loadRecaptcha(): void {
-    const scriptSub = this.scReCaptchaService.loadScript().subscribe((loaded) => {
-      this.scriptLoaded = loaded;
-
-      if (!loaded) {
-        this.scriptLoadError.emit();
-        return;
-      }
-
-      // If callbacks aren't registered yet, do it now
-      // if (!this.callbacksRegistered) {
-      //   this.registerCallbacks();
-      // }
-
-      // If container is available (view initialized), render widget
-      if (this.recaptchaContainer) {
-        setTimeout(() => this.render(), 0);
-      }
-    });
-
-    this.subscriptions.push(scriptSub);
+  private async loadAndRender(): Promise<void> {
+    await this.scReCaptchaService.loadScript();
+    this.render();
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
