@@ -10,6 +10,7 @@
 - Works seamlessly with both reactive and template-driven forms.
 - Leverages the latest Angular features, including **signal inputs** and **standalone components** for enhanced modularity and reactivity.
 - Optimized for performance with a lightweight implementation.
+- Allows customization of the reCAPTCHA theme (e.g., light or dark) for better UI consistency.
 
 ## Compatibility
 
