@@ -2,7 +2,6 @@ import {
   ChangeDetectorRef,
   Directive,
   ElementRef,
-  OnDestroy,
   afterNextRender,
   computed,
   inject,
@@ -12,8 +11,6 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { Router } from '@angular/router';
-
-import { Subscription } from 'rxjs';
 
 import { IdGenerator } from './id-generator';
 import { SC_RE_CAPTCHA_V2_SITE_KEY } from './re-captcha-config';
@@ -31,7 +28,7 @@ type ErrorCallbackFn = () => void;
     '[class.g-recaptcha]': 'true',
   },
 })
-export class ScReCaptchaBase implements OnDestroy, ControlValueAccessor {
+export class ScReCaptchaBase implements ControlValueAccessor {
   private readonly id = inject(IdGenerator).getId('sc-re-captcha-');
   protected widgetId = '';
 
@@ -68,7 +65,6 @@ export class ScReCaptchaBase implements OnDestroy, ControlValueAccessor {
   scriptLoaded = false;
   private readonly router = inject(Router);
   private readonly recaptchaContainer = inject(ElementRef);
-  private readonly subscriptions: Subscription[] = [];
 
   scriptLoadError = output<void>();
 
@@ -77,11 +73,6 @@ export class ScReCaptchaBase implements OnDestroy, ControlValueAccessor {
       // this.registerCallbacks();
       this.loadRecaptcha();
     });
-  }
-
-  ngOnDestroy(): void {
-    // Clean up all subscriptions
-    this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
 
   // Check if widget is actually rendered in the DOM
@@ -94,27 +85,25 @@ export class ScReCaptchaBase implements OnDestroy, ControlValueAccessor {
     return this.recaptchaContainer.nativeElement.querySelector('iframe') !== null;
   }
 
-  private loadRecaptcha(): void {
-    const scriptSub = this.scReCaptchaService.loadScript().subscribe((loaded) => {
+  private async loadRecaptcha(): Promise<void> {
+    try {
+      // Use the Promise-based approach instead of Observable
+      const loaded = await this.scReCaptchaService.loadScript();
       this.scriptLoaded = loaded;
 
-      if (!loaded) {
-        this.scriptLoadError.emit();
-        return;
-      }
-
-      // If callbacks aren't registered yet, do it now
-      // if (!this.callbacksRegistered) {
-      //   this.registerCallbacks();
-      // }
+      // If we get here, the script loaded successfully
 
       // If container is available (view initialized), render widget
       if (this.recaptchaContainer) {
+        // Use setTimeout to ensure render happens in the next tick
         setTimeout(() => this.render(), 0);
       }
-    });
-
-    this.subscriptions.push(scriptSub);
+    } catch (error) {
+      // Handle the error case
+      this.scriptLoaded = false;
+      this.scriptLoadError.emit();
+      console.error('Failed to load reCAPTCHA script:', error);
+    }
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function

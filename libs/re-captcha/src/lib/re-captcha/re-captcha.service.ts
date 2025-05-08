@@ -1,8 +1,4 @@
-import { Injectable, inject } from '@angular/core';
-
-import { filter, take } from 'rxjs/operators';
-
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable, Signal, inject, signal } from '@angular/core';
 
 import { SC_RE_CAPTCHA_LANGUAGE_CODE, SC_RE_CAPTCHA_V3_SITE_KEY } from './re-captcha-config';
 
@@ -17,6 +13,11 @@ declare global {
   }
 }
 
+/**
+ * Script status: null (initial), true (loaded), false (error)
+ */
+export type ScriptStatus = boolean | null;
+
 @Injectable({
   providedIn: 'root',
 })
@@ -27,9 +28,9 @@ export class ScReCaptchaService {
   private readonly scriptId = 'recaptcha-script';
   private readonly apiUrl = 'https://www.google.com/recaptcha/api.js';
 
-  // Use BehaviorSubject with three states: null (initial), true (loaded), false (error)
-  private readonly scriptStatus$ = new BehaviorSubject<boolean | null>(null);
+  private readonly scriptStatus = signal<ScriptStatus>(null);
   private scriptLoading = false;
+  private loadPromise: Promise<boolean> | null = null;
 
   constructor() {
     // Check if script already exists on page load
@@ -44,7 +45,7 @@ export class ScReCaptchaService {
     if (existingScript) {
       // Check if grecaptcha is actually available in window object
       if (window['grecaptcha'] && typeof window['grecaptcha'].render === 'function') {
-        this.scriptStatus$.next(true);
+        this.scriptStatus.set(true);
       }
     }
   }
@@ -52,103 +53,109 @@ export class ScReCaptchaService {
   /**
    * Load the reCAPTCHA script dynamically
    * @param onload Optional callback function name for script load
-   * @returns Observable that emits true when script is loaded
+   * @returns Promise that resolves to true when script is loaded
    */
-  loadScript(onload?: string): Observable<boolean> {
+  loadScript(onload?: string): Promise<boolean> {
     // First check if script exists and is loaded
     this.checkScriptExists();
 
     // If script is already loaded, return success immediately
-    if (this.scriptStatus$.value === true) {
-      return this.scriptStatus$.pipe(
-        filter((status) => status === true),
-        take(1),
-      ) as Observable<boolean>;
+    if (this.scriptStatus() === true) {
+      return Promise.resolve(true);
     }
 
-    // If script is currently loading, return the observable without creating a new script
-    if (this.scriptLoading) {
-      return this.scriptStatus$.pipe(
-        filter((status) => status !== null),
-        take(1),
-      );
+    // If script is currently loading, return the existing promise
+    if (this.loadPromise) {
+      return this.loadPromise;
     }
 
-    this.scriptLoading = true;
+    // Create a new loading promise
+    this.loadPromise = new Promise<boolean>((resolve, reject) => {
+      this.scriptLoading = true;
 
-    // Create a unique callback function name if not provided
-    const callbackName = onload ?? `onRecaptchaLoaded_${Date.now()}`;
+      // Create a unique callback function name if not provided
+      const callbackName = onload ?? `onRecaptchaLoaded_${Date.now()}`;
 
-    // Define the callback function in window scope
-    (window as any)[callbackName] = () => {
-      // Start checking for grecaptcha object
-      this.checkGrecaptchaAvailability(10);
-    };
+      // Define the callback function in window scope
+      (window as any)[callbackName] = () => {
+        // Start checking for grecaptcha object
+        this.checkGrecaptchaAvailability(10, resolve, reject);
+      };
 
-    // Build URL with parameters if provided
-    let url = this.apiUrl;
-    const params: string[] = [];
+      // Build URL with parameters if provided
+      let url = this.apiUrl;
+      const params: string[] = [];
 
-    if (this.v3SiteKey) {
-      params.push(`render=${this.v3SiteKey}`);
-    } else {
-      params.push(`render=explicit`);
-    }
+      if (this.v3SiteKey) {
+        params.push(`render=${this.v3SiteKey}`);
+      } else {
+        params.push(`render=explicit`);
+      }
 
-    if (this.languageCode) {
-      params.push(`hl=${this.languageCode}`);
-    }
+      if (this.languageCode) {
+        params.push(`hl=${this.languageCode}`);
+      }
 
-    // Always include onload parameter
-    params.push(`onload=${callbackName}`);
+      // Always include onload parameter
+      params.push(`onload=${callbackName}`);
 
-    if (params.length > 0) {
-      url = `${url}?${params.join('&')}`;
-    }
+      if (params.length > 0) {
+        url = `${url}?${params.join('&')}`;
+      }
 
-    // Create script element
-    const script = document.createElement('script');
-    script.id = this.scriptId;
-    script.src = url;
-    script.async = true;
-    script.defer = true;
+      // Create script element
+      const script = document.createElement('script');
+      script.id = this.scriptId;
+      script.src = url;
+      script.async = true;
+      script.defer = true;
 
-    // Set up error handler
-    script.onerror = () => {
-      this.scriptLoading = false;
-      console.error('Error loading reCAPTCHA script');
-      this.scriptStatus$.next(false);
-    };
+      // Set up error handler
+      script.onerror = () => {
+        this.scriptLoading = false;
+        this.loadPromise = null;
+        console.error('Error loading reCAPTCHA script');
+        this.scriptStatus.set(false);
+        reject(new Error('Failed to load reCAPTCHA script'));
+      };
 
-    // Add script to document
-    document.head.appendChild(script);
+      // Add script to document
+      document.head.appendChild(script);
+    });
 
-    return this.scriptStatus$.pipe(
-      filter((status) => status !== null),
-      take(1),
-    );
+    return this.loadPromise;
   }
 
   /**
    * Check repeatedly if grecaptcha is available
    * @param attempts Number of attempts to check
+   * @param resolve Promise resolve function
+   * @param reject Promise reject function
    */
-  private checkGrecaptchaAvailability(attempts = 10): void {
+  private checkGrecaptchaAvailability(
+    attempts = 10,
+    resolve: (value: boolean) => void,
+    reject: (reason: any) => void,
+  ): void {
     if (window['grecaptcha'] && typeof window['grecaptcha'].render === 'function') {
       this.scriptLoading = false;
-      this.scriptStatus$.next(true);
+      this.scriptStatus.set(true);
+      this.loadPromise = null;
+      resolve(true);
       return;
     }
 
     if (attempts <= 0) {
       this.scriptLoading = false;
+      this.loadPromise = null;
       console.error('reCAPTCHA script loaded but grecaptcha object not available');
-      this.scriptStatus$.next(false);
+      this.scriptStatus.set(false);
+      reject(new Error('reCAPTCHA script loaded but grecaptcha object not available'));
       return;
     }
 
     // Try again after a short delay
-    setTimeout(() => this.checkGrecaptchaAvailability(attempts - 1), 200);
+    setTimeout(() => this.checkGrecaptchaAvailability(attempts - 1, resolve, reject), 200);
   }
 
   /**
@@ -159,23 +166,24 @@ export class ScReCaptchaService {
     if (script) {
       script.remove();
       delete window['grecaptcha'];
-      this.scriptStatus$.next(null);
+      this.scriptStatus.set(null);
       this.scriptLoading = false;
+      this.loadPromise = null;
     }
   }
 
   /**
-   * Check if the script is loaded
+   * Get a signal with the current script status
    */
-  isLoaded(): Observable<boolean | null> {
-    return this.scriptStatus$.asObservable();
+  isLoaded(): Signal<ScriptStatus> {
+    return this.scriptStatus.asReadonly();
   }
 
   /**
    * Reset all reCAPTCHA instances on the page
    */
   resetAll(): void {
-    if (this.scriptStatus$.value === true && window['grecaptcha']) {
+    if (this.scriptStatus() === true && window['grecaptcha']) {
       try {
         window['grecaptcha'].reset();
       } catch (e) {
