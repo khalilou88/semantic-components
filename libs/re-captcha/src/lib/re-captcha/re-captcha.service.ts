@@ -79,7 +79,7 @@ export class ScReCaptchaService {
       // Define the callback function in window scope
       (window as any)[callbackName] = () => {
         // Start checking for grecaptcha object
-        this.checkGrecaptchaAvailability(10, resolve, reject);
+        this.checkGrecaptchaAvailability(3, resolve, reject);
       };
 
       // Build URL with parameters if provided
