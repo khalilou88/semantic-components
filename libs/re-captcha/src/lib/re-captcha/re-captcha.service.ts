@@ -1,4 +1,4 @@
-import { Injectable, NgZone, inject } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import { filter, take } from 'rxjs/operators';
 
@@ -21,8 +21,6 @@ declare global {
   providedIn: 'root',
 })
 export class ScReCaptchaService {
-  private readonly zone = inject(NgZone);
-
   private readonly v3SiteKey = inject<string>(SC_RE_CAPTCHA_V3_SITE_KEY, { optional: true });
   private readonly languageCode = inject<string>(SC_RE_CAPTCHA_LANGUAGE_CODE, { optional: true });
 
@@ -109,26 +107,22 @@ export class ScReCaptchaService {
 
     // Set up load and error handlers
     script.onload = () => {
-      this.zone.run(() => {
-        this.scriptLoading = false;
-        // Wait a brief moment to ensure grecaptcha is fully initialized
-        setTimeout(() => {
-          if (window['grecaptcha'] && typeof window['grecaptcha'].render === 'function') {
-            this.scriptStatus$.next(true);
-          } else {
-            console.error('reCAPTCHA script loaded but grecaptcha object not available');
-            this.scriptStatus$.next(false);
-          }
-        }, 100);
-      });
+      this.scriptLoading = false;
+      // Wait a brief moment to ensure grecaptcha is fully initialized
+      setTimeout(() => {
+        if (window['grecaptcha'] && typeof window['grecaptcha'].render === 'function') {
+          this.scriptStatus$.next(true);
+        } else {
+          console.error('reCAPTCHA script loaded but grecaptcha object not available');
+          this.scriptStatus$.next(false);
+        }
+      }, 100);
     };
 
     script.onerror = () => {
-      this.zone.run(() => {
-        this.scriptLoading = false;
-        console.error('Error loading reCAPTCHA script');
-        this.scriptStatus$.next(false);
-      });
+      this.scriptLoading = false;
+      console.error('Error loading reCAPTCHA script');
+      this.scriptStatus$.next(false);
     };
 
     // Add script to document
