@@ -60,14 +60,10 @@ export class ScReCaptchaBase implements ControlValueAccessor {
   private readonly disabledByCva = signal(false);
 
   constructor() {
-    afterNextRender(() => {
-      this.loadAndRender();
+    afterNextRender(async () => {
+      await this.scReCaptchaService.loadScript();
+      this.render();
     });
-  }
-
-  private async loadAndRender(): Promise<void> {
-    await this.scReCaptchaService.loadScript();
-    this.render();
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function

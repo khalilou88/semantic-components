@@ -154,6 +154,11 @@ export const appRoutes: Route[] = [
             title: 'reCaptcha Page',
           },
           {
+            path: 're-captcha-v3',
+            loadComponent: () => import('./pages/re-captcha-v3-page'),
+            title: 'reCaptcha V3 Page',
+          },
+          {
             path: 'menu-bar',
             loadComponent: () => import('./pages/menu-bar-page'),
             title: 'Menu Bar Page',
