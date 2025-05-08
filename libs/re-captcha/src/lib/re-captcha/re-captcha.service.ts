@@ -133,7 +133,7 @@ export class ScReCaptchaService {
    * @param reject Promise reject function
    */
   private checkGrecaptchaAvailability(
-    attempts = 10,
+    attempts: number,
     resolve: (value: boolean) => void,
     reject: (reason: any) => void,
   ): void {
