@@ -1,4 +1,4 @@
-import { Injectable, Signal, inject, signal } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 
 import { SC_RE_CAPTCHA_LANGUAGE_CODE, SC_RE_CAPTCHA_V3_SITE_KEY } from './re-captcha-config';
 
@@ -158,13 +158,6 @@ export class ScReCaptchaService {
       this.scriptStatus.set(null);
       this.loadPromise = null;
     }
-  }
-
-  /**
-   * Get a signal with the current script status
-   */
-  isLoaded(): Signal<ScriptStatus> {
-    return this.scriptStatus.asReadonly();
   }
 
   /**
