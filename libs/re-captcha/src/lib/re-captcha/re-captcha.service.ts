@@ -32,11 +32,6 @@ export class ScReCaptchaService {
   private scriptLoading = false;
   private loadPromise: Promise<boolean> | null = null;
 
-  constructor() {
-    // Check if script already exists on page load
-    this.checkScriptExists();
-  }
-
   /**
    * Check if the script already exists in the document
    */
