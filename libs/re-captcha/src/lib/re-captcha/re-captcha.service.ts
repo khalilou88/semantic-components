@@ -29,7 +29,6 @@ export class ScReCaptchaService {
   private readonly apiUrl = 'https://www.google.com/recaptcha/api.js';
 
   private readonly scriptStatus = signal<ScriptStatus>(null);
-  private scriptLoading = false;
   private loadPromise: Promise<boolean> | null = null;
 
   /**
@@ -66,8 +65,6 @@ export class ScReCaptchaService {
 
     // Create a new loading promise
     this.loadPromise = new Promise<boolean>((resolve, reject) => {
-      this.scriptLoading = true;
-
       // Create a unique callback function name if not provided
       const callbackName = onload ?? `onRecaptchaLoaded_${Date.now()}`;
 
@@ -107,7 +104,6 @@ export class ScReCaptchaService {
 
       // Set up error handler
       script.onerror = () => {
-        this.scriptLoading = false;
         this.loadPromise = null;
         console.error('Error loading reCAPTCHA script');
         this.scriptStatus.set(false);
@@ -133,7 +129,6 @@ export class ScReCaptchaService {
     reject: (reason: any) => void,
   ): void {
     if (window['grecaptcha'] && typeof window['grecaptcha'].render === 'function') {
-      this.scriptLoading = false;
       this.scriptStatus.set(true);
       this.loadPromise = null;
       resolve(true);
@@ -141,7 +136,6 @@ export class ScReCaptchaService {
     }
 
     if (attempts <= 0) {
-      this.scriptLoading = false;
       this.loadPromise = null;
       console.error('reCAPTCHA script loaded but grecaptcha object not available');
       this.scriptStatus.set(false);
@@ -162,7 +156,6 @@ export class ScReCaptchaService {
       script.remove();
       delete window['grecaptcha'];
       this.scriptStatus.set(null);
-      this.scriptLoading = false;
       this.loadPromise = null;
     }
   }
