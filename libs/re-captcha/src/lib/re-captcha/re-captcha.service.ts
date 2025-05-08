@@ -76,6 +76,15 @@ export class ScReCaptchaService {
 
     this.scriptLoading = true;
 
+    // Create a unique callback function name if not provided
+    const callbackName = onload ?? `onRecaptchaLoaded_${Date.now()}`;
+
+    // Define the callback function in window scope
+    (window as any)[callbackName] = () => {
+      // Start checking for grecaptcha object
+      this.checkGrecaptchaAvailability(10);
+    };
+
     // Build URL with parameters if provided
     let url = this.apiUrl;
     const params: string[] = [];
@@ -90,9 +99,8 @@ export class ScReCaptchaService {
       params.push(`hl=${this.languageCode}`);
     }
 
-    if (onload) {
-      params.push(`onload=${onload}`);
-    }
+    // Always include onload parameter
+    params.push(`onload=${callbackName}`);
 
     if (params.length > 0) {
       url = `${url}?${params.join('&')}`;
@@ -105,20 +113,7 @@ export class ScReCaptchaService {
     script.async = true;
     script.defer = true;
 
-    // Set up load and error handlers
-    script.onload = () => {
-      this.scriptLoading = false;
-      // Wait a brief moment to ensure grecaptcha is fully initialized
-      setTimeout(() => {
-        if (window['grecaptcha'] && typeof window['grecaptcha'].render === 'function') {
-          this.scriptStatus$.next(true);
-        } else {
-          console.error('reCAPTCHA script loaded but grecaptcha object not available');
-          this.scriptStatus$.next(false);
-        }
-      }, 100);
-    };
-
+    // Set up error handler
     script.onerror = () => {
       this.scriptLoading = false;
       console.error('Error loading reCAPTCHA script');
@@ -132,6 +127,28 @@ export class ScReCaptchaService {
       filter((status) => status !== null),
       take(1),
     );
+  }
+
+  /**
+   * Check repeatedly if grecaptcha is available
+   * @param attempts Number of attempts to check
+   */
+  private checkGrecaptchaAvailability(attempts: number = 10): void {
+    if (window['grecaptcha'] && typeof window['grecaptcha'].render === 'function') {
+      this.scriptLoading = false;
+      this.scriptStatus$.next(true);
+      return;
+    }
+
+    if (attempts <= 0) {
+      this.scriptLoading = false;
+      console.error('reCAPTCHA script loaded but grecaptcha object not available');
+      this.scriptStatus$.next(false);
+      return;
+    }
+
+    // Try again after a short delay
+    setTimeout(() => this.checkGrecaptchaAvailability(attempts - 1), 200);
   }
 
   /**
