@@ -3,7 +3,7 @@ import {
   Directive,
   ElementRef,
   OnDestroy,
-  OnInit,
+  afterNextRender,
   computed,
   inject,
   input,
@@ -31,7 +31,7 @@ type ErrorCallbackFn = () => void;
     '[class.g-recaptcha]': 'true',
   },
 })
-export class ScReCaptchaBase implements OnInit, OnDestroy, ControlValueAccessor {
+export class ScReCaptchaBase implements OnDestroy, ControlValueAccessor {
   private readonly id = inject(IdGenerator).getId('sc-re-captcha-');
   protected widgetId = '';
 
@@ -72,9 +72,11 @@ export class ScReCaptchaBase implements OnInit, OnDestroy, ControlValueAccessor 
 
   scriptLoadError = output<void>();
 
-  ngOnInit(): void {
-    // this.registerCallbacks();
-    this.loadRecaptcha();
+  constructor() {
+    afterNextRender(() => {
+      // this.registerCallbacks();
+      this.loadRecaptcha();
+    });
   }
 
   ngOnDestroy(): void {
