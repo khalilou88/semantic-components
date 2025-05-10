@@ -1,5 +1,5 @@
 import { Directive, ElementRef, effect, forwardRef, inject, input } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { ScReCaptchaBase } from './re-captcha-base';
 
@@ -14,7 +14,7 @@ import { ScReCaptchaBase } from './re-captcha-base';
     },
   ],
 })
-export class ScCheckboxReCaptcha extends ScReCaptchaBase implements ControlValueAccessor {
+export class ScCheckboxReCaptcha extends ScReCaptchaBase {
   private readonly host = inject(ElementRef);
 
   readonly theme = input<'dark' | 'light'>('light');
