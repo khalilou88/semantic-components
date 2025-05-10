@@ -5,10 +5,6 @@ import { SC_RE_CAPTCHA_LANGUAGE_CODE, SC_RE_CAPTCHA_V3_SITE_KEY } from './re-cap
 // Extend the Window interface to include custom reCAPTCHA properties
 declare global {
   interface Window {
-    onRecaptchaError?: () => void;
-    onRecaptchaSuccess?: (token: string) => void;
-    onRecaptchaExpired?: () => void;
-    onRecaptchaLoaded?: () => void;
     grecaptcha?: any;
   }
 }
@@ -46,10 +42,9 @@ export class ScReCaptchaService {
 
   /**
    * Load the reCAPTCHA script dynamically
-   * @param onload Optional callback function name for script load
    * @returns Promise that resolves to true when script is loaded
    */
-  loadScript(onload?: string): Promise<boolean> {
+  loadScript(): Promise<boolean> {
     // First check if script exists and is loaded
     this.checkScriptExists();
 
@@ -66,7 +61,7 @@ export class ScReCaptchaService {
     // Create a new loading promise
     this.loadPromise = new Promise<boolean>((resolve, reject) => {
       // Create a unique callback function name if not provided
-      const callbackName = onload ?? `onRecaptchaLoaded_${Date.now()}`;
+      const callbackName = `onRecaptchaLoaded_${Date.now()}`;
 
       // Define the callback function in window scope
       (window as any)[callbackName] = () => {
