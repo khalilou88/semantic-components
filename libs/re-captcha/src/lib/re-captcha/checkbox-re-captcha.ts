@@ -35,7 +35,7 @@ export class ScCheckboxReCaptcha extends ScReCaptchaBase {
     });
   }
 
-  updateRecaptchaTheme(newTheme: 'dark' | 'light') {
+  private updateRecaptchaTheme(newTheme: 'dark' | 'light') {
     if (this.isFirstRun) {
       this.isFirstRun = false;
       return;
