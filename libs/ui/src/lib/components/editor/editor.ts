@@ -83,123 +83,125 @@ export class ScEditor implements ControlValueAccessor {
     extensions.push(Paragraph);
     extensions.push(Text);
 
-    if (this.extensions.highlight()) {
-      const Highlight = (await import('@tiptap/extension-highlight')).Highlight;
-      extensions.push(Highlight);
-    }
+    try {
+      if (this.extensions.highlight()) {
+        const Highlight = (await import('@tiptap/extension-highlight')).Highlight;
+        extensions.push(Highlight);
+      }
 
-    if (this.extensions.textStyle()) {
-      const TextStyle = (await import('@tiptap/extension-text-style')).TextStyle;
-      extensions.push(TextStyle);
-    }
+      if (this.extensions.textStyle()) {
+        const TextStyle = (await import('@tiptap/extension-text-style')).TextStyle;
+        extensions.push(TextStyle);
+      }
 
-    if (this.extensions.color()) {
-      const Color = (await import('@tiptap/extension-color')).Color;
-      extensions.push(Color);
-    }
+      if (this.extensions.color()) {
+        const Color = (await import('@tiptap/extension-color')).Color;
+        extensions.push(Color);
+      }
 
-    if (this.extensions.fontFamily()) {
-      const FontFamily = (await import('@tiptap/extension-font-family')).FontFamily;
-      extensions.push(FontFamily);
-    }
+      if (this.extensions.fontFamily()) {
+        const FontFamily = (await import('@tiptap/extension-font-family')).FontFamily;
+        extensions.push(FontFamily);
+      }
 
-    if (this.extensions.underline()) {
-      const Underline = (await import('@tiptap/extension-underline')).Underline;
-      extensions.push(Underline);
-    }
+      if (this.extensions.underline()) {
+        const Underline = (await import('@tiptap/extension-underline')).Underline;
+        extensions.push(Underline);
+      }
 
-    if (this.extensions.image()) {
-      const Image = (await import('@tiptap/extension-image')).Image;
-      extensions.push(Image);
-    }
+      if (this.extensions.image()) {
+        const Image = (await import('@tiptap/extension-image')).Image;
+        extensions.push(Image);
+      }
 
-    if (this.extensions.youtube()) {
-      const Youtube = (await import('@tiptap/extension-youtube')).Youtube;
-      extensions.push(Youtube);
-    }
+      if (this.extensions.youtube()) {
+        const Youtube = (await import('@tiptap/extension-youtube')).Youtube;
+        extensions.push(Youtube);
+      }
 
-    if (this.extensions.link()) {
-      const Link = (await import('@tiptap/extension-link')).Link;
-      extensions.push(Link);
-    }
+      if (this.extensions.link()) {
+        const Link = (await import('@tiptap/extension-link')).Link;
+        extensions.push(Link);
+      }
 
-    if (this.extensions.textAlign()) {
-      const TextAlign = (await import('@tiptap/extension-text-align')).TextAlign;
-      extensions.push(
-        TextAlign.configure({
-          types: ['heading', 'paragraph'],
-        }),
-      );
-    }
+      if (this.extensions.textAlign()) {
+        const TextAlign = (await import('@tiptap/extension-text-align')).TextAlign;
+        extensions.push(
+          TextAlign.configure({
+            types: ['heading', 'paragraph'],
+          }),
+        );
+      }
 
-    if (this.extensions.bulletList() || this.extensions.orderedList()) {
-      const ListItem = (await import('@tiptap/extension-list-item')).ListItem;
-      extensions.push(ListItem);
-    }
+      if (this.extensions.bulletList() || this.extensions.orderedList()) {
+        const ListItem = (await import('@tiptap/extension-list-item')).ListItem;
+        extensions.push(ListItem);
+      }
 
-    if (this.extensions.bulletList()) {
-      const BulletList = (await import('@tiptap/extension-bullet-list')).BulletList;
-      extensions.push(BulletList);
-    }
+      if (this.extensions.bulletList()) {
+        const BulletList = (await import('@tiptap/extension-bullet-list')).BulletList;
+        extensions.push(BulletList);
+      }
 
-    if (this.extensions.orderedList()) {
-      const OrderedList = (await import('@tiptap/extension-ordered-list')).OrderedList;
-      extensions.push(OrderedList);
-    }
+      if (this.extensions.orderedList()) {
+        const OrderedList = (await import('@tiptap/extension-ordered-list')).OrderedList;
+        extensions.push(OrderedList);
+      }
 
-    if (this.extensions.strike()) {
-      const Strike = (await import('@tiptap/extension-strike')).Strike;
-      extensions.push(Strike);
-    }
+      if (this.extensions.strike()) {
+        const Strike = (await import('@tiptap/extension-strike')).Strike;
+        extensions.push(Strike);
+      }
 
-    if (this.extensions.italic()) {
-      const Italic = (await import('@tiptap/extension-italic')).Italic;
-      extensions.push(Italic);
-    }
+      if (this.extensions.italic()) {
+        const Italic = (await import('@tiptap/extension-italic')).Italic;
+        extensions.push(Italic);
+      }
 
-    if (this.extensions.bold()) {
-      const Bold = (await import('@tiptap/extension-bold')).Bold;
-      extensions.push(Bold);
-    }
+      if (this.extensions.bold()) {
+        const Bold = (await import('@tiptap/extension-bold')).Bold;
+        extensions.push(Bold);
+      }
 
-    if (this.extensions.horizontalRule()) {
-      const HorizontalRule = (await import('@tiptap/extension-horizontal-rule')).HorizontalRule;
-      extensions.push(HorizontalRule);
-    }
+      if (this.extensions.horizontalRule()) {
+        const HorizontalRule = (await import('@tiptap/extension-horizontal-rule')).HorizontalRule;
+        extensions.push(HorizontalRule);
+      }
 
-    if (this.extensions.blockquote()) {
-      const Blockquote = (await import('@tiptap/extension-blockquote')).Blockquote;
-      extensions.push(Blockquote);
-    }
+      if (this.extensions.blockquote()) {
+        const Blockquote = (await import('@tiptap/extension-blockquote')).Blockquote;
+        extensions.push(Blockquote);
+      }
 
-    if (this.extensions.code()) {
-      const Code = (await import('@tiptap/extension-code')).Code;
-      extensions.push(Code);
-    }
+      if (this.extensions.code()) {
+        const Code = (await import('@tiptap/extension-code')).Code;
+        extensions.push(Code);
+      }
 
-    if (this.extensions.history()) {
-      const History = (await import('@tiptap/extension-history')).History;
-      extensions.push(History);
-    }
+      if (this.extensions.history()) {
+        const History = (await import('@tiptap/extension-history')).History;
+        extensions.push(History);
+      }
 
-    if (this.extensions.table()) {
-      const TableHeader = (await import('@tiptap/extension-table-header')).TableHeader;
-      extensions.push(TableHeader);
+      if (this.extensions.table()) {
+        const TableHeader = (await import('@tiptap/extension-table-header')).TableHeader;
+        extensions.push(TableHeader);
 
-      const TableRow = (await import('@tiptap/extension-table-row')).TableRow;
-      extensions.push(TableRow);
+        const TableRow = (await import('@tiptap/extension-table-row')).TableRow;
+        extensions.push(TableRow);
 
-      const TableCell = (await import('@tiptap/extension-table-cell')).TableCell;
-      extensions.push(TableCell);
+        const TableCell = (await import('@tiptap/extension-table-cell')).TableCell;
+        extensions.push(TableCell);
 
-      const Table = (await import('@tiptap/extension-table')).Table;
+        const Table = (await import('@tiptap/extension-table')).Table;
 
-      extensions.push(
-        Table.configure({
-          resizable: true,
-        }),
-      );
-    }
+        extensions.push(
+          Table.configure({
+            resizable: true,
+          }),
+        );
+      }
+    } catch (_) {}
 
     this.editor = new Editor({
       element: this.editorContent().nativeElement,
