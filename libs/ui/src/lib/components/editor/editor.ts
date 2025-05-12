@@ -201,7 +201,9 @@ export class ScEditor implements ControlValueAccessor {
           }),
         );
       }
-    } catch (_) {}
+    } catch (e) {
+      console.log(e);
+    }
 
     this.editor = new Editor({
       element: this.editorContent().nativeElement,
