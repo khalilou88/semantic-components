@@ -464,20 +464,38 @@ export class ImageCropperComponent implements OnInit {
       const newHeight = width / aspectRatio;
       const centerY = (this.cropPosition().y1 + this.cropPosition().y2) / 2;
 
-      this.cropPosition().y1 = centerY - newHeight / 2;
-      this.cropPosition().y2 = centerY + newHeight / 2;
+      // this.cropPosition().y1 = centerY - newHeight / 2;
+      // this.cropPosition().y2 = centerY + newHeight / 2;
+
+      this.cropPosition.update((prev) => ({
+        ...prev,
+        y1: centerY - newHeight / 2,
+        y2: centerY + newHeight / 2,
+      }));
 
       // Ensure it fits in canvas
       const containerRect = this.cropperContainer.nativeElement.getBoundingClientRect();
       if (this.cropPosition().y2 > containerRect.height) {
         const overflow = this.cropPosition().y2 - containerRect.height;
-        this.cropPosition().y1 -= overflow;
-        this.cropPosition().y2 -= overflow;
+        // this.cropPosition().y1 -= overflow;
+        // this.cropPosition().y2 -= overflow;
+
+        this.cropPosition.update((prev) => ({
+          ...prev,
+          y1: prev.y1 - overflow,
+          y2: prev.y2 - overflow,
+        }));
       }
       if (this.cropPosition().y1 < 0) {
         const overflow = -this.cropPosition().y1;
-        this.cropPosition().y1 += overflow;
-        this.cropPosition().y2 += overflow;
+        // this.cropPosition().y1 += overflow;
+        // this.cropPosition().y2 += overflow;
+
+        this.cropPosition.update((prev) => ({
+          ...prev,
+          y1: prev.y1 + overflow,
+          y2: prev.y2 + overflow,
+        }));
       }
     }
   }
