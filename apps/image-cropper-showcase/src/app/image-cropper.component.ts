@@ -465,16 +465,26 @@ export class ImageCropperComponent implements OnInit, OnDestroy {
         switch (this.resizeHandle) {
           case 'tl':
           case 'tr':
-          case 't':
-            y1 = y2 - width / aspectRatio;
-            break;
           case 'bl':
           case 'br':
+            // For corner handles, adjust height based on width
+            if (this.resizeHandle === 'tl' || this.resizeHandle === 'tr') {
+              y1 = y2 - width / aspectRatio;
+            } else {
+              y2 = y1 + width / aspectRatio;
+            }
+            break;
+          case 't':
           case 'b':
-            y2 = y1 + width / aspectRatio;
+            // For top/bottom handles, adjust width based on height
+            const newWidth = height * aspectRatio;
+            const centerX = (x1 + x2) / 2;
+            x1 = centerX - newWidth / 2;
+            x2 = centerX + newWidth / 2;
             break;
           case 'l':
           case 'r': {
+            // For left/right handles, adjust height based on width
             const newHeight = width / aspectRatio;
             const centerY = (y1 + y2) / 2;
             y1 = centerY - newHeight / 2;
