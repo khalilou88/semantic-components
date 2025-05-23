@@ -34,3 +34,5 @@ nx g @nx/angular:library libs/styles --publishable --import-path=@semantic-compo
 nx g @nx/angular:library libs/logging --publishable --import-path=@semantic-components/logging
 
 nx g @nx/angular:library libs/experimental --publishable --import-path=@semantic-components/experimental
+
+nx g @nx/angular:library libs/image-cropper --publishable --import-path=@semantic-components/image-cropper
