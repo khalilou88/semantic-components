@@ -13,7 +13,7 @@
         "outputPath": "dist/apps/image-cropper-showcase",
         "index": "apps/image-cropper-showcase/src/index.html",
         "browser": "apps/image-cropper-showcase/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [],
         "tsConfig": "apps/image-cropper-showcase/tsconfig.app.json",
         "assets": [
           {
