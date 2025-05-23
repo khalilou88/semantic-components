@@ -21,6 +21,4 @@ import { ImageCropperComponent } from './image-cropper.component';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
-  title = 'angular-image-cropper';
-}
+export class AppComponent {}
