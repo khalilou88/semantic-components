@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 
+import { ImageCropperComponent } from './image-cropper.component';
+
 @Component({
-  imports: [],
   selector: 'app-root',
+  imports: [ImageCropperComponent],
   template: `
     <div class="container">
       <div class="header">
@@ -11,74 +13,59 @@ import { Component } from '@angular/core';
       </div>
 
       <div class="content">
-        <!-- Upload Section -->
-        <div class="upload-section">
-          <label class="file-input-wrapper" for="imageInput">
-            📁 Choose Image File
-            <input class="file-input" id="imageInput" type="file" accept="image/*" />
-          </label>
-
-          <div class="demo-buttons">
-            <button class="demo-btn" onclick="loadDemoImage('landscape')">🏔️ Landscape</button>
-            <button class="demo-btn" onclick="loadDemoImage('portrait')">👤 Portrait</button>
-            <button class="demo-btn" onclick="loadDemoImage('square')">⬜ Square</button>
-            <button class="demo-btn" onclick="loadDemoImage('wide')">📐 Wide</button>
-          </div>
-        </div>
-
-        <!-- Cropper Container -->
-        <div class="cropper-container">
-          <!-- Original Image & Cropper -->
-          <div class="cropper-section">
-            <h3>📷 Original Image</h3>
-            <div class="image-cropper-container" id="cropperContainer">
-              <div class="no-image">
-                <p>Select an image to start cropping</p>
-              </div>
-            </div>
-
-            <div class="preset-buttons">
-              <button class="preset-btn active" onclick="setAspectRatio(null)">Free</button>
-              <button class="preset-btn" onclick="setAspectRatio(1)">1:1</button>
-              <button class="preset-btn" onclick="setAspectRatio(4/3)">4:3</button>
-              <button class="preset-btn" onclick="setAspectRatio(16/9)">16:9</button>
-              <button class="preset-btn" onclick="setAspectRatio(3/2)">3:2</button>
-            </div>
-
-            <div class="controls">
-              <button class="control-btn" id="cropBtn" onclick="cropImage()" disabled>
-                ✂️ Crop Image
-              </button>
-              <button class="control-btn" id="resetBtn" onclick="resetCrop()" disabled>
-                🔄 Reset
-              </button>
-              <button class="control-btn" id="downloadBtn" onclick="downloadImage()" disabled>
-                💾 Download
-              </button>
-            </div>
-          </div>
-
-          <!-- Cropped Result -->
-          <div class="result-section">
-            <h3>✨ Cropped Result</h3>
-            <div id="resultContainer">
-              <div class="no-image">
-                <p>Cropped image will appear here</p>
-              </div>
-            </div>
-
-            <div class="crop-info" id="cropInfo" style="display: none;">
-              <h4>📊 Crop Information</h4>
-              <p id="imageDimensions"></p>
-              <p id="cropDimensions"></p>
-              <p id="aspectRatioInfo"></p>
-              <p id="fileSizeInfo"></p>
-            </div>
-          </div>
-        </div>
+        <app-image-cropper></app-image-cropper>
       </div>
     </div>
   `,
-  styles: '',
+  styles: [
+    `
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :host {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+        display: block;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        color: white;
+        padding: 30px;
+        text-align: center;
+      }
+
+      .header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        font-weight: 300;
+      }
+
+      .header p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+      }
+
+      .content {
+        padding: 40px;
+      }
+    `,
+  ],
 })
-export class AppComponent {}
+export class AppComponent {
+  title = 'angular-image-cropper';
+}
