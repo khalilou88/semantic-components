@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  HostListener,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -234,6 +235,9 @@ export class ImageCropperComponent implements OnInit, OnDestroy {
 
   cropInfo = signal<CropInfo | null>(null);
 
+  // Store crop position as percentages for responsiveness
+  private cropPercentages = { x1: 0.1, y1: 0.1, x2: 0.9, y2: 0.9 };
+
   // Bound methods for proper event listener cleanup
   private readonly boundOnMove = this.onMove.bind(this);
   private readonly boundEndMove = this.endMove.bind(this);
@@ -245,6 +249,19 @@ export class ImageCropperComponent implements OnInit, OnDestroy {
     wide: 'https://picsum.photos/1000/400?random=4',
   };
 
+  @HostListener('window:resize', ['$event'])
+  onWindowResize() {
+    if (this.showOverlay() && this.sourceImage) {
+      // Debounce resize events
+      clearTimeout(this.resizeTimeout);
+      this.resizeTimeout = setTimeout(() => {
+        this.updateCropPositionFromPercentages();
+      }, 100);
+    }
+  }
+
+  private resizeTimeout: any;
+
   ngOnInit() {
     // Load demo image by default
     setTimeout(() => this.loadDemoImage('landscape'), 500);
@@ -252,6 +269,9 @@ export class ImageCropperComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.cleanup();
+    if (this.resizeTimeout) {
+      clearTimeout(this.resizeTimeout);
+    }
   }
 
   private cleanup() {
@@ -285,6 +305,8 @@ export class ImageCropperComponent implements OnInit, OnDestroy {
     this.showOverlay.set(false);
     this.croppedImageData.set(null);
     this.cropInfo.set(null);
+    // Reset crop percentages
+    this.cropPercentages = { x1: 0.1, y1: 0.1, x2: 0.9, y2: 0.9 };
   }
 
   onImageLoad() {
@@ -296,6 +318,12 @@ export class ImageCropperComponent implements OnInit, OnDestroy {
   }
 
   private initializeCropArea() {
+    this.updateCropPositionFromPercentages();
+  }
+
+  private updateCropPositionFromPercentages() {
+    if (!this.sourceImage || !this.cropperContainer) return;
+
     const container = this.cropperContainer.nativeElement;
     const img = this.sourceImage.nativeElement;
 
@@ -306,22 +334,57 @@ export class ImageCropperComponent implements OnInit, OnDestroy {
     const imgLeft = imgRect.left - containerRect.left;
     const imgTop = imgRect.top - containerRect.top;
 
-    const autoCropArea = 0.8;
-    const cropWidth = imgRect.width * autoCropArea;
+    // Convert percentages to pixel positions
+    const cropWidth = imgRect.width * (this.cropPercentages.x2 - this.cropPercentages.x1);
+    const cropHeight = imgRect.height * (this.cropPercentages.y2 - this.cropPercentages.y1);
 
+    const x1 = imgLeft + imgRect.width * this.cropPercentages.x1;
+    const y1 = imgTop + imgRect.height * this.cropPercentages.y1;
+
+    // Apply aspect ratio if set
     const aspectRatio = this.aspectRatio();
-    const cropHeight = aspectRatio ? cropWidth / aspectRatio : imgRect.height * autoCropArea;
+    let finalX2 = x1 + cropWidth;
+    let finalY2 = y1 + cropHeight;
 
-    // Center the crop area on the image
-    const x1 = imgLeft + (imgRect.width - cropWidth) / 2;
-    const y1 = imgTop + (imgRect.height - cropHeight) / 2;
+    if (aspectRatio) {
+      const currentRatio = cropWidth / cropHeight;
+      if (Math.abs(currentRatio - aspectRatio) > 0.01) {
+        const newHeight = cropWidth / aspectRatio;
+        const centerY = y1 + cropHeight / 2;
+        const finalY1 = Math.max(imgTop, centerY - newHeight / 2);
+        finalY2 = Math.min(imgTop + imgRect.height, finalY1 + newHeight);
+      }
+    }
 
     this.cropPosition.set({
       x1: Math.max(imgLeft, x1),
       y1: Math.max(imgTop, y1),
-      x2: Math.min(imgLeft + imgRect.width, x1 + cropWidth),
-      y2: Math.min(imgTop + imgRect.height, y1 + cropHeight),
+      x2: Math.min(imgLeft + imgRect.width, finalX2),
+      y2: Math.min(imgTop + imgRect.height, finalY2),
     });
+  }
+
+  private updateCropPercentages() {
+    if (!this.sourceImage || !this.cropperContainer) return;
+
+    const container = this.cropperContainer.nativeElement;
+    const img = this.sourceImage.nativeElement;
+
+    const containerRect = container.getBoundingClientRect();
+    const imgRect = img.getBoundingClientRect();
+
+    const imgLeft = imgRect.left - containerRect.left;
+    const imgTop = imgRect.top - containerRect.top;
+
+    const position = this.cropPosition();
+
+    // Convert pixel positions to percentages
+    this.cropPercentages = {
+      x1: (position.x1 - imgLeft) / imgRect.width,
+      y1: (position.y1 - imgTop) / imgRect.height,
+      x2: (position.x2 - imgLeft) / imgRect.width,
+      y2: (position.y2 - imgTop) / imgRect.height,
+    };
   }
 
   startMove(event: MouseEvent | TouchEvent) {
@@ -406,6 +469,8 @@ export class ImageCropperComponent implements OnInit, OnDestroy {
       x2: x1 + width,
       y2: y1 + height,
     });
+
+    this.updateCropPercentages();
   }
 
   resizeCropArea(deltaX: number, deltaY: number) {
@@ -513,6 +578,7 @@ export class ImageCropperComponent implements OnInit, OnDestroy {
     }
 
     this.cropPosition.set({ x1, y1, x2, y2 });
+    this.updateCropPercentages();
   }
 
   endMove(event: MouseEvent | TouchEvent) {
@@ -565,6 +631,8 @@ export class ImageCropperComponent implements OnInit, OnDestroy {
         y1,
         y2,
       }));
+
+      this.updateCropPercentages();
     }
   }
 
@@ -632,6 +700,8 @@ export class ImageCropperComponent implements OnInit, OnDestroy {
 
   resetCrop() {
     if (this.sourceImage) {
+      // Reset to default crop percentages
+      this.cropPercentages = { x1: 0.1, y1: 0.1, x2: 0.9, y2: 0.9 };
       this.onImageLoad();
     }
   }
