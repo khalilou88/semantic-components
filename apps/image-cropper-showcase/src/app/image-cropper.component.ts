@@ -6,6 +6,7 @@ import {
   OnInit,
   ViewChild,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 
 interface CropPosition {
@@ -52,15 +53,15 @@ interface Position {
       <div class="cropper-section">
         <h3>📷 Original Image</h3>
         <div class="image-cropper-container" #cropperContainer>
-          <div class="no-image" *ngIf="!currentImage">
+          <div class="no-image" *ngIf="!currentImage()">
             <p>Select an image to start cropping</p>
           </div>
 
-          <div class="cropper-canvas" *ngIf="currentImage">
+          <div class="cropper-canvas" *ngIf="currentImage()">
             <img
               class="source-image"
               #sourceImage
-              [src]="currentImage"
+              [src]="currentImage()"
               (load)="onImageLoad()"
               alt="Source image"
             />
@@ -136,10 +137,10 @@ interface Position {
         </div>
 
         <div class="controls">
-          <button class="control-btn" [disabled]="!currentImage" (click)="cropImage()">
+          <button class="control-btn" [disabled]="!currentImage()" (click)="cropImage()">
             ✂️ Crop Image
           </button>
-          <button class="control-btn" [disabled]="!currentImage" (click)="resetCrop()">
+          <button class="control-btn" [disabled]="!currentImage()" (click)="resetCrop()">
             🔄 Reset
           </button>
           <button class="control-btn" [disabled]="!croppedImageData" (click)="downloadImage()">
@@ -182,7 +183,7 @@ export class ImageCropperComponent implements OnInit {
   @ViewChild('sourceImage') sourceImage!: ElementRef<HTMLImageElement>;
   @ViewChild('cropArea') cropArea!: ElementRef;
 
-  currentImage: string | null = null;
+  currentImage = signal<string | null>(null);
   showOverlay = false;
   aspectRatio: number | null = null;
   croppedImageData: string | null = null;
@@ -225,7 +226,7 @@ export class ImageCropperComponent implements OnInit {
   }
 
   loadImage(src: string) {
-    this.currentImage = src;
+    this.currentImage.set(src);
     this.showOverlay = false;
     this.croppedImageData = null;
     this.cropInfo = null;
