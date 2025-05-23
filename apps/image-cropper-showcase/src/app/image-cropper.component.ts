@@ -78,6 +78,7 @@ interface Position {
                 (mousedown)="startMove($event)"
                 (touchstart)="startMove($event)"
               >
+                <!-- Corner resize handles -->
                 <div
                   class="resize-handle tl"
                   (mousedown)="startResize($event, 'tl')"
@@ -97,6 +98,28 @@ interface Position {
                   class="resize-handle br"
                   (mousedown)="startResize($event, 'br')"
                   (touchstart)="startResize($event, 'br')"
+                ></div>
+
+                <!-- Side resize handles -->
+                <div
+                  class="resize-handle t"
+                  (mousedown)="startResize($event, 't')"
+                  (touchstart)="startResize($event, 't')"
+                ></div>
+                <div
+                  class="resize-handle r"
+                  (mousedown)="startResize($event, 'r')"
+                  (touchstart)="startResize($event, 'r')"
+                ></div>
+                <div
+                  class="resize-handle b"
+                  (mousedown)="startResize($event, 'b')"
+                  (touchstart)="startResize($event, 'b')"
+                ></div>
+                <div
+                  class="resize-handle l"
+                  (mousedown)="startResize($event, 'l')"
+                  (touchstart)="startResize($event, 'l')"
                 ></div>
               </div>
             </div>
@@ -366,6 +389,18 @@ export class ImageCropperComponent implements OnInit {
         x2 = Math.max(x2 + deltaX, x1 + minSize);
         y2 = Math.max(y2 + deltaY, y1 + minSize);
         break;
+      case 't':
+        y1 = Math.min(y1 + deltaY, y2 - minSize);
+        break;
+      case 'r':
+        x2 = Math.max(x2 + deltaX, x1 + minSize);
+        break;
+      case 'b':
+        y2 = Math.max(y2 + deltaY, y1 + minSize);
+        break;
+      case 'l':
+        x1 = Math.min(x1 + deltaX, x2 - minSize);
+        break;
     }
 
     // Maintain aspect ratio if set
@@ -378,11 +413,21 @@ export class ImageCropperComponent implements OnInit {
         switch (this.resizeHandle) {
           case 'tl':
           case 'tr':
+          case 't':
             y1 = y2 - width / aspectRatio;
             break;
           case 'bl':
           case 'br':
+          case 'b':
             y2 = y1 + width / aspectRatio;
+            break;
+          case 'l':
+          case 'r':
+            // For side handles, adjust height to maintain aspect ratio
+            const newHeight = width / aspectRatio;
+            const centerY = (y1 + y2) / 2;
+            y1 = centerY - newHeight / 2;
+            y2 = centerY + newHeight / 2;
             break;
         }
       }

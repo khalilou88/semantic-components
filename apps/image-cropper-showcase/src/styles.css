@@ -212,6 +212,35 @@ body {
   cursor: nwse-resize;
 }
 
+/* Side resize handles */
+.resize-handle.t {
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: ns-resize;
+}
+
+.resize-handle.r {
+  top: 50%;
+  right: -6px;
+  transform: translateY(-50%);
+  cursor: ew-resize;
+}
+
+.resize-handle.b {
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: ns-resize;
+}
+
+.resize-handle.l {
+  top: 50%;
+  left: -6px;
+  transform: translateY(-50%);
+  cursor: ew-resize;
+}
+
 .controls {
   margin-top: 20px;
   display: flex;
