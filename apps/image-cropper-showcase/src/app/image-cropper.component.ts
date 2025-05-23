@@ -240,7 +240,7 @@ export class ImageCropperComponent implements OnInit {
     const target = event.target as HTMLInputElement;
     const file = target.files?.[0];
 
-    if (file && file.type.startsWith('image/')) {
+    if (file?.type?.startsWith('image/')) {
       const reader = new FileReader();
       reader.onload = (e) => {
         this.loadImage(e.target?.result as string);
@@ -422,13 +422,14 @@ export class ImageCropperComponent implements OnInit {
             y2 = y1 + width / aspectRatio;
             break;
           case 'l':
-          case 'r':
+          case 'r': {
             // For side handles, adjust height to maintain aspect ratio
             const newHeight = width / aspectRatio;
             const centerY = (y1 + y2) / 2;
             y1 = centerY - newHeight / 2;
             y2 = centerY + newHeight / 2;
             break;
+          }
         }
       }
     }
@@ -527,7 +528,7 @@ export class ImageCropperComponent implements OnInit {
     const originalHeight = img.naturalHeight;
 
     // Estimate file size (rough approximation)
-    const estimatedSize = Math.round(((this.croppedImageData()?.length || 0) * 0.75) / 1024);
+    const estimatedSize = Math.round(((this.croppedImageData()?.length ?? 0) * 0.75) / 1024);
 
     this.cropInfo.set({
       originalWidth,
