@@ -475,13 +475,14 @@ export class ImageCropperComponent implements OnInit, OnDestroy {
             }
             break;
           case 't':
-          case 'b':
+          case 'b': {
             // For top/bottom handles, adjust width based on height
             const newWidth = height * aspectRatio;
             const centerX = (x1 + x2) / 2;
             x1 = centerX - newWidth / 2;
             x2 = centerX + newWidth / 2;
             break;
+          }
           case 'l':
           case 'r': {
             // For left/right handles, adjust height based on width
