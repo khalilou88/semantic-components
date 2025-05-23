@@ -343,7 +343,7 @@ export class ImageCropperComponent implements OnInit, OnDestroy {
 
     // Apply aspect ratio if set
     const aspectRatio = this.aspectRatio();
-    let finalX2 = x1 + cropWidth;
+    const finalX2 = x1 + cropWidth;
     let finalY2 = y1 + cropHeight;
 
     if (aspectRatio) {
