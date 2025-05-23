@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  OnDestroy,
   OnInit,
   ViewChild,
   ViewEncapsulation,
@@ -19,6 +20,15 @@ interface CropPosition {
 interface Position {
   x: number;
   y: number;
+}
+
+interface CropInfo {
+  originalWidth: number;
+  originalHeight: number;
+  croppedWidth: number;
+  croppedHeight: number;
+  aspectRatio: string;
+  estimatedSize: number;
 }
 
 @Component({
@@ -194,10 +204,10 @@ interface Position {
 
         <div class="crop-info" *ngIf="cropInfo()">
           <h4>📊 Crop Information</h4>
-          <p>Original: {{ cropInfo().originalWidth }} × {{ cropInfo().originalHeight }}px</p>
-          <p>Cropped: {{ cropInfo().croppedWidth }} × {{ cropInfo().croppedHeight }}px</p>
-          <p>Aspect Ratio: {{ cropInfo().aspectRatio }}:1</p>
-          <p>Estimated Size: ~{{ cropInfo().estimatedSize }}KB</p>
+          <p>Original: {{ cropInfo()!.originalWidth }} × {{ cropInfo()!.originalHeight }}px</p>
+          <p>Cropped: {{ cropInfo()!.croppedWidth }} × {{ cropInfo()!.croppedHeight }}px</p>
+          <p>Aspect Ratio: {{ cropInfo()!.aspectRatio }}:1</p>
+          <p>Estimated Size: ~{{ cropInfo()!.estimatedSize }}KB</p>
         </div>
       </div>
     </div>
@@ -206,7 +216,7 @@ interface Position {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ImageCropperComponent implements OnInit {
+export class ImageCropperComponent implements OnInit, OnDestroy {
   @ViewChild('cropperContainer') cropperContainer!: ElementRef;
   @ViewChild('sourceImage') sourceImage!: ElementRef<HTMLImageElement>;
   @ViewChild('cropArea') cropArea!: ElementRef;
@@ -222,7 +232,11 @@ export class ImageCropperComponent implements OnInit {
   resizeHandle: string | null = null;
   isCropping = false;
 
-  cropInfo = signal<any>(null);
+  cropInfo = signal<CropInfo | null>(null);
+
+  // Bound methods for proper event listener cleanup
+  private boundOnMove = this.onMove.bind(this);
+  private boundEndMove = this.endMove.bind(this);
 
   demoImages = {
     landscape: 'https://picsum.photos/800/600?random=1',
@@ -234,6 +248,19 @@ export class ImageCropperComponent implements OnInit {
   ngOnInit() {
     // Load demo image by default
     setTimeout(() => this.loadDemoImage('landscape'), 500);
+  }
+
+  ngOnDestroy() {
+    this.cleanup();
+  }
+
+  private cleanup() {
+    if (this.isCropping) {
+      document.removeEventListener('mousemove', this.boundOnMove);
+      document.removeEventListener('mouseup', this.boundEndMove);
+      document.removeEventListener('touchmove', this.boundOnMove);
+      document.removeEventListener('touchend', this.boundEndMove);
+    }
   }
 
   onFileSelect(event: Event) {
@@ -261,30 +288,41 @@ export class ImageCropperComponent implements OnInit {
   }
 
   onImageLoad() {
-    this.showOverlay.set(true);
+    // Small delay to ensure DOM is updated
+    setTimeout(() => {
+      this.showOverlay.set(true);
+      this.initializeCropArea();
+    }, 100);
+  }
 
-    // Set initial crop area (80% of image)
+  private initializeCropArea() {
     const container = this.cropperContainer.nativeElement;
     const img = this.sourceImage.nativeElement;
 
     const containerRect = container.getBoundingClientRect();
     const imgRect = img.getBoundingClientRect();
 
+    // Calculate image position within container
+    const containerLeft = containerRect.left;
+    const containerTop = containerRect.top;
+    const imgLeft = imgRect.left - containerLeft;
+    const imgTop = imgRect.top - containerTop;
+
     const autoCropArea = 0.8;
     const cropWidth = imgRect.width * autoCropArea;
 
     const aspectRatio = this.aspectRatio();
-
     const cropHeight = aspectRatio ? cropWidth / aspectRatio : imgRect.height * autoCropArea;
 
-    const x1 = (containerRect.width - cropWidth) / 2;
-    const y1 = (containerRect.height - cropHeight) / 2;
+    // Center the crop area on the image
+    const x1 = imgLeft + (imgRect.width - cropWidth) / 2;
+    const y1 = imgTop + (imgRect.height - cropHeight) / 2;
 
     this.cropPosition.set({
-      x1,
-      y1,
-      x2: x1 + cropWidth,
-      y2: y1 + cropHeight,
+      x1: Math.max(imgLeft, x1),
+      y1: Math.max(imgTop, y1),
+      x2: Math.min(imgLeft + imgRect.width, x1 + cropWidth),
+      y2: Math.min(imgTop + imgRect.height, y1 + cropHeight),
     });
   }
 
@@ -299,10 +337,10 @@ export class ImageCropperComponent implements OnInit {
     this.startPosition = { x: clientX, y: clientY };
     this.isCropping = true;
 
-    document.addEventListener('mousemove', this.onMove.bind(this));
-    document.addEventListener('mouseup', this.endMove.bind(this));
-    document.addEventListener('touchmove', this.onMove.bind(this));
-    document.addEventListener('touchend', this.endMove.bind(this));
+    document.addEventListener('mousemove', this.boundOnMove);
+    document.addEventListener('mouseup', this.boundEndMove);
+    document.addEventListener('touchmove', this.boundOnMove, { passive: false });
+    document.addEventListener('touchend', this.boundEndMove);
   }
 
   startResize(event: MouseEvent | TouchEvent, handle: string) {
@@ -317,10 +355,10 @@ export class ImageCropperComponent implements OnInit {
     this.startPosition = { x: clientX, y: clientY };
     this.isCropping = true;
 
-    document.addEventListener('mousemove', this.onMove.bind(this));
-    document.addEventListener('mouseup', this.endMove.bind(this));
-    document.addEventListener('touchmove', this.onMove.bind(this));
-    document.addEventListener('touchend', this.endMove.bind(this));
+    document.addEventListener('mousemove', this.boundOnMove);
+    document.addEventListener('mouseup', this.boundEndMove);
+    document.addEventListener('touchmove', this.boundOnMove, { passive: false });
+    document.addEventListener('touchend', this.boundEndMove);
   }
 
   onMove(event: MouseEvent | TouchEvent) {
@@ -343,20 +381,26 @@ export class ImageCropperComponent implements OnInit {
   }
 
   moveCropArea(deltaX: number, deltaY: number) {
-    const containerRect = this.cropperContainer.nativeElement.getBoundingClientRect();
+    const img = this.sourceImage.nativeElement;
+    const container = this.cropperContainer.nativeElement;
+
+    const containerRect = container.getBoundingClientRect();
+    const imgRect = img.getBoundingClientRect();
+
+    const imgLeft = imgRect.left - containerRect.left;
+    const imgTop = imgRect.top - containerRect.top;
+    const imgRight = imgLeft + imgRect.width;
+    const imgBottom = imgTop + imgRect.height;
+
     const width = this.cropPosition().x2 - this.cropPosition().x1;
     const height = this.cropPosition().y2 - this.cropPosition().y1;
 
-    let x1 = Math.max(0, this.cropPosition().x1 + deltaX);
-    let y1 = Math.max(0, this.cropPosition().y1 + deltaY);
+    let x1 = this.cropPosition().x1 + deltaX;
+    let y1 = this.cropPosition().y1 + deltaY;
 
-    if (x1 + width > containerRect.width) {
-      x1 = containerRect.width - width;
-    }
-
-    if (y1 + height > containerRect.height) {
-      y1 = containerRect.height - height;
-    }
+    // Keep within image bounds
+    x1 = Math.max(imgLeft, Math.min(x1, imgRight - width));
+    y1 = Math.max(imgTop, Math.min(y1, imgBottom - height));
 
     this.cropPosition.set({
       x1,
@@ -367,7 +411,17 @@ export class ImageCropperComponent implements OnInit {
   }
 
   resizeCropArea(deltaX: number, deltaY: number) {
-    const containerRect = this.cropperContainer.nativeElement.getBoundingClientRect();
+    const img = this.sourceImage.nativeElement;
+    const container = this.cropperContainer.nativeElement;
+
+    const containerRect = container.getBoundingClientRect();
+    const imgRect = img.getBoundingClientRect();
+
+    const imgLeft = imgRect.left - containerRect.left;
+    const imgTop = imgRect.top - containerRect.top;
+    const imgRight = imgLeft + imgRect.width;
+    const imgBottom = imgTop + imgRect.height;
+
     let { x1, y1, x2, y2 } = this.cropPosition();
 
     const minSize = 50;
@@ -409,7 +463,7 @@ export class ImageCropperComponent implements OnInit {
       const width = x2 - x1;
       const height = y2 - y1;
 
-      if (width / height !== aspectRatio) {
+      if (Math.abs(width / height - aspectRatio) > 0.01) {
         switch (this.resizeHandle) {
           case 'tl':
           case 'tr':
@@ -423,7 +477,6 @@ export class ImageCropperComponent implements OnInit {
             break;
           case 'l':
           case 'r': {
-            // For side handles, adjust height to maintain aspect ratio
             const newHeight = width / aspectRatio;
             const centerY = (y1 + y2) / 2;
             y1 = centerY - newHeight / 2;
@@ -434,11 +487,21 @@ export class ImageCropperComponent implements OnInit {
       }
     }
 
-    // Keep within bounds
-    x1 = Math.max(0, x1);
-    y1 = Math.max(0, y1);
-    x2 = Math.min(containerRect.width, x2);
-    y2 = Math.min(containerRect.height, y2);
+    // Keep within image bounds
+    x1 = Math.max(imgLeft, x1);
+    y1 = Math.max(imgTop, y1);
+    x2 = Math.min(imgRight, x2);
+    y2 = Math.min(imgBottom, y2);
+
+    // Ensure minimum size is maintained
+    if (x2 - x1 < minSize) {
+      if (this.resizeHandle?.includes('l')) x1 = x2 - minSize;
+      else x2 = x1 + minSize;
+    }
+    if (y2 - y1 < minSize) {
+      if (this.resizeHandle?.includes('t')) y1 = y2 - minSize;
+      else y2 = y1 + minSize;
+    }
 
     this.cropPosition.set({ x1, y1, x2, y2 });
   }
@@ -449,54 +512,50 @@ export class ImageCropperComponent implements OnInit {
     this.isCropping = false;
     this.resizeHandle = null;
 
-    document.removeEventListener('mousemove', this.onMove.bind(this));
-    document.removeEventListener('mouseup', this.endMove.bind(this));
-    document.removeEventListener('touchmove', this.onMove.bind(this));
-    document.removeEventListener('touchend', this.endMove.bind(this));
+    document.removeEventListener('mousemove', this.boundOnMove);
+    document.removeEventListener('mouseup', this.boundEndMove);
+    document.removeEventListener('touchmove', this.boundOnMove);
+    document.removeEventListener('touchend', this.boundEndMove);
   }
 
   setAspectRatio(ratio: number | null) {
     this.aspectRatio.set(ratio);
-    const aspectRatio = this.aspectRatio();
-    if (this.sourceImage && aspectRatio) {
+
+    if (this.sourceImage && this.showOverlay() && ratio) {
       // Adjust current crop area to match aspect ratio
       const width = this.cropPosition().x2 - this.cropPosition().x1;
-      const newHeight = width / aspectRatio;
+      const newHeight = width / ratio;
       const centerY = (this.cropPosition().y1 + this.cropPosition().y2) / 2;
 
-      // this.cropPosition().y1 = centerY - newHeight / 2;
-      // this.cropPosition().y2 = centerY + newHeight / 2;
+      const img = this.sourceImage.nativeElement;
+      const container = this.cropperContainer.nativeElement;
+
+      const containerRect = container.getBoundingClientRect();
+      const imgRect = img.getBoundingClientRect();
+
+      const imgTop = imgRect.top - containerRect.top;
+      const imgBottom = imgTop + imgRect.height;
+
+      let y1 = centerY - newHeight / 2;
+      let y2 = centerY + newHeight / 2;
+
+      // Ensure it fits within image bounds
+      if (y2 > imgBottom) {
+        const overflow = y2 - imgBottom;
+        y1 -= overflow;
+        y2 -= overflow;
+      }
+      if (y1 < imgTop) {
+        const overflow = imgTop - y1;
+        y1 += overflow;
+        y2 += overflow;
+      }
 
       this.cropPosition.update((prev) => ({
         ...prev,
-        y1: centerY - newHeight / 2,
-        y2: centerY + newHeight / 2,
+        y1,
+        y2,
       }));
-
-      // Ensure it fits in canvas
-      const containerRect = this.cropperContainer.nativeElement.getBoundingClientRect();
-      if (this.cropPosition().y2 > containerRect.height) {
-        const overflow = this.cropPosition().y2 - containerRect.height;
-        // this.cropPosition().y1 -= overflow;
-        // this.cropPosition().y2 -= overflow;
-
-        this.cropPosition.update((prev) => ({
-          ...prev,
-          y1: prev.y1 - overflow,
-          y2: prev.y2 - overflow,
-        }));
-      }
-      if (this.cropPosition().y1 < 0) {
-        const overflow = -this.cropPosition().y1;
-        // this.cropPosition().y1 += overflow;
-        // this.cropPosition().y2 += overflow;
-
-        this.cropPosition.update((prev) => ({
-          ...prev,
-          y1: prev.y1 + overflow,
-          y2: prev.y2 + overflow,
-        }));
-      }
     }
   }
 
