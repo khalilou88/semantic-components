@@ -66,7 +66,7 @@ interface Position {
               alt="Source image"
             />
 
-            <div class="crop-overlay" [style.display]="showOverlay ? 'block' : 'none'">
+            <div class="crop-overlay" [style.display]="showOverlay() ? 'block' : 'none'">
               <div
                 class="crop-area"
                 #cropArea
@@ -105,31 +105,35 @@ interface Position {
         <div class="preset-buttons">
           <button
             class="preset-btn"
-            [class.active]="aspectRatio === null"
+            [class.active]="aspectRatio() === null"
             (click)="setAspectRatio(null)"
           >
             Free
           </button>
-          <button class="preset-btn" [class.active]="aspectRatio === 1" (click)="setAspectRatio(1)">
+          <button
+            class="preset-btn"
+            [class.active]="aspectRatio() === 1"
+            (click)="setAspectRatio(1)"
+          >
             1:1
           </button>
           <button
             class="preset-btn"
-            [class.active]="aspectRatio === 4 / 3"
+            [class.active]="aspectRatio() === 4 / 3"
             (click)="setAspectRatio(4 / 3)"
           >
             4:3
           </button>
           <button
             class="preset-btn"
-            [class.active]="aspectRatio === 16 / 9"
+            [class.active]="aspectRatio() === 16 / 9"
             (click)="setAspectRatio(16 / 9)"
           >
             16:9
           </button>
           <button
             class="preset-btn"
-            [class.active]="aspectRatio === 3 / 2"
+            [class.active]="aspectRatio() === 3 / 2"
             (click)="setAspectRatio(3 / 2)"
           >
             3:2
@@ -164,12 +168,12 @@ interface Position {
           />
         </div>
 
-        <div class="crop-info" *ngIf="cropInfo">
+        <div class="crop-info" *ngIf="cropInfo()">
           <h4>📊 Crop Information</h4>
-          <p>Original: {{ cropInfo.originalWidth }} × {{ cropInfo.originalHeight }}px</p>
-          <p>Cropped: {{ cropInfo.croppedWidth }} × {{ cropInfo.croppedHeight }}px</p>
-          <p>Aspect Ratio: {{ cropInfo.aspectRatio }}:1</p>
-          <p>Estimated Size: ~{{ cropInfo.estimatedSize }}KB</p>
+          <p>Original: {{ cropInfo().originalWidth }} × {{ cropInfo().originalHeight }}px</p>
+          <p>Cropped: {{ cropInfo().croppedWidth }} × {{ cropInfo().croppedHeight }}px</p>
+          <p>Aspect Ratio: {{ cropInfo().aspectRatio }}:1</p>
+          <p>Estimated Size: ~{{ cropInfo().estimatedSize }}KB</p>
         </div>
       </div>
     </div>
@@ -184,8 +188,8 @@ export class ImageCropperComponent implements OnInit {
   @ViewChild('cropArea') cropArea!: ElementRef;
 
   currentImage = signal<string | null>(null);
-  showOverlay = false;
-  aspectRatio: number | null = null;
+  showOverlay = signal(false);
+  aspectRatio = signal<number | null>(null);
   croppedImageData: string | null = null;
 
   cropPosition: CropPosition = { x1: 0, y1: 0, x2: 0, y2: 0 };
@@ -194,7 +198,7 @@ export class ImageCropperComponent implements OnInit {
   resizeHandle: string | null = null;
   isCropping = false;
 
-  cropInfo: any = null;
+  cropInfo = signal<any>(null);
 
   demoImages = {
     landscape: 'https://picsum.photos/800/600?random=1',
@@ -227,13 +231,13 @@ export class ImageCropperComponent implements OnInit {
 
   loadImage(src: string) {
     this.currentImage.set(src);
-    this.showOverlay = false;
+    this.showOverlay.set(false);
     this.croppedImageData = null;
-    this.cropInfo = null;
+    this.cropInfo.set(null);
   }
 
   onImageLoad() {
-    this.showOverlay = true;
+    this.showOverlay.set(true);
 
     // Set initial crop area (80% of image)
     const container = this.cropperContainer.nativeElement;
@@ -244,9 +248,10 @@ export class ImageCropperComponent implements OnInit {
 
     const autoCropArea = 0.8;
     const cropWidth = imgRect.width * autoCropArea;
-    const cropHeight = this.aspectRatio
-      ? cropWidth / this.aspectRatio
-      : imgRect.height * autoCropArea;
+
+    const aspectRatio = this.aspectRatio();
+
+    const cropHeight = aspectRatio ? cropWidth / aspectRatio : imgRect.height * autoCropArea;
 
     const x1 = (containerRect.width - cropWidth) / 2;
     const y1 = (containerRect.height - cropHeight) / 2;
@@ -363,19 +368,20 @@ export class ImageCropperComponent implements OnInit {
     }
 
     // Maintain aspect ratio if set
-    if (this.aspectRatio) {
+    const aspectRatio = this.aspectRatio();
+    if (aspectRatio) {
       const width = x2 - x1;
       const height = y2 - y1;
 
-      if (width / height !== this.aspectRatio) {
+      if (width / height !== aspectRatio) {
         switch (this.resizeHandle) {
           case 'tl':
           case 'tr':
-            y1 = y2 - width / this.aspectRatio;
+            y1 = y2 - width / aspectRatio;
             break;
           case 'bl':
           case 'br':
-            y2 = y1 + width / this.aspectRatio;
+            y2 = y1 + width / aspectRatio;
             break;
         }
       }
@@ -403,12 +409,12 @@ export class ImageCropperComponent implements OnInit {
   }
 
   setAspectRatio(ratio: number | null) {
-    this.aspectRatio = ratio;
-
-    if (this.sourceImage && this.aspectRatio) {
+    this.aspectRatio.set(ratio);
+    const aspectRatio = this.aspectRatio();
+    if (this.sourceImage && aspectRatio) {
       // Adjust current crop area to match aspect ratio
       const width = this.cropPosition.x2 - this.cropPosition.x1;
-      const newHeight = width / this.aspectRatio;
+      const newHeight = width / aspectRatio;
       const centerY = (this.cropPosition.y1 + this.cropPosition.y2) / 2;
 
       this.cropPosition.y1 = centerY - newHeight / 2;
@@ -430,7 +436,7 @@ export class ImageCropperComponent implements OnInit {
   }
 
   cropImage() {
-    if (!this.sourceImage || !this.showOverlay) return;
+    if (!this.sourceImage || !this.showOverlay()) return;
 
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d')!;
@@ -477,14 +483,14 @@ export class ImageCropperComponent implements OnInit {
     // Estimate file size (rough approximation)
     const estimatedSize = Math.round(((this.croppedImageData?.length || 0) * 0.75) / 1024);
 
-    this.cropInfo = {
+    this.cropInfo.set({
       originalWidth,
       originalHeight,
       croppedWidth: Math.round(width),
       croppedHeight: Math.round(height),
       aspectRatio: (width / height).toFixed(2),
       estimatedSize,
-    };
+    });
   }
 
   resetCrop() {
