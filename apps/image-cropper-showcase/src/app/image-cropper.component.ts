@@ -63,6 +63,7 @@ interface Position {
               #sourceImage
               [src]="currentImage()"
               (load)="onImageLoad()"
+              crossorigin="anonymous"
               alt="Source image"
             />
 
