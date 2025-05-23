@@ -22,11 +22,15 @@ module.exports = [
   {
     files: ['**/*.ts'],
     rules: {
+      '@angular-eslint/no-output-native': ['warn'],
+      '@angular-eslint/no-input-rename': ['warn'],
+      '@angular-eslint/component-class-suffix': 'off',
+      '@angular-eslint/directive-class-suffix': 'off',
       '@angular-eslint/directive-selector': [
         'error',
         {
           type: 'attribute',
-          prefix: 'lib',
+          prefix: 'sc',
           style: 'camelCase',
         },
       ],
@@ -34,7 +38,7 @@ module.exports = [
         'error',
         {
           type: 'element',
-          prefix: 'lib',
+          prefix: 'sc',
           style: 'kebab-case',
         },
       ],

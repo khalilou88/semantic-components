@@ -1,4 +1,6 @@
+import { CommonModule } from '@angular/common';
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   EventEmitter,
@@ -10,13 +12,15 @@ import {
   Renderer2,
   SimpleChanges,
   ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
 
 import { CropperOptions, CropperPosition, CropperResult } from './image-cropper.interface';
 import { ImageCropperService } from './image-cropper.service';
 
 @Component({
-  selector: 'ng-image-cropper',
+  selector: 'sc-image-cropper',
+  imports: [CommonModule],
   template: `
     <div class="image-cropper-container" [ngStyle]="containerStyle">
       <div class="cropper-canvas" #cropperCanvas [ngClass]="{ 'cropping-active': isCropping }">
@@ -144,9 +148,11 @@ import { ImageCropperService } from './image-cropper.service';
       }
     `,
   ],
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScImageCropper implements OnInit, OnChanges, OnDestroy {
-  @Input() imageUrl: string = '';
+  @Input() imageUrl = '';
   @Input() options: CropperOptions = {
     aspectRatio: 1,
     resizable: true,
@@ -188,9 +194,13 @@ export class ScImageCropper implements OnInit, OnChanges, OnDestroy {
   private startPosition = { x: 0, y: 0 };
   private moveType: 'crop' | 'resize' = 'crop';
   private resizeHandle: 'tl' | 'tr' | 'bl' | 'br' | null = null;
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   private mouseMoveListener: () => void = () => {};
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   private mouseUpListener: () => void = () => {};
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   private touchMoveListener: () => void = () => {};
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   private touchEndListener: () => void = () => {};
 
   constructor(
