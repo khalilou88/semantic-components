@@ -147,7 +147,7 @@ interface Position {
           <button class="control-btn" [disabled]="!currentImage()" (click)="resetCrop()">
             🔄 Reset
           </button>
-          <button class="control-btn" [disabled]="!croppedImageData" (click)="downloadImage()">
+          <button class="control-btn" [disabled]="!croppedImageData()" (click)="downloadImage()">
             💾 Download
           </button>
         </div>
@@ -157,13 +157,13 @@ interface Position {
       <div class="result-section">
         <h3>✨ Cropped Result</h3>
         <div id="resultContainer">
-          <div class="no-image" *ngIf="!croppedImageData">
+          <div class="no-image" *ngIf="!croppedImageData()">
             <p>Cropped image will appear here</p>
           </div>
           <img
             class="result-image"
-            *ngIf="croppedImageData"
-            [src]="croppedImageData"
+            *ngIf="croppedImageData()"
+            [src]="croppedImageData()"
             alt="Cropped image"
           />
         </div>
@@ -190,7 +190,7 @@ export class ImageCropperComponent implements OnInit {
   currentImage = signal<string | null>(null);
   showOverlay = signal(false);
   aspectRatio = signal<number | null>(null);
-  croppedImageData: string | null = null;
+  croppedImageData = signal<string | null>(null);
 
   cropPosition: CropPosition = { x1: 0, y1: 0, x2: 0, y2: 0 };
   startPosition: Position = { x: 0, y: 0 };
@@ -232,7 +232,7 @@ export class ImageCropperComponent implements OnInit {
   loadImage(src: string) {
     this.currentImage.set(src);
     this.showOverlay.set(false);
-    this.croppedImageData = null;
+    this.croppedImageData.set(null);
     this.cropInfo.set(null);
   }
 
@@ -469,7 +469,7 @@ export class ImageCropperComponent implements OnInit {
       cropHeight,
     );
 
-    this.croppedImageData = canvas.toDataURL('image/png');
+    this.croppedImageData.set(canvas.toDataURL('image/png'));
 
     // Show crop info
     this.showCropInfo(cropWidth, cropHeight);
@@ -481,7 +481,7 @@ export class ImageCropperComponent implements OnInit {
     const originalHeight = img.naturalHeight;
 
     // Estimate file size (rough approximation)
-    const estimatedSize = Math.round(((this.croppedImageData?.length || 0) * 0.75) / 1024);
+    const estimatedSize = Math.round(((this.croppedImageData()?.length || 0) * 0.75) / 1024);
 
     this.cropInfo.set({
       originalWidth,
@@ -500,10 +500,11 @@ export class ImageCropperComponent implements OnInit {
   }
 
   downloadImage() {
-    if (this.croppedImageData) {
+    const croppedImageData = this.croppedImageData();
+    if (croppedImageData) {
       const link = document.createElement('a');
       link.download = `cropped-image-${Date.now()}.png`;
-      link.href = this.croppedImageData;
+      link.href = croppedImageData;
       link.click();
     }
   }
