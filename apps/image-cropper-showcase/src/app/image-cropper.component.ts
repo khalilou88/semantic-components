@@ -302,11 +302,9 @@ export class ImageCropperComponent implements OnInit, OnDestroy {
     const containerRect = container.getBoundingClientRect();
     const imgRect = img.getBoundingClientRect();
 
-    // Calculate image position within container
-    const containerLeft = containerRect.left;
-    const containerTop = containerRect.top;
-    const imgLeft = imgRect.left - containerLeft;
-    const imgTop = imgRect.top - containerTop;
+    // Calculate image position within container (relative to container)
+    const imgLeft = imgRect.left - containerRect.left;
+    const imgTop = imgRect.top - containerRect.top;
 
     const autoCropArea = 0.8;
     const cropWidth = imgRect.width * autoCropArea;
@@ -573,10 +571,14 @@ export class ImageCropperComponent implements OnInit, OnDestroy {
     const scaleX = img.naturalWidth / imgRect.width;
     const scaleY = img.naturalHeight / imgRect.height;
 
+    // Calculate correct crop position relative to image
+    const imgLeft = imgRect.left - containerRect.left;
+    const imgTop = imgRect.top - containerRect.top;
+
     const cropWidth = (this.cropPosition().x2 - this.cropPosition().x1) * scaleX;
     const cropHeight = (this.cropPosition().y2 - this.cropPosition().y1) * scaleY;
-    const cropX = (this.cropPosition().x1 - (containerRect.width - imgRect.width) / 2) * scaleX;
-    const cropY = (this.cropPosition().y1 - (containerRect.height - imgRect.height) / 2) * scaleY;
+    const cropX = (this.cropPosition().x1 - imgLeft) * scaleX;
+    const cropY = (this.cropPosition().y1 - imgTop) * scaleY;
 
     canvas.width = cropWidth;
     canvas.height = cropHeight;
