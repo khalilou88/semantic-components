@@ -235,8 +235,8 @@ export class ImageCropperComponent implements OnInit, OnDestroy {
   cropInfo = signal<CropInfo | null>(null);
 
   // Bound methods for proper event listener cleanup
-  private boundOnMove = this.onMove.bind(this);
-  private boundEndMove = this.endMove.bind(this);
+  private readonly boundOnMove = this.onMove.bind(this);
+  private readonly boundEndMove = this.endMove.bind(this);
 
   demoImages = {
     landscape: 'https://picsum.photos/800/600?random=1',
