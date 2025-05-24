@@ -8,9 +8,9 @@ import {
   linkedSignal,
 } from '@angular/core';
 
+import { ButtonVariants, ScButtonBase, buttonVariants } from '@semantic-components/ui';
 import { cn } from '@semantic-components/utils';
 
-import { ButtonVariants, ScButtonBase, buttonVariants } from '../button';
 import { ScCarousel } from './carousel';
 
 @Component({
