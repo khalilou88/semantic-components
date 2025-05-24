@@ -10,7 +10,8 @@
   "peerDependencies": {
     "@angular/core": ">=19.0.0",
     "@semantic-components/utils": "0.39.0",
-    "embla-carousel": "^8.6.0"
+    "embla-carousel": "^8.6.0",
+    "@semantic-components/ui": "0.50.0"
   },
   "repository": {
     "type": "git",
