@@ -1,14 +1,14 @@
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
+import { ScButton } from '@semantic-components/ui';
+import { ScInput } from '@semantic-components/ui';
+import { ScLabel } from '@semantic-components/ui';
+import { ScPopoverTriggerFor } from '@semantic-components/ui';
+import { ScToggle } from '@semantic-components/ui';
+import { ScTooltip } from '@semantic-components/ui';
 import { SiImagePlusIcon } from '@semantic-icons/lucide-icons';
 
-import { ScButton } from '../../button';
-import { ScInput } from '../../input';
-import { ScLabel } from '../../label';
-import { ScPopoverTriggerFor } from '../../popover';
-import { ScToggle } from '../../toggle';
-import { ScTooltip } from '../../tooltip';
 import { ScEditor } from '../editor';
 import { ImageData, ScAddImageDialog } from '../toolbar/add-image-dialog';
 import { ScExtensions } from './extensions';

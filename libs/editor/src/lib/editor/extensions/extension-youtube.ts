@@ -1,10 +1,10 @@
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
+import { ScToggle } from '@semantic-components/ui';
+import { ScTooltip } from '@semantic-components/ui';
 import { SiFileVideoIcon } from '@semantic-icons/lucide-icons';
 
-import { ScToggle } from '../../toggle';
-import { ScTooltip } from '../../tooltip';
 import { ScEditor } from '../editor';
 import { ScAddVideoDialog, VideoData } from '../toolbar/add-video-dialog';
 import { ScExtensions } from './extensions';

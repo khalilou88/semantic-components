@@ -6,10 +6,9 @@ import {
   input,
 } from '@angular/core';
 
+import { ScToggle, ScTooltip } from '@semantic-components/ui';
 import { SiQuoteIcon } from '@semantic-icons/lucide-icons';
 
-import { ScToggle } from '../../toggle';
-import { ScTooltip } from '../../tooltip';
 import { ScEditor } from '../editor';
 import { ScExtensions } from '../extensions/extensions';
 

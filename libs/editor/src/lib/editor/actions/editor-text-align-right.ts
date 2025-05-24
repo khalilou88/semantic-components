@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
+import { ScToggle } from '@semantic-components/ui';
+import { ScTooltip } from '@semantic-components/ui';
 import { SiAlignRightIcon } from '@semantic-icons/lucide-icons';
 
-import { ScToggle } from '../../toggle';
-import { ScTooltip } from '../../tooltip';
 import { ScEditor } from '../editor';
 import { ScExtensions } from '../extensions/extensions';
 

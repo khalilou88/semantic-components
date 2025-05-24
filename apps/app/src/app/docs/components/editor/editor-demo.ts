@@ -22,8 +22,8 @@ import {
   ScEditorUnderline,
   ScEditorUndo,
   ScEditorUnsetLink,
-  ScSeparator,
-} from '@semantic-components/ui';
+} from '@semantic-components/editor';
+import { ScSeparator } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-editor-demo',
@@ -88,7 +88,7 @@ import {
 })
 export class EditorDemo {
   protected readonly editorForm = new FormGroup({
-    content: new FormControl(`  
+    content: new FormControl(`
       <h1>Garlic bread with cheese: What the science tells us</h1>
   <p>
     For years parents have espoused the health benefits of eating garlic bread with cheese to their

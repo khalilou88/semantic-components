@@ -2,17 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
-import { ScTab, ScTabContent, ScTabLabel, ScTabs } from '@semantic-components/experimental';
 import {
-  ScBreadcrumb,
-  ScBreadcrumbItem,
-  ScBreadcrumbLink,
-  ScBreadcrumbList,
-  ScBreadcrumbPage,
-  ScBreadcrumbSeparator,
-  ScCard,
-  ScCardContent,
-  ScCodeHighlighter,
   ScEditor,
   ScEditorBlockquote,
   ScEditorBold,
@@ -24,7 +14,6 @@ import {
   ScEditorHorizontalRule,
   ScEditorItalic,
   ScEditorOrderedList,
-  // ScEditorParagraph,
   ScEditorRedo,
   ScEditorStrike,
   ScEditorTextAlignCenter,
@@ -34,6 +23,19 @@ import {
   ScEditorUnderline,
   ScEditorUndo,
   ScEditorUnsetLink,
+} from '@semantic-components/editor';
+import { ScTab, ScTabContent, ScTabLabel, ScTabs } from '@semantic-components/experimental';
+import {
+  ScBreadcrumb,
+  ScBreadcrumbItem,
+  ScBreadcrumbLink,
+  ScBreadcrumbList,
+  ScBreadcrumbPage,
+  ScBreadcrumbSeparator,
+  ScCard,
+  ScCardContent,
+  ScCodeHighlighter,
+  // ScEditorParagraph,
   // ScExtensionColor,
   // ScExtensionFontFamily,
   // ScExtensionHeading,

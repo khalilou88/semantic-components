@@ -1,7 +1,8 @@
 import { Dialog } from '@angular/cdk/dialog';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { ScTooltip } from '../../tooltip';
+import { ScTooltip } from '@semantic-components/ui';
+
 import { ScEditor } from '../editor';
 import { LinkData, ScAddLinkDialog } from '../toolbar/add-link-dialog';
 import { ScExtensions } from './extensions';

@@ -7,8 +7,9 @@ import {
   ScMenuSeparator,
   ScMenuShortcut,
   ScMenuTriggerFor,
-} from '../../menu';
-import { ScToggle } from '../../toggle';
+} from '@semantic-components/ui';
+import { ScToggle, ScTooltip } from '@semantic-components/ui';
+
 import { ScEditor } from '../editor';
 
 @Component({

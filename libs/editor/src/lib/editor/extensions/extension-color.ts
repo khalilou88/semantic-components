@@ -1,9 +1,9 @@
 import { CdkMenu, CdkMenuItem, CdkMenuTrigger } from '@angular/cdk/menu';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
+import { ScTooltip } from '@semantic-components/ui';
 import { SiPaletteIcon } from '@semantic-icons/lucide-icons';
 
-import { ScTooltip } from '../../tooltip';
 import { colors } from '../colors';
 import { ScEditor } from '../editor';
 import { ScExtensions } from './extensions';
