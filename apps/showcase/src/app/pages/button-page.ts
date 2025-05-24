@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+import { ScCodeHighlighter } from '@semantic-components/code-highlighter';
 import { ScTab, ScTabContent, ScTabLabel, ScTabs } from '@semantic-components/experimental';
 import {
   ScBreadcrumb,
@@ -12,7 +13,6 @@ import {
   ScButton,
   ScCard,
   ScCardContent,
-  ScCodeHighlighter,
   ScHeading,
   ScPageDescription,
   ScPageSubtitle,

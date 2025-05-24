@@ -9,6 +9,7 @@ import {
   ScCarouselNext,
   ScCarouselPrevious,
 } from '@semantic-components/carousel';
+import { ScCodeHighlighter } from '@semantic-components/code-highlighter';
 import { ScTab, ScTabContent, ScTabLabel, ScTabs } from '@semantic-components/experimental';
 import {
   ScBreadcrumb,
@@ -19,7 +20,6 @@ import {
   ScBreadcrumbSeparator,
   ScCard,
   ScCardContent,
-  ScCodeHighlighter,
   ScHeading,
   ScPageDescription,
   ScPageSubtitle,

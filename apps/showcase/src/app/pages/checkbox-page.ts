@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
+import { ScCodeHighlighter } from '@semantic-components/code-highlighter';
 import {
   ScCheckbox1,
   ScCheckboxContainer,
@@ -19,7 +20,6 @@ import {
   ScCard,
   ScCardContent,
   ScCheckbox,
-  ScCodeHighlighter,
   ScDescription,
   ScLabel,
   ScPageDescription,

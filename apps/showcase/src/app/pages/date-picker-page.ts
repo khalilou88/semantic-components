@@ -8,6 +8,7 @@ import {
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
+import { ScCodeHighlighter } from '@semantic-components/code-highlighter';
 import { ScTab, ScTabContent, ScTabLabel, ScTabs } from '@semantic-components/experimental';
 import {
   ScBreadcrumb,
@@ -18,7 +19,6 @@ import {
   ScBreadcrumbSeparator,
   ScCard,
   ScCardContent,
-  ScCodeHighlighter,
   ScDatePicker,
   ScDatePickerToggle,
   ScInput,
