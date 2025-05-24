@@ -1,6 +1,14 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+import {
+  ScCarousel,
+  ScCarouselContainer,
+  ScCarouselItem,
+  ScCarouselItems,
+  ScCarouselNext,
+  ScCarouselPrevious,
+} from '@semantic-components/carousel';
 import { ScTab, ScTabContent, ScTabLabel, ScTabs } from '@semantic-components/experimental';
 import {
   ScBreadcrumb,
@@ -11,12 +19,6 @@ import {
   ScBreadcrumbSeparator,
   ScCard,
   ScCardContent,
-  ScCarousel,
-  ScCarouselContainer,
-  ScCarouselItem,
-  ScCarouselItems,
-  ScCarouselNext,
-  ScCarouselPrevious,
   ScCodeHighlighter,
   ScHeading,
   ScPageDescription,
