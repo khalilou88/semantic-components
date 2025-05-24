@@ -12,34 +12,6 @@
     "@angular/core": ">=19.0.0",
     "@angular/cdk": ">=19.0.0",
     "@angular/forms": ">=19.0.0",
-    "@tiptap/core": "^2.10.3",
-    "@tiptap/extension-blockquote": "^2.10.3",
-    "@tiptap/extension-bold": "^2.10.3",
-    "@tiptap/extension-bullet-list": "^2.10.3",
-    "@tiptap/extension-code": "^2.10.3",
-    "@tiptap/extension-color": "^2.10.3",
-    "@tiptap/extension-document": "^2.10.3",
-    "@tiptap/extension-font-family": "^2.10.3",
-    "@tiptap/extension-heading": "^2.10.3",
-    "@tiptap/extension-highlight": "^2.10.3",
-    "@tiptap/extension-history": "^2.10.3",
-    "@tiptap/extension-horizontal-rule": "^2.10.3",
-    "@tiptap/extension-image": "^2.10.3",
-    "@tiptap/extension-italic": "^2.10.3",
-    "@tiptap/extension-link": "^2.10.3",
-    "@tiptap/extension-list-item": "^2.10.3",
-    "@tiptap/extension-ordered-list": "^2.10.3",
-    "@tiptap/extension-text-style": "^2.10.3",
-    "@tiptap/extension-paragraph": "^2.10.3",
-    "@tiptap/extension-strike": "^2.10.3",
-    "@tiptap/extension-text": "^2.10.3",
-    "@tiptap/extension-text-align": "^2.10.3",
-    "@tiptap/extension-underline": "^2.10.3",
-    "@tiptap/extension-youtube": "^2.10.3",
-    "@tiptap/extension-table-header": "^2.10.3",
-    "@tiptap/extension-table-row": "^2.10.3",
-    "@tiptap/extension-table-cell": "^2.10.3",
-    "@tiptap/extension-table": "^2.10.3",
     "class-variance-authority": "^0.7.1",
     "embla-carousel": "^8.5.1",
     "rxjs": "~7.8.1",
@@ -49,98 +21,6 @@
     "shiki": ">=3.0.0",
     "@angular/router": ">=19.0.0",
     "@js-temporal/polyfill": ">=0.4.4"
-  },
-  "peerDependenciesMeta": {
-    "@tiptap/core": {
-      "optional": true
-    },
-    "@tiptap/extension-blockquote": {
-      "optional": true
-    },
-    "@tiptap/extension-bold": {
-      "optional": true
-    },
-    "@tiptap/extension-bullet-list": {
-      "optional": true
-    },
-    "@tiptap/extension-code": {
-      "optional": true
-    },
-    "@tiptap/extension-color": {
-      "optional": true
-    },
-    "@tiptap/extension-document": {
-      "optional": true
-    },
-    "@tiptap/extension-font-family": {
-      "optional": true
-    },
-    "@tiptap/extension-heading": {
-      "optional": true
-    },
-    "@tiptap/extension-highlight": {
-      "optional": true
-    },
-    "@tiptap/extension-history": {
-      "optional": true
-    },
-    "@tiptap/extension-horizontal-rule": {
-      "optional": true
-    },
-    "@tiptap/extension-image": {
-      "optional": true
-    },
-    "@tiptap/extension-italic": {
-      "optional": true
-    },
-    "@tiptap/extension-link": {
-      "optional": true
-    },
-    "@tiptap/extension-list-item": {
-      "optional": true
-    },
-    "@tiptap/extension-ordered-list": {
-      "optional": true
-    },
-    "@tiptap/extension-text-style": {
-      "optional": true
-    },
-    "@tiptap/extension-paragraph": {
-      "optional": true
-    },
-    "@tiptap/extension-strike": {
-      "optional": true
-    },
-    "@tiptap/extension-text": {
-      "optional": true
-    },
-    "@tiptap/extension-text-align": {
-      "optional": true
-    },
-    "@tiptap/extension-underline": {
-      "optional": true
-    },
-    "@tiptap/extension-youtube": {
-      "optional": true
-    },
-    "@tiptap/extension-table-header": {
-      "optional": true
-    },
-    "@tiptap/extension-table-row": {
-      "optional": true
-    },
-    "@tiptap/extension-table-cell": {
-      "optional": true
-    },
-    "@tiptap/extension-table": {
-      "optional": true
-    },
-    "embla-carousel": {
-      "optional": true
-    },
-    "shiki": {
-      "optional": true
-    }
   },
   "sideEffects": false,
   "repository": {

@@ -36,3 +36,5 @@ nx g @nx/angular:library libs/logging --publishable --import-path=@semantic-comp
 nx g @nx/angular:library libs/experimental --publishable --import-path=@semantic-components/experimental
 
 nx g @nx/angular:library libs/image-cropper --publishable --import-path=@semantic-components/image-cropper
+
+nx g @nx/angular:library libs/editor --publishable --import-path=@semantic-components/editor
