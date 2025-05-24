@@ -1,6 +1,12 @@
 {
   "name": "@semantic-components/editor",
   "version": "0.0.1",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Khalil LAGRIDA",
+  "license": "MIT",
   "peerDependencies": {
     "@angular/core": ">=19.0.0",
     "@semantic-icons/lucide-icons": "^0.44.0",
@@ -107,5 +113,10 @@
       "optional": true
     }
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/khalilou88/semantic-components",
+    "directory": "libs/editor"
+  }
 }
