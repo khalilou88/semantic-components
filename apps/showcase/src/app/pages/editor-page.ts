@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
+import { ScCodeHighlighter } from '@semantic-components/code-highlighter';
 import {
   ScEditor,
   ScEditorBlockquote,
@@ -34,7 +35,6 @@ import {
   ScBreadcrumbSeparator,
   ScCard,
   ScCardContent,
-  ScCodeHighlighter,
   // ScEditorParagraph,
   // ScExtensionColor,
   // ScExtensionFontFamily,

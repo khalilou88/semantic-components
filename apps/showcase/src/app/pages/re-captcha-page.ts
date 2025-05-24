@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
+import { ScCodeHighlighter } from '@semantic-components/code-highlighter';
 import { ScTab, ScTabContent, ScTabLabel, ScTabs } from '@semantic-components/experimental';
 import {
   ScCheckboxReCaptcha,
@@ -23,7 +24,6 @@ import {
   ScButton,
   ScCard,
   ScCardContent,
-  ScCodeHighlighter,
   ScHeading,
   ScPageDescription,
   ScPageSubtitle,
