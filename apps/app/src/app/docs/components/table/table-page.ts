@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { ScCodeHighlighter } from '@semantic-components/ui';
+import { ScCodeHighlighter } from '@semantic-components/code-highlighter';
 
 import { TableDemoSection } from './table-demo-section';
 

@@ -6,7 +6,7 @@ import {
   signal,
 } from '@angular/core';
 
-import { ScCodeHighlighter } from '@semantic-components/ui';
+import { ScCodeHighlighter } from '@semantic-components/code-highlighter';
 
 import { TocHeadingDirective } from '../toc/toc-heading.directive';
 
