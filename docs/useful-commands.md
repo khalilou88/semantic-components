@@ -38,3 +38,5 @@ nx g @nx/angular:library libs/experimental --publishable --import-path=@semantic
 nx g @nx/angular:library libs/image-cropper --publishable --import-path=@semantic-components/image-cropper
 
 nx g @nx/angular:library libs/editor --publishable --import-path=@semantic-components/editor
+
+nx g @nx/angular:library libs/carousel --publishable --import-path=@semantic-components/carousel

@@ -1,0 +1,21 @@
+{
+  "name": "@semantic-components/carousel",
+  "version": "0.0.1",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Khalil LAGRIDA",
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/core": ">=19.0.0",
+    "@semantic-components/utils": "0.39.0",
+    "embla-carousel": "^8.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/khalilou88/semantic-components",
+    "directory": "libs/carousel"
+  },
+  "sideEffects": false
+}

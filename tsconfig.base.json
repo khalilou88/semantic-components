@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@semantic-components/carousel": ["libs/carousel/src/index.ts"],
       "@semantic-components/editor": ["libs/editor/src/index.ts"],
       "@semantic-components/event-manager": ["libs/event-manager/src/index.ts"],
       "@semantic-components/experimental": ["libs/experimental/src/index.ts"],
