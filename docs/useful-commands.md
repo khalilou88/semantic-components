@@ -39,4 +39,4 @@ nx g @nx/angular:library libs/image-cropper --publishable --import-path=@semanti
 
 nx g @nx/angular:library libs/editor --publishable --import-path=@semantic-components/editor
 
-nx g @nx/angular:library libs/carousel --publishable --import-path=@semantic-components/carousel
+nx g @nx/angular:library libs/code-highlighter --publishable --import-path=@semantic-components/code-highlighter

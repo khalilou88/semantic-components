@@ -16,8 +16,6 @@
     "rxjs": "~7.8.1",
     "@semantic-icons/lucide-icons": ">=0.0.1",
     "@semantic-components/utils": "0.39.0",
-    "@angular/platform-browser": ">=19.0.0",
-    "shiki": ">=3.0.0",
     "@angular/router": ">=19.0.0",
     "@js-temporal/polyfill": ">=0.4.4"
   },

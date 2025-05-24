@@ -1,0 +1,25 @@
+{
+  "name": "@semantic-components/code-highlighter",
+  "version": "0.0.1",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Khalil LAGRIDA",
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/core": ">=19.0.0",
+    "@angular/cdk": "^19.2.16",
+    "@angular/platform-browser": "19.2.11",
+    "@semantic-components/utils": "0.39.0",
+    "@semantic-icons/lucide-icons": "^0.44.0",
+    "@semantic-components/ui": "0.50.0",
+    "shiki": "^3.4.2"
+  },
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/khalilou88/semantic-components",
+    "directory": "libs/code-highlighter"
+  }
+}
