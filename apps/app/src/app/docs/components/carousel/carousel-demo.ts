@@ -1,15 +1,14 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import {
-  ScCard,
-  ScCardContent,
   ScCarousel,
   ScCarouselContainer,
   ScCarouselItem,
   ScCarouselItems,
   ScCarouselNext,
   ScCarouselPrevious,
-} from '@semantic-components/ui';
+} from '@semantic-components/carousel';
+import { ScCard, ScCardContent } from '@semantic-components/ui';
 import { SiArrowLeftIcon, SiArrowRightIcon } from '@semantic-icons/lucide-icons';
 import { EmblaOptionsType, EmblaPluginType } from 'embla-carousel';
 import Autoplay from 'embla-carousel-autoplay';
