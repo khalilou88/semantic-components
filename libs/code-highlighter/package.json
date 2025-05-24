@@ -9,8 +9,8 @@
   "license": "MIT",
   "peerDependencies": {
     "@angular/core": ">=19.0.0",
-    "@angular/cdk": "^19.2.16",
-    "@angular/platform-browser": "19.2.11",
+    "@angular/cdk": ">=19.0.0",
+    "@angular/platform-browser": ">=19.0.0",
     "@semantic-components/utils": "0.39.0",
     "@semantic-icons/lucide-icons": "^0.44.0",
     "@semantic-components/ui": "0.50.0",
