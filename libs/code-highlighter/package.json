@@ -11,9 +11,9 @@
     "@angular/core": ">=19.0.0",
     "@angular/cdk": ">=19.0.0",
     "@angular/platform-browser": ">=19.0.0",
-    "@semantic-components/utils": "0.39.0",
-    "@semantic-icons/lucide-icons": "^0.44.0",
-    "@semantic-components/ui": "0.50.0",
+    "@semantic-components/utils": ">=0.41.0",
+    "@semantic-icons/lucide-icons": ">=0.45.0",
+    "@semantic-components/ui": ">=0.52.0",
     "shiki": "^3.4.2"
   },
   "sideEffects": false,
