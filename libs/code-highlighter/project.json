@@ -2,7 +2,7 @@
   "name": "code-highlighter",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/code-highlighter/src",
-  "prefix": "lib",
+  "prefix": "sc",
   "projectType": "library",
   "release": {
     "version": {
