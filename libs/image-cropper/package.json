@@ -10,7 +10,7 @@
   "peerDependencies": {
     "@angular/core": ">=19.0.0",
     "@angular/common": ">=19.0.0",
-    "@angular/forms": "19.2.13"
+    "@angular/forms": ">=19.0.0"
   },
   "sideEffects": false,
   "repository": {
