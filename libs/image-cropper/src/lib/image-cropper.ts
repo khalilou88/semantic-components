@@ -1,68 +1,306 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  Output,
-  Renderer2,
-  SimpleChanges,
-  ViewChild,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
-import { CropperOptions, CropperPosition, CropperResult } from './image-cropper.interface';
-import { ImageCropperService } from './image-cropper.service';
+interface CropSettings {
+  width: number;
+  height: number;
+  x: number;
+  y: number;
+  aspectRatio: string;
+  format: string;
+  quality: number;
+}
+
+interface CropBox {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
 
 @Component({
   selector: 'sc-image-cropper',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   template: `
-    <div class="image-cropper-container" [ngStyle]="containerStyle">
-      <div class="cropper-canvas" #cropperCanvas [ngClass]="{ 'cropping-active': isCropping }">
-        <img
-          class="source-image"
-          #sourceImage
-          [src]="imageUrl"
-          (load)="onImageLoad()"
-          alt="Source image"
-        />
-        <div class="crop-overlay" *ngIf="showOverlay">
-          <div
-            class="crop-area"
-            #cropArea
-            [ngStyle]="getCropAreaStyle()"
-            (mousedown)="onCropAreaMouseDown($event)"
-            (touchstart)="onCropAreaTouchStart($event)"
-          >
+    <div class="min-h-screen bg-background p-4">
+      <div class="mx-auto max-w-4xl space-y-6">
+        <!-- Header -->
+        <div class="space-y-2">
+          <h1 class="text-3xl font-semibold tracking-tight">Image Cropper</h1>
+          <p class="text-muted-foreground">
+            Upload an image and crop it to your desired dimensions
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- Main Cropper Area -->
+          <div class="lg:col-span-2 space-y-4">
+            <!-- Upload Area -->
             <div
-              class="resize-handle tl"
-              *ngIf="options.resizable"
-              (mousedown)="onResizeHandleMouseDown($event, 'tl')"
-              (touchstart)="onResizeHandleTouchStart($event, 'tl')"
-            ></div>
-            <div
-              class="resize-handle tr"
-              *ngIf="options.resizable"
-              (mousedown)="onResizeHandleMouseDown($event, 'tr')"
-              (touchstart)="onResizeHandleTouchStart($event, 'tr')"
-            ></div>
-            <div
-              class="resize-handle bl"
-              *ngIf="options.resizable"
-              (mousedown)="onResizeHandleMouseDown($event, 'bl')"
-              (touchstart)="onResizeHandleTouchStart($event, 'bl')"
-            ></div>
-            <div
-              class="resize-handle br"
-              *ngIf="options.resizable"
-              (mousedown)="onResizeHandleMouseDown($event, 'br')"
-              (touchstart)="onResizeHandleTouchStart($event, 'br')"
-            ></div>
+              class="rounded-lg border border-dashed border-border bg-card p-8 text-center"
+              [class.hidden]="imageLoaded"
+              (keydown)="onKeyDown($event, fileInput)"
+              (dragover)="onDragOver($event)"
+              (drop)="onDrop($event)"
+              (click)="fileInput.click()"
+              role="button"
+              tabIndex="0"
+            >
+              <div
+                class="mx-auto flex max-w-[420px] flex-col items-center justify-center text-center cursor-pointer"
+              >
+                <svg
+                  class="h-10 w-10 text-muted-foreground mb-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 48 48"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                  />
+                </svg>
+                <h3 class="text-lg font-semibold">Upload an image</h3>
+                <p class="text-sm text-muted-foreground mb-4">
+                  Drag and drop your image here, or click to browse
+                </p>
+                <button
+                  class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
+                >
+                  Choose File
+                </button>
+              </div>
+            </div>
+
+            <input
+              class="hidden"
+              #fileInput
+              (change)="onFileSelected($event)"
+              type="file"
+              accept="image/*"
+            />
+
+            <!-- Crop Area -->
+            <div class="rounded-lg border bg-card p-4" [class.hidden]="!imageLoaded">
+              <div class="relative aspect-video bg-muted rounded-md overflow-hidden" #cropContainer>
+                <!-- Image -->
+                <img
+                  class="absolute inset-0 w-full h-full object-contain"
+                  #imageElement
+                  *ngIf="imageSrc"
+                  [src]="imageSrc"
+                  (load)="onImageLoad()"
+                  alt=""
+                />
+
+                <!-- Crop Overlay -->
+                <div class="absolute inset-0" *ngIf="imageLoaded">
+                  <!-- Dark overlay -->
+                  <div class="absolute inset-0 bg-black/40"></div>
+
+                  <!-- Crop selection box -->
+                  <div
+                    class="absolute border-2 border-white shadow-lg cursor-move"
+                    [style.left.px]="cropBox.x"
+                    [style.top.px]="cropBox.y"
+                    [style.width.px]="cropBox.width"
+                    [style.height.px]="cropBox.height"
+                    (mousedown)="startDrag($event)"
+                  >
+                    <!-- Clear area inside crop box -->
+                    <div class="absolute inset-0 bg-transparent"></div>
+
+                    <!-- Corner handles -->
+                    <div
+                      class="absolute -top-1 -left-1 w-3 h-3 bg-white border border-gray-300 cursor-nw-resize"
+                      (mousedown)="startResize($event, 'nw')"
+                    ></div>
+                    <div
+                      class="absolute -top-1 -right-1 w-3 h-3 bg-white border border-gray-300 cursor-ne-resize"
+                      (mousedown)="startResize($event, 'ne')"
+                    ></div>
+                    <div
+                      class="absolute -bottom-1 -left-1 w-3 h-3 bg-white border border-gray-300 cursor-sw-resize"
+                      (mousedown)="startResize($event, 'sw')"
+                    ></div>
+                    <div
+                      class="absolute -bottom-1 -right-1 w-3 h-3 bg-white border border-gray-300 cursor-se-resize"
+                      (mousedown)="startResize($event, 'se')"
+                    ></div>
+
+                    <!-- Edge handles -->
+                    <div
+                      class="absolute -top-1 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-white border border-gray-300 cursor-n-resize"
+                      (mousedown)="startResize($event, 'n')"
+                    ></div>
+                    <div
+                      class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-white border border-gray-300 cursor-s-resize"
+                      (mousedown)="startResize($event, 's')"
+                    ></div>
+                    <div
+                      class="absolute -left-1 top-1/2 transform -translate-y-1/2 w-3 h-3 bg-white border border-gray-300 cursor-w-resize"
+                      (mousedown)="startResize($event, 'w')"
+                    ></div>
+                    <div
+                      class="absolute -right-1 top-1/2 transform -translate-y-1/2 w-3 h-3 bg-white border border-gray-300 cursor-e-resize"
+                      (mousedown)="startResize($event, 'e')"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controls Panel -->
+          <div class="space-y-4">
+            <!-- Crop Settings -->
+            <div class="rounded-lg border bg-card p-4">
+              <h3 class="font-semibold mb-4">Crop Settings</h3>
+              <div class="space-y-4">
+                <!-- Aspect Ratio -->
+                <div class="space-y-2">
+                  <label class="text-sm font-medium" for="id12">Aspect Ratio</label>
+                  <select
+                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    id="id12"
+                    [(ngModel)]="cropSettings.aspectRatio"
+                    (change)="onAspectRatioChange()"
+                  >
+                    <option value="free">Free</option>
+                    <option value="1:1">1:1 (Square)</option>
+                    <option value="4:3">4:3</option>
+                    <option value="16:9">16:9</option>
+                    <option value="3:2">3:2</option>
+                  </select>
+                </div>
+
+                <!-- Dimensions -->
+                <div class="grid grid-cols-2 gap-2">
+                  <div class="space-y-2">
+                    <label class="text-sm font-medium" for="id22">Width</label>
+                    <input
+                      class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                      id="id22"
+                      [(ngModel)]="cropSettings.width"
+                      (change)="updateCropBox()"
+                      type="number"
+                    />
+                  </div>
+                  <div class="space-y-2">
+                    <label class="text-sm font-medium" for="id127">Height</label>
+
+                    <input
+                      class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                      id="id127"
+                      [(ngModel)]="cropSettings.height"
+                      (change)="updateCropBox()"
+                      type="number"
+                    />
+                  </div>
+                </div>
+
+                <!-- Position -->
+                <div class="grid grid-cols-2 gap-2">
+                  <div class="space-y-2">
+                    <label class="text-sm font-medium" for="id527">X Position</label>
+                    <input
+                      class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                      id="id527"
+                      [(ngModel)]="cropSettings.x"
+                      (change)="updateCropBox()"
+                      type="number"
+                    />
+                  </div>
+                  <div class="space-y-2">
+                    <label class="text-sm font-medium" for="id5757">Y Position</label>
+                    <input
+                      class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                      id="id5757"
+                      [(ngModel)]="cropSettings.y"
+                      (change)="updateCropBox()"
+                      type="number"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Export Settings -->
+            <div class="rounded-lg border bg-card p-4">
+              <h3 class="font-semibold mb-4">Export Settings</h3>
+              <div class="space-y-4">
+                <div class="space-y-2">
+                  <label class="text-sm font-medium" for="id5117">Format</label>
+                  <select
+                    class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    id="id5117"
+                    [(ngModel)]="cropSettings.format"
+                  >
+                    <option value="png">PNG</option>
+                    <option value="jpeg">JPEG</option>
+                    <option value="webp">WEBP</option>
+                  </select>
+                </div>
+
+                <div class="space-y-2">
+                  <label class="text-sm font-medium" for="id5827">Quality</label>
+                  <input
+                    class="w-full h-2 bg-secondary rounded-lg appearance-none cursor-pointer"
+                    id="id5827"
+                    [(ngModel)]="cropSettings.quality"
+                    type="range"
+                    min="1"
+                    max="100"
+                  />
+                  <div class="flex justify-between text-xs text-muted-foreground">
+                    <span>1</span>
+                    <span>{{ cropSettings.quality }}</span>
+                    <span>100</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="space-y-2">
+              <button
+                class="w-full inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
+                [disabled]="!imageLoaded"
+                (click)="cropAndDownload()"
+              >
+                Crop & Download
+              </button>
+              <button
+                class="w-full inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
+                [disabled]="!imageLoaded"
+                (click)="resetCrop()"
+              >
+                Reset Crop
+              </button>
+            </div>
+
+            <!-- Preview -->
+            <div class="rounded-lg border bg-card p-4">
+              <h3 class="font-semibold mb-4">Preview</h3>
+              <div
+                class="aspect-square bg-muted rounded-md flex items-center justify-center overflow-hidden"
+              >
+                <canvas
+                  class="max-w-full max-h-full"
+                  #previewCanvas
+                  *ngIf="imageLoaded; else noPreview"
+                ></canvas>
+                <ng-template #noPreview>
+                  <span class="text-muted-foreground text-sm">Cropped preview</span>
+                </ng-template>
+              </div>
+              <div class="mt-2 text-xs text-muted-foreground text-center">
+                {{ cropSettings.width }} × {{ cropSettings.height }} px
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -70,587 +308,359 @@ import { ImageCropperService } from './image-cropper.service';
   `,
   styles: [
     `
-      .image-cropper-container {
-        position: relative;
-        overflow: hidden;
-        width: 100%;
-        height: 100%;
-        min-height: 200px;
-        background-color: #f5f5f5;
-        user-select: none;
-      }
-
-      .cropper-canvas {
-        position: relative;
-        overflow: hidden;
-        width: 100%;
-        height: 100%;
-      }
-
-      .source-image {
-        max-width: 100%;
-        max-height: 100%;
+      :host {
         display: block;
-        margin: 0 auto;
+        --background: 0 0% 100%;
+        --foreground: 222.2 84% 4.9%;
+        --muted: 210 40% 96%;
+        --muted-foreground: 215.4 16.3% 46.9%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 222.2 84% 4.9%;
+        --card: 0 0% 100%;
+        --card-foreground: 222.2 84% 4.9%;
+        --border: 214.3 31.8% 91.4%;
+        --input: 214.3 31.8% 91.4%;
+        --primary: 222.2 47.4% 11.2%;
+        --primary-foreground: 210 40% 98%;
+        --secondary: 210 40% 96%;
+        --secondary-foreground: 222.2 84% 4.9%;
+        --accent: 210 40% 96%;
+        --accent-foreground: 222.2 84% 4.9%;
+        --destructive: 0 72.22% 50.59%;
+        --destructive-foreground: 210 40% 98%;
+        --ring: 222.2 84% 4.9%;
       }
 
-      .crop-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
+      .bg-background {
+        background-color: hsl(var(--background));
       }
-
-      .crop-area {
-        position: absolute;
-        background: transparent;
-        border: 1px solid white;
-        box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
-        cursor: move;
+      .text-foreground {
+        color: hsl(var(--foreground));
       }
-
-      .resize-handle {
-        position: absolute;
-        width: 10px;
-        height: 10px;
-        background-color: white;
-        border: 1px solid #333;
+      .bg-muted {
+        background-color: hsl(var(--muted));
       }
-
-      .resize-handle.tl {
-        top: -5px;
-        left: -5px;
-        cursor: nwse-resize;
+      .text-muted-foreground {
+        color: hsl(var(--muted-foreground));
       }
-
-      .resize-handle.tr {
-        top: -5px;
-        right: -5px;
-        cursor: nesw-resize;
+      .bg-card {
+        background-color: hsl(var(--card));
       }
-
-      .resize-handle.bl {
-        bottom: -5px;
-        left: -5px;
-        cursor: nesw-resize;
+      .text-card-foreground {
+        color: hsl(var(--card-foreground));
       }
-
-      .resize-handle.br {
-        bottom: -5px;
-        right: -5px;
-        cursor: nwse-resize;
+      .border-border {
+        border-color: hsl(var(--border));
       }
-
-      .cropping-active {
-        cursor: crosshair;
+      .border-input {
+        border-color: hsl(var(--input));
+      }
+      .bg-primary {
+        background-color: hsl(var(--primary));
+      }
+      .text-primary-foreground {
+        color: hsl(var(--primary-foreground));
+      }
+      .bg-secondary {
+        background-color: hsl(var(--secondary));
+      }
+      .text-secondary-foreground {
+        color: hsl(var(--secondary-foreground));
+      }
+      .bg-accent {
+        background-color: hsl(var(--accent));
+      }
+      .text-accent-foreground {
+        color: hsl(var(--accent-foreground));
       }
     `,
   ],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScImageCropper implements OnInit, OnChanges, OnDestroy {
-  @Input() imageUrl = '';
-  @Input() options: CropperOptions = {
-    aspectRatio: 1,
-    resizable: true,
-    movable: true,
-    minWidth: 50,
-    minHeight: 50,
-    viewMode: 1,
-    responsive: true,
-    guides: true,
-    center: true,
-    highlight: true,
-    background: true,
-    autoCrop: true,
-    autoCropArea: 0.8,
-    dragMode: 'crop',
-    cropBoxMovable: true,
-    cropBoxResizable: true,
-    zoomable: true,
-    zoomOnTouch: true,
-    zoomOnWheel: true,
+export class ScImageCropper implements OnInit {
+  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('imageElement') imageElement!: ElementRef<HTMLImageElement>;
+  @ViewChild('cropContainer') cropContainer!: ElementRef<HTMLDivElement>;
+  @ViewChild('previewCanvas') previewCanvas!: ElementRef<HTMLCanvasElement>;
+
+  imageLoaded = false;
+  imageSrc = '';
+  originalImage: HTMLImageElement | null = null;
+
+  cropSettings: CropSettings = {
+    width: 400,
+    height: 300,
+    x: 0,
+    y: 0,
+    aspectRatio: 'free',
+    format: 'png',
+    quality: 90,
   };
 
-  @Output() cropStart = new EventEmitter<void>();
-  @Output() cropMove = new EventEmitter<CropperPosition>();
-  @Output() cropEnd = new EventEmitter<CropperResult>();
-  @Output() ready = new EventEmitter<void>();
+  cropBox: CropBox = {
+    x: 0,
+    y: 0,
+    width: 400,
+    height: 300,
+  };
 
-  @ViewChild('sourceImage', { static: false }) sourceImage!: ElementRef;
-  @ViewChild('cropperCanvas', { static: false }) cropperCanvas!: ElementRef;
-  @ViewChild('cropArea', { static: false }) cropArea!: ElementRef;
+  private isDragging = false;
+  private isResizing = false;
+  private resizeHandle = '';
+  private startMousePos = { x: 0, y: 0 };
+  private startCropBox = { x: 0, y: 0, width: 0, height: 0 };
 
-  containerStyle: any = {};
-  showOverlay = false;
-  isCropping = false;
+  ngOnInit() {
+    // Add global mouse event listeners
+    document.addEventListener('mousemove', this.onMouseMove.bind(this));
+    document.addEventListener('mouseup', this.onMouseUp.bind(this));
+  }
 
-  private imageWidth = 0;
-  private imageHeight = 0;
-  private cropPosition: CropperPosition = { x1: 0, y1: 0, x2: 0, y2: 0 };
-  private startPosition = { x: 0, y: 0 };
-  private moveType: 'crop' | 'resize' = 'crop';
-  private resizeHandle: 'tl' | 'tr' | 'bl' | 'br' | null = null;
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  private mouseMoveListener: () => void = () => {};
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  private mouseUpListener: () => void = () => {};
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  private touchMoveListener: () => void = () => {};
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  private touchEndListener: () => void = () => {};
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+  }
 
-  constructor(
-    private renderer: Renderer2,
-    private element: ElementRef,
-    private cropperService: ImageCropperService,
-  ) {}
-
-  ngOnInit(): void {
-    if (this.options.responsive) {
-      this.containerStyle = {
-        width: '100%',
-        height: '100%',
-      };
+  onDrop(event: DragEvent) {
+    event.preventDefault();
+    const files = event.dataTransfer?.files;
+    if (files && files.length > 0) {
+      this.loadImage(files[0]);
     }
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['imageUrl'] && this.imageUrl) {
-      // Reset cropper when image changes
-      this.showOverlay = false;
-      this.isCropping = false;
-      this.cropPosition = { x1: 0, y1: 0, x2: 0, y2: 0 };
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.loadImage(file);
     }
   }
 
-  ngOnDestroy(): void {
-    this.removeEventListeners();
-  }
-
-  onImageLoad(): void {
-    const img = this.sourceImage.nativeElement;
-    this.imageWidth = img.naturalWidth;
-    this.imageHeight = img.naturalHeight;
-
-    // Set initial crop area
-    if (this.options.autoCrop) {
-      const canvas = this.cropperCanvas.nativeElement;
-      const canvasRect = canvas.getBoundingClientRect();
-      const canvasWidth = canvasRect.width;
-      const canvasHeight = canvasRect.height;
-
-      const scale = Math.min(canvasWidth / this.imageWidth, canvasHeight / this.imageHeight);
-      const scaledWidth = this.imageWidth * scale;
-      const scaledHeight = this.imageHeight * scale;
-
-      const autoCropArea = this.options.autoCropArea || 0.8;
-      const cropWidth = scaledWidth * autoCropArea;
-      const cropHeight = this.options.aspectRatio
-        ? cropWidth / this.options.aspectRatio
-        : scaledHeight * autoCropArea;
-
-      const x1 = (canvasWidth - cropWidth) / 2;
-      const y1 = (canvasHeight - cropHeight) / 2;
-
-      this.cropPosition = {
-        x1,
-        y1,
-        x2: x1 + cropWidth,
-        y2: y1 + cropHeight,
-      };
-
-      this.showOverlay = true;
-    }
-
-    this.ready.emit();
-  }
-
-  getCropAreaStyle(): any {
-    const width = this.cropPosition.x2 - this.cropPosition.x1;
-    const height = this.cropPosition.y2 - this.cropPosition.y1;
-
-    return {
-      left: `${this.cropPosition.x1}px`,
-      top: `${this.cropPosition.y1}px`,
-      width: `${width}px`,
-      height: `${height}px`,
+  private loadImage(file: File) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      this.imageSrc = e.target?.result as string;
     };
+    reader.readAsDataURL(file);
   }
 
-  onCropAreaMouseDown(event: MouseEvent): void {
-    if (!this.options.movable) return;
+  onImageLoad() {
+    this.imageLoaded = true;
+    this.originalImage = this.imageElement.nativeElement;
+    this.resetCrop();
+    this.updatePreview();
+  }
 
+  resetCrop() {
+    if (!this.cropContainer) return;
+
+    const containerRect = this.cropContainer.nativeElement.getBoundingClientRect();
+    this.cropBox = {
+      x: containerRect.width * 0.25,
+      y: containerRect.height * 0.25,
+      width: containerRect.width * 0.5,
+      height: containerRect.height * 0.5,
+    };
+
+    this.updateCropSettings();
+    this.updatePreview();
+  }
+
+  onAspectRatioChange() {
+    if (this.cropSettings.aspectRatio !== 'free') {
+      const [widthRatio, heightRatio] = this.cropSettings.aspectRatio.split(':').map(Number);
+      const aspectRatio = widthRatio / heightRatio;
+
+      this.cropSettings.height = Math.round(this.cropSettings.width / aspectRatio);
+      this.updateCropBox();
+    }
+  }
+
+  updateCropBox() {
+    this.cropBox.width = this.cropSettings.width;
+    this.cropBox.height = this.cropSettings.height;
+    this.cropBox.x = this.cropSettings.x;
+    this.cropBox.y = this.cropSettings.y;
+    this.updatePreview();
+  }
+
+  private updateCropSettings() {
+    this.cropSettings.width = Math.round(this.cropBox.width);
+    this.cropSettings.height = Math.round(this.cropBox.height);
+    this.cropSettings.x = Math.round(this.cropBox.x);
+    this.cropSettings.y = Math.round(this.cropBox.y);
+  }
+
+  startDrag(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
-
-    this.startCropping(event.clientX, event.clientY, 'crop');
-
-    this.mouseMoveListener = this.renderer.listen('document', 'mousemove', (e: MouseEvent) => {
-      this.onCropAreaMouseMove(e);
-    });
-
-    this.mouseUpListener = this.renderer.listen('document', 'mouseup', () => {
-      this.onCropAreaMouseUp();
-    });
+    this.isDragging = true;
+    this.startMousePos = { x: event.clientX, y: event.clientY };
+    this.startCropBox = { ...this.cropBox };
   }
 
-  onCropAreaTouchStart(event: TouchEvent): void {
-    if (!this.options.movable) return;
-
+  startResize(event: MouseEvent, handle: string) {
     event.preventDefault();
     event.stopPropagation();
-
-    const touch = event.touches[0];
-    this.startCropping(touch.clientX, touch.clientY, 'crop');
-
-    this.touchMoveListener = this.renderer.listen('document', 'touchmove', (e: TouchEvent) => {
-      const touchMove = e.touches[0];
-      this.onCropAreaMove(touchMove.clientX, touchMove.clientY);
-    });
-
-    this.touchEndListener = this.renderer.listen('document', 'touchend', () => {
-      this.onCropAreaEnd();
-    });
-  }
-
-  onResizeHandleMouseDown(event: MouseEvent, handle: 'tl' | 'tr' | 'bl' | 'br'): void {
-    if (!this.options.resizable) return;
-
-    event.preventDefault();
-    event.stopPropagation();
-
-    this.startCropping(event.clientX, event.clientY, 'resize', handle);
-
-    this.mouseMoveListener = this.renderer.listen('document', 'mousemove', (e: MouseEvent) => {
-      this.onResizeHandleMouseMove(e);
-    });
-
-    this.mouseUpListener = this.renderer.listen('document', 'mouseup', () => {
-      this.onResizeHandleMouseUp();
-    });
-  }
-
-  onResizeHandleTouchStart(event: TouchEvent, handle: 'tl' | 'tr' | 'bl' | 'br'): void {
-    if (!this.options.resizable) return;
-
-    event.preventDefault();
-    event.stopPropagation();
-
-    const touch = event.touches[0];
-    this.startCropping(touch.clientX, touch.clientY, 'resize', handle);
-
-    this.touchMoveListener = this.renderer.listen('document', 'touchmove', (e: TouchEvent) => {
-      const touchMove = e.touches[0];
-      this.onResizeHandleMove(touchMove.clientX, touchMove.clientY);
-    });
-
-    this.touchEndListener = this.renderer.listen('document', 'touchend', () => {
-      this.onResizeHandleEnd();
-    });
-  }
-
-  private startCropping(
-    clientX: number,
-    clientY: number,
-    moveType: 'crop' | 'resize',
-    handle: 'tl' | 'tr' | 'bl' | 'br' | null = null,
-  ): void {
-    this.moveType = moveType;
+    this.isResizing = true;
     this.resizeHandle = handle;
-    this.startPosition = { x: clientX, y: clientY };
-    this.isCropping = true;
-    this.cropStart.emit();
+    this.startMousePos = { x: event.clientX, y: event.clientY };
+    this.startCropBox = { ...this.cropBox };
   }
 
-  onCropAreaMouseMove(event: MouseEvent): void {
-    event.preventDefault();
-    this.onCropAreaMove(event.clientX, event.clientY);
-  }
+  private onMouseMove(event: MouseEvent) {
+    if (this.isDragging) {
+      const deltaX = event.clientX - this.startMousePos.x;
+      const deltaY = event.clientY - this.startMousePos.y;
 
-  onCropAreaMove(clientX: number, clientY: number): void {
-    if (!this.isCropping || this.moveType !== 'crop') return;
+      this.cropBox.x = this.startCropBox.x + deltaX;
+      this.cropBox.y = this.startCropBox.y + deltaY;
 
-    const deltaX = clientX - this.startPosition.x;
-    const deltaY = clientY - this.startPosition.y;
-
-    // Update start position for next move
-    this.startPosition = { x: clientX, y: clientY };
-
-    // Update crop position
-    const newX1 = this.cropPosition.x1 + deltaX;
-    const newY1 = this.cropPosition.y1 + deltaY;
-    const width = this.cropPosition.x2 - this.cropPosition.x1;
-    const height = this.cropPosition.y2 - this.cropPosition.y1;
-
-    // Ensure crop area stays within canvas
-    const canvas = this.cropperCanvas.nativeElement;
-    const canvasRect = canvas.getBoundingClientRect();
-
-    let x1 = Math.max(0, newX1);
-    let y1 = Math.max(0, newY1);
-
-    if (x1 + width > canvasRect.width) {
-      x1 = canvasRect.width - width;
+      // Constrain to container bounds
+      this.constrainCropBox();
+      this.updateCropSettings();
+      this.updatePreview();
+    } else if (this.isResizing) {
+      this.handleResize(event);
     }
-
-    if (y1 + height > canvasRect.height) {
-      y1 = canvasRect.height - height;
-    }
-
-    this.cropPosition = {
-      x1,
-      y1,
-      x2: x1 + width,
-      y2: y1 + height,
-    };
-
-    this.cropMove.emit(this.cropPosition);
   }
 
-  onCropAreaMouseUp(): void {
-    this.onCropAreaEnd();
-    this.removeEventListeners();
-  }
+  private handleResize(event: MouseEvent) {
+    const deltaX = event.clientX - this.startMousePos.x;
+    const deltaY = event.clientY - this.startMousePos.y;
 
-  onCropAreaEnd(): void {
-    if (!this.isCropping) return;
-
-    this.isCropping = false;
-    this.publishCropData();
-    this.cropEnd.emit(this.getCropperResult());
-  }
-
-  onResizeHandleMouseMove(event: MouseEvent): void {
-    event.preventDefault();
-    this.onResizeHandleMove(event.clientX, event.clientY);
-  }
-
-  onResizeHandleMove(clientX: number, clientY: number): void {
-    if (!this.isCropping || this.moveType !== 'resize' || !this.resizeHandle) return;
-
-    const deltaX = clientX - this.startPosition.x;
-    const deltaY = clientY - this.startPosition.y;
-
-    // Update start position for next move
-    this.startPosition = { x: clientX, y: clientY };
-
-    const canvas = this.cropperCanvas.nativeElement;
-    const canvasRect = canvas.getBoundingClientRect();
-
-    let { x1, y1, x2, y2 } = this.cropPosition;
-
-    // Apply resize based on handle
     switch (this.resizeHandle) {
-      case 'tl':
-        x1 = Math.min(x1 + deltaX, x2 - (this.options.minWidth || 50));
-        y1 = Math.min(y1 + deltaY, y2 - (this.options.minHeight || 50));
+      case 'nw':
+        this.cropBox.x = this.startCropBox.x + deltaX;
+        this.cropBox.y = this.startCropBox.y + deltaY;
+        this.cropBox.width = this.startCropBox.width - deltaX;
+        this.cropBox.height = this.startCropBox.height - deltaY;
         break;
-      case 'tr':
-        x2 = Math.max(x2 + deltaX, x1 + (this.options.minWidth || 50));
-        y1 = Math.min(y1 + deltaY, y2 - (this.options.minHeight || 50));
+      case 'ne':
+        this.cropBox.y = this.startCropBox.y + deltaY;
+        this.cropBox.width = this.startCropBox.width + deltaX;
+        this.cropBox.height = this.startCropBox.height - deltaY;
         break;
-      case 'bl':
-        x1 = Math.min(x1 + deltaX, x2 - (this.options.minWidth || 50));
-        y2 = Math.max(y2 + deltaY, y1 + (this.options.minHeight || 50));
+      case 'sw':
+        this.cropBox.x = this.startCropBox.x + deltaX;
+        this.cropBox.width = this.startCropBox.width - deltaX;
+        this.cropBox.height = this.startCropBox.height + deltaY;
         break;
-      case 'br':
-        x2 = Math.max(x2 + deltaX, x1 + (this.options.minWidth || 50));
-        y2 = Math.max(y2 + deltaY, y1 + (this.options.minHeight || 50));
+      case 'se':
+        this.cropBox.width = this.startCropBox.width + deltaX;
+        this.cropBox.height = this.startCropBox.height + deltaY;
+        break;
+      case 'n':
+        this.cropBox.y = this.startCropBox.y + deltaY;
+        this.cropBox.height = this.startCropBox.height - deltaY;
+        break;
+      case 's':
+        this.cropBox.height = this.startCropBox.height + deltaY;
+        break;
+      case 'w':
+        this.cropBox.x = this.startCropBox.x + deltaX;
+        this.cropBox.width = this.startCropBox.width - deltaX;
+        break;
+      case 'e':
+        this.cropBox.width = this.startCropBox.width + deltaX;
         break;
     }
 
-    // Ensure x1 <= x2 and y1 <= y2
-    if (x1 > x2) [x1, x2] = [x2, x1];
-    if (y1 > y2) [y1, y2] = [y2, y1];
+    // Ensure minimum size
+    this.cropBox.width = Math.max(50, this.cropBox.width);
+    this.cropBox.height = Math.max(50, this.cropBox.height);
 
-    // Ensure min/max width/height
-    const width = x2 - x1;
-    const height = y2 - y1;
+    this.constrainCropBox();
+    this.updateCropSettings();
+    this.updatePreview();
+  }
 
-    if (this.options.minWidth && width < this.options.minWidth) {
-      if (this.resizeHandle === 'tl' || this.resizeHandle === 'bl') {
-        x1 = x2 - this.options.minWidth;
-      } else {
-        x2 = x1 + this.options.minWidth;
-      }
-    }
+  private onMouseUp() {
+    this.isDragging = false;
+    this.isResizing = false;
+    this.resizeHandle = '';
+  }
 
-    if (this.options.minHeight && height < this.options.minHeight) {
-      if (this.resizeHandle === 'tl' || this.resizeHandle === 'tr') {
-        y1 = y2 - this.options.minHeight;
-      } else {
-        y2 = y1 + this.options.minHeight;
-      }
-    }
+  private constrainCropBox() {
+    if (!this.cropContainer) return;
 
-    if (this.options.maxWidth && width > this.options.maxWidth) {
-      if (this.resizeHandle === 'tl' || this.resizeHandle === 'bl') {
-        x1 = x2 - this.options.maxWidth;
-      } else {
-        x2 = x1 + this.options.maxWidth;
-      }
-    }
+    const containerRect = this.cropContainer.nativeElement.getBoundingClientRect();
 
-    if (this.options.maxHeight && height > this.options.maxHeight) {
-      if (this.resizeHandle === 'tl' || this.resizeHandle === 'tr') {
-        y1 = y2 - this.options.maxHeight;
-      } else {
-        y2 = y1 + this.options.maxHeight;
-      }
-    }
+    // Constrain position
+    this.cropBox.x = Math.max(
+      0,
+      Math.min(this.cropBox.x, containerRect.width - this.cropBox.width),
+    );
+    this.cropBox.y = Math.max(
+      0,
+      Math.min(this.cropBox.y, containerRect.height - this.cropBox.height),
+    );
 
-    // Maintain aspect ratio if needed
-    if (this.options.aspectRatio) {
-      const aspectRatio = this.options.aspectRatio;
-      const newWidth = x2 - x1;
-      const newHeight = y2 - y1;
+    // Constrain size
+    this.cropBox.width = Math.min(this.cropBox.width, containerRect.width - this.cropBox.x);
+    this.cropBox.height = Math.min(this.cropBox.height, containerRect.height - this.cropBox.y);
+  }
 
-      if (newWidth / newHeight !== aspectRatio) {
-        // Adjust based on which handle is being dragged
-        switch (this.resizeHandle) {
-          case 'tl':
-            y1 = y2 - newWidth / aspectRatio;
-            break;
-          case 'tr':
-            y1 = y2 - newWidth / aspectRatio;
-            break;
-          case 'bl':
-            y2 = y1 + newWidth / aspectRatio;
-            break;
-          case 'br':
-            y2 = y1 + newWidth / aspectRatio;
-            break;
+  private updatePreview() {
+    if (!this.originalImage || !this.previewCanvas) return;
+
+    const canvas = this.previewCanvas.nativeElement;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    canvas.width = this.cropSettings.width;
+    canvas.height = this.cropSettings.height;
+
+    // Calculate the actual image dimensions and crop area
+    const containerRect = this.cropContainer.nativeElement.getBoundingClientRect();
+    const scaleX = this.originalImage.naturalWidth / containerRect.width;
+    const scaleY = this.originalImage.naturalHeight / containerRect.height;
+
+    const sourceX = this.cropBox.x * scaleX;
+    const sourceY = this.cropBox.y * scaleY;
+    const sourceWidth = this.cropBox.width * scaleX;
+    const sourceHeight = this.cropBox.height * scaleY;
+
+    ctx.drawImage(
+      this.originalImage,
+      sourceX,
+      sourceY,
+      sourceWidth,
+      sourceHeight,
+      0,
+      0,
+      canvas.width,
+      canvas.height,
+    );
+  }
+
+  cropAndDownload() {
+    if (!this.originalImage || !this.previewCanvas) return;
+
+    const canvas = this.previewCanvas.nativeElement;
+    const mimeType = `image/${this.cropSettings.format}`;
+    const quality = this.cropSettings.quality / 100;
+
+    canvas.toBlob(
+      (blob) => {
+        if (blob) {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `cropped-image.${this.cropSettings.format}`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
         }
-      }
-    }
-
-    // Ensure crop area stays within canvas
-    x1 = Math.max(0, x1);
-    y1 = Math.max(0, y1);
-    x2 = Math.min(canvasRect.width, x2);
-    y2 = Math.min(canvasRect.height, y2);
-
-    this.cropPosition = { x1, y1, x2, y2 };
-    this.cropMove.emit(this.cropPosition);
-  }
-
-  onResizeHandleMouseUp(): void {
-    this.onResizeHandleEnd();
-    this.removeEventListeners();
-  }
-
-  onResizeHandleEnd(): void {
-    if (!this.isCropping) return;
-
-    this.isCropping = false;
-    this.resizeHandle = null;
-    this.publishCropData();
-    this.cropEnd.emit(this.getCropperResult());
-  }
-
-  private removeEventListeners(): void {
-    if (this.mouseMoveListener) this.mouseMoveListener();
-    if (this.mouseUpListener) this.mouseUpListener();
-    if (this.touchMoveListener) this.touchMoveListener();
-    if (this.touchEndListener) this.touchEndListener();
-  }
-
-  private publishCropData(): void {
-    const result = this.getCropperResult();
-    this.cropperService.publishCropperResult(result);
-  }
-
-  private getCropperResult(): CropperResult {
-    const canvas = this.cropperCanvas.nativeElement;
-    const canvasRect = canvas.getBoundingClientRect();
-    const img = this.sourceImage.nativeElement;
-
-    const scaleX = this.imageWidth / img.width;
-    const scaleY = this.imageHeight / img.height;
-
-    const width = this.cropPosition.x2 - this.cropPosition.x1;
-    const height = this.cropPosition.y2 - this.cropPosition.y1;
-
-    // Get crop data in original image coordinates
-    const cropData = {
-      x: this.cropPosition.x1 * scaleX,
-      y: this.cropPosition.y1 * scaleY,
-      width: width * scaleX,
-      height: height * scaleY,
-      rotate: 0,
-      scaleX: 1,
-      scaleY: 1,
-    };
-
-    // Create canvas for cropped image
-    const cropCanvas = document.createElement('canvas');
-    cropCanvas.width = cropData.width;
-    cropCanvas.height = cropData.height;
-
-    const ctx = cropCanvas.getContext('2d');
-
-    if (ctx) {
-      ctx.drawImage(
-        img,
-        cropData.x,
-        cropData.y,
-        cropData.width,
-        cropData.height,
-        0,
-        0,
-        cropData.width,
-        cropData.height,
-      );
-    }
-
-    // Generate blob and data URL
-    let blob: Blob | undefined;
-    let dataUrl: string | undefined;
-
-    try {
-      dataUrl = cropCanvas.toDataURL('image/png');
-
-      cropCanvas.toBlob((b) => {
-        if (b) blob = b;
-      }, 'image/png');
-    } catch (error) {
-      console.error('Error generating crop data', error);
-    }
-
-    return {
-      imageData: {
-        left: 0,
-        top: 0,
-        width: this.imageWidth,
-        height: this.imageHeight,
-        naturalWidth: this.imageWidth,
-        naturalHeight: this.imageHeight,
-        aspectRatio: this.imageWidth / this.imageHeight,
-        rotate: 0,
-        scaleX: 1,
-        scaleY: 1,
       },
-      cropBoxData: {
-        left: this.cropPosition.x1,
-        top: this.cropPosition.y1,
-        width: width,
-        height: height,
-      },
-      canvasData: {
-        left: 0,
-        top: 0,
-        width: canvasRect.width,
-        height: canvasRect.height,
-        naturalWidth: this.imageWidth,
-        naturalHeight: this.imageHeight,
-      },
-      cropData,
-      blob,
-      dataUrl,
-    };
+      mimeType,
+      quality,
+    );
+  }
+
+  onKeyDown(event: KeyboardEvent, fileInput: any): void {
+    if (event.key === 'Enter' || event.key === ' ') {
+      fileInput.click();
+      event.preventDefault(); // Prevent scrolling for space key
+    }
   }
 }

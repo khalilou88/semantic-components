@@ -9,8 +9,8 @@
   "license": "MIT",
   "peerDependencies": {
     "@angular/core": ">=19.0.0",
-    "rxjs": "~7.8.2",
-    "@angular/common": ">=19.0.0"
+    "@angular/common": ">=19.0.0",
+    "@angular/forms": "19.2.13"
   },
   "sideEffects": false,
   "repository": {
