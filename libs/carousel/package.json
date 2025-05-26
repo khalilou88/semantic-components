@@ -1,6 +1,6 @@
 {
   "name": "@semantic-components/carousel",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": false,
   "publishConfig": {
     "access": "public"
@@ -9,9 +9,9 @@
   "license": "MIT",
   "peerDependencies": {
     "@angular/core": ">=19.0.0",
-    "@semantic-components/utils": ">=0.41.0",
+    "@semantic-components/utils": "0.43.0",
     "embla-carousel": "^8.6.0",
-    "@semantic-components/ui": ">=0.52.0"
+    "@semantic-components/ui": "0.54.0"
   },
   "repository": {
     "type": "git",
