@@ -1,5 +1,5 @@
 import { CdkCombobox, CdkComboboxModule } from '@angular/cdk-experimental/combobox';
-import { CdkOption } from '@angular/cdk/listbox';
+import { CdkListbox, CdkOption } from '@angular/cdk/listbox';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -18,7 +18,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { Subject } from 'rxjs';
 
-export interface ComboBoxOption {
+export interface ScComboBoxOption {
   value: any;
   label: string;
   disabled?: boolean;
@@ -27,7 +27,7 @@ export interface ComboBoxOption {
 
 @Component({
   selector: 'sc-combobox',
-  imports: [CdkComboboxModule, CommonModule, CdkOption],
+  imports: [CdkComboboxModule, CommonModule, CdkListbox, CdkOption],
   template: `
     <div class="relative w-full" [class.opacity-50]="disabled">
       <!-- Combobox Container -->
@@ -105,7 +105,7 @@ export interface ComboBoxOption {
           </div>
 
           <!-- Options List -->
-          <div class="max-h-60 overflow-auto p-1" role="listbox">
+          <div class="max-h-60 overflow-auto p-1" role="listbox" cdkListbox>
             <div
               class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none data-[highlighted]:bg-slate-100 data-[highlighted]:text-slate-900 data-[selected]:bg-slate-100 data-[selected]:text-slate-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:data-[highlighted]:bg-slate-800 dark:data-[highlighted]:text-slate-50 dark:data-[selected]:bg-slate-800 dark:data-[selected]:text-slate-50"
               *ngFor="let option of filteredOptions; trackBy: trackByValue"
@@ -206,7 +206,7 @@ export interface ComboBoxOption {
   ],
 })
 export class ScCombobox implements OnInit, OnDestroy, ControlValueAccessor {
-  @Input() options: ComboBoxOption[] = [];
+  @Input() options: ScComboBoxOption[] = [];
   @Input() placeholder = 'Select an option...';
   @Input() disabled = false;
   @Input() searchable = true;
@@ -216,15 +216,15 @@ export class ScCombobox implements OnInit, OnDestroy, ControlValueAccessor {
   @Input() labelId?: string;
   @Input() clearable = true;
 
-  @Output() selectionChange = new EventEmitter<ComboBoxOption | null>();
+  @Output() selectionChange = new EventEmitter<ScComboBoxOption | null>();
   @Output() customValueCreated = new EventEmitter<string>();
   @Output() searchChange = new EventEmitter<string>();
 
   @ViewChild('input', { static: true }) inputRef!: ElementRef<HTMLInputElement>;
   @ViewChild('combobox', { static: true }) combobox!: CdkCombobox<any>;
 
-  selectedOption: ComboBoxOption | null = null;
-  filteredOptions: ComboBoxOption[] = [];
+  selectedOption: ScComboBoxOption | null = null;
+  filteredOptions: ScComboBoxOption[] = [];
   searchValue = '';
   displayValue = '';
 
@@ -294,7 +294,7 @@ export class ScCombobox implements OnInit, OnDestroy, ControlValueAccessor {
     }, 150);
   }
 
-  onOptionSelected(option: ComboBoxOption, event: any): void {
+  onOptionSelected(option: ScComboBoxOption, event: any): void {
     const selected = event.selected;
     if (selected && !option.disabled) {
       this.selectedOption = option;
@@ -309,7 +309,7 @@ export class ScCombobox implements OnInit, OnDestroy, ControlValueAccessor {
   onCustomValueSelected(event: any): void {
     const selected = event.selected;
     if (selected && this.allowCustomValues && this.searchValue.trim()) {
-      const customOption: ComboBoxOption = {
+      const customOption: ScComboBoxOption = {
         value: this.searchValue.trim(),
         label: this.searchValue.trim(),
       };
@@ -323,7 +323,7 @@ export class ScCombobox implements OnInit, OnDestroy, ControlValueAccessor {
     }
   }
 
-  isSelected(option: ComboBoxOption): boolean {
+  isSelected(option: ScComboBoxOption): boolean {
     return this.selectedOption?.value === option.value;
   }
 
@@ -358,7 +358,7 @@ export class ScCombobox implements OnInit, OnDestroy, ControlValueAccessor {
     this.selectionChange.emit(null);
   }
 
-  trackByValue(index: number, option: ComboBoxOption): any {
+  trackByValue(index: number, option: ScComboBoxOption): any {
     return option.value;
   }
 
