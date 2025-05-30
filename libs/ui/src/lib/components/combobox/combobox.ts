@@ -1,309 +1,384 @@
-import { NgTemplateOutlet } from '@angular/common';
+import { CdkCombobox, CdkComboboxModule } from '@angular/cdk-experimental/combobox';
+import { CdkListbox, CdkOption } from '@angular/cdk/listbox';
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  HostListener,
+  EventEmitter,
+  Input,
+  OnDestroy,
   OnInit,
+  Output,
+  ViewChild,
   ViewEncapsulation,
-  inject,
-  input,
-  output,
+  forwardRef,
 } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+
+export interface ComboBoxOption {
+  value: any;
+  label: string;
+  disabled?: boolean;
+  description?: string;
+}
 
 @Component({
   selector: 'sc-combobox',
-  imports: [ReactiveFormsModule, NgTemplateOutlet],
+  imports: [CdkComboboxModule, CommonModule, CdkListbox, CdkOption],
   template: `
-    <div class="relative w-full" #container>
-      <!-- Label -->
-      @if (label()) {
-        <label class="mb-1 block text-sm font-medium text-gray-700" [for]="id()">
-          {{ label() }}
-        </label>
-      }
-
-      <!-- Input Group -->
-      <div class="relative">
+    <div class="relative w-full" [class.opacity-50]="disabled">
+      <!-- Combobox Container -->
+      <div class="relative" #combobox="cdkCombobox" [disabled]="disabled" cdkCombobox>
+        <!-- Trigger Input -->
         <input
-          class="w-full rounded-lg border px-4 py-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
-          [id]="id()"
-          [formControl]="searchControl"
-          [placeholder]="placeholder()"
-          [attr.aria-expanded]="isOpen"
-          [attr.aria-activedescendant]="activeId"
-          [attr.aria-controls]="listboxId"
-          [attr.aria-owns]="listboxId"
-          [attr.aria-autocomplete]="'list'"
-          [attr.aria-haspopup]="'listbox'"
-          (focus)="onFocus()"
-          (blur)="onBlur()"
-          (keydown)="onKeydown($event)"
+          class="flex h-10 w-full rounded-md border border-slate-200 bg-white px-3 py-2 pr-10 text-sm ring-offset-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-950 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:bg-slate-950 dark:ring-offset-slate-950 dark:placeholder:text-slate-400 dark:focus:ring-slate-300"
+          #input
+          [value]="displayValue"
+          [placeholder]="placeholder"
+          [disabled]="disabled"
+          [readonly]="!searchable"
+          [attr.aria-label]="ariaLabel"
+          [attr.aria-labelledby]="labelId"
+          (input)="onInputChange($event)"
+          (focus)="onInputFocus()"
+          (blur)="onInputBlur()"
           type="text"
-          role="combobox"
+          cdkComboboxInput
         />
 
-        <!-- Dropdown button -->
+        <!-- Dropdown Arrow -->
         <button
-          class="absolute inset-y-0 right-0 flex items-center px-2"
-          [attr.aria-label]="isOpen ? 'Close options' : 'Open options'"
-          (keydown)="onButtonKeydown($event)"
-          (click)="handleButtonInteraction($event)"
+          class="absolute inset-y-0 right-0 flex items-center pr-3 focus:outline-none"
+          [attr.aria-label]="'Open dropdown'"
+          [disabled]="disabled"
           type="button"
-          tabindex="0"
+          cdkComboboxTrigger
         >
-          <svg class="size-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+          <svg
+            class="h-4 w-4 opacity-50 transition-transform duration-200"
+            [class.rotate-180]="combobox.isOpen()"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"
+            />
           </svg>
         </button>
-      </div>
 
-      <!-- Dropdown -->
-      @if (isOpen) {
+        <!-- Popup Panel -->
         <div
-          class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white shadow-lg"
-          [id]="listboxId"
-          [attr.aria-label]="label() || 'Options'"
-          role="listbox"
+          class="absolute z-50 mt-1 w-full min-w-[8rem] overflow-hidden rounded-md border border-slate-200 bg-white text-slate-950 shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50"
+          #popup="cdkComboboxPopup"
+          cdkComboboxPopup
         >
-          @if (loading()) {
-            <div class="p-4 text-center text-gray-500" role="status">Loading...</div>
-          }
-          @if (!loading() && filteredOptions.length === 0) {
-            <div class="p-4 text-center text-gray-500" role="status">No results found</div>
-          }
-          @if (!loading() && filteredOptions.length > 0) {
-            <ul>
-              @for (option of filteredOptions; track option; let i = $index) {
-                <li
-                  class="cursor-pointer px-4 py-2 outline-none"
-                  [id]="id() + '-option-' + i"
-                  [attr.aria-selected]="i === activeIndex"
-                  [class.bg-blue-100]="i === activeIndex"
-                  (click)="handleOptionClick($event, option)"
-                  (keydown)="onOptionKeydown($event, option)"
-                  (mouseenter)="setActiveIndex(i)"
-                  role="option"
-                  tabindex="0"
-                >
-                  <ng-container
-                    *ngTemplateOutlet="
-                      optionTemplate() || defaultOptionTemplate;
-                      context: { $implicit: option }
-                    "
-                  ></ng-container>
-                </li>
-              }
-            </ul>
-          }
-        </div>
-      }
-    </div>
+          <!-- Search Header (when searchable) -->
+          <div
+            class="border-b border-slate-200 p-2 dark:border-slate-800"
+            *ngIf="searchable && showSearchInPopup"
+          >
+            <div class="flex items-center">
+              <svg
+                class="mr-2 h-4 w-4 shrink-0 opacity-50"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+              <span class="text-sm text-slate-600 dark:text-slate-300">Type to search...</span>
+            </div>
+          </div>
 
-    <!-- Default option template -->
-    <ng-template #defaultOptionTemplate let-option>
-      {{ getOptionLabel(option) }}
-    </ng-template>
+          <!-- Options List -->
+          <div class="max-h-60 overflow-auto p-1" role="listbox">
+            <div
+              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none data-[highlighted]:bg-slate-100 data-[highlighted]:text-slate-900 data-[selected]:bg-slate-100 data-[selected]:text-slate-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:data-[highlighted]:bg-slate-800 dark:data-[highlighted]:text-slate-50 dark:data-[selected]:bg-slate-800 dark:data-[selected]:text-slate-50"
+              *ngFor="let option of filteredOptions; trackBy: trackByValue"
+              [cdkOptionValue]="option.value"
+              [disabled]="option.disabled"
+              [class.opacity-50]="option.disabled"
+              [class.cursor-not-allowed]="option.disabled"
+              (cdkOptionSelectionChange)="onOptionSelected(option, $event)"
+              cdkOption
+            >
+              <!-- Selection Indicator -->
+              <div class="flex h-4 w-4 items-center justify-center mr-2">
+                <svg
+                  class="h-4 w-4"
+                  *ngIf="isSelected(option)"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </div>
+
+              <!-- Option Content -->
+              <div class="flex-1 min-w-0">
+                <div class="truncate font-medium">{{ option.label }}</div>
+                <div
+                  class="truncate text-xs text-slate-500 dark:text-slate-400"
+                  *ngIf="option.description"
+                >
+                  {{ option.description }}
+                </div>
+              </div>
+            </div>
+
+            <!-- Empty State -->
+            <div
+              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-6 text-center text-sm text-slate-500 dark:text-slate-400"
+              *ngIf="filteredOptions.length === 0"
+            >
+              <div class="flex-1">
+                <div class="font-medium">No results found</div>
+                <div class="text-xs mt-1" *ngIf="searchValue">
+                  No options match "{{ searchValue }}"
+                </div>
+              </div>
+            </div>
+
+            <!-- Create New Option (if enabled) -->
+            <div
+              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none data-[highlighted]:bg-slate-100 data-[highlighted]:text-slate-900 border-t border-slate-200 dark:border-slate-800 dark:data-[highlighted]:bg-slate-800 dark:data-[highlighted]:text-slate-50"
+              *ngIf="allowCustomValues && searchValue && !hasExactMatch"
+              [cdkOptionValue]="searchValue"
+              (cdkOptionSelectionChange)="onCustomValueSelected($event)"
+              cdkOption
+            >
+              <div class="flex h-4 w-4 items-center justify-center mr-2">
+                <svg
+                  class="h-4 w-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 4v16m8-8H4"
+                  />
+                </svg>
+              </div>
+              <div class="flex-1">
+                <div class="font-medium">Create "{{ searchValue }}"</div>
+                <div class="text-xs text-slate-500 dark:text-slate-400">Add new option</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => ScCombobox),
+      multi: true,
+    },
+  ],
 })
-export class ScCombobox implements OnInit {
-  private readonly elementRef = inject(ElementRef);
+export class ScCombobox implements OnInit, OnDestroy, ControlValueAccessor {
+  @Input() options: ComboBoxOption[] = [];
+  @Input() placeholder = 'Select an option...';
+  @Input() disabled = false;
+  @Input() searchable = true;
+  @Input() showSearchInPopup = false;
+  @Input() allowCustomValues = false;
+  @Input() ariaLabel?: string;
+  @Input() labelId?: string;
+  @Input() clearable = true;
 
-  readonly id = input(`combobox-${Math.random().toString(36).substr(2, 9)}`);
-  readonly label = input<string>();
-  readonly placeholder = input('Select an option');
-  readonly options = input<any[]>([]);
-  readonly optionTemplate = input<any>();
-  readonly loading = input(false);
-  readonly labelKey = input('label');
+  @Output() selectionChange = new EventEmitter<ComboBoxOption | null>();
+  @Output() customValueCreated = new EventEmitter<string>();
+  @Output() searchChange = new EventEmitter<string>();
 
-  readonly optionSelected = output<any>();
-  readonly search = output<string>();
+  @ViewChild('input', { static: true }) inputRef!: ElementRef<HTMLInputElement>;
+  @ViewChild('combobox', { static: true }) combobox!: CdkCombobox<any>;
 
-  searchControl = new FormControl('');
-  isOpen = false;
-  activeIndex = -1;
-  filteredOptions: any[] = [];
-  listboxId = `${this.id()}-listbox`;
+  selectedOption: ComboBoxOption | null = null;
+  filteredOptions: ComboBoxOption[] = [];
+  searchValue = '';
+  displayValue = '';
 
-  private closeTimeout?: any;
-
-  get activeId(): string {
-    return this.activeIndex >= 0 ? `${this.id()}-option-${this.activeIndex}` : '';
-  }
-
-  constructor() {
-    this.searchControl.valueChanges
-      .pipe(debounceTime(300), distinctUntilChanged())
-      .subscribe((value) => {
-        this.onSearch(value ?? '');
-      });
-  }
+  private readonly destroy$ = new Subject<void>();
+  private onChange = (value: any) => {};
+  private onTouched = () => {};
 
   ngOnInit() {
-    this.listboxId = `${this.id()}-listbox`;
+    this.filteredOptions = [...this.options];
+    this.updateDisplayValue();
   }
 
-  // Handle button interactions
-  handleButtonInteraction(event: MouseEvent) {
-    event.preventDefault();
-    event.stopPropagation();
-    this.toggleDropdown();
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
-  onButtonKeydown(event: KeyboardEvent) {
-    switch (event.key) {
-      case ' ':
-      case 'Enter':
-        event.preventDefault();
-        event.stopPropagation();
-        this.toggleDropdown();
-        break;
-    }
-  }
-
-  // Handle option interactions
-  handleOptionClick(event: MouseEvent, option: any) {
-    event.preventDefault();
-    event.stopPropagation();
-    this.selectOption(option);
-  }
-
-  onOptionKeydown(event: KeyboardEvent, option: any) {
-    switch (event.key) {
-      case ' ':
-      case 'Enter':
-        event.preventDefault();
-        event.stopPropagation();
-        this.selectOption(option);
-        break;
-      case 'ArrowDown':
-        event.preventDefault();
-        this.moveActiveIndex(1);
-        break;
-      case 'ArrowUp':
-        event.preventDefault();
-        this.moveActiveIndex(-1);
-        break;
-      case 'Home':
-        event.preventDefault();
-        this.setActiveIndex(0);
-        break;
-      case 'End':
-        event.preventDefault();
-        this.setActiveIndex(this.filteredOptions.length - 1);
-        break;
-    }
-  }
-
-  moveActiveIndex(delta: number) {
-    const newIndex = this.activeIndex + delta;
-    if (newIndex >= 0 && newIndex < this.filteredOptions.length) {
-      this.setActiveIndex(newIndex);
-    }
-  }
-
-  setActiveIndex(index: number) {
-    this.activeIndex = index;
-    this.scrollActiveOptionIntoView();
-  }
-
-  @HostListener('document:click', ['$event'])
-  onClickOutside(event: Event) {
-    if (!this.elementRef.nativeElement.contains(event.target)) {
-      this.close();
-    }
-  }
-
-  toggleDropdown() {
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    this.isOpen ? this.close() : this.open();
-  }
-
-  open() {
-    this.isOpen = true;
+  // ControlValueAccessor implementation
+  writeValue(value: any): void {
+    this.selectedOption = this.options.find((option) => option.value === value) || null;
+    this.updateDisplayValue();
     this.filterOptions();
   }
 
-  close() {
-    this.isOpen = false;
-    this.activeIndex = -1;
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
   }
 
-  onFocus() {
-    if (this.closeTimeout) {
-      clearTimeout(this.closeTimeout);
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
+
+  onInputChange(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    this.searchValue = target.value;
+    this.displayValue = target.value;
+
+    if (this.searchable) {
+      this.filterOptions();
+      this.searchChange.emit(this.searchValue);
+    }
+
+    // Clear selection if input doesn't match selected option
+    if (this.selectedOption && this.selectedOption.label !== this.searchValue) {
+      this.clearSelection();
     }
   }
 
-  onBlur() {
-    this.closeTimeout = setTimeout(() => this.close(), 200);
-  }
-
-  onSearch(query: string) {
-    this.search.emit(query);
-    this.filterOptions();
-  }
-
-  filterOptions() {
-    const query = this.searchControl.value?.toLowerCase() ?? '';
-    this.filteredOptions = this.options().filter((option) =>
-      this.getOptionLabel(option).toLowerCase().includes(query),
-    );
-    this.activeIndex = -1;
-  }
-
-  selectOption(option: any) {
-    this.searchControl.setValue(this.getOptionLabel(option), { emitEvent: false });
-    this.optionSelected.emit(option);
-    this.close();
-  }
-
-  getOptionLabel(option: any): string {
-    return typeof option === 'object' ? option[this.labelKey()] : option.toString();
-  }
-
-  onKeydown(event: KeyboardEvent) {
-    switch (event.key) {
-      case 'ArrowDown':
-        event.preventDefault();
-        if (!this.isOpen) {
-          this.open();
-        }
-        this.moveActiveIndex(1);
-        break;
-      case 'ArrowUp':
-        event.preventDefault();
-        this.moveActiveIndex(-1);
-        break;
-      case 'Enter':
-        event.preventDefault();
-        if (this.activeIndex >= 0) {
-          this.selectOption(this.filteredOptions[this.activeIndex]);
-        }
-        break;
-      case 'Escape':
-        event.preventDefault();
-        this.close();
-        break;
-      case 'Tab':
-        this.close();
-        break;
+  onInputFocus(): void {
+    if (!this.combobox.isOpen()) {
+      this.combobox.open();
     }
   }
 
-  private scrollActiveOptionIntoView() {
-    if (this.activeIndex >= 0) {
-      const activeOption = document.getElementById(`${this.id()}-option-${this.activeIndex}`);
-      if (activeOption) {
-        activeOption.scrollIntoView({ block: 'nearest' });
+  onInputBlur(): void {
+    this.onTouched();
+
+    // Restore display value if no valid selection
+    setTimeout(() => {
+      if (!this.combobox.isOpen()) {
+        this.updateDisplayValue();
       }
+    }, 150);
+  }
+
+  onOptionSelected(option: ComboBoxOption, selected: boolean): void {
+    if (selected && !option.disabled) {
+      this.selectedOption = option;
+      this.displayValue = option.label;
+      this.searchValue = option.label;
+      this.onChange(option.value);
+      this.selectionChange.emit(option);
+      this.combobox.close();
+    }
+  }
+
+  onCustomValueSelected(selected: boolean): void {
+    if (selected && this.allowCustomValues && this.searchValue.trim()) {
+      const customOption: ComboBoxOption = {
+        value: this.searchValue.trim(),
+        label: this.searchValue.trim(),
+      };
+
+      this.selectedOption = customOption;
+      this.displayValue = customOption.label;
+      this.onChange(customOption.value);
+      this.selectionChange.emit(customOption);
+      this.customValueCreated.emit(this.searchValue.trim());
+      this.combobox.close();
+    }
+  }
+
+  isSelected(option: ComboBoxOption): boolean {
+    return this.selectedOption?.value === option.value;
+  }
+
+  get hasExactMatch(): boolean {
+    return this.filteredOptions.some(
+      (option) => option.label.toLowerCase() === this.searchValue.toLowerCase(),
+    );
+  }
+
+  private filterOptions(): void {
+    if (!this.searchable || !this.searchValue.trim()) {
+      this.filteredOptions = [...this.options];
+      return;
+    }
+
+    const searchTerm = this.searchValue.toLowerCase();
+    this.filteredOptions = this.options.filter(
+      (option) =>
+        option.label.toLowerCase().includes(searchTerm) ||
+        option.description?.toLowerCase().includes(searchTerm),
+    );
+  }
+
+  private updateDisplayValue(): void {
+    this.displayValue = this.selectedOption ? this.selectedOption.label : '';
+    this.searchValue = this.displayValue;
+  }
+
+  private clearSelection(): void {
+    this.selectedOption = null;
+    this.onChange(null);
+    this.selectionChange.emit(null);
+  }
+
+  trackByValue(index: number, option: ComboBoxOption): any {
+    return option.value;
+  }
+
+  // Public methods for programmatic control
+  public open(): void {
+    this.combobox.open();
+  }
+
+  public close(): void {
+    this.combobox.close();
+  }
+
+  public focus(): void {
+    this.inputRef.nativeElement.focus();
+  }
+
+  public clear(): void {
+    if (this.clearable) {
+      this.displayValue = '';
+      this.searchValue = '';
+      this.clearSelection();
+      this.filterOptions();
     }
   }
 }
