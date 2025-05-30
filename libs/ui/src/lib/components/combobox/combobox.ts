@@ -1,5 +1,5 @@
 import { CdkCombobox, CdkComboboxModule } from '@angular/cdk-experimental/combobox';
-import { CdkListbox, CdkOption } from '@angular/cdk/listbox';
+import { CdkOption } from '@angular/cdk/listbox';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -27,7 +27,7 @@ export interface ComboBoxOption {
 
 @Component({
   selector: 'sc-combobox',
-  imports: [CdkComboboxModule, CommonModule, CdkListbox, CdkOption],
+  imports: [CdkComboboxModule, CommonModule, CdkOption],
   template: `
     <div class="relative w-full" [class.opacity-50]="disabled">
       <!-- Combobox Container -->
@@ -109,8 +109,8 @@ export interface ComboBoxOption {
             <div
               class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none data-[highlighted]:bg-slate-100 data-[highlighted]:text-slate-900 data-[selected]:bg-slate-100 data-[selected]:text-slate-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:data-[highlighted]:bg-slate-800 dark:data-[highlighted]:text-slate-50 dark:data-[selected]:bg-slate-800 dark:data-[selected]:text-slate-50"
               *ngFor="let option of filteredOptions; trackBy: trackByValue"
-              [cdkOptionValue]="option.value"
-              [disabled]="option.disabled"
+              [cdkOption]="option.value"
+              [cdkOptionDisabled]="option.disabled"
               [class.opacity-50]="option.disabled"
               [class.cursor-not-allowed]="option.disabled"
               (cdkOptionSelectionChange)="onOptionSelected(option, $event)"
@@ -164,7 +164,7 @@ export interface ComboBoxOption {
             <div
               class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none data-[highlighted]:bg-slate-100 data-[highlighted]:text-slate-900 border-t border-slate-200 dark:border-slate-800 dark:data-[highlighted]:bg-slate-800 dark:data-[highlighted]:text-slate-50"
               *ngIf="allowCustomValues && searchValue && !hasExactMatch"
-              [cdkOptionValue]="searchValue"
+              [cdkOption]="searchValue"
               (cdkOptionSelectionChange)="onCustomValueSelected($event)"
               cdkOption
             >
@@ -294,7 +294,8 @@ export class ScCombobox implements OnInit, OnDestroy, ControlValueAccessor {
     }, 150);
   }
 
-  onOptionSelected(option: ComboBoxOption, selected: boolean): void {
+  onOptionSelected(option: ComboBoxOption, event: any): void {
+    const selected = event.selected;
     if (selected && !option.disabled) {
       this.selectedOption = option;
       this.displayValue = option.label;
@@ -305,7 +306,8 @@ export class ScCombobox implements OnInit, OnDestroy, ControlValueAccessor {
     }
   }
 
-  onCustomValueSelected(selected: boolean): void {
+  onCustomValueSelected(event: any): void {
+    const selected = event.selected;
     if (selected && this.allowCustomValues && this.searchValue.trim()) {
       const customOption: ComboBoxOption = {
         value: this.searchValue.trim(),
