@@ -88,11 +88,11 @@ export const appRoutes: Route[] = [
             loadComponent: () => import('./pages/alert-dialog-page'),
             title: 'Alert Dialog Page',
           },
-          {
-            path: 'combobox',
-            loadComponent: () => import('./pages/combobox-page'),
-            title: 'Combobox Page',
-          },
+          // {
+          //   path: 'combobox',
+          //   loadComponent: () => import('./pages/combobox-page'),
+          //   title: 'Combobox Page',
+          // },
           {
             path: 'chat',
             loadComponent: () => import('./pages/chat-page'),
