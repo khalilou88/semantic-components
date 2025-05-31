@@ -1,4 +1,4 @@
-import { Injectable, computed, signal } from '@angular/core';
+import { Injectable, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
 import { filter, map } from 'rxjs/operators';
@@ -13,6 +13,9 @@ export interface BreadcrumbItem {
   providedIn: 'root',
 })
 export class BreadcrumbService {
+  private readonly router = inject(Router);
+  private readonly activatedRoute = inject(ActivatedRoute);
+
   private readonly routeDataSignal = signal<any[]>([]);
 
   // Computed signal that transforms route data into breadcrumb items
@@ -35,10 +38,7 @@ export class BreadcrumbService {
     return items;
   });
 
-  constructor(
-    private readonly router: Router,
-    private readonly activatedRoute: ActivatedRoute,
-  ) {
+  constructor() {
     this.router.events
       .pipe(
         filter((event) => event instanceof NavigationEnd),
