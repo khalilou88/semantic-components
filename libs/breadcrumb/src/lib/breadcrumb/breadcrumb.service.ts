@@ -1,4 +1,5 @@
-import { Injectable, computed, inject, signal } from '@angular/core';
+import { Injectable, computed, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
 import { filter, map } from 'rxjs/operators';
@@ -16,7 +17,16 @@ export class BreadcrumbService {
   private readonly router = inject(Router);
   private readonly activatedRoute = inject(ActivatedRoute);
 
-  private readonly routeDataSignal = signal<any[]>([]);
+  // Convert the observable to a signal
+  private readonly routeDataSignal = toSignal(
+    this.router.events.pipe(
+      filter((event) => event instanceof NavigationEnd),
+      map(() => this.buildRouteData(this.activatedRoute.root)),
+    ),
+    {
+      initialValue: [],
+    },
+  );
 
   // Computed signal that transforms route data into breadcrumb items
   breadcrumbs = computed(() => {
@@ -37,17 +47,6 @@ export class BreadcrumbService {
 
     return items;
   });
-
-  constructor() {
-    this.router.events
-      .pipe(
-        filter((event) => event instanceof NavigationEnd),
-        map(() => this.buildRouteData(this.activatedRoute.root)),
-      )
-      .subscribe((routeData) => {
-        this.routeDataSignal.set(routeData);
-      });
-  }
 
   private buildRouteData(route: ActivatedRoute): any[] {
     const data: any[] = [];
