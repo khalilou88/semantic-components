@@ -66,12 +66,12 @@ import { BreadcrumbComponent } from '@semantic-components/breadcrumb';
     <div class="app-container">
       <header class="app-header">
         <h1>My Application</h1>
-        <app-breadcrumb
+        <lib-breadcrumb
           [showHome]="true"
           [enableNavigation]="true"
           homeLabel="Dashboard"
           homeUrl="/dashboard"
-        ></app-breadcrumb>
+        ></lib-breadcrumb>
       </header>
 
       <main class="app-main">

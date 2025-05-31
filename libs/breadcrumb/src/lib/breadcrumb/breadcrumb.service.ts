@@ -56,7 +56,7 @@ export class BreadcrumbService {
       const routeSnapshot = currentRoute.snapshot;
 
       if (routeSnapshot.routeConfig?.path) {
-        const fullPath = path + '/' + routeSnapshot.routeConfig.path;
+        // const fullPath = path + '/' + routeSnapshot.routeConfig.path;
 
         // Replace route parameters with actual values
         let resolvedPath = routeSnapshot.routeConfig.path;

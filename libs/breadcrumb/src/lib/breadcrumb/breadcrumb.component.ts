@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { BreadcrumbService } from './breadcrumb.service';
 
 @Component({
-  selector: 'app-breadcrumb',
+  selector: 'lib-breadcrumb',
   standalone: true,
   imports: [CommonModule, RouterModule],
   template: `
