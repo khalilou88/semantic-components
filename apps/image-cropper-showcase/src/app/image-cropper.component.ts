@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -34,7 +33,7 @@ interface CropInfo {
 
 @Component({
   selector: 'app-image-cropper',
-  imports: [CommonModule],
+  imports: [],
   template: `
     <!-- Upload Section -->
     <div class="upload-section">
@@ -64,77 +63,79 @@ interface CropInfo {
       <div class="cropper-section">
         <h3>📷 Original Image</h3>
         <div class="image-cropper-container" #cropperContainer>
-          <div class="no-image" *ngIf="!currentImage()">
-            <p>Select an image to start cropping</p>
-          </div>
+          @if (!currentImage()) {
+            <div class="no-image">
+              <p>Select an image to start cropping</p>
+            </div>
+          }
 
-          <div class="cropper-canvas" *ngIf="currentImage()">
-            <img
-              class="source-image"
-              #sourceImage
-              [src]="currentImage()"
-              (load)="onImageLoad()"
-              crossorigin="anonymous"
-              alt="Source image"
-            />
-
-            <div class="crop-overlay" [style.display]="showOverlay() ? 'block' : 'none'">
-              <div
-                class="crop-area"
-                #cropArea
-                [style.left.px]="cropPosition().x1"
-                [style.top.px]="cropPosition().y1"
-                [style.width.px]="cropPosition().x2 - cropPosition().x1"
-                [style.height.px]="cropPosition().y2 - cropPosition().y1"
-                (mousedown)="startMove($event)"
-                (touchstart)="startMove($event)"
-              >
-                <!-- Corner resize handles -->
+          @if (currentImage()) {
+            <div class="cropper-canvas">
+              <img
+                class="source-image"
+                #sourceImage
+                [src]="currentImage()"
+                (load)="onImageLoad()"
+                crossorigin="anonymous"
+                alt="Source image"
+              />
+              <div class="crop-overlay" [style.display]="showOverlay() ? 'block' : 'none'">
                 <div
-                  class="resize-handle tl"
-                  (mousedown)="startResize($event, 'tl')"
-                  (touchstart)="startResize($event, 'tl')"
-                ></div>
-                <div
-                  class="resize-handle tr"
-                  (mousedown)="startResize($event, 'tr')"
-                  (touchstart)="startResize($event, 'tr')"
-                ></div>
-                <div
-                  class="resize-handle bl"
-                  (mousedown)="startResize($event, 'bl')"
-                  (touchstart)="startResize($event, 'bl')"
-                ></div>
-                <div
-                  class="resize-handle br"
-                  (mousedown)="startResize($event, 'br')"
-                  (touchstart)="startResize($event, 'br')"
-                ></div>
-
-                <!-- Side resize handles -->
-                <div
-                  class="resize-handle t"
-                  (mousedown)="startResize($event, 't')"
-                  (touchstart)="startResize($event, 't')"
-                ></div>
-                <div
-                  class="resize-handle r"
-                  (mousedown)="startResize($event, 'r')"
-                  (touchstart)="startResize($event, 'r')"
-                ></div>
-                <div
-                  class="resize-handle b"
-                  (mousedown)="startResize($event, 'b')"
-                  (touchstart)="startResize($event, 'b')"
-                ></div>
-                <div
-                  class="resize-handle l"
-                  (mousedown)="startResize($event, 'l')"
-                  (touchstart)="startResize($event, 'l')"
-                ></div>
+                  class="crop-area"
+                  #cropArea
+                  [style.left.px]="cropPosition().x1"
+                  [style.top.px]="cropPosition().y1"
+                  [style.width.px]="cropPosition().x2 - cropPosition().x1"
+                  [style.height.px]="cropPosition().y2 - cropPosition().y1"
+                  (mousedown)="startMove($event)"
+                  (touchstart)="startMove($event)"
+                >
+                  <!-- Corner resize handles -->
+                  <div
+                    class="resize-handle tl"
+                    (mousedown)="startResize($event, 'tl')"
+                    (touchstart)="startResize($event, 'tl')"
+                  ></div>
+                  <div
+                    class="resize-handle tr"
+                    (mousedown)="startResize($event, 'tr')"
+                    (touchstart)="startResize($event, 'tr')"
+                  ></div>
+                  <div
+                    class="resize-handle bl"
+                    (mousedown)="startResize($event, 'bl')"
+                    (touchstart)="startResize($event, 'bl')"
+                  ></div>
+                  <div
+                    class="resize-handle br"
+                    (mousedown)="startResize($event, 'br')"
+                    (touchstart)="startResize($event, 'br')"
+                  ></div>
+                  <!-- Side resize handles -->
+                  <div
+                    class="resize-handle t"
+                    (mousedown)="startResize($event, 't')"
+                    (touchstart)="startResize($event, 't')"
+                  ></div>
+                  <div
+                    class="resize-handle r"
+                    (mousedown)="startResize($event, 'r')"
+                    (touchstart)="startResize($event, 'r')"
+                  ></div>
+                  <div
+                    class="resize-handle b"
+                    (mousedown)="startResize($event, 'b')"
+                    (touchstart)="startResize($event, 'b')"
+                  ></div>
+                  <div
+                    class="resize-handle l"
+                    (mousedown)="startResize($event, 'l')"
+                    (touchstart)="startResize($event, 'l')"
+                  ></div>
+                </div>
               </div>
             </div>
-          </div>
+          }
         </div>
 
         <div class="preset-buttons">
@@ -192,24 +193,25 @@ interface CropInfo {
       <div class="result-section">
         <h3>✨ Cropped Result</h3>
         <div id="resultContainer">
-          <div class="no-image" *ngIf="!croppedImageData()">
-            <p>Cropped image will appear here</p>
-          </div>
-          <img
-            class="result-image"
-            *ngIf="croppedImageData()"
-            [src]="croppedImageData()"
-            alt="Cropped image"
-          />
+          @if (!croppedImageData()) {
+            <div class="no-image">
+              <p>Cropped image will appear here</p>
+            </div>
+          }
+          @if (croppedImageData()) {
+            <img class="result-image" [src]="croppedImageData()" alt="Cropped image" />
+          }
         </div>
 
-        <div class="crop-info" *ngIf="cropInfo()">
-          <h4>📊 Crop Information</h4>
-          <p>Original: {{ cropInfo()!.originalWidth }} × {{ cropInfo()!.originalHeight }}px</p>
-          <p>Cropped: {{ cropInfo()!.croppedWidth }} × {{ cropInfo()!.croppedHeight }}px</p>
-          <p>Aspect Ratio: {{ cropInfo()!.aspectRatio }}:1</p>
-          <p>Estimated Size: ~{{ cropInfo()!.estimatedSize }}KB</p>
-        </div>
+        @if (cropInfo()) {
+          <div class="crop-info">
+            <h4>📊 Crop Information</h4>
+            <p>Original: {{ cropInfo()!.originalWidth }} × {{ cropInfo()!.originalHeight }}px</p>
+            <p>Cropped: {{ cropInfo()!.croppedWidth }} × {{ cropInfo()!.croppedHeight }}px</p>
+            <p>Aspect Ratio: {{ cropInfo()!.aspectRatio }}:1</p>
+            <p>Estimated Size: ~{{ cropInfo()!.estimatedSize }}KB</p>
+          </div>
+        }
       </div>
     </div>
   `,

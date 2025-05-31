@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -21,7 +20,7 @@ interface CropBox {
 
 @Component({
   selector: 'sc-image-cropper',
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   template: `
     <div class="min-h-screen bg-background p-4">
       <div class="mx-auto max-w-4xl space-y-6">
@@ -87,69 +86,69 @@ interface CropBox {
             <div class="rounded-lg border bg-card p-4" [class.hidden]="!imageLoaded">
               <div class="relative aspect-video bg-muted rounded-md overflow-hidden" #cropContainer>
                 <!-- Image -->
-                <img
-                  class="absolute inset-0 w-full h-full object-contain"
-                  #imageElement
-                  *ngIf="imageSrc"
-                  [src]="imageSrc"
-                  (load)="onImageLoad()"
-                  alt=""
-                />
+                @if (imageSrc) {
+                  <img
+                    class="absolute inset-0 w-full h-full object-contain"
+                    #imageElement
+                    [src]="imageSrc"
+                    (load)="onImageLoad()"
+                    alt=""
+                  />
+                }
 
                 <!-- Crop Overlay -->
-                <div class="absolute inset-0" *ngIf="imageLoaded">
-                  <!-- Dark overlay -->
-                  <div class="absolute inset-0 bg-black/40"></div>
-
-                  <!-- Crop selection box -->
-                  <div
-                    class="absolute border-2 border-white shadow-lg cursor-move"
-                    [style.left.px]="cropBox.x"
-                    [style.top.px]="cropBox.y"
-                    [style.width.px]="cropBox.width"
-                    [style.height.px]="cropBox.height"
-                    (mousedown)="startDrag($event)"
-                  >
-                    <!-- Clear area inside crop box -->
-                    <div class="absolute inset-0 bg-transparent"></div>
-
-                    <!-- Corner handles -->
+                @if (imageLoaded) {
+                  <div class="absolute inset-0">
+                    <!-- Dark overlay -->
+                    <div class="absolute inset-0 bg-black/40"></div>
+                    <!-- Crop selection box -->
                     <div
-                      class="absolute -top-1 -left-1 w-3 h-3 bg-white border border-gray-300 cursor-nw-resize"
-                      (mousedown)="startResize($event, 'nw')"
-                    ></div>
-                    <div
-                      class="absolute -top-1 -right-1 w-3 h-3 bg-white border border-gray-300 cursor-ne-resize"
-                      (mousedown)="startResize($event, 'ne')"
-                    ></div>
-                    <div
-                      class="absolute -bottom-1 -left-1 w-3 h-3 bg-white border border-gray-300 cursor-sw-resize"
-                      (mousedown)="startResize($event, 'sw')"
-                    ></div>
-                    <div
-                      class="absolute -bottom-1 -right-1 w-3 h-3 bg-white border border-gray-300 cursor-se-resize"
-                      (mousedown)="startResize($event, 'se')"
-                    ></div>
-
-                    <!-- Edge handles -->
-                    <div
-                      class="absolute -top-1 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-white border border-gray-300 cursor-n-resize"
-                      (mousedown)="startResize($event, 'n')"
-                    ></div>
-                    <div
-                      class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-white border border-gray-300 cursor-s-resize"
-                      (mousedown)="startResize($event, 's')"
-                    ></div>
-                    <div
-                      class="absolute -left-1 top-1/2 transform -translate-y-1/2 w-3 h-3 bg-white border border-gray-300 cursor-w-resize"
-                      (mousedown)="startResize($event, 'w')"
-                    ></div>
-                    <div
-                      class="absolute -right-1 top-1/2 transform -translate-y-1/2 w-3 h-3 bg-white border border-gray-300 cursor-e-resize"
-                      (mousedown)="startResize($event, 'e')"
-                    ></div>
+                      class="absolute border-2 border-white shadow-lg cursor-move"
+                      [style.left.px]="cropBox.x"
+                      [style.top.px]="cropBox.y"
+                      [style.width.px]="cropBox.width"
+                      [style.height.px]="cropBox.height"
+                      (mousedown)="startDrag($event)"
+                    >
+                      <!-- Clear area inside crop box -->
+                      <div class="absolute inset-0 bg-transparent"></div>
+                      <!-- Corner handles -->
+                      <div
+                        class="absolute -top-1 -left-1 w-3 h-3 bg-white border border-gray-300 cursor-nw-resize"
+                        (mousedown)="startResize($event, 'nw')"
+                      ></div>
+                      <div
+                        class="absolute -top-1 -right-1 w-3 h-3 bg-white border border-gray-300 cursor-ne-resize"
+                        (mousedown)="startResize($event, 'ne')"
+                      ></div>
+                      <div
+                        class="absolute -bottom-1 -left-1 w-3 h-3 bg-white border border-gray-300 cursor-sw-resize"
+                        (mousedown)="startResize($event, 'sw')"
+                      ></div>
+                      <div
+                        class="absolute -bottom-1 -right-1 w-3 h-3 bg-white border border-gray-300 cursor-se-resize"
+                        (mousedown)="startResize($event, 'se')"
+                      ></div>
+                      <!-- Edge handles -->
+                      <div
+                        class="absolute -top-1 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-white border border-gray-300 cursor-n-resize"
+                        (mousedown)="startResize($event, 'n')"
+                      ></div>
+                      <div
+                        class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-white border border-gray-300 cursor-s-resize"
+                        (mousedown)="startResize($event, 's')"
+                      ></div>
+                      <div
+                        class="absolute -left-1 top-1/2 transform -translate-y-1/2 w-3 h-3 bg-white border border-gray-300 cursor-w-resize"
+                        (mousedown)="startResize($event, 'w')"
+                      ></div>
+                      <div
+                        class="absolute -right-1 top-1/2 transform -translate-y-1/2 w-3 h-3 bg-white border border-gray-300 cursor-e-resize"
+                        (mousedown)="startResize($event, 'e')"
+                      ></div>
+                    </div>
                   </div>
-                </div>
+                }
               </div>
             </div>
           </div>
@@ -288,14 +287,11 @@ interface CropBox {
               <div
                 class="aspect-square bg-muted rounded-md flex items-center justify-center overflow-hidden"
               >
-                <canvas
-                  class="max-w-full max-h-full"
-                  #previewCanvas
-                  *ngIf="imageLoaded; else noPreview"
-                ></canvas>
-                <ng-template #noPreview>
+                @if (imageLoaded) {
+                  <canvas class="max-w-full max-h-full" #previewCanvas></canvas>
+                } @else {
                   <span class="text-muted-foreground text-sm">Cropped preview</span>
-                </ng-template>
+                }
               </div>
               <div class="mt-2 text-xs text-muted-foreground text-center">
                 {{ cropSettings.width }} × {{ cropSettings.height }} px

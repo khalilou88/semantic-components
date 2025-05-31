@@ -1,4 +1,4 @@
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -13,7 +13,7 @@ import { ScImageCropper } from '@semantic-components/image-cropper';
 import { ScScrollToTop } from '@semantic-components/ui';
 
 @Component({
-  imports: [RouterOutlet, ScImageCropper, CommonModule],
+  imports: [RouterOutlet, ScImageCropper],
   selector: 'app-root',
   template: `
     <sc-image-cropper></sc-image-cropper>
