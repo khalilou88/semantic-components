@@ -24,12 +24,12 @@ import { BreadcrumbService } from './breadcrumb.service';
 
         <li
           class="breadcrumb-item"
-          *ngFor="let item of breadcrumbs(); let last = last"
+          *ngFor="let item of breadcrumbs(); let last = last; first as isFirst"
           [class.active]="item.isActive"
         >
           <svg
             class="separator"
-            *ngIf="showHome || !$first"
+            *ngIf="showHome || !isFirst"
             viewBox="0 0 20 20"
             fill="currentColor"
           >
