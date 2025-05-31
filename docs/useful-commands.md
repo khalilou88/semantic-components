@@ -42,3 +42,5 @@ nx g @nx/angular:library libs/editor --publishable --import-path=@semantic-compo
 nx g @nx/angular:library libs/code-highlighter --publishable --import-path=@semantic-components/code-highlighter
 
 nx g @nx/angular:library libs/breadcrumb --publishable --import-path=@semantic-components/breadcrumb
+
+nx g @nx/angular:application apps/breadcrumb-showcase
