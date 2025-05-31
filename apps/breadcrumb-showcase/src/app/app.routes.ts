@@ -1,5 +1,13 @@
 import { Route } from '@angular/router';
 
+import { Category } from './category';
+import { Dashboard } from './dashboard';
+import { ProductDetail } from './product-detail';
+import { ProductList } from './product-list';
+import { UserList } from './user-list';
+import { UserProfile } from './user-profile';
+import { UserSettings } from './user-settings';
+
 export const appRoutes: Route[] = [
   {
     path: '',
@@ -8,7 +16,7 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'dashboard',
-    component: DashboardComponent,
+    component: Dashboard,
     data: { breadcrumb: 'Dashboard' },
   },
   {
@@ -17,16 +25,16 @@ export const appRoutes: Route[] = [
     children: [
       {
         path: '',
-        component: ProductListComponent,
+        component: ProductList,
       },
       {
         path: 'category/:categoryId',
-        component: CategoryComponent,
+        component: Category,
         data: { breadcrumb: 'Category' },
       },
       {
         path: ':productId',
-        component: ProductDetailComponent,
+        component: ProductDetail,
         data: { breadcrumb: 'Product Details' },
       },
     ],
@@ -37,16 +45,16 @@ export const appRoutes: Route[] = [
     children: [
       {
         path: '',
-        component: UserListComponent,
+        component: UserList,
       },
       {
         path: ':userId',
-        component: UserProfileComponent,
+        component: UserProfile,
         data: { breadcrumb: 'User Profile' },
         children: [
           {
             path: 'settings',
-            component: UserSettingsComponent,
+            component: UserSettings,
             data: { breadcrumb: 'Settings' },
           },
         ],
