@@ -1,3 +1,4 @@
+import { JsonPipe } from '@angular/common';
 import { Component, inject, input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -6,8 +7,12 @@ import { BreadcrumbService } from './breadcrumb.service';
 @Component({
   selector: 'lib-breadcrumb',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, JsonPipe],
   template: `
+    {{ breadcrumbs() | json }}
+    <br />
+    <br />
+
     <nav class="breadcrumb-nav" [attr.aria-label]="ariaLabel()">
       <ol class="breadcrumb-list">
         @if (showHome()) {
