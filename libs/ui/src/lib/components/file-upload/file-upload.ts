@@ -3,7 +3,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  Input,
   Output,
   ViewEncapsulation,
   computed,
@@ -53,8 +52,8 @@ import { cn } from '@semantic-components/utils';
         </p>
         <p class="text-xs text-gray-500">
           {{
-            acceptedFileTypes
-              ? 'Accepted file types: ' + acceptedFileTypes
+            acceptedFileTypes()
+              ? 'Accepted file types: ' + acceptedFileTypes()
               : 'Any file type accepted'
           }}
           (Max: {{ maxFileSize() }}MB)
@@ -64,7 +63,7 @@ import { cn } from '@semantic-components/utils';
         <input
           class="hidden"
           #fileInput
-          [accept]="acceptedFileTypes"
+          [accept]="acceptedFileTypes()"
           [multiple]="multiple()"
           (change)="onFileSelected($event)"
           type="file"
@@ -216,7 +215,7 @@ export class ScFileUpload {
 
   protected readonly class = computed(() => cn('', this.classInput()));
 
-  @Input() acceptedFileTypes = '';
+  readonly acceptedFileTypes = input('');
   readonly maxFileSize = input(5); // Default max size in MB
   readonly multiple = input(false);
   readonly uploadUrl = input('/api/upload');
@@ -265,8 +264,9 @@ export class ScFileUpload {
     const filesArray = Array.from(fileList);
 
     // Validate file types if needed
-    if (this.acceptedFileTypes) {
-      const allowedTypes = this.acceptedFileTypes.split(',');
+    const acceptedFileTypes = this.acceptedFileTypes();
+    if (acceptedFileTypes) {
+      const allowedTypes = acceptedFileTypes.split(',');
       const invalidFiles = filesArray.filter(
         (file) =>
           !allowedTypes.some(

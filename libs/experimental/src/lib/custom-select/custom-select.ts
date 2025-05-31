@@ -15,7 +15,6 @@ import {
   Component,
   ContentChildren,
   ElementRef,
-  Input,
   OnDestroy,
   QueryList,
   TemplateRef,
@@ -23,6 +22,7 @@ import {
   ViewEncapsulation,
   inject,
   input,
+  linkedSignal,
   output,
   viewChild,
 } from '@angular/core';
@@ -89,7 +89,11 @@ export class CustomSelect implements AfterContentInit, OnDestroy, AfterViewInit 
   private readonly elementRef = inject(ElementRef);
 
   readonly placeholder = input('Select an option');
-  @Input() value: any = null;
+  readonly valueInput = input<any>(null, {
+    alias: 'value',
+  });
+
+  readonly value = linkedSignal<any>(() => this.valueInput());
 
   readonly valueChange = output<any>();
   readonly opened = output<void>();
@@ -147,9 +151,10 @@ export class CustomSelect implements AfterContentInit, OnDestroy, AfterViewInit 
   }
 
   updateSelectedOption() {
-    if (this.value !== null && this.value !== undefined) {
+    const value = this.value();
+    if (value !== null && value !== undefined) {
       this.selectedOption =
-        this.optionComponents.find((option) => option.value() === this.value) || null;
+        this.optionComponents.find((option) => option.value() === this.value()) || null;
     } else {
       this.selectedOption = null;
     }
@@ -257,7 +262,7 @@ export class CustomSelect implements AfterContentInit, OnDestroy, AfterViewInit 
   }
 
   selectOption(option: CustomOption) {
-    this.value = option.value();
+    this.value.set(option.value());
     this.selectedOption = option;
 
     // Update active state on all options
@@ -265,7 +270,7 @@ export class CustomSelect implements AfterContentInit, OnDestroy, AfterViewInit 
       opt.isActive = opt === option;
     });
 
-    this.valueChange.emit(this.value);
+    this.valueChange.emit(this.value());
     this.closeDropdown();
   }
 

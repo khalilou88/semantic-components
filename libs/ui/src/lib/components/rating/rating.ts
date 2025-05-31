@@ -2,12 +2,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  Input,
   OnChanges,
   OnInit,
   Output,
   ViewEncapsulation,
   input,
+  linkedSignal,
 } from '@angular/core';
 
 @Component({
@@ -62,7 +62,7 @@ import {
       </div>
       @if (showRatingValue()) {
         <span class="ml-2 text-sm text-gray-600">
-          {{ rating.toFixed(1) }}
+          {{ rating().toFixed(1) }}
         </span>
       }
     </div>
@@ -73,7 +73,12 @@ import {
 })
 export class ScRating implements OnInit, OnChanges {
   readonly maxRating = input(5);
-  @Input() rating = 0;
+  readonly ratingInput = input(0, {
+    alias: 'rating',
+  });
+
+  readonly rating = linkedSignal(() => this.ratingInput());
+
   readonly interactive = input(true);
   readonly showRatingValue = input(false);
   readonly allowHalfStars = input(true);
@@ -102,21 +107,23 @@ export class ScRating implements OnInit, OnChanges {
 
   onRate(position: number) {
     if (!this.interactive()) return;
-    if (this.rating === position && this.allowHalfStars()) {
+    const rating = this.rating();
+    if (rating === position && this.allowHalfStars()) {
       // If clicking the same star, toggle between whole and half star
-      this.rating = position - 0.5;
+      this.rating.set(position - 0.5);
     } else {
-      this.rating = position;
+      this.rating.set(position);
     }
-    this.ratingChange.emit(this.rating);
+    this.ratingChange.emit(rating);
   }
 
   isHalfOrFullStar(position: number): boolean {
-    return this.rating >= position - 0.5;
+    return this.rating() >= position - 0.5;
   }
 
   isHalfStar(position: number): boolean {
-    return Math.ceil(this.rating) === position && this.isHalfValue(this.rating);
+    const rating = this.rating();
+    return Math.ceil(rating) === position && this.isHalfValue(rating);
   }
 
   isHalfValue(value: number): boolean {

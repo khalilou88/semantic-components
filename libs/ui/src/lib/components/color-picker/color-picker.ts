@@ -1,9 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
   OnInit,
   ViewEncapsulation,
+  input,
+  linkedSignal,
   output,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -98,7 +99,13 @@ import { FormsModule } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScColorPicker implements OnInit {
-  @Input() initialColor = '#ff0000';
+  readonly initialColorInput = input('#ff0000', {
+    alias: 'initialColor',
+  });
+
+  readonly initialColor = linkedSignal(() => {
+    return this.initialColorInput();
+  });
   readonly colorChange = output<string>();
 
   red = 255;
@@ -124,7 +131,7 @@ export class ScColorPicker implements OnInit {
   }
 
   setInitialColor() {
-    const color = this.initialColor.replace('#', '');
+    const color = this.initialColor().replace('#', '');
     this.red = parseInt(color.substr(0, 2), 16);
     this.green = parseInt(color.substr(2, 2), 16);
     this.blue = parseInt(color.substr(4, 2), 16);
@@ -142,7 +149,7 @@ export class ScColorPicker implements OnInit {
   }
 
   selectPresetColor(color: string) {
-    this.initialColor = color;
+    this.initialColor.set(color);
     this.setInitialColor();
   }
 }

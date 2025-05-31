@@ -4,7 +4,6 @@ import {
   ElementRef,
   EventEmitter,
   HostListener,
-  Input,
   OnInit,
   Output,
   ViewEncapsulation,
@@ -26,9 +25,9 @@ export interface ScOptionModel {
   template: `
     <div class="relative w-full">
       <!-- Label for screen readers -->
-      @if (label) {
+      @if (label()) {
         <label class="block text-sm font-medium text-gray-700 mb-1" [attr.for]="labelId">
-          {{ label }}
+          {{ label() }}
           @if (required()) {
             <span class="text-red-500">*</span>
           }
@@ -101,9 +100,9 @@ export interface ScOptionModel {
       </div>
 
       <!-- Error message -->
-      @if (showError() && errorMessage) {
+      @if (showError() && errorMessage()) {
         <div class="text-sm text-red-500 mt-1">
-          {{ errorMessage }}
+          {{ errorMessage() }}
         </div>
       }
 
@@ -169,10 +168,10 @@ export class ScMultiSelect implements OnInit {
   readonly options = input<ScOptionModel[]>([]);
   readonly placeholder = input('Select options');
   readonly searchable = input(true);
-  @Input() label = '';
+  readonly label = input('');
   readonly required = input(false);
   readonly showError = input(false);
-  @Input() errorMessage = 'This field is required';
+  readonly errorMessage = input('This field is required');
 
   @Output() selectionChange = new EventEmitter<ScOptionModel[]>();
 

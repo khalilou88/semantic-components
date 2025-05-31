@@ -3,12 +3,13 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  Input,
   NgZone,
   OnInit,
   Output,
   ViewEncapsulation,
   inject,
+  input,
+  linkedSignal,
   signal,
 } from '@angular/core';
 
@@ -28,8 +29,8 @@ import {
               : '')
       "
     >
-      <h2 class="text-xl font-bold mb-3">{{ title }}</h2>
-      <div class="mb-4">{{ content }}</div>
+      <h2 class="text-xl font-bold mb-3">{{ title() }}</h2>
+      <div class="mb-4">{{ content() }}</div>
       <div class="flex justify-end space-x-3">
         <button
           class="px-4 py-2 text-gray-700 bg-gray-200 rounded hover:bg-gray-300 transition-colors"
@@ -54,8 +55,16 @@ export class AnimatedContent implements OnInit {
   private readonly el = inject(ElementRef);
   private readonly ngZone = inject(NgZone);
 
-  @Input() title = 'Dialog Title';
-  @Input() content = 'Dialog content goes here.';
+  readonly titleInput = input('Dialog Title', {
+    alias: 'title',
+  });
+  readonly contentInput = input('Dialog content goes here.', {
+    alias: 'content',
+  });
+
+  readonly title = linkedSignal(() => this.titleInput());
+  readonly content = linkedSignal(() => this.contentInput());
+
   @Output() confirm = new EventEmitter<void>();
   @Output() cancel = new EventEmitter<void>();
 

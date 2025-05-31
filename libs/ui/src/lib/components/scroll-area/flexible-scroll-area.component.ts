@@ -4,10 +4,10 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  Input,
   OnDestroy,
   OnInit,
   input,
+  linkedSignal,
   viewChild,
 } from '@angular/core';
 
@@ -19,8 +19,8 @@ import {
     <div
       class="relative"
       [ngClass]="{
-        'w-full max-w-4xl': orientation === 'horizontal',
-        'h-[8.5rem] w-96 max-w-[calc(100vw-8rem)]': orientation === 'vertical',
+        'w-full max-w-4xl': orientation() === 'horizontal',
+        'h-[8.5rem] w-96 max-w-[calc(100vw-8rem)]': orientation() === 'vertical',
       }"
     >
       <!-- Main scroll container -->
@@ -28,8 +28,8 @@ import {
         class="overscroll-contain rounded-md outline -outline-offset-1 outline-gray-200 focus-visible:outline  focus-visible:outline-blue-800 scrollbar-hide"
         #viewport
         [ngClass]="{
-          'overflow-x-scroll overflow-y-hidden h-64': orientation === 'horizontal',
-          'overflow-y-scroll overflow-x-hidden h-full': orientation === 'vertical',
+          'overflow-x-scroll overflow-y-hidden h-64': orientation() === 'horizontal',
+          'overflow-y-scroll overflow-x-hidden h-full': orientation() === 'vertical',
         }"
         (scroll)="onScroll()"
         (mouseenter)="isHovering = true"
@@ -38,9 +38,9 @@ import {
         <!-- Content container with proper layout based on orientation -->
         <div
           [ngClass]="{
-            'flex flex-row gap-4 p-4 min-w-max': orientation === 'horizontal',
+            'flex flex-row gap-4 p-4 min-w-max': orientation() === 'horizontal',
             'flex flex-col gap-4 py-3 pr-6 pl-4 text-sm leading-[1.375rem] text-gray-900':
-              orientation === 'vertical',
+              orientation() === 'vertical',
           }"
         >
           <!-- Projected content from parent component -->
@@ -49,7 +49,7 @@ import {
       </div>
 
       <!-- Custom scrollbar for vertical orientation -->
-      @if (orientation === 'vertical') {
+      @if (orientation() === 'vertical') {
         <div
           class="absolute top-0 right-1 w-1 h-[calc(100%-0.5rem)] my-1 rounded-full bg-gray-200 opacity-0 transition-opacity delay-300"
           [ngClass]="{ 'opacity-100 delay-0 duration-75': isScrolling || isHovering }"
@@ -65,7 +65,7 @@ import {
       }
 
       <!-- Custom scrollbar for horizontal orientation -->
-      @if (orientation === 'horizontal') {
+      @if (orientation() === 'horizontal') {
         <div
           class="absolute bottom-0 left-0 right-4 h-1 mx-2 rounded-full bg-gray-200 opacity-0 transition-opacity delay-300"
           [ngClass]="{ 'opacity-100 delay-0 duration-75': isScrolling || isHovering }"
@@ -81,7 +81,7 @@ import {
       }
 
       <!-- Navigation buttons for horizontal scrolling -->
-      @if (orientation === 'horizontal' && showNavButtons()) {
+      @if (orientation() === 'horizontal' && showNavButtons()) {
         <button
           class="absolute top-1/2 left-2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full shadow-md p-2 opacity-0 transition-opacity duration-200"
           [ngClass]="{ 'opacity-100': isHovering && canScrollStart }"
@@ -129,7 +129,7 @@ import {
       }
 
       <!-- Navigation buttons for vertical scrolling -->
-      @if (orientation === 'vertical' && showNavButtons()) {
+      @if (orientation() === 'vertical' && showNavButtons()) {
         <button
           class="absolute top-2 left-1/2 -translate-x-1/2 bg-white/80 hover:bg-white rounded-full shadow-md p-2 opacity-0 transition-opacity duration-200"
           [ngClass]="{ 'opacity-100': isHovering && canScrollStart }"
@@ -193,7 +193,12 @@ import {
   ],
 })
 export class FlexibleScrollAreaComponent implements OnInit, OnDestroy, AfterViewInit {
-  @Input() orientation: 'vertical' | 'horizontal' = 'vertical';
+  readonly orientationInput = input<'vertical' | 'horizontal'>('vertical', {
+    alias: 'orientation',
+  });
+
+  readonly orientation = linkedSignal<'vertical' | 'horizontal'>(() => this.orientationInput());
+
   readonly height = input('8.5rem');
   readonly width = input('96');
   readonly showNavButtons = input(true);
@@ -219,8 +224,9 @@ export class FlexibleScrollAreaComponent implements OnInit, OnDestroy, AfterView
 
   ngOnInit() {
     // Initial check to make sure we have a valid orientation
-    if (this.orientation !== 'vertical' && this.orientation !== 'horizontal') {
-      this.orientation = 'vertical';
+    const orientation = this.orientation();
+    if (orientation !== 'vertical' && orientation !== 'horizontal') {
+      this.orientation.set('vertical');
     }
   }
 
@@ -249,7 +255,7 @@ export class FlexibleScrollAreaComponent implements OnInit, OnDestroy, AfterView
   updateThumb() {
     const viewport = this.viewportRef().nativeElement;
 
-    if (this.orientation === 'vertical') {
+    if (this.orientation() === 'vertical') {
       const scrollHeight = viewport.scrollHeight;
       const clientHeight = viewport.clientHeight;
 
@@ -275,7 +281,7 @@ export class FlexibleScrollAreaComponent implements OnInit, OnDestroy, AfterView
   updateScrollButtonsState() {
     const viewport = this.viewportRef().nativeElement;
 
-    if (this.orientation === 'vertical') {
+    if (this.orientation() === 'vertical') {
       this.canScrollStart = viewport.scrollTop > 0;
       this.canScrollEnd = viewport.scrollTop < viewport.scrollHeight - viewport.clientHeight - 1; // -1 for rounding errors
     } else {
@@ -287,7 +293,7 @@ export class FlexibleScrollAreaComponent implements OnInit, OnDestroy, AfterView
   startDragging(event: MouseEvent) {
     this.isDragging = true;
 
-    if (this.orientation === 'vertical') {
+    if (this.orientation() === 'vertical') {
       this.startPoint = event.clientY;
       this.startScrollPosition = this.viewportRef().nativeElement.scrollTop;
     } else {
@@ -303,7 +309,7 @@ export class FlexibleScrollAreaComponent implements OnInit, OnDestroy, AfterView
 
     const viewport = this.viewportRef().nativeElement;
 
-    if (this.orientation === 'vertical') {
+    if (this.orientation() === 'vertical') {
       const deltaY = event.clientY - this.startPoint;
       const scrollbarHeight = viewport.clientHeight;
       const scrollContentHeight = viewport.scrollHeight;
@@ -335,7 +341,7 @@ export class FlexibleScrollAreaComponent implements OnInit, OnDestroy, AfterView
   scrollPrev() {
     const viewport = this.viewportRef().nativeElement;
 
-    if (this.orientation === 'vertical') {
+    if (this.orientation() === 'vertical') {
       viewport.scrollBy({ top: -200, behavior: 'smooth' });
     } else {
       viewport.scrollBy({ left: -300, behavior: 'smooth' });
@@ -345,7 +351,7 @@ export class FlexibleScrollAreaComponent implements OnInit, OnDestroy, AfterView
   scrollNext() {
     const viewport = this.viewportRef().nativeElement;
 
-    if (this.orientation === 'vertical') {
+    if (this.orientation() === 'vertical') {
       viewport.scrollBy({ top: 200, behavior: 'smooth' });
     } else {
       viewport.scrollBy({ left: 300, behavior: 'smooth' });

@@ -36,8 +36,8 @@ export class AnimatedOverlayService {
       const componentPortal = new ComponentPortal(AnimatedContent);
       this.componentRef = this.overlayRef.attach(componentPortal);
 
-      this.componentRef.instance.title = config.title;
-      this.componentRef.instance.content = config.content;
+      this.componentRef.instance.title.set(config.title);
+      this.componentRef.instance.content.set(config.content);
 
       // Add backdrop click to close
       this.overlayRef.backdropClick().subscribe(async () => {
