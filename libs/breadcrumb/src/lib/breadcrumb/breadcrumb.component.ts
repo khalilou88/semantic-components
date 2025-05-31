@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { BreadcrumbService } from './breadcrumb.service';
@@ -8,24 +8,24 @@ import { BreadcrumbService } from './breadcrumb.service';
   standalone: true,
   imports: [RouterModule],
   template: `
-    <nav class="breadcrumb-nav" [attr.aria-label]="ariaLabel">
+    <nav class="breadcrumb-nav" [attr.aria-label]="ariaLabel()">
       <ol class="breadcrumb-list">
-        @if (showHome) {
+        @if (showHome()) {
           <li class="breadcrumb-item home-item">
-            <a class="breadcrumb-link" [routerLink]="homeUrl">
+            <a class="breadcrumb-link" [routerLink]="homeUrl()">
               <svg class="home-icon" viewBox="0 0 20 20" fill="currentColor">
                 <path
                   d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"
                 />
               </svg>
-              <span class="sr-only">{{ homeLabel }}</span>
+              <span class="sr-only">{{ homeLabel() }}</span>
             </a>
           </li>
         }
 
         @for (item of breadcrumbs(); track item; let last = $last; let isFirst = $first) {
           <li class="breadcrumb-item" [class.active]="item.isActive">
-            @if (showHome || !isFirst) {
+            @if (showHome() || !isFirst) {
               <svg class="separator" viewBox="0 0 20 20" fill="currentColor">
                 <path
                   fill-rule="evenodd"
@@ -34,7 +34,7 @@ import { BreadcrumbService } from './breadcrumb.service';
                 />
               </svg>
             }
-            @if (!item.isActive && enableNavigation) {
+            @if (!item.isActive && enableNavigation()) {
               <a
                 class="breadcrumb-link"
                 [routerLink]="item.url"
@@ -43,7 +43,7 @@ import { BreadcrumbService } from './breadcrumb.service';
                 {{ item.label }}
               </a>
             }
-            @if (item.isActive || !enableNavigation) {
+            @if (item.isActive || !enableNavigation()) {
               <span class="breadcrumb-current" [attr.aria-current]="item.isActive ? 'page' : null">
                 {{ item.label }}
               </span>
@@ -148,11 +148,11 @@ import { BreadcrumbService } from './breadcrumb.service';
   ],
 })
 export class BreadcrumbComponent {
-  @Input() showHome = true;
-  @Input() homeUrl = '/';
-  @Input() homeLabel = 'Home';
-  @Input() enableNavigation = true;
-  @Input() ariaLabel = 'Breadcrumb navigation';
+  readonly showHome = input(true);
+  readonly homeUrl = input('/');
+  readonly homeLabel = input('Home');
+  readonly enableNavigation = input(true);
+  readonly ariaLabel = input('Breadcrumb navigation');
 
   breadcrumbs = inject(BreadcrumbService).breadcrumbs;
 }
