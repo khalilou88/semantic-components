@@ -24,7 +24,7 @@
     "@fontsource/inter": "^5.2.5",
     "@fontsource/jetbrains-mono": "^5.2.5",
     "@js-temporal/polyfill": "^0.5.1",
-    "@semantic-icons/lucide-icons": "^0.47.0",
+    "@semantic-icons/lucide-icons": "^0.48.0",
     "@supabase/supabase-js": "^2.49.8",
     "@tailwindcss/postcss": "^4.1.8",
     "@tiptap/core": "^2.12.0",
