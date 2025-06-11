@@ -42,7 +42,7 @@
     "@tiptap/extension-horizontal-rule": "^2.14.0",
     "@tiptap/extension-image": "^2.12.0",
     "@tiptap/extension-italic": "^2.14.0",
-    "@tiptap/extension-link": "^2.12.0",
+    "@tiptap/extension-link": "^2.14.0",
     "@tiptap/extension-list-item": "^2.14.0",
     "@tiptap/extension-ordered-list": "^2.14.0",
     "@tiptap/extension-paragraph": "^2.14.0",
