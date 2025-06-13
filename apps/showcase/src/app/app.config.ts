@@ -1,9 +1,5 @@
 import { provideHttpClient, withFetch } from '@angular/common/http';
-import {
-  ApplicationConfig,
-  LOCALE_ID,
-  provideExperimentalZonelessChangeDetection,
-} from '@angular/core';
+import { ApplicationConfig, LOCALE_ID, provideZonelessChangeDetection } from '@angular/core';
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 
@@ -14,7 +10,7 @@ import { appRoutes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideExperimentalZonelessChangeDetection(),
+    provideZonelessChangeDetection(),
     provideRouter(
       appRoutes,
       withInMemoryScrolling({
