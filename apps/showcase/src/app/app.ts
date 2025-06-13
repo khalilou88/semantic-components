@@ -1,7 +1,7 @@
-import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  DOCUMENT,
   OnInit,
   ViewEncapsulation,
   inject,

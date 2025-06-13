@@ -1,5 +1,4 @@
-import { DOCUMENT } from '@angular/common';
-import { Injectable, afterNextRender, computed, inject, signal } from '@angular/core';
+import { DOCUMENT, Injectable, afterNextRender, computed, inject, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',

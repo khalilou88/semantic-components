@@ -13,7 +13,7 @@
         "outputPath": "dist/apps/breadcrumb-showcase",
         "index": "apps/breadcrumb-showcase/src/index.html",
         "browser": "apps/breadcrumb-showcase/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [],
         "tsConfig": "apps/breadcrumb-showcase/tsconfig.app.json",
         "assets": [
           {
