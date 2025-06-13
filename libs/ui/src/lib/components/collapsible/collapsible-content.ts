@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -18,7 +19,7 @@ import { ScCollapsibleState } from './collapsible-state';
 
 @Component({
   selector: 'sc-collapsible-content',
-  imports: [],
+  imports: [NgTemplateOutlet],
   template: `
     @if (contentShown()) {
       <!-- We need to constrain the size of the child to the size of the grid row to ensure the height animation works correctly  -->
