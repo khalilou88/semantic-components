@@ -16,7 +16,7 @@ import { ReCaptchaWithReset } from './re-captcha-with-reset';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReCaptchaWithResetSection {
-  readonly title = input<string>('reCaptcha with Reset');
+  readonly title = input<string>('reCAPTCHA with Reset');
 
   readonly level = input<'2' | '3'>('2');
 

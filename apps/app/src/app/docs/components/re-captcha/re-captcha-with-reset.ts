@@ -14,7 +14,7 @@ import { ScButton, ScTheme } from '@semantic-components/ui';
   selector: 'app-re-captcha-with-reset',
   imports: [ScCheckboxReCaptcha, ScButton],
   template: `
-    <button class="mb-5" (click)="reset()" sc-button>Reset reCaptcha</button>
+    <button class="mb-5" (click)="reset()" sc-button>Reset reCAPTCHA</button>
 
     <div [siteKey]="siteKey" [theme]="theme()" sc-checkbox-re-captcha></div>
   `,
