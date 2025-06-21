@@ -27,6 +27,8 @@ export class ScCheckboxReCaptcha extends ScReCaptchaBase {
 
   private isFirstRun = true;
 
+  private firstTheme!: 'dark' | 'light';
+
   constructor() {
     super();
 
@@ -35,8 +37,17 @@ export class ScCheckboxReCaptcha extends ScReCaptchaBase {
     });
   }
 
+  override reset() {
+    super.reset();
+
+    if (this.firstTheme !== this.theme()) {
+      this.updateRecaptchaTheme(this.theme());
+    }
+  }
+
   private updateRecaptchaTheme(newTheme: 'dark' | 'light') {
     if (this.isFirstRun) {
+      this.firstTheme = newTheme;
       this.isFirstRun = false;
       return;
     }
