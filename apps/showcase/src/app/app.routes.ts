@@ -149,16 +149,6 @@ export const appRoutes: Route[] = [
             title: 'Checkbox Group Page',
           },
           {
-            path: 're-captcha',
-            loadComponent: () => import('./pages/re-captcha-page'),
-            title: 'reCaptcha Page',
-          },
-          {
-            path: 're-captcha-v3',
-            loadComponent: () => import('./pages/re-captcha-v3-page'),
-            title: 'reCaptcha V3 Page',
-          },
-          {
             path: 'menu-bar',
             loadComponent: () => import('./pages/menu-bar-page'),
             title: 'Menu Bar Page',
