@@ -20,7 +20,7 @@ import {
 } from '@semantic-components/ui';
 import {
   SiChevronRightIcon,
-  SiCircleHelpIcon,
+  SiCircleQuestionMarkIcon,
   SiDollarSignIcon,
 } from '@semantic-icons/lucide-icons';
 
@@ -30,7 +30,7 @@ import {
     ScInputGroup,
     ScInput,
     SiDollarSignIcon,
-    SiCircleHelpIcon,
+    SiCircleQuestionMarkIcon,
     SiChevronRightIcon,
     ScBreadcrumb,
     ScBreadcrumbList,
@@ -78,7 +78,7 @@ import {
                     <sc-input-group>
                       <svg si-dollar-sign-icon></svg>
                       <input sc-input />
-                      <svg si-circle-help-icon></svg>
+                      <svg si-circle-question-mark-icon></svg>
                     </sc-input-group>
                   </div>
                 </div>
