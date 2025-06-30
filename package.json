@@ -29,7 +29,7 @@
     "@tailwindcss/postcss": "^4.1.10",
     "@tiptap/core": "^2.23.0",
     "@tiptap/extension-blockquote": "^2.23.0",
-    "@tiptap/extension-bold": "^2.22.3",
+    "@tiptap/extension-bold": "^2.23.0",
     "@tiptap/extension-bullet-list": "^2.22.3",
     "@tiptap/extension-code": "^2.22.3",
     "@tiptap/extension-code-block": "^2.22.3",
