@@ -19,7 +19,6 @@
       "@semantic-components/carousel": ["libs/carousel/src/index.ts"],
       "@semantic-components/code-highlighter": ["libs/code-highlighter/src/index.ts"],
       "@semantic-components/editor": ["libs/editor/src/index.ts"],
-      "@semantic-components/event-manager": ["libs/event-manager/src/index.ts"],
       "@semantic-components/experimental": ["libs/experimental/src/index.ts"],
       "@semantic-components/image-cropper": ["libs/image-cropper/src/index.ts"],
       "@semantic-components/logging": ["libs/logging/src/index.ts"],

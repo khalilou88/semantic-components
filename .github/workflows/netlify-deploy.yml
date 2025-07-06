@@ -1,4 +1,4 @@
-name: Deploy to Netlify
+name: Deploy App to Netlify
 on:
   workflow_dispatch:
 
@@ -20,12 +20,12 @@ jobs:
         run: npm i
 
       - name: Build Application
-        run: npx nx build showcase
+        run: npx nx build app
 
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v3.0
         with:
-          publish-dir: './dist/apps/showcase/browser'
+          publish-dir: './dist/apps/app/browser'
           production-branch: main
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message: 'Deploy from GitHub Actions'
