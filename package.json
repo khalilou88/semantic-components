@@ -55,7 +55,7 @@
     "@tiptap/extension-text-align": "^2.25.1",
     "@tiptap/extension-text-style": "^2.25.1",
     "@tiptap/extension-underline": "^2.25.0",
-    "@tiptap/extension-youtube": "^2.25.0",
+    "@tiptap/extension-youtube": "^3.0.1",
     "@tiptap/pm": "^2.25.0",
     "chart.js": "^4.5.0",
     "class-variance-authority": "^0.7.1",
