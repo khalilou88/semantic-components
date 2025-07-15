@@ -14,13 +14,11 @@
 
 ## Compatibility
 
-This library is **compatible with Angular 19 and above**.
-
-### Compatibility Table
+This library is **compatible with Angular 19 and above**:
 
 | Lib Version | Angular Version |
 | ----------- | --------------- |
-| 0.42.0      | >=19            |
+| 0.43.0      | >=19            |
 
 ## Installation
 
