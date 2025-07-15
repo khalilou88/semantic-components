@@ -22,12 +22,6 @@ This library is **compatible with Angular 19 and above**.
 | ----------- | --------------- |
 | 0.42.0      | >=19            |
 
-### Requirements
-
-- Angular 19.x.x or higher is required to use this library.
-
-If you are using a version of Angular below 19, please upgrade to Angular 19 or higher before using this library.
-
 ## Installation
 
 To install the library, use npm or yarn:
