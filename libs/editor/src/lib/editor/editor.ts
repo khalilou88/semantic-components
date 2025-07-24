@@ -83,7 +83,7 @@ export class ScEditor implements ControlValueAccessor {
     extensions.push(Paragraph);
     extensions.push(Text);
 
-    try {
+    // try {
       if (this.extensions.highlight()) {
         const Highlight = (await import('@tiptap/extension-highlight')).Highlight;
         extensions.push(Highlight);
@@ -201,9 +201,9 @@ export class ScEditor implements ControlValueAccessor {
           }),
         );
       }
-    } catch (e) {
-      console.log(e);
-    }
+    // } catch (e) {
+    //   console.log(e);
+    // }
 
     this.editor = new Editor({
       element: this.editorContent().nativeElement,
