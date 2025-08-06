@@ -35,6 +35,6 @@ jobs:
 
       - run: npm ci --legacy-peer-deps
 
-      - run: npm list @tiptap/core
+      - run: npm list @tiptap/pm
 
       - run: npx nx build editor --skip-nx-cache
