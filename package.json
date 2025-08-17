@@ -41,7 +41,7 @@
     "@tiptap/extension-history": "^3.0.9",
     "@tiptap/extension-horizontal-rule": "^3.0.9",
     "@tiptap/extension-image": "^3.0.9",
-    "@tiptap/extension-italic": "^3.0.9",
+    "@tiptap/extension-italic": "^3.2.0",
     "@tiptap/extension-link": "^3.1.0",
     "@tiptap/extension-list-item": "^3.2.0",
     "@tiptap/extension-ordered-list": "^3.1.0",
