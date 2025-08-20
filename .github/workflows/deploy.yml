@@ -22,7 +22,7 @@ jobs:
         run: npm ci
 
       - name: Build Angular app
-        run: npm run build --prod
+        run: npx nx build app
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
