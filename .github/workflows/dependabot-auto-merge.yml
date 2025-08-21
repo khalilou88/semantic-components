@@ -12,7 +12,7 @@ jobs:
         os: [ubuntu-latest]
         node_version: ['20']
     runs-on: ${{ matrix.os }}
-    if: ${{ github.actor == 'dependabot[bot]' || (github.event.pull_request.user.login == 'dependabot[bot]' && github.actor == '@khalilou88') }}
+    if: ${{ github.actor == 'dependabot[bot]' || (github.event.pull_request.user.login == 'dependabot[bot]' && github.actor == '@gridatek') }}
     steps:
       - name: Dependabot metadata
         id: metadata

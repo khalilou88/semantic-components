@@ -107,7 +107,7 @@ import { AppStateService } from '../app-state.service';
         <nav class="flex items-center">
           <a
             class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2 mr-1"
-            href="https://github.com/khalilou88/semantic-components"
+            href="https://github.com/gridatek/semantic-components"
             target="_blank"
           >
             GitHub

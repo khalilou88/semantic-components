@@ -16,7 +16,7 @@ import { RouterLink } from '@angular/router';
         </a>
         <a
           class="text-sm text-muted-foreground hover:text-foreground"
-          href="https://github.com/khalilou88/semantic-components"
+          href="https://github.com/gridatek/semantic-components"
           target="_blank"
         >
           GitHub
